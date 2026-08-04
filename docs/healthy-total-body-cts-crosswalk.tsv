@@ -1,0 +1,89 @@
+# Label -> UBERON crosswalk for the TCIA Healthy-Total-Body-CTs collection (B2).
+#
+# Every `uberon` CURIE below was resolved by querying EBI OLS4 for the term and
+# taking the exact match, not written from memory. Two guesses were wrong and are
+# worth recording so nobody repeats them: the bone is `clavicle bone`
+# (UBERON:0001105), because an exact search for "clavicle" returns *sternal end of
+# clavicle* first; and "pelvis" resolves to RENAL pelvis, so the bony pelvis had
+# to be searched for by name (UBERON:0001270).
+#
+# ⚠️ THE DEFINING PROPERTY OF THIS COLLECTION: LABELS ARE GROUPED.
+# There is one `Ribcage`, not 24 ribs. One `Spine`, not 24 vertebrae. `Kidneys`,
+# `Lung`, `Adrenal-glands` and every long bone merge left and right into a single
+# mask. That is a property of the source, not of this table, and it cannot be
+# refined here because the CT images are access-restricted so the data cannot be
+# re-segmented at finer granularity.
+#
+# The consequence for this repo is specific: this atlas gives whole-body COVERAGE
+# but not the per-structure identity ROADMAP Phase 1 exists to provide. Rows whose
+# mask covers more than their term names carry status=flag, so `--strict` can drop
+# them and the build reports them either way. The complement for granularity is the
+# TotalSegmentator CT dataset, which has per-rib and per-vertebra labels and
+# nothing distal to the knee.
+#
+# System assignments follow the precedent already set in
+# `docs/moose-uberon-crosswalk.tsv` rather than being re-decided here -- including
+# the spleen, which is flagged there for the same reason and gets the same note.
+#
+#
+# ⚠️ THREE LABELS ARE DELIBERATELY EXCLUDED, AND THE NUMBERS ARE WHY.
+# A first build kept them and produced a 403 MB asset of 15,190,538 triangles
+# against a 380,000 target. Measured share of that total:
+#
+#     Subcutaneous-fat   7,000,016   46.1 %
+#     Skeletal-muscle    5,364,192   35.3 %
+#     Torso-fat          1,838,084   12.1 %
+#     ------------------------------------
+#     these three       14,202,292   93.5 %
+#     all 33 others        988,246    6.5 %
+#
+# They are diffuse tissue DEPOTS, not organs: enormous convoluted surface area,
+# no anatomical boundary a viewer would look for, and the decimator's
+# per-structure hole-avoidance back-off refuses to touch them (documented in
+# docs/CT_ATLAS_PIPELINE.md as uneven decimation). D5a had already parked body
+# composition as probably belonging to the SCORING path rather than the geometry
+# path; this is the measurement that settles it for the geometry path.
+#
+# Their rows are kept below, commented out, so the mapping work is not lost and
+# so re-enabling them is a one-character edit rather than a re-derivation.
+#
+# Columns match the MOOSE crosswalk so `read_crosswalk` needs no change.
+# `moose_class` is the label name from the collection's own spreadsheet; the column
+# keeps its name because the loader keys on it.
+moose_model	moose_class	uberon	uberon_label	system	layer	side	status	note
+htb_ct	Adrenal-glands	UBERON:0002369	adrenal gland	endocrine	organ		flag	Both glands in one mask. UBERON has per-side terms (0001234/0001233) but the mask cannot be split, so the unsided parent is the honest choice.
+htb_ct	Aorta	UBERON:0000947	aorta	cardiovascular	organ		ok
+htb_ct	Bladder	UBERON:0001255	urinary bladder	metabolic	organ		ok	Urinary, not gall -- same reading as the MOOSE crosswalk.
+htb_ct	Brain	UBERON:0000955	brain	nervous	organ		ok	⚠️ Low-dose non-contrast CT barely separates brain from CSF; treat the shape as indicative. The collection's own 37-119 labels are brain sub-structures and are absent from these files.
+htb_ct	Heart	UBERON:0000948	heart	cardiovascular	organ		ok	Whole heart, no chambers. The beating-heart overlay supersedes a chamber-level heart, not this one.
+htb_ct	Kidneys	UBERON:0002113	kidney	metabolic	organ		flag	Both kidneys in one mask; UBERON's per-side terms (0004538/0004539) cannot be used.
+htb_ct	Liver	UBERON:0002107	liver	metabolic	organ		ok
+htb_ct	Pancreas	UBERON:0001264	pancreas	metabolic	organ		ok	⚠️ The pancreas is the organ non-contrast CT localises worst of all of these.
+htb_ct	Spleen	UBERON:0002106	spleen	cardiovascular	organ		flag	UBERON term is certain; the SYSTEM is a judgement call, and this repeats the MOOSE crosswalk's note verbatim in substance: the spleen is a lymphoid organ and the closed SystemId set has no lymphatic id. cardiovascular is the least-wrong home; metabolic is the other defensible answer.
+htb_ct	Thyroid	UBERON:0002046	thyroid gland	endocrine	organ		ok	Whole gland, not per-lobe.
+htb_ct	VCI	UBERON:0001072	inferior vena cava	cardiovascular	organ		ok	"VCI" is vena cava inferior -- the spreadsheet's only abbreviated label.
+htb_ct	Lung	UBERON:0002048	lung	respiratory	organ		flag	Both lungs, no lobes. MOOSE segments five lobes; this is one mask.
+htb_ct	Carpal	UBERON:0001435	carpal bone	musculoskeletal	bone		flag	All sixteen carpals, both wrists, one mask.
+htb_ct	Clavicle	UBERON:0001105	clavicle bone	musculoskeletal	bone		flag	Both clavicles in one mask.
+htb_ct	Femur	UBERON:0000981	femur	musculoskeletal	bone		flag	Both femora in one mask.
+htb_ct	Fibula	UBERON:0001446	fibula	musculoskeletal	bone		flag	Both fibulae in one mask.
+htb_ct	Humerus	UBERON:0000976	humerus	musculoskeletal	bone		flag	Both humeri in one mask.
+htb_ct	Metacarpal	UBERON:0002374	metacarpal bone	musculoskeletal	bone		flag	All ten metacarpals in one mask.
+htb_ct	Metatarsal	UBERON:0001448	metatarsal bone	musculoskeletal	bone		flag	All ten metatarsals in one mask.
+htb_ct	Patella	UBERON:0002446	patella	musculoskeletal	bone		flag	Both patellae in one mask.
+htb_ct	Pelvis	UBERON:0001270	bony pelvis	musculoskeletal	bone		ok	The BONY pelvis. An exact OLS4 search for "pelvis" returns renal pelvis, which is the trap here.
+htb_ct	Fingers	UBERON:0001436	phalanx of manus	musculoskeletal	bone		flag	All twenty-eight phalanges of both hands. `manual digit` (UBERON:0002389) would be wrong -- that is the whole digit including soft tissue, and this mask is bone.
+htb_ct	Radius	UBERON:0001423	radius bone	musculoskeletal	bone		flag	Both radii in one mask.
+htb_ct	Ribcage	UBERON:0003252	thoracic rib cage	musculoskeletal	bone		ok	The rib cage as a structure, which is what the mask actually is. Individual ribs are not recoverable.
+htb_ct	Scapula	UBERON:0006849	scapula	musculoskeletal	bone		flag	Both scapulae in one mask.
+htb_ct	Skull	UBERON:0003129	skull	musculoskeletal	bone		ok	⚠️ PRIVACY. This is the structure the collection's own risk posture is inconsistent about: TCIA restricted the CT images citing facial reconstruction, then released the skull mask openly. Treat a rendered skull as identifying and see the defacing discussion in docs/CT_ATLAS_PIPELINE.md.
+htb_ct	Spine	UBERON:0001130	vertebral column	musculoskeletal	bone		ok	The column as a structure. C1-L5 are not separable, which is the single biggest loss against TotalSegmentator.
+htb_ct	Sternum	UBERON:0000975	sternum	musculoskeletal	bone		ok	The bone HRA-male does not have at all.
+htb_ct	Tarsal	UBERON:0001447	tarsal bone	musculoskeletal	bone		flag	All fourteen tarsals, both feet, one mask.
+htb_ct	Tibia	UBERON:0000979	tibia	musculoskeletal	bone		flag	Both tibiae in one mask.
+htb_ct	Toes	UBERON:0001449	phalanx of pes	musculoskeletal	bone		flag	All phalanges of both feet. Bone, not `pedal digit`.
+htb_ct	Ulna	UBERON:0001424	ulna	musculoskeletal	bone		flag	Both ulnae in one mask.
+# htb_ct	Skeletal-muscle	UBERON:0001134	skeletal muscle tissue	musculoskeletal	muscle		flag	A TISSUE mask, not an organ -- every skeletal muscle in the field of view as one blob, with no individual muscle recoverable. It also OVERLAPS Psoas below, which is carved out of the same tissue.
+# htb_ct	Subcutaneous-fat	UBERON:0002190	subcutaneous adipose tissue	integumentary	organ		flag	Tissue, not organ, and the system is a judgement: subcutaneous fat sits under the skin, so integumentary is the least-wrong home in the closed set. D5a left body composition undecided between the geometry and scoring paths; this ships it as geometry and says so.
+# htb_ct	Torso-fat	UBERON:0014454	visceral abdominal adipose tissue	integumentary	organ		flag	⚠️ THE WEAKEST ROW IN THIS TABLE. "Torso fat" has no UBERON equivalent. This is the standard counterpart to `subcutaneous adipose tissue` in body composition -- internal rather than under-skin fat -- so it is the closest term in kind, but it is narrower in extent: the mask covers the thorax too, and `abdominal` does not. `abdominal fat pad` (UBERON:0003427) was considered and is worse, being a discrete fat pad rather than the diffuse depot. Either get a reviewer to accept this or drop the label with --strict.
+htb_ct	Psoas	UBERON:0008450	psoas muscle	musculoskeletal	muscle		flag	Both psoas muscles in one mask, and it overlaps Skeletal-muscle above -- the psoas IS skeletal muscle, so these two masks are not disjoint. Whichever is meshed second wins at the boundary.

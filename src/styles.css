@@ -1,0 +1,242 @@
+/**
+ * Inter, self-hosted.
+ *
+ * This used to be an @import from the Google Fonts CDN, which fetched the font
+ * from Google on every page load and therefore disclosed every visitor's IP
+ * address to Google. A German court (LG München I, 3 O 17493/20) held that this
+ * alone violates GDPR without consent. It was also the last external runtime
+ * fetch in the app — the environment map is procedural specifically to avoid a
+ * CDN dependency, so the font was the odd one out.
+ *
+ * Vendored as files rather than via `@fontsource/inter` on purpose: adding an npm
+ * dependency here re-resolves the whole tree, and doing exactly that with
+ * `@pmndrs/assets` previously broke the app (see docs/RESOURCES.md). Two files
+ * and no dependency cannot do that.
+ *
+ * THE COMPLETE FONT, NOT A SUBSET, AND NO `unicode-range`.
+ *
+ * It was the Google latin subset (47 KB) with the matching `unicode-range`, which
+ * is the conventional choice and was silently wrong here. A `unicode-range` does
+ * not merely describe the file — it tells the browser which characters this face
+ * may be used for, so every character outside it falls back to `system-ui`
+ * WITHOUT any warning. Audited against the actual source: `→` and `≈` appear in
+ * rendered strings and Inter contains both, yet they were being drawn by the
+ * system font because they sit outside the latin range. Mixed typography that
+ * nobody notices is exactly the failure mode a subset invites.
+ *
+ * `InterVariable.woff2` from the official Inter 4.1 release covers every glyph the
+ * typeface has, so nothing can fall back except characters Inter genuinely lacks —
+ * which is only the `⚠️` emoji and the geometric overlay icons (`◉`, `◗`). Those
+ * SHOULD come from the system: self-hosting an emoji font is neither wanted nor
+ * lawful under most emoji licences.
+ *
+ * The cost is 47 KB -> 344 KB. That is a rounding error against ~22 MB of geometry
+ * per session, and it buys the guarantee that what is on screen is the font we
+ * shipped. Weight is declared 100-900, the variable font's full axis, so a future
+ * `font-bold` cannot silently get a synthesised weight either.
+ *
+ * Vendored as files rather than via `@fontsource/inter` on purpose: adding an npm
+ * dependency here re-resolves the whole tree, and doing exactly that with
+ * `@pmndrs/assets` previously broke the app (see docs/RESOURCES.md).
+ *
+ * Inter is SIL OFL 1.1. `OFL.txt` sits beside it — verified byte-identical to the
+ * `LICENSE.txt` in the upstream release — because redistribution carries the
+ * licence with it.
+ */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('/fonts/InterVariable.woff2') format('woff2');
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+ * Theme tokens.
+ *
+ * Defined here rather than as Tailwind literals so that switching `.dark` on
+ * <html> retints the whole UI without touching a single component: every
+ * `text-ink`, `bg-panel`, `border-line` in the app reads these.
+ *
+ * The dark values are not the light ones inverted. Anatomy is the subject, and
+ * tissue colour is the thing being judged, so the dark surfaces stay desaturated
+ * and slightly blue — a warm dark grey would push red muscle towards brown and
+ * ivory bone towards yellow, which is exactly the judgement the viewer is trying
+ * to make. Contrast is kept just below pure white on near-black for the same
+ * reason: a hard white label beside a lit organ reads as a highlight.
+ */
+:root {
+  --ink: 31 42 51;
+  --muted: 107 120 133;
+  --panel: rgba(255, 255, 255, 0.72);
+  --surface: rgba(255, 255, 255, 0.8);
+  --line: rgba(255, 255, 255, 0.6);
+  --track: rgba(0, 0, 0, 0.05);
+  --raised: #ffffff;
+  --page-from: #eef3f7;
+  --page-to: #e4ebf1;
+  /* The 3D canvas clear colour. Kept in sync from the store; see BodyScene. */
+  --scene: #eef3f7;
+}
+
+.dark {
+  --ink: 223 230 237;
+  --muted: 142 156 170;
+  --panel: rgba(24, 30, 37, 0.72);
+  --surface: rgba(38, 46, 55, 0.82);
+  --line: rgba(255, 255, 255, 0.09);
+  --track: rgba(255, 255, 255, 0.07);
+  --raised: #39434e;
+  --page-from: #11161c;
+  --page-to: #0b0f14;
+  --scene: #0e1319;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* The page gradient, so App.tsx does not hardcode two hex values. */
+.app-bg {
+  background-image: linear-gradient(to bottom right, var(--page-from), var(--page-to));
+}
+
+/*
+ * The screen-space half of the stage vignette.
+ *
+ * ⚠️ THIS IS CSS BECAUSE THE GPU ROUTE IS CLOSED. A true screen-space vignette is
+ * a post-processing pass, and `docs/RESOURCES.md` marks `postprocessing` /
+ * `@react-three/postprocessing` ⛔: it renders nothing at all inside a WebXR
+ * session (pmndrs/xr#128). A DOM overlay costs zero draw calls — the compositor
+ * does it, not the renderer — and it is XR-safe by construction for the same
+ * reason `XRInfoPanel` exists at all: the DOM does not render in an immersive
+ * session, so this cannot paint over passthrough even in principle.
+ *
+ * It handles what geometry cannot: a falloff anchored to the VIEWPORT. The
+ * backdrop sphere in `src/scene/Stage.tsx` is anchored to the world, which is
+ * right for depth and wrong for framing — the corners of a wide panel stay bright
+ * no matter where the turntable is. The two are complementary; neither replaces
+ * the other.
+ *
+ * `pointer-events: none` is load-bearing: this lies over the whole canvas, and
+ * without it OrbitControls never sees a drag.
+ */
+.scene-vignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  /* Ellipse, not a circle: the canvas is much wider than it is tall, and a
+     circular falloff on a 16:9 panel darkens the sides while leaving the top and
+     bottom untouched. */
+  background: radial-gradient(
+    ellipse 78% 88% at 50% 42%,
+    transparent 52%,
+    rgba(26, 38, 48, 0.035) 78%,
+    rgba(26, 38, 48, 0.09) 100%
+  );
+}
+
+/*
+ * Dark mode inverts the intent, as it does for the ground shadow: darkening a
+ * near-black scene only crushes the rim light. The centre lifts instead, which is
+ * what gives the body an edge to be read against.
+ */
+.dark .scene-vignette {
+  background:
+    radial-gradient(ellipse 70% 80% at 50% 44%, rgba(192, 190, 178, 0.05) 0%, transparent 62%),
+    radial-gradient(ellipse 82% 92% at 50% 42%, transparent 55%, rgba(0, 0, 0, 0.3) 100%);
+}
+
+/*
+ * Range inputs do not inherit `accent-color` usefully across themes — the track
+ * stays a browser default that is near-white in dark mode. Setting the scheme
+ * lets the UA draw its own dark widgets for the parts we do not style.
+ */
+.dark input[type='range'] {
+  color-scheme: dark;
+}
+
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/*
+ * The heartbeat on the overlay toggle. Purely decorative: the rate readout in
+ * the panel is what states the number, and this only signals "something here is
+ * animating". Its duration is set inline from the chosen bpm so the glyph and the
+ * geometry share one rate rather than drifting apart.
+ */
+@keyframes pulse-beat {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  12% {
+    transform: scale(1.28);
+  }
+  30% {
+    transform: scale(1);
+  }
+}
+
+/*
+ * The models-and-sources dialog.
+ *
+ * A native <dialog> for Esc-to-close, focus containment and the top layer — this
+ * layout nests several `overflow-hidden` rounded panels, and anything positioned
+ * inside them gets clipped. Only the backdrop and the centring need styling;
+ * Tailwind handles the panel itself.
+ *
+ * `--panel` is translucent, so the dialog needs its own blur or the body renders
+ * straight through the text behind it.
+ */
+/*
+ * ⚠️ `[open]` IS LOAD-BEARING. The UA stylesheet hides a closed dialog with
+ * `dialog:not([open]) { display: none }`, but ANY author rule beats a UA rule
+ * regardless of specificity — so an unqualified `display: grid` here rendered the
+ * closed dialog inline at the bottom of the sidebar, below the fold where it was
+ * easy to miss. Found in a full-page screenshot, not in the app.
+ */
+.sources-dialog[open] {
+  /*
+   * The dialog FILLS the viewport and the visible card is a child of it. That is
+   * what makes click-outside-to-dismiss possible: a content-sized dialog never
+   * receives the clicks beside it, so the handler had nothing to match on.
+   */
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  max-height: none;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  display: grid;
+  place-items: center;
+}
+
+/* `--panel` is translucent, so the card needs its own blur or the body renders
+   straight through the text. On the card, not the dialog — blurring a
+   full-viewport transparent element would blur the whole page twice. */
+.sources-dialog[open] > div {
+  backdrop-filter: blur(16px);
+}
+
+.sources-dialog::backdrop {
+  background: rgba(15, 20, 26, 0.42);
+  backdrop-filter: blur(2px);
+}

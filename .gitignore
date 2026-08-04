@@ -1,0 +1,44 @@
+node_modules
+dist
+dist-ssr
+*.local
+.DS_Store
+.env
+.env.*
+# Anatomy assets are DOWNLOADED, not committed. The HRA whole-body models are
+# 357 MB (female) and 230 MB (male); a single accidental `git add` of one would
+# be effectively unrecoverable from history. docs/HRA_ASSETS.md has the URLs and
+# public/models/README.md has the expected filenames, so the assets are always
+# reproducible without storing them here.
+public/models/*.glb
+public/models/*.blend
+public/models/*.gltf
+public/models/*.bin
+
+# build info
+tsconfig.tsbuildinfo
+.gstack/
+
+# CT atlas pipeline (docs/CT_ATLAS_PIPELINE.md). The venv holds torch and the
+# MOOSE weights, which land INSIDE the package directory
+# (moosez/models/nnunet_trained_models/) at ~240 MB per model — about 2 GB for
+# the eight whole-body CT models. Nothing here is source; it is all rebuildable
+# from scripts/ct-atlas/requirements.txt plus one `run_moose.py` invocation.
+scripts/ct-atlas/.venv/
+# Segmentations and intermediate NIfTIs. These are DERIVED FROM PATIENT IMAGING
+# and must never be committed even when small — see CLAUDE.md constraint 3.
+scripts/ct-atlas/work/
+*.nii
+*.nii.gz
+
+# Python bytecode from the CT-atlas tooling
+__pycache__/
+*.py[cod]
+scripts/ct-atlas/.venv/
+
+# Third-party reference documents dropped in for reading. Not ours to
+# redistribute — keep them local and cite them instead.
+nako_verf.txt
+
+# MOOSE/CT working cache — rebuildable, and large.
+scripts/ct-atlas/.cache/

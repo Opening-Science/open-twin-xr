@@ -1,0 +1,1839 @@
+mesh_file	system	layer	fma_id	label
+FJ1252.obj	digestive	organ	FMA54397	upper jaw
+FJ1253.obj	digestive	organ	FMA59764	gingiva of lower jaw
+FJ1283.obj	nervous	organ	FMA52677	left anterior ethmoidal nerve
+FJ1290.obj	nervous	organ	FMA52640	left frontal nerve
+FJ1293.obj	nervous	organ	FMA52577	inferior branch of left oculomotor nerve
+FJ1294.obj	musculoskeletal	muscle	FMA49051	left inferior oblique
+FJ1295.obj	musculoskeletal	muscle	FMA49047	left inferior rectus
+FJ1296.obj	nervous	organ	FMA52699	left infratrochlear nerve
+FJ1300.obj	nervous	organ	FMA52630	left lacrimal nerve
+FJ1304.obj	musculoskeletal	muscle	FMA49055	left lateral rectus
+FJ1306.obj	musculoskeletal	muscle	FMA49049	left levator palpebrae superioris
+FJ1308.obj	musculoskeletal	muscle	FMA49057	left medial rectus
+FJ1310.obj	nervous	organ	FMA52670	left nasociliary nerve
+FJ1311.obj	nervous	organ	FMA52674	communicating branch of left nasociliary nerve with left ciliary ganglion
+FJ1312.obj	nervous	organ	FMA52623	left ophthalmic nerve
+FJ1315.obj	nervous	organ	FMA52716	left posterior ethmoidal nerve
+FJ1318.obj	nervous	organ	FMA82735	left long ciliary nerve
+FJ1321.obj	nervous	organ	FMA52575	superior branch of left oculomotor nerve
+FJ1322.obj	musculoskeletal	muscle	FMA49053	left superior oblique
+FJ1323.obj	musculoskeletal	muscle	FMA49045	left superior rectus
+FJ1325.obj	nervous	organ	FMA52657	left supra-orbital nerve
+FJ1326.obj	nervous	organ	FMA52644	left supratrochlear nerve
+FJ1333.obj	nervous	organ	FMA52676	right anterior ethmoidal nerve
+FJ1341.obj	nervous	organ	FMA52639	right frontal nerve
+FJ1344.obj	nervous	organ	FMA52576	inferior branch of right oculomotor nerve
+FJ1345.obj	musculoskeletal	muscle	FMA49050	right inferior oblique
+FJ1346.obj	musculoskeletal	muscle	FMA49046	right inferior rectus
+FJ1347.obj	nervous	organ	FMA52698	right infratrochlear nerve
+FJ1351.obj	nervous	organ	FMA52629	right lacrimal nerve
+FJ1355.obj	musculoskeletal	muscle	FMA49054	right lateral rectus
+FJ1357.obj	musculoskeletal	muscle	FMA49048	right levator palpebrae superioris
+FJ1359.obj	musculoskeletal	muscle	FMA49056	right medial rectus
+FJ1361.obj	nervous	organ	FMA52669	right nasociliary nerve
+FJ1362.obj	nervous	organ	FMA52673	communicating branch of right nasociliary nerve with right ciliary ganglion
+FJ1363.obj	nervous	organ	FMA52622	right ophthalmic nerve
+FJ1366.obj	nervous	organ	FMA52715	right posterior ethmoidal nerve
+FJ1369.obj	nervous	organ	FMA82734	right long ciliary nerve
+FJ1372.obj	nervous	organ	FMA52574	superior branch of right oculomotor nerve
+FJ1373.obj	musculoskeletal	muscle	FMA49052	right superior oblique
+FJ1374.obj	musculoskeletal	muscle	FMA49044	right superior rectus
+FJ1376.obj	nervous	organ	FMA52656	right supra-orbital nerve
+FJ1377.obj	nervous	organ	FMA52643	right supratrochlear nerve
+FJ1383.obj	musculoskeletal	muscle	FMA37717	first lumbrical of right foot
+FJ1383M.obj	musculoskeletal	muscle	FMA37718	first lumbrical of left foot
+FJ1384.obj	musculoskeletal	muscle	FMA37745	first plantar interosseous of right foot
+FJ1384M.obj	musculoskeletal	muscle	FMA37746	first plantar interosseous of left foot
+FJ1385.obj	musculoskeletal	muscle	FMA37719	second lumbrical of right foot
+FJ1385M.obj	musculoskeletal	muscle	FMA37720	second lumbrical of left foot
+FJ1386.obj	musculoskeletal	muscle	FMA37743	second plantar interosseous of right foot
+FJ1386M.obj	musculoskeletal	muscle	FMA37744	second plantar interosseous of left foot
+FJ1387.obj	musculoskeletal	muscle	FMA37485	third lumbrical of right foot
+FJ1387M.obj	musculoskeletal	muscle	FMA37486	third lumbrical of left foot
+FJ1388.obj	musculoskeletal	muscle	FMA37741	third plantar interosseous of right foot
+FJ1388M.obj	musculoskeletal	muscle	FMA37742	third plantar interosseous of left foot
+FJ1389.obj	musculoskeletal	muscle	FMA37483	fourth lumbrical of right foot
+FJ1389M.obj	musculoskeletal	muscle	FMA37484	fourth lumbrical of left foot
+FJ1390.obj	musculoskeletal	muscle	FMA37463	abductor digiti minimi of right foot
+FJ1390M.obj	musculoskeletal	muscle	FMA37464	abductor digiti minimi of left foot
+FJ1391.obj	musculoskeletal	muscle	FMA37471	flexor digiti minimi brevis of right foot
+FJ1391M.obj	musculoskeletal	muscle	FMA37472	flexor digiti minimi brevis of left foot
+FJ1399.obj	musculoskeletal	muscle	FMA86034	opponens digiti minimi of right foot
+FJ1399M.obj	musculoskeletal	muscle	FMA86035	opponens digiti minimi of left foot
+FJ1400.obj	musculoskeletal	muscle	FMA37459	right abductor hallucis
+FJ1400M.obj	musculoskeletal	muscle	FMA37460	left abductor hallucis
+FJ1401.obj	musculoskeletal	muscle	FMA22452	right adductor brevis
+FJ1401M.obj	musculoskeletal	muscle	FMA22454	left adductor brevis
+FJ1402.obj	musculoskeletal	muscle	FMA22456	right adductor longus
+FJ1402M.obj	musculoskeletal	muscle	FMA22457	left adductor longus
+FJ1403.obj	musculoskeletal	muscle	FMA22459	right adductor magnus
+FJ1403M.obj	musculoskeletal	muscle	FMA22460	left adductor magnus
+FJ1404.obj	musculoskeletal	muscle	FMA43886	right adductor minimus
+FJ1404M.obj	musculoskeletal	muscle	FMA43887	left adductor minimus
+FJ1406.obj	musculoskeletal	muscle	FMA22548	right extensor digitorum longus
+FJ1406M.obj	musculoskeletal	muscle	FMA22549	left extensor digitorum longus
+FJ1407.obj	musculoskeletal	muscle	FMA51144	right extensor hallucis brevis
+FJ1407M.obj	musculoskeletal	muscle	FMA51145	left extensor hallucis brevis
+FJ1408.obj	musculoskeletal	muscle	FMA22546	right extensor hallucis longus
+FJ1408M.obj	musculoskeletal	muscle	FMA22547	left extensor hallucis longus
+FJ1409.obj	musculoskeletal	muscle	FMA22554	right fibularis brevis
+FJ1409M.obj	musculoskeletal	muscle	FMA22555	left fibularis brevis
+FJ1410.obj	musculoskeletal	muscle	FMA22552	right fibularis longus
+FJ1410M.obj	musculoskeletal	muscle	FMA22553	left fibularis longus
+FJ1411.obj	musculoskeletal	muscle	FMA22550	right fibularis tertius
+FJ1411M.obj	musculoskeletal	muscle	FMA22551	left fibularis tertius
+FJ1412.obj	musculoskeletal	muscle	FMA37465	right flexor accessorius
+FJ1412M.obj	musculoskeletal	muscle	FMA37466	left flexor accessorius
+FJ1413.obj	musculoskeletal	muscle	FMA37461	right flexor digitorum brevis
+FJ1413M.obj	musculoskeletal	muscle	FMA37462	left flexor digitorum brevis
+FJ1414.obj	musculoskeletal	muscle	FMA65016	right flexor digitorum longus
+FJ1414M.obj	musculoskeletal	muscle	FMA65017	left flexor digitorum longus
+FJ1415.obj	musculoskeletal	muscle	FMA65014	right flexor hallucis longus
+FJ1415M.obj	musculoskeletal	muscle	FMA65015	left flexor hallucis longus
+FJ1416.obj	musculoskeletal	muscle	FMA22336	right gemellus inferior
+FJ1416M.obj	musculoskeletal	muscle	FMA22337	left gemellus inferior
+FJ1417.obj	musculoskeletal	muscle	FMA22334	right gemellus superior
+FJ1417M.obj	musculoskeletal	muscle	FMA22335	left gemellus superior
+FJ1418.obj	musculoskeletal	muscle	FMA22328	right gluteus maximus
+FJ1418M.obj	musculoskeletal	muscle	FMA22329	left gluteus maximus
+FJ1419.obj	musculoskeletal	muscle	FMA22330	right gluteus medius
+FJ1419M.obj	musculoskeletal	muscle	FMA22331	left gluteus medius
+FJ1420.obj	musculoskeletal	muscle	FMA22332	right gluteus minimus
+FJ1420M.obj	musculoskeletal	muscle	FMA22333	left gluteus minimus
+FJ1421.obj	musculoskeletal	muscle	FMA43883	right gracilis
+FJ1421M.obj	musculoskeletal	muscle	FMA43884	left gracilis
+FJ1422.obj	musculoskeletal	muscle	FMA22322	right iliacus
+FJ1422M.obj	musculoskeletal	muscle	FMA22323	left iliacus
+FJ1425.obj	musculoskeletal	muscle	FMA22326	right obturator externus
+FJ1425M.obj	musculoskeletal	muscle	FMA22327	left obturator externus
+FJ1426.obj	musculoskeletal	muscle	FMA22324	right obturator internus
+FJ1426M.obj	musculoskeletal	muscle	FMA22325	left obturator internus
+FJ1427.obj	musculoskeletal	muscle	FMA22450	right pectineus
+FJ1427M.obj	musculoskeletal	muscle	FMA22451	left pectineus
+FJ1428.obj	musculoskeletal	muscle	FMA22340	right piriformis
+FJ1428M.obj	musculoskeletal	muscle	FMA22341	left piriformis
+FJ1429.obj	musculoskeletal	muscle	FMA22560	right plantaris
+FJ1429M.obj	musculoskeletal	muscle	FMA22561	left plantaris
+FJ1430.obj	musculoskeletal	muscle	FMA22591	right popliteus
+FJ1430M.obj	musculoskeletal	muscle	FMA22592	left popliteus
+FJ1431.obj	musculoskeletal	muscle	FMA22342	right psoas major
+FJ1431M.obj	musculoskeletal	muscle	FMA22343	left psoas major
+FJ1432.obj	musculoskeletal	muscle	FMA22338	right quadratus femoris
+FJ1432M.obj	musculoskeletal	muscle	FMA22339	left quadratus femoris
+FJ1434.obj	musculoskeletal	muscle	FMA22354	right sartorius
+FJ1434M.obj	musculoskeletal	muscle	FMA22355	left sartorius
+FJ1435.obj	musculoskeletal	muscle	FMA22448	right semimembranosus
+FJ1435M.obj	musculoskeletal	muscle	FMA22449	left semimembranosus
+FJ1436.obj	musculoskeletal	muscle	FMA22358	right semitendinosus
+FJ1436M.obj	musculoskeletal	muscle	FMA22359	left semitendinosus
+FJ1437.obj	musculoskeletal	muscle	FMA22558	right soleus
+FJ1437M.obj	musculoskeletal	muscle	FMA22559	left soleus
+FJ1438.obj	musculoskeletal	muscle	FMA22425	right tensor fasciae latae
+FJ1438M.obj	musculoskeletal	muscle	FMA22426	left tensor fasciae latae
+FJ1439.obj	musculoskeletal	muscle	FMA22544	right tibialis anterior
+FJ1439M.obj	musculoskeletal	muscle	FMA22545	left tibialis anterior
+FJ1440.obj	musculoskeletal	muscle	FMA65018	right tibialis posterior
+FJ1440M.obj	musculoskeletal	muscle	FMA65019	left tibialis posterior
+FJ1449M.obj	musculoskeletal	muscle	FMA46444	left coccygeus
+FJ1450.obj	musculoskeletal	muscle	FMA9579	perineum
+FJ1450M.obj	musculoskeletal	muscle	FMA9579	perineum
+FJ1451.obj	musculoskeletal	muscle	FMA9756	external intercostal muscle
+FJ1451M.obj	musculoskeletal	muscle	FMA9756	external intercostal muscle
+FJ1452.obj	musculoskeletal	muscle	FMA13336	right external oblique
+FJ1452M.obj	musculoskeletal	muscle	FMA13337	left external oblique
+FJ1454.obj	musculoskeletal	muscle	FMA9758	innermost intercostal muscle
+FJ1454M.obj	musculoskeletal	muscle	FMA9758	innermost intercostal muscle
+FJ1455.obj	musculoskeletal	muscle	FMA9757	internal intercostal muscle
+FJ1455M.obj	musculoskeletal	muscle	FMA9757	internal intercostal muscle
+FJ1456.obj	musculoskeletal	muscle	FMA13375	right pectoralis minor
+FJ1456M.obj	musculoskeletal	muscle	FMA13376	left pectoralis minor
+FJ1459.obj	musculoskeletal	muscle	FMA13398	right serratus anterior
+FJ1459M.obj	musculoskeletal	muscle	FMA13399	left serratus anterior
+FJ1460.obj	musculoskeletal	muscle	FMA13412	right subclavius
+FJ1460M.obj	musculoskeletal	muscle	FMA13411	left subclavius
+FJ1461.obj	musculoskeletal	muscle	FMA9761	right transversus thoracis
+FJ1461M.obj	musculoskeletal	muscle	FMA9762	left transversus thoracis
+FJ1466.obj	musculoskeletal	muscle	FMA37396	abductor digiti minimi of right hand
+FJ1466M.obj	musculoskeletal	muscle	FMA37397	abductor digiti minimi of left hand
+FJ1469.obj	musculoskeletal	muscle	FMA37389	left flexor pollicis brevis
+FJ1469M.obj	musculoskeletal	muscle	FMA37388	right flexor pollicis brevis
+FJ1470.obj	musculoskeletal	muscle	FMA37398	flexor digiti minimi brevis of right hand
+FJ1470M.obj	musculoskeletal	muscle	FMA37399	flexor digiti minimi brevis of left hand
+FJ1472.obj	musculoskeletal	muscle	FMA38507	right extensor carpi ulnaris
+FJ1472M.obj	musculoskeletal	muscle	FMA38508	left extensor carpi ulnaris
+FJ1475.obj	musculoskeletal	muscle	FMA38470	right flexor digitorum superficialis
+FJ1475M.obj	musculoskeletal	muscle	FMA38471	left flexor digitorum superficialis
+FJ1482.obj	musculoskeletal	muscle	FMA37400	opponens digiti minimi of right hand
+FJ1482M.obj	musculoskeletal	muscle	FMA37401	opponens digiti minimi of left hand
+FJ1483.obj	musculoskeletal	muscle	FMA37386	right abductor pollicis brevis
+FJ1483M.obj	musculoskeletal	muscle	FMA37387	left abductor pollicis brevis
+FJ1484.obj	musculoskeletal	muscle	FMA38516	right abductor pollicis longus
+FJ1484M.obj	musculoskeletal	muscle	FMA38517	left abductor pollicis longus
+FJ1485.obj	musculoskeletal	muscle	FMA37705	right anconeus
+FJ1485M.obj	musculoskeletal	muscle	FMA37706	left anconeus
+FJ1486.obj	musculoskeletal	muscle	FMA37668	right brachialis
+FJ1486M.obj	musculoskeletal	muscle	FMA37669	left brachialis
+FJ1487.obj	musculoskeletal	muscle	FMA38486	right brachioradialis
+FJ1487M.obj	musculoskeletal	muscle	FMA38487	left brachioradialis
+FJ1488.obj	musculoskeletal	muscle	FMA37665	right coracobrachialis
+FJ1488M.obj	musculoskeletal	muscle	FMA37666	left coracobrachialis
+FJ1489.obj	musculoskeletal	muscle	FMA38498	right extensor carpi radialis brevis
+FJ1489M.obj	musculoskeletal	muscle	FMA38499	left extensor carpi radialis brevis
+FJ1490.obj	musculoskeletal	muscle	FMA38495	right extensor carpi radialis longus
+FJ1490M.obj	musculoskeletal	muscle	FMA38496	left extensor carpi radialis longus
+FJ1491.obj	musculoskeletal	muscle	FMA38504	right extensor digiti minimi
+FJ1491M.obj	musculoskeletal	muscle	FMA38505	left extensor digiti minimi
+FJ1492.obj	musculoskeletal	muscle	FMA38501	right extensor digitorum
+FJ1492M.obj	musculoskeletal	muscle	FMA38502	left extensor digitorum
+FJ1493.obj	musculoskeletal	muscle	FMA38525	right extensor indicis
+FJ1493M.obj	musculoskeletal	muscle	FMA38526	left extensor indicis
+FJ1494.obj	musculoskeletal	muscle	FMA38519	right extensor pollicis brevis
+FJ1494M.obj	musculoskeletal	muscle	FMA38520	left extensor pollicis brevis
+FJ1495.obj	musculoskeletal	muscle	FMA38522	right extensor pollicis longus
+FJ1495M.obj	musculoskeletal	muscle	FMA38523	left extensor pollicis longus
+FJ1496.obj	musculoskeletal	muscle	FMA38460	right flexor carpi radialis
+FJ1496M.obj	musculoskeletal	muscle	FMA38461	left flexor carpi radialis
+FJ1497.obj	musculoskeletal	muscle	FMA38479	right flexor digitorum profundus
+FJ1497M.obj	musculoskeletal	muscle	FMA38480	left flexor digitorum profundus
+FJ1498.obj	musculoskeletal	muscle	FMA38482	right flexor pollicis longus
+FJ1498M.obj	musculoskeletal	muscle	FMA38484	left flexor pollicis longus
+FJ1499.obj	musculoskeletal	muscle	FMA38470	right flexor digitorum superficialis
+FJ1499M.obj	musculoskeletal	muscle	FMA38471	left flexor digitorum superficialis
+FJ1500.obj	musculoskeletal	muscle	FMA32547	right infraspinatus muscle
+FJ1500M.obj	musculoskeletal	muscle	FMA32548	left infraspinatus muscle
+FJ1501.obj	musculoskeletal	muscle	FMA37390	right opponens pollicis
+FJ1501M.obj	musculoskeletal	muscle	FMA37391	left opponens pollicis
+FJ1502.obj	musculoskeletal	muscle	FMA38463	right palmaris longus
+FJ1502M.obj	musculoskeletal	muscle	FMA38464	left palmaris longus
+FJ1503.obj	musculoskeletal	muscle	FMA38454	right pronator quadratus
+FJ1503M.obj	musculoskeletal	muscle	FMA38455	left pronator quadratus
+FJ1504.obj	musculoskeletal	muscle	FMA13414	right subscapularis
+FJ1504M.obj	musculoskeletal	muscle	FMA13415	left subscapularis
+FJ1505.obj	musculoskeletal	muscle	FMA38513	right supinator
+FJ1505M.obj	musculoskeletal	muscle	FMA38514	left supinator
+FJ1506.obj	musculoskeletal	muscle	FMA32544	right supraspinatus
+FJ1506M.obj	musculoskeletal	muscle	FMA32545	left supraspinatus
+FJ1507.obj	musculoskeletal	muscle	FMA32551	right teres major
+FJ1507M.obj	musculoskeletal	muscle	FMA32552	left teres major
+FJ1508.obj	musculoskeletal	muscle	FMA32553	right teres minor
+FJ1508M.obj	musculoskeletal	muscle	FMA32554	left teres minor
+FJ1517.obj	musculoskeletal	muscle	FMA38507	right extensor carpi ulnaris
+FJ1517M.obj	musculoskeletal	muscle	FMA38508	left extensor carpi ulnaris
+FJ1522.obj	musculoskeletal	muscle	FMA23089	right lumbar rotator
+FJ1522M.obj	musculoskeletal	muscle	FMA23090	left lumbar rotator
+FJ1524.obj	musculoskeletal	muscle	FMA81752	right cervical rotator
+FJ1524M.obj	musculoskeletal	muscle	FMA81753	left cervical rotator
+FJ1525.obj	musculoskeletal	muscle	FMA23083	thoracic rotator
+FJ1525M.obj	musculoskeletal	muscle	FMA23083	thoracic rotator
+FJ1526.obj	musculoskeletal	muscle	FMA22744	right iliocostalis cervicis
+FJ1526M.obj	musculoskeletal	muscle	FMA22745	left iliocostalis cervicis
+FJ1527.obj	musculoskeletal	muscle	FMA22740	right iliocostalis lumborum
+FJ1527M.obj	musculoskeletal	muscle	FMA22741	left iliocostalis lumborum
+FJ1528.obj	musculoskeletal	muscle	FMA22742	right iliocostalis thoracis
+FJ1528M.obj	musculoskeletal	muscle	FMA22743	left iliocostalis thoracis
+FJ1532.obj	musculoskeletal	muscle	FMA32540	right levator scapulae
+FJ1532M.obj	musculoskeletal	muscle	FMA32541	left levator scapulae
+FJ1533.obj	musculoskeletal	muscle	FMA22754	right longissimus capitis
+FJ1533M.obj	musculoskeletal	muscle	FMA22756	left longissimus capitis
+FJ1534.obj	musculoskeletal	muscle	FMA22757	right longissimus cervicis
+FJ1534M.obj	musculoskeletal	muscle	FMA22758	left longissimus cervicis
+FJ1535.obj	musculoskeletal	muscle	FMA22751	right longissimus thoracis
+FJ1535M.obj	musculoskeletal	muscle	FMA22753	left longissimus thoracis
+FJ1536.obj	musculoskeletal	muscle	FMA13381	right rhomboid major
+FJ1536M.obj	musculoskeletal	muscle	FMA13382	left rhomboid major
+FJ1537.obj	musculoskeletal	muscle	FMA13383	right rhomboid minor
+FJ1537M.obj	musculoskeletal	muscle	FMA13384	left rhomboid minor
+FJ1538.obj	musculoskeletal	muscle	FMA22876	right semispinalis capitis
+FJ1538M.obj	musculoskeletal	muscle	FMA22877	left semispinalis capitis
+FJ1539.obj	musculoskeletal	muscle	FMA22874	right semispinalis cervicis
+FJ1539M.obj	musculoskeletal	muscle	FMA22875	left semispinalis cervicis
+FJ1540.obj	musculoskeletal	muscle	FMA22872	right semispinalis thoracis
+FJ1540M.obj	musculoskeletal	muscle	FMA22873	left semispinalis thoracis
+FJ1541.obj	musculoskeletal	muscle	FMA13405	right serratus posterior inferior
+FJ1541M.obj	musculoskeletal	muscle	FMA13406	left serratus posterior inferior
+FJ1542.obj	musculoskeletal	muscle	FMA13403	right serratus posterior superior
+FJ1542M.obj	musculoskeletal	muscle	FMA13404	left serratus posterior superior
+FJ1543.obj	musculoskeletal	muscle	FMA77179	spinalis
+FJ1543M.obj	musculoskeletal	muscle	FMA77179	spinalis
+FJ1544.obj	musculoskeletal	muscle	FMA22779	right spinalis thoracis
+FJ1544M.obj	musculoskeletal	muscle	FMA22780	left spinalis thoracis
+FJ1545.obj	musculoskeletal	muscle	FMA22728	right splenius capitis
+FJ1545M.obj	musculoskeletal	muscle	FMA22729	left splenius capitis
+FJ1546.obj	musculoskeletal	muscle	FMA22726	right splenius cervicis
+FJ1546M.obj	musculoskeletal	muscle	FMA22727	left splenius cervicis
+FJ1547.obj	musculoskeletal	muscle	FMA22850	lateral lumbar intertransversarius
+FJ1547M.obj	musculoskeletal	muscle	FMA22850	lateral lumbar intertransversarius
+FJ1548.obj	musculoskeletal	muscle	FMA22851	medial lumbar intertransversarius
+FJ1548M.obj	musculoskeletal	muscle	FMA22851	medial lumbar intertransversarius
+FJ1551.obj	musculoskeletal	muscle	FMA22890	right interspinalis thoracis
+FJ1551M.obj	musculoskeletal	muscle	FMA22891	left interspinalis thoracis
+FJ1555.obj	musculoskeletal	muscle	FMA46293	left digastric
+FJ1556.obj	musculoskeletal	muscle	FMA46292	right digastric
+FJ1558.obj	musculoskeletal	muscle	FMA45740	left platysma
+FJ1559.obj	musculoskeletal	muscle	FMA46327	left geniohyoid
+FJ1560.obj	musculoskeletal	muscle	FMA46293	left digastric
+FJ1561.obj	musculoskeletal	muscle	FMA46310	left longus capitis
+FJ1562.obj	musculoskeletal	muscle	FMA46322	left mylohyoid
+FJ1563.obj	musculoskeletal	muscle	FMA32537	left obliquus capitis inferior
+FJ1564.obj	musculoskeletal	muscle	FMA32535	left obliquus capitis superior
+FJ1565.obj	musculoskeletal	muscle	FMA13349	left omohyoid
+FJ1566.obj	musculoskeletal	muscle	FMA46314	left rectus capitis anterior
+FJ1567.obj	musculoskeletal	muscle	FMA32531	left rectus capitis posterior major
+FJ1568.obj	musculoskeletal	muscle	FMA32533	left rectus capitis posterior minor
+FJ1569.obj	musculoskeletal	muscle	FMA46318	left rectus capitis lateralis
+FJ1570.obj	musculoskeletal	muscle	FMA13393	left scalenus anterior
+FJ1571.obj	musculoskeletal	muscle	FMA13391	left scalenus medius
+FJ1572.obj	musculoskeletal	muscle	FMA13389	left scalenus posterior
+FJ1573.obj	musculoskeletal	muscle	FMA13409	left sternocleidomastoid
+FJ1574.obj	musculoskeletal	muscle	FMA13347	left sternohyoid
+FJ1575.obj	musculoskeletal	muscle	FMA13351	left sternothyroid
+FJ1576.obj	musculoskeletal	muscle	FMA45827	left stylohyoid
+FJ1577.obj	musculoskeletal	muscle	FMA13353	left thyrohyoid
+FJ1578.obj	musculoskeletal	muscle	FMA46293	left digastric
+FJ1579.obj	musculoskeletal	muscle	FMA46292	right digastric
+FJ1580.obj	musculoskeletal	muscle	FMA46326	right geniohyoid
+FJ1582.obj	musculoskeletal	muscle	FMA46309	right longus capitis
+FJ1583.obj	musculoskeletal	muscle	FMA46321	right mylohyoid
+FJ1584.obj	musculoskeletal	muscle	FMA32536	right obliquus capitis inferior
+FJ1585.obj	musculoskeletal	muscle	FMA32534	right obliquus capitis superior
+FJ1586.obj	musculoskeletal	muscle	FMA13348	right omohyoid
+FJ1587.obj	musculoskeletal	muscle	FMA45739	right platysma
+FJ1588.obj	musculoskeletal	muscle	FMA46313	right rectus capitis anterior
+FJ1589.obj	musculoskeletal	muscle	FMA32530	right rectus capitis posterior major
+FJ1590.obj	musculoskeletal	muscle	FMA32532	right rectus capitis posterior minor
+FJ1591.obj	musculoskeletal	muscle	FMA46317	right rectus capitis lateralis
+FJ1592.obj	musculoskeletal	muscle	FMA13392	right scalenus anterior
+FJ1593.obj	musculoskeletal	muscle	FMA13390	right scalenus medius
+FJ1594.obj	musculoskeletal	muscle	FMA13388	right scalenus posterior
+FJ1595.obj	musculoskeletal	muscle	FMA13408	right sternocleidomastoid
+FJ1596.obj	musculoskeletal	muscle	FMA13346	right sternohyoid
+FJ1597.obj	musculoskeletal	muscle	FMA13350	right sternothyroid
+FJ1598.obj	musculoskeletal	muscle	FMA45826	right stylohyoid
+FJ1599.obj	musculoskeletal	muscle	FMA13352	right thyrohyoid
+FJ1654.obj	cardiovascular	organ	FMA50029	right anterior cerebral artery
+FJ1654M.obj	cardiovascular	organ	FMA50030	left anterior cerebral artery
+FJ1655.obj	cardiovascular	organ	FMA50169	anterior communicating artery
+FJ1656.obj	cardiovascular	organ	FMA50544	anterior inferior cerebellar artery
+FJ1656M.obj	cardiovascular	organ	FMA50544	anterior inferior cerebellar artery
+FJ1657.obj	cardiovascular	organ	FMA50532	right anterior spinal artery
+FJ1657M.obj	cardiovascular	organ	FMA50533	left anterior spinal artery
+FJ1658.obj	cardiovascular	organ	FMA50088	right anterior choroidal artery
+FJ1658M.obj	cardiovascular	organ	FMA50089	left anterior choroidal artery
+FJ1659.obj	cardiovascular	organ	FMA50383	right anterior temporal artery
+FJ1659M.obj	cardiovascular	organ	FMA50384	left anterior temporal artery
+FJ1661.obj	cardiovascular	organ	FMA50678	anterior temporal branch of right lateral occipital artery
+FJ1661M.obj	cardiovascular	organ	FMA50679	anterior temporal branch of left lateral occipital artery
+FJ1662.obj	cardiovascular	organ	FMA50377	anterolateral central branch of right middle cerebral artery
+FJ1662M.obj	cardiovascular	organ	FMA50378	anterolateral central branch of left middle cerebral artery
+FJ1663.obj	cardiovascular	organ	FMA50377	anterolateral central branch of right middle cerebral artery
+FJ1663M.obj	cardiovascular	organ	FMA50378	anterolateral central branch of left middle cerebral artery
+FJ1664.obj	cardiovascular	organ	FMA77439	artery of central sulcus
+FJ1664M.obj	cardiovascular	organ	FMA77439	artery of central sulcus
+FJ1665.obj	cardiovascular	organ	FMA77439	artery of central sulcus
+FJ1665M.obj	cardiovascular	organ	FMA77439	artery of central sulcus
+FJ1666.obj	cardiovascular	organ	FMA50483	artery of right postcentral sulcus
+FJ1666M.obj	cardiovascular	organ	FMA50484	artery of left postcentral sulcus
+FJ1667.obj	cardiovascular	organ	FMA50486	right anterior parietal artery
+FJ1667M.obj	cardiovascular	organ	FMA50487	left anterior parietal artery
+FJ1668.obj	cardiovascular	organ	FMA50480	artery of right precentral sulcus
+FJ1668M.obj	cardiovascular	organ	FMA50481	artery of left precentral sulcus
+FJ1669.obj	cardiovascular	organ	FMA50480	artery of right precentral sulcus
+FJ1669M.obj	cardiovascular	organ	FMA50481	artery of left precentral sulcus
+FJ1670.obj	cardiovascular	organ	FMA50480	artery of right precentral sulcus
+FJ1670M.obj	cardiovascular	organ	FMA50481	artery of left precentral sulcus
+FJ1671.obj	cardiovascular	organ	FMA50361	precuneal branch of right pericallosal artery
+FJ1671M.obj	cardiovascular	organ	FMA50362	precuneal branch of left pericallosal artery
+FJ1672.obj	cardiovascular	organ	FMA50542	basilar artery
+FJ1673.obj	cardiovascular	organ	FMA50476	branch of right middle cerebral artery to right angular gyrus
+FJ1673M.obj	cardiovascular	organ	FMA50477	branch of left middle cerebral artery to left angular gyrus
+FJ1674.obj	cardiovascular	organ	FMA50146	branch of right anterior choroidal artery to posterior limb of right internal capsule
+FJ1674M.obj	cardiovascular	organ	FMA50147	branch of left anterior choroidal artery to posterior limb of left internal capsule
+FJ1675.obj	cardiovascular	organ	FMA50670	right thalamogeniculate artery
+FJ1675M.obj	cardiovascular	organ	FMA50671	left thalamogeniculate artery
+FJ1676.obj	cardiovascular	organ	FMA50347	right callosomarginal artery
+FJ1676M.obj	cardiovascular	organ	FMA50348	left callosomarginal artery
+FJ1677.obj	cardiovascular	organ	FMA50684	right splenial artery
+FJ1677M.obj	cardiovascular	organ	FMA50685	left splenial artery
+FJ1678.obj	cardiovascular	organ	FMA50684	right splenial artery
+FJ1678M.obj	cardiovascular	organ	FMA50685	left splenial artery
+FJ1679.obj	cardiovascular	organ	FMA50428	hypothalamic branch of right posterior communicating artery
+FJ1679M.obj	cardiovascular	organ	FMA50429	hypothalamic branch of left posterior communicating artery
+FJ1680.obj	cardiovascular	organ	FMA50680	middle temporal branch of right lateral occipital artery
+FJ1680M.obj	cardiovascular	organ	FMA50681	middle temporal branch of left lateral occipital artery
+FJ1681.obj	cardiovascular	organ	FMA50351	intermediomedial branch of right callosomarginal artery
+FJ1681M.obj	cardiovascular	organ	FMA50352	intermediomedial branch of left callosomarginal artery
+FJ1682.obj	cardiovascular	organ	FMA3947	internal carotid artery
+FJ1682M.obj	cardiovascular	organ	FMA3947	internal carotid artery
+FJ1683.obj	cardiovascular	organ	FMA50578	lateral branch of right superior cerebellar artery
+FJ1683M.obj	cardiovascular	organ	FMA50579	lateral branch of left superior cerebellar artery
+FJ1684.obj	cardiovascular	organ	FMA50568	lateral branch of right pontine artery
+FJ1684M.obj	cardiovascular	organ	FMA50569	lateral branch of left pontine artery
+FJ1685.obj	cardiovascular	organ	FMA50443	right lateral frontobasal artery
+FJ1685M.obj	cardiovascular	organ	FMA50444	left lateral frontobasal artery
+FJ1686.obj	cardiovascular	organ	FMA50443	right lateral frontobasal artery
+FJ1686M.obj	cardiovascular	organ	FMA50444	left lateral frontobasal artery
+FJ1687.obj	cardiovascular	organ	FMA50633	lateral occipital artery
+FJ1687M.obj	cardiovascular	organ	FMA50633	lateral occipital artery
+FJ1688.obj	cardiovascular	organ	FMA50581	medial branch of right superior cerebellar artery
+FJ1688M.obj	cardiovascular	organ	FMA50582	medial branch of left superior cerebellar artery
+FJ1689.obj	cardiovascular	organ	FMA50566	medial branch of right pontine artery
+FJ1689M.obj	cardiovascular	organ	FMA50567	medial branch of left pontine artery
+FJ1690.obj	cardiovascular	organ	FMA50343	right medial frontobasal artery
+FJ1690M.obj	cardiovascular	organ	FMA50344	left medial frontobasal artery
+FJ1691.obj	cardiovascular	organ	FMA50638	medial occipital artery
+FJ1691M.obj	cardiovascular	organ	FMA50638	medial occipital artery
+FJ1692.obj	cardiovascular	organ	FMA61991	trunk of right middle cerebral artery
+FJ1693.obj	cardiovascular	organ	FMA50467	middle temporal branch of right middle cerebral artery
+FJ1693M.obj	cardiovascular	organ	FMA50468	middle temporal branch of left middle cerebral artery
+FJ1695.obj	cardiovascular	organ	FMA49869	right ophthalmic artery
+FJ1695M.obj	cardiovascular	organ	FMA49870	left ophthalmic artery
+FJ1696.obj	cardiovascular	organ	FMA50357	paracentral branch of right callosomarginal artery
+FJ1696M.obj	cardiovascular	organ	FMA50358	paracentral branch of left callosomarginal artery
+FJ1697.obj	cardiovascular	organ	FMA50357	paracentral branch of right callosomarginal artery
+FJ1697M.obj	cardiovascular	organ	FMA50358	paracentral branch of left callosomarginal artery
+FJ1698.obj	cardiovascular	organ	FMA50357	paracentral branch of right callosomarginal artery
+FJ1698M.obj	cardiovascular	organ	FMA50358	paracentral branch of left callosomarginal artery
+FJ1699.obj	cardiovascular	organ	FMA50359	right pericallosal artery
+FJ1699M.obj	cardiovascular	organ	FMA50360	left pericallosal artery
+FJ1700.obj	cardiovascular	organ	FMA50519	right posterior inferior cerebellar artery
+FJ1700M.obj	cardiovascular	organ	FMA50520	left posterior inferior cerebellar artery
+FJ1701.obj	cardiovascular	organ	FMA50519	right posterior inferior cerebellar artery
+FJ1701M.obj	cardiovascular	organ	FMA50520	left posterior inferior cerebellar artery
+FJ1702.obj	cardiovascular	organ	FMA50519	right posterior inferior cerebellar artery
+FJ1702M.obj	cardiovascular	organ	FMA50520	left posterior inferior cerebellar artery
+FJ1703.obj	cardiovascular	organ	FMA50519	right posterior inferior cerebellar artery
+FJ1703M.obj	cardiovascular	organ	FMA50520	left posterior inferior cerebellar artery
+FJ1704.obj	cardiovascular	organ	FMA50519	right posterior inferior cerebellar artery
+FJ1704M.obj	cardiovascular	organ	FMA50520	left posterior inferior cerebellar artery
+FJ1705.obj	cardiovascular	organ	FMA50519	right posterior inferior cerebellar artery
+FJ1705M.obj	cardiovascular	organ	FMA50520	left posterior inferior cerebellar artery
+FJ1706.obj	cardiovascular	organ	FMA50519	right posterior inferior cerebellar artery
+FJ1706M.obj	cardiovascular	organ	FMA50520	left posterior inferior cerebellar artery
+FJ1707.obj	cardiovascular	organ	FMA50519	right posterior inferior cerebellar artery
+FJ1707M.obj	cardiovascular	organ	FMA50520	left posterior inferior cerebellar artery
+FJ1708.obj	cardiovascular	organ	FMA50519	right posterior inferior cerebellar artery
+FJ1708M.obj	cardiovascular	organ	FMA50520	left posterior inferior cerebellar artery
+FJ1709.obj	cardiovascular	organ	FMA50519	right posterior inferior cerebellar artery
+FJ1709M.obj	cardiovascular	organ	FMA50520	left posterior inferior cerebellar artery
+FJ1710.obj	cardiovascular	organ	FMA50519	right posterior inferior cerebellar artery
+FJ1710M.obj	cardiovascular	organ	FMA50520	left posterior inferior cerebellar artery
+FJ1711.obj	cardiovascular	organ	FMA50519	right posterior inferior cerebellar artery
+FJ1711M.obj	cardiovascular	organ	FMA50520	left posterior inferior cerebellar artery
+FJ1712.obj	cardiovascular	organ	FMA50380	right polar temporal artery
+FJ1712M.obj	cardiovascular	organ	FMA50381	left polar temporal artery
+FJ1713.obj	cardiovascular	organ	FMA50085	right posterior communicating artery
+FJ1713M.obj	cardiovascular	organ	FMA50086	left posterior communicating artery
+FJ1715.obj	cardiovascular	organ	FMA50519	right posterior inferior cerebellar artery
+FJ1715M.obj	cardiovascular	organ	FMA50520	left posterior inferior cerebellar artery
+FJ1716.obj	cardiovascular	organ	FMA50489	right posterior parietal artery
+FJ1716M.obj	cardiovascular	organ	FMA50490	left posterior parietal artery
+FJ1717.obj	cardiovascular	organ	FMA50470	posterior temporal branch of right middle cerebral artery
+FJ1717M.obj	cardiovascular	organ	FMA50471	posterior temporal branch of left middle cerebral artery
+FJ1720.obj	cardiovascular	organ	FMA50664	right thalamoperforating artery
+FJ1720M.obj	cardiovascular	organ	FMA50665	left thalamoperforating artery
+FJ1721.obj	cardiovascular	organ	FMA50660	posteromedial central branch of right posterior cerebral artery
+FJ1721M.obj	cardiovascular	organ	FMA50661	posteromedial central branch of left posterior cerebral artery
+FJ1722.obj	cardiovascular	organ	FMA50353	posteromedial branch of right callosomarginal artery
+FJ1722M.obj	cardiovascular	organ	FMA50354	posteromedial branch of left callosomarginal artery
+FJ1723.obj	cardiovascular	organ	FMA50639	precommunicating part of right posterior cerebral artery
+FJ1723M.obj	cardiovascular	organ	FMA50640	precommunicating part of left posterior cerebral artery
+FJ1724.obj	cardiovascular	organ	FMA50445	right prefrontal artery
+FJ1724M.obj	cardiovascular	organ	FMA50478	left prefrontal artery
+FJ1725.obj	cardiovascular	organ	FMA3956	vertebral artery
+FJ1725M.obj	cardiovascular	organ	FMA3956	vertebral artery
+FJ1726.obj	cardiovascular	organ	FMA50574	right superior cerebellar artery
+FJ1726M.obj	cardiovascular	organ	FMA50575	left superior cerebellar artery
+FJ1727.obj	cardiovascular	organ	FMA50658	right posterior choroidal artery
+FJ1727M.obj	cardiovascular	organ	FMA50659	left posterior choroidal artery
+FJ1728.obj	cardiovascular	organ	FMA50696	superior vermian branch of medial branch of right superior cerebellar artery
+FJ1728M.obj	cardiovascular	organ	FMA50697	superior vermian branch of medial branch of left superior cerebellar artery
+FJ1729.obj	cardiovascular	organ	FMA50473	temporo-occipital branch of right middle cerebral artery
+FJ1729M.obj	cardiovascular	organ	FMA50474	temporo-occipital branch of left middle cerebral artery
+FJ1730.obj	nervous	organ	FMA78454	third ventricle
+FJ1731.obj	nervous	organ	FMA78469	fourth ventricle
+FJ1732.obj	nervous	organ	FMA72670	left angular gyrus
+FJ1733.obj	nervous	organ	FMA72669	right angular gyrus
+FJ1737.obj	nervous	organ	FMA7647	spinal cord
+FJ1738.obj	nervous	organ	FMA78467	cerebral aqueduct
+FJ1739.obj	nervous	organ	FMA72718	left cingulate gyrus
+FJ1740.obj	nervous	organ	FMA72717	right cingulate gyrus
+FJ1743.obj	nervous	organ	FMA62032	habenula
+FJ1744.obj	nervous	organ	FMA72658	left inferior frontal gyrus
+FJ1745.obj	nervous	organ	FMA72657	right inferior frontal gyrus
+FJ1746.obj	nervous	organ	FMA72688	left inferior temporal gyrus
+FJ1747.obj	nervous	organ	FMA72687	right inferior temporal gyrus
+FJ1748.obj	nervous	organ	FMA72978	left insula
+FJ1749.obj	nervous	organ	FMA72977	right insula
+FJ1750.obj	nervous	organ	FMA72907	left internal capsule
+FJ1751.obj	nervous	organ	FMA72906	right internal capsule
+FJ1758.obj	nervous	organ	FMA241998	cerebral white matter
+FJ1759.obj	nervous	organ	FMA72714	left hippocampus
+FJ1760.obj	nervous	organ	FMA62008	hypothalamus
+FJ1762.obj	nervous	organ	FMA73435	left inferior colliculus
+FJ1767.obj	nervous	organ	FMA78450	left lateral ventricle
+FJ1769.obj	nervous	organ	FMA62004	medulla oblongata
+FJ1770.obj	nervous	organ	FMA61815	cardinal segment of brain
+FJ1775.obj	nervous	organ	FMA67943	pons
+FJ1779.obj	nervous	organ	FMA73423	left superior colliculus
+FJ1780.obj	nervous	organ	FMA62327	tuber cinereum
+FJ1781.obj	nervous	organ	FMA67944	cerebellum
+FJ1783.obj	nervous	organ	FMA72690	left fusiform gyrus
+FJ1784.obj	nervous	organ	FMA72689	right fusiform gyrus
+FJ1785.obj	nervous	organ	FMA72706	left parahippocampal gyrus
+FJ1786.obj	nervous	organ	FMA72705	right parahippocampal gyrus
+FJ1787.obj	nervous	organ	FMA72656	left middle frontal gyrus
+FJ1788.obj	nervous	organ	FMA72655	right middle frontal gyrus
+FJ1789.obj	nervous	organ	FMA72686	left middle temporal gyrus
+FJ1790.obj	nervous	organ	FMA72685	right middle temporal gyrus
+FJ1791.obj	nervous	organ	FMA72976	left occipital lobe
+FJ1792.obj	nervous	organ	FMA72975	right occipital lobe
+FJ1795.obj	nervous	organ	FMA62033	pineal body
+FJ1796.obj	endocrine	organ	FMA13889	pituitary gland
+FJ1797.obj	nervous	organ	FMA72666	left postcentral gyrus
+FJ1798.obj	nervous	organ	FMA72665	right postcentral gyrus
+FJ1800.obj	nervous	organ	FMA72662	left precentral gyrus
+FJ1801.obj	nervous	organ	FMA72661	right precentral gyrus
+FJ1806.obj	nervous	organ	FMA241998	cerebral white matter
+FJ1807.obj	nervous	organ	FMA242609	right archicortex
+FJ1808.obj	nervous	organ	FMA62008	hypothalamus
+FJ1810.obj	nervous	organ	FMA73434	right inferior colliculus
+FJ1814.obj	nervous	organ	FMA78449	right lateral ventricle
+FJ1817.obj	nervous	organ	FMA61815	cardinal segment of brain
+FJ1822.obj	nervous	organ	FMA67943	pons
+FJ1826.obj	nervous	organ	FMA73422	right superior colliculus
+FJ1828.obj	nervous	organ	FMA62327	tuber cinereum
+FJ1830.obj	nervous	organ	FMA67944	cerebellum
+FJ1831.obj	nervous	organ	FMA62004	medulla oblongata
+FJ1833.obj	nervous	organ	FMA72654	left superior frontal gyrus
+FJ1834.obj	nervous	organ	FMA72653	right superior frontal gyrus
+FJ1835.obj	nervous	organ	FMA72672	left superior parietal lobule
+FJ1836.obj	nervous	organ	FMA72671	right superior parietal lobule
+FJ1841.obj	nervous	organ	FMA72668	left supramarginal gyrus
+FJ1842.obj	nervous	organ	FMA72667	right supramarginal gyrus
+FJ1844.obj	cardiovascular	organ	FMA50542	basilar artery
+FJ1846.obj	cardiovascular	organ	FMA50737	celiac artery
+FJ1853.obj	cardiovascular	organ	FMA50735	hepatic portal vein
+FJ1867.obj	cardiovascular	organ	FMA15793	tributary of middle hepatic vein
+FJ1874.obj	cardiovascular	organ	FMA71710	left lobe branch of left hepatic artery
+FJ1883.obj	metabolic	organ	FMA71889	caudate lobe tributary of left hepatic biliary tree
+FJ1893.obj	metabolic	organ	FMA15415	left portal vein
+FJ1895.obj	metabolic	organ	FMA7198	pancreas
+FJ1896.obj	metabolic	organ	FMA10419	pancreatic duct
+FJ1913.obj	metabolic	organ	FMA15414	right portal vein
+FJ1914.obj	metabolic	organ	FMA82706	caudate lobe branch of right portal vein
+FJ1916.obj	metabolic	organ	FMA70447	caudate lobe branch of right hepatic artery
+FJ1924.obj	cardiovascular	organ	FMA71708	right lobe branch of right hepatic artery
+FJ1928.obj	cardiovascular	organ	FMA14749	superior mesenteric artery
+FJ1931.obj	cardiovascular	organ	FMA87217	descending thoracic aorta
+FJ1932.obj	cardiovascular	organ	FMA3789	abdominal aorta
+FJ1933.obj	cardiovascular	organ	FMA68109	bronchial artery
+FJ1934.obj	cardiovascular	organ	FMA4149	esophageal artery
+FJ1935.obj	cardiovascular	organ	FMA5042	right superior intercostal artery
+FJ1936.obj	cardiovascular	organ	FMA3988	right superior epigastric artery
+FJ1937.obj	cardiovascular	organ	FMA3960	internal thoracic artery
+FJ1938.obj	cardiovascular	organ	FMA22675	right lateral thoracic artery
+FJ1939.obj	cardiovascular	organ	FMA66242	right first posterior intercostal artery
+FJ1950.obj	cardiovascular	organ	FMA5041	right second posterior intercostal artery
+FJ1967.obj	cardiovascular	organ	FMA4634	right subcostal artery
+FJ1969.obj	cardiovascular	organ	FMA10692	right musculophrenic artery
+FJ1970.obj	cardiovascular	organ	FMA4088	left superior intercostal artery
+FJ1971.obj	cardiovascular	organ	FMA4083	left superior epigastric artery
+FJ1972.obj	cardiovascular	organ	FMA3960	internal thoracic artery
+FJ1973.obj	cardiovascular	organ	FMA66243	left first posterior intercostal artery
+FJ1974.obj	cardiovascular	organ	FMA4112	left second posterior intercostal artery
+FJ1976.obj	cardiovascular	organ	FMA22676	left lateral thoracic artery
+FJ1977.obj	cardiovascular	organ	FMA4654	left subcostal artery
+FJ1979.obj	cardiovascular	organ	FMA4077	left musculophrenic artery
+FJ1981.obj	cardiovascular	organ	FMA5011	accessory hemiazygos vein
+FJ1986.obj	cardiovascular	organ	FMA4797	left superior intercostal vein
+FJ1987.obj	cardiovascular	organ	FMA4951	left subcostal vein
+FJ1988.obj	cardiovascular	organ	FMA4786	left musculophrenic vein
+FJ1991.obj	cardiovascular	organ	FMA4877	right superior intercostal vein
+FJ1993.obj	cardiovascular	organ	FMA4729	internal thoracic vein
+FJ1995.obj	cardiovascular	organ	FMA4844	right subcostal vein
+FJ1996.obj	cardiovascular	organ	FMA4772	right musculophrenic vein
+FJ2011.obj	cardiovascular	organ	FMA14749	superior mesenteric artery
+FJ2013.obj	cardiovascular	organ	FMA50737	celiac artery
+FJ2025.obj	cardiovascular	organ	FMA14824	marginal colic artery
+FJ2034.obj	cardiovascular	organ	FMA14819	ileal branch of inferior branch of ileocolic artery
+FJ2038.obj	cardiovascular	organ	FMA14751	renal artery
+FJ2041.obj	respiratory	organ	FMA8620	right anterior segmental artery
+FJ2042.obj	cardiovascular	organ	FMA86340	superior segmental branch of right renal artery
+FJ2043.obj	cardiovascular	organ	FMA86346	inferior segmental branch of right renal artery
+FJ2044.obj	respiratory	organ	FMA8620	right anterior segmental artery
+FJ2045.obj	cardiovascular	organ	FMA86348	posterior segmental branch of right renal artery
+FJ2046.obj	cardiovascular	organ	FMA14751	renal artery
+FJ2049.obj	cardiovascular	organ	FMA86347	inferior segmental branch of left renal artery
+FJ2052.obj	cardiovascular	organ	FMA86341	superior segmental branch of left renal artery
+FJ2053.obj	cardiovascular	organ	FMA86349	posterior segmental branch of left renal artery
+FJ2054.obj	cardiovascular	organ	FMA86349	posterior segmental branch of left renal artery
+FJ2055.obj	cardiovascular	organ	FMA43915	dorsalis pedis artery
+FJ2056.obj	cardiovascular	organ	FMA21354	deep dorsal vein of penis
+FJ2057.obj	cardiovascular	organ	FMA21422	descending branch of right lateral circumflex femoral artery
+FJ2058.obj	cardiovascular	organ	FMA69517	distal perforating artery
+FJ2059.obj	cardiovascular	organ	FMA44882	dorsal venous arch of left foot
+FJ2060.obj	cardiovascular	organ	FMA44882	dorsal venous arch of left foot
+FJ2061.obj	cardiovascular	organ	FMA44881	dorsal venous arch of right foot
+FJ2062.obj	cardiovascular	organ	FMA44881	dorsal venous arch of right foot
+FJ2063.obj	cardiovascular	organ	FMA21423	descending branch of left lateral circumflex femoral artery
+FJ2064.obj	cardiovascular	organ	FMA69517	distal perforating artery
+FJ2065.obj	cardiovascular	organ	FMA43894	anterior tibial artery
+FJ2066.obj	cardiovascular	organ	FMA43908	left anterior tibial recurrent artery
+FJ2067.obj	cardiovascular	organ	FMA69495	left arcuate artery
+FJ2069.obj	cardiovascular	organ	FMA22508	left descending genicular artery
+FJ2072.obj	cardiovascular	organ	FMA69713	digital artery of foot
+FJ2073.obj	cardiovascular	organ	FMA43915	dorsalis pedis artery
+FJ2074.obj	cardiovascular	organ	FMA70248	femoral artery
+FJ2076.obj	cardiovascular	organ	FMA43893	left inferior lateral genicular artery
+FJ2077.obj	cardiovascular	organ	FMA43891	left inferior medial genicular artery
+FJ2078.obj	cardiovascular	organ	FMA20802	left lateral circumflex femoral artery
+FJ2079.obj	cardiovascular	organ	FMA43926	lateral plantar artery
+FJ2080.obj	cardiovascular	organ	FMA22589	left lateral superior genicular artery
+FJ2081.obj	cardiovascular	organ	FMA69491	left lateral tarsal artery
+FJ2082.obj	cardiovascular	organ	FMA43925	medial plantar artery
+FJ2083.obj	cardiovascular	organ	FMA22587	left medial superior genicular artery
+FJ2084.obj	cardiovascular	organ	FMA22563	left middle genicular artery
+FJ2085.obj	cardiovascular	organ	FMA43944	left plantar arch
+FJ2086.obj	cardiovascular	organ	FMA77381	left popliteal artery
+FJ2087.obj	cardiovascular	organ	FMA43899	left posterior tibial artery
+FJ2089.obj	cardiovascular	organ	FMA43938	left superficial medial plantar artery
+FJ2096.obj	cardiovascular	organ	FMA43956	plantar metatarsal artery
+FJ2097.obj	cardiovascular	organ	FMA44337	left anterior tibial vein
+FJ2099.obj	cardiovascular	organ	FMA51043	left deep femoral vein
+FJ2102.obj	cardiovascular	organ	FMA21189	left femoral vein
+FJ2103.obj	cardiovascular	organ	FMA21380	left great saphenous vein
+FJ2107.obj	cardiovascular	organ	FMA44888	left genicular vein
+FJ2108.obj	cardiovascular	organ	FMA44888	left genicular vein
+FJ2113.obj	cardiovascular	organ	FMA44499	tributary of plantar venous arch
+FJ2115.obj	cardiovascular	organ	FMA44499	tributary of plantar venous arch
+FJ2117.obj	cardiovascular	organ	FMA44329	left popliteal vein
+FJ2118.obj	cardiovascular	organ	FMA44339	left posterior tibial vein
+FJ2121.obj	cardiovascular	organ	FMA44335	left small saphenous vein
+FJ2122.obj	cardiovascular	organ	FMA44341	left superficial epigastric vein
+FJ2124.obj	cardiovascular	organ	FMA44888	left genicular vein
+FJ2125.obj	cardiovascular	organ	FMA44888	left genicular vein
+FJ2128.obj	cardiovascular	organ	FMA44884	plantar venous arch of left foot
+FJ2129.obj	cardiovascular	organ	FMA44883	plantar venous arch of right foot
+FJ2130.obj	cardiovascular	organ	FMA43894	anterior tibial artery
+FJ2131.obj	cardiovascular	organ	FMA43907	right anterior tibial recurrent artery
+FJ2132.obj	cardiovascular	organ	FMA44336	right anterior tibial vein
+FJ2133.obj	cardiovascular	organ	FMA69494	right arcuate artery
+FJ2135.obj	cardiovascular	organ	FMA51042	right deep femoral vein
+FJ2137.obj	cardiovascular	organ	FMA22507	right descending genicular artery
+FJ2141.obj	cardiovascular	organ	FMA69713	digital artery of foot
+FJ2143.obj	cardiovascular	organ	FMA70248	femoral artery
+FJ2144.obj	cardiovascular	organ	FMA21188	right femoral vein
+FJ2145.obj	cardiovascular	organ	FMA21379	right great saphenous vein
+FJ2150.obj	cardiovascular	organ	FMA43892	right inferior lateral genicular artery
+FJ2151.obj	cardiovascular	organ	FMA44887	right genicular vein
+FJ2152.obj	cardiovascular	organ	FMA43890	right inferior medial genicular artery
+FJ2153.obj	cardiovascular	organ	FMA44887	right genicular vein
+FJ2158.obj	cardiovascular	organ	FMA20801	right lateral circumflex femoral artery
+FJ2159.obj	cardiovascular	organ	FMA43926	lateral plantar artery
+FJ2160.obj	cardiovascular	organ	FMA44499	tributary of plantar venous arch
+FJ2162.obj	cardiovascular	organ	FMA22588	right lateral superior genicular artery
+FJ2163.obj	cardiovascular	organ	FMA69490	right lateral tarsal artery
+FJ2164.obj	cardiovascular	organ	FMA43925	medial plantar artery
+FJ2165.obj	cardiovascular	organ	FMA44499	tributary of plantar venous arch
+FJ2166.obj	cardiovascular	organ	FMA22586	right medial superior genicular artery
+FJ2167.obj	cardiovascular	organ	FMA22562	right middle genicular artery
+FJ2169.obj	cardiovascular	organ	FMA43943	right plantar arch
+FJ2170.obj	cardiovascular	organ	FMA77380	right popliteal artery
+FJ2171.obj	cardiovascular	organ	FMA44328	right popliteal vein
+FJ2172.obj	cardiovascular	organ	FMA43898	right posterior tibial artery
+FJ2173.obj	cardiovascular	organ	FMA44338	right posterior tibial vein
+FJ2176.obj	cardiovascular	organ	FMA44334	right small saphenous vein
+FJ2178.obj	cardiovascular	organ	FMA44340	right superficial epigastric vein
+FJ2179.obj	cardiovascular	organ	FMA43937	right superficial medial plantar artery
+FJ2181.obj	cardiovascular	organ	FMA44887	right genicular vein
+FJ2182.obj	cardiovascular	organ	FMA44887	right genicular vein
+FJ2183.obj	cardiovascular	organ	FMA44337	left anterior tibial vein
+FJ2184.obj	cardiovascular	organ	FMA44886	left fibular vein
+FJ2187.obj	cardiovascular	organ	FMA44886	left fibular vein
+FJ2188.obj	cardiovascular	organ	FMA44922	left lateral circumflex femoral vein
+FJ2189.obj	cardiovascular	organ	FMA44919	left medial circumflex femoral vein
+FJ2190.obj	cardiovascular	organ	FMA44885	right fibular vein
+FJ2191.obj	cardiovascular	organ	FMA44504	plantar metatarsal vein
+FJ2193.obj	cardiovascular	organ	FMA44336	right anterior tibial vein
+FJ2194.obj	cardiovascular	organ	FMA44885	right fibular vein
+FJ2200.obj	cardiovascular	organ	FMA44885	right fibular vein
+FJ2201.obj	cardiovascular	organ	FMA44920	right lateral circumflex femoral vein
+FJ2202.obj	cardiovascular	organ	FMA44918	right medial circumflex femoral vein
+FJ2206.obj	cardiovascular	organ	FMA43956	plantar metatarsal artery
+FJ2207.obj	cardiovascular	organ	FMA44504	plantar metatarsal vein
+FJ2208.obj	cardiovascular	organ	FMA21384	superficial dorsal vein of penis
+FJ2209.obj	cardiovascular	organ	FMA10697	right inferior thyroid artery
+FJ2210.obj	cardiovascular	organ	FMA10680	left inferior thyroid artery
+FJ2211.obj	cardiovascular	organ	FMA23069	acromial branch of left thoraco-acromial artery
+FJ2212.obj	cardiovascular	organ	FMA22683	left anterior circumflex humeral artery
+FJ2213.obj	cardiovascular	organ	FMA77955	left anterior circumflex humeral vein
+FJ2214.obj	cardiovascular	organ	FMA22813	left anterior interosseous artery
+FJ2215.obj	cardiovascular	organ	FMA22713	left inferior ulnar collateral artery
+FJ2217.obj	cardiovascular	organ	FMA13331	left axillary vein
+FJ2218.obj	cardiovascular	organ	FMA22910	left basilic vein
+FJ2220.obj	cardiovascular	organ	FMA13326	left cephalic vein
+FJ2221.obj	cardiovascular	organ	FMA23181	left circumflex scapular artery
+FJ2222.obj	cardiovascular	organ	FMA77950	left circumflex scapular vein
+FJ2223.obj	cardiovascular	organ	FMA22806	common interosseous artery
+FJ2224.obj	cardiovascular	organ	FMA4086	left costocervical trunk
+FJ2225.obj	cardiovascular	organ	FMA22697	left deep brachial artery
+FJ2226.obj	cardiovascular	organ	FMA4134	left deep cervical artery
+FJ2230.obj	cardiovascular	organ	FMA23073	deltoid branch of left thoraco-acromial artery
+FJ2231.obj	cardiovascular	organ	FMA22773	dorsal carpal branch of left radial artery
+FJ2232.obj	cardiovascular	organ	FMA10552	left dorsal scapular artery
+FJ2233.obj	cardiovascular	organ	FMA71212	left lateral thoracic vein
+FJ2234.obj	cardiovascular	organ	FMA22969	left median antebrachial vein
+FJ2235.obj	cardiovascular	organ	FMA22965	left median cubital vein
+FJ2236.obj	cardiovascular	organ	FMA22822	left dorsal carpal branch of ulnar artery
+FJ2237.obj	cardiovascular	organ	FMA22865	left palmar metacarpal artery
+FJ2238.obj	cardiovascular	organ	FMA22921	left palmar metacarpal vein
+FJ2239.obj	cardiovascular	organ	FMA22687	left posterior circumflex humeral artery
+FJ2240.obj	cardiovascular	organ	FMA22687	left posterior circumflex humeral artery
+FJ2241.obj	cardiovascular	organ	FMA22805	left posterior ulnar recurrent artery
+FJ2242.obj	cardiovascular	organ	FMA22730	radial artery
+FJ2243.obj	cardiovascular	organ	FMA22766	left radial recurrent artery
+FJ2244.obj	cardiovascular	organ	FMA22949	left radial vein
+FJ2245.obj	cardiovascular	organ	FMA268669	left recurrent interosseous artery
+FJ2246.obj	cardiovascular	organ	FMA22677	subscapular artery
+FJ2247.obj	cardiovascular	organ	FMA23115	left subscapular vein
+FJ2250.obj	cardiovascular	organ	FMA50860	left suprascapular vein
+FJ2251.obj	cardiovascular	organ	FMA10681	left suprascapular artery
+FJ2252.obj	cardiovascular	organ	FMA66564	trunk of left thoraco-acromial artery
+FJ2253.obj	cardiovascular	organ	FMA66322	left thoracodorsal artery
+FJ2254.obj	cardiovascular	organ	FMA71215	left thoracodorsal vein
+FJ2255.obj	cardiovascular	organ	FMA4084	left thyrocervical trunk
+FJ2256.obj	cardiovascular	organ	FMA10683	left superficial cervical artery
+FJ2257.obj	cardiovascular	organ	FMA10664	transverse cervical artery
+FJ2258.obj	cardiovascular	organ	FMA22796	ulnar artery
+FJ2259.obj	cardiovascular	organ	FMA22802	left anterior ulnar recurrent artery
+FJ2260.obj	cardiovascular	organ	FMA22952	left ulnar vein
+FJ2261.obj	cardiovascular	organ	FMA23127	radial collateral branch of left deep brachial artery
+FJ2262.obj	cardiovascular	organ	FMA23126	radial collateral branch of right deep brachial artery
+FJ2263.obj	cardiovascular	organ	FMA23068	acromial branch of right thoraco-acromial artery
+FJ2264.obj	cardiovascular	organ	FMA22682	right anterior circumflex humeral artery
+FJ2265.obj	cardiovascular	organ	FMA77954	right anterior circumflex humeral vein
+FJ2266.obj	cardiovascular	organ	FMA22812	right anterior interosseous artery
+FJ2267.obj	cardiovascular	organ	FMA22712	right inferior ulnar collateral artery
+FJ2269.obj	cardiovascular	organ	FMA13330	right axillary vein
+FJ2270.obj	cardiovascular	organ	FMA22909	right basilic vein
+FJ2272.obj	cardiovascular	organ	FMA13325	right cephalic vein
+FJ2273.obj	cardiovascular	organ	FMA23180	right circumflex scapular artery
+FJ2274.obj	cardiovascular	organ	FMA77949	right circumflex scapular vein
+FJ2275.obj	cardiovascular	organ	FMA22806	common interosseous artery
+FJ2276.obj	cardiovascular	organ	FMA5039	right costocervical trunk
+FJ2277.obj	cardiovascular	organ	FMA22696	right deep brachial artery
+FJ2278.obj	cardiovascular	organ	FMA10660	right deep cervical artery
+FJ2282.obj	cardiovascular	organ	FMA23072	deltoid branch of right thoraco-acromial artery
+FJ2283.obj	cardiovascular	organ	FMA22772	dorsal carpal branch of right radial artery
+FJ2284.obj	cardiovascular	organ	FMA4057	right dorsal scapular artery
+FJ2285.obj	cardiovascular	organ	FMA71211	right lateral thoracic vein
+FJ2286.obj	cardiovascular	organ	FMA22968	right median antebrachial vein
+FJ2287.obj	cardiovascular	organ	FMA22964	right median cubital vein
+FJ2288.obj	cardiovascular	organ	FMA22821	right dorsal carpal branch of ulnar artery
+FJ2289.obj	cardiovascular	organ	FMA22864	right palmar metacarpal artery
+FJ2290.obj	cardiovascular	organ	FMA22920	right palmar metacarpal vein
+FJ2291.obj	cardiovascular	organ	FMA22685	right posterior circumflex humeral artery
+FJ2292.obj	cardiovascular	organ	FMA22685	right posterior circumflex humeral artery
+FJ2293.obj	cardiovascular	organ	FMA22804	right posterior ulnar recurrent artery
+FJ2294.obj	cardiovascular	organ	FMA22730	radial artery
+FJ2295.obj	cardiovascular	organ	FMA22764	right radial recurrent artery
+FJ2296.obj	cardiovascular	organ	FMA22948	right radial vein
+FJ2297.obj	cardiovascular	organ	FMA268667	right recurrent interosseous artery
+FJ2298.obj	cardiovascular	organ	FMA22677	subscapular artery
+FJ2299.obj	cardiovascular	organ	FMA23114	right subscapular vein
+FJ2302.obj	cardiovascular	organ	FMA50859	right suprascapular vein
+FJ2303.obj	cardiovascular	organ	FMA10698	right suprascapular artery
+FJ2304.obj	cardiovascular	organ	FMA66563	trunk of right thoraco-acromial artery
+FJ2305.obj	cardiovascular	organ	FMA66321	right thoracodorsal artery
+FJ2306.obj	cardiovascular	organ	FMA71214	right thoracodorsal vein
+FJ2307.obj	cardiovascular	organ	FMA3992	right thyrocervical trunk
+FJ2308.obj	cardiovascular	organ	FMA10700	right superficial cervical artery
+FJ2309.obj	cardiovascular	organ	FMA10664	transverse cervical artery
+FJ2310.obj	cardiovascular	organ	FMA22796	ulnar artery
+FJ2311.obj	cardiovascular	organ	FMA22801	right anterior ulnar recurrent artery
+FJ2312.obj	cardiovascular	organ	FMA22951	right ulnar vein
+FJ2313.obj	cardiovascular	organ	FMA22936	left medial brachial vein
+FJ2314.obj	cardiovascular	organ	FMA22778	left arteria radialis indicis
+FJ2315.obj	cardiovascular	organ	FMA85118	left first common palmar digital artery
+FJ2316.obj	cardiovascular	organ	FMA85120	left second common palmar digital artery
+FJ2317.obj	cardiovascular	organ	FMA85122	left third common palmar digital artery
+FJ2320.obj	cardiovascular	organ	FMA22921	left palmar metacarpal vein
+FJ2323.obj	cardiovascular	organ	FMA22921	left palmar metacarpal vein
+FJ2330.obj	cardiovascular	organ	FMA23064	pectoral branch of left thoraco-acromial artery
+FJ2331.obj	cardiovascular	organ	FMA23125	middle collateral branch of left deep brachial artery
+FJ2332.obj	cardiovascular	organ	FMA22778	left arteria radialis indicis
+FJ2333.obj	cardiovascular	organ	FMA23051	medial proper palmar digital artery of left index finger
+FJ2334.obj	cardiovascular	organ	FMA22860	lateral proper palmar digital artery of left middle finger
+FJ2335.obj	cardiovascular	organ	FMA85116	lateral proper palmar digital artery of left ring finger
+FJ2336.obj	cardiovascular	organ	FMA23055	lateral proper palmar digital artery of left little finger
+FJ2337.obj	cardiovascular	organ	FMA85124	left fourth common palmar digital artery
+FJ2338.obj	cardiovascular	organ	FMA22907	left arteria princeps pollicis
+FJ2339.obj	cardiovascular	organ	FMA22907	left arteria princeps pollicis
+FJ2341.obj	cardiovascular	organ	FMA22935	right medial brachial vein
+FJ2342.obj	cardiovascular	organ	FMA22777	right arteria radialis indicis
+FJ2343.obj	cardiovascular	organ	FMA22856	right first common palmar digital artery
+FJ2344.obj	cardiovascular	organ	FMA85119	right second common palmar digital artery
+FJ2345.obj	cardiovascular	organ	FMA85121	right third common palmar digital artery
+FJ2350.obj	cardiovascular	organ	FMA22920	right palmar metacarpal vein
+FJ2353.obj	cardiovascular	organ	FMA22920	right palmar metacarpal vein
+FJ2361.obj	cardiovascular	organ	FMA23063	pectoral branch of right thoraco-acromial artery
+FJ2362.obj	cardiovascular	organ	FMA23124	middle collateral branch of right deep brachial artery
+FJ2363.obj	cardiovascular	organ	FMA22777	right arteria radialis indicis
+FJ2364.obj	cardiovascular	organ	FMA23050	medial proper palmar digital artery of right index finger
+FJ2365.obj	cardiovascular	organ	FMA22858	lateral proper palmar digital artery of right middle finger
+FJ2366.obj	cardiovascular	organ	FMA85115	lateral proper palmar digital artery of right ring finger
+FJ2367.obj	cardiovascular	organ	FMA85111	medial proper palmar digital artery of middle finger
+FJ2368.obj	cardiovascular	organ	FMA23054	lateral proper palmar digital artery of right little finger
+FJ2369.obj	cardiovascular	organ	FMA23046	medial proper palmar digital artery of ring finger
+FJ2370.obj	cardiovascular	organ	FMA85123	right fourth common palmar digital artery
+FJ2371.obj	cardiovascular	organ	FMA22905	right arteria princeps pollicis
+FJ2372.obj	cardiovascular	organ	FMA22905	right arteria princeps pollicis
+FJ2373.obj	cardiovascular	organ	FMA22707	right superior ulnar collateral artery
+FJ2374.obj	cardiovascular	organ	FMA22708	left superior ulnar collateral artery
+FJ2386.obj	metabolic	organ	FMA70447	caudate lobe branch of right hepatic artery
+FJ2394.obj	cardiovascular	organ	FMA71708	right lobe branch of right hepatic artery
+FJ2404.obj	metabolic	organ	FMA15415	left portal vein
+FJ2405.obj	metabolic	organ	FMA15414	right portal vein
+FJ2409.obj	metabolic	organ	FMA15745	hepatovenous segment vii
+FJ2414.obj	cardiovascular	organ	FMA14340	middle hepatic vein
+FJ2415.obj	metabolic	organ	FMA14339	left hepatic vein
+FJ2416.obj	metabolic	organ	FMA14338	right hepatic vein
+FJ2417.obj	cardiovascular	organ	FMA7247	left anterior cusp of pulmonary valve
+FJ2418.obj	cardiovascular	organ	FMA86064	myocardial zone 12
+FJ2419.obj	cardiovascular	organ	FMA9553	anterior wall of right ventricle
+FJ2420.obj	cardiovascular	organ	FMA7242	anterior leaflet of mitral valve
+FJ2421.obj	cardiovascular	organ	FMA7238	anterior leaflet of tricuspid valve
+FJ2422.obj	cardiovascular	organ	FMA9466	cavity of left ventricle
+FJ2423.obj	cardiovascular	organ	FMA9291	cavity of right ventricle
+FJ2424.obj	cardiovascular	organ	FMA11359	cavity of right atrium
+FJ2425.obj	cardiovascular	organ	FMA9465	cavity of left atrium
+FJ2426.obj	cardiovascular	organ	FMA7254	left posterior cusp of aortic valve
+FJ2427.obj	cardiovascular	organ	FMA7250	posterior cusp of pulmonary valve
+FJ2429.obj	cardiovascular	organ	FMA86063	myocardial zone 11
+FJ2430.obj	cardiovascular	organ	FMA9555	inferior wall of right ventricle
+FJ2431.obj	cardiovascular	organ	FMA7252	right posterior cusp of aortic valve
+FJ2432.obj	cardiovascular	organ	FMA86056	myocardial zone 4
+FJ2433.obj	cardiovascular	organ	FMA7239	posterior leaflet of tricuspid valve
+FJ2434.obj	cardiovascular	organ	FMA7249	right anterior cusp of pulmonary valve
+FJ2435.obj	cardiovascular	organ	FMA7253	anterior cusp of aortic valve
+FJ2436.obj	cardiovascular	organ	FMA7240	septal leaflet of tricuspid valve
+FJ2437.obj	cardiovascular	organ	FMA7262	septal papillary muscle of right ventricle
+FJ2438.obj	cardiovascular	organ	FMA9531	wall of left atrium
+FJ2439.obj	cardiovascular	organ	FMA9457	wall of right atrium
+FJ2440.obj	musculoskeletal	connective	FMA9615	cricoid cartilage
+FJ2441.obj	respiratory	organ	FMA68227	inferior lingular bronchial tree
+FJ2442.obj	respiratory	organ	FMA68230	left medial basal segmental bronchial tree
+FJ2443.obj	respiratory	organ	FMA68222	left anterior segmental bronchial tree
+FJ2444.obj	respiratory	organ	FMA68223	left apical segmental bronchial tree
+FJ2445.obj	respiratory	organ	FMA68232	left lateral basal segmental bronchial tree
+FJ2446.obj	respiratory	organ	FMA68233	left posterior basal segmental bronchial tree
+FJ2447.obj	respiratory	organ	FMA68225	left posterior segmental bronchial tree
+FJ2448.obj	respiratory	organ	FMA68228	left superior segmental bronchial tree
+FJ2449.obj	respiratory	organ	FMA68215	lateral segmental bronchial tree
+FJ2450.obj	respiratory	organ	FMA7405	main bronchus
+FJ2451.obj	respiratory	organ	FMA68214	medial segmental bronchial tree
+FJ2452.obj	respiratory	organ	FMA68321	right anterior basal segmental bronchial tree
+FJ2453.obj	respiratory	organ	FMA68212	right anterior segmental bronchial tree
+FJ2454.obj	respiratory	organ	FMA68211	right apical segmental bronchial tree
+FJ2455.obj	respiratory	organ	FMA68220	right lateral basal segmental bronchial tree
+FJ2456.obj	respiratory	organ	FMA68218	right medial basal segmental bronchial tree
+FJ2457.obj	respiratory	organ	FMA68221	right posterior basal segmental bronchial tree
+FJ2458.obj	respiratory	organ	FMA68213	right posterior segmental bronchial tree
+FJ2459.obj	respiratory	organ	FMA68216	right superior segmental bronchial tree
+FJ2460.obj	respiratory	organ	FMA68223	left apical segmental bronchial tree
+FJ2461.obj	respiratory	organ	FMA68223	left apical segmental bronchial tree
+FJ2462.obj	respiratory	organ	FMA68223	left apical segmental bronchial tree
+FJ2463.obj	respiratory	organ	FMA68223	left apical segmental bronchial tree
+FJ2464.obj	respiratory	organ	FMA68223	left apical segmental bronchial tree
+FJ2465.obj	respiratory	organ	FMA68225	left posterior segmental bronchial tree
+FJ2466.obj	respiratory	organ	FMA68225	left posterior segmental bronchial tree
+FJ2467.obj	respiratory	organ	FMA68222	left anterior segmental bronchial tree
+FJ2468.obj	respiratory	organ	FMA68222	left anterior segmental bronchial tree
+FJ2469.obj	respiratory	organ	FMA68222	left anterior segmental bronchial tree
+FJ2470.obj	respiratory	organ	FMA68221	right posterior basal segmental bronchial tree
+FJ2471.obj	respiratory	organ	FMA68222	left anterior segmental bronchial tree
+FJ2472.obj	respiratory	organ	FMA68222	left anterior segmental bronchial tree
+FJ2473.obj	respiratory	organ	FMA68222	left anterior segmental bronchial tree
+FJ2474.obj	respiratory	organ	FMA68222	left anterior segmental bronchial tree
+FJ2475.obj	respiratory	organ	FMA68227	inferior lingular bronchial tree
+FJ2476.obj	respiratory	organ	FMA68226	superior lingular bronchial tree
+FJ2477.obj	respiratory	organ	FMA68226	superior lingular bronchial tree
+FJ2478.obj	respiratory	organ	FMA68226	superior lingular bronchial tree
+FJ2479.obj	respiratory	organ	FMA68228	left superior segmental bronchial tree
+FJ2480.obj	respiratory	organ	FMA68228	left superior segmental bronchial tree
+FJ2481.obj	respiratory	organ	FMA68221	right posterior basal segmental bronchial tree
+FJ2482.obj	respiratory	organ	FMA68228	left superior segmental bronchial tree
+FJ2483.obj	respiratory	organ	FMA68228	left superior segmental bronchial tree
+FJ2484.obj	respiratory	organ	FMA68228	left superior segmental bronchial tree
+FJ2485.obj	respiratory	organ	FMA68228	left superior segmental bronchial tree
+FJ2486.obj	respiratory	organ	FMA68221	right posterior basal segmental bronchial tree
+FJ2487.obj	respiratory	organ	FMA68221	right posterior basal segmental bronchial tree
+FJ2488.obj	respiratory	organ	FMA68218	right medial basal segmental bronchial tree
+FJ2489.obj	respiratory	organ	FMA68221	right posterior basal segmental bronchial tree
+FJ2490.obj	respiratory	organ	FMA68220	right lateral basal segmental bronchial tree
+FJ2491.obj	respiratory	organ	FMA68220	right lateral basal segmental bronchial tree
+FJ2492.obj	respiratory	organ	FMA68220	right lateral basal segmental bronchial tree
+FJ2493.obj	respiratory	organ	FMA68321	right anterior basal segmental bronchial tree
+FJ2494.obj	respiratory	organ	FMA68321	right anterior basal segmental bronchial tree
+FJ2495.obj	respiratory	organ	FMA68216	right superior segmental bronchial tree
+FJ2496.obj	respiratory	organ	FMA68216	right superior segmental bronchial tree
+FJ2497.obj	respiratory	organ	FMA68216	right superior segmental bronchial tree
+FJ2498.obj	respiratory	organ	FMA68216	right superior segmental bronchial tree
+FJ2499.obj	respiratory	organ	FMA68216	right superior segmental bronchial tree
+FJ2500.obj	respiratory	organ	FMA68216	right superior segmental bronchial tree
+FJ2501.obj	respiratory	organ	FMA68216	right superior segmental bronchial tree
+FJ2502.obj	respiratory	organ	FMA68216	right superior segmental bronchial tree
+FJ2503.obj	respiratory	organ	FMA68215	lateral segmental bronchial tree
+FJ2504.obj	respiratory	organ	FMA68215	lateral segmental bronchial tree
+FJ2505.obj	respiratory	organ	FMA68215	lateral segmental bronchial tree
+FJ2506.obj	respiratory	organ	FMA68214	medial segmental bronchial tree
+FJ2507.obj	respiratory	organ	FMA68214	medial segmental bronchial tree
+FJ2508.obj	respiratory	organ	FMA68214	medial segmental bronchial tree
+FJ2509.obj	respiratory	organ	FMA68212	right anterior segmental bronchial tree
+FJ2510.obj	respiratory	organ	FMA68212	right anterior segmental bronchial tree
+FJ2511.obj	respiratory	organ	FMA68212	right anterior segmental bronchial tree
+FJ2512.obj	respiratory	organ	FMA68212	right anterior segmental bronchial tree
+FJ2513.obj	respiratory	organ	FMA68212	right anterior segmental bronchial tree
+FJ2514.obj	respiratory	organ	FMA68212	right anterior segmental bronchial tree
+FJ2515.obj	respiratory	organ	FMA68213	right posterior segmental bronchial tree
+FJ2516.obj	respiratory	organ	FMA68213	right posterior segmental bronchial tree
+FJ2517.obj	respiratory	organ	FMA68213	right posterior segmental bronchial tree
+FJ2518.obj	respiratory	organ	FMA68213	right posterior segmental bronchial tree
+FJ2519.obj	respiratory	organ	FMA68213	right posterior segmental bronchial tree
+FJ2520.obj	respiratory	organ	FMA68211	right apical segmental bronchial tree
+FJ2521.obj	respiratory	organ	FMA68211	right apical segmental bronchial tree
+FJ2522.obj	respiratory	organ	FMA68211	right apical segmental bronchial tree
+FJ2523.obj	respiratory	organ	FMA68211	right apical segmental bronchial tree
+FJ2524.obj	respiratory	organ	FMA68211	right apical segmental bronchial tree
+FJ2525.obj	respiratory	organ	FMA68211	right apical segmental bronchial tree
+FJ2526.obj	respiratory	organ	FMA68211	right apical segmental bronchial tree
+FJ2527.obj	respiratory	organ	FMA68233	left posterior basal segmental bronchial tree
+FJ2528.obj	respiratory	organ	FMA68233	left posterior basal segmental bronchial tree
+FJ2529.obj	respiratory	organ	FMA68233	left posterior basal segmental bronchial tree
+FJ2530.obj	respiratory	organ	FMA68233	left posterior basal segmental bronchial tree
+FJ2531.obj	respiratory	organ	FMA68233	left posterior basal segmental bronchial tree
+FJ2532.obj	respiratory	organ	FMA68232	left lateral basal segmental bronchial tree
+FJ2533.obj	respiratory	organ	FMA68232	left lateral basal segmental bronchial tree
+FJ2534.obj	respiratory	organ	FMA68232	left lateral basal segmental bronchial tree
+FJ2535.obj	respiratory	organ	FMA68231	left anterior basal segmental bronchial tree
+FJ2536.obj	respiratory	organ	FMA68231	left anterior basal segmental bronchial tree
+FJ2537.obj	respiratory	organ	FMA68230	left medial basal segmental bronchial tree
+FJ2538.obj	respiratory	organ	FMA68231	left anterior basal segmental bronchial tree
+FJ2539.obj	respiratory	organ	FMA7395	right main bronchus
+FJ2540.obj	respiratory	organ	FMA68226	superior lingular bronchial tree
+FJ2541.obj	respiratory	organ	FMA7394	trachea
+FJ2542.obj	musculoskeletal	muscle	FMA46444	left coccygeus
+FJ2543.obj	musculoskeletal	muscle	FMA9579	perineum
+FJ2547.obj	musculoskeletal	muscle	FMA46443	right coccygeus
+FJ2548.obj	musculoskeletal	muscle	FMA9579	perineum
+FJ2554.obj	musculoskeletal	connective	FMA59505	right major alar cartilage
+FJ2555.obj	musculoskeletal	connective	FMA59506	left major alar cartilage
+FJ2556.obj	musculoskeletal	connective	FMA59513	left lateral nasal cartilage
+FJ2557.obj	musculoskeletal	connective	FMA59503	septal nasal cartilage
+FJ2558.obj	musculoskeletal	connective	FMA59512	right lateral nasal cartilage
+FJ2562.obj	cardiovascular	organ	FMA14773	splenic artery
+FJ2563.obj	digestive	organ	FMA7131	esophagus
+FJ2564.obj	digestive	organ	FMA7148	stomach
+FJ2565.obj	digestive	organ	FMA14542	appendix
+FJ2566.obj	digestive	organ	FMA14545	ascending colon
+FJ2567.obj	digestive	organ	FMA14547	descending colon
+FJ2568.obj	digestive	organ	FMA15044	taenia libera
+FJ2569.obj	digestive	organ	FMA15042	taenia mesocolica
+FJ2570.obj	digestive	organ	FMA15043	taenia omentalis
+FJ2571.obj	digestive	organ	FMA14544	rectum
+FJ2572.obj	digestive	organ	FMA14546	transverse colon
+FJ2573.obj	digestive	organ	FMA7206	duodenum
+FJ2574.obj	digestive	organ	FMA14964	proximal part of ileum
+FJ2575.obj	digestive	organ	FMA14964	proximal part of ileum
+FJ2576.obj	digestive	organ	FMA14965	middle part of ileum
+FJ2577.obj	digestive	organ	FMA14965	middle part of ileum
+FJ2578.obj	digestive	organ	FMA14965	middle part of ileum
+FJ2579.obj	digestive	organ	FMA14965	middle part of ileum
+FJ2580.obj	digestive	organ	FMA14965	middle part of ileum
+FJ2581.obj	digestive	organ	FMA14965	middle part of ileum
+FJ2582.obj	digestive	organ	FMA14965	middle part of ileum
+FJ2583.obj	digestive	organ	FMA14965	middle part of ileum
+FJ2584.obj	digestive	organ	FMA14965	middle part of ileum
+FJ2585.obj	digestive	organ	FMA14964	proximal part of ileum
+FJ2586.obj	digestive	organ	FMA14965	middle part of ileum
+FJ2587.obj	digestive	organ	FMA14966	distal part of ileum
+FJ2588.obj	digestive	organ	FMA14966	distal part of ileum
+FJ2589.obj	digestive	organ	FMA14966	distal part of ileum
+FJ2590.obj	digestive	organ	FMA14966	distal part of ileum
+FJ2591.obj	digestive	organ	FMA14966	distal part of ileum
+FJ2592.obj	digestive	organ	FMA14966	distal part of ileum
+FJ2593.obj	digestive	organ	FMA14966	distal part of ileum
+FJ2594.obj	digestive	organ	FMA14966	distal part of ileum
+FJ2595.obj	digestive	organ	FMA14966	distal part of ileum
+FJ2596.obj	digestive	organ	FMA14964	proximal part of ileum
+FJ2597.obj	digestive	organ	FMA14966	distal part of ileum
+FJ2598.obj	digestive	organ	FMA14966	distal part of ileum
+FJ2599.obj	digestive	organ	FMA14541	cecum
+FJ2600.obj	digestive	organ	FMA14964	proximal part of ileum
+FJ2601.obj	digestive	organ	FMA14964	proximal part of ileum
+FJ2602.obj	digestive	organ	FMA14964	proximal part of ileum
+FJ2603.obj	digestive	organ	FMA14964	proximal part of ileum
+FJ2604.obj	digestive	organ	FMA14964	proximal part of ileum
+FJ2605.obj	digestive	organ	FMA14964	proximal part of ileum
+FJ2606.obj	digestive	organ	FMA16981	proximal part of jejunum
+FJ2607.obj	digestive	organ	FMA16982	middle part of jejunum
+FJ2608.obj	digestive	organ	FMA16982	middle part of jejunum
+FJ2609.obj	digestive	organ	FMA16982	middle part of jejunum
+FJ2610.obj	digestive	organ	FMA16982	middle part of jejunum
+FJ2611.obj	digestive	organ	FMA16983	distal part of jejunum
+FJ2612.obj	digestive	organ	FMA16983	distal part of jejunum
+FJ2613.obj	digestive	organ	FMA16983	distal part of jejunum
+FJ2614.obj	digestive	organ	FMA16983	distal part of jejunum
+FJ2615.obj	digestive	organ	FMA16983	distal part of jejunum
+FJ2616.obj	digestive	organ	FMA16983	distal part of jejunum
+FJ2617.obj	digestive	organ	FMA16981	proximal part of jejunum
+FJ2618.obj	digestive	organ	FMA16983	distal part of jejunum
+FJ2619.obj	digestive	organ	FMA16983	distal part of jejunum
+FJ2620.obj	digestive	organ	FMA16983	distal part of jejunum
+FJ2621.obj	digestive	organ	FMA16983	distal part of jejunum
+FJ2622.obj	digestive	organ	FMA16981	proximal part of jejunum
+FJ2623.obj	digestive	organ	FMA16981	proximal part of jejunum
+FJ2624.obj	digestive	organ	FMA16981	proximal part of jejunum
+FJ2625.obj	digestive	organ	FMA16981	proximal part of jejunum
+FJ2626.obj	digestive	organ	FMA16981	proximal part of jejunum
+FJ2627.obj	digestive	organ	FMA16981	proximal part of jejunum
+FJ2628.obj	digestive	organ	FMA16982	middle part of jejunum
+FJ2629.obj	metabolic	organ	FMA45732	parenchyma
+FJ2630.obj	metabolic	organ	FMA63103	pancreatic duct tree
+FJ2631.obj	cardiovascular	organ	FMA4677	trunk of branch of coronary artery
+FJ2632.obj	cardiovascular	organ	FMA3872	first right anterior branch of anterior interventricular branch of left coronary artery
+FJ2633.obj	cardiovascular	organ	FMA3860	diagonal branch of anterior descending branch of left coronary artery
+FJ2634.obj	cardiovascular	organ	FMA3860	diagonal branch of anterior descending branch of left coronary artery
+FJ2635.obj	cardiovascular	organ	FMA3860	diagonal branch of anterior descending branch of left coronary artery
+FJ2636.obj	cardiovascular	organ	FMA3860	diagonal branch of anterior descending branch of left coronary artery
+FJ2637.obj	cardiovascular	organ	FMA3860	diagonal branch of anterior descending branch of left coronary artery
+FJ2638.obj	cardiovascular	organ	FMA3860	diagonal branch of anterior descending branch of left coronary artery
+FJ2639.obj	cardiovascular	organ	FMA3860	diagonal branch of anterior descending branch of left coronary artery
+FJ2640.obj	cardiovascular	organ	FMA3860	diagonal branch of anterior descending branch of left coronary artery
+FJ2641.obj	cardiovascular	organ	FMA3876	third right anterior branch of anterior interventricular branch of left coronary artery
+FJ2642.obj	cardiovascular	organ	FMA3860	diagonal branch of anterior descending branch of left coronary artery
+FJ2643.obj	cardiovascular	organ	FMA3868	conus branch of anterior interventricular branch of left coronary artery
+FJ2644.obj	cardiovascular	organ	FMA3868	conus branch of anterior interventricular branch of left coronary artery
+FJ2645.obj	cardiovascular	organ	FMA3872	first right anterior branch of anterior interventricular branch of left coronary artery
+FJ2646.obj	cardiovascular	organ	FMA3874	second right anterior branch of anterior interventricular branch of left coronary artery
+FJ2647.obj	cardiovascular	organ	FMA3876	third right anterior branch of anterior interventricular branch of left coronary artery
+FJ2648.obj	cardiovascular	organ	FMA3860	diagonal branch of anterior descending branch of left coronary artery
+FJ2649.obj	cardiovascular	organ	FMA3895	circumflex branch of left coronary artery
+FJ2650.obj	cardiovascular	organ	FMA3895	circumflex branch of left coronary artery
+FJ2651.obj	cardiovascular	organ	FMA3895	circumflex branch of left coronary artery
+FJ2652.obj	cardiovascular	organ	FMA3895	circumflex branch of left coronary artery
+FJ2653.obj	cardiovascular	organ	FMA3895	circumflex branch of left coronary artery
+FJ2654.obj	cardiovascular	organ	FMA3895	circumflex branch of left coronary artery
+FJ2655.obj	cardiovascular	organ	FMA4706	coronary sinus
+FJ2656.obj	cardiovascular	organ	FMA4707	great cardiac vein
+FJ2657.obj	cardiovascular	organ	FMA66403	anterior interventricular vein
+FJ2658.obj	cardiovascular	organ	FMA66403	anterior interventricular vein
+FJ2659.obj	cardiovascular	organ	FMA66403	anterior interventricular vein
+FJ2660.obj	cardiovascular	organ	FMA66403	anterior interventricular vein
+FJ2661.obj	cardiovascular	organ	FMA66403	anterior interventricular vein
+FJ2662.obj	cardiovascular	organ	FMA66403	anterior interventricular vein
+FJ2663.obj	cardiovascular	organ	FMA66403	anterior interventricular vein
+FJ2664.obj	cardiovascular	organ	FMA66403	anterior interventricular vein
+FJ2665.obj	cardiovascular	organ	FMA66403	anterior interventricular vein
+FJ2667.obj	cardiovascular	organ	FMA3818	marginal branch of right coronary artery
+FJ2668.obj	cardiovascular	organ	FMA3818	marginal branch of right coronary artery
+FJ2670.obj	cardiovascular	organ	FMA3807	right conus artery
+FJ2671.obj	cardiovascular	organ	FMA3815	first anterior ventricular branch of right coronary artery
+FJ2672.obj	cardiovascular	organ	FMA3818	marginal branch of right coronary artery
+FJ2673.obj	cardiovascular	organ	FMA3815	first anterior ventricular branch of right coronary artery
+FJ2674.obj	cardiovascular	organ	FMA3818	marginal branch of right coronary artery
+FJ2675.obj	cardiovascular	organ	FMA3818	marginal branch of right coronary artery
+FJ2676.obj	cardiovascular	organ	FMA3807	right conus artery
+FJ2677.obj	cardiovascular	organ	FMA3815	first anterior ventricular branch of right coronary artery
+FJ2678.obj	cardiovascular	organ	FMA4713	middle cardiac vein
+FJ2679.obj	cardiovascular	organ	FMA4713	middle cardiac vein
+FJ2680.obj	cardiovascular	organ	FMA4713	middle cardiac vein
+FJ2681.obj	cardiovascular	organ	FMA4713	middle cardiac vein
+FJ2682.obj	cardiovascular	organ	FMA4713	middle cardiac vein
+FJ2683.obj	cardiovascular	organ	FMA4713	middle cardiac vein
+FJ2684.obj	cardiovascular	organ	FMA4713	middle cardiac vein
+FJ2685.obj	cardiovascular	organ	FMA4713	middle cardiac vein
+FJ2686.obj	cardiovascular	organ	FMA4713	middle cardiac vein
+FJ2687.obj	cardiovascular	organ	FMA4713	middle cardiac vein
+FJ2688.obj	cardiovascular	organ	FMA4713	middle cardiac vein
+FJ2689.obj	cardiovascular	organ	FMA4713	middle cardiac vein
+FJ2690.obj	cardiovascular	organ	FMA4713	middle cardiac vein
+FJ2691.obj	cardiovascular	organ	FMA4713	middle cardiac vein
+FJ2692.obj	cardiovascular	organ	FMA3840	posterior interventricular branch of right coronary artery
+FJ2693.obj	cardiovascular	organ	FMA3840	posterior interventricular branch of right coronary artery
+FJ2694.obj	cardiovascular	organ	FMA3840	posterior interventricular branch of right coronary artery
+FJ2695.obj	cardiovascular	organ	FMA3840	posterior interventricular branch of right coronary artery
+FJ2696.obj	cardiovascular	organ	FMA3840	posterior interventricular branch of right coronary artery
+FJ2697.obj	cardiovascular	organ	FMA3840	posterior interventricular branch of right coronary artery
+FJ2698.obj	cardiovascular	organ	FMA3840	posterior interventricular branch of right coronary artery
+FJ2699.obj	cardiovascular	organ	FMA3840	posterior interventricular branch of right coronary artery
+FJ2700.obj	cardiovascular	organ	FMA3840	posterior interventricular branch of right coronary artery
+FJ2701.obj	cardiovascular	organ	FMA4712	posterior vein of left ventricle
+FJ2702.obj	cardiovascular	organ	FMA4712	posterior vein of left ventricle
+FJ2703.obj	cardiovascular	organ	FMA4708	left marginal vein
+FJ2704.obj	cardiovascular	organ	FMA4708	left marginal vein
+FJ2705.obj	cardiovascular	organ	FMA4708	left marginal vein
+FJ2706.obj	cardiovascular	organ	FMA4712	posterior vein of left ventricle
+FJ2707.obj	cardiovascular	organ	FMA4712	posterior vein of left ventricle
+FJ2708.obj	cardiovascular	organ	FMA4712	posterior vein of left ventricle
+FJ2709.obj	cardiovascular	organ	FMA4712	posterior vein of left ventricle
+FJ2710.obj	cardiovascular	organ	FMA4712	posterior vein of left ventricle
+FJ2711.obj	cardiovascular	organ	FMA4712	posterior vein of left ventricle
+FJ2712.obj	cardiovascular	organ	FMA4712	posterior vein of left ventricle
+FJ2713.obj	cardiovascular	organ	FMA4712	posterior vein of left ventricle
+FJ2714.obj	cardiovascular	organ	FMA3835	posterior ventricular branch of right coronary artery
+FJ2715.obj	cardiovascular	organ	FMA3835	posterior ventricular branch of right coronary artery
+FJ2716.obj	cardiovascular	organ	FMA3835	posterior ventricular branch of right coronary artery
+FJ2717.obj	cardiovascular	organ	FMA3835	posterior ventricular branch of right coronary artery
+FJ2718.obj	cardiovascular	organ	FMA3835	posterior ventricular branch of right coronary artery
+FJ2719.obj	cardiovascular	organ	FMA3835	posterior ventricular branch of right coronary artery
+FJ2720.obj	cardiovascular	organ	FMA3835	posterior ventricular branch of right coronary artery
+FJ2721.obj	cardiovascular	organ	FMA3835	posterior ventricular branch of right coronary artery
+FJ2722.obj	cardiovascular	organ	FMA3835	posterior ventricular branch of right coronary artery
+FJ2723.obj	cardiovascular	organ	FMA3802	trunk of right coronary artery
+FJ2724.obj	cardiovascular	organ	FMA4714	small cardiac vein
+FJ2725.obj	cardiovascular	organ	FMA76767	anterior cardiac vein
+FJ2727.obj	cardiovascular	organ	FMA4716	right marginal vein
+FJ2728.obj	cardiovascular	organ	FMA4716	right marginal vein
+FJ2729.obj	cardiovascular	organ	FMA4716	right marginal vein
+FJ2730.obj	cardiovascular	organ	FMA76767	anterior cardiac vein
+FJ2731.obj	cardiovascular	organ	FMA4714	small cardiac vein
+FJ2732.obj	cardiovascular	organ	FMA3892	septal branch of anterior interventricular artery
+FJ2733.obj	cardiovascular	organ	FMA3892	septal branch of anterior interventricular artery
+FJ2734.obj	cardiovascular	organ	FMA3892	septal branch of anterior interventricular artery
+FJ2735.obj	cardiovascular	organ	FMA3847	first septal branch of right posterior interventricular artery
+FJ2736.obj	cardiovascular	organ	FMA3848	second septal branch of right posterior interventricular artery
+FJ2737.obj	cardiovascular	organ	FMA3855	trunk of left coronary artery
+FJ2738.obj	musculoskeletal	muscle	FMA46702	left genioglossus
+FJ2739.obj	musculoskeletal	muscle	FMA46704	left hyoglossus
+FJ2740.obj	musculoskeletal	muscle	FMA46636	left inferior pharyngeal constrictor
+FJ2741.obj	musculoskeletal	muscle	FMA46729	left levator veli palatini
+FJ2742.obj	musculoskeletal	muscle	FMA46633	right middle pharyngeal constrictor
+FJ2743.obj	musculoskeletal	muscle	FMA46672	left palatopharyngeus
+FJ2745.obj	musculoskeletal	muscle	FMA46670	left salpingopharyngeus
+FJ2746.obj	musculoskeletal	muscle	FMA46668	left stylopharyngeus
+FJ2747.obj	musculoskeletal	muscle	FMA46632	left superior pharyngeal constrictor
+FJ2748.obj	musculoskeletal	muscle	FMA46732	left tensor veli palatini
+FJ2750.obj	musculoskeletal	muscle	FMA46698	right genioglossus
+FJ2751.obj	musculoskeletal	muscle	FMA46703	right hyoglossus
+FJ2752.obj	musculoskeletal	muscle	FMA46635	right inferior pharyngeal constrictor
+FJ2753.obj	musculoskeletal	muscle	FMA46728	right levator veli palatini
+FJ2754.obj	musculoskeletal	muscle	FMA46634	left middle pharyngeal constrictor
+FJ2755.obj	musculoskeletal	muscle	FMA46671	right palatopharyngeus
+FJ2757.obj	musculoskeletal	muscle	FMA46669	right salpingopharyngeus
+FJ2758.obj	musculoskeletal	muscle	FMA46667	right stylopharyngeus
+FJ2759.obj	musculoskeletal	muscle	FMA46631	right superior pharyngeal constrictor
+FJ2760.obj	musculoskeletal	muscle	FMA46731	right tensor veli palatini
+FJ2761.obj	digestive	organ	FMA54640	tongue
+FJ2762.obj	musculoskeletal	muscle	FMA55022	uvula
+FJ2766.obj	digestive	organ	FMA59803	left submandibular gland
+FJ2768.obj	digestive	organ	FMA59802	right submandibular gland
+FJ2769.obj	musculoskeletal	connective	FMA9615	cricoid cartilage
+FJ2772.obj	musculoskeletal	bone	FMA52749	hyoid bone
+FJ2773.obj	musculoskeletal	connective	FMA55118	left cuneiform cartilage
+FJ2775.obj	musculoskeletal	connective	FMA55114	left arytenoid cartilage
+FJ2776.obj	musculoskeletal	connective	FMA55116	left corniculate cartilage
+FJ2778.obj	musculoskeletal	muscle	FMA46581	left lateral crico-arytenoid
+FJ2780.obj	musculoskeletal	muscle	FMA46585	left oblique arytenoid
+FJ2782.obj	musculoskeletal	muscle	FMA46578	left posterior crico-arytenoid
+FJ2784.obj	musculoskeletal	muscle	FMA46590	left thyro-arytenoid
+FJ2785.obj	musculoskeletal	muscle	FMA46590	left thyro-arytenoid
+FJ2788.obj	musculoskeletal	muscle	FMA46593	left vocalis
+FJ2792.obj	musculoskeletal	connective	FMA55113	right arytenoid cartilage
+FJ2793.obj	musculoskeletal	connective	FMA55115	right corniculate cartilage
+FJ2795.obj	musculoskeletal	connective	FMA55117	right cuneiform cartilage
+FJ2796.obj	musculoskeletal	muscle	FMA46580	right lateral crico-arytenoid
+FJ2798.obj	musculoskeletal	muscle	FMA46584	right oblique arytenoid
+FJ2800.obj	musculoskeletal	muscle	FMA46577	right posterior crico-arytenoid
+FJ2802.obj	musculoskeletal	muscle	FMA46589	right thyro-arytenoid
+FJ2803.obj	musculoskeletal	muscle	FMA46589	right thyro-arytenoid
+FJ2806.obj	musculoskeletal	muscle	FMA46592	right vocalis
+FJ2808.obj	musculoskeletal	connective	FMA55099	thyroid cartilage
+FJ2809.obj	musculoskeletal	muscle	FMA46582	transverse arytenoid
+FJ2810.obj	integumentary	organ	FMA7163	skin
+FJ2816.obj	metabolic	organ	FMA82494	lobular segment
+FJ2817.obj	metabolic	organ	FMA7202	gallbladder
+FJ2818.obj	metabolic	organ	FMA15739	hepatovenous segment ii
+FJ2819.obj	metabolic	organ	FMA15741	hepatovenous segment iii
+FJ2820.obj	metabolic	organ	FMA15742	hepatovenous segment iv
+FJ2821.obj	metabolic	organ	FMA15743	hepatovenous segment v
+FJ2822.obj	metabolic	organ	FMA15744	hepatovenous segment vi
+FJ2823.obj	metabolic	organ	FMA15746	hepatovenous segment viii
+FJ2824.obj	metabolic	organ	FMA15746	hepatovenous segment viii
+FJ2881.obj	respiratory	organ	FMA8719	posterior basal segmental artery
+FJ2882.obj	respiratory	organ	FMA8718	lateral basal segmental artery
+FJ2883.obj	respiratory	organ	FMA8717	anterior basal segmental artery
+FJ2884.obj	respiratory	organ	FMA8716	medial basal segmental artery
+FJ2885.obj	respiratory	organ	FMA8716	medial basal segmental artery
+FJ2886.obj	respiratory	organ	FMA8717	anterior basal segmental artery
+FJ2887.obj	respiratory	organ	FMA8717	anterior basal segmental artery
+FJ2888.obj	respiratory	organ	FMA8714	superior segmental artery
+FJ2889.obj	respiratory	organ	FMA8714	superior segmental artery
+FJ2890.obj	respiratory	organ	FMA8714	superior segmental artery
+FJ2891.obj	respiratory	organ	FMA8714	superior segmental artery
+FJ2892.obj	respiratory	organ	FMA8719	posterior basal segmental artery
+FJ2893.obj	respiratory	organ	FMA8714	superior segmental artery
+FJ2894.obj	respiratory	organ	FMA8714	superior segmental artery
+FJ2895.obj	respiratory	organ	FMA8714	superior segmental artery
+FJ2896.obj	respiratory	organ	FMA8640	inferior lingular artery
+FJ2897.obj	respiratory	organ	FMA8640	inferior lingular artery
+FJ2898.obj	respiratory	organ	FMA8639	superior lingular artery
+FJ2899.obj	respiratory	organ	FMA8639	superior lingular artery
+FJ2900.obj	respiratory	organ	FMA8639	superior lingular artery
+FJ2901.obj	respiratory	organ	FMA8639	superior lingular artery
+FJ2902.obj	respiratory	organ	FMA13279	left anterior segmental artery
+FJ2903.obj	respiratory	organ	FMA8719	posterior basal segmental artery
+FJ2904.obj	respiratory	organ	FMA13279	left anterior segmental artery
+FJ2905.obj	respiratory	organ	FMA13279	left anterior segmental artery
+FJ2906.obj	respiratory	organ	FMA13279	left anterior segmental artery
+FJ2907.obj	respiratory	organ	FMA13279	left anterior segmental artery
+FJ2908.obj	respiratory	organ	FMA13279	left anterior segmental artery
+FJ2909.obj	respiratory	organ	FMA13279	left anterior segmental artery
+FJ2910.obj	respiratory	organ	FMA13279	left anterior segmental artery
+FJ2911.obj	respiratory	organ	FMA13280	posterior segmental artery
+FJ2912.obj	respiratory	organ	FMA13280	posterior segmental artery
+FJ2913.obj	respiratory	organ	FMA13280	posterior segmental artery
+FJ2914.obj	respiratory	organ	FMA8719	posterior basal segmental artery
+FJ2915.obj	respiratory	organ	FMA8707	apical segmental artery
+FJ2916.obj	respiratory	organ	FMA8707	apical segmental artery
+FJ2917.obj	respiratory	organ	FMA8707	apical segmental artery
+FJ2918.obj	respiratory	organ	FMA8707	apical segmental artery
+FJ2919.obj	respiratory	organ	FMA8719	posterior basal segmental artery
+FJ2920.obj	respiratory	organ	FMA8719	posterior basal segmental artery
+FJ2921.obj	respiratory	organ	FMA8718	lateral basal segmental artery
+FJ2922.obj	respiratory	organ	FMA8718	lateral basal segmental artery
+FJ2923.obj	respiratory	organ	FMA8718	lateral basal segmental artery
+FJ2924.obj	cardiovascular	organ	FMA50873	left pulmonary artery
+FJ2925.obj	cardiovascular	organ	FMA49908	superior pulmonary vein
+FJ2926.obj	respiratory	organ	FMA9438	left posterior segmental vein
+FJ2927.obj	respiratory	organ	FMA9438	left posterior segmental vein
+FJ2928.obj	respiratory	organ	FMA9438	left posterior segmental vein
+FJ2929.obj	respiratory	organ	FMA9438	left posterior segmental vein
+FJ2930.obj	respiratory	organ	FMA8667	left anterior segmental vein
+FJ2931.obj	respiratory	organ	FMA8667	left anterior segmental vein
+FJ2932.obj	respiratory	organ	FMA8667	left anterior segmental vein
+FJ2933.obj	cardiovascular	organ	FMA49908	superior pulmonary vein
+FJ2934.obj	respiratory	organ	FMA8669	inferior lingular vein
+FJ2935.obj	respiratory	organ	FMA8669	inferior lingular vein
+FJ2936.obj	respiratory	organ	FMA13444	apical segmental vein
+FJ2937.obj	respiratory	organ	FMA8668	superior lingular vein
+FJ2938.obj	respiratory	organ	FMA8668	superior lingular vein
+FJ2939.obj	respiratory	organ	FMA9438	left posterior segmental vein
+FJ2940.obj	respiratory	organ	FMA9438	left posterior segmental vein
+FJ2941.obj	respiratory	organ	FMA9438	left posterior segmental vein
+FJ2942.obj	respiratory	organ	FMA9438	left posterior segmental vein
+FJ2943.obj	respiratory	organ	FMA9438	left posterior segmental vein
+FJ2944.obj	cardiovascular	organ	FMA49910	inferior pulmonary vein
+FJ2945.obj	respiratory	organ	FMA8679	left inferior basal vein
+FJ2946.obj	respiratory	organ	FMA8679	left inferior basal vein
+FJ2947.obj	respiratory	organ	FMA13444	apical segmental vein
+FJ2948.obj	respiratory	organ	FMA8679	left inferior basal vein
+FJ2949.obj	respiratory	organ	FMA8679	left inferior basal vein
+FJ2950.obj	cardiovascular	organ	FMA49910	inferior pulmonary vein
+FJ2951.obj	respiratory	organ	FMA9450	left lateral basal segmental vein
+FJ2952.obj	respiratory	organ	FMA9450	left lateral basal segmental vein
+FJ2953.obj	respiratory	organ	FMA9450	left lateral basal segmental vein
+FJ2954.obj	respiratory	organ	FMA9450	left lateral basal segmental vein
+FJ2955.obj	cardiovascular	organ	FMA49910	inferior pulmonary vein
+FJ2956.obj	respiratory	organ	FMA8678	left anterior basal segmental vein
+FJ2957.obj	respiratory	organ	FMA8678	left anterior basal segmental vein
+FJ2958.obj	respiratory	organ	FMA13444	apical segmental vein
+FJ2959.obj	respiratory	organ	FMA8678	left anterior basal segmental vein
+FJ2960.obj	respiratory	organ	FMA8678	left anterior basal segmental vein
+FJ2961.obj	respiratory	organ	FMA13444	apical segmental vein
+FJ2962.obj	respiratory	organ	FMA13444	apical segmental vein
+FJ2963.obj	respiratory	organ	FMA13444	apical segmental vein
+FJ2964.obj	respiratory	organ	FMA13444	apical segmental vein
+FJ2965.obj	respiratory	organ	FMA9438	left posterior segmental vein
+FJ2966.obj	cardiovascular	organ	FMA8612	pulmonary trunk
+FJ2967.obj	respiratory	organ	FMA68661	apical part of apical segmental artery
+FJ2968.obj	respiratory	organ	FMA68669	apical part of posterior segmental artery
+FJ2969.obj	respiratory	organ	FMA68669	apical part of posterior segmental artery
+FJ2970.obj	respiratory	organ	FMA68672	posterior part of posterior segmental artery
+FJ2971.obj	respiratory	organ	FMA68672	posterior part of posterior segmental artery
+FJ2972.obj	respiratory	organ	FMA68672	posterior part of posterior segmental artery
+FJ2973.obj	respiratory	organ	FMA68192	lobar artery
+FJ2974.obj	respiratory	organ	FMA68676	posterior part of anterior segmental artery
+FJ2975.obj	respiratory	organ	FMA68682	anterior branch of anterior segmental artery
+FJ2976.obj	respiratory	organ	FMA68682	anterior branch of anterior segmental artery
+FJ2977.obj	respiratory	organ	FMA68682	anterior branch of anterior segmental artery
+FJ2978.obj	respiratory	organ	FMA68664	anterior part of apical segmental artery
+FJ2979.obj	respiratory	organ	FMA68682	anterior branch of anterior segmental artery
+FJ2980.obj	respiratory	organ	FMA68676	posterior part of anterior segmental artery
+FJ2981.obj	respiratory	organ	FMA68676	posterior part of anterior segmental artery
+FJ2982.obj	respiratory	organ	FMA68691	anterior branch of lateral segmental artery
+FJ2983.obj	respiratory	organ	FMA68690	posterior branch of lateral segmental artery
+FJ2984.obj	respiratory	organ	FMA68690	posterior branch of lateral segmental artery
+FJ2985.obj	respiratory	organ	FMA68691	anterior branch of lateral segmental artery
+FJ2986.obj	respiratory	organ	FMA68693	superior branch of medial segmental artery
+FJ2987.obj	respiratory	organ	FMA68694	inferior branch of medial segmental artery
+FJ2988.obj	respiratory	organ	FMA68694	inferior branch of medial segmental artery
+FJ2989.obj	respiratory	organ	FMA68664	anterior part of apical segmental artery
+FJ2990.obj	respiratory	organ	FMA68693	superior branch of medial segmental artery
+FJ2991.obj	respiratory	organ	FMA68711	lateral branch of superior segmental artery
+FJ2992.obj	respiratory	organ	FMA68711	lateral branch of superior segmental artery
+FJ2993.obj	respiratory	organ	FMA68711	lateral branch of superior segmental artery
+FJ2994.obj	respiratory	organ	FMA68704	medial branch of superior segmental artery
+FJ2995.obj	respiratory	organ	FMA68704	medial branch of superior segmental artery
+FJ2996.obj	respiratory	organ	FMA68704	medial branch of superior segmental artery
+FJ2997.obj	respiratory	organ	FMA68708	superior branch of superior segmental artery
+FJ2998.obj	respiratory	organ	FMA68708	superior branch of superior segmental artery
+FJ2999.obj	respiratory	organ	FMA68708	superior branch of superior segmental artery
+FJ3000.obj	respiratory	organ	FMA68664	anterior part of apical segmental artery
+FJ3001.obj	respiratory	organ	FMA68721	lateral branch of anterior basal segmental artery
+FJ3002.obj	respiratory	organ	FMA68722	basal branch of anterior basal segmental artery
+FJ3003.obj	respiratory	organ	FMA68722	basal branch of anterior basal segmental artery
+FJ3004.obj	respiratory	organ	FMA8631	right lateral basal segmental artery
+FJ3005.obj	respiratory	organ	FMA8631	right lateral basal segmental artery
+FJ3006.obj	respiratory	organ	FMA8631	right lateral basal segmental artery
+FJ3007.obj	respiratory	organ	FMA8631	right lateral basal segmental artery
+FJ3008.obj	respiratory	organ	FMA68740	mediobasal branch of posterior basal segmental artery
+FJ3009.obj	respiratory	organ	FMA68734	accessory subsuperior branch of posterior basal segmental artery
+FJ3010.obj	respiratory	organ	FMA68734	accessory subsuperior branch of posterior basal segmental artery
+FJ3011.obj	respiratory	organ	FMA68664	anterior part of apical segmental artery
+FJ3012.obj	respiratory	organ	FMA68740	mediobasal branch of posterior basal segmental artery
+FJ3013.obj	respiratory	organ	FMA68737	laterobasal branch of posterior basal segmental artery
+FJ3014.obj	respiratory	organ	FMA68737	laterobasal branch of posterior basal segmental artery
+FJ3015.obj	respiratory	organ	FMA68661	apical part of apical segmental artery
+FJ3016.obj	respiratory	organ	FMA68661	apical part of apical segmental artery
+FJ3017.obj	respiratory	organ	FMA68661	apical part of apical segmental artery
+FJ3018.obj	respiratory	organ	FMA68669	apical part of posterior segmental artery
+FJ3019.obj	cardiovascular	organ	FMA50872	right pulmonary artery
+FJ3020.obj	cardiovascular	organ	FMA49908	superior pulmonary vein
+FJ3021.obj	respiratory	organ	FMA8693	inferior part of anterior segmental vein
+FJ3022.obj	respiratory	organ	FMA8663	right posterior segmental vein
+FJ3023.obj	respiratory	organ	FMA8663	right posterior segmental vein
+FJ3024.obj	respiratory	organ	FMA8663	right posterior segmental vein
+FJ3025.obj	respiratory	organ	FMA8663	right posterior segmental vein
+FJ3026.obj	respiratory	organ	FMA8663	right posterior segmental vein
+FJ3027.obj	respiratory	organ	FMA8683	superior part of anterior segmental vein
+FJ3028.obj	respiratory	organ	FMA8662	right anterior segmental vein
+FJ3029.obj	respiratory	organ	FMA8662	right anterior segmental vein
+FJ3030.obj	respiratory	organ	FMA68982	superior part of medial segmental vein
+FJ3031.obj	respiratory	organ	FMA8648	trunk of pulmonary vein
+FJ3032.obj	respiratory	organ	FMA68983	inferior part of medial segmental vein
+FJ3033.obj	respiratory	organ	FMA68983	inferior part of medial segmental vein
+FJ3034.obj	respiratory	organ	FMA68945	anterior part of lateral segmental vein
+FJ3035.obj	respiratory	organ	FMA68945	anterior part of lateral segmental vein
+FJ3036.obj	respiratory	organ	FMA68945	anterior part of lateral segmental vein
+FJ3037.obj	respiratory	organ	FMA68944	posterior part of lateral segmental vein
+FJ3038.obj	respiratory	organ	FMA68944	posterior part of lateral segmental vein
+FJ3039.obj	respiratory	organ	FMA68944	posterior part of lateral segmental vein
+FJ3040.obj	cardiovascular	organ	FMA49910	inferior pulmonary vein
+FJ3041.obj	respiratory	organ	FMA9428	right posterior basal segmental vein
+FJ3042.obj	respiratory	organ	FMA68920	anterior part of apical segmental vein
+FJ3043.obj	respiratory	organ	FMA9428	right posterior basal segmental vein
+FJ3044.obj	respiratory	organ	FMA9428	right posterior basal segmental vein
+FJ3045.obj	respiratory	organ	FMA9428	right posterior basal segmental vein
+FJ3046.obj	respiratory	organ	FMA9428	right posterior basal segmental vein
+FJ3047.obj	respiratory	organ	FMA9428	right posterior basal segmental vein
+FJ3048.obj	respiratory	organ	FMA9428	right posterior basal segmental vein
+FJ3049.obj	respiratory	organ	FMA8673	right anterior basal segmental vein
+FJ3050.obj	respiratory	organ	FMA13445	superior segmental vein
+FJ3051.obj	respiratory	organ	FMA13445	superior segmental vein
+FJ3052.obj	respiratory	organ	FMA13445	superior segmental vein
+FJ3053.obj	respiratory	organ	FMA68920	anterior part of apical segmental vein
+FJ3054.obj	respiratory	organ	FMA13289	medial basal segmental vein
+FJ3055.obj	respiratory	organ	FMA13289	medial basal segmental vein
+FJ3056.obj	respiratory	organ	FMA8673	right anterior basal segmental vein
+FJ3057.obj	respiratory	organ	FMA9428	right posterior basal segmental vein
+FJ3058.obj	respiratory	organ	FMA9428	right posterior basal segmental vein
+FJ3059.obj	respiratory	organ	FMA9425	right lateral basal segmental vein
+FJ3060.obj	respiratory	organ	FMA9425	right lateral basal segmental vein
+FJ3061.obj	respiratory	organ	FMA9425	right lateral basal segmental vein
+FJ3062.obj	respiratory	organ	FMA9425	right lateral basal segmental vein
+FJ3063.obj	respiratory	organ	FMA13445	superior segmental vein
+FJ3064.obj	respiratory	organ	FMA68919	apical part of apical segmental vein
+FJ3065.obj	respiratory	organ	FMA13445	superior segmental vein
+FJ3066.obj	respiratory	organ	FMA13445	superior segmental vein
+FJ3067.obj	respiratory	organ	FMA68919	apical part of apical segmental vein
+FJ3068.obj	respiratory	organ	FMA68919	apical part of apical segmental vein
+FJ3069.obj	respiratory	organ	FMA8663	right posterior segmental vein
+FJ3070.obj	respiratory	organ	FMA8663	right posterior segmental vein
+FJ3071.obj	metabolic	organ	FMA71867	anterior superior tributary of right hepatic biliary tree
+FJ3072.obj	metabolic	organ	FMA71868	anterior inferior tributary of right hepatic biliary tree
+FJ3073.obj	metabolic	organ	FMA15420	anterior superior segmental branch of right portal vein
+FJ3074.obj	metabolic	organ	FMA15421	anterior inferior segmental branch of right portal vein
+FJ3075.obj	metabolic	organ	FMA70443	anterior inferior segmental hepatic artery
+FJ3076.obj	metabolic	organ	FMA70442	anterior superior segmental hepatic artery
+FJ3077.obj	metabolic	organ	FMA70455	caudate lobe branch of left hepatic artery
+FJ3078.obj	cardiovascular	organ	FMA14771	common hepatic artery
+FJ3079.obj	metabolic	organ	FMA14668	common hepatic duct
+FJ3080.obj	metabolic	organ	FMA14539	cystic duct
+FJ3081.obj	metabolic	organ	FMA14772	hepatic artery proper
+FJ3082.obj	cardiovascular	organ	FMA71904	pre-hepatic portal vein
+FJ3083.obj	metabolic	organ	FMA15800	anterior inferior segmental tributary of middle hepatic vein
+FJ3084.obj	cardiovascular	organ	FMA15801	medial inferior segmental tributary of middle hepatic vein
+FJ3085.obj	cardiovascular	organ	FMA15801	medial inferior segmental tributary of middle hepatic vein
+FJ3086.obj	metabolic	organ	FMA15800	anterior inferior segmental tributary of middle hepatic vein
+FJ3088.obj	metabolic	organ	FMA71887	lateral superior tributary of left hepatic biliary tree
+FJ3089.obj	metabolic	organ	FMA71888	lateral inferior tributary of left hepatic biliary tree
+FJ3090.obj	metabolic	organ	FMA71887	lateral superior tributary of left hepatic biliary tree
+FJ3091.obj	metabolic	organ	FMA70452	lateral superior segmental hepatic artery
+FJ3092.obj	metabolic	organ	FMA70453	lateral inferior segmental hepatic artery
+FJ3093.obj	metabolic	organ	FMA70452	lateral superior segmental hepatic artery
+FJ3095.obj	metabolic	organ	FMA70457	trunk of left hepatic artery
+FJ3096.obj	metabolic	organ	FMA14670	left hepatic duct
+FJ3097.obj	cardiovascular	organ	FMA15804	lateral inferior segmental tributary of left hepatic vein
+FJ3098.obj	cardiovascular	organ	FMA15803	lateral superior segmental tributary of left hepatic vein
+FJ3099.obj	cardiovascular	organ	FMA15804	lateral inferior segmental tributary of left hepatic vein
+FJ3100.obj	cardiovascular	organ	FMA15804	lateral inferior segmental tributary of left hepatic vein
+FJ3101.obj	cardiovascular	organ	FMA15802	medial superior segmental tributary of left hepatic vein
+FJ3102.obj	metabolic	organ	FMA82697	trunk of left portal vein
+FJ3103.obj	metabolic	organ	FMA71886	medial inferior tributary of left hepatic biliary tree
+FJ3104.obj	metabolic	organ	FMA71885	medial superior tributary of left hepatic biliary tree
+FJ3105.obj	metabolic	organ	FMA71885	medial superior tributary of left hepatic biliary tree
+FJ3106.obj	metabolic	organ	FMA70450	medial inferior segmental hepatic artery
+FJ3107.obj	metabolic	organ	FMA70449	medial superior segmental hepatic artery
+FJ3108.obj	metabolic	organ	FMA71870	posterior inferior tributary of right hepatic biliary tree
+FJ3109.obj	metabolic	organ	FMA71869	posterior superior tributary of right hepatic biliary tree
+FJ3110.obj	metabolic	organ	FMA71869	posterior superior tributary of right hepatic biliary tree
+FJ3111.obj	metabolic	organ	FMA15424	posterior inferior segmental branch of right portal vein
+FJ3112.obj	metabolic	organ	FMA15423	posterior superior segmental branch of right portal vein
+FJ3113.obj	metabolic	organ	FMA15423	posterior superior segmental branch of right portal vein
+FJ3114.obj	metabolic	organ	FMA70446	posterior inferior segmental hepatic artery
+FJ3115.obj	metabolic	organ	FMA70445	posterior superior segmental hepatic artery
+FJ3116.obj	metabolic	organ	FMA70445	posterior superior segmental hepatic artery
+FJ3117.obj	metabolic	organ	FMA70456	trunk of right hepatic artery
+FJ3118.obj	cardiovascular	organ	FMA15797	posterior inferior segmental tributary of right hepatic vein
+FJ3119.obj	cardiovascular	organ	FMA15796	posterior superior segmental tributary of right hepatic vein
+FJ3120.obj	cardiovascular	organ	FMA15797	posterior inferior segmental tributary of right hepatic vein
+FJ3121.obj	cardiovascular	organ	FMA15798	anterior superior segmental tributary of right hepatic vein
+FJ3122.obj	metabolic	organ	FMA82695	trunk of right portal vein
+FJ3123.obj	metabolic	organ	FMA14669	right hepatic duct
+FJ3124.obj	metabolic	organ	FMA15425	caudate lobe branch of left portal vein
+FJ3125.obj	metabolic	organ	FMA15432	lateral inferior segmental branch of left portal vein
+FJ3126.obj	metabolic	organ	FMA15431	lateral superior segmental branch of left portal vein
+FJ3127.obj	metabolic	organ	FMA15428	medial superior segmental branch of left portal vein
+FJ3128.obj	metabolic	organ	FMA15429	medial inferior segmental branch of left portal vein
+FJ3129.obj	endocrine	organ	FMA15630	left adrenal gland
+FJ3130.obj	endocrine	organ	FMA15629	right adrenal gland
+FJ3131.obj	musculoskeletal	muscle	FMA13295	diaphragm
+FJ3139.obj	reproductive	organ	FMA9600	prostate
+FJ3144.obj	metabolic	organ	FMA15572	left ureter
+FJ3145.obj	metabolic	organ	FMA7205	left kidney
+FJ3146.obj	metabolic	organ	FMA15571	right ureter
+FJ3147.obj	metabolic	organ	FMA7204	right kidney
+FJ3148.obj	metabolic	organ	FMA19667	urethra
+FJ3149.obj	metabolic	organ	FMA15900	urinary bladder
+FJ3152.obj	musculoskeletal	bone	FMA24965	right hip
+FJ3154.obj	musculoskeletal	bone	FMA10037	tenth thoracic vertebra
+FJ3155.obj	musculoskeletal	bone	FMA10059	eleventh thoracic vertebra
+FJ3156.obj	musculoskeletal	bone	FMA10081	twelfth thoracic vertebra
+FJ3157.obj	musculoskeletal	bone	FMA13072	first lumbar vertebra
+FJ3158.obj	musculoskeletal	bone	FMA9165	first thoracic vertebra
+FJ3159.obj	musculoskeletal	bone	FMA13073	second lumbar vertebra
+FJ3160.obj	musculoskeletal	bone	FMA9187	second thoracic vertebra
+FJ3161.obj	musculoskeletal	bone	FMA12521	third cervical vertebra
+FJ3162.obj	musculoskeletal	bone	FMA13074	third lumbar vertebra
+FJ3163.obj	musculoskeletal	bone	FMA9209	third thoracic vertebra
+FJ3164.obj	musculoskeletal	bone	FMA12522	fourth cervical vertebra
+FJ3165.obj	musculoskeletal	bone	FMA13075	fourth lumbar vertebra
+FJ3166.obj	musculoskeletal	bone	FMA9248	fourth thoracic vertebra
+FJ3167.obj	musculoskeletal	bone	FMA12523	fifth cervical vertebra
+FJ3168.obj	musculoskeletal	bone	FMA13076	fifth lumbar vertebra
+FJ3169.obj	musculoskeletal	bone	FMA9922	fifth thoracic vertebra
+FJ3170.obj	musculoskeletal	bone	FMA12524	sixth cervical vertebra
+FJ3171.obj	musculoskeletal	bone	FMA9945	sixth thoracic vertebra
+FJ3172.obj	musculoskeletal	bone	FMA12525	seventh cervical vertebra
+FJ3173.obj	musculoskeletal	bone	FMA9968	seventh thoracic vertebra
+FJ3174.obj	musculoskeletal	bone	FMA9991	eighth thoracic vertebra
+FJ3175.obj	musculoskeletal	bone	FMA10014	ninth thoracic vertebra
+FJ3176.obj	musculoskeletal	bone	FMA12519	atlas
+FJ3177.obj	musculoskeletal	bone	FMA12520	axis
+FJ3179.obj	musculoskeletal	bone	FMA32653	distal phalanx of left second toe
+FJ3180.obj	musculoskeletal	bone	FMA32655	distal phalanx of left third toe
+FJ3181.obj	musculoskeletal	bone	FMA32657	distal phalanx of left fourth toe
+FJ3182.obj	musculoskeletal	bone	FMA32651	distal phalanx of left big toe
+FJ3183.obj	musculoskeletal	bone	FMA23953	distal phalanx of left index finger
+FJ3184.obj	musculoskeletal	bone	FMA23959	distal phalanx of left little finger
+FJ3185.obj	musculoskeletal	bone	FMA32659	distal phalanx of left little toe
+FJ3186.obj	musculoskeletal	bone	FMA23955	distal phalanx of left middle finger
+FJ3187.obj	musculoskeletal	bone	FMA23957	distal phalanx of left ring finger
+FJ3188.obj	musculoskeletal	bone	FMA23951	distal phalanx of left thumb
+FJ3189.obj	musculoskeletal	bone	FMA32652	distal phalanx of right second toe
+FJ3190.obj	musculoskeletal	bone	FMA32654	distal phalanx of right third toe
+FJ3191.obj	musculoskeletal	bone	FMA32656	distal phalanx of right fourth toe
+FJ3192.obj	musculoskeletal	bone	FMA32650	distal phalanx of right big toe
+FJ3193.obj	musculoskeletal	bone	FMA24460	distal phalanx of right index finger
+FJ3194.obj	musculoskeletal	bone	FMA24463	distal phalanx of right little finger
+FJ3195.obj	musculoskeletal	bone	FMA32658	distal phalanx of right little toe
+FJ3196.obj	musculoskeletal	bone	FMA24461	distal phalanx of right middle finger
+FJ3197.obj	musculoskeletal	bone	FMA24462	distal phalanx of right ring finger
+FJ3198.obj	musculoskeletal	bone	FMA24459	distal phalanx of right thumb
+FJ3199.obj	musculoskeletal	bone	FMA52740	ethmoid
+FJ3200.obj	musculoskeletal	bone	FMA52734	frontal bone
+FJ3201.obj	musculoskeletal	bone	FMA52749	hyoid bone
+FJ3202.obj	musculoskeletal	connective	FMA25058	intervertebral disk of axis
+FJ3203.obj	musculoskeletal	connective	FMA26096	fourth thoracic intervertebral symphysis
+FJ3204.obj	musculoskeletal	connective	FMA26097	fifth thoracic intervertebral symphysis
+FJ3205.obj	musculoskeletal	connective	FMA26098	sixth thoracic intervertebral symphysis
+FJ3206.obj	musculoskeletal	connective	FMA26099	seventh thoracic intervertebral symphysis
+FJ3207.obj	musculoskeletal	connective	FMA26100	eighth thoracic intervertebral symphysis
+FJ3208.obj	musculoskeletal	connective	FMA26101	ninth thoracic intervertebral symphysis
+FJ3209.obj	musculoskeletal	connective	FMA26102	tenth thoracic intervertebral symphysis
+FJ3210.obj	musculoskeletal	connective	FMA26103	eleventh thoracic intervertebral symphysis
+FJ3211.obj	musculoskeletal	connective	FMA25511	intervertebral symphysis
+FJ3212.obj	musculoskeletal	connective	FMA26105	first lumbar intervertebral symphysis
+FJ3213.obj	musculoskeletal	connective	FMA26078	third cervical intervertebral symphysis
+FJ3214.obj	musculoskeletal	connective	FMA26106	second lumbar intervertebral symphysis
+FJ3215.obj	musculoskeletal	connective	FMA26107	third lumbar intervertebral symphysis
+FJ3216.obj	musculoskeletal	connective	FMA26108	fourth lumbar intervertebral symphysis
+FJ3217.obj	musculoskeletal	connective	FMA26109	fifth lumbar intervertebral symphysis
+FJ3218.obj	musculoskeletal	connective	FMA26083	fourth cervical intervertebral symphysis
+FJ3219.obj	musculoskeletal	connective	FMA26084	fifth cervical intervertebral symphysis
+FJ3220.obj	musculoskeletal	connective	FMA26085	sixth cervical intervertebral symphysis
+FJ3221.obj	musculoskeletal	connective	FMA26086	seventh cervical intervertebral symphysis
+FJ3222.obj	musculoskeletal	connective	FMA26089	first thoracic intervertebral symphysis
+FJ3223.obj	musculoskeletal	connective	FMA26094	second thoracic intervertebral symphysis
+FJ3224.obj	musculoskeletal	connective	FMA26095	third thoracic intervertebral symphysis
+FJ3225.obj	musculoskeletal	bone	FMA8472	left tenth rib
+FJ3226.obj	musculoskeletal	bone	FMA8532	left eleventh rib
+FJ3227.obj	musculoskeletal	bone	FMA8534	left twelfth rib
+FJ3228.obj	musculoskeletal	bone	FMA7987	left first rib
+FJ3229.obj	musculoskeletal	bone	FMA8012	left second rib
+FJ3230.obj	musculoskeletal	bone	FMA8039	left third rib
+FJ3231.obj	musculoskeletal	bone	FMA8148	left fourth rib
+FJ3232.obj	musculoskeletal	bone	FMA8093	left fifth rib
+FJ3233.obj	musculoskeletal	bone	FMA8202	left sixth rib
+FJ3234.obj	musculoskeletal	bone	FMA8256	left seventh rib
+FJ3235.obj	musculoskeletal	bone	FMA8310	left eighth rib
+FJ3236.obj	musculoskeletal	bone	FMA8391	left ninth rib
+FJ3237.obj	musculoskeletal	bone	FMA13323	left clavicle
+FJ3240.obj	musculoskeletal	bone	FMA24465	left first metacarpal bone
+FJ3241.obj	musculoskeletal	bone	FMA24508	left first metatarsal bone
+FJ3243.obj	musculoskeletal	bone	FMA24467	left second metacarpal bone
+FJ3244.obj	musculoskeletal	bone	FMA24510	left second metatarsal bone
+FJ3246.obj	musculoskeletal	bone	FMA24469	left third metacarpal bone
+FJ3247.obj	musculoskeletal	bone	FMA24512	left third metatarsal bone
+FJ3249.obj	musculoskeletal	bone	FMA24471	left fourth metacarpal bone
+FJ3250.obj	musculoskeletal	bone	FMA24514	left fourth metatarsal bone
+FJ3252.obj	musculoskeletal	bone	FMA24473	left fifth metacarpal bone
+FJ3253.obj	musculoskeletal	bone	FMA24516	left fifth metatarsal bone
+FJ3256.obj	musculoskeletal	bone	FMA24498	left calcaneus
+FJ3257.obj	musculoskeletal	bone	FMA24447	left capitate
+FJ3258.obj	musculoskeletal	bone	FMA24529	left cuboid bone
+FJ3259.obj	musculoskeletal	bone	FMA24475	left femur
+FJ3260.obj	musculoskeletal	bone	FMA24481	left fibula
+FJ3261.obj	musculoskeletal	bone	FMA24449	left hamate
+FJ3262.obj	musculoskeletal	bone	FMA23131	left humerus
+FJ3263.obj	musculoskeletal	bone	FMA54738	left inferior nasal concha
+FJ3264.obj	musculoskeletal	bone	FMA24524	left intermediate cuneiform bone
+FJ3265.obj	musculoskeletal	bone	FMA53646	left lacrimal bone
+FJ3266.obj	musculoskeletal	bone	FMA45098	sesamoid bone of left foot
+FJ3267.obj	musculoskeletal	bone	FMA24526	left lateral cuneiform bone
+FJ3268.obj	musculoskeletal	bone	FMA24438	left lunate
+FJ3269.obj	musculoskeletal	bone	FMA53650	left maxilla
+FJ3270.obj	musculoskeletal	bone	FMA45098	sesamoid bone of left foot
+FJ3271.obj	musculoskeletal	bone	FMA24522	left medial cuneiform bone
+FJ3272.obj	musculoskeletal	bone	FMA53648	left nasal bone
+FJ3273.obj	musculoskeletal	bone	FMA53656	left palatine bone
+FJ3274.obj	musculoskeletal	bone	FMA52789	left parietal bone
+FJ3275.obj	musculoskeletal	bone	FMA24978	left knee
+FJ3276.obj	musculoskeletal	bone	FMA24442	left pisiform
+FJ3277.obj	musculoskeletal	bone	FMA23465	left radius
+FJ3278.obj	musculoskeletal	bone	FMA24436	left scaphoid
+FJ3279.obj	musculoskeletal	bone	FMA13396	left scapula
+FJ3280.obj	musculoskeletal	bone	FMA24483	left talus
+FJ3281.obj	musculoskeletal	bone	FMA52739	left temporal bone
+FJ3282.obj	musculoskeletal	bone	FMA24478	left tibia
+FJ3283.obj	musculoskeletal	bone	FMA24444	left trapezium
+FJ3284.obj	musculoskeletal	bone	FMA24445	left trapezoid
+FJ3285.obj	musculoskeletal	bone	FMA24440	left triquetral
+FJ3286.obj	musculoskeletal	bone	FMA23468	left ulna
+FJ3287.obj	musculoskeletal	bone	FMA53638	left cheek
+FJ3288.obj	musculoskeletal	bone	FMA24966	left hip
+FJ3289.obj	musculoskeletal	bone	FMA52748	mandible
+FJ3291.obj	musculoskeletal	bone	FMA23942	middle phalanx of left ring finger
+FJ3292.obj	musculoskeletal	bone	FMA24457	middle phalanx of right ring finger
+FJ3293.obj	musculoskeletal	bone	FMA32643	middle phalanx of left second toe
+FJ3294.obj	musculoskeletal	bone	FMA32645	middle phalanx of left third toe
+FJ3295.obj	musculoskeletal	bone	FMA32647	middle phalanx of left fourth toe
+FJ3296.obj	musculoskeletal	bone	FMA23938	middle phalanx of left index finger
+FJ3297.obj	musculoskeletal	bone	FMA23944	middle phalanx of left little finger
+FJ3298.obj	musculoskeletal	bone	FMA230988	middle phalanx of left little toe
+FJ3299.obj	musculoskeletal	bone	FMA23940	middle phalanx of left middle finger
+FJ3300.obj	musculoskeletal	bone	FMA32642	middle phalanx of right second toe
+FJ3301.obj	musculoskeletal	bone	FMA32644	middle phalanx of right third toe
+FJ3302.obj	musculoskeletal	bone	FMA32646	middle phalanx of right fourth toe
+FJ3303.obj	musculoskeletal	bone	FMA24455	middle phalanx of right index finger
+FJ3304.obj	musculoskeletal	bone	FMA24458	middle phalanx of right little finger
+FJ3305.obj	musculoskeletal	bone	FMA230986	middle phalanx of right little toe
+FJ3306.obj	musculoskeletal	bone	FMA24456	middle phalanx of right middle finger
+FJ3307.obj	musculoskeletal	bone	FMA24501	navicular bone of left foot
+FJ3308.obj	musculoskeletal	bone	FMA24500	navicular bone of right foot
+FJ3309.obj	musculoskeletal	bone	FMA52735	occipital bone
+FJ3310.obj	musculoskeletal	bone	FMA43253	proximal phalanx of right big toe
+FJ3311.obj	musculoskeletal	bone	FMA32637	proximal phalanx of left third toe
+FJ3312.obj	musculoskeletal	bone	FMA32639	proximal phalanx of left fourth toe
+FJ3313.obj	musculoskeletal	bone	FMA71915	proximal phalanx of left index finger
+FJ3314.obj	musculoskeletal	bone	FMA66791	proximal phalanx of left little finger
+FJ3315.obj	musculoskeletal	bone	FMA32641	proximal phalanx of left little toe
+FJ3316.obj	musculoskeletal	bone	FMA71908	proximal phalanx of left middle finger
+FJ3317.obj	musculoskeletal	bone	FMA71916	proximal phalanx of left ring finger
+FJ3318.obj	musculoskeletal	bone	FMA65470	proximal phalanx of left thumb
+FJ3319.obj	musculoskeletal	bone	FMA32634	proximal phalanx of right second toe
+FJ3320.obj	musculoskeletal	bone	FMA32636	proximal phalanx of right third toe
+FJ3321.obj	musculoskeletal	bone	FMA32638	proximal phalanx of right fourth toe
+FJ3322.obj	musculoskeletal	bone	FMA24451	proximal phalanx of right index finger
+FJ3323.obj	musculoskeletal	bone	FMA24454	proximal phalanx of right little finger
+FJ3324.obj	musculoskeletal	bone	FMA32640	proximal phalanx of right little toe
+FJ3325.obj	musculoskeletal	bone	FMA24452	proximal phalanx of right middle finger
+FJ3326.obj	musculoskeletal	bone	FMA24453	proximal phalanx of right ring finger
+FJ3327.obj	musculoskeletal	bone	FMA24450	proximal phalanx of right thumb
+FJ3328.obj	musculoskeletal	bone	FMA32635	proximal phalanx of left second toe
+FJ3329.obj	musculoskeletal	bone	FMA43254	proximal phalanx of left big toe
+FJ3330.obj	musculoskeletal	bone	FMA8445	right tenth rib
+FJ3331.obj	musculoskeletal	bone	FMA8531	right eleventh rib
+FJ3332.obj	musculoskeletal	bone	FMA8533	right twelfth rib
+FJ3334.obj	musculoskeletal	bone	FMA7857	right first rib
+FJ3336.obj	musculoskeletal	bone	FMA7882	right second rib
+FJ3338.obj	musculoskeletal	bone	FMA7909	right third rib
+FJ3340.obj	musculoskeletal	bone	FMA7957	right fourth rib
+FJ3342.obj	musculoskeletal	bone	FMA8066	right fifth rib
+FJ3344.obj	musculoskeletal	bone	FMA8175	right sixth rib
+FJ3346.obj	musculoskeletal	bone	FMA8229	right seventh rib
+FJ3347.obj	musculoskeletal	bone	FMA8283	right eighth rib
+FJ3348.obj	musculoskeletal	bone	FMA8364	right ninth rib
+FJ3349.obj	musculoskeletal	bone	FMA23464	right radius
+FJ3350.obj	musculoskeletal	bone	FMA24464	right first metacarpal bone
+FJ3351.obj	musculoskeletal	bone	FMA24507	right first metatarsal bone
+FJ3352.obj	musculoskeletal	bone	FMA24466	right second metacarpal bone
+FJ3353.obj	musculoskeletal	bone	FMA24509	right second metatarsal bone
+FJ3354.obj	musculoskeletal	bone	FMA24468	right third metacarpal bone
+FJ3355.obj	musculoskeletal	bone	FMA24511	right third metatarsal bone
+FJ3356.obj	musculoskeletal	bone	FMA24470	right fourth metacarpal bone
+FJ3357.obj	musculoskeletal	bone	FMA24513	right fourth metatarsal bone
+FJ3358.obj	musculoskeletal	bone	FMA24472	right fifth metacarpal bone
+FJ3359.obj	musculoskeletal	bone	FMA24515	right fifth metatarsal bone
+FJ3360.obj	musculoskeletal	bone	FMA24497	right calcaneus
+FJ3361.obj	musculoskeletal	bone	FMA24446	right capitate
+FJ3362.obj	musculoskeletal	bone	FMA13322	right clavicle
+FJ3364.obj	musculoskeletal	bone	FMA24528	right cuboid bone
+FJ3365.obj	musculoskeletal	bone	FMA24968	right thigh
+FJ3366.obj	musculoskeletal	bone	FMA24480	right fibula
+FJ3367.obj	musculoskeletal	bone	FMA24448	right hamate
+FJ3368.obj	musculoskeletal	bone	FMA23130	right humerus
+FJ3369.obj	musculoskeletal	bone	FMA54737	right inferior nasal concha
+FJ3370.obj	musculoskeletal	bone	FMA24523	right intermediate cuneiform bone
+FJ3371.obj	musculoskeletal	bone	FMA53645	right lacrimal bone
+FJ3372.obj	musculoskeletal	bone	FMA45097	sesamoid bone of right foot
+FJ3373.obj	musculoskeletal	bone	FMA24525	right lateral cuneiform bone
+FJ3374.obj	musculoskeletal	bone	FMA24437	right lunate
+FJ3375.obj	musculoskeletal	bone	FMA53649	right maxilla
+FJ3376.obj	musculoskeletal	bone	FMA45097	sesamoid bone of right foot
+FJ3377.obj	musculoskeletal	bone	FMA24521	right medial cuneiform bone
+FJ3378.obj	musculoskeletal	bone	FMA53647	right nasal bone
+FJ3379.obj	musculoskeletal	bone	FMA53655	right palatine bone
+FJ3380.obj	musculoskeletal	bone	FMA52788	right parietal bone
+FJ3381.obj	musculoskeletal	bone	FMA24977	right knee
+FJ3382.obj	musculoskeletal	bone	FMA24441	right pisiform
+FJ3383.obj	musculoskeletal	bone	FMA24435	right scaphoid
+FJ3384.obj	musculoskeletal	bone	FMA13395	right scapula
+FJ3385.obj	musculoskeletal	bone	FMA24482	right talus
+FJ3386.obj	musculoskeletal	bone	FMA52738	right temporal bone
+FJ3387.obj	musculoskeletal	bone	FMA24477	right tibia
+FJ3388.obj	musculoskeletal	bone	FMA24443	right trapezium
+FJ3389.obj	musculoskeletal	bone	FMA23725	right trapezoid
+FJ3390.obj	musculoskeletal	bone	FMA24439	right triquetral
+FJ3391.obj	musculoskeletal	bone	FMA23467	right ulna
+FJ3392.obj	musculoskeletal	bone	FMA53637	right cheek
+FJ3393.obj	musculoskeletal	bone	FMA16202	sacrum
+FJ3394.obj	musculoskeletal	bone	FMA52736	sphenoid bone
+FJ3395.obj	musculoskeletal	bone	FMA9710	vomer
+FJ3396.obj	digestive	organ	FMA14643	mesentery of small intestine
+FJ3397.obj	digestive	organ	FMA16549	mesoappendix
+FJ3398.obj	digestive	organ	FMA14647	transverse mesocolon
+FJ3400.obj	cardiovascular	organ	FMA15394	left colic vein
+FJ3401.obj	cardiovascular	organ	FMA70479	anterior inferior pancreaticoduodenal artery
+FJ3406.obj	cardiovascular	organ	FMA14816	anterior cecal artery
+FJ3409.obj	cardiovascular	organ	FMA14782	anterior superior pancreaticoduodenal artery
+FJ3410.obj	cardiovascular	organ	FMA14818	appendicular artery
+FJ3411.obj	cardiovascular	organ	FMA3768	arch of aorta
+FJ3413.obj	cardiovascular	organ	FMA3736	ascending aorta
+FJ3414.obj	cardiovascular	organ	FMA14820	ascending branch of inferior branch of ileocolic artery
+FJ3415.obj	cardiovascular	organ	FMA15408	ileocolic vein
+FJ3416.obj	cardiovascular	organ	FMA4838	azygos vein
+FJ3417.obj	cardiovascular	organ	FMA3932	brachiocephalic artery
+FJ3419.obj	cardiovascular	organ	FMA14793	caudal pancreatic artery
+FJ3420.obj	cardiovascular	organ	FMA14773	splenic artery
+FJ3421.obj	cardiovascular	organ	FMA14812	celiac trunk
+FJ3426.obj	cardiovascular	organ	FMA21386	left superficial dorsal vein of penis
+FJ3427.obj	cardiovascular	organ	FMA3784	descending aorta
+FJ3429.obj	cardiovascular	organ	FMA15394	left colic vein
+FJ3430.obj	cardiovascular	organ	FMA14787	dorsal pancreatic artery
+FJ3432.obj	cardiovascular	organ	FMA14775	gastroduodenal artery
+FJ3433.obj	cardiovascular	organ	FMA14792	great pancreatic artery
+FJ3434.obj	cardiovascular	organ	FMA4944	hemiazygos vein
+FJ3437.obj	cardiovascular	organ	FMA14809	ileal artery
+FJ3438.obj	cardiovascular	organ	FMA15405	ileal vein
+FJ3439.obj	cardiovascular	organ	FMA14815	ileocolic artery
+FJ3440.obj	cardiovascular	organ	FMA15408	ileocolic vein
+FJ3441.obj	cardiovascular	organ	FMA10951	inferior vena cava
+FJ3442.obj	cardiovascular	organ	FMA14750	inferior mesenteric artery
+FJ3443.obj	cardiovascular	organ	FMA15391	inferior mesenteric vein
+FJ3444.obj	cardiovascular	organ	FMA14790	inferior pancreatic artery
+FJ3446.obj	cardiovascular	organ	FMA14805	inferior pancreaticoduodenal artery
+FJ3447.obj	cardiovascular	organ	FMA68068	inferior phrenic vein
+FJ3448.obj	cardiovascular	organ	FMA68068	inferior phrenic vein
+FJ3449.obj	cardiovascular	organ	FMA68068	inferior phrenic vein
+FJ3450.obj	cardiovascular	organ	FMA68068	inferior phrenic vein
+FJ3451.obj	cardiovascular	organ	FMA68068	inferior phrenic vein
+FJ3452.obj	cardiovascular	organ	FMA68068	inferior phrenic vein
+FJ3458.obj	cardiovascular	organ	FMA70487	anterior division of left renal artery
+FJ3459.obj	cardiovascular	organ	FMA70487	anterior division of left renal artery
+FJ3460.obj	cardiovascular	organ	FMA70487	anterior division of left renal artery
+FJ3461.obj	cardiovascular	organ	FMA70487	anterior division of left renal artery
+FJ3462.obj	cardiovascular	organ	FMA70487	anterior division of left renal artery
+FJ3463.obj	cardiovascular	organ	FMA70487	anterior division of left renal artery
+FJ3464.obj	cardiovascular	organ	FMA14764	common iliac artery
+FJ3465.obj	cardiovascular	organ	FMA21388	left common iliac vein
+FJ3466.obj	cardiovascular	organ	FMA18805	external iliac artery
+FJ3467.obj	cardiovascular	organ	FMA69266	left inferior suprarenal artery
+FJ3468.obj	cardiovascular	organ	FMA18810	left internal iliac artery
+FJ3469.obj	cardiovascular	organ	FMA18888	left internal iliac vein
+FJ3470.obj	cardiovascular	organ	FMA18888	left internal iliac vein
+FJ3471.obj	cardiovascular	organ	FMA18888	left internal iliac vein
+FJ3472.obj	cardiovascular	organ	FMA14756	left middle suprarenal artery
+FJ3473.obj	cardiovascular	organ	FMA70490	posterior division of left renal artery
+FJ3474.obj	cardiovascular	organ	FMA70490	posterior division of left renal artery
+FJ3475.obj	cardiovascular	organ	FMA70490	posterior division of left renal artery
+FJ3476.obj	cardiovascular	organ	FMA66364	trunk of left renal artery
+FJ3477.obj	cardiovascular	organ	FMA14336	left renal vein
+FJ3478.obj	cardiovascular	organ	FMA14336	left renal vein
+FJ3479.obj	cardiovascular	organ	FMA3951	subclavian artery
+FJ3480.obj	cardiovascular	organ	FMA14349	left suprarenal vein
+FJ3481.obj	cardiovascular	organ	FMA70493	ureteric segment of left renal artery
+FJ3482.obj	cardiovascular	organ	FMA4761	left brachiocephalic vein
+FJ3483.obj	cardiovascular	organ	FMA3939	common carotid artery
+FJ3484.obj	cardiovascular	organ	FMA18886	left external iliac vein
+FJ3485.obj	cardiovascular	organ	FMA4762	left internal jugular vein
+FJ3486.obj	cardiovascular	organ	FMA4763	left subclavian vein
+FJ3493.obj	cardiovascular	organ	FMA4950	left ascending lumbar vein
+FJ3494.obj	cardiovascular	organ	FMA14826	left colic artery
+FJ3495.obj	cardiovascular	organ	FMA15394	left colic vein
+FJ3496.obj	cardiovascular	organ	FMA20819	left dorsal artery of penis
+FJ3497.obj	cardiovascular	organ	FMA20819	left dorsal artery of penis
+FJ3499.obj	cardiovascular	organ	FMA14768	left gastric artery
+FJ3500.obj	cardiovascular	organ	FMA15399	left gastric vein
+FJ3501.obj	cardiovascular	organ	FMA14796	left gastro-epiploic artery
+FJ3502.obj	cardiovascular	organ	FMA15390	left gastroepiploic vein
+FJ3510.obj	cardiovascular	organ	FMA18904	left iliolumbar vein
+FJ3511.obj	cardiovascular	organ	FMA20689	left inferior epigastric artery
+FJ3512.obj	cardiovascular	organ	FMA21164	left inferior epigastric vein
+FJ3513.obj	cardiovascular	organ	FMA18913	left inferior gluteal vein
+FJ3514.obj	cardiovascular	organ	FMA14747	left inferior phrenic artery
+FJ3515.obj	cardiovascular	organ	FMA14747	left inferior phrenic artery
+FJ3516.obj	cardiovascular	organ	FMA14747	left inferior phrenic artery
+FJ3517.obj	cardiovascular	organ	FMA14747	left inferior phrenic artery
+FJ3518.obj	cardiovascular	organ	FMA14747	left inferior phrenic artery
+FJ3519.obj	cardiovascular	organ	FMA14747	left inferior phrenic artery
+FJ3520.obj	cardiovascular	organ	FMA14747	left inferior phrenic artery
+FJ3522.obj	cardiovascular	organ	FMA18886	left external iliac vein
+FJ3523.obj	cardiovascular	organ	FMA18886	left external iliac vein
+FJ3524.obj	cardiovascular	organ	FMA18886	left external iliac vein
+FJ3525.obj	cardiovascular	organ	FMA18919	left internal pudendal vein
+FJ3526.obj	cardiovascular	organ	FMA18907	left lateral sacral vein
+FJ3527.obj	cardiovascular	organ	FMA18916	left obturator vein
+FJ3529.obj	cardiovascular	organ	FMA20736	left superficial epigastric artery
+FJ3530.obj	cardiovascular	organ	FMA4785	left superior epigastric vein
+FJ3531.obj	cardiovascular	organ	FMA18910	left superior gluteal vein
+FJ3532.obj	cardiovascular	organ	FMA14760	left testicular artery
+FJ3533.obj	cardiovascular	organ	FMA14345	left testicular vein
+FJ3534.obj	cardiovascular	organ	FMA14831	marginal artery of colon
+FJ3541.obj	cardiovascular	organ	FMA77168	median sacral vein
+FJ3542.obj	cardiovascular	organ	FMA14810	middle colic artery
+FJ3543.obj	cardiovascular	organ	FMA15406	middle colic vein
+FJ3544.obj	cardiovascular	organ	FMA14773	splenic artery
+FJ3545.obj	cardiovascular	organ	FMA15398	pancreaticoduodenal vein
+FJ3546.obj	cardiovascular	organ	FMA70480	posterior inferior pancreaticoduodenal artery
+FJ3553.obj	cardiovascular	organ	FMA14817	posterior cecal artery
+FJ3557.obj	cardiovascular	organ	FMA14784	posterior superior pancreaticoduodenal artery
+FJ3558.obj	cardiovascular	organ	FMA70486	anterior division of right renal artery
+FJ3559.obj	cardiovascular	organ	FMA70486	anterior division of right renal artery
+FJ3560.obj	cardiovascular	organ	FMA70486	anterior division of right renal artery
+FJ3561.obj	cardiovascular	organ	FMA70486	anterior division of right renal artery
+FJ3562.obj	cardiovascular	organ	FMA70486	anterior division of right renal artery
+FJ3563.obj	cardiovascular	organ	FMA70486	anterior division of right renal artery
+FJ3564.obj	cardiovascular	organ	FMA3939	common carotid artery
+FJ3565.obj	cardiovascular	organ	FMA14764	common iliac artery
+FJ3566.obj	cardiovascular	organ	FMA21387	right common iliac vein
+FJ3567.obj	cardiovascular	organ	FMA18805	external iliac artery
+FJ3568.obj	cardiovascular	organ	FMA18885	right external iliac vein
+FJ3569.obj	cardiovascular	organ	FMA18809	right internal iliac artery
+FJ3570.obj	cardiovascular	organ	FMA18887	right internal iliac vein
+FJ3571.obj	cardiovascular	organ	FMA18887	right internal iliac vein
+FJ3572.obj	cardiovascular	organ	FMA18887	right internal iliac vein
+FJ3573.obj	cardiovascular	organ	FMA70489	posterior division of right renal artery
+FJ3574.obj	cardiovascular	organ	FMA70489	posterior division of right renal artery
+FJ3575.obj	cardiovascular	organ	FMA70489	posterior division of right renal artery
+FJ3576.obj	cardiovascular	organ	FMA66363	trunk of right renal artery
+FJ3577.obj	cardiovascular	organ	FMA14335	right renal vein
+FJ3578.obj	cardiovascular	organ	FMA14335	right renal vein
+FJ3579.obj	cardiovascular	organ	FMA3951	subclavian artery
+FJ3580.obj	cardiovascular	organ	FMA14343	right suprarenal vein
+FJ3581.obj	cardiovascular	organ	FMA70492	ureteric segment of right renal artery
+FJ3582.obj	cardiovascular	organ	FMA70492	ureteric segment of right renal artery
+FJ3583.obj	cardiovascular	organ	FMA4723	brachiocephalic vein
+FJ3584.obj	cardiovascular	organ	FMA69265	right inferior suprarenal artery
+FJ3585.obj	cardiovascular	organ	FMA4754	right internal jugular vein
+FJ3586.obj	cardiovascular	organ	FMA14755	right middle suprarenal artery
+FJ3587.obj	cardiovascular	organ	FMA4755	right subclavian vein
+FJ3589.obj	cardiovascular	organ	FMA4843	right ascending lumbar vein
+FJ3590.obj	cardiovascular	organ	FMA14811	right colic artery
+FJ3591.obj	cardiovascular	organ	FMA15407	right colic vein
+FJ3592.obj	cardiovascular	organ	FMA20818	right dorsal artery of penis
+FJ3593.obj	cardiovascular	organ	FMA20818	right dorsal artery of penis
+FJ3594.obj	cardiovascular	organ	FMA14776	right gastric artery
+FJ3595.obj	cardiovascular	organ	FMA15400	right gastric vein
+FJ3596.obj	cardiovascular	organ	FMA14781	right gastro-epiploic artery
+FJ3597.obj	cardiovascular	organ	FMA15397	right gastroepiploic vein
+FJ3603.obj	cardiovascular	organ	FMA18903	right iliolumbar vein
+FJ3604.obj	cardiovascular	organ	FMA20688	right inferior epigastric artery
+FJ3605.obj	cardiovascular	organ	FMA21163	right inferior epigastric vein
+FJ3606.obj	cardiovascular	organ	FMA18912	right inferior gluteal vein
+FJ3607.obj	cardiovascular	organ	FMA18887	right internal iliac vein
+FJ3608.obj	cardiovascular	organ	FMA18887	right internal iliac vein
+FJ3609.obj	cardiovascular	organ	FMA18887	right internal iliac vein
+FJ3610.obj	cardiovascular	organ	FMA18918	right internal pudendal vein
+FJ3611.obj	cardiovascular	organ	FMA18906	right lateral sacral vein
+FJ3612.obj	cardiovascular	organ	FMA18915	right obturator vein
+FJ3614.obj	cardiovascular	organ	FMA20735	right superficial epigastric artery
+FJ3615.obj	cardiovascular	organ	FMA4771	right superior epigastric vein
+FJ3616.obj	cardiovascular	organ	FMA18909	right superior gluteal vein
+FJ3617.obj	cardiovascular	organ	FMA14759	right testicular artery
+FJ3618.obj	cardiovascular	organ	FMA14341	right testicular vein
+FJ3619.obj	cardiovascular	organ	FMA14746	right inferior phrenic artery
+FJ3620.obj	cardiovascular	organ	FMA14746	right inferior phrenic artery
+FJ3621.obj	cardiovascular	organ	FMA14746	right inferior phrenic artery
+FJ3622.obj	cardiovascular	organ	FMA14746	right inferior phrenic artery
+FJ3623.obj	cardiovascular	organ	FMA14746	right inferior phrenic artery
+FJ3624.obj	cardiovascular	organ	FMA14746	right inferior phrenic artery
+FJ3625.obj	cardiovascular	organ	FMA14746	right inferior phrenic artery
+FJ3626.obj	cardiovascular	organ	FMA14746	right inferior phrenic artery
+FJ3631.obj	cardiovascular	organ	FMA15370	lumbar vein
+FJ3632.obj	cardiovascular	organ	FMA14735	lumbar artery
+FJ3635.obj	cardiovascular	organ	FMA15370	lumbar vein
+FJ3636.obj	cardiovascular	organ	FMA14735	lumbar artery
+FJ3637.obj	cardiovascular	organ	FMA21385	right superficial dorsal vein of penis
+FJ3638.obj	cardiovascular	organ	FMA14830	sigmoid artery
+FJ3639.obj	cardiovascular	organ	FMA15395	sigmoid vein
+FJ3640.obj	cardiovascular	organ	FMA14773	splenic artery
+FJ3641.obj	cardiovascular	organ	FMA14331	splenic vein
+FJ3644.obj	cardiovascular	organ	FMA66358	trunk of superior mesenteric artery
+FJ3645.obj	cardiovascular	organ	FMA4720	superior vena cava
+FJ3646.obj	cardiovascular	organ	FMA15398	pancreaticoduodenal vein
+FJ3647.obj	cardiovascular	organ	FMA14332	superior mesenteric vein
+FJ3648.obj	cardiovascular	organ	FMA78121	superior phrenic vein
+FJ3649.obj	cardiovascular	organ	FMA78121	superior phrenic vein
+FJ3650.obj	cardiovascular	organ	FMA78121	superior phrenic vein
+FJ3651.obj	cardiovascular	organ	FMA78121	superior phrenic vein
+FJ3652.obj	cardiovascular	organ	FMA78121	superior phrenic vein
+FJ3653.obj	cardiovascular	organ	FMA78121	superior phrenic vein
+FJ3654.obj	cardiovascular	organ	FMA78121	superior phrenic vein
+FJ3655.obj	cardiovascular	organ	FMA15398	pancreaticoduodenal vein
+FJ3656.obj	cardiovascular	organ	FMA14832	superior rectal artery
+FJ3657.obj	cardiovascular	organ	FMA15393	superior rectal vein
+FJ3658.obj	cardiovascular	organ	FMA12858	ascending lumbar vein
+FJ3659.obj	cardiovascular	organ	FMA10951	inferior vena cava

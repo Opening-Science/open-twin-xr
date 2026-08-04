@@ -1,0 +1,1623 @@
+# Organ systems and ontology terms
+
+**Generated — do not edit by hand.** Run `node scripts/gen-ontology-map.mjs`.
+
+Every mapping from a body system to a nomenclature term that this repository holds, and — more importantly — which of them actually reach the shipped assets. 1,408 distinct terms across 9 systems.
+
+## Why this exists
+
+Organ overlays declare what they replace **by structure name**, and that is fragile. Z-Anatomy names the left and right ossicles identically, so a name test cannot mask one ear without masking the other — which is why the OpenEar overlay supersedes nothing at all today and renders alongside the atlas’s own ear. Ontology terms are the join that fixes it: per-side where the anatomy is per-side, stable across a rebuild, and shared between atlases. This is the inventory for that move.
+
+**Two nomenclatures appear because the atlases have two lineages, not because anybody chose to mix them.** BodyParts3D and its derivative Z-Anatomy are addressed in **FMA**; everything segmented from imaging — the CT atlases and HRA — speaks **UBERON**. Any cross-atlas overlay therefore needs both, or an FMA↔UBERON bridge that this repository does not yet have.
+
+## ⚠️ The gap: crosswalks exist, the assets mostly do not carry them
+
+A crosswalk in `docs/` is not a join the app can make. Unless the term travels into the GLB, the only thing available at runtime is the structure’s name — which is exactly the situation the overlays are stuck in.
+
+| asset | structures | carry a term | where the term is |
+|---|---|---|---|
+| `hra` | 96 mesh nodes | 85 (89 %) | node `extras.ontologyid` |
+| `hra-m` | 85 mesh nodes | 76 (89 %) | node `extras.ontologyid` |
+| `bodyparts3d` | 11 mesh nodes | 0 (0 %) | **nowhere — name only** |
+| `z-anatomy` | 3,617 in the structure table | 0 (0 %) | **nowhere — name only** |
+| `z-anatomy-regions` | 257 in the structure table | 0 (0 %) | **nowhere — name only** |
+| `htb-ct-f` | 33 mesh nodes | 33 (100 %) | node `extras.ontologyid` |
+| `ct-atlas-f` | 109 mesh nodes | 109 (100 %) | node `extras.ontologyid` |
+
+**So the two richest atlases are the two with no terms in the asset.** Z-Anatomy ships 3,617 named structures and carries none, though `docs/z-anatomy-fma.tsv` maps 618 distinct terms across 676 rows; BodyParts3D is merged to eleven draw calls and loses the FMA id that `docs/bodyparts3d-system-map.tsv` holds for all 1,838 of its source meshes. Writing those crosswalks into the structure table at build time is the concrete next step — it is a change to `build-z-anatomy.mjs` and `build-bodyparts3d.mjs`, not new research.
+
+## Crosswalks in this repository
+
+| source | vocabulary | rows | with a term | distinct terms | what it is |
+|---|---|---|---|---|---|
+| BodyParts3D | FMA | 1,838 | 1,838 | 1,295 | one row per source OBJ, from the FMA walk done when the atlas was assembled |
+| Z-Anatomy | FMA | 676 | 676 | 618 | per structure and per side |
+| CT atlas (MOOSE) | UBERON | 139 | 136 | 103 | MOOSE class to UBERON, hand-built and hand-checked |
+| CT (female), TCIA | UBERON | 33 | 33 | 33 | grouped labelmap classes to UBERON |
+
+These TSVs are the machine-readable form and stay the authority; the tables below are the same data organised by system.
+
+## Terms by organ system
+
+| system | distinct terms |
+|---|---|
+| musculoskeletal | 608 |
+| cardiovascular | 529 |
+| nervous | 98 |
+| respiratory | 85 |
+| metabolic | 70 |
+| digestive | 34 |
+| endocrine | 9 |
+| integumentary | 6 |
+| reproductive | 1 |
+
+⚠️ `SystemId` has nine values and is the **health-data contract**, owned upstream (D8). Systems outside it — `lymphoid`, `sensory` — are deliberately not added to it for a geometric reason; those structures render unresolved rather than score-coloured. A term mapping does not change that.
+
+<details>
+<summary><strong>musculoskeletal</strong> — 608 terms</summary>
+
+| term | label | sides | in |
+|---|---|---|---|
+| `FMA:37464` | abductor digiti minimi of left foot | left | BodyParts3D, Z-Anatomy |
+| `FMA:37397` | abductor digiti minimi of left hand | left | BodyParts3D, Z-Anatomy |
+| `FMA:37463` | abductor digiti minimi of right foot | right | BodyParts3D, Z-Anatomy |
+| `FMA:37396` | abductor digiti minimi of right hand | right | BodyParts3D, Z-Anatomy |
+| `FMA:12519` | atlas | — | BodyParts3D |
+| `FMA:12520` | axis | — | BodyParts3D |
+| `UBERON:0001270` | bony pelvis | — | CT (female), TCIA |
+| `UBERON:0001435` | carpal bone | left, right | CT (female), TCIA, CT atlas (MOOSE) |
+| `UBERON:0001105` | clavicle bone | — | CT (female), TCIA |
+| `FMA:9615` | cricoid cartilage | — | BodyParts3D, Z-Anatomy |
+| `FMA:13295` | diaphragm | — | BodyParts3D, Z-Anatomy |
+| `FMA:32651` | distal phalanx of left big toe | left | BodyParts3D, Z-Anatomy |
+| `FMA:32657` | distal phalanx of left fourth toe | left | BodyParts3D, Z-Anatomy |
+| `FMA:23953` | distal phalanx of left index finger | — | BodyParts3D |
+| `FMA:23959` | distal phalanx of left little finger | — | BodyParts3D |
+| `FMA:32659` | distal phalanx of left little toe | — | BodyParts3D |
+| `FMA:23955` | distal phalanx of left middle finger | — | BodyParts3D |
+| `FMA:23957` | distal phalanx of left ring finger | — | BodyParts3D |
+| `FMA:32653` | distal phalanx of left second toe | left | BodyParts3D, Z-Anatomy |
+| `FMA:32655` | distal phalanx of left third toe | left | BodyParts3D, Z-Anatomy |
+| `FMA:23951` | distal phalanx of left thumb | — | BodyParts3D |
+| `FMA:32650` | distal phalanx of right big toe | right | BodyParts3D, Z-Anatomy |
+| `FMA:32656` | distal phalanx of right fourth toe | right | BodyParts3D, Z-Anatomy |
+| `FMA:24460` | distal phalanx of right index finger | — | BodyParts3D |
+| `FMA:24463` | distal phalanx of right little finger | — | BodyParts3D |
+| `FMA:32658` | distal phalanx of right little toe | — | BodyParts3D |
+| `FMA:24461` | distal phalanx of right middle finger | — | BodyParts3D |
+| `FMA:24462` | distal phalanx of right ring finger | — | BodyParts3D |
+| `FMA:32652` | distal phalanx of right second toe | right | BodyParts3D, Z-Anatomy |
+| `FMA:32654` | distal phalanx of right third toe | right | BodyParts3D, Z-Anatomy |
+| `FMA:24459` | distal phalanx of right thumb | — | BodyParts3D |
+| `FMA:26100` | eighth thoracic intervertebral symphysis | — | BodyParts3D |
+| `FMA:9991` | eighth thoracic vertebra | — | BodyParts3D |
+| `FMA:26103` | eleventh thoracic intervertebral symphysis | — | BodyParts3D |
+| `FMA:10059` | eleventh thoracic vertebra | — | BodyParts3D |
+| `UBERON:0002462` | erector spinae muscle group | left, right | CT atlas (MOOSE) |
+| `FMA:52740` | ethmoid | — | BodyParts3D, Z-Anatomy |
+| `FMA:9756` | external intercostal muscle | — | BodyParts3D |
+| `UBERON:0000981` | femur | left, right | CT (female), TCIA, CT atlas (MOOSE) |
+| `UBERON:0001446` | fibula | left, right | CT (female), TCIA, CT atlas (MOOSE) |
+| `FMA:26084` | fifth cervical intervertebral symphysis | — | BodyParts3D |
+| `FMA:12523` | fifth cervical vertebra | — | BodyParts3D |
+| `FMA:26109` | fifth lumbar intervertebral symphysis | — | BodyParts3D |
+| `FMA:13076` | fifth lumbar vertebra | — | BodyParts3D |
+| `FMA:26097` | fifth thoracic intervertebral symphysis | — | BodyParts3D |
+| `FMA:9922` | fifth thoracic vertebra | — | BodyParts3D |
+| `FMA:26105` | first lumbar intervertebral symphysis | — | BodyParts3D |
+| `FMA:13072` | first lumbar vertebra | — | BodyParts3D |
+| `FMA:37718` | first lumbrical of left foot | — | BodyParts3D |
+| `FMA:37717` | first lumbrical of right foot | — | BodyParts3D |
+| `FMA:37746` | first plantar interosseous of left foot | — | BodyParts3D |
+| `FMA:37745` | first plantar interosseous of right foot | — | BodyParts3D |
+| `FMA:26089` | first thoracic intervertebral symphysis | — | BodyParts3D |
+| `FMA:9165` | first thoracic vertebra | — | BodyParts3D |
+| `FMA:37472` | flexor digiti minimi brevis of left foot | — | BodyParts3D |
+| `FMA:37399` | flexor digiti minimi brevis of left hand | — | BodyParts3D |
+| `FMA:37471` | flexor digiti minimi brevis of right foot | — | BodyParts3D |
+| `FMA:37398` | flexor digiti minimi brevis of right hand | — | BodyParts3D |
+| `FMA:26083` | fourth cervical intervertebral symphysis | — | BodyParts3D |
+| `FMA:12522` | fourth cervical vertebra | — | BodyParts3D |
+| `FMA:26108` | fourth lumbar intervertebral symphysis | — | BodyParts3D |
+| `FMA:13075` | fourth lumbar vertebra | — | BodyParts3D |
+| `FMA:37484` | fourth lumbrical of left foot | — | BodyParts3D |
+| `FMA:37483` | fourth lumbrical of right foot | — | BodyParts3D |
+| `FMA:26096` | fourth thoracic intervertebral symphysis | — | BodyParts3D |
+| `FMA:9248` | fourth thoracic vertebra | — | BodyParts3D |
+| `FMA:52734` | frontal bone | — | BodyParts3D, Z-Anatomy |
+| `UBERON:0003690` | fused sacrum | — | CT atlas (MOOSE) |
+| `UBERON:0001370` | gluteus maximus | left, right | CT atlas (MOOSE) |
+| `UBERON:0001371` | gluteus medius | left, right | CT atlas (MOOSE) |
+| `UBERON:0008521` | gluteus minimus | left, right | CT atlas (MOOSE) |
+| `UBERON:0000976` | humerus | left, right | CT (female), TCIA, CT atlas (MOOSE) |
+| `FMA:52749` | hyoid bone | — | BodyParts3D, Z-Anatomy |
+| `FMA:18903` | Iliolumbar ligament | right | Z-Anatomy |
+| `FMA:18904` | Iliolumbar ligament | left | Z-Anatomy |
+| `UBERON:0001999` | iliopsoas | left, right | CT atlas (MOOSE) |
+| `FMA:9758` | innermost intercostal muscle | — | BodyParts3D |
+| `UBERON:0001272` | innominate bone | left, right | CT atlas (MOOSE) |
+| `FMA:9757` | internal intercostal muscle | — | BodyParts3D |
+| `FMA:25058` | intervertebral disk of axis | — | BodyParts3D |
+| `FMA:25511` | intervertebral symphysis | — | BodyParts3D |
+| `FMA:22850` | lateral lumbar intertransversarius | — | BodyParts3D |
+| `FMA:37460` | left abductor hallucis | left | BodyParts3D, Z-Anatomy |
+| `FMA:37387` | left abductor pollicis brevis | left | BodyParts3D, Z-Anatomy |
+| `FMA:38517` | left abductor pollicis longus | left | BodyParts3D, Z-Anatomy |
+| `FMA:22454` | left adductor brevis | left | BodyParts3D, Z-Anatomy |
+| `FMA:22457` | left adductor longus | left | BodyParts3D, Z-Anatomy |
+| `FMA:22460` | left adductor magnus | left | BodyParts3D, Z-Anatomy |
+| `FMA:43887` | left adductor minimus | left | BodyParts3D, Z-Anatomy |
+| `FMA:37706` | left anconeus | left | BodyParts3D, Z-Anatomy |
+| `FMA:55114` | left arytenoid cartilage | left | BodyParts3D, Z-Anatomy |
+| `FMA:37669` | left brachialis | left | BodyParts3D, Z-Anatomy |
+| `FMA:38487` | left brachioradialis | left | BodyParts3D, Z-Anatomy |
+| `FMA:24498` | left calcaneus | left | BodyParts3D, Z-Anatomy |
+| `FMA:24447` | left capitate | left | BodyParts3D, Z-Anatomy |
+| `FMA:81753` | left cervical rotator | — | BodyParts3D |
+| `FMA:53638` | left cheek | — | BodyParts3D |
+| `FMA:13323` | left clavicle | left | BodyParts3D, Z-Anatomy |
+| `UBERON:0008256` | left clavicle | left | CT atlas (MOOSE) |
+| `FMA:46444` | left coccygeus | left | BodyParts3D, Z-Anatomy |
+| `FMA:37666` | left coracobrachialis | left | BodyParts3D, Z-Anatomy |
+| `FMA:55116` | left corniculate cartilage | left | BodyParts3D, Z-Anatomy |
+| `FMA:24529` | left cuboid bone | left | BodyParts3D, Z-Anatomy |
+| `FMA:55118` | left cuneiform cartilage | — | BodyParts3D |
+| `FMA:46293` | left digastric | — | BodyParts3D |
+| `FMA:8310` | left eighth rib | left | BodyParts3D, Z-Anatomy |
+| `FMA:8532` | left eleventh rib | left | BodyParts3D, Z-Anatomy |
+| `FMA:38499` | left extensor carpi radialis brevis | left | BodyParts3D, Z-Anatomy |
+| `FMA:38496` | left extensor carpi radialis longus | left | BodyParts3D, Z-Anatomy |
+| `FMA:38508` | left extensor carpi ulnaris | — | BodyParts3D |
+| `FMA:38505` | left extensor digiti minimi | left | BodyParts3D, Z-Anatomy |
+| `FMA:38502` | left extensor digitorum | left | BodyParts3D, Z-Anatomy |
+| `FMA:22549` | left extensor digitorum longus | left | BodyParts3D, Z-Anatomy |
+| `FMA:51145` | left extensor hallucis brevis | left | BodyParts3D, Z-Anatomy |
+| `FMA:22547` | left extensor hallucis longus | left | BodyParts3D, Z-Anatomy |
+| `FMA:38526` | left extensor indicis | left | BodyParts3D, Z-Anatomy |
+| `FMA:38520` | left extensor pollicis brevis | left | BodyParts3D, Z-Anatomy |
+| `FMA:38523` | left extensor pollicis longus | left | BodyParts3D, Z-Anatomy |
+| `FMA:13337` | left external oblique | — | BodyParts3D |
+| `FMA:24475` | left femur | left | BodyParts3D, Z-Anatomy |
+| `FMA:24481` | left fibula | left | BodyParts3D, Z-Anatomy |
+| `FMA:22555` | left fibularis brevis | left | BodyParts3D, Z-Anatomy |
+| `FMA:22553` | left fibularis longus | left | BodyParts3D, Z-Anatomy |
+| `FMA:22551` | left fibularis tertius | left | BodyParts3D, Z-Anatomy |
+| `FMA:24473` | left fifth metacarpal bone | left | BodyParts3D, Z-Anatomy |
+| `FMA:24516` | left fifth metatarsal bone | left | BodyParts3D, Z-Anatomy |
+| `FMA:8093` | left fifth rib | left | BodyParts3D, Z-Anatomy |
+| `FMA:24465` | left first metacarpal bone | left | BodyParts3D, Z-Anatomy |
+| `FMA:24508` | left first metatarsal bone | left | BodyParts3D, Z-Anatomy |
+| `FMA:7987` | left first rib | left | BodyParts3D, Z-Anatomy |
+| `FMA:37466` | left flexor accessorius | — | BodyParts3D |
+| `FMA:38461` | left flexor carpi radialis | left | BodyParts3D, Z-Anatomy |
+| `FMA:37462` | left flexor digitorum brevis | left | BodyParts3D, Z-Anatomy |
+| `FMA:65017` | left flexor digitorum longus | left | BodyParts3D, Z-Anatomy |
+| `FMA:38480` | left flexor digitorum profundus | left | BodyParts3D, Z-Anatomy |
+| `FMA:38471` | left flexor digitorum superficialis | — | BodyParts3D |
+| `FMA:65015` | left flexor hallucis longus | left | BodyParts3D, Z-Anatomy |
+| `FMA:37389` | left flexor pollicis brevis | — | BodyParts3D |
+| `FMA:38484` | left flexor pollicis longus | left | BodyParts3D, Z-Anatomy |
+| `FMA:24471` | left fourth metacarpal bone | left | BodyParts3D, Z-Anatomy |
+| `FMA:24514` | left fourth metatarsal bone | left | BodyParts3D, Z-Anatomy |
+| `FMA:8148` | left fourth rib | left | BodyParts3D, Z-Anatomy |
+| `FMA:22337` | left gemellus inferior | — | BodyParts3D |
+| `FMA:22335` | left gemellus superior | — | BodyParts3D |
+| `FMA:46702` | left genioglossus | left | BodyParts3D, Z-Anatomy |
+| `FMA:46327` | left geniohyoid | left | BodyParts3D, Z-Anatomy |
+| `FMA:22329` | left gluteus maximus | left | BodyParts3D, Z-Anatomy |
+| `FMA:22331` | left gluteus medius | left | BodyParts3D, Z-Anatomy |
+| `FMA:22333` | left gluteus minimus | left | BodyParts3D, Z-Anatomy |
+| `FMA:43884` | left gracilis | left | BodyParts3D, Z-Anatomy |
+| `FMA:24449` | left hamate | left | BodyParts3D, Z-Anatomy |
+| `FMA:24966` | left hip | left | BodyParts3D, Z-Anatomy |
+| `FMA:23131` | left humerus | left | BodyParts3D, Z-Anatomy |
+| `FMA:46704` | left hyoglossus | left | BodyParts3D, Z-Anatomy |
+| `FMA:22323` | left iliacus | left | BodyParts3D, Z-Anatomy |
+| `FMA:22745` | left iliocostalis cervicis | — | BodyParts3D |
+| `FMA:22741` | left iliocostalis lumborum | left | BodyParts3D, Z-Anatomy |
+| `FMA:22743` | left iliocostalis thoracis | left | BodyParts3D, Z-Anatomy |
+| `FMA:54738` | left inferior nasal concha | left | BodyParts3D, Z-Anatomy |
+| `FMA:49051` | left inferior oblique | left | BodyParts3D, Z-Anatomy |
+| `FMA:46636` | left inferior pharyngeal constrictor | left | BodyParts3D, Z-Anatomy |
+| `FMA:49047` | left inferior rectus | left | BodyParts3D, Z-Anatomy |
+| `FMA:32548` | left infraspinatus muscle | left | BodyParts3D, Z-Anatomy |
+| `FMA:24524` | left intermediate cuneiform bone | left | BodyParts3D, Z-Anatomy |
+| `FMA:22891` | left interspinalis thoracis | — | BodyParts3D |
+| `FMA:24978` | left knee | — | BodyParts3D |
+| `FMA:53646` | left lacrimal bone | left | BodyParts3D, Z-Anatomy |
+| `FMA:46581` | left lateral crico-arytenoid | left | BodyParts3D, Z-Anatomy |
+| `FMA:24526` | left lateral cuneiform bone | left | BodyParts3D, Z-Anatomy |
+| `FMA:59513` | left lateral nasal cartilage | — | BodyParts3D |
+| `FMA:49055` | left lateral rectus | left | BodyParts3D, Z-Anatomy |
+| `FMA:49049` | left levator palpebrae superioris | left | BodyParts3D, Z-Anatomy |
+| `FMA:32541` | left levator scapulae | left | BodyParts3D, Z-Anatomy |
+| `FMA:46729` | left levator veli palatini | — | BodyParts3D |
+| `FMA:22756` | left longissimus capitis | left | BodyParts3D, Z-Anatomy |
+| `FMA:22758` | left longissimus cervicis | — | BodyParts3D |
+| `FMA:22753` | left longissimus thoracis | left | BodyParts3D, Z-Anatomy |
+| `FMA:46310` | left longus capitis | left | BodyParts3D, Z-Anatomy |
+| `FMA:23090` | left lumbar rotator | — | BodyParts3D |
+| `FMA:24438` | left lunate | left | BodyParts3D, Z-Anatomy |
+| `FMA:59506` | left major alar cartilage | left | BodyParts3D, Z-Anatomy |
+| `FMA:53650` | left maxilla | left | BodyParts3D, Z-Anatomy |
+| `FMA:24522` | left medial cuneiform bone | left | BodyParts3D, Z-Anatomy |
+| `FMA:49057` | left medial rectus | left | BodyParts3D, Z-Anatomy |
+| `FMA:46634` | left middle pharyngeal constrictor | left | BodyParts3D, Z-Anatomy |
+| `FMA:46322` | left mylohyoid | left | BodyParts3D, Z-Anatomy |
+| `FMA:53648` | left nasal bone | left | BodyParts3D, Z-Anatomy |
+| `FMA:8391` | left ninth rib | left | BodyParts3D, Z-Anatomy |
+| `FMA:46585` | left oblique arytenoid | — | BodyParts3D |
+| `FMA:32537` | left obliquus capitis inferior | — | BodyParts3D |
+| `FMA:32535` | left obliquus capitis superior | — | BodyParts3D |
+| `FMA:22327` | left obturator externus | left | BodyParts3D, Z-Anatomy |
+| `FMA:22325` | left obturator internus | left | BodyParts3D, Z-Anatomy |
+| `FMA:13349` | left omohyoid | left | BodyParts3D, Z-Anatomy |
+| `FMA:37391` | left opponens pollicis | left | BodyParts3D, Z-Anatomy |
+| `FMA:53656` | left palatine bone | left | BodyParts3D, Z-Anatomy |
+| `FMA:46672` | left palatopharyngeus | left | BodyParts3D, Z-Anatomy |
+| `FMA:38464` | left palmaris longus | left | BodyParts3D, Z-Anatomy |
+| `FMA:52789` | left parietal bone | left | BodyParts3D, Z-Anatomy |
+| `FMA:22451` | left pectineus | left | BodyParts3D, Z-Anatomy |
+| `FMA:13376` | left pectoralis minor | left | BodyParts3D, Z-Anatomy |
+| `FMA:22341` | left piriformis | left | BodyParts3D, Z-Anatomy |
+| `FMA:24442` | left pisiform | left | BodyParts3D, Z-Anatomy |
+| `FMA:22561` | left plantaris | left | BodyParts3D, Z-Anatomy |
+| `FMA:45740` | left platysma | left | BodyParts3D, Z-Anatomy |
+| `FMA:22592` | left popliteus | left | BodyParts3D, Z-Anatomy |
+| `FMA:46578` | left posterior crico-arytenoid | left | BodyParts3D, Z-Anatomy |
+| `FMA:38455` | left pronator quadratus | left | BodyParts3D, Z-Anatomy |
+| `FMA:22343` | left psoas major | left | BodyParts3D, Z-Anatomy |
+| `FMA:22339` | left quadratus femoris | left | BodyParts3D, Z-Anatomy |
+| `FMA:23465` | left radius | left | BodyParts3D, Z-Anatomy |
+| `FMA:46314` | left rectus capitis anterior | — | BodyParts3D |
+| `FMA:46318` | left rectus capitis lateralis | — | BodyParts3D |
+| `FMA:32531` | left rectus capitis posterior major | — | BodyParts3D |
+| `FMA:32533` | left rectus capitis posterior minor | — | BodyParts3D |
+| `FMA:13382` | left rhomboid major | left | BodyParts3D, Z-Anatomy |
+| `FMA:13384` | left rhomboid minor | left | BodyParts3D, Z-Anatomy |
+| `FMA:46670` | left salpingopharyngeus | — | BodyParts3D |
+| `FMA:22355` | left sartorius | left | BodyParts3D, Z-Anatomy |
+| `FMA:13393` | left scalenus anterior | left | BodyParts3D, Z-Anatomy |
+| `FMA:13391` | left scalenus medius | left | BodyParts3D, Z-Anatomy |
+| `FMA:13389` | left scalenus posterior | left | BodyParts3D, Z-Anatomy |
+| `FMA:24436` | left scaphoid | left | BodyParts3D, Z-Anatomy |
+| `FMA:13396` | left scapula | left | BodyParts3D, Z-Anatomy |
+| `FMA:24467` | left second metacarpal bone | left | BodyParts3D, Z-Anatomy |
+| `FMA:24510` | left second metatarsal bone | left | BodyParts3D, Z-Anatomy |
+| `FMA:8012` | left second rib | left | BodyParts3D, Z-Anatomy |
+| `FMA:22449` | left semimembranosus | left | BodyParts3D, Z-Anatomy |
+| `FMA:22877` | left semispinalis capitis | — | BodyParts3D |
+| `FMA:22875` | left semispinalis cervicis | — | BodyParts3D |
+| `FMA:22873` | left semispinalis thoracis | left | BodyParts3D, Z-Anatomy |
+| `FMA:22359` | left semitendinosus | left | BodyParts3D, Z-Anatomy |
+| `FMA:13399` | left serratus anterior | left | BodyParts3D, Z-Anatomy |
+| `FMA:13406` | left serratus posterior inferior | left | BodyParts3D, Z-Anatomy |
+| `FMA:13404` | left serratus posterior superior | left | BodyParts3D, Z-Anatomy |
+| `FMA:8256` | left seventh rib | left | BodyParts3D, Z-Anatomy |
+| `FMA:8202` | left sixth rib | left | BodyParts3D, Z-Anatomy |
+| `FMA:22559` | left soleus | left | BodyParts3D, Z-Anatomy |
+| `FMA:22780` | left spinalis thoracis | left | BodyParts3D, Z-Anatomy |
+| `FMA:22729` | left splenius capitis | left | BodyParts3D, Z-Anatomy |
+| `FMA:22727` | left splenius cervicis | — | BodyParts3D |
+| `FMA:13409` | left sternocleidomastoid | left | BodyParts3D, Z-Anatomy |
+| `FMA:13347` | left sternohyoid | left | BodyParts3D, Z-Anatomy |
+| `FMA:13351` | left sternothyroid | left | BodyParts3D, Z-Anatomy |
+| `FMA:45827` | left stylohyoid | left | BodyParts3D, Z-Anatomy |
+| `FMA:46668` | left stylopharyngeus | left | BodyParts3D, Z-Anatomy |
+| `FMA:13411` | left subclavius | left | BodyParts3D, Z-Anatomy |
+| `FMA:13415` | left subscapularis | left | BodyParts3D, Z-Anatomy |
+| `FMA:49053` | left superior oblique | left | BodyParts3D, Z-Anatomy |
+| `FMA:46632` | left superior pharyngeal constrictor | left | BodyParts3D, Z-Anatomy |
+| `FMA:49045` | left superior rectus | left | BodyParts3D, Z-Anatomy |
+| `FMA:38514` | left supinator | left | BodyParts3D, Z-Anatomy |
+| `FMA:32545` | left supraspinatus | left | BodyParts3D, Z-Anatomy |
+| `FMA:24483` | left talus | left | BodyParts3D, Z-Anatomy |
+| `FMA:52739` | left temporal bone | left | BodyParts3D, Z-Anatomy |
+| `FMA:22426` | left tensor fasciae latae | left | BodyParts3D, Z-Anatomy |
+| `FMA:46732` | left tensor veli palatini | — | BodyParts3D |
+| `FMA:8472` | left tenth rib | left | BodyParts3D, Z-Anatomy |
+| `FMA:32552` | left teres major | left | BodyParts3D, Z-Anatomy |
+| `FMA:32554` | left teres minor | left | BodyParts3D, Z-Anatomy |
+| `FMA:24469` | left third metacarpal bone | left | BodyParts3D, Z-Anatomy |
+| `FMA:24512` | left third metatarsal bone | left | BodyParts3D, Z-Anatomy |
+| `FMA:8039` | left third rib | left | BodyParts3D, Z-Anatomy |
+| `FMA:46590` | left thyro-arytenoid | — | BodyParts3D |
+| `FMA:13353` | left thyrohyoid | left | BodyParts3D, Z-Anatomy |
+| `FMA:24478` | left tibia | left | BodyParts3D, Z-Anatomy |
+| `FMA:22545` | left tibialis anterior | left | BodyParts3D, Z-Anatomy |
+| `FMA:65019` | left tibialis posterior | left | BodyParts3D, Z-Anatomy |
+| `FMA:9762` | left transversus thoracis | left | BodyParts3D, Z-Anatomy |
+| `FMA:24444` | left trapezium | left | BodyParts3D, Z-Anatomy |
+| `FMA:24445` | left trapezoid | left | BodyParts3D, Z-Anatomy |
+| `FMA:24440` | left triquetral | — | BodyParts3D |
+| `FMA:8534` | left twelfth rib | left | BodyParts3D, Z-Anatomy |
+| `FMA:23468` | left ulna | left | BodyParts3D, Z-Anatomy |
+| `FMA:46593` | left vocalis | — | BodyParts3D |
+| `UBERON:0004617` | lumbar vertebra 1 | — | CT atlas (MOOSE) |
+| `UBERON:0004618` | lumbar vertebra 2 | — | CT atlas (MOOSE) |
+| `UBERON:0004619` | lumbar vertebra 3 | — | CT atlas (MOOSE) |
+| `UBERON:0004620` | lumbar vertebra 4 | — | CT atlas (MOOSE) |
+| `UBERON:0004621` | lumbar vertebra 5 | — | CT atlas (MOOSE) |
+| `UBERON:0004612` | mammalian cervical vertebra 3 | — | CT atlas (MOOSE) |
+| `UBERON:0004613` | mammalian cervical vertebra 4 | — | CT atlas (MOOSE) |
+| `UBERON:0004614` | mammalian cervical vertebra 5 | — | CT atlas (MOOSE) |
+| `UBERON:0004615` | mammalian cervical vertebra 6 | — | CT atlas (MOOSE) |
+| `UBERON:0004616` | mammalian cervical vertebra 7 | — | CT atlas (MOOSE) |
+| `FMA:52748` | mandible | — | BodyParts3D, Z-Anatomy |
+| `FMA:22851` | medial lumbar intertransversarius | — | BodyParts3D |
+| `UBERON:0002374` | metacarpal bone | left, right | CT (female), TCIA, CT atlas (MOOSE) |
+| `UBERON:0001448` | metatarsal bone | left, right | CT (female), TCIA, CT atlas (MOOSE) |
+| `FMA:32647` | middle phalanx of left fourth toe | left | BodyParts3D, Z-Anatomy |
+| `FMA:23938` | middle phalanx of left index finger | — | BodyParts3D |
+| `FMA:23944` | middle phalanx of left little finger | — | BodyParts3D |
+| `FMA:230988` | middle phalanx of left little toe | — | BodyParts3D |
+| `FMA:23940` | middle phalanx of left middle finger | — | BodyParts3D |
+| `FMA:23942` | middle phalanx of left ring finger | — | BodyParts3D |
+| `FMA:32643` | middle phalanx of left second toe | left | BodyParts3D, Z-Anatomy |
+| `FMA:32645` | middle phalanx of left third toe | left | BodyParts3D, Z-Anatomy |
+| `FMA:32646` | middle phalanx of right fourth toe | right | BodyParts3D, Z-Anatomy |
+| `FMA:24455` | middle phalanx of right index finger | — | BodyParts3D |
+| `FMA:24458` | middle phalanx of right little finger | — | BodyParts3D |
+| `FMA:230986` | middle phalanx of right little toe | — | BodyParts3D |
+| `FMA:24456` | middle phalanx of right middle finger | — | BodyParts3D |
+| `FMA:24457` | middle phalanx of right ring finger | — | BodyParts3D |
+| `FMA:32642` | middle phalanx of right second toe | right | BodyParts3D, Z-Anatomy |
+| `FMA:32644` | middle phalanx of right third toe | right | BodyParts3D, Z-Anatomy |
+| `FMA:24501` | navicular bone of left foot | — | BodyParts3D |
+| `FMA:24500` | navicular bone of right foot | — | BodyParts3D |
+| `FMA:26101` | ninth thoracic intervertebral symphysis | — | BodyParts3D |
+| `FMA:10014` | ninth thoracic vertebra | — | BodyParts3D |
+| `FMA:52735` | occipital bone | — | BodyParts3D, Z-Anatomy |
+| `FMA:86035` | opponens digiti minimi of left foot | — | BodyParts3D |
+| `FMA:37401` | opponens digiti minimi of left hand | — | BodyParts3D |
+| `FMA:86034` | opponens digiti minimi of right foot | — | BodyParts3D |
+| `FMA:37400` | opponens digiti minimi of right hand | — | BodyParts3D |
+| `UBERON:0002446` | patella | left, right | CT (female), TCIA, CT atlas (MOOSE) |
+| `FMA:9579` | perineum | — | BodyParts3D |
+| `UBERON:0001436` | phalanx of manus | left, right | CT (female), TCIA, CT atlas (MOOSE) |
+| `UBERON:0001449` | phalanx of pes | left, right | CT (female), TCIA, CT atlas (MOOSE) |
+| `FMA:43254` | proximal phalanx of left big toe | left | BodyParts3D, Z-Anatomy |
+| `FMA:32639` | proximal phalanx of left fourth toe | left | BodyParts3D, Z-Anatomy |
+| `FMA:71915` | proximal phalanx of left index finger | — | BodyParts3D |
+| `FMA:66791` | proximal phalanx of left little finger | — | BodyParts3D |
+| `FMA:32641` | proximal phalanx of left little toe | — | BodyParts3D |
+| `FMA:71908` | proximal phalanx of left middle finger | — | BodyParts3D |
+| `FMA:71916` | proximal phalanx of left ring finger | — | BodyParts3D |
+| `FMA:32635` | proximal phalanx of left second toe | left | BodyParts3D, Z-Anatomy |
+| `FMA:32637` | proximal phalanx of left third toe | left | BodyParts3D, Z-Anatomy |
+| `FMA:65470` | proximal phalanx of left thumb | — | BodyParts3D |
+| `FMA:43253` | proximal phalanx of right big toe | right | BodyParts3D, Z-Anatomy |
+| `FMA:32638` | proximal phalanx of right fourth toe | right | BodyParts3D, Z-Anatomy |
+| `FMA:24451` | proximal phalanx of right index finger | — | BodyParts3D |
+| `FMA:24454` | proximal phalanx of right little finger | — | BodyParts3D |
+| `FMA:32640` | proximal phalanx of right little toe | — | BodyParts3D |
+| `FMA:24452` | proximal phalanx of right middle finger | — | BodyParts3D |
+| `FMA:24453` | proximal phalanx of right ring finger | — | BodyParts3D |
+| `FMA:32634` | proximal phalanx of right second toe | right | BodyParts3D, Z-Anatomy |
+| `FMA:32636` | proximal phalanx of right third toe | right | BodyParts3D, Z-Anatomy |
+| `FMA:24450` | proximal phalanx of right thumb | — | BodyParts3D |
+| `UBERON:0008450` | psoas muscle | — | CT (female), TCIA |
+| `UBERON:0001423` | radius bone | left, right | CT (female), TCIA, CT atlas (MOOSE) |
+| `UBERON:0004601` | rib 1 | left, right | CT atlas (MOOSE) |
+| `UBERON:0004609` | rib 10 | left, right | CT atlas (MOOSE) |
+| `UBERON:0004610` | rib 11 | left, right | CT atlas (MOOSE) |
+| `UBERON:0004611` | rib 12 | left, right | CT atlas (MOOSE) |
+| `UBERON:0004602` | rib 2 | left, right | CT atlas (MOOSE) |
+| `UBERON:0004603` | rib 3 | left, right | CT atlas (MOOSE) |
+| `UBERON:0004604` | rib 4 | left, right | CT atlas (MOOSE) |
+| `UBERON:0004605` | rib 5 | left, right | CT atlas (MOOSE) |
+| `UBERON:0004606` | rib 6 | left, right | CT atlas (MOOSE) |
+| `UBERON:0004607` | rib 7 | left, right | CT atlas (MOOSE) |
+| `UBERON:0010757` | rib 8 | left, right | CT atlas (MOOSE) |
+| `UBERON:0004608` | rib 9 | left, right | CT atlas (MOOSE) |
+| `FMA:37459` | right abductor hallucis | right | BodyParts3D, Z-Anatomy |
+| `FMA:37386` | right abductor pollicis brevis | right | BodyParts3D, Z-Anatomy |
+| `FMA:38516` | right abductor pollicis longus | right | BodyParts3D, Z-Anatomy |
+| `FMA:22452` | right adductor brevis | right | BodyParts3D, Z-Anatomy |
+| `FMA:22456` | right adductor longus | right | BodyParts3D, Z-Anatomy |
+| `FMA:22459` | right adductor magnus | right | BodyParts3D, Z-Anatomy |
+| `FMA:43886` | right adductor minimus | right | BodyParts3D, Z-Anatomy |
+| `FMA:37705` | right anconeus | right | BodyParts3D, Z-Anatomy |
+| `FMA:55113` | right arytenoid cartilage | right | BodyParts3D, Z-Anatomy |
+| `FMA:37668` | right brachialis | right | BodyParts3D, Z-Anatomy |
+| `FMA:38486` | right brachioradialis | right | BodyParts3D, Z-Anatomy |
+| `FMA:24497` | right calcaneus | right | BodyParts3D, Z-Anatomy |
+| `FMA:24446` | right capitate | right | BodyParts3D, Z-Anatomy |
+| `FMA:81752` | right cervical rotator | — | BodyParts3D |
+| `FMA:53637` | right cheek | — | BodyParts3D |
+| `FMA:13322` | right clavicle | right | BodyParts3D, Z-Anatomy |
+| `UBERON:0008255` | right clavicle | right | CT atlas (MOOSE) |
+| `FMA:46443` | right coccygeus | right | BodyParts3D, Z-Anatomy |
+| `FMA:37665` | right coracobrachialis | right | BodyParts3D, Z-Anatomy |
+| `FMA:55115` | right corniculate cartilage | right | BodyParts3D, Z-Anatomy |
+| `FMA:24528` | right cuboid bone | right | BodyParts3D, Z-Anatomy |
+| `FMA:55117` | right cuneiform cartilage | — | BodyParts3D |
+| `FMA:46292` | right digastric | — | BodyParts3D |
+| `FMA:8283` | right eighth rib | right | BodyParts3D, Z-Anatomy |
+| `FMA:8531` | right eleventh rib | right | BodyParts3D, Z-Anatomy |
+| `FMA:38498` | right extensor carpi radialis brevis | right | BodyParts3D, Z-Anatomy |
+| `FMA:38495` | right extensor carpi radialis longus | right | BodyParts3D, Z-Anatomy |
+| `FMA:38507` | right extensor carpi ulnaris | — | BodyParts3D |
+| `FMA:38504` | right extensor digiti minimi | right | BodyParts3D, Z-Anatomy |
+| `FMA:38501` | right extensor digitorum | right | BodyParts3D, Z-Anatomy |
+| `FMA:22548` | right extensor digitorum longus | right | BodyParts3D, Z-Anatomy |
+| `FMA:51144` | right extensor hallucis brevis | right | BodyParts3D, Z-Anatomy |
+| `FMA:22546` | right extensor hallucis longus | right | BodyParts3D, Z-Anatomy |
+| `FMA:38525` | right extensor indicis | right | BodyParts3D, Z-Anatomy |
+| `FMA:38519` | right extensor pollicis brevis | right | BodyParts3D, Z-Anatomy |
+| `FMA:38522` | right extensor pollicis longus | right | BodyParts3D, Z-Anatomy |
+| `FMA:13336` | right external oblique | — | BodyParts3D |
+| `FMA:24480` | right fibula | right | BodyParts3D, Z-Anatomy |
+| `FMA:22554` | right fibularis brevis | right | BodyParts3D, Z-Anatomy |
+| `FMA:22552` | right fibularis longus | right | BodyParts3D, Z-Anatomy |
+| `FMA:22550` | right fibularis tertius | right | BodyParts3D, Z-Anatomy |
+| `FMA:24472` | right fifth metacarpal bone | right | BodyParts3D, Z-Anatomy |
+| `FMA:24515` | right fifth metatarsal bone | right | BodyParts3D, Z-Anatomy |
+| `FMA:8066` | right fifth rib | right | BodyParts3D, Z-Anatomy |
+| `FMA:24464` | right first metacarpal bone | right | BodyParts3D, Z-Anatomy |
+| `FMA:24507` | right first metatarsal bone | right | BodyParts3D, Z-Anatomy |
+| `FMA:7857` | right first rib | right | BodyParts3D, Z-Anatomy |
+| `FMA:37465` | right flexor accessorius | — | BodyParts3D |
+| `FMA:38460` | right flexor carpi radialis | right | BodyParts3D, Z-Anatomy |
+| `FMA:37461` | right flexor digitorum brevis | right | BodyParts3D, Z-Anatomy |
+| `FMA:65016` | right flexor digitorum longus | right | BodyParts3D, Z-Anatomy |
+| `FMA:38479` | right flexor digitorum profundus | right | BodyParts3D, Z-Anatomy |
+| `FMA:38470` | right flexor digitorum superficialis | — | BodyParts3D |
+| `FMA:65014` | right flexor hallucis longus | right | BodyParts3D, Z-Anatomy |
+| `FMA:37388` | right flexor pollicis brevis | — | BodyParts3D |
+| `FMA:38482` | right flexor pollicis longus | right | BodyParts3D, Z-Anatomy |
+| `FMA:24470` | right fourth metacarpal bone | right | BodyParts3D, Z-Anatomy |
+| `FMA:24513` | right fourth metatarsal bone | right | BodyParts3D, Z-Anatomy |
+| `FMA:7957` | right fourth rib | right | BodyParts3D, Z-Anatomy |
+| `FMA:22336` | right gemellus inferior | — | BodyParts3D |
+| `FMA:22334` | right gemellus superior | — | BodyParts3D |
+| `FMA:46698` | right genioglossus | right | BodyParts3D, Z-Anatomy |
+| `FMA:46326` | right geniohyoid | right | BodyParts3D, Z-Anatomy |
+| `FMA:22328` | right gluteus maximus | right | BodyParts3D, Z-Anatomy |
+| `FMA:22330` | right gluteus medius | right | BodyParts3D, Z-Anatomy |
+| `FMA:22332` | right gluteus minimus | right | BodyParts3D, Z-Anatomy |
+| `FMA:43883` | right gracilis | right | BodyParts3D, Z-Anatomy |
+| `FMA:24448` | right hamate | right | BodyParts3D, Z-Anatomy |
+| `FMA:24965` | right hip | right | BodyParts3D, Z-Anatomy |
+| `FMA:23130` | right humerus | right | BodyParts3D, Z-Anatomy |
+| `FMA:46703` | right hyoglossus | right | BodyParts3D, Z-Anatomy |
+| `FMA:22322` | right iliacus | right | BodyParts3D, Z-Anatomy |
+| `FMA:22744` | right iliocostalis cervicis | — | BodyParts3D |
+| `FMA:22740` | right iliocostalis lumborum | right | BodyParts3D, Z-Anatomy |
+| `FMA:22742` | right iliocostalis thoracis | right | BodyParts3D, Z-Anatomy |
+| `FMA:54737` | right inferior nasal concha | right | BodyParts3D, Z-Anatomy |
+| `FMA:49050` | right inferior oblique | right | BodyParts3D, Z-Anatomy |
+| `FMA:46635` | right inferior pharyngeal constrictor | right | BodyParts3D, Z-Anatomy |
+| `FMA:49046` | right inferior rectus | right | BodyParts3D, Z-Anatomy |
+| `FMA:32547` | right infraspinatus muscle | right | BodyParts3D, Z-Anatomy |
+| `FMA:24523` | right intermediate cuneiform bone | right | BodyParts3D, Z-Anatomy |
+| `FMA:22890` | right interspinalis thoracis | — | BodyParts3D |
+| `FMA:24977` | right knee | — | BodyParts3D |
+| `FMA:53645` | right lacrimal bone | right | BodyParts3D, Z-Anatomy |
+| `FMA:46580` | right lateral crico-arytenoid | right | BodyParts3D, Z-Anatomy |
+| `FMA:24525` | right lateral cuneiform bone | right | BodyParts3D, Z-Anatomy |
+| `FMA:59512` | right lateral nasal cartilage | — | BodyParts3D |
+| `FMA:49054` | right lateral rectus | right | BodyParts3D, Z-Anatomy |
+| `FMA:49048` | right levator palpebrae superioris | right | BodyParts3D, Z-Anatomy |
+| `FMA:32540` | right levator scapulae | right | BodyParts3D, Z-Anatomy |
+| `FMA:46728` | right levator veli palatini | — | BodyParts3D |
+| `FMA:22754` | right longissimus capitis | right | BodyParts3D, Z-Anatomy |
+| `FMA:22757` | right longissimus cervicis | — | BodyParts3D |
+| `FMA:22751` | right longissimus thoracis | right | BodyParts3D, Z-Anatomy |
+| `FMA:46309` | right longus capitis | right | BodyParts3D, Z-Anatomy |
+| `FMA:23089` | right lumbar rotator | — | BodyParts3D |
+| `FMA:24437` | right lunate | right | BodyParts3D, Z-Anatomy |
+| `FMA:59505` | right major alar cartilage | right | BodyParts3D, Z-Anatomy |
+| `FMA:53649` | right maxilla | right | BodyParts3D, Z-Anatomy |
+| `FMA:24521` | right medial cuneiform bone | right | BodyParts3D, Z-Anatomy |
+| `FMA:49056` | right medial rectus | right | BodyParts3D, Z-Anatomy |
+| `FMA:46633` | right middle pharyngeal constrictor | right | BodyParts3D, Z-Anatomy |
+| `FMA:46321` | right mylohyoid | right | BodyParts3D, Z-Anatomy |
+| `FMA:53647` | right nasal bone | right | BodyParts3D, Z-Anatomy |
+| `FMA:8364` | right ninth rib | right | BodyParts3D, Z-Anatomy |
+| `FMA:46584` | right oblique arytenoid | — | BodyParts3D |
+| `FMA:32536` | right obliquus capitis inferior | — | BodyParts3D |
+| `FMA:32534` | right obliquus capitis superior | — | BodyParts3D |
+| `FMA:22326` | right obturator externus | right | BodyParts3D, Z-Anatomy |
+| `FMA:22324` | right obturator internus | right | BodyParts3D, Z-Anatomy |
+| `FMA:13348` | right omohyoid | right | BodyParts3D, Z-Anatomy |
+| `FMA:37390` | right opponens pollicis | right | BodyParts3D, Z-Anatomy |
+| `FMA:53655` | right palatine bone | right | BodyParts3D, Z-Anatomy |
+| `FMA:46671` | right palatopharyngeus | right | BodyParts3D, Z-Anatomy |
+| `FMA:38463` | right palmaris longus | right | BodyParts3D, Z-Anatomy |
+| `FMA:52788` | right parietal bone | right | BodyParts3D, Z-Anatomy |
+| `FMA:22450` | right pectineus | right | BodyParts3D, Z-Anatomy |
+| `FMA:13375` | right pectoralis minor | right | BodyParts3D, Z-Anatomy |
+| `FMA:22340` | right piriformis | right | BodyParts3D, Z-Anatomy |
+| `FMA:24441` | right pisiform | right | BodyParts3D, Z-Anatomy |
+| `FMA:22560` | right plantaris | right | BodyParts3D, Z-Anatomy |
+| `FMA:45739` | right platysma | right | BodyParts3D, Z-Anatomy |
+| `FMA:22591` | right popliteus | right | BodyParts3D, Z-Anatomy |
+| `FMA:46577` | right posterior crico-arytenoid | right | BodyParts3D, Z-Anatomy |
+| `FMA:38454` | right pronator quadratus | right | BodyParts3D, Z-Anatomy |
+| `FMA:22342` | right psoas major | right | BodyParts3D, Z-Anatomy |
+| `FMA:22338` | right quadratus femoris | right | BodyParts3D, Z-Anatomy |
+| `FMA:23464` | right radius | right | BodyParts3D, Z-Anatomy |
+| `FMA:46313` | right rectus capitis anterior | — | BodyParts3D |
+| `FMA:46317` | right rectus capitis lateralis | — | BodyParts3D |
+| `FMA:32530` | right rectus capitis posterior major | — | BodyParts3D |
+| `FMA:32532` | right rectus capitis posterior minor | — | BodyParts3D |
+| `FMA:13381` | right rhomboid major | right | BodyParts3D, Z-Anatomy |
+| `FMA:13383` | right rhomboid minor | right | BodyParts3D, Z-Anatomy |
+| `FMA:46669` | right salpingopharyngeus | — | BodyParts3D |
+| `FMA:22354` | right sartorius | right | BodyParts3D, Z-Anatomy |
+| `FMA:13392` | right scalenus anterior | right | BodyParts3D, Z-Anatomy |
+| `FMA:13390` | right scalenus medius | right | BodyParts3D, Z-Anatomy |
+| `FMA:13388` | right scalenus posterior | right | BodyParts3D, Z-Anatomy |
+| `FMA:24435` | right scaphoid | right | BodyParts3D, Z-Anatomy |
+| `FMA:13395` | right scapula | right | BodyParts3D, Z-Anatomy |
+| `FMA:24466` | right second metacarpal bone | right | BodyParts3D, Z-Anatomy |
+| `FMA:24509` | right second metatarsal bone | right | BodyParts3D, Z-Anatomy |
+| `FMA:7882` | right second rib | right | BodyParts3D, Z-Anatomy |
+| `FMA:22448` | right semimembranosus | right | BodyParts3D, Z-Anatomy |
+| `FMA:22876` | right semispinalis capitis | — | BodyParts3D |
+| `FMA:22874` | right semispinalis cervicis | — | BodyParts3D |
+| `FMA:22872` | right semispinalis thoracis | right | BodyParts3D, Z-Anatomy |
+| `FMA:22358` | right semitendinosus | right | BodyParts3D, Z-Anatomy |
+| `FMA:13398` | right serratus anterior | right | BodyParts3D, Z-Anatomy |
+| `FMA:13405` | right serratus posterior inferior | right | BodyParts3D, Z-Anatomy |
+| `FMA:13403` | right serratus posterior superior | right | BodyParts3D, Z-Anatomy |
+| `FMA:8229` | right seventh rib | right | BodyParts3D, Z-Anatomy |
+| `FMA:8175` | right sixth rib | right | BodyParts3D, Z-Anatomy |
+| `FMA:22558` | right soleus | right | BodyParts3D, Z-Anatomy |
+| `FMA:22779` | right spinalis thoracis | right | BodyParts3D, Z-Anatomy |
+| `FMA:22728` | right splenius capitis | right | BodyParts3D, Z-Anatomy |
+| `FMA:22726` | right splenius cervicis | — | BodyParts3D |
+| `FMA:13408` | right sternocleidomastoid | right | BodyParts3D, Z-Anatomy |
+| `FMA:13346` | right sternohyoid | right | BodyParts3D, Z-Anatomy |
+| `FMA:13350` | right sternothyroid | right | BodyParts3D, Z-Anatomy |
+| `FMA:45826` | right stylohyoid | right | BodyParts3D, Z-Anatomy |
+| `FMA:46667` | right stylopharyngeus | right | BodyParts3D, Z-Anatomy |
+| `FMA:13412` | right subclavius | right | BodyParts3D, Z-Anatomy |
+| `FMA:13414` | right subscapularis | right | BodyParts3D, Z-Anatomy |
+| `FMA:49052` | right superior oblique | right | BodyParts3D, Z-Anatomy |
+| `FMA:46631` | right superior pharyngeal constrictor | right | BodyParts3D, Z-Anatomy |
+| `FMA:49044` | right superior rectus | right | BodyParts3D, Z-Anatomy |
+| `FMA:38513` | right supinator | right | BodyParts3D, Z-Anatomy |
+| `FMA:32544` | right supraspinatus | right | BodyParts3D, Z-Anatomy |
+| `FMA:24482` | right talus | right | BodyParts3D, Z-Anatomy |
+| `FMA:52738` | right temporal bone | right | BodyParts3D, Z-Anatomy |
+| `FMA:22425` | right tensor fasciae latae | right | BodyParts3D, Z-Anatomy |
+| `FMA:46731` | right tensor veli palatini | — | BodyParts3D |
+| `FMA:8445` | right tenth rib | right | BodyParts3D, Z-Anatomy |
+| `FMA:32551` | right teres major | right | BodyParts3D, Z-Anatomy |
+| `FMA:32553` | right teres minor | right | BodyParts3D, Z-Anatomy |
+| `FMA:24968` | right thigh | — | BodyParts3D |
+| `FMA:24468` | right third metacarpal bone | right | BodyParts3D, Z-Anatomy |
+| `FMA:24511` | right third metatarsal bone | right | BodyParts3D, Z-Anatomy |
+| `FMA:7909` | right third rib | right | BodyParts3D, Z-Anatomy |
+| `FMA:46589` | right thyro-arytenoid | — | BodyParts3D |
+| `FMA:13352` | right thyrohyoid | right | BodyParts3D, Z-Anatomy |
+| `FMA:24477` | right tibia | right | BodyParts3D, Z-Anatomy |
+| `FMA:22544` | right tibialis anterior | right | BodyParts3D, Z-Anatomy |
+| `FMA:65018` | right tibialis posterior | right | BodyParts3D, Z-Anatomy |
+| `FMA:9761` | right transversus thoracis | right | BodyParts3D, Z-Anatomy |
+| `FMA:24443` | right trapezium | right | BodyParts3D, Z-Anatomy |
+| `FMA:23725` | right trapezoid | right | BodyParts3D, Z-Anatomy |
+| `FMA:24439` | right triquetral | — | BodyParts3D |
+| `FMA:8533` | right twelfth rib | right | BodyParts3D, Z-Anatomy |
+| `FMA:23467` | right ulna | right | BodyParts3D, Z-Anatomy |
+| `FMA:46592` | right vocalis | — | BodyParts3D |
+| `FMA:16202` | sacrum | — | BodyParts3D, Z-Anatomy |
+| `UBERON:0006849` | scapula | left, right | CT (female), TCIA, CT atlas (MOOSE) |
+| `FMA:26106` | second lumbar intervertebral symphysis | — | BodyParts3D |
+| `FMA:13073` | second lumbar vertebra | — | BodyParts3D |
+| `FMA:37720` | second lumbrical of left foot | — | BodyParts3D |
+| `FMA:37719` | second lumbrical of right foot | — | BodyParts3D |
+| `FMA:37744` | second plantar interosseous of left foot | — | BodyParts3D |
+| `FMA:37743` | second plantar interosseous of right foot | — | BodyParts3D |
+| `FMA:26094` | second thoracic intervertebral symphysis | — | BodyParts3D |
+| `FMA:9187` | second thoracic vertebra | — | BodyParts3D |
+| `FMA:59503` | septal nasal cartilage | — | BodyParts3D |
+| `FMA:45098` | sesamoid bone of left foot | — | BodyParts3D |
+| `FMA:45097` | sesamoid bone of right foot | — | BodyParts3D |
+| `FMA:26086` | seventh cervical intervertebral symphysis | — | BodyParts3D |
+| `FMA:12525` | seventh cervical vertebra | — | BodyParts3D |
+| `FMA:26099` | seventh thoracic intervertebral symphysis | — | BodyParts3D |
+| `FMA:9968` | seventh thoracic vertebra | — | BodyParts3D |
+| `FMA:26085` | sixth cervical intervertebral symphysis | — | BodyParts3D |
+| `FMA:12524` | sixth cervical vertebra | — | BodyParts3D |
+| `FMA:26098` | sixth thoracic intervertebral symphysis | — | BodyParts3D |
+| `FMA:9945` | sixth thoracic vertebra | — | BodyParts3D |
+| `UBERON:0001134` | skeletal muscle tissue | — | CT atlas (MOOSE) |
+| `UBERON:0003129` | skull | — | CT (female), TCIA, CT atlas (MOOSE) |
+| `FMA:52736` | sphenoid bone | — | BodyParts3D, Z-Anatomy |
+| `FMA:77179` | spinalis | — | BodyParts3D |
+| `UBERON:0000975` | sternum | — | CT (female), TCIA, CT atlas (MOOSE) |
+| `UBERON:0001447` | tarsal bone | left, right | CT (female), TCIA, CT atlas (MOOSE) |
+| `FMA:26102` | tenth thoracic intervertebral symphysis | — | BodyParts3D |
+| `FMA:10037` | tenth thoracic vertebra | — | BodyParts3D |
+| `FMA:26078` | third cervical intervertebral symphysis | — | BodyParts3D |
+| `FMA:12521` | third cervical vertebra | — | BodyParts3D |
+| `FMA:26107` | third lumbar intervertebral symphysis | — | BodyParts3D |
+| `FMA:13074` | third lumbar vertebra | — | BodyParts3D |
+| `FMA:37486` | third lumbrical of left foot | — | BodyParts3D |
+| `FMA:37485` | third lumbrical of right foot | — | BodyParts3D |
+| `FMA:37742` | third plantar interosseous of left foot | — | BodyParts3D |
+| `FMA:37741` | third plantar interosseous of right foot | — | BodyParts3D |
+| `FMA:26095` | third thoracic intervertebral symphysis | — | BodyParts3D |
+| `FMA:9209` | third thoracic vertebra | — | BodyParts3D |
+| `UBERON:0003252` | thoracic rib cage | — | CT (female), TCIA |
+| `FMA:23083` | thoracic rotator | — | BodyParts3D |
+| `UBERON:0004626` | thoracic vertebra 1 | — | CT atlas (MOOSE) |
+| `UBERON:0004634` | thoracic vertebra 10 | — | CT atlas (MOOSE) |
+| `UBERON:0004635` | thoracic vertebra 11 | — | CT atlas (MOOSE) |
+| `UBERON:0004636` | thoracic vertebra 12 | — | CT atlas (MOOSE) |
+| `UBERON:0004627` | thoracic vertebra 2 | — | CT atlas (MOOSE) |
+| `UBERON:0004628` | thoracic vertebra 3 | — | CT atlas (MOOSE) |
+| `UBERON:0004629` | thoracic vertebra 4 | — | CT atlas (MOOSE) |
+| `UBERON:0004630` | thoracic vertebra 5 | — | CT atlas (MOOSE) |
+| `UBERON:0004631` | thoracic vertebra 6 | — | CT atlas (MOOSE) |
+| `UBERON:0004632` | thoracic vertebra 7 | — | CT atlas (MOOSE) |
+| `UBERON:0011050` | thoracic vertebra 8 | — | CT atlas (MOOSE) |
+| `UBERON:0004633` | thoracic vertebra 9 | — | CT atlas (MOOSE) |
+| `FMA:55099` | thyroid cartilage | — | BodyParts3D, Z-Anatomy |
+| `UBERON:0000979` | tibia | left, right | CT (female), TCIA, CT atlas (MOOSE) |
+| `FMA:46582` | transverse arytenoid | — | BodyParts3D, Z-Anatomy |
+| `FMA:10081` | twelfth thoracic vertebra | — | BodyParts3D |
+| `UBERON:0001424` | ulna | left, right | CT (female), TCIA, CT atlas (MOOSE) |
+| `FMA:55022` | uvula | — | BodyParts3D |
+| `UBERON:0001092` | vertebral bone 1 | — | CT atlas (MOOSE) |
+| `UBERON:0001093` | vertebral bone 2 | — | CT atlas (MOOSE) |
+| `UBERON:0001130` | vertebral column | — | CT (female), TCIA |
+| `FMA:9710` | vomer | — | BodyParts3D, Z-Anatomy |
+
+</details>
+
+<details>
+<summary><strong>cardiovascular</strong> — 529 terms</summary>
+
+| term | label | sides | in |
+|---|---|---|---|
+| `FMA:3789` | abdominal aorta | — | BodyParts3D, Z-Anatomy |
+| `FMA:5011` | accessory hemiazygos vein | — | BodyParts3D |
+| `FMA:23069` | acromial branch of left thoraco-acromial artery | — | BodyParts3D |
+| `FMA:23068` | acromial branch of right thoraco-acromial artery | — | BodyParts3D |
+| `FMA:76767` | anterior cardiac vein | — | BodyParts3D |
+| `FMA:14816` | anterior cecal artery | — | BodyParts3D |
+| `FMA:50169` | anterior communicating artery | — | BodyParts3D, Z-Anatomy |
+| `FMA:7253` | anterior cusp of aortic valve | — | BodyParts3D |
+| `FMA:70487` | anterior division of left renal artery | — | BodyParts3D |
+| `FMA:70486` | anterior division of right renal artery | — | BodyParts3D |
+| `FMA:52676` | Anterior ethmoidal artery | right | Z-Anatomy |
+| `FMA:52677` | Anterior ethmoidal artery | left | Z-Anatomy |
+| `FMA:50544` | anterior inferior cerebellar artery | left, right | BodyParts3D, Z-Anatomy |
+| `FMA:70479` | anterior inferior pancreaticoduodenal artery | — | BodyParts3D, Z-Anatomy |
+| `FMA:66403` | anterior interventricular vein | — | BodyParts3D, Z-Anatomy |
+| `FMA:7242` | anterior leaflet of mitral valve | — | BodyParts3D |
+| `FMA:7238` | anterior leaflet of tricuspid valve | — | BodyParts3D |
+| `FMA:14782` | anterior superior pancreaticoduodenal artery | — | BodyParts3D |
+| `FMA:15798` | anterior superior segmental tributary of right hepatic vein | — | BodyParts3D |
+| `FMA:50679` | anterior temporal branch of left lateral occipital artery | — | BodyParts3D |
+| `FMA:50678` | anterior temporal branch of right lateral occipital artery | — | BodyParts3D |
+| `FMA:43894` | anterior tibial artery | — | BodyParts3D |
+| `FMA:9553` | anterior wall of right ventricle | — | BodyParts3D |
+| `FMA:50378` | anterolateral central branch of left middle cerebral artery | — | BodyParts3D |
+| `FMA:50377` | anterolateral central branch of right middle cerebral artery | — | BodyParts3D |
+| `UBERON:0000947` | aorta | — | CT (female), TCIA, CT atlas (MOOSE) |
+| `FMA:14818` | appendicular artery | — | BodyParts3D, Z-Anatomy |
+| `FMA:3768` | arch of aorta | — | BodyParts3D |
+| `FMA:77439` | artery of central sulcus | left, right | BodyParts3D, Z-Anatomy |
+| `FMA:50484` | artery of left postcentral sulcus | — | BodyParts3D |
+| `FMA:50481` | artery of left precentral sulcus | left | BodyParts3D, Z-Anatomy |
+| `FMA:50483` | artery of right postcentral sulcus | — | BodyParts3D |
+| `FMA:50480` | artery of right precentral sulcus | right | BodyParts3D, Z-Anatomy |
+| `FMA:3736` | ascending aorta | — | BodyParts3D, Z-Anatomy |
+| `FMA:14820` | ascending branch of inferior branch of ileocolic artery | — | BodyParts3D |
+| `FMA:12858` | ascending lumbar vein | — | BodyParts3D |
+| `FMA:4838` | azygos vein | — | BodyParts3D, Z-Anatomy |
+| `FMA:50542` | basilar artery | — | BodyParts3D, Z-Anatomy |
+| `FMA:3932` | brachiocephalic artery | — | BodyParts3D |
+| `FMA:4723` | brachiocephalic vein | — | BodyParts3D |
+| `FMA:50147` | branch of left anterior choroidal artery to posterior limb of left internal capsule | — | BodyParts3D |
+| `FMA:50477` | branch of left middle cerebral artery to left angular gyrus | — | BodyParts3D |
+| `FMA:50146` | branch of right anterior choroidal artery to posterior limb of right internal capsule | — | BodyParts3D |
+| `FMA:50476` | branch of right middle cerebral artery to right angular gyrus | — | BodyParts3D |
+| `FMA:68109` | bronchial artery | — | BodyParts3D |
+| `FMA:14793` | caudal pancreatic artery | — | BodyParts3D |
+| `FMA:9465` | cavity of left atrium | — | BodyParts3D |
+| `FMA:9466` | cavity of left ventricle | — | BodyParts3D |
+| `FMA:11359` | cavity of right atrium | — | BodyParts3D |
+| `FMA:9291` | cavity of right ventricle | — | BodyParts3D |
+| `FMA:50737` | celiac artery | — | BodyParts3D |
+| `FMA:14812` | celiac trunk | — | BodyParts3D |
+| `FMA:3895` | circumflex branch of left coronary artery | — | BodyParts3D |
+| `FMA:3939` | common carotid artery | — | BodyParts3D |
+| `FMA:14771` | common hepatic artery | — | BodyParts3D, Z-Anatomy |
+| `FMA:14764` | common iliac artery | — | BodyParts3D |
+| `UBERON:0001139` | common iliac vein | left, right | CT atlas (MOOSE) |
+| `FMA:22806` | common interosseous artery | left, right | BodyParts3D, Z-Anatomy |
+| `FMA:3868` | conus branch of anterior interventricular branch of left coronary artery | — | BodyParts3D |
+| `FMA:4706` | coronary sinus | — | BodyParts3D, Z-Anatomy |
+| `FMA:21354` | deep dorsal vein of penis | — | BodyParts3D, Z-Anatomy |
+| `FMA:23073` | deltoid branch of left thoraco-acromial artery | — | BodyParts3D |
+| `FMA:23072` | deltoid branch of right thoraco-acromial artery | — | BodyParts3D |
+| `FMA:3784` | descending aorta | — | BodyParts3D |
+| `FMA:21423` | descending branch of left lateral circumflex femoral artery | — | BodyParts3D |
+| `FMA:21422` | descending branch of right lateral circumflex femoral artery | — | BodyParts3D |
+| `FMA:87217` | descending thoracic aorta | — | BodyParts3D |
+| `FMA:3860` | diagonal branch of anterior descending branch of left coronary artery | — | BodyParts3D |
+| `FMA:69713` | digital artery of foot | — | BodyParts3D |
+| `FMA:69517` | distal perforating artery | — | BodyParts3D |
+| `FMA:22773` | dorsal carpal branch of left radial artery | — | BodyParts3D |
+| `FMA:22772` | dorsal carpal branch of right radial artery | — | BodyParts3D |
+| `FMA:14787` | dorsal pancreatic artery | — | BodyParts3D |
+| `FMA:44882` | dorsal venous arch of left foot | left | BodyParts3D, Z-Anatomy |
+| `FMA:44881` | dorsal venous arch of right foot | right | BodyParts3D, Z-Anatomy |
+| `FMA:43915` | dorsalis pedis artery | left, right | BodyParts3D, Z-Anatomy |
+| `FMA:4149` | esophageal artery | — | BodyParts3D |
+| `FMA:18805` | external iliac artery | — | BodyParts3D |
+| `FMA:70248` | femoral artery | — | BodyParts3D |
+| `FMA:3815` | first anterior ventricular branch of right coronary artery | — | BodyParts3D |
+| `FMA:3872` | first right anterior branch of anterior interventricular branch of left coronary artery | — | BodyParts3D |
+| `FMA:3847` | first septal branch of right posterior interventricular artery | — | BodyParts3D |
+| `FMA:14775` | gastroduodenal artery | — | BodyParts3D, Z-Anatomy |
+| `FMA:4707` | great cardiac vein | — | BodyParts3D, Z-Anatomy |
+| `FMA:14792` | great pancreatic artery | — | BodyParts3D |
+| `UBERON:0000948` | heart | — | CT (female), TCIA |
+| `UBERON:0002084` | heart left ventricle | left | CT atlas (MOOSE) |
+| `UBERON:0002080` | heart right ventricle | right | CT atlas (MOOSE) |
+| `FMA:4944` | hemiazygos vein | — | BodyParts3D |
+| `FMA:50735` | hepatic portal vein | — | BodyParts3D, Z-Anatomy |
+| `UBERON:0001639` | hepatic portal vein | — | CT atlas (MOOSE) |
+| `FMA:50429` | hypothalamic branch of left posterior communicating artery | — | BodyParts3D |
+| `FMA:50428` | hypothalamic branch of right posterior communicating artery | — | BodyParts3D |
+| `FMA:14809` | ileal artery | — | BodyParts3D |
+| `FMA:14819` | ileal branch of inferior branch of ileocolic artery | — | BodyParts3D |
+| `FMA:15405` | ileal vein | — | BodyParts3D |
+| `FMA:14815` | ileocolic artery | — | BodyParts3D, Z-Anatomy |
+| `FMA:15408` | ileocolic vein | — | BodyParts3D |
+| `FMA:14750` | inferior mesenteric artery | — | BodyParts3D, Z-Anatomy |
+| `FMA:15391` | inferior mesenteric vein | — | BodyParts3D, Z-Anatomy |
+| `FMA:14790` | inferior pancreatic artery | — | BodyParts3D |
+| `FMA:14805` | inferior pancreaticoduodenal artery | — | BodyParts3D, Z-Anatomy |
+| `FMA:68068` | inferior phrenic vein | — | BodyParts3D, Z-Anatomy |
+| `FMA:49910` | inferior pulmonary vein | — | BodyParts3D |
+| `FMA:86347` | inferior segmental branch of left renal artery | — | BodyParts3D |
+| `FMA:86346` | inferior segmental branch of right renal artery | — | BodyParts3D |
+| `FMA:10951` | inferior vena cava | — | BodyParts3D |
+| `UBERON:0001072` | inferior vena cava | — | CT (female), TCIA, CT atlas (MOOSE) |
+| `FMA:9555` | inferior wall of right ventricle | — | BodyParts3D |
+| `FMA:50352` | intermediomedial branch of left callosomarginal artery | — | BodyParts3D |
+| `FMA:50351` | intermediomedial branch of right callosomarginal artery | — | BodyParts3D |
+| `FMA:3947` | internal carotid artery | left, right | BodyParts3D, Z-Anatomy |
+| `FMA:3960` | internal thoracic artery | left, right | BodyParts3D, Z-Anatomy |
+| `FMA:4729` | internal thoracic vein | — | BodyParts3D |
+| `FMA:50569` | lateral branch of left pontine artery | — | BodyParts3D |
+| `FMA:50579` | lateral branch of left superior cerebellar artery | — | BodyParts3D |
+| `FMA:50568` | lateral branch of right pontine artery | — | BodyParts3D |
+| `FMA:50578` | lateral branch of right superior cerebellar artery | — | BodyParts3D |
+| `FMA:15804` | lateral inferior segmental tributary of left hepatic vein | — | BodyParts3D |
+| `FMA:50633` | lateral occipital artery | left, right | BodyParts3D, Z-Anatomy |
+| `FMA:43926` | lateral plantar artery | left, right | BodyParts3D, Z-Anatomy |
+| `FMA:23055` | lateral proper palmar digital artery of left little finger | — | BodyParts3D |
+| `FMA:22860` | lateral proper palmar digital artery of left middle finger | — | BodyParts3D |
+| `FMA:85116` | lateral proper palmar digital artery of left ring finger | — | BodyParts3D |
+| `FMA:23054` | lateral proper palmar digital artery of right little finger | — | BodyParts3D |
+| `FMA:22858` | lateral proper palmar digital artery of right middle finger | — | BodyParts3D |
+| `FMA:85115` | lateral proper palmar digital artery of right ring finger | — | BodyParts3D |
+| `FMA:15803` | lateral superior segmental tributary of left hepatic vein | — | BodyParts3D |
+| `FMA:50030` | left anterior cerebral artery | left | BodyParts3D, Z-Anatomy |
+| `FMA:50089` | left anterior choroidal artery | — | BodyParts3D |
+| `FMA:22683` | left anterior circumflex humeral artery | left | BodyParts3D, Z-Anatomy |
+| `FMA:77955` | left anterior circumflex humeral vein | left | BodyParts3D, Z-Anatomy |
+| `FMA:7247` | left anterior cusp of pulmonary valve | — | BodyParts3D |
+| `FMA:22813` | left anterior interosseous artery | — | BodyParts3D |
+| `FMA:50487` | left anterior parietal artery | — | BodyParts3D |
+| `FMA:50533` | left anterior spinal artery | left | BodyParts3D, Z-Anatomy |
+| `FMA:50384` | left anterior temporal artery | — | BodyParts3D |
+| `FMA:43908` | left anterior tibial recurrent artery | — | BodyParts3D |
+| `FMA:44337` | left anterior tibial vein | left | BodyParts3D, Z-Anatomy |
+| `FMA:22802` | left anterior ulnar recurrent artery | — | BodyParts3D |
+| `FMA:69495` | left arcuate artery | left | BodyParts3D, Z-Anatomy |
+| `FMA:22907` | left arteria princeps pollicis | — | BodyParts3D |
+| `FMA:22778` | left arteria radialis indicis | — | BodyParts3D |
+| `FMA:4950` | left ascending lumbar vein | — | BodyParts3D |
+| `FMA:13331` | left axillary vein | left | BodyParts3D, Z-Anatomy |
+| `FMA:22910` | left basilic vein | left | BodyParts3D, Z-Anatomy |
+| `FMA:4761` | left brachiocephalic vein | — | BodyParts3D |
+| `FMA:50348` | left callosomarginal artery | left | BodyParts3D, Z-Anatomy |
+| `UBERON:0002079` | left cardiac atrium | left | CT atlas (MOOSE) |
+| `FMA:13326` | left cephalic vein | left | BodyParts3D, Z-Anatomy |
+| `FMA:23181` | left circumflex scapular artery | left | BodyParts3D, Z-Anatomy |
+| `FMA:77950` | left circumflex scapular vein | left | BodyParts3D, Z-Anatomy |
+| `FMA:14826` | left colic artery | — | BodyParts3D |
+| `FMA:15394` | left colic vein | — | BodyParts3D |
+| `UBERON:0035529` | left common iliac artery | left | CT atlas (MOOSE) |
+| `FMA:21388` | left common iliac vein | left | BodyParts3D, Z-Anatomy |
+| `FMA:4086` | left costocervical trunk | left | BodyParts3D, Z-Anatomy |
+| `FMA:22697` | left deep brachial artery | left | BodyParts3D, Z-Anatomy |
+| `FMA:4134` | left deep cervical artery | left | BodyParts3D, Z-Anatomy |
+| `FMA:51043` | left deep femoral vein | left | BodyParts3D, Z-Anatomy |
+| `FMA:22508` | left descending genicular artery | — | BodyParts3D |
+| `FMA:20819` | left dorsal artery of penis | left | BodyParts3D, Z-Anatomy |
+| `FMA:22822` | left dorsal carpal branch of ulnar artery | left | BodyParts3D, Z-Anatomy |
+| `FMA:10552` | left dorsal scapular artery | — | BodyParts3D |
+| `FMA:18886` | left external iliac vein | left | BodyParts3D, Z-Anatomy |
+| `FMA:21189` | left femoral vein | left | BodyParts3D, Z-Anatomy |
+| `FMA:44886` | left fibular vein | left | BodyParts3D, Z-Anatomy |
+| `FMA:85118` | left first common palmar digital artery | — | BodyParts3D |
+| `FMA:66243` | left first posterior intercostal artery | left | BodyParts3D, Z-Anatomy |
+| `FMA:85124` | left fourth common palmar digital artery | — | BodyParts3D |
+| `FMA:14768` | left gastric artery | — | BodyParts3D |
+| `FMA:15399` | left gastric vein | — | BodyParts3D |
+| `FMA:14796` | left gastro-epiploic artery | — | BodyParts3D |
+| `FMA:15390` | left gastroepiploic vein | — | BodyParts3D |
+| `FMA:44888` | left genicular vein | — | BodyParts3D |
+| `FMA:21380` | left great saphenous vein | left | BodyParts3D, Z-Anatomy |
+| `FMA:18904` | left iliolumbar vein | left | BodyParts3D, Z-Anatomy |
+| `FMA:20689` | left inferior epigastric artery | left | BodyParts3D, Z-Anatomy |
+| `FMA:21164` | left inferior epigastric vein | left | BodyParts3D, Z-Anatomy |
+| `FMA:18913` | left inferior gluteal vein | left | BodyParts3D, Z-Anatomy |
+| `FMA:43893` | left inferior lateral genicular artery | left | BodyParts3D, Z-Anatomy |
+| `FMA:43891` | left inferior medial genicular artery | left | BodyParts3D, Z-Anatomy |
+| `FMA:14747` | left inferior phrenic artery | — | BodyParts3D |
+| `FMA:69266` | left inferior suprarenal artery | left | BodyParts3D, Z-Anatomy |
+| `FMA:10680` | left inferior thyroid artery | left | BodyParts3D, Z-Anatomy |
+| `FMA:22713` | left inferior ulnar collateral artery | left | BodyParts3D, Z-Anatomy |
+| `FMA:18810` | left internal iliac artery | left | BodyParts3D, Z-Anatomy |
+| `FMA:18888` | left internal iliac vein | left | BodyParts3D, Z-Anatomy |
+| `FMA:4762` | left internal jugular vein | left | BodyParts3D, Z-Anatomy |
+| `FMA:18919` | left internal pudendal vein | left | BodyParts3D, Z-Anatomy |
+| `FMA:20802` | left lateral circumflex femoral artery | left | BodyParts3D, Z-Anatomy |
+| `FMA:44922` | left lateral circumflex femoral vein | — | BodyParts3D |
+| `FMA:50444` | left lateral frontobasal artery | left | BodyParts3D, Z-Anatomy |
+| `FMA:18907` | left lateral sacral vein | — | BodyParts3D |
+| `FMA:22589` | left lateral superior genicular artery | — | BodyParts3D |
+| `FMA:69491` | left lateral tarsal artery | left | BodyParts3D, Z-Anatomy |
+| `FMA:22676` | left lateral thoracic artery | left | BodyParts3D, Z-Anatomy |
+| `FMA:71212` | left lateral thoracic vein | left | BodyParts3D, Z-Anatomy |
+| `FMA:71710` | left lobe branch of left hepatic artery | — | BodyParts3D |
+| `FMA:4708` | left marginal vein | — | BodyParts3D |
+| `FMA:22936` | left medial brachial vein | — | BodyParts3D |
+| `FMA:44919` | left medial circumflex femoral vein | left | BodyParts3D, Z-Anatomy |
+| `FMA:50344` | left medial frontobasal artery | — | BodyParts3D |
+| `FMA:22587` | left medial superior genicular artery | — | BodyParts3D |
+| `FMA:22969` | left median antebrachial vein | left | BodyParts3D, Z-Anatomy |
+| `FMA:22965` | left median cubital vein | left | BodyParts3D, Z-Anatomy |
+| `FMA:22563` | left middle genicular artery | left | BodyParts3D, Z-Anatomy |
+| `FMA:14756` | left middle suprarenal artery | — | BodyParts3D |
+| `FMA:4077` | left musculophrenic artery | left | BodyParts3D, Z-Anatomy |
+| `FMA:4786` | left musculophrenic vein | — | BodyParts3D |
+| `FMA:18916` | left obturator vein | left | BodyParts3D, Z-Anatomy |
+| `FMA:49870` | left ophthalmic artery | left | BodyParts3D, Z-Anatomy |
+| `FMA:22865` | left palmar metacarpal artery | — | BodyParts3D |
+| `FMA:22921` | left palmar metacarpal vein | — | BodyParts3D |
+| `FMA:50360` | left pericallosal artery | left | BodyParts3D, Z-Anatomy |
+| `FMA:43944` | left plantar arch | left | BodyParts3D, Z-Anatomy |
+| `FMA:50381` | left polar temporal artery | — | BodyParts3D |
+| `FMA:77381` | left popliteal artery | left | BodyParts3D, Z-Anatomy |
+| `FMA:44329` | left popliteal vein | left | BodyParts3D, Z-Anatomy |
+| `FMA:50659` | left posterior choroidal artery | — | BodyParts3D |
+| `FMA:22687` | left posterior circumflex humeral artery | left | BodyParts3D, Z-Anatomy |
+| `FMA:50086` | left posterior communicating artery | left | BodyParts3D, Z-Anatomy |
+| `FMA:7254` | left posterior cusp of aortic valve | — | BodyParts3D |
+| `FMA:50520` | left posterior inferior cerebellar artery | left | BodyParts3D, Z-Anatomy |
+| `FMA:50490` | left posterior parietal artery | left | BodyParts3D, Z-Anatomy |
+| `FMA:43899` | left posterior tibial artery | left | BodyParts3D, Z-Anatomy |
+| `FMA:44339` | left posterior tibial vein | — | BodyParts3D |
+| `FMA:22805` | left posterior ulnar recurrent artery | — | BodyParts3D |
+| `FMA:50478` | left prefrontal artery | left | BodyParts3D, Z-Anatomy |
+| `FMA:50873` | left pulmonary artery | — | BodyParts3D |
+| `FMA:22766` | left radial recurrent artery | — | BodyParts3D |
+| `FMA:22949` | left radial vein | left | BodyParts3D, Z-Anatomy |
+| `FMA:268669` | left recurrent interosseous artery | left | BodyParts3D, Z-Anatomy |
+| `FMA:14336` | left renal vein | — | BodyParts3D |
+| `FMA:85120` | left second common palmar digital artery | — | BodyParts3D |
+| `FMA:4112` | left second posterior intercostal artery | left | BodyParts3D, Z-Anatomy |
+| `FMA:44335` | left small saphenous vein | left | BodyParts3D, Z-Anatomy |
+| `FMA:50685` | left splenial artery | — | BodyParts3D |
+| `FMA:4763` | left subclavian vein | — | BodyParts3D |
+| `FMA:4654` | left subcostal artery | left | BodyParts3D, Z-Anatomy |
+| `FMA:4951` | left subcostal vein | — | BodyParts3D |
+| `FMA:23115` | left subscapular vein | left | BodyParts3D, Z-Anatomy |
+| `FMA:10683` | left superficial cervical artery | — | BodyParts3D |
+| `FMA:21386` | left superficial dorsal vein of penis | — | BodyParts3D |
+| `FMA:20736` | left superficial epigastric artery | left | BodyParts3D, Z-Anatomy |
+| `FMA:44341` | left superficial epigastric vein | left | BodyParts3D, Z-Anatomy |
+| `FMA:43938` | left superficial medial plantar artery | — | BodyParts3D |
+| `FMA:50575` | left superior cerebellar artery | left | BodyParts3D, Z-Anatomy |
+| `FMA:4083` | left superior epigastric artery | left | BodyParts3D, Z-Anatomy |
+| `FMA:4785` | left superior epigastric vein | — | BodyParts3D |
+| `FMA:18910` | left superior gluteal vein | left | BodyParts3D, Z-Anatomy |
+| `FMA:4088` | left superior intercostal artery | — | BodyParts3D |
+| `FMA:4797` | left superior intercostal vein | — | BodyParts3D |
+| `FMA:22708` | left superior ulnar collateral artery | left | BodyParts3D, Z-Anatomy |
+| `FMA:14349` | left suprarenal vein | — | BodyParts3D |
+| `FMA:10681` | left suprascapular artery | left | BodyParts3D, Z-Anatomy |
+| `FMA:50860` | left suprascapular vein | left | BodyParts3D, Z-Anatomy |
+| `FMA:14760` | left testicular artery | — | BodyParts3D |
+| `FMA:14345` | left testicular vein | — | BodyParts3D |
+| `FMA:50671` | left thalamogeniculate artery | — | BodyParts3D |
+| `FMA:50665` | left thalamoperforating artery | — | BodyParts3D |
+| `FMA:85122` | left third common palmar digital artery | — | BodyParts3D |
+| `FMA:66322` | left thoracodorsal artery | left | BodyParts3D, Z-Anatomy |
+| `FMA:71215` | left thoracodorsal vein | left | BodyParts3D, Z-Anatomy |
+| `FMA:4084` | left thyrocervical trunk | left | BodyParts3D, Z-Anatomy |
+| `FMA:22952` | left ulnar vein | left | BodyParts3D, Z-Anatomy |
+| `FMA:14735` | lumbar artery | — | BodyParts3D |
+| `FMA:15370` | lumbar vein | — | BodyParts3D |
+| `FMA:14831` | marginal artery of colon | — | BodyParts3D |
+| `FMA:3818` | marginal branch of right coronary artery | — | BodyParts3D |
+| `FMA:14824` | marginal colic artery | — | BodyParts3D |
+| `FMA:50567` | medial branch of left pontine artery | — | BodyParts3D |
+| `FMA:50582` | medial branch of left superior cerebellar artery | — | BodyParts3D |
+| `FMA:50566` | medial branch of right pontine artery | — | BodyParts3D |
+| `FMA:50581` | medial branch of right superior cerebellar artery | — | BodyParts3D |
+| `FMA:15801` | medial inferior segmental tributary of middle hepatic vein | — | BodyParts3D |
+| `FMA:50638` | medial occipital artery | left, right | BodyParts3D, Z-Anatomy |
+| `FMA:43925` | medial plantar artery | left, right | BodyParts3D, Z-Anatomy |
+| `FMA:23051` | medial proper palmar digital artery of left index finger | — | BodyParts3D |
+| `FMA:85111` | medial proper palmar digital artery of middle finger | — | BodyParts3D |
+| `FMA:23050` | medial proper palmar digital artery of right index finger | — | BodyParts3D |
+| `FMA:23046` | medial proper palmar digital artery of ring finger | — | BodyParts3D |
+| `FMA:15802` | medial superior segmental tributary of left hepatic vein | — | BodyParts3D |
+| `FMA:77168` | median sacral vein | — | BodyParts3D, Z-Anatomy |
+| `FMA:4713` | middle cardiac vein | — | BodyParts3D, Z-Anatomy |
+| `FMA:14810` | middle colic artery | — | BodyParts3D, Z-Anatomy |
+| `FMA:15406` | middle colic vein | — | BodyParts3D, Z-Anatomy |
+| `FMA:23125` | middle collateral branch of left deep brachial artery | — | BodyParts3D |
+| `FMA:23124` | middle collateral branch of right deep brachial artery | — | BodyParts3D |
+| `FMA:14340` | middle hepatic vein | — | BodyParts3D |
+| `FMA:50681` | middle temporal branch of left lateral occipital artery | — | BodyParts3D |
+| `FMA:50468` | middle temporal branch of left middle cerebral artery | — | BodyParts3D |
+| `FMA:50680` | middle temporal branch of right lateral occipital artery | — | BodyParts3D |
+| `FMA:50467` | middle temporal branch of right middle cerebral artery | — | BodyParts3D |
+| `FMA:86063` | myocardial zone 11 | — | BodyParts3D |
+| `FMA:86064` | myocardial zone 12 | — | BodyParts3D |
+| `FMA:86056` | myocardial zone 4 | — | BodyParts3D |
+| `UBERON:0002349` | myocardium | — | CT atlas (MOOSE) |
+| `FMA:52735` | Occipital artery | left, right | Z-Anatomy |
+| `FMA:15398` | pancreaticoduodenal vein | — | BodyParts3D |
+| `FMA:50358` | paracentral branch of left callosomarginal artery | — | BodyParts3D |
+| `FMA:50357` | paracentral branch of right callosomarginal artery | — | BodyParts3D |
+| `FMA:23064` | pectoral branch of left thoraco-acromial artery | — | BodyParts3D |
+| `FMA:23063` | pectoral branch of right thoraco-acromial artery | — | BodyParts3D |
+| `FMA:43956` | plantar metatarsal artery | — | BodyParts3D |
+| `FMA:44504` | plantar metatarsal vein | — | BodyParts3D |
+| `FMA:44884` | plantar venous arch of left foot | — | BodyParts3D |
+| `FMA:44883` | plantar venous arch of right foot | — | BodyParts3D |
+| `FMA:14817` | posterior cecal artery | — | BodyParts3D |
+| `FMA:7250` | posterior cusp of pulmonary valve | — | BodyParts3D |
+| `FMA:70490` | posterior division of left renal artery | — | BodyParts3D |
+| `FMA:70489` | posterior division of right renal artery | — | BodyParts3D |
+| `FMA:52715` | Posterior ethmoidal artery | right | Z-Anatomy |
+| `FMA:52716` | Posterior ethmoidal artery | left | Z-Anatomy |
+| `FMA:70480` | posterior inferior pancreaticoduodenal artery | — | BodyParts3D |
+| `FMA:15797` | posterior inferior segmental tributary of right hepatic vein | — | BodyParts3D |
+| `FMA:3840` | posterior interventricular branch of right coronary artery | — | BodyParts3D |
+| `FMA:7239` | posterior leaflet of tricuspid valve | — | BodyParts3D |
+| `FMA:86349` | posterior segmental branch of left renal artery | — | BodyParts3D |
+| `FMA:86348` | posterior segmental branch of right renal artery | — | BodyParts3D |
+| `FMA:14784` | posterior superior pancreaticoduodenal artery | — | BodyParts3D |
+| `FMA:15796` | posterior superior segmental tributary of right hepatic vein | — | BodyParts3D |
+| `FMA:50471` | posterior temporal branch of left middle cerebral artery | — | BodyParts3D |
+| `FMA:50470` | posterior temporal branch of right middle cerebral artery | — | BodyParts3D |
+| `FMA:4712` | posterior vein of left ventricle | — | BodyParts3D |
+| `FMA:3835` | posterior ventricular branch of right coronary artery | — | BodyParts3D |
+| `FMA:50354` | posteromedial branch of left callosomarginal artery | — | BodyParts3D |
+| `FMA:50353` | posteromedial branch of right callosomarginal artery | — | BodyParts3D |
+| `FMA:50661` | posteromedial central branch of left posterior cerebral artery | — | BodyParts3D |
+| `FMA:50660` | posteromedial central branch of right posterior cerebral artery | — | BodyParts3D |
+| `FMA:71904` | pre-hepatic portal vein | — | BodyParts3D |
+| `FMA:50640` | precommunicating part of left posterior cerebral artery | — | BodyParts3D |
+| `FMA:50639` | precommunicating part of right posterior cerebral artery | — | BodyParts3D |
+| `FMA:50362` | precuneal branch of left pericallosal artery | — | BodyParts3D |
+| `FMA:50361` | precuneal branch of right pericallosal artery | — | BodyParts3D |
+| `UBERON:0002012` | pulmonary artery | — | CT atlas (MOOSE) |
+| `FMA:8612` | pulmonary trunk | — | BodyParts3D, Z-Anatomy |
+| `FMA:22730` | radial artery | — | BodyParts3D |
+| `FMA:23127` | radial collateral branch of left deep brachial artery | — | BodyParts3D |
+| `FMA:23126` | radial collateral branch of right deep brachial artery | — | BodyParts3D |
+| `FMA:14751` | renal artery | — | BodyParts3D |
+| `FMA:50029` | right anterior cerebral artery | right | BodyParts3D, Z-Anatomy |
+| `FMA:50088` | right anterior choroidal artery | — | BodyParts3D |
+| `FMA:22682` | right anterior circumflex humeral artery | right | BodyParts3D, Z-Anatomy |
+| `FMA:77954` | right anterior circumflex humeral vein | right | BodyParts3D, Z-Anatomy |
+| `FMA:7249` | right anterior cusp of pulmonary valve | — | BodyParts3D |
+| `FMA:22812` | right anterior interosseous artery | — | BodyParts3D |
+| `FMA:50486` | right anterior parietal artery | — | BodyParts3D |
+| `FMA:50532` | right anterior spinal artery | right | BodyParts3D, Z-Anatomy |
+| `FMA:50383` | right anterior temporal artery | — | BodyParts3D |
+| `FMA:43907` | right anterior tibial recurrent artery | — | BodyParts3D |
+| `FMA:44336` | right anterior tibial vein | right | BodyParts3D, Z-Anatomy |
+| `FMA:22801` | right anterior ulnar recurrent artery | — | BodyParts3D |
+| `FMA:69494` | right arcuate artery | right | BodyParts3D, Z-Anatomy |
+| `FMA:22905` | right arteria princeps pollicis | — | BodyParts3D |
+| `FMA:22777` | right arteria radialis indicis | — | BodyParts3D |
+| `FMA:4843` | right ascending lumbar vein | — | BodyParts3D |
+| `FMA:13330` | right axillary vein | right | BodyParts3D, Z-Anatomy |
+| `FMA:22909` | right basilic vein | right | BodyParts3D, Z-Anatomy |
+| `FMA:50347` | right callosomarginal artery | right | BodyParts3D, Z-Anatomy |
+| `UBERON:0002078` | right cardiac atrium | right | CT atlas (MOOSE) |
+| `FMA:13325` | right cephalic vein | right | BodyParts3D, Z-Anatomy |
+| `FMA:23180` | right circumflex scapular artery | right | BodyParts3D, Z-Anatomy |
+| `FMA:77949` | right circumflex scapular vein | right | BodyParts3D, Z-Anatomy |
+| `FMA:14811` | right colic artery | — | BodyParts3D |
+| `FMA:15407` | right colic vein | — | BodyParts3D |
+| `UBERON:0035322` | right common iliac artery | right | CT atlas (MOOSE) |
+| `FMA:21387` | right common iliac vein | right | BodyParts3D, Z-Anatomy |
+| `FMA:3807` | right conus artery | — | BodyParts3D |
+| `FMA:5039` | right costocervical trunk | right | BodyParts3D, Z-Anatomy |
+| `FMA:22696` | right deep brachial artery | right | BodyParts3D, Z-Anatomy |
+| `FMA:10660` | right deep cervical artery | right | BodyParts3D, Z-Anatomy |
+| `FMA:51042` | right deep femoral vein | right | BodyParts3D, Z-Anatomy |
+| `FMA:22507` | right descending genicular artery | — | BodyParts3D |
+| `FMA:20818` | right dorsal artery of penis | right | BodyParts3D, Z-Anatomy |
+| `FMA:22821` | right dorsal carpal branch of ulnar artery | right | BodyParts3D, Z-Anatomy |
+| `FMA:4057` | right dorsal scapular artery | — | BodyParts3D |
+| `FMA:18885` | right external iliac vein | right | BodyParts3D, Z-Anatomy |
+| `FMA:21188` | right femoral vein | right | BodyParts3D, Z-Anatomy |
+| `FMA:44885` | right fibular vein | right | BodyParts3D, Z-Anatomy |
+| `FMA:22856` | right first common palmar digital artery | — | BodyParts3D |
+| `FMA:66242` | right first posterior intercostal artery | right | BodyParts3D, Z-Anatomy |
+| `FMA:85123` | right fourth common palmar digital artery | — | BodyParts3D |
+| `FMA:14776` | right gastric artery | — | BodyParts3D |
+| `FMA:15400` | right gastric vein | — | BodyParts3D |
+| `FMA:14781` | right gastro-epiploic artery | — | BodyParts3D |
+| `FMA:15397` | right gastroepiploic vein | — | BodyParts3D |
+| `FMA:44887` | right genicular vein | — | BodyParts3D |
+| `FMA:21379` | right great saphenous vein | right | BodyParts3D, Z-Anatomy |
+| `FMA:18903` | right iliolumbar vein | right | BodyParts3D, Z-Anatomy |
+| `FMA:20688` | right inferior epigastric artery | right | BodyParts3D, Z-Anatomy |
+| `FMA:21163` | right inferior epigastric vein | right | BodyParts3D, Z-Anatomy |
+| `FMA:18912` | right inferior gluteal vein | right | BodyParts3D, Z-Anatomy |
+| `FMA:43892` | right inferior lateral genicular artery | right | BodyParts3D, Z-Anatomy |
+| `FMA:43890` | right inferior medial genicular artery | right | BodyParts3D, Z-Anatomy |
+| `FMA:14746` | right inferior phrenic artery | — | BodyParts3D |
+| `FMA:69265` | right inferior suprarenal artery | right | BodyParts3D, Z-Anatomy |
+| `FMA:10697` | right inferior thyroid artery | right | BodyParts3D, Z-Anatomy |
+| `FMA:22712` | right inferior ulnar collateral artery | right | BodyParts3D, Z-Anatomy |
+| `FMA:18809` | right internal iliac artery | right | BodyParts3D, Z-Anatomy |
+| `FMA:18887` | right internal iliac vein | right | BodyParts3D, Z-Anatomy |
+| `FMA:4754` | right internal jugular vein | right | BodyParts3D, Z-Anatomy |
+| `FMA:18918` | right internal pudendal vein | right | BodyParts3D, Z-Anatomy |
+| `FMA:20801` | right lateral circumflex femoral artery | right | BodyParts3D, Z-Anatomy |
+| `FMA:44920` | right lateral circumflex femoral vein | — | BodyParts3D |
+| `FMA:50443` | right lateral frontobasal artery | right | BodyParts3D, Z-Anatomy |
+| `FMA:18906` | right lateral sacral vein | — | BodyParts3D |
+| `FMA:22588` | right lateral superior genicular artery | — | BodyParts3D |
+| `FMA:69490` | right lateral tarsal artery | right | BodyParts3D, Z-Anatomy |
+| `FMA:22675` | right lateral thoracic artery | right | BodyParts3D, Z-Anatomy |
+| `FMA:71211` | right lateral thoracic vein | right | BodyParts3D, Z-Anatomy |
+| `FMA:71708` | right lobe branch of right hepatic artery | — | BodyParts3D |
+| `FMA:4716` | right marginal vein | — | BodyParts3D |
+| `FMA:22935` | right medial brachial vein | — | BodyParts3D |
+| `FMA:44918` | right medial circumflex femoral vein | right | BodyParts3D, Z-Anatomy |
+| `FMA:50343` | right medial frontobasal artery | — | BodyParts3D |
+| `FMA:22586` | right medial superior genicular artery | — | BodyParts3D |
+| `FMA:22968` | right median antebrachial vein | right | BodyParts3D, Z-Anatomy |
+| `FMA:22964` | right median cubital vein | right | BodyParts3D, Z-Anatomy |
+| `FMA:22562` | right middle genicular artery | right | BodyParts3D, Z-Anatomy |
+| `FMA:14755` | right middle suprarenal artery | — | BodyParts3D |
+| `FMA:10692` | right musculophrenic artery | right | BodyParts3D, Z-Anatomy |
+| `FMA:4772` | right musculophrenic vein | — | BodyParts3D |
+| `FMA:18915` | right obturator vein | right | BodyParts3D, Z-Anatomy |
+| `FMA:49869` | right ophthalmic artery | right | BodyParts3D, Z-Anatomy |
+| `FMA:22864` | right palmar metacarpal artery | — | BodyParts3D |
+| `FMA:22920` | right palmar metacarpal vein | — | BodyParts3D |
+| `FMA:50359` | right pericallosal artery | right | BodyParts3D, Z-Anatomy |
+| `FMA:43943` | right plantar arch | right | BodyParts3D, Z-Anatomy |
+| `FMA:50380` | right polar temporal artery | — | BodyParts3D |
+| `FMA:77380` | right popliteal artery | right | BodyParts3D, Z-Anatomy |
+| `FMA:44328` | right popliteal vein | right | BodyParts3D, Z-Anatomy |
+| `FMA:50658` | right posterior choroidal artery | — | BodyParts3D |
+| `FMA:22685` | right posterior circumflex humeral artery | right | BodyParts3D, Z-Anatomy |
+| `FMA:50085` | right posterior communicating artery | right | BodyParts3D, Z-Anatomy |
+| `FMA:7252` | right posterior cusp of aortic valve | — | BodyParts3D |
+| `FMA:50519` | right posterior inferior cerebellar artery | right | BodyParts3D, Z-Anatomy |
+| `FMA:50489` | right posterior parietal artery | right | BodyParts3D, Z-Anatomy |
+| `FMA:43898` | right posterior tibial artery | right | BodyParts3D, Z-Anatomy |
+| `FMA:44338` | right posterior tibial vein | — | BodyParts3D |
+| `FMA:22804` | right posterior ulnar recurrent artery | — | BodyParts3D |
+| `FMA:50445` | right prefrontal artery | right | BodyParts3D, Z-Anatomy |
+| `FMA:50872` | right pulmonary artery | — | BodyParts3D |
+| `FMA:22764` | right radial recurrent artery | — | BodyParts3D |
+| `FMA:22948` | right radial vein | right | BodyParts3D, Z-Anatomy |
+| `FMA:268667` | right recurrent interosseous artery | right | BodyParts3D, Z-Anatomy |
+| `FMA:14335` | right renal vein | — | BodyParts3D |
+| `FMA:85119` | right second common palmar digital artery | — | BodyParts3D |
+| `FMA:5041` | right second posterior intercostal artery | right | BodyParts3D, Z-Anatomy |
+| `FMA:44334` | right small saphenous vein | right | BodyParts3D, Z-Anatomy |
+| `FMA:50684` | right splenial artery | — | BodyParts3D |
+| `FMA:4755` | right subclavian vein | — | BodyParts3D |
+| `FMA:4634` | right subcostal artery | right | BodyParts3D, Z-Anatomy |
+| `FMA:4844` | right subcostal vein | — | BodyParts3D |
+| `FMA:23114` | right subscapular vein | right | BodyParts3D, Z-Anatomy |
+| `FMA:10700` | right superficial cervical artery | — | BodyParts3D |
+| `FMA:21385` | right superficial dorsal vein of penis | — | BodyParts3D |
+| `FMA:20735` | right superficial epigastric artery | right | BodyParts3D, Z-Anatomy |
+| `FMA:44340` | right superficial epigastric vein | right | BodyParts3D, Z-Anatomy |
+| `FMA:43937` | right superficial medial plantar artery | — | BodyParts3D |
+| `FMA:50574` | right superior cerebellar artery | right | BodyParts3D, Z-Anatomy |
+| `FMA:3988` | right superior epigastric artery | right | BodyParts3D, Z-Anatomy |
+| `FMA:4771` | right superior epigastric vein | — | BodyParts3D |
+| `FMA:18909` | right superior gluteal vein | right | BodyParts3D, Z-Anatomy |
+| `FMA:5042` | right superior intercostal artery | — | BodyParts3D |
+| `FMA:4877` | right superior intercostal vein | — | BodyParts3D |
+| `FMA:22707` | right superior ulnar collateral artery | right | BodyParts3D, Z-Anatomy |
+| `FMA:14343` | right suprarenal vein | — | BodyParts3D |
+| `FMA:10698` | right suprascapular artery | right | BodyParts3D, Z-Anatomy |
+| `FMA:50859` | right suprascapular vein | right | BodyParts3D, Z-Anatomy |
+| `FMA:14759` | right testicular artery | — | BodyParts3D |
+| `FMA:14341` | right testicular vein | — | BodyParts3D |
+| `FMA:50670` | right thalamogeniculate artery | — | BodyParts3D |
+| `FMA:50664` | right thalamoperforating artery | — | BodyParts3D |
+| `FMA:85121` | right third common palmar digital artery | — | BodyParts3D |
+| `FMA:66321` | right thoracodorsal artery | right | BodyParts3D, Z-Anatomy |
+| `FMA:71214` | right thoracodorsal vein | right | BodyParts3D, Z-Anatomy |
+| `FMA:3992` | right thyrocervical trunk | right | BodyParts3D, Z-Anatomy |
+| `FMA:22951` | right ulnar vein | right | BodyParts3D, Z-Anatomy |
+| `FMA:3874` | second right anterior branch of anterior interventricular branch of left coronary artery | — | BodyParts3D |
+| `FMA:3848` | second septal branch of right posterior interventricular artery | — | BodyParts3D |
+| `FMA:3892` | septal branch of anterior interventricular artery | — | BodyParts3D |
+| `FMA:7240` | septal leaflet of tricuspid valve | — | BodyParts3D |
+| `FMA:7262` | septal papillary muscle of right ventricle | — | BodyParts3D |
+| `FMA:14830` | sigmoid artery | — | BodyParts3D |
+| `FMA:15395` | sigmoid vein | — | BodyParts3D |
+| `FMA:4714` | small cardiac vein | — | BodyParts3D |
+| `UBERON:0002106` | spleen | — | CT (female), TCIA, CT atlas (MOOSE) |
+| `FMA:14773` | splenic artery | — | BodyParts3D, Z-Anatomy |
+| `FMA:14331` | splenic vein | — | BodyParts3D, Z-Anatomy |
+| `FMA:3951` | subclavian artery | — | BodyParts3D |
+| `FMA:22677` | subscapular artery | — | BodyParts3D |
+| `FMA:21384` | superficial dorsal vein of penis | — | BodyParts3D |
+| `FMA:14749` | superior mesenteric artery | — | BodyParts3D, Z-Anatomy |
+| `FMA:14332` | superior mesenteric vein | — | BodyParts3D, Z-Anatomy |
+| `FMA:78121` | superior phrenic vein | — | BodyParts3D |
+| `FMA:49908` | superior pulmonary vein | — | BodyParts3D |
+| `FMA:14832` | superior rectal artery | — | BodyParts3D |
+| `FMA:15393` | superior rectal vein | — | BodyParts3D |
+| `FMA:86341` | superior segmental branch of left renal artery | — | BodyParts3D |
+| `FMA:86340` | superior segmental branch of right renal artery | — | BodyParts3D |
+| `FMA:4720` | superior vena cava | — | BodyParts3D, Z-Anatomy |
+| `FMA:50697` | superior vermian branch of medial branch of left superior cerebellar artery | — | BodyParts3D |
+| `FMA:50696` | superior vermian branch of medial branch of right superior cerebellar artery | — | BodyParts3D |
+| `FMA:52656` | Supra-orbital artery | right | Z-Anatomy |
+| `FMA:52657` | Supra-orbital artery | left | Z-Anatomy |
+| `FMA:52643` | Supratrochlear artery | right | Z-Anatomy |
+| `FMA:52644` | Supratrochlear artery | left | Z-Anatomy |
+| `FMA:50474` | temporo-occipital branch of left middle cerebral artery | — | BodyParts3D |
+| `FMA:50473` | temporo-occipital branch of right middle cerebral artery | — | BodyParts3D |
+| `FMA:3876` | third right anterior branch of anterior interventricular branch of left coronary artery | — | BodyParts3D |
+| `FMA:10664` | transverse cervical artery | left, right | BodyParts3D, Z-Anatomy |
+| `FMA:15793` | tributary of middle hepatic vein | — | BodyParts3D |
+| `FMA:44499` | tributary of plantar venous arch | — | BodyParts3D |
+| `FMA:4677` | trunk of branch of coronary artery | — | BodyParts3D |
+| `FMA:3855` | trunk of left coronary artery | — | BodyParts3D |
+| `FMA:66364` | trunk of left renal artery | — | BodyParts3D |
+| `FMA:66564` | trunk of left thoraco-acromial artery | — | BodyParts3D |
+| `FMA:3802` | trunk of right coronary artery | — | BodyParts3D |
+| `FMA:61991` | trunk of right middle cerebral artery | — | BodyParts3D |
+| `FMA:66363` | trunk of right renal artery | — | BodyParts3D |
+| `FMA:66563` | trunk of right thoraco-acromial artery | — | BodyParts3D |
+| `FMA:66358` | trunk of superior mesenteric artery | — | BodyParts3D |
+| `FMA:22796` | ulnar artery | — | BodyParts3D |
+| `FMA:70493` | ureteric segment of left renal artery | — | BodyParts3D |
+| `FMA:70492` | ureteric segment of right renal artery | — | BodyParts3D |
+| `FMA:3956` | vertebral artery | left, right | BodyParts3D, Z-Anatomy |
+| `FMA:9531` | wall of left atrium | — | BodyParts3D |
+| `FMA:9457` | wall of right atrium | — | BodyParts3D |
+
+</details>
+
+<details>
+<summary><strong>nervous</strong> — 98 terms</summary>
+
+| term | label | sides | in |
+|---|---|---|---|
+| `FMA:13330` | Axillary nerve | right | Z-Anatomy |
+| `FMA:13331` | Axillary nerve | left | Z-Anatomy |
+| `UBERON:0000955` | brain | — | CT (female), TCIA, CT atlas (MOOSE) |
+| `FMA:61815` | cardinal segment of brain | — | BodyParts3D |
+| `FMA:67944` | cerebellum | — | BodyParts3D |
+| `FMA:78467` | cerebral aqueduct | — | BodyParts3D |
+| `FMA:241998` | cerebral white matter | — | BodyParts3D |
+| `FMA:52674` | communicating branch of left nasociliary nerve with left ciliary ganglion | — | BodyParts3D |
+| `FMA:52673` | communicating branch of right nasociliary nerve with right ciliary ganglion | — | BodyParts3D |
+| `FMA:4057` | Dorsal scapular nerve | right | Z-Anatomy |
+| `FMA:10552` | Dorsal scapular nerve | left | Z-Anatomy |
+| `FMA:21188` | Femoral nerve | right | Z-Anatomy |
+| `FMA:21189` | Femoral nerve | left | Z-Anatomy |
+| `FMA:78469` | fourth ventricle | — | BodyParts3D, Z-Anatomy |
+| `FMA:62032` | habenula | — | BodyParts3D, Z-Anatomy |
+| `FMA:62008` | hypothalamus | — | BodyParts3D, Z-Anatomy |
+| `FMA:52577` | inferior branch of left oculomotor nerve | — | BodyParts3D |
+| `FMA:52576` | inferior branch of right oculomotor nerve | — | BodyParts3D |
+| `FMA:43926` | Lateral plantar nerve | left, right | Z-Anatomy |
+| `FMA:72670` | left angular gyrus | left | BodyParts3D, Z-Anatomy |
+| `FMA:52677` | left anterior ethmoidal nerve | — | BodyParts3D |
+| `FMA:72718` | left cingulate gyrus | — | BodyParts3D |
+| `FMA:52640` | left frontal nerve | — | BodyParts3D |
+| `FMA:72690` | left fusiform gyrus | — | BodyParts3D |
+| `FMA:72714` | left hippocampus | left | BodyParts3D, Z-Anatomy |
+| `FMA:73435` | left inferior colliculus | left | BodyParts3D, Z-Anatomy |
+| `FMA:72658` | left inferior frontal gyrus | — | BodyParts3D |
+| `FMA:72688` | left inferior temporal gyrus | left | BodyParts3D, Z-Anatomy |
+| `FMA:52699` | left infratrochlear nerve | — | BodyParts3D |
+| `FMA:72978` | left insula | — | BodyParts3D |
+| `FMA:72907` | left internal capsule | — | BodyParts3D |
+| `FMA:52630` | left lacrimal nerve | — | BodyParts3D |
+| `FMA:78450` | left lateral ventricle | left | BodyParts3D, Z-Anatomy |
+| `FMA:82735` | left long ciliary nerve | — | BodyParts3D |
+| `FMA:72656` | left middle frontal gyrus | left | BodyParts3D, Z-Anatomy |
+| `FMA:72686` | left middle temporal gyrus | left | BodyParts3D, Z-Anatomy |
+| `FMA:52670` | left nasociliary nerve | — | BodyParts3D |
+| `FMA:72976` | left occipital lobe | — | BodyParts3D |
+| `FMA:52623` | left ophthalmic nerve | left | BodyParts3D, Z-Anatomy |
+| `FMA:72706` | left parahippocampal gyrus | — | BodyParts3D |
+| `FMA:72666` | left postcentral gyrus | left | BodyParts3D, Z-Anatomy |
+| `FMA:52716` | left posterior ethmoidal nerve | — | BodyParts3D |
+| `FMA:72662` | left precentral gyrus | left | BodyParts3D, Z-Anatomy |
+| `FMA:73423` | left superior colliculus | left | BodyParts3D, Z-Anatomy |
+| `FMA:72654` | left superior frontal gyrus | left | BodyParts3D, Z-Anatomy |
+| `FMA:72672` | left superior parietal lobule | left | BodyParts3D, Z-Anatomy |
+| `FMA:52657` | left supra-orbital nerve | — | BodyParts3D |
+| `FMA:72668` | left supramarginal gyrus | left | BodyParts3D, Z-Anatomy |
+| `FMA:52644` | left supratrochlear nerve | — | BodyParts3D |
+| `FMA:43925` | Medial plantar nerve | left, right | Z-Anatomy |
+| `FMA:62004` | medulla oblongata | left, right | BodyParts3D, Z-Anatomy |
+| `FMA:18915` | Obturator nerve | right | Z-Anatomy |
+| `FMA:18916` | Obturator nerve | left | Z-Anatomy |
+| `FMA:62033` | pineal body | — | BodyParts3D |
+| `FMA:67943` | pons | left, right | BodyParts3D, Z-Anatomy |
+| `FMA:22948` | Radial nerve | right | Z-Anatomy |
+| `FMA:22949` | Radial nerve | left | Z-Anatomy |
+| `FMA:72669` | right angular gyrus | right | BodyParts3D, Z-Anatomy |
+| `FMA:52676` | right anterior ethmoidal nerve | — | BodyParts3D |
+| `FMA:242609` | right archicortex | — | BodyParts3D |
+| `FMA:72717` | right cingulate gyrus | — | BodyParts3D |
+| `FMA:52639` | right frontal nerve | — | BodyParts3D |
+| `FMA:72689` | right fusiform gyrus | — | BodyParts3D |
+| `FMA:73434` | right inferior colliculus | right | BodyParts3D, Z-Anatomy |
+| `FMA:72657` | right inferior frontal gyrus | — | BodyParts3D |
+| `FMA:72687` | right inferior temporal gyrus | right | BodyParts3D, Z-Anatomy |
+| `FMA:52698` | right infratrochlear nerve | — | BodyParts3D |
+| `FMA:72977` | right insula | — | BodyParts3D |
+| `FMA:72906` | right internal capsule | — | BodyParts3D |
+| `FMA:52629` | right lacrimal nerve | — | BodyParts3D |
+| `FMA:78449` | right lateral ventricle | right | BodyParts3D, Z-Anatomy |
+| `FMA:82734` | right long ciliary nerve | — | BodyParts3D |
+| `FMA:72655` | right middle frontal gyrus | right | BodyParts3D, Z-Anatomy |
+| `FMA:72685` | right middle temporal gyrus | right | BodyParts3D, Z-Anatomy |
+| `FMA:52669` | right nasociliary nerve | — | BodyParts3D |
+| `FMA:72975` | right occipital lobe | — | BodyParts3D |
+| `FMA:52622` | right ophthalmic nerve | right | BodyParts3D, Z-Anatomy |
+| `FMA:72705` | right parahippocampal gyrus | — | BodyParts3D |
+| `FMA:72665` | right postcentral gyrus | right | BodyParts3D, Z-Anatomy |
+| `FMA:52715` | right posterior ethmoidal nerve | — | BodyParts3D |
+| `FMA:72661` | right precentral gyrus | right | BodyParts3D, Z-Anatomy |
+| `FMA:73422` | right superior colliculus | right | BodyParts3D, Z-Anatomy |
+| `FMA:72653` | right superior frontal gyrus | right | BodyParts3D, Z-Anatomy |
+| `FMA:72671` | right superior parietal lobule | right | BodyParts3D, Z-Anatomy |
+| `FMA:52656` | right supra-orbital nerve | — | BodyParts3D |
+| `FMA:72667` | right supramarginal gyrus | right | BodyParts3D, Z-Anatomy |
+| `FMA:52643` | right supratrochlear nerve | — | BodyParts3D |
+| `FMA:7647` | spinal cord | — | BodyParts3D |
+| `FMA:4755` | Subclavian nerve | right | Z-Anatomy |
+| `FMA:4763` | Subclavian nerve | left | Z-Anatomy |
+| `FMA:52575` | superior branch of left oculomotor nerve | — | BodyParts3D |
+| `FMA:52574` | superior branch of right oculomotor nerve | — | BodyParts3D |
+| `FMA:18910` | Superior gluteal nerve | left | Z-Anatomy |
+| `FMA:18909` | Superior gluteal nerve | right | Z-Anatomy |
+| `FMA:78454` | third ventricle | — | BodyParts3D, Z-Anatomy |
+| `FMA:62327` | tuber cinereum | — | BodyParts3D |
+| `FMA:22951` | Ulnar nerve | right | Z-Anatomy |
+| `FMA:22952` | Ulnar nerve | left | Z-Anatomy |
+
+</details>
+
+<details>
+<summary><strong>respiratory</strong> — 85 terms</summary>
+
+| term | label | sides | in |
+|---|---|---|---|
+| `FMA:68734` | accessory subsuperior branch of posterior basal segmental artery | — | BodyParts3D |
+| `FMA:8717` | anterior basal segmental artery | — | BodyParts3D |
+| `FMA:68682` | anterior branch of anterior segmental artery | — | BodyParts3D |
+| `FMA:68691` | anterior branch of lateral segmental artery | — | BodyParts3D |
+| `FMA:68664` | anterior part of apical segmental artery | — | BodyParts3D |
+| `FMA:68920` | anterior part of apical segmental vein | — | BodyParts3D |
+| `FMA:68945` | anterior part of lateral segmental vein | — | BodyParts3D |
+| `FMA:68661` | apical part of apical segmental artery | — | BodyParts3D |
+| `FMA:68919` | apical part of apical segmental vein | — | BodyParts3D |
+| `FMA:68669` | apical part of posterior segmental artery | — | BodyParts3D |
+| `FMA:8707` | apical segmental artery | — | BodyParts3D |
+| `FMA:13444` | apical segmental vein | — | BodyParts3D |
+| `FMA:68722` | basal branch of anterior basal segmental artery | — | BodyParts3D |
+| `FMA:68694` | inferior branch of medial segmental artery | — | BodyParts3D |
+| `FMA:8640` | inferior lingular artery | — | BodyParts3D |
+| `FMA:68227` | inferior lingular bronchial tree | — | BodyParts3D |
+| `FMA:8669` | inferior lingular vein | — | BodyParts3D |
+| `FMA:8693` | inferior part of anterior segmental vein | — | BodyParts3D |
+| `FMA:68983` | inferior part of medial segmental vein | — | BodyParts3D |
+| `FMA:8718` | lateral basal segmental artery | — | BodyParts3D |
+| `FMA:68721` | lateral branch of anterior basal segmental artery | — | BodyParts3D |
+| `FMA:68711` | lateral branch of superior segmental artery | — | BodyParts3D |
+| `FMA:68215` | lateral segmental bronchial tree | — | BodyParts3D |
+| `FMA:68737` | laterobasal branch of posterior basal segmental artery | — | BodyParts3D |
+| `FMA:68231` | left anterior basal segmental bronchial tree | — | BodyParts3D |
+| `FMA:8678` | left anterior basal segmental vein | — | BodyParts3D |
+| `FMA:13279` | left anterior segmental artery | — | BodyParts3D |
+| `FMA:68222` | left anterior segmental bronchial tree | — | BodyParts3D |
+| `FMA:8667` | left anterior segmental vein | — | BodyParts3D |
+| `FMA:68223` | left apical segmental bronchial tree | — | BodyParts3D |
+| `FMA:8679` | left inferior basal vein | — | BodyParts3D |
+| `FMA:68232` | left lateral basal segmental bronchial tree | — | BodyParts3D |
+| `FMA:9450` | left lateral basal segmental vein | — | BodyParts3D |
+| `FMA:68230` | left medial basal segmental bronchial tree | — | BodyParts3D |
+| `FMA:68233` | left posterior basal segmental bronchial tree | — | BodyParts3D |
+| `FMA:68225` | left posterior segmental bronchial tree | — | BodyParts3D |
+| `FMA:9438` | left posterior segmental vein | — | BodyParts3D |
+| `FMA:68228` | left superior segmental bronchial tree | — | BodyParts3D |
+| `FMA:68192` | lobar artery | — | BodyParts3D |
+| `UBERON:0008953` | lower lobe of left lung | left | CT atlas (MOOSE) |
+| `UBERON:0002171` | lower lobe of right lung | right | CT atlas (MOOSE) |
+| `UBERON:0002048` | lung | — | CT (female), TCIA |
+| `FMA:7405` | main bronchus | — | BodyParts3D |
+| `FMA:8716` | medial basal segmental artery | — | BodyParts3D |
+| `FMA:13289` | medial basal segmental vein | — | BodyParts3D |
+| `FMA:68704` | medial branch of superior segmental artery | — | BodyParts3D |
+| `FMA:68214` | medial segmental bronchial tree | — | BodyParts3D |
+| `FMA:68740` | mediobasal branch of posterior basal segmental artery | — | BodyParts3D |
+| `UBERON:0002174` | middle lobe of right lung | right | CT atlas (MOOSE) |
+| `FMA:8719` | posterior basal segmental artery | — | BodyParts3D |
+| `FMA:68690` | posterior branch of lateral segmental artery | — | BodyParts3D |
+| `FMA:68676` | posterior part of anterior segmental artery | — | BodyParts3D |
+| `FMA:68944` | posterior part of lateral segmental vein | — | BodyParts3D |
+| `FMA:68672` | posterior part of posterior segmental artery | — | BodyParts3D |
+| `FMA:13280` | posterior segmental artery | — | BodyParts3D |
+| `FMA:68321` | right anterior basal segmental bronchial tree | — | BodyParts3D |
+| `FMA:8673` | right anterior basal segmental vein | — | BodyParts3D |
+| `FMA:8620` | right anterior segmental artery | — | BodyParts3D |
+| `FMA:68212` | right anterior segmental bronchial tree | — | BodyParts3D |
+| `FMA:8662` | right anterior segmental vein | — | BodyParts3D |
+| `FMA:68211` | right apical segmental bronchial tree | — | BodyParts3D |
+| `FMA:8631` | right lateral basal segmental artery | — | BodyParts3D |
+| `FMA:68220` | right lateral basal segmental bronchial tree | — | BodyParts3D |
+| `FMA:9425` | right lateral basal segmental vein | — | BodyParts3D |
+| `FMA:7395` | right main bronchus | — | BodyParts3D |
+| `FMA:68218` | right medial basal segmental bronchial tree | — | BodyParts3D |
+| `FMA:68221` | right posterior basal segmental bronchial tree | — | BodyParts3D |
+| `FMA:9428` | right posterior basal segmental vein | — | BodyParts3D |
+| `FMA:68213` | right posterior segmental bronchial tree | — | BodyParts3D |
+| `FMA:8663` | right posterior segmental vein | — | BodyParts3D |
+| `FMA:68216` | right superior segmental bronchial tree | — | BodyParts3D |
+| `FMA:68693` | superior branch of medial segmental artery | — | BodyParts3D |
+| `FMA:68708` | superior branch of superior segmental artery | — | BodyParts3D |
+| `FMA:8639` | superior lingular artery | — | BodyParts3D |
+| `FMA:68226` | superior lingular bronchial tree | — | BodyParts3D |
+| `FMA:8668` | superior lingular vein | — | BodyParts3D |
+| `FMA:8683` | superior part of anterior segmental vein | — | BodyParts3D |
+| `FMA:68982` | superior part of medial segmental vein | — | BodyParts3D |
+| `FMA:8714` | superior segmental artery | — | BodyParts3D |
+| `FMA:13445` | superior segmental vein | — | BodyParts3D |
+| `FMA:7394` | trachea | — | BodyParts3D, Z-Anatomy |
+| `UBERON:0003126` | trachea | — | CT atlas (MOOSE) |
+| `FMA:8648` | trunk of pulmonary vein | — | BodyParts3D |
+| `UBERON:0008952` | upper lobe of left lung | left | CT atlas (MOOSE) |
+| `UBERON:0002170` | upper lobe of right lung | right | CT atlas (MOOSE) |
+
+</details>
+
+<details>
+<summary><strong>metabolic</strong> — 70 terms</summary>
+
+| term | label | sides | in |
+|---|---|---|---|
+| `FMA:15421` | anterior inferior segmental branch of right portal vein | — | BodyParts3D |
+| `FMA:70443` | anterior inferior segmental hepatic artery | — | BodyParts3D |
+| `FMA:15800` | anterior inferior segmental tributary of middle hepatic vein | — | BodyParts3D |
+| `FMA:71868` | anterior inferior tributary of right hepatic biliary tree | — | BodyParts3D |
+| `FMA:15420` | anterior superior segmental branch of right portal vein | — | BodyParts3D |
+| `FMA:70442` | anterior superior segmental hepatic artery | — | BodyParts3D |
+| `FMA:71867` | anterior superior tributary of right hepatic biliary tree | — | BodyParts3D |
+| `FMA:70455` | caudate lobe branch of left hepatic artery | — | BodyParts3D |
+| `FMA:15425` | caudate lobe branch of left portal vein | — | BodyParts3D |
+| `FMA:70447` | caudate lobe branch of right hepatic artery | — | BodyParts3D |
+| `FMA:82706` | caudate lobe branch of right portal vein | — | BodyParts3D |
+| `FMA:71889` | caudate lobe tributary of left hepatic biliary tree | — | BodyParts3D |
+| `FMA:14668` | common hepatic duct | — | BodyParts3D |
+| `FMA:14539` | cystic duct | — | BodyParts3D |
+| `FMA:7202` | gallbladder | — | BodyParts3D |
+| `UBERON:0002110` | gallbladder | — | CT atlas (MOOSE) |
+| `FMA:14772` | hepatic artery proper | — | BodyParts3D |
+| `FMA:15739` | hepatovenous segment ii | — | BodyParts3D |
+| `FMA:15741` | hepatovenous segment iii | — | BodyParts3D |
+| `FMA:15742` | hepatovenous segment iv | — | BodyParts3D |
+| `FMA:15743` | hepatovenous segment v | — | BodyParts3D |
+| `FMA:15744` | hepatovenous segment vi | — | BodyParts3D |
+| `FMA:15745` | hepatovenous segment vii | — | BodyParts3D |
+| `FMA:15746` | hepatovenous segment viii | — | BodyParts3D |
+| `UBERON:0002113` | kidney | — | CT (female), TCIA |
+| `FMA:15432` | lateral inferior segmental branch of left portal vein | — | BodyParts3D |
+| `FMA:70453` | lateral inferior segmental hepatic artery | — | BodyParts3D |
+| `FMA:71888` | lateral inferior tributary of left hepatic biliary tree | — | BodyParts3D |
+| `FMA:15431` | lateral superior segmental branch of left portal vein | — | BodyParts3D |
+| `FMA:70452` | lateral superior segmental hepatic artery | — | BodyParts3D |
+| `FMA:71887` | lateral superior tributary of left hepatic biliary tree | — | BodyParts3D |
+| `FMA:14670` | left hepatic duct | — | BodyParts3D |
+| `FMA:14339` | left hepatic vein | — | BodyParts3D |
+| `FMA:7205` | left kidney | left | BodyParts3D, Z-Anatomy |
+| `UBERON:0004538` | left kidney | left | CT atlas (MOOSE) |
+| `FMA:15415` | left portal vein | — | BodyParts3D |
+| `FMA:15572` | left ureter | left | BodyParts3D, Z-Anatomy |
+| `UBERON:0002107` | liver | — | CT (female), TCIA, CT atlas (MOOSE) |
+| `FMA:82494` | lobular segment | — | BodyParts3D |
+| `FMA:15429` | medial inferior segmental branch of left portal vein | — | BodyParts3D |
+| `FMA:70450` | medial inferior segmental hepatic artery | — | BodyParts3D |
+| `FMA:71886` | medial inferior tributary of left hepatic biliary tree | — | BodyParts3D |
+| `FMA:15428` | medial superior segmental branch of left portal vein | — | BodyParts3D |
+| `FMA:70449` | medial superior segmental hepatic artery | — | BodyParts3D |
+| `FMA:71885` | medial superior tributary of left hepatic biliary tree | — | BodyParts3D |
+| `FMA:7198` | pancreas | — | BodyParts3D |
+| `UBERON:0001264` | pancreas | — | CT (female), TCIA, CT atlas (MOOSE) |
+| `FMA:10419` | pancreatic duct | — | BodyParts3D |
+| `FMA:63103` | pancreatic duct tree | — | BodyParts3D |
+| `FMA:45732` | parenchyma | — | BodyParts3D |
+| `FMA:15424` | posterior inferior segmental branch of right portal vein | — | BodyParts3D |
+| `FMA:70446` | posterior inferior segmental hepatic artery | — | BodyParts3D |
+| `FMA:71870` | posterior inferior tributary of right hepatic biliary tree | — | BodyParts3D |
+| `FMA:15423` | posterior superior segmental branch of right portal vein | — | BodyParts3D |
+| `FMA:70445` | posterior superior segmental hepatic artery | — | BodyParts3D |
+| `FMA:71869` | posterior superior tributary of right hepatic biliary tree | — | BodyParts3D |
+| `FMA:14669` | right hepatic duct | — | BodyParts3D |
+| `FMA:14338` | right hepatic vein | — | BodyParts3D |
+| `FMA:7204` | right kidney | right | BodyParts3D, Z-Anatomy |
+| `UBERON:0004539` | right kidney | right | CT atlas (MOOSE) |
+| `FMA:15414` | right portal vein | — | BodyParts3D |
+| `FMA:15571` | right ureter | right | BodyParts3D, Z-Anatomy |
+| `FMA:70457` | trunk of left hepatic artery | — | BodyParts3D |
+| `FMA:82697` | trunk of left portal vein | — | BodyParts3D |
+| `FMA:70456` | trunk of right hepatic artery | — | BodyParts3D |
+| `FMA:82695` | trunk of right portal vein | — | BodyParts3D |
+| `FMA:19667` | urethra | — | BodyParts3D, Z-Anatomy |
+| `FMA:15900` | urinary bladder | — | BodyParts3D, Z-Anatomy |
+| `UBERON:0001255` | urinary bladder | — | CT (female), TCIA, CT atlas (MOOSE) |
+| `UBERON:0014454` | visceral abdominal adipose tissue | — | CT atlas (MOOSE) |
+
+</details>
+
+<details>
+<summary><strong>digestive</strong> — 34 terms</summary>
+
+| term | label | sides | in |
+|---|---|---|---|
+| `FMA:14542` | appendix | — | BodyParts3D |
+| `FMA:14545` | ascending colon | — | BodyParts3D, Z-Anatomy |
+| `FMA:14541` | cecum | — | BodyParts3D |
+| `UBERON:0001155` | colon | — | CT atlas (MOOSE) |
+| `FMA:14547` | descending colon | — | BodyParts3D, Z-Anatomy |
+| `FMA:14966` | distal part of ileum | — | BodyParts3D |
+| `FMA:16983` | distal part of jejunum | — | BodyParts3D |
+| `FMA:7206` | duodenum | — | BodyParts3D, Z-Anatomy |
+| `UBERON:0002114` | duodenum | — | CT atlas (MOOSE) |
+| `FMA:7131` | esophagus | — | BodyParts3D |
+| `UBERON:0001043` | esophagus | — | CT atlas (MOOSE) |
+| `FMA:7202` | Gallbladder | — | Z-Anatomy |
+| `FMA:59764` | gingiva of lower jaw | — | BodyParts3D |
+| `FMA:59803` | left submandibular gland | left | BodyParts3D, Z-Anatomy |
+| `FMA:14643` | mesentery of small intestine | — | BodyParts3D |
+| `FMA:16549` | mesoappendix | — | BodyParts3D |
+| `FMA:14965` | middle part of ileum | — | BodyParts3D |
+| `FMA:16982` | middle part of jejunum | — | BodyParts3D |
+| `FMA:7198` | Pancreas | — | Z-Anatomy |
+| `FMA:10419` | Pancreatic duct | — | Z-Anatomy |
+| `FMA:14964` | proximal part of ileum | — | BodyParts3D |
+| `FMA:16981` | proximal part of jejunum | — | BodyParts3D |
+| `FMA:14544` | rectum | — | BodyParts3D |
+| `FMA:59802` | right submandibular gland | right | BodyParts3D, Z-Anatomy |
+| `UBERON:0002108` | small intestine | — | CT atlas (MOOSE) |
+| `FMA:7148` | stomach | — | BodyParts3D, Z-Anatomy |
+| `UBERON:0000945` | stomach | — | CT atlas (MOOSE) |
+| `FMA:15044` | taenia libera | — | BodyParts3D |
+| `FMA:15042` | taenia mesocolica | — | BodyParts3D |
+| `FMA:15043` | taenia omentalis | — | BodyParts3D |
+| `FMA:54640` | tongue | — | BodyParts3D, Z-Anatomy |
+| `FMA:14546` | transverse colon | — | BodyParts3D, Z-Anatomy |
+| `FMA:14647` | transverse mesocolon | — | BodyParts3D |
+| `FMA:54397` | upper jaw | — | BodyParts3D |
+
+</details>
+
+<details>
+<summary><strong>endocrine</strong> — 9 terms</summary>
+
+| term | label | sides | in |
+|---|---|---|---|
+| `UBERON:0002369` | adrenal gland | — | CT (female), TCIA |
+| `FMA:15630` | left adrenal gland | — | BodyParts3D |
+| `UBERON:0001234` | left adrenal gland | left | CT atlas (MOOSE) |
+| `UBERON:0001120` | left lobe of thyroid gland | left | CT atlas (MOOSE) |
+| `FMA:13889` | pituitary gland | — | BodyParts3D |
+| `FMA:15629` | right adrenal gland | — | BodyParts3D |
+| `UBERON:0001233` | right adrenal gland | right | CT atlas (MOOSE) |
+| `UBERON:0001119` | right lobe of thyroid gland | right | CT atlas (MOOSE) |
+| `UBERON:0002046` | thyroid gland | — | CT (female), TCIA |
+
+</details>
+
+<details>
+<summary><strong>integumentary</strong> — 6 terms</summary>
+
+| term | label | sides | in |
+|---|---|---|---|
+| `UBERON:0001460` | arm | — | CT atlas (MOOSE) |
+| `UBERON:0000033` | head | — | CT atlas (MOOSE) |
+| `UBERON:0000978` | leg | — | CT atlas (MOOSE) |
+| `FMA:7163` | skin | — | BodyParts3D |
+| `UBERON:0002190` | subcutaneous adipose tissue | — | CT atlas (MOOSE) |
+| `UBERON:0002100` | trunk | — | CT atlas (MOOSE) |
+
+</details>
+
+<details>
+<summary><strong>reproductive</strong> — 1 term</summary>
+
+| term | label | sides | in |
+|---|---|---|---|
+| `FMA:9600` | prostate | — | BodyParts3D, Z-Anatomy |
+
+</details>
+
+## What an overlay would declare
+
+Each overlay’s own parts, read from its asset, matched against the crosswalks by name. This is the shortlist an overlay would supersede by term instead of by name test. Names that do not match are shown as unmatched rather than resolved to a plausible term — a wrong ontology id would hide the wrong structure, which is worse than hiding nothing.
+
+### Beating heart
+
+0/3 parts have a term. 0 exist in an atlas but have no term in any crosswalk. 3 are in no atlas here at all.
+
+| part | term | status | in which atlas |
+|---|---|---|---|
+| cardiovascular/epicardium | — | adds an organ, nothing to supersede | none |
+| cardiovascular/lv-endocardium | — | adds an organ, nothing to supersede | none |
+| cardiovascular/rv-endocardium | — | adds an organ, nothing to supersede | none |
+
+### Schematic eye
+
+0/3 parts have a term. 3 exist in an atlas but have no term in any crosswalk. 0 are in no atlas here at all.
+
+| part | term | status | in which atlas |
+|---|---|---|---|
+| Cornea | — | **needs a term** | z-anatomy |
+| Lens | — | **needs a term** | z-anatomy |
+| Retina | — | **needs a term** | z-anatomy |
+
+### Ear (photographic)
+
+0/12 parts have a term. 5 exist in an atlas but have no term in any crosswalk. 7 are in no atlas here at all.
+
+| part | term | status | in which atlas |
+|---|---|---|---|
+| Scala Tympani | — | adds an organ, nothing to supersede | none |
+| Scala Vestibuli | — | adds an organ, nothing to supersede | none |
+| Malleus | — | **needs a term** | z-anatomy |
+| Incus | — | **needs a term** | z-anatomy |
+| Stapes | — | **needs a term** | z-anatomy |
+| Facial Nerve | — | adds an organ, nothing to supersede | none |
+| Chorda Tympani | — | **needs a term** | z-anatomy |
+| Cochleovestibular Nerve | — | adds an organ, nothing to supersede | none |
+| Tympanic Membrane | — | **needs a term** | z-anatomy |
+| External Auditory Canal | — | adds an organ, nothing to supersede | none |
+| Sinus Dura | — | adds an organ, nothing to supersede | none |
+| Carotis Interna | — | adds an organ, nothing to supersede | none |
+
+**Read the middle column, not the count.** "Needs a term" is the actionable row: the atlas holds that structure, so an overlay could supersede it precisely — the term is simply missing from the crosswalks, which cover the skeleton and the vasculature well and the special senses not at all.
+
+⚠️ **"Adds an organ" is matched by NAME, so read it as "no structure with this name".** It is not proof the anatomy is absent. Z-Anatomy has no `Scala Tympani`, but it does have a `Cochlea` — one structure where OpenEar has two — and a name test cannot see a many-to-one correspondence. Terms would: the scalae are parts of the cochlea in both FMA and UBERON, which is precisely the kind of relation a name string cannot express and an ontology can.
+
+### ⚠️ The conflict this table found: the schematic eye
+
+The eye overlay was built and documented on the basis that **no atlas here contained an eyeball**. That was true of the three-file Z-Anatomy build and stopped being true when `NervousSystem100.fbx` was imported; nothing re-checked it until this table was generated. Z-Anatomy carries a complete bilateral globe under `nervous` — cornea, lens, retina, sclera, iris, vitreous body, zonular fibres, both segments and the anterior chamber — 20 structures at ids 2631–2650, which are contiguous and could therefore be masked exactly by the existing mechanism. There is no left/right obstacle either, because the eye overlay already places two instances.
+
+It is **not** wired up, deliberately, and the decision is recorded rather than taken: the schematic models three refracting surfaces, while Z-Anatomy models the sclera and iris it does not have. Superseding would render LESS anatomy in exchange for correct optics, which contradicts the overlay’s own note that it is "not a substitute for an anatomical eye". Until that is settled, switching the eye on over Z-Anatomy draws two overlapping globes. Narrowing the mask to just cornea, lens and retina is **not** available — those three sit at ids 2631, 2635, 2641, 2644, 2648 and 2649, which are not contiguous, and the masking mechanism takes a range.
+
+---
+
+Per-asset licence and component provenance is in `docs/LICENCE_LOG.md`; the viewer shows the same provenance under **All models and sources**.

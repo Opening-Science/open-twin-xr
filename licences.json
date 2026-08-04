@@ -1,0 +1,283 @@
+{
+  "$comment": [
+    "THE LICENCE REGISTER — a RECORD, not a gate.",
+    "",
+    "D12b: this project imports everything each atlas offers, stays open source and",
+    "non-commercial, and renders every attribution its sources require. Nothing is",
+    "excluded on licence grounds. What this file does is keep the licence position",
+    "knowable, so it can be reviewed properly before publication instead of guessed.",
+    "",
+    "`npm run check:licences` reads the SHIPPED GLBs — including the per-structure",
+    "component tags build-z-anatomy.mjs writes into them — and regenerates",
+    "docs/LICENCE_LOG.md. Read the log, not this file, for the current state; this",
+    "file holds the things a machine cannot derive from an asset: why a source was",
+    "chosen, what is unverified, and what is closed by contract.",
+    "",
+    "`verify` fields become checkboxes on the log's pre-publication action list."
+  ],
+  "tiers": {
+    "note": "Retained as vocabulary for the log, NOT as an exclusion mechanism. D12 briefly used these to gate a publish step and D12b replaced that with the record-keeping approach. They remain useful for saying what an obligation IS.",
+    "open": {
+      "licences": [
+        "CC0",
+        "CC BY",
+        "CC BY-SA",
+        "MIT",
+        "Apache-2.0",
+        "BSD",
+        "US public domain",
+        "SIL OFL"
+      ],
+      "obligation": "Attribution, and share-alike where the licence says so. No barrier to publishing."
+    },
+    "non-commercial": {
+      "licences": [
+        "CC BY-NC",
+        "CC BY-NC-SA"
+      ],
+      "obligation": "Attribution, plus the project must not be sold. Compatible with this project's stated stance. ⚠️ It does mean the bundled result cannot be offered under a licence that permits commercial reuse — the NC parts stay NC, so the whole is 'open source, non-commercial' rather than Open Definition conformant. Say so plainly when publishing."
+    },
+    "no-licence": {
+      "licences": [
+        "unstated / all-rights-reserved"
+      ],
+      "obligation": "NO GRANT EXISTS. Attribution satisfies a licence's conditions; it cannot manufacture permission that was never given. Needs written permission from the rights holder, or replacement geometry, before publication."
+    },
+    "closed": {
+      "licences": [
+        "proprietary EULA",
+        "signed material transfer agreement"
+      ],
+      "obligation": "Not reachable by any decision of ours — a contract with someone else."
+    }
+  },
+  "assets": [
+    {
+      "id": "bodyparts3d",
+      "kind": "atlas",
+      "file": "public/models/bodyparts3d.ao.glb",
+      "loaded": true,
+      "licence": "CC BY 4.0",
+      "source": "https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html",
+      "attribution": "BodyParts3D, © The Database Center for Life Science licensed under CC Attribution 4.0 International.",
+      "why": "Relicensed from CC BY-SA 2.1 Japan on 2025-02-27. See D2 — several upstream pages still say share-alike, and the stale ones are the easier ones to find. Tier 1 under either reading.",
+      "verify": "DBCLS have not confirmed the relicence in writing. Chase it before relying on the CC BY reading for anything that matters.",
+      "holder": "The Database Center for Life Science (DBCLS)",
+      "ownLicence": "CC BY 4.0"
+    },
+    {
+      "id": "z-anatomy",
+      "kind": "atlas",
+      "file": "public/models/z-anatomy.ao.glb",
+      "loaded": true,
+      "licence": "CC BY-SA 4.0 aggregate, incl. CC BY-NC-SA and CC BY-NC components and one component with no licence",
+      "source": "https://github.com/LluisV/Z-Anatomy",
+      "attribution": "Z-Anatomy - The open source atlas of anatomy - CC-BY-SA 4.0; incl. Anatomy of the Inner Ear by University of Dundee School of Medicine (CC-BY-NC-SA 4.0), Kidney by lissiecowley (CC-BY-NC 4.0), and Brainder/white matter by University of Washington (NO LICENCE STATED); derived from BodyParts3D - The Database Center for Life Science - CC-BY-SA 2.1 Japan.",
+      "why": "All seven system files imported (D12b). Per-structure component tags live in the asset's own structure table, so docs/LICENCE_LOG.md counts what actually ships. THE SHIPPED BUILD IS THE --publishable ONE: 3,614 structures, of which 3,606 are Z-Anatomy's own CC BY-SA work and 8 come from two non-commercial components (4 Dundee inner ear, 4 lissiecowley kidney). The 3 unlicensed University of Washington white-matter structures are excluded by --publishable and are NOT in it. The full research build is 3,617. Both differ from the 3,626 quoted before a zero-vertex-part guard stopped emitting nine empty structures, and from the 8-structure Dundee tag before the inner-ear pattern was narrowed to exclude the middle ear.",
+      "components": [
+        {
+          "file": "SkeletalSystem100.fbx",
+          "licence": "CC BY-SA 4.0",
+          "imported": true,
+          "verify": "⚠️ UNRESOLVED: contains Incus, Stapes and Malleus. Those are middle-ear bones and belong in a skeleton, so they are most likely Z-Anatomy's own — but the CC BY-NC-SA 'Anatomy of the Inner Ear' component is also ear geometry, and the component-to-file mapping is an inference nobody has checked against upstream's License.txt. They are currently untagged, i.e. credited as Z-Anatomy's. Check against License.txt before publishing."
+        },
+        {
+          "file": "MuscularSystem100.fbx",
+          "licence": "CC BY-SA 4.0",
+          "imported": true
+        },
+        {
+          "file": "Joints100.fbx",
+          "licence": "CC BY-SA 4.0",
+          "imported": true
+        },
+        {
+          "file": "CardioVascular41.fbx",
+          "size_mb": 61.88,
+          "licence": "CC BY-SA 4.0",
+          "imported": true,
+          "note": "Never licence-blocked — plain CC BY-SA, simply unbuilt until 28 July. ⚠️ Note the version suffix is 41, not 100 like every other file. Z-Anatomy's convention appears to encode completeness, so this may be a partial model. Check coverage before trusting it."
+        },
+        {
+          "file": "NervousSystem100.fbx",
+          "size_mb": 51.39,
+          "licence": "MIXED — mostly CC BY-SA 4.0, plus CC BY-NC-SA inner ear and UNLICENSED white matter",
+          "imported": true,
+          "note": "⚠️ docs/ROADMAP.md Phase 3 warned this file was not uniformly CC BY-SA and was RIGHT. A name scan of the built table found 8 inner-ear meshes (Cochlea, Vestibule, Tympanic membrane, Auditory tube — the CC BY-NC-SA Dundee component) and 3 white-matter meshes (the University of Washington 'Brainder' component, NO LICENCE STATED) among 578 structures of Z-Anatomy's own work. All are imported per D12b and tagged per structure via COMPONENTS in build-z-anatomy.mjs. ⚠️ The cochlear and vestibular NERVES and NUCLEI are Z-Anatomy's own and are deliberately NOT tagged — only the sense organ is Dundee's. Tagging the nerves would over-attribute."
+        },
+        {
+          "file": "LymphoidOrgans100.fbx",
+          "size_mb": 2.03,
+          "licence": "CC BY-SA 4.0",
+          "imported": true,
+          "note": "Never licence-blocked — plain CC BY-SA, simply unbuilt. Spleen, thymus, palatine tonsil and ~106 lymph node groups. SystemId has no 'lymphoid' and deliberately still does not: the meshes carry system 'lymphoid' in extras, systemForGroup returns null, and AtlasBody renders them unresolved — visible and named but not score-coloured. Adding a SystemId would have drifted the health-data contract (D8 owns it upstream) for a geometry reason."
+        },
+        {
+          "file": "VisceralSystem100.fbx",
+          "size_mb": 17.54,
+          "licence": "MIXED — contains CC BY-NC 4.0 kidney (lissiecowley)",
+          "imported": true,
+          "note": "Contains the CC BY-NC 4.0 kidney (lissiecowley), imported and tagged per structure. Also the one file where 'one FBX per system' breaks down: viscera span digestive, respiratory, endocrine, reproductive and urinary, so the system comes from the mesh name via visceralSystem() rather than the filename. urinary maps to 'metabolic', matching the FMA walk already recorded in docs/bodyparts3d-system-map.tsv."
+        },
+        {
+          "file": "Regions of human body100.fbx",
+          "size_mb": 4.22,
+          "licence": "CC BY-SA 4.0",
+          "imported": true,
+          "note": "Imported 28 July as its own asset (z-anatomy-regions), not merged into the body. Surface regions lie on the skin and would hide every organ behind them; as a separate atlas source it is one click in the switcher. Never a licence question — plain CC BY-SA."
+        }
+      ],
+      "verify": "⚠️ DISTRIBUTION GATE: the University of Washington white-matter component (3 structures) has NO licence statement, and serving to logged-in users is still distribution — a login wall does not change this. Build with `npm run build:z-anatomy -- --publishable`, which drops exactly that component and keeps the non-commercial ones (they need attribution, not removal). See docs/DEPLOY.md. The permanent fix is written permission or CT-segmented white matter from MOOSE (Apache-2.0).",
+      "holder": "Z-Anatomy authors",
+      "ownLicence": "CC BY-SA 4.0"
+    },
+    {
+      "id": "z-anatomy-regions",
+      "kind": "atlas",
+      "file": "public/models/z-anatomy-regions.ao.glb",
+      "loaded": true,
+      "licence": "CC BY-SA 4.0",
+      "source": "https://github.com/LluisV/Z-Anatomy",
+      "attribution": "Z-Anatomy - The open source atlas of anatomy - CC-BY-SA 4.0; derived from BodyParts3D - The Database Center for Life Science - CC-BY-SA 2.1 Japan.",
+      "why": "Surface topography from Regions of human body100.fbx — 256 named regions of the body surface. Plain CC BY-SA with none of the three third-party components, so it is the cleanest asset in the set. A SEPARATE GLB for a geometric reason, not a licence one: the patches lie on the skin and would occlude every organ if merged into z-anatomy.",
+      "holder": "Z-Anatomy authors",
+      "ownLicence": "CC BY-SA 4.0"
+    },
+    {
+      "id": "hra",
+      "kind": "atlas",
+      "file": "public/models/hra.ao.glb",
+      "loaded": true,
+      "licence": "CC BY 4.0",
+      "source": "https://hubmapconsortium.github.io/ccf/pages/ccf-3d-reference-library.html",
+      "attribution": "3D anatomical structures from the HuBMAP Human Reference Atlas (HRA), CC BY 4.0.",
+      "why": "Attribution and indication-of-changes only. Derived from the NLM Visible Human Female, itself public domain since July 2019.",
+      "holder": "HuBMAP Consortium",
+      "ownLicence": "CC BY 4.0"
+    },
+    {
+      "id": "hra-m",
+      "kind": "atlas",
+      "file": "public/models/hra-m.ao.glb",
+      "loaded": true,
+      "licence": "CC BY 4.0",
+      "source": "https://hubmapconsortium.github.io/ccf/pages/ccf-3d-reference-library.html",
+      "attribution": "3D anatomical structures from the HuBMAP Human Reference Atlas (HRA), CC BY 4.0.",
+      "why": "Same atlas, Visible Human Male donor.",
+      "holder": "HuBMAP Consortium",
+      "ownLicence": "CC BY 4.0"
+    },
+    {
+      "id": "ct-atlas-f",
+      "kind": "derived-atlas",
+      "file": "public/models/ct-atlas-f.glb",
+      "loaded": false,
+      "licence": "CC BY 4.0 (MOOSE weights) over CC BY 4.0 source CT",
+      "source": "docs/CT_ATLAS_PIPELINE.md",
+      "attribution": "Segmented with MOOSE 3.2 (ENHANCE-PET), CC BY 4.0 weights.",
+      "why": "Built by the MOOSE pipeline and tier 1 throughout, but not registered in anatomySources.ts, so nothing loads it. Registered here anyway — an asset on disk needs an entry whether or not it renders.",
+      "verify": "If the pipeline is ever re-run with TotalSegmentator's GATED subtasks (tissue_types, appendicular_bones, face), the output becomes tier 2 and needs its own id here — the academic weights licence is non-commercial.",
+      "holder": "unidentified — source scan not recorded",
+      "ownLicence": "⚠️ unresolved (MOOSE weights CC BY 4.0)"
+    },
+    {
+      "id": "htb-ct-f",
+      "kind": "derived-atlas",
+      "file": "public/models/htb-ct-003.glb",
+      "loaded": true,
+      "licence": "CC BY 4.0",
+      "source": "https://www.cancerimagingarchive.net/collection/healthy-total-body-cts/",
+      "attribution": "Segmentations from the TCIA Healthy-Total-Body-CTs collection (subject 003), CC BY 4.0; meshed for this project. doi:10.7937/NC7Z-4F76.",
+      "why": "The first complete FEMALE body in this repo, and the first atlas derived from a real person's CT rather than modelled. Verified at source rather than from a survey: the segmentations AND the clinical demographics are both CC BY 4.0, and only the CT images sit behind the NIH Controlled Data Access Policy -- which does not matter, because the images are not needed to build this. Subject 003 is F, 26, 1.7018 m, BMI 20.4, from the collection's own clinical spreadsheet. Closes ROADMAP Phase 6, which HRA could not: HRA's female donor has no skeleton above the pelvis.",
+      "verify": "Nothing outstanding on rights. Two properties must travel with any use of it, both recorded in docs/healthy-total-body-cts-crosswalk.tsv. Labels are GROUPED -- one Ribcage rather than 24 ribs, one Spine rather than 24 vertebrae, every long bone merging left and right -- and the images being restricted means it cannot be re-segmented finer. And it is low-dose non-contrast CT, so bone is trustworthy and soft tissue is not: D10's contrast objection applies to the organ masks. ⚠️ Do not re-run this with TotalSegmentator's gated subtasks; that would make the output non-commercial and it would need its own entry.",
+      "holder": "TCIA Healthy-Total-Body-CTs collection authors",
+      "ownLicence": "CC BY 4.0"
+    },
+    {
+      "id": "biv-heart",
+      "kind": "organ-overlay",
+      "file": "public/models/biv-heart.glb",
+      "loaded": true,
+      "licence": "Apache-2.0",
+      "source": "https://github.com/UOA-Heart-Mechanics-Research/biv-me",
+      "attribution": "Beating biventricular heart from biv-me (UOA Heart Mechanics Research), Apache-2.0 — a model fitted to one subject's cine MRI, 25 cardiac phases.",
+      "why": "First organ overlay rather than an atlas: one organ, its own donor, and a time dimension no atlas here has. Apache-2.0 verified from the repository's own LICENSE. Built by scripts/build-biv-heart.mjs from the committed demo output; see docs/PLAN_INTEGRATION.md (B6).",
+      "verify": "⚠️ BLOCKS PUBLICATION — and the question is now PRECISE rather than a suspicion. Resolved by reading the upstream repo and the FIMH 2025 paper (doi:10.1007/978-3-031-94562-5_34) on 29 July 2026: the paper's own acknowledgements thank 'the study participants of the UK Biobank and CARDIOHANCE', and the abstract says the pipeline was tested on CMR data from TWO CENTRES. So UK Biobank involvement is established fact, not an inference from Steffen Petersen's co-authorship. The repo still carries NO data statement, no ethics or consent text, and it bundles input DICOMs under demo/dicoms for a case named 'patient1'. THE ONE OPEN QUESTION: which of the two cohorts is patient1? If UK Biobank, redistribution of derived geometry is almost certainly barred by their access terms — derived data returns to UK Biobank and is not published onward — and Apache-2.0 at the repo root cannot override the authors' own obligations. If CARDIOHANCE (Auckland), it turns on that study's consent and ethics approval, which the authors know and we cannot. ASK: joshua.dillon@auckland.ac.nz (corresponding author, Auckland Bioengineering Institute) and charlene.1.mauger@kcl.ac.uk (KCL) — both listed as contacts in the repo README. If the answer is UK Biobank or otherwise restricted, replace with the Sunnybrook CC0 fitted models (docs/INTEGRATION_CANDIDATES.md C3), which carry no such question. Draft email in docs/PLAN_INTEGRATION.md under B6.",
+      "holder": "University of Auckland Heart Mechanics Research Group",
+      "ownLicence": "Apache-2.0",
+      "gate": "subject cohort unidentified — UK Biobank or CARDIOHANCE",
+      "gateNote": "Not a licence problem. Apache-2.0 is clear; what is unconfirmed is whether the licensor held rights to the demo subject's scan. Also enforced in code by publishable:false in src/scene/organOverlays.ts, which is what keeps it out of a --publishable build."
+    },
+    {
+      "id": "schematic-eye",
+      "kind": "organ-overlay",
+      "file": "public/models/eye.glb",
+      "loaded": true,
+      "licence": "None required — generated by this project",
+      "source": "scripts/build-eye.mjs",
+      "attribution": "Schematic optical eye generated by open-twin-openXR from the published Arizona eye model (Schwiegerling). Geometry original to this project.",
+      "why": "THE ONLY ASSET HERE WITH NO UPSTREAM RIGHTS HOLDER. Generated from published radii, conic constants, thicknesses and refractive indices. Those are measurements, and measurements are not copyrightable expression, so the mesh is ours outright — no licence, no attribution chain, no provenance question. Crediting Schwiegerling for the parameters is courtesy and good scholarship, not a licence condition. This is the pattern to reach for whenever a structure is fully specified in the literature: generate it and own it.",
+      "verify": "Nothing to verify for rights. What DOES need saying every time it is shown: it is a SCHEMATIC OPTICAL model — cornea, lens and retina only, with no sclera, iris, ciliary body, extraocular muscles, optic nerve or vasculature. Correct as optics; not a substitute for an anatomical eye, and not a donor's.",
+      "holder": "open-twin-openXR (this project)",
+      "ownLicence": "None required — generated by this project"
+    },
+    {
+      "id": "openear-zeta",
+      "kind": "organ-overlay",
+      "file": "public/models/openear-zeta.glb",
+      "loaded": true,
+      "licence": "CC BY 4.0",
+      "source": "https://zenodo.org/record/1473724",
+      "attribution": "OpenEar library of 3D models of the human temporal bone (Sieber et al., MED-EL / University of Bern), CC BY 4.0. Surface colour baked from the same specimen's true-colour micro-slicing volume.",
+      "why": "The D4 texture pilot at 1/100th of Visible Human's cost (B3), and it ANSWERS D4: photographic tissue colour does survive this pipeline. The first asset here coloured by what the tissue looked like rather than by a palette we chose. Licence re-confirmed CC BY 4.0 from the Zenodo API. Specimen ZETA only, indexed and pulled member-by-member over HTTP range requests by scripts/remote-zip-index.mjs, which fetched 140 MB instead of 7.3 GB. Meshes are in RAS and the colour volume in LPS, so the shipped FlipXY.h5 — diag(-1,-1,1) — is the whole registration: 6,985 of 7,200 sampled vertices land inside the volume on non-black tissue. Placed by landmark fit rather than by eye — five structures common to it and Z-Anatomy, 1.27 mm RMS, and the same fit is what identified it as a RIGHT ear.",
+      "verify": "Nothing outstanding on rights, and the pipeline blocker is fixed: all 12 structures now carry baked photographic colour, and it renders as the `openear` organ overlay. Three properties travel with any use of it. It is ONE cadaveric RIGHT temporal bone, not a population. 71.5% of its surface has a colour source and the rest is neutral grey, because the micro-sliced block (~39.6 x 39.6 x 51.8 mm) is smaller than the scan -- grey means 'no source', never 'this colour', and the per-structure split is in the asset's own extras. And it is ~14% larger than Z-Anatomy's inner ear, left unscaled deliberately; see the note in src/scene/organOverlays.ts.",
+      "holder": "MED-EL / University of Bern (Sieber et al.)",
+      "ownLicence": "CC BY 4.0"
+    },
+    {
+      "id": "inter-font",
+      "kind": "font",
+      "file": "public/fonts/InterVariable.woff2",
+      "loaded": true,
+      "licence": "SIL Open Font License 1.1",
+      "source": "https://github.com/rsms/inter/releases/tag/v4.1",
+      "attribution": "Inter typeface by Rasmus Andersson, SIL Open Font License 1.1.",
+      "why": "Self-hosted from the official Inter 4.1 release: web/InterVariable.woff2, the COMPLETE variable font, 344 KB. Not a Google subset — a subset carries a `unicode-range`, which does not merely describe the file but restricts which characters the face may render, so anything outside it falls back to system-ui silently. Audited 29 July 2026: `->` and `~=` appear in rendered strings and Inter has both, yet the latin subset was letting the system font draw them. public/fonts/OFL.txt is byte-identical to LICENSE.txt in that release.",
+      "verify": "RESOLVED — no external runtime fetch remains. Verified twice: no fonts.googleapis or fonts.gstatic reference in src/ or index.html, and a full network capture of the running app shows every request on localhost with /fonts/InterVariable.woff2 served 200. Kept as a record because re-adding a CDN font link would silently reopen a GDPR exposure — LG Muenchen I (3 O 17493/20) held the IP disclosure alone sufficient. The only characters that still fall back are the emoji and geometric icons Inter genuinely lacks, which is correct: self-hosting an emoji font is neither wanted nor generally licensed.",
+      "holder": "Rasmus Andersson",
+      "ownLicence": "SIL Open Font License 1.1"
+    },
+    {
+      "id": "npm-runtime",
+      "kind": "code",
+      "file": "package.json",
+      "loaded": true,
+      "licence": "MIT / Apache-2.0 / BSD throughout",
+      "source": "package-lock.json",
+      "attribution": null,
+      "why": "three, r3f, drei, @react-three/xr, three-mesh-bvh, zustand, recharts and the whole build chain are permissive. Deliberately NOT enumerated here — a hand-written copy of the dependency tree is the thing that goes stale. Run `npx license-checker --summary` for the live answer.",
+      "verify": "Re-run the checker after any dependency bump. The one historical trap is @pmndrs/assets (CC0, fine) pulling a re-resolution of the whole pmndrs stack."
+    }
+  ],
+  "closed": [
+    {
+      "id": "zygote",
+      "licence": "proprietary, five figures",
+      "tier": 4,
+      "why": "Terms forbid redistributing the content or 3D derivatives. Not reachable by D12 — this is a contract and a purchase, not a licence tier."
+    },
+    {
+      "id": "uk-biobank",
+      "licence": "material transfer agreement",
+      "tier": 4,
+      "why": "Signed MTA forbids sublicensing and redistribution, and derived results return to the holder. A decision of ours cannot relax an agreement with someone else."
+    },
+    {
+      "id": "nako",
+      "licence": "material transfer agreement",
+      "tier": 4,
+      "why": "As UK Biobank."
+    }
+  ],
+  "stance": "open source, non-commercial, fully attributed — the twin will be published under an open licence with every required credit rendered in-app and embedded in each asset. Non-commercial components (CC BY-NC, CC BY-NC-SA) are therefore compatible with the intended use, and the obligation they carry is attribution plus not selling it. ⚠️ One exception the stance cannot cover: geometry with NO licence statement grants nothing at all, so it needs written permission rather than a credit line."
+}

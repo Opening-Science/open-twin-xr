@@ -1,0 +1,144 @@
+{
+  "schemaVersion": "0.2.0",
+  "_comment": "FICTIONAL sample data. Shaped to match what etzm/open-twin can actually produce - see docs/SCHEMA_VERIFICATION.md. Systems with no connector are hasData:false with score:null and MUST render as 'no data', never as a number. UBERON ids are standard terms; confirm each against the HRA release before relying on them.",
+  "profile": {
+    "name": "John",
+    "biologicalAge": {
+      "value": null,
+      "available": false,
+      "caveat": "No connector produces biological age. It would be a metric this project invents."
+    },
+    "cardiovascularAge": {
+      "value": 36,
+      "available": true,
+      "caveat": "From Oura 'vascular age'. No standard LOINC or SNOMED concept exists; vendor-local code pending clinical sign-off."
+    },
+    "overallScore": 78,
+    "status": "Good",
+    "statusMessage": "5 of 9 systems connected"
+  },
+  "systems": [
+    {
+      "id": "cardiovascular",
+      "name": "Cardiovascular",
+      "score": 7,
+      "hasData": true,
+      "provenance": ["oura"],
+      "summary": "Resting heart rate and HRV within a healthy band; blood pressure trending slightly high.",
+      "structures": [
+        { "id": "UBERON:0000948", "label": "heart" },
+        { "id": "UBERON:0001981", "label": "blood vessel" }
+      ]
+    },
+    {
+      "id": "musculoskeletal",
+      "name": "Musculoskeletal",
+      "score": 9,
+      "hasData": true,
+      "provenance": ["vitronic-bodyloop", "oura"],
+      "summary": "Posture and joint angles from BodyLoop within reference; strong activity and mobility markers.",
+      "structures": [
+        { "id": "UBERON:0001434", "label": "skeletal system" },
+        { "id": "UBERON:0001015", "label": "musculature" }
+      ]
+    },
+    {
+      "id": "respiratory",
+      "name": "Respiratory",
+      "score": 8,
+      "hasData": true,
+      "provenance": ["oura"],
+      "summary": "SpO2 stable and respiratory rate within range. Limited signal: no spirometry connected.",
+      "structures": [
+        { "id": "UBERON:0002048", "label": "lung" },
+        { "id": "UBERON:0003126", "label": "trachea" }
+      ]
+    },
+    {
+      "id": "metabolic",
+      "name": "Metabolic",
+      "score": 7,
+      "hasData": true,
+      "provenance": ["oura", "google-health"],
+      "summary": "VO2max and activity acceptable. Glucose coding unresolved upstream, so lab-derived markers are excluded.",
+      "structures": [
+        { "id": "UBERON:0002107", "label": "liver" },
+        { "id": "UBERON:0001264", "label": "pancreas" }
+      ]
+    },
+    {
+      "id": "nervous",
+      "name": "Nervous System",
+      "score": 8,
+      "hasData": true,
+      "proxy": true,
+      "provenance": ["oura"],
+      "summary": "Derived from sleep, stress and resilience proxies. These are not nervous-system measurements. Relabelling this system to 'Sleep & Recovery' is an open decision.",
+      "structures": [
+        { "id": "UBERON:0000955", "label": "brain" }
+      ]
+    },
+    {
+      "id": "digestive",
+      "name": "Digestive",
+      "score": null,
+      "hasData": false,
+      "provenance": [],
+      "summary": "No connected data source produces digestive measurements.",
+      "structures": [
+        { "id": "UBERON:0000945", "label": "stomach" },
+        { "id": "UBERON:0000059", "label": "large intestine" }
+      ]
+    },
+    {
+      "id": "endocrine",
+      "name": "Endocrine",
+      "score": null,
+      "hasData": false,
+      "provenance": [],
+      "summary": "No connected data source produces endocrine measurements.",
+      "structures": [
+        { "id": "UBERON:0002046", "label": "thyroid gland" },
+        { "id": "UBERON:0002369", "label": "adrenal gland" }
+      ]
+    },
+    {
+      "id": "reproductive",
+      "name": "Reproductive",
+      "score": null,
+      "hasData": false,
+      "provenance": [],
+      "summary": "No connected data source produces reproductive measurements.",
+      "structures": []
+    },
+    {
+      "id": "integumentary",
+      "name": "Integumentary",
+      "score": null,
+      "hasData": false,
+      "provenance": [],
+      "summary": "No connected data source. Oura skin temperature deviation exists but has no standard concept and is not a system score.",
+      "structures": [
+        { "id": "UBERON:0002097", "label": "skin" }
+      ]
+    }
+  ],
+  "trend": [
+    { "date": "2026-01-01", "score": 70 },
+    { "date": "2026-02-01", "score": 72 },
+    { "date": "2026-03-01", "score": 71 },
+    { "date": "2026-04-01", "score": 75 },
+    { "date": "2026-05-01", "score": 77 },
+    { "date": "2026-06-01", "score": 76 },
+    { "date": "2026-07-01", "score": 78 }
+  ],
+  "connectedSources": [
+    { "name": "Oura Ring", "status": "Connected", "lastSync": "2h ago", "provenance": "oura" },
+    { "name": "Google Health", "status": "Connected", "lastSync": "2h ago", "provenance": "google-health" },
+    { "name": "VITRONIC BodyLoop", "status": "Connected", "lastSync": "3d ago", "provenance": "vitronic-bodyloop" }
+  ],
+  "journey": [
+    { "date": "2026-03-14", "title": "BodyLoop scan imported", "detail": "Posture and joint angles added from a VITRONIC BodyLoop session." },
+    { "date": "2026-05-02", "title": "Cardio improvement", "detail": "Resting HR down 4 bpm over 6 weeks." }
+  ]
+}

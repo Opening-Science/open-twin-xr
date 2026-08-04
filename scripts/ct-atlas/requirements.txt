@@ -1,0 +1,24 @@
+# CT-derived atlas pipeline. Python 3.12 in a venv at scripts/ct-atlas/.venv.
+#
+#   uv venv --python 3.12 scripts/ct-atlas/.venv
+#   VIRTUAL_ENV=scripts/ct-atlas/.venv uv pip install -r scripts/ct-atlas/requirements.txt
+#
+# Deliberately NOT in package.json: none of this is a JS dependency, and the
+# project has been bitten once by an npm install re-resolving caret ranges
+# across the pmndrs stack.
+#
+# moosez pulls torch, nnunetv2, SimpleITK, nibabel, pandas and dcm2niix itself.
+# Pinned exactly, because the whole point of this pipeline is reproducibility:
+# a different nnU-Net version can change resampling and therefore the mesh.
+moosez==3.2.2
+
+# vtkSurfaceNets3D needs VTK >= 9.3. Developed and measured against 9.6.2.
+vtk>=9.3,<10
+
+# GLB authoring. pygltflib is used rather than trimesh because per-node `extras`
+# is the whole contract with AtlasBody, and pygltflib exposes it directly.
+pygltflib>=1.16,<2
+
+# Reading the ENHANCE.PET metadata spreadsheets (sex/age/height, which is what
+# makes sex a build parameter rather than a donor lottery).
+openpyxl>=3.1

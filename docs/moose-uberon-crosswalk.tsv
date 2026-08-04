@@ -1,0 +1,191 @@
+# MOOSE 3.2 class -> UBERON crosswalk for the CT-derived atlas (D5, D7b).
+#
+# Hand-built and hand-checked on 27 July 2026. Every `uberon` CURIE in this file
+# was verified by fetching the term back from EBI OLS4 and comparing the
+# ontology's own label against `uberon_label` below — see
+# scripts/ct-atlas/verify_crosswalk.py. Rows are not guesses.
+#
+# WHY THIS FILE EXISTS AND CANNOT BE GENERATED
+# -------------------------------------------
+# MOOSE ships a SNOMED-CT mapping (moosez/mappings/SNOMED.py). It does not join
+# to UBERON: it uses SNOMED *structure* concepts while UBERON cross-references
+# SNOMED *entire* concepts, so the join returns zero rows. Verified previously
+# and recorded in docs/PHOTOREALISM_AND_PERSONALISATION.md 5.4. This table is
+# the manual bridge, and it is the real integration cost of the CT pipeline.
+#
+# COLUMNS
+#   moose_model   MOOSE model that emits the class
+#   moose_class   the class name in that model's dataset.json (authoritative)
+#   uberon        UBERON CURIE, or empty when no term exists (see status=flag)
+#   uberon_label  the ontology's own rdfs:label, verbatim, for the check above
+#   system        our closed SystemId set (src/data/schema.ts)
+#   layer         our closed AnatomyLayer set (src/store.ts): organ|connective|muscle|bone
+#   side          left|right|"" — needed because UBERON often has no lateral term
+#   status        ok | flag  (flag = a human has to decide something here)
+#                 A flag is a REVIEW marker, not an exclusion. labelmap2glb.py
+#                 ships flagged rows by default with a per-structure warning,
+#                 because dropping the spleen out of an anatomical atlas over an
+#                 unsettled system assignment is the wrong failure. Use --strict
+#                 to exclude them. Rows with an EMPTY uberon column are excluded
+#                 by default regardless, since they cannot join to anything.
+#   note          why, when it is not obvious
+#
+# NODE-NAME COLLISIONS ARE EXPECTED AND HANDLED
+# ---------------------------------------------
+# UBERON's laterality coverage is patchy: it has left/right terms for kidney,
+# adrenal and clavicle, and none for femur, humerus, scapula, rib or hip bone.
+# So `femur_left` and `femur_right` legitimately share UBERON:0000981. The GLB
+# builder disambiguates the glTF node name as `UBERON_0000981.left` — the dot is
+# deliberate: AtlasBody's CURIE regex needs a NON-word character after the
+# digits, so `UBERON_0000981_left` would fail to parse and `.left` parses.
+# The unambiguous ontology term always also travels in extras.ontologyid.
+#
+# SYSTEM ASSIGNMENTS FOLLOW THE PROJECT'S EXISTING CONVENTION, NOT A TEXTBOOK
+# --------------------------------------------------------------------------
+# Taken from docs/bodyparts3d-system-map.tsv and src/scene/anatomy/layout.ts so
+# the CT atlas colours the same way the BodyParts3D atlas already does:
+# liver / pancreas / gallbladder / kidney / urinary bladder -> metabolic,
+# adrenal + thyroid -> endocrine, trachea -> respiratory.
+# ⚠️ Those two existing files DISAGREE about kidney (layout.ts says endocrine,
+# the manifest says metabolic). This file follows the manifest, because the
+# manifest is what actually drives the shipped atlas. Worth reconciling.
+moose_model	moose_class	uberon	uberon_label	system	layer	side	status	note
+clin_ct_organs	adrenal_gland_left	UBERON:0001234	left adrenal gland	endocrine	organ	left	ok
+clin_ct_organs	adrenal_gland_right	UBERON:0001233	right adrenal gland	endocrine	organ	right	ok
+clin_ct_organs	bladder	UBERON:0001255	urinary bladder	metabolic	organ		ok	MOOSE says "bladder"; the class is the urinary bladder, not the gallbladder.
+clin_ct_organs	brain	UBERON:0000955	brain	nervous	organ		ok
+clin_ct_organs	gallbladder	UBERON:0002110	gallbladder	metabolic	organ		ok
+clin_ct_organs	kidney_left	UBERON:0004538	left kidney	metabolic	organ	left	ok
+clin_ct_organs	kidney_right	UBERON:0004539	right kidney	metabolic	organ	right	ok
+clin_ct_organs	liver	UBERON:0002107	liver	metabolic	organ		ok
+clin_ct_organs	lung_lower_lobe_left	UBERON:0008953	lower lobe of left lung	respiratory	organ	left	ok
+clin_ct_organs	lung_lower_lobe_right	UBERON:0002171	lower lobe of right lung	respiratory	organ	right	ok
+clin_ct_organs	lung_middle_lobe_right	UBERON:0002174	middle lobe of right lung	respiratory	organ	right	ok
+clin_ct_organs	lung_upper_lobe_left	UBERON:0008952	upper lobe of left lung	respiratory	organ	left	ok
+clin_ct_organs	lung_upper_lobe_right	UBERON:0002170	upper lobe of right lung	respiratory	organ	right	ok
+clin_ct_organs	pancreas	UBERON:0001264	pancreas	metabolic	organ		ok
+clin_ct_organs	spleen	UBERON:0002106	spleen	cardiovascular	organ		flag	UBERON term is certain; the SYSTEM is a judgement call. The spleen is a lymphoid/haematological organ and our closed set has no lymphatic id. cardiovascular is the least-wrong home (blood filtration); metabolic is the other defensible answer. Needs the same named reviewer the scoring weights need.
+clin_ct_organs	stomach	UBERON:0000945	stomach	digestive	organ		ok
+clin_ct_organs	thyroid_left	UBERON:0001120	left lobe of thyroid gland	endocrine	organ	left	ok	MOOSE segments the two lobes separately; UBERON has per-lobe terms, so this is exact rather than a shared-term case.
+clin_ct_organs	thyroid_right	UBERON:0001119	right lobe of thyroid gland	endocrine	organ	right	ok
+clin_ct_organs	trachea	UBERON:0003126	trachea	respiratory	organ		ok	Present in the shipped dataset.json but MISSING from the ENHANCE.PET bucket's labels.json. Trust dataset.json.
+clin_ct_cardiac	heart_myocardium	UBERON:0002349	myocardium	cardiovascular	organ		ok	layer is deliberately organ, not muscle: AtlasBody treats layer=muscle as an outer skeletal-muscle shell with its own visibility toggle, so tagging the heart wall as muscle would hide the heart whenever muscles are hidden.
+clin_ct_cardiac	heart_atrium_left	UBERON:0002079	left cardiac atrium	cardiovascular	organ	left	ok
+clin_ct_cardiac	heart_atrium_right	UBERON:0002078	right cardiac atrium	cardiovascular	organ	right	ok
+clin_ct_cardiac	heart_ventricle_left	UBERON:0002084	heart left ventricle	cardiovascular	organ	left	ok
+clin_ct_cardiac	heart_ventricle_right	UBERON:0002080	heart right ventricle	cardiovascular	organ	right	ok
+clin_ct_cardiac	aorta	UBERON:0000947	aorta	cardiovascular	organ		ok
+clin_ct_cardiac	iliac_artery_left	UBERON:0035529	left common iliac artery	cardiovascular	organ	left	ok
+clin_ct_cardiac	iliac_artery_right	UBERON:0035322	right common iliac artery	cardiovascular	organ	right	ok
+clin_ct_cardiac	iliac_vena_left	UBERON:0001139	common iliac vein	cardiovascular	organ	left	ok	UBERON has left/right terms for the iliac ARTERY but not the iliac VEIN. Both sides share the unsided term; the side column and the node-name suffix carry laterality.
+clin_ct_cardiac	iliac_vena_right	UBERON:0001139	common iliac vein	cardiovascular	organ	right	ok	See iliac_vena_left.
+clin_ct_cardiac	inferior_vena_cava	UBERON:0001072	inferior vena cava	cardiovascular	organ		ok
+clin_ct_cardiac	portal_splenic_vein	UBERON:0001639	hepatic portal vein	cardiovascular	organ		flag	MOOSE merges TWO distinct vessels into one class. UBERON has no union term: hepatic portal vein is UBERON:0001639 and splenic vein is UBERON:0003713. Shipping it as the portal vein alone is a factual overstatement of what the mask contains. Either split the mask geometrically or label the node "portal and splenic vein" with no single CURIE.
+clin_ct_cardiac	pulmonary_artery	UBERON:0002012	pulmonary artery	cardiovascular	organ		ok
+clin_ct_muscles	autochthon_left	UBERON:0002462	erector spinae muscle group	musculoskeletal	muscle	left	ok	"Autochthon" is the continental-radiology name for the intrinsic (deep) back muscles; the erector spinae group is the accepted equivalent and is what the mask actually covers.
+clin_ct_muscles	autochthon_right	UBERON:0002462	erector spinae muscle group	musculoskeletal	muscle	right	ok
+clin_ct_muscles	gluteus_maximus_left	UBERON:0001370	gluteus maximus	musculoskeletal	muscle	left	ok
+clin_ct_muscles	gluteus_maximus_right	UBERON:0001370	gluteus maximus	musculoskeletal	muscle	right	ok
+clin_ct_muscles	gluteus_medius_left	UBERON:0001371	gluteus medius	musculoskeletal	muscle	left	ok	Note the IDs are NOT in the order you would guess: maximus is ...370 and medius is ...371. Do not extrapolate UBERON ids.
+clin_ct_muscles	gluteus_medius_right	UBERON:0001371	gluteus medius	musculoskeletal	muscle	right	ok
+clin_ct_muscles	gluteus_minimus_left	UBERON:0008521	gluteus minimus	musculoskeletal	muscle	left	ok
+clin_ct_muscles	gluteus_minimus_right	UBERON:0008521	gluteus minimus	musculoskeletal	muscle	right	ok
+clin_ct_muscles	iliopsoas_left	UBERON:0001999	iliopsoas	musculoskeletal	muscle	left	ok
+clin_ct_muscles	iliopsoas_right	UBERON:0001999	iliopsoas	musculoskeletal	muscle	right	ok
+clin_ct_vertebrae	vertebra_C1	UBERON:0001092	vertebral bone 1	musculoskeletal	bone		ok	UBERON's label is generic but its synonyms include "C1 vertebra" and "atlas"; there is no term literally called "cervical vertebra 1".
+clin_ct_vertebrae	vertebra_C2	UBERON:0001093	vertebral bone 2	musculoskeletal	bone		ok	Synonyms include "C2 vertebra" and "axis".
+clin_ct_vertebrae	vertebra_C3	UBERON:0004612	mammalian cervical vertebra 3	musculoskeletal	bone		ok
+clin_ct_vertebrae	vertebra_C4	UBERON:0004613	mammalian cervical vertebra 4	musculoskeletal	bone		ok
+clin_ct_vertebrae	vertebra_C5	UBERON:0004614	mammalian cervical vertebra 5	musculoskeletal	bone		ok
+clin_ct_vertebrae	vertebra_C6	UBERON:0004615	mammalian cervical vertebra 6	musculoskeletal	bone		ok
+clin_ct_vertebrae	vertebra_C7	UBERON:0004616	mammalian cervical vertebra 7	musculoskeletal	bone		ok
+clin_ct_vertebrae	vertebra_T1	UBERON:0004626	thoracic vertebra 1	musculoskeletal	bone		ok
+clin_ct_vertebrae	vertebra_T2	UBERON:0004627	thoracic vertebra 2	musculoskeletal	bone		ok
+clin_ct_vertebrae	vertebra_T3	UBERON:0004628	thoracic vertebra 3	musculoskeletal	bone		ok
+clin_ct_vertebrae	vertebra_T4	UBERON:0004629	thoracic vertebra 4	musculoskeletal	bone		ok
+clin_ct_vertebrae	vertebra_T5	UBERON:0004630	thoracic vertebra 5	musculoskeletal	bone		ok
+clin_ct_vertebrae	vertebra_T6	UBERON:0004631	thoracic vertebra 6	musculoskeletal	bone		ok
+clin_ct_vertebrae	vertebra_T7	UBERON:0004632	thoracic vertebra 7	musculoskeletal	bone		ok
+clin_ct_vertebrae	vertebra_T8	UBERON:0011050	thoracic vertebra 8	musculoskeletal	bone		ok	⚠️ T8 breaks the numeric run. T1-T7 are 0004626-0004632 and T9-T12 resume at 0004633; T8 sits at 0011050. Extrapolating the range gives the WRONG bone for T8 through T12.
+clin_ct_vertebrae	vertebra_T9	UBERON:0004633	thoracic vertebra 9	musculoskeletal	bone		ok
+clin_ct_vertebrae	vertebra_T10	UBERON:0004634	thoracic vertebra 10	musculoskeletal	bone		ok
+clin_ct_vertebrae	vertebra_T11	UBERON:0004635	thoracic vertebra 11	musculoskeletal	bone		ok
+clin_ct_vertebrae	vertebra_T12	UBERON:0004636	thoracic vertebra 12	musculoskeletal	bone		ok
+clin_ct_vertebrae	vertebra_L1	UBERON:0004617	lumbar vertebra 1	musculoskeletal	bone		ok
+clin_ct_vertebrae	vertebra_L2	UBERON:0004618	lumbar vertebra 2	musculoskeletal	bone		ok
+clin_ct_vertebrae	vertebra_L3	UBERON:0004619	lumbar vertebra 3	musculoskeletal	bone		ok
+clin_ct_vertebrae	vertebra_L4	UBERON:0004620	lumbar vertebra 4	musculoskeletal	bone		ok
+clin_ct_vertebrae	vertebra_L5	UBERON:0004621	lumbar vertebra 5	musculoskeletal	bone		ok
+clin_ct_vertebrae	vertebra_L6	 	 	musculoskeletal	bone		flag	NO UBERON TERM EXISTS. A sixth lumbar vertebra is a transitional-anatomy variant (lumbarised S1). Rare, and absent in most subjects. Do not invent a CURIE. Either drop the class or emit the node with ontologyid empty and a plain label.
+clin_ct_vertebrae	hip_left	UBERON:0001272	innominate bone	musculoskeletal	bone	left	ok	MOOSE's "hip" is the hip BONE (os coxa), not the joint. UBERON has no lateral term.
+clin_ct_vertebrae	hip_right	UBERON:0001272	innominate bone	musculoskeletal	bone	right	ok
+clin_ct_vertebrae	sacrum	UBERON:0003690	fused sacrum	musculoskeletal	bone		ok	"fused sacrum" is UBERON's label; "sacrum" and "os sacrum" are its synonyms.
+clin_ct_ribs	rib_left_1	UBERON:0004601	rib 1	musculoskeletal	bone	left	ok
+clin_ct_ribs	rib_left_2	UBERON:0004602	rib 2	musculoskeletal	bone	left	ok
+clin_ct_ribs	rib_left_3	UBERON:0004603	rib 3	musculoskeletal	bone	left	ok
+clin_ct_ribs	rib_left_4	UBERON:0004604	rib 4	musculoskeletal	bone	left	ok
+clin_ct_ribs	rib_left_5	UBERON:0004605	rib 5	musculoskeletal	bone	left	ok
+clin_ct_ribs	rib_left_6	UBERON:0004606	rib 6	musculoskeletal	bone	left	ok
+clin_ct_ribs	rib_left_7	UBERON:0004607	rib 7	musculoskeletal	bone	left	ok
+clin_ct_ribs	rib_left_8	UBERON:0010757	rib 8	musculoskeletal	bone	left	ok	⚠️ Same discontinuity as T8: rib 8 is 0010757, NOT 0004608 (which is rib 9).
+clin_ct_ribs	rib_left_9	UBERON:0004608	rib 9	musculoskeletal	bone	left	ok
+clin_ct_ribs	rib_left_10	UBERON:0004609	rib 10	musculoskeletal	bone	left	ok
+clin_ct_ribs	rib_left_11	UBERON:0004610	rib 11	musculoskeletal	bone	left	ok
+clin_ct_ribs	rib_left_12	UBERON:0004611	rib 12	musculoskeletal	bone	left	ok
+clin_ct_ribs	rib_left_13	 	 	musculoskeletal	bone	left	flag	NO UBERON TERM. A 13th rib is not standard human anatomy; the class exists because the label set was drawn up to tolerate variants. Expect it to be empty in almost every scan. Do not invent a CURIE.
+clin_ct_ribs	rib_right_1	UBERON:0004601	rib 1	musculoskeletal	bone	right	ok
+clin_ct_ribs	rib_right_2	UBERON:0004602	rib 2	musculoskeletal	bone	right	ok
+clin_ct_ribs	rib_right_3	UBERON:0004603	rib 3	musculoskeletal	bone	right	ok
+clin_ct_ribs	rib_right_4	UBERON:0004604	rib 4	musculoskeletal	bone	right	ok
+clin_ct_ribs	rib_right_5	UBERON:0004605	rib 5	musculoskeletal	bone	right	ok
+clin_ct_ribs	rib_right_6	UBERON:0004606	rib 6	musculoskeletal	bone	right	ok
+clin_ct_ribs	rib_right_7	UBERON:0004607	rib 7	musculoskeletal	bone	right	ok
+clin_ct_ribs	rib_right_8	UBERON:0010757	rib 8	musculoskeletal	bone	right	ok
+clin_ct_ribs	rib_right_9	UBERON:0004608	rib 9	musculoskeletal	bone	right	ok
+clin_ct_ribs	rib_right_10	UBERON:0004609	rib 10	musculoskeletal	bone	right	ok
+clin_ct_ribs	rib_right_11	UBERON:0004610	rib 11	musculoskeletal	bone	right	ok
+clin_ct_ribs	rib_right_12	UBERON:0004611	rib 12	musculoskeletal	bone	right	ok
+clin_ct_ribs	rib_right_13	 	 	musculoskeletal	bone	right	flag	See rib_left_13.
+clin_ct_ribs	sternum	UBERON:0000975	sternum	musculoskeletal	bone		ok	The bone HRA-male lacks entirely (D7b). This row is a large part of why the CT route exists.
+clin_ct_peripheral_bones	carpal_left	UBERON:0001435	carpal bone	musculoskeletal	bone	left	ok	One mask for all eight carpals, so the term is the generic "carpal bone" rather than a named bone.
+clin_ct_peripheral_bones	carpal_right	UBERON:0001435	carpal bone	musculoskeletal	bone	right	ok
+clin_ct_peripheral_bones	clavicle_left	UBERON:0008256	left clavicle	musculoskeletal	bone	left	ok
+clin_ct_peripheral_bones	clavicle_right	UBERON:0008255	right clavicle	musculoskeletal	bone	right	ok
+clin_ct_peripheral_bones	femur_left	UBERON:0000981	femur	musculoskeletal	bone	left	ok
+clin_ct_peripheral_bones	femur_right	UBERON:0000981	femur	musculoskeletal	bone	right	ok
+clin_ct_peripheral_bones	fibula_left	UBERON:0001446	fibula	musculoskeletal	bone	left	ok
+clin_ct_peripheral_bones	fibula_right	UBERON:0001446	fibula	musculoskeletal	bone	right	ok
+clin_ct_peripheral_bones	fingers_left	UBERON:0001436	phalanx of manus	musculoskeletal	bone	left	ok	MOOSE's "fingers" is a BONE class in a bones model — the phalanges, not the soft-tissue digit (which would be UBERON:0002389 manual digit).
+clin_ct_peripheral_bones	fingers_right	UBERON:0001436	phalanx of manus	musculoskeletal	bone	right	ok
+clin_ct_peripheral_bones	humerus_left	UBERON:0000976	humerus	musculoskeletal	bone	left	ok
+clin_ct_peripheral_bones	humerus_right	UBERON:0000976	humerus	musculoskeletal	bone	right	ok
+clin_ct_peripheral_bones	metacarpal_left	UBERON:0002374	metacarpal bone	musculoskeletal	bone	left	ok
+clin_ct_peripheral_bones	metacarpal_right	UBERON:0002374	metacarpal bone	musculoskeletal	bone	right	ok
+clin_ct_peripheral_bones	metatarsal_left	UBERON:0001448	metatarsal bone	musculoskeletal	bone	left	ok
+clin_ct_peripheral_bones	metatarsal_right	UBERON:0001448	metatarsal bone	musculoskeletal	bone	right	ok
+clin_ct_peripheral_bones	patella_left	UBERON:0002446	patella	musculoskeletal	bone	left	ok
+clin_ct_peripheral_bones	patella_right	UBERON:0002446	patella	musculoskeletal	bone	right	ok
+clin_ct_peripheral_bones	radius_left	UBERON:0001423	radius bone	musculoskeletal	bone	left	ok
+clin_ct_peripheral_bones	radius_right	UBERON:0001423	radius bone	musculoskeletal	bone	right	ok
+clin_ct_peripheral_bones	scapula_left	UBERON:0006849	scapula	musculoskeletal	bone	left	ok
+clin_ct_peripheral_bones	scapula_right	UBERON:0006849	scapula	musculoskeletal	bone	right	ok
+clin_ct_peripheral_bones	skull	UBERON:0003129	skull	musculoskeletal	bone		ok	One mask for the whole cranium and mandible. ⚠️ This is also the privacy-critical structure: a skull surface plus soft tissue is a reconstructible face. See docs/PHOTOREALISM_AND_PERSONALISATION.md 5.5 before shipping it from real patient data.
+clin_ct_peripheral_bones	tarsal_left	UBERON:0001447	tarsal bone	musculoskeletal	bone	left	ok
+clin_ct_peripheral_bones	tarsal_right	UBERON:0001447	tarsal bone	musculoskeletal	bone	right	ok
+clin_ct_peripheral_bones	tibia_left	UBERON:0000979	tibia	musculoskeletal	bone	left	ok
+clin_ct_peripheral_bones	tibia_right	UBERON:0000979	tibia	musculoskeletal	bone	right	ok
+clin_ct_peripheral_bones	toes_left	UBERON:0001449	phalanx of pes	musculoskeletal	bone	left	ok	As with fingers: the bone, not the soft-tissue digit.
+clin_ct_peripheral_bones	toes_right	UBERON:0001449	phalanx of pes	musculoskeletal	bone	right	ok
+clin_ct_peripheral_bones	ulna_left	UBERON:0001424	ulna	musculoskeletal	bone	left	ok
+clin_ct_peripheral_bones	ulna_right	UBERON:0001424	ulna	musculoskeletal	bone	right	ok
+clin_ct_digestive	colon	UBERON:0001155	colon	digestive	organ		ok
+clin_ct_digestive	duodenum	UBERON:0002114	duodenum	digestive	organ		ok
+clin_ct_digestive	esophagus	UBERON:0001043	esophagus	digestive	organ		ok
+clin_ct_digestive	small_bowel	UBERON:0002108	small intestine	digestive	organ		ok	MOOSE's small_bowel excludes the duodenum, which it emits separately; UBERON:0002108 includes it. Slight over-claim, kept because splitting it would need a term for "jejunum and ileum" that UBERON does not have as a single class.
+clin_ct_body	body	UBERON:0002100	trunk	integumentary	organ		flag	REGION MASK, not an anatomical structure — the trunk envelope. Deliberately NOT UBERON:0002097 (skin of body): that would claim a tissue the mask does not delineate. UBERON:0002100 (trunk) is honest about what it is, a body region, and matches how head/arms/legs are handled below. Together the four are the integumentary hull, which AtlasBody already renders semi-transparent under the user's hullOpacity control.
+clin_ct_body	head	UBERON:0000033	head	integumentary	organ		flag	Region mask, and the right term for the region, but the mesh is an envelope rather than an organ. ⚠️ Also the defacing surface — a head envelope derived from real patient imaging is biometric data under GDPR Art. 4(14); do not ship it. See PHOTOREALISM_AND_PERSONALISATION.md 5.5.
+clin_ct_body	arms	UBERON:0001460	arm	integumentary	organ		flag	Region mask, BOTH arms in one label, while UBERON:0001460 is singular "arm". One node cannot honestly be one arm; this needs either a geometric split or a plural label.
+clin_ct_body	legs	UBERON:0000978	leg	integumentary	organ		flag	Region mask, both legs in one label. Same singular/plural problem as arms.
+clin_ct_body_composition	skeletal_muscle	UBERON:0001134	skeletal muscle tissue	musculoskeletal	muscle		ok	Tissue class, not a named muscle: one mask covering all skeletal muscle in the field of view. Useful as a volume statistic, poor as a selectable structure.
+clin_ct_body_composition	subcutaneous_fat	UBERON:0002190	subcutaneous adipose tissue	integumentary	connective		flag	UBERON term is exact. The SYSTEM is arguable: subcutaneous fat sits in the hypodermis, which is why integumentary is defensible, but metabolic is the system a body-composition score would actually feed. Pick one deliberately.
+clin_ct_body_composition	visceral_fat	UBERON:0014454	visceral abdominal adipose tissue	metabolic	connective		ok	The body-composition signal with the strongest clinical evidence behind it (D5a).

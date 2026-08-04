@@ -1,0 +1,24 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run build
+
+      # ⚠️ Three gates cannot run here, and their absence is not an oversight.
+      # `check:licences`, `check:winding` and `check:structures` read the shipped
+      # GLBs, and no asset is committed to this repository — CI has nothing to
+      # read. Run them locally after a conversion. See CONTRIBUTING.md.

@@ -1,0 +1,17 @@
+# Default: the maintainer reviews everything not matched below.
+*                       @etzm
+
+# Rights and provenance. A change here can make the project unlawful to serve, so
+# it does not get an ordinary review — licences.json is the register, and the two
+# generated documents are read out of the shipped assets.
+/licences.json          @etzm
+/docs/LICENCE_LOG.md    @etzm
+/ASSETS_LICENSE.md      @etzm
+
+# The asset pipeline. Its failure modes are silent: a corrupted structure id shows
+# up as hover naming the wrong organ, and inside-out geometry as a lighting bug.
+/scripts/               @etzm
+
+# The data contract boundary. Owned upstream by etzm/open-twin under D8; widening
+# it here would drift a contract this repository does not own.
+/src/data/schema.ts     @etzm
