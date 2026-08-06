@@ -152,17 +152,31 @@ rsync -az docs/LICENCE_LOG.md docs/ONTOLOGY_MAP.md docs/STACK_AND_MODELS.md \
 Push these whenever `check:licences` regenerates the log, so the served attribution
 matches the served geometry.
 
-### `$DEPLOY_USER` is not necessarily `deploy`
+### `$DEPLOY_USER` is an unprivileged account, and must stay one
 
-An earlier revision of this document hardcoded `deploy@`, and that account **does not
-exist** on the current deployment — it fails with `Permission denied (publickey)`. Find
-the real one before assuming; the key and the account are both worth confirming with a
-harmless `ssh … 'whoami'` rather than discovered mid-rsync.
+**Confirm the account before assuming it.** A `ssh … 'whoami'` costs nothing; discovering
+it mid-rsync costs a failed deploy. An earlier revision hardcoded `deploy@` at a time when
+that account did not exist, and the deploy in fact ran as `root`.
 
-⚠️ **The current deployment authenticates as `root`, and that is worth changing.** A
-deploy that only needs to write one directory should not hold the whole machine. An
-unprivileged account owning `/srv/opentwin` would be a strict improvement, and would make
-the hardcoded name in this document correct rather than merely absent.
+⚠️ **It runs as `root` no longer, and it must not go back.** The webroot is owned by an
+unprivileged user that is deliberately:
+
+- **not in sudoers** — verified with `sudo -l -U`, not inferred from group membership,
+  because `sudo -n` answers "a password is required" for a non-sudoer too and that reads
+  like an escalation path when it is not one
+- **password-locked** (`passwd -l`), so there is no secret to phish or brute force
+- **the owner of `/srv/opentwin`**, which is all it needs
+
+The reasoning is not abstract. A deploy that only writes one directory should not hold the
+whole machine — and it matters more the moment the key stops living on one laptop. Putting
+a **root** key into CI secrets would turn "repository write access" into "the server";
+putting this one there grants exactly the ability to replace static files.
+
+⚠️ **Related, and easy to miss:** running the rsync as root with `-a` preserved the
+*client's* numeric ownership, so the webroot ended up owned by uid `501:staff` — a macOS
+UID with no meaning on a Linux box. As an unprivileged user rsync cannot set ownership at
+all, so this stops happening by construction. Caddy reads the tree as its own user, so
+directories are `755` and files `644`.
 
 ⚠️ **If the tailnet name does not resolve, use the tailnet address.** MagicDNS was not
 resolving the host on a machine whose tailnet was otherwise up and listing peers
