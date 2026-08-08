@@ -1334,6 +1334,12 @@ number was supplied and mapped to a colour.
 
 ⚠️ **Renaming is not a regulatory answer.** The metrics mode still colours anatomy on a
 red-amber-green scale from a supplied value, and the bundled sample is still fictional.
+
+> **Answered in part by [D17](#d17--the-metrics-ramp-is-sequential-not-diverging-and-no-data-is-hatched), 8 August 2026.** The
+> red-amber-green scale is gone — it is now sequential and single-hue, and no-data
+> is hatched rather than filled. What D17 does NOT settle is the sentence below:
+> the scale is still driven by a number this repository does not validate, so the
+> methodology question stands.
 See [`reports/06-app-store-publication.md`](reports/06-app-store-publication.md) §5 —
 for any public or store distribution, the question is what the scale *means*, and an
 honest label is not a substitute for a validated methodology. This is currently an
@@ -1469,3 +1475,86 @@ reason:** deforming organs by a skin-surface transform yields a *wrong* organ, n
 a personalised one, because organ shape is not a function of skin shape. That is
 the same class of objection D10 used to reject cadaver CT. Specified as future
 work in [`research/ORGAN_SHAPE_MODELS.md`](research/ORGAN_SHAPE_MODELS.md).
+
+---
+
+## D17 — The metrics ramp is sequential, not diverging, and no-data is hatched
+
+**8 August 2026.** Answers the question **D15** left open by name.
+
+### What D15 left open
+
+> ⚠️ **Renaming is not a regulatory answer.** The metrics mode still colours
+> anatomy on a red-amber-green scale from a supplied value ... for any public or
+> store distribution, the question is what the scale *means*.
+
+### The decision
+
+The ramp was `#d9736a` red at 0, `#e6b566` amber at 5, `#5fae94` green at 10. It
+is now a **sequential single-hue ramp** on an attention axis: `#5b8fa8` at 0
+("this is where attention goes") to `#cfd8de` at 10 ("nothing to say"). One hue,
+monotonic in lightness, no midpoint.
+
+**Red on an organ is an alert, not a value.** Alert framing is a signal MDR
+Rule 11's second paragraph reads as monitoring a physiological process — a medical
+purpose this repository does not have. And it is not harmless to the person
+looking: Rosman et al. associate wearable alerting with anxiety in roughly one
+user in five (DOI 10.1161/JAHA.123.033750).
+
+It is also **more accessible than what it replaces**. A single hue varying
+monotonically in lightness survives greyscale and every form of colour blindness;
+red-versus-green is the one distinction most affected people cannot make. The old
+comment claimed the RAG ramp was "distinct in hue AND lightness so it survives
+colour-blind viewing", which was optimistic.
+
+### The hard half: no-data could not be carried over
+
+`NO_DATA_COLOR` was justified **relationally** — `#b7c2cc` was chosen to sit
+"deliberately OUTSIDE the red-amber-green scale" so "we don't know" could not read
+as "bad" or "fine". Against three hues a neutral grey genuinely was outside.
+**Against one hue it is not**: the ramp now varies chiefly in lightness, so
+lightness has become the data channel and any flat grey lands somewhere on it.
+
+Measured: the new warm neutral `#b3aaa2` comes within **0.1 lightness points** of
+the ramp at score 3.7. Hue separates them by 177°, which works in colour and does
+nothing in greyscale. A lightness outside the ramp's 51–84 % span means going very
+dark (reads as bad — the original problem) or very light (glows on the dark theme).
+
+So the load-bearing distinction is a **channel the ramp never uses**:
+
+| surface | treatment | provenance |
+|---|---|---|
+| 3D body | object-space **dither** at 45 % opacity | already there — **D13**, scoped to metrics mode |
+| DOM swatches | 45° **hatch** (`NO_DATA_SWATCH_CSS`) | new; a 14 px swatch has no dither to inherit |
+
+The 3D half needed no new shader work, which is worth noting: D13's ghost was
+already distinguishing no-data on a non-hue channel, for unrelated reasons. It is
+now load-bearing for legibility, so **do not remove the metrics-mode ghost without
+replacing it**.
+
+### Two changes that came with it
+
+**`scoreToEmissive` no longer depends on the score.** It was
+`0.15 + (1 - s) * 0.35` — glowing *brighter as the score fell*, which is the alert
+framing expressed in light rather than hue. Recolouring the ramp while leaving a
+low value glowing would have moved the alert, not dropped it, and D15's own
+warning applies to a cosmetic fix. It is a flat 0.12 now, carrying no signal.
+
+The downstream form is different and belongs downstream: where a proposals layer
+exists, a glow marking "there is something you can act on here" is honest, because
+it points at an available action rather than at a number being low. That needs a
+proposal to point at, and D8 puts those elsewhere.
+
+**`scoreToOpacity` was deleted rather than reused.** Zero importers, and it
+duplicated a decision that lives in `AtlasBody.materialFor` — whose no-data rung is
+scoped to metrics mode precisely because D13 records that ghosting unmeasured
+anatomy in *anatomical* mode dissolved the abdomen into a point cloud. A second,
+unscoped copy was an invitation to reintroduce the bug D13 documents.
+
+### What this does NOT settle
+
+⚠️ Still a colour driven by a number this repository did not compute and does not
+validate. A calmer scale lowers the framing risk; it does not turn an unvalidated
+metric into a validated one, and it is not a substitute for the methodology
+question D15 raises for any public or store distribution. **Recolouring is no more
+a regulatory answer than renaming was.** The bundled sample remains fictional.

@@ -1,4 +1,4 @@
-import { scoreToColor } from '../scene/metricColor'
+import { scoreToColor, NO_DATA_SWATCH_CSS } from '../scene/metricColor'
 import { anatomicalColor } from '../scene/anatomyPalette'
 import { useTwin, type AnatomyLayer } from '../store'
 
@@ -177,12 +177,22 @@ export function StructurePanel() {
           // actually painted with — tissue hue in anatomical mode, the metric
           // scale in metrics mode. It used to always show the metric scale, which
           // made it disagree with the render in the default mode.
+          //
+          // ⚠️ NO DATA IS HATCHED, NOT FILLED, and that is a legibility
+          // requirement rather than decoration. The metrics ramp is now
+          // sequential and single-hue, so LIGHTNESS carries the value — which
+          // means any flat grey reads as a position on the scale. The 3D body
+          // escapes this because unmeasured anatomy is already dithered there
+          // (D13), but a 14px swatch has no dither to inherit. See
+          // `NO_DATA_SWATCH_CSS` in `metricColor.ts`.
+          const noData = colourMode === 'metrics' && !sys.hasData
           const colour =
             '#' +
             (colourMode === 'anatomical'
               ? anatomicalColor(sys.id)
               : scoreToColor(sys.hasData ? sys.score : null)
             ).getHexString()
+          const swatch = noData ? { background: NO_DATA_SWATCH_CSS } : { background: colour }
           return (
             <div key={sys.id} className="flex flex-col gap-1">
               <div className="flex items-center gap-2">
@@ -194,7 +204,7 @@ export function StructurePanel() {
                   'h-3.5 w-3.5 shrink-0 rounded-[4px] border transition ' +
                   (off ? 'border-line bg-transparent' : 'border-transparent')
                 }
-                style={off ? undefined : { background: colour }}
+                style={off ? undefined : swatch}
               />
               {/* Clicking the name selects, matching a click on the organ itself. */}
               <button
@@ -236,6 +246,12 @@ export function StructurePanel() {
                         ? anatomicalColor(sys.id, mine[0])
                         : scoreToColor(sys.hasData ? sys.score : null)
                       ).getHexString()
+                    // Same hatch as the parent row — a sub-row of an unmeasured
+                    // system is equally unmeasured, and a flat fill here would
+                    // undo the distinction one line above.
+                    const rowSwatch = noData
+                      ? { background: NO_DATA_SWATCH_CSS }
+                      : { background: rowColour }
                     return (
                       <div key={r.label} className="flex items-center gap-2 pl-5">
                         <button
@@ -246,7 +262,7 @@ export function StructurePanel() {
                             'h-2.5 w-2.5 shrink-0 rounded-[3px] border transition ' +
                             (rowOn ? 'border-transparent' : 'border-line bg-transparent')
                           }
-                          style={rowOn ? { background: rowColour } : undefined}
+                          style={rowOn ? rowSwatch : undefined}
                         />
                         <button
                           onClick={() =>
