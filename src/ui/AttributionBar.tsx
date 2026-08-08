@@ -16,6 +16,7 @@ import { BPM_RANGE, ORGAN_OVERLAYS, type OrganOverlayId } from '../scene/organOv
 import { SourcesButton } from './SourcesModal'
 import { useTwin, useResolvedAnatomyMode } from '../store'
 import { DockGroup, DockPill } from './SceneDock'
+import { BODY_ENVELOPES } from '../scene/bodyEnvelopes'
 
 const COMPARE_MODES: { value: AnatomyMode; label: string; title: string }[] = [
   {
@@ -348,6 +349,11 @@ export function AtlasAttribution() {
   const sources = useInstalledSources()
   const mode = useResolvedAnatomyMode()
   const shareAlike = sources.some((s) => s.shareAlike)
+  // The envelope is credited only while it is actually rendering, exactly as
+  // the atlases and overlays are — a licence obligation attaches to what is
+  // distributed on screen, not to what the registry could offer.
+  const envelopeId = useTwin((s) => s.bodyEnvelope)
+  const envelope = envelopeId ? BODY_ENVELOPES[envelopeId] : null
   const mixedDonors = donorsDisagree(mode)
   // Which systems each atlas contributes, so the credit can name the join.
   const systemsBySource = useMemo(
@@ -500,6 +506,74 @@ export function AtlasAttribution() {
             )}
           </p>
         ))}
+
+        {/*
+          The body envelope, credited separately for the same reason overlays are —
+          a different rights holder on different terms — and with one extra thing
+          to say that no atlas or overlay needs.
+
+          ⚠️ EVERY LICENCE IN THE PACKAGE, NOT THE HEADLINE ONE. ANNY ships three
+          buckets: Apache-2.0 code, CC0 shape assets, and an Apache-2.0 SOMA
+          topology. The geometry on screen derives from the CC0 bucket and was
+          produced by the Apache-2.0 code, so crediting only "Apache-2.0" would
+          misstate what the surface is, and crediting only CC0 would drop a notice
+          obligation that is actually owed.
+
+          And it says it is NOT A PERSON. Every other credit in this panel names a
+          donor, because every other thing on screen came from somebody's body.
+          This one did not, and the absence has to be stated rather than left as a
+          blank where a donor line would be — a viewer who has read four donor
+          lines will assume the fifth exists.
+        */}
+        {envelope && (
+          <div className="border-t border-line pt-2">
+            <p>
+              {envelope.attribution}
+              {envelope.citation && <span className="text-ink/45"> {envelope.citation}</span>}
+            </p>
+            <ul className="mt-1 space-y-0.5 border-l border-line pl-2 text-ink/60">
+              {envelope.licences.map((l) => (
+                <li key={l.covers}>
+                  <a
+                    href={l.url}
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    className="whitespace-nowrap underline underline-offset-2 hover:text-ink"
+                  >
+                    {l.spdx}
+                  </a>{' '}
+                  — {l.covers}
+                </li>
+              ))}
+            </ul>
+            <strong className="mt-1 block text-[#8a6d3b]">
+              Not a person and not a donor: a generated surface with no organs, no ontology terms
+              and no scan of anyone.
+            </strong>
+            {/*
+              Measured, and stated where the claim would otherwise be made. The
+              envelope is baked in ANNY's rest pose and each atlas has its own, so
+              it encloses the torso and not the limbs — on Z-Anatomy, 1.124 m
+              across the arms against the atlas's 0.646 m. It is a reference
+              silhouette, and rendering it as clear glass rather than as skin is
+              the visual half of the same statement.
+            */}
+            <span className="mt-0.5 block text-[#8a6d3b]">
+              Its rest pose is not the atlas’s, so it wraps the torso but not the limbs — measured
+              on Z-Anatomy at 1.124 m across the arms against the atlas’s 0.646 m. Scaled to the
+              canonical 1.7 m body, so its own stature ({envelope.heightM} m) is not what you see.
+            </span>
+            <span className="mt-0.5 block text-[#8a6d3b]">{envelope.note}</span>
+            <span className="mt-0.5 block text-ink/45">
+              Baked by <span className="font-mono">{envelope.provenance.script}</span> from{' '}
+              <span className="font-mono">{envelope.provenance.package}</span> at{' '}
+              {Object.entries(envelope.provenance.parameters)
+                .map(([k, v]) => `${k} ${v}`)
+                .join(', ')}
+              .
+            </span>
+          </div>
+        )}
 
         {mixedDonors && (
           <p className="border-t border-line pt-2 text-[#8a6d3b]">

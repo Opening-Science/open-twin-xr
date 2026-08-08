@@ -8,8 +8,9 @@ import type { TwinMetrics, SystemId } from './data/schema'
  * nothing, so there is no cycle to reason about at all.
  */
 import type { AtlasComponent, StructureEntry } from './scene/structureEntry'
-import { resolveMode, type AnatomyMode, type Sex } from './scene/anatomySources'
+import { activeSources, resolveMode, type AnatomyMode, type Sex } from './scene/anatomySources'
 import { BPM_RANGE, DEFAULT_BPM, type OrganOverlayId } from './scene/organOverlays'
+import type { BodyEnvelopeId } from './scene/bodyEnvelopes'
 
 /** Depth layers an atlas can declare, outermost first. */
 export const ANATOMY_LAYERS = ['organ', 'connective', 'muscle', 'bone'] as const
@@ -368,6 +369,26 @@ interface TwinState {
    */
   structureLabel: boolean
   /**
+   * Which parametric body envelope is drawn around the anatomy, or null.
+   *
+   * ⚠️ AN ENVELOPE IS A GENERATED SURFACE, NOT ANATOMY AND NOT A DONOR. Off by
+   * default, because the subject of this viewer is real anatomy from registered
+   * sources and a synthetic skin is something a viewer opts into — the same rule
+   * organ overlays follow, and for a stronger reason: an overlay is somebody's
+   * measured organ, where this is nobody's body at all.
+   *
+   * It exists because D14 measured that three of the seven sources ship no skin,
+   * so the glass hull is unavailable on exactly the atlases with the best
+   * anatomy. See `scene/bodyEnvelopes.ts`.
+   */
+  bodyEnvelope: BodyEnvelopeId | null
+  /**
+   * Which envelope assets the server actually has, or null before the probe
+   * answers. Same contract as `overlayAvailability`: a build may legitimately
+   * ship none of them, and the toggle has to know rather than 404 in the Canvas.
+   */
+  envelopeAvailability: Record<string, boolean> | null
+  /**
    * Height in metres the camera orbits around, 0 at the feet to ~1.75 at the
    * crown. The orbit target used to be pinned to the chest, which made the head
    * and feet unreachable at any zoom.
@@ -417,6 +438,9 @@ interface TwinState {
   /** Pass null to withdraw a source's count, which unmount does. */
   setStructureCount: (sourceId: string, count: number | null) => void
   setStructureLabel: (v: boolean) => void
+  /** Pass null to remove the envelope, which is the default state. */
+  setBodyEnvelope: (id: BodyEnvelopeId | null) => void
+  setEnvelopeAvailability: (a: Record<string, boolean> | null) => void
   setFocusY: (y: number, distance?: number | null) => void
 }
 
@@ -467,6 +491,8 @@ export const useTwin = create<TwinState>((set) => ({
   structureInspect: 'none',
   structureCounts: {},
   structureLabel: true,
+  bodyEnvelope: null,
+  envelopeAvailability: null,
   focusY: 0.95,
   focusDistance: null,
 
@@ -536,6 +562,8 @@ export const useTwin = create<TwinState>((set) => ({
     }),
   setColourMode: (colourMode) => set({ colourMode }),
   setStructureInspect: (structureInspect) => set({ structureInspect }),
+  setBodyEnvelope: (bodyEnvelope) => set({ bodyEnvelope }),
+  setEnvelopeAvailability: (envelopeAvailability) => set({ envelopeAvailability }),
   setStructureLabel: (structureLabel) => set({ structureLabel }),
   setStructureCount: (sourceId, count) =>
     set((st) => {
@@ -582,3 +610,25 @@ export function useResolvedAnatomyMode(): AnatomyMode {
   return resolveMode(mode, sex)
 }
 
+/**
+ * The sex of the donor actually on screen, or null where that has no single
+ * answer.
+ *
+ * ⚠️ NOT the same thing as the `sex` store field, and the difference is the whole
+ * point of this hook. `sex` is what the viewer ASKED FOR; this is what the loaded
+ * atlas actually IS. They come apart routinely: Z-Anatomy and BodyParts3D are
+ * male-only, so selecting "female" leaves `sex === 'female'` while a male body is
+ * on screen — `AttributionBar` documents that exact trap for the composed-mode
+ * pill. Anything reasoning about donor coherence has to read the atlas, not the
+ * request.
+ *
+ * Returns null when `composed` genuinely mixes donors of different sexes, because
+ * there is then no single donor to be coherent with. The app already warns about
+ * that case separately, so callers should treat null as "no claim to make" rather
+ * than as an error.
+ */
+export function useDonorSex(): Sex | null {
+  const mode = useResolvedAnatomyMode()
+  const sexes = new Set(activeSources(mode).map((s) => s.donor.sex))
+  return sexes.size === 1 ? [...sexes][0] : null
+}

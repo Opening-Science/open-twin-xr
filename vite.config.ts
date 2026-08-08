@@ -26,12 +26,30 @@ function pruneUnshippedModels(): Plugin {
     apply: 'build',
     closeBundle() {
       const dir = join(__dirname, 'dist', 'models')
-      // BOTH registries. Overlays live in their own file because they are single
-      // organs rather than whole-body atlases, and reading only `anatomySources`
-      // would silently prune every overlay asset out of the build — the exact
-      // failure this whitelist exists to prevent, just from the other direction.
+      /**
+       * ⚠️ EVERY REGISTRY. THREE OF THEM NOW, AND THE LIST HAS ALREADY BEEN
+       * INCOMPLETE ONCE.
+       *
+       * Overlays live in their own file because they are single organs rather
+       * than whole-body atlases, and body envelopes in a third because they are
+       * generated surfaces with no donor (D16). Reading only `anatomySources`
+       * would silently prune every overlay and every envelope out of the build —
+       * the exact failure this whitelist exists to prevent, just from the other
+       * direction.
+       *
+       * That is not hypothetical. `bodyEnvelopes.ts` was added on 8 August 2026
+       * and NOT added here, so all five ANNY envelopes were pruned from `dist`
+       * and the feature shipped as five "not installed" pills. It was invisible
+       * in development, because `npm run dev` serves `public/` directly and never
+       * runs this plugin at all — so the only way to catch it is to look in
+       * `dist/models` after a build.
+       *
+       * A new registry file MUST be added to this list. And its urls must be
+       * written as literal strings: the regex below cannot see a template
+       * literal, which is the second half of the same bug.
+       */
       let sources = ''
-      for (const f of ['anatomySources.ts', 'organOverlays.ts']) {
+      for (const f of ['anatomySources.ts', 'organOverlays.ts', 'bodyEnvelopes.ts']) {
         try {
           sources += readFileSync(join(__dirname, 'src', 'scene', f), 'utf8')
         } catch {
