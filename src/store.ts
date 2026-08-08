@@ -143,6 +143,14 @@ interface TwinState {
    * reads as an image, and a turning one reads as something you can look around.
    * Any drag of the orbit control is the obvious way to stop caring about it, and
    * the pill in the dock stops it outright.
+   *
+   * ⚠️ EXCEPT under `prefers-reduced-motion`, where it starts OFF. This is the
+   * only continuous unprompted motion in the app, and continuous rotation is
+   * squarely what that preference is about — for a vestibular disorder it is a
+   * symptom trigger, not a taste. It is a DEFAULT rather than a lock: the pill
+   * still works, because someone who asked the system for less motion may still
+   * want to turn a body around, and removing the control would answer a request
+   * they did not make. The CSS half of this lives in `styles.css`.
    */
   spin: boolean
   /**
@@ -296,6 +304,20 @@ interface TwinState {
   setFocusY: (y: number, distance?: number | null) => void
 }
 
+/**
+ * Whether the system has asked for reduced motion.
+ *
+ * Read once, at store creation, rather than subscribed to. A viewer who changes
+ * the OS setting mid-session is not a case worth the subscription: this only
+ * chooses an INITIAL value for `spin`, and once they have touched the pill any
+ * live update would fight their choice. Guarded for `matchMedia` because jsdom
+ * and older Safari do not define it.
+ */
+function prefersReducedMotion(): boolean {
+  if (typeof window === 'undefined' || typeof window.matchMedia !== 'function') return false
+  return window.matchMedia('(prefers-reduced-motion: reduce)').matches
+}
+
 export const useTwin = create<TwinState>((set) => ({
   data: null,
   selectedSystem: null,
@@ -312,7 +334,7 @@ export const useTwin = create<TwinState>((set) => ({
   atlasAvailability: null,
   overlayAvailability: null,
   explode: 0,
-  spin: true,
+  spin: !prefersReducedMotion(),
   theme: 'dark',
   hiddenSystems: ['musculoskeletal'],
   hiddenLayers: [],

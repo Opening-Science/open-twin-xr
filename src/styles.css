@@ -108,6 +108,71 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/*
+ * FOCUS.
+ *
+ * There were no focus styles at all in this file — not one `:focus` or
+ * `:focus-visible` rule — so the only indication of keyboard position was
+ * whatever the UA happened to draw, which Tailwind's preflight removes
+ * (`outline: none` on `:focus` is not in preflight, but the reset's
+ * `border-style: solid` plus the custom backgrounds made the default ring
+ * invisible against `--raised` on the dark theme). A keyboard user could tab
+ * through eleven dock pills and never know where they were.
+ *
+ * `:focus-visible` rather than `:focus` so a mouse click on a pill does not
+ * leave a ring behind it — the UA's own heuristic is better than any we would
+ * write, and it is the reason this selector exists.
+ *
+ * The ring colour is the selection green already used by the structure
+ * highlight in `AtlasBody`, so keyboard focus and 3D selection speak with one
+ * accent. `outline-offset` keeps it clear of the pill's own rounded background
+ * instead of tracing its edge, and because it is an `outline` rather than a
+ * `box-shadow` it survives `overflow: hidden` on the dock card.
+ *
+ * Applied to `:where(...)` so it carries zero specificity and any component
+ * that needs a different ring can simply say so without `!important`.
+ */
+:where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+  outline: 2px solid #5ad2a8;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/*
+ * The 3D canvas is focusable (see `ui/CanvasKeyboardShell.tsx`), and it is the one
+ * element where an offset ring would sit outside the rounded card that clips
+ * it. Inset it instead, so it reads as "the model has keyboard focus" rather
+ * than as a stray line at the panel edge.
+ */
+.scene-canvas-shell:focus-visible {
+  outline: 2px solid #5ad2a8;
+  outline-offset: -2px;
+}
+
+/*
+ * REDUCED MOTION.
+ *
+ * Two things move on their own here, and both are decoration: the heartbeat
+ * glyph on the overlay toggle, and the turntable.
+ *
+ * The turntable cannot be switched off from CSS — it is `autoRotate` on the
+ * orbit control, driven from the `spin` store field — so the store reads the
+ * same media query at initialisation and starts with it off. That is a
+ * DEFAULT, not a lock: the Spin pill still works, because someone who asked
+ * the OS for less motion may still want to turn a body around, and taking the
+ * control away would be a worse answer than not starting it for them.
+ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
 /* The page gradient, so App.tsx does not hardcode two hex values. */
 .app-bg {
   background-image: linear-gradient(to bottom right, var(--page-from), var(--page-to));

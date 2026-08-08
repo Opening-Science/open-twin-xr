@@ -2,7 +2,16 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+    <!--
+      No `maximum-scale`. It was here to stop iOS zooming the page when a control
+      takes focus, and the price is that it also blocks deliberate pinch-zoom —
+      which WCAG 2.2 1.4.4 (Resize Text) treats as a failure, and which matters
+      more here than elsewhere: this interface is dense, its labels are 9-11 px,
+      and a viewer who needs to magnify a structure name has no other route to it.
+      Safari has ignored the attribute since iOS 10 anyway, so the accessibility
+      cost was being paid for an effect that no longer exists.
+    -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Open Twin XR — open-source human body viewer</title>
   </head>
   <body>

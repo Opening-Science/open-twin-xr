@@ -7,6 +7,7 @@ import { AtlasAttribution } from './ui/AttributionBar'
 import { StructurePanel } from './ui/StructurePanel'
 import { SceneDock } from './ui/SceneDock'
 import { OsfLogo } from './ui/OsfLogo'
+import { CanvasKeyboardShell } from './ui/CanvasKeyboardShell'
 
 /**
  * An open-source human body viewer.
@@ -92,7 +93,11 @@ export default function App() {
               as a box around the mark rather than a separator beside it. */}
           <div className="h-10 w-px shrink-0 bg-line" aria-hidden="true" />
           <div className="min-w-0">
-            <div className="truncate text-lg font-semibold leading-tight">Open Twin XR</div>
+            {/* The page had no <h1> at all, so a screen reader's heading list —
+                one of the two ways anybody navigates an unfamiliar page — was
+                empty. It is the product name because that is what the page is
+                about; the visual weight is unchanged. */}
+            <h1 className="truncate text-lg font-semibold leading-tight">Open Twin XR</h1>
             <div className="truncate text-[11px] text-muted">
               Open-source human body viewer &middot; built on{' '}
               {/*
@@ -125,7 +130,14 @@ export default function App() {
       {/* The body gets the room. Everything beside it is a control for it. */}
       <main className="grid flex-1 min-h-0 grid-cols-[minmax(0,1fr)_300px] gap-5 px-6 pb-6">
         <div className="relative overflow-hidden rounded-3xl border border-line bg-panel">
-          <BodyScene />
+          {/* The 3D view is wrapped rather than bare so it can be focused and
+              driven from the keyboard — see `CanvasKeyboardShell`, and note the
+              warning there that this makes the view OPERABLE without making it
+              PERCEIVABLE. `StructurePanel` is the DOM surface that carries the
+              information. */}
+          <CanvasKeyboardShell>
+            <BodyScene />
+          </CanvasKeyboardShell>
           {/* The screen-space half of the stage falloff. DOM rather than a
               post-processing pass because post FX renders nothing at all inside a
               WebXR session — see the note on `.scene-vignette` in styles.css. Sits

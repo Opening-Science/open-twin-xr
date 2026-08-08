@@ -1,4 +1,11 @@
+import type { ReactNode } from 'react'
 import { useTwin } from '../store'
+import {
+  cameraCommands,
+  DOLLY_STEP,
+  ORBIT_STEP,
+  RESET_FRAMING,
+} from '../scene/cameraCommands'
 
 /**
  * Vertical body-height control for the camera.
@@ -73,6 +80,102 @@ export function FramingControls() {
           className="h-1.5 w-28 origin-center -rotate-90 accent-[#4f9c84]"
         />
       </div>
+
+      <CameraButtons />
+    </div>
+  )
+}
+
+/**
+ * Discrete rotate, zoom and reset.
+ *
+ * ⚠️ THIS IS A CONFORMANCE REQUIREMENT, NOT A CONVENIENCE. Orbiting and zooming
+ * were reachable only by dragging on the canvas, and WCAG 2.2 2.5.7 (Dragging
+ * Movements) requires that anything achievable by dragging also be achievable
+ * with a single pointer — a tap or a click. A viewer using a head pointer, a
+ * switch, or simply a trackpad they cannot hold a drag on had no way to turn the
+ * body round at all.
+ *
+ * It doubles as the discoverable half of the keyboard scheme in
+ * `CanvasKeyboardShell`: the titles name the key, so finding one control teaches
+ * the other. The two share `cameraCommands` so they cannot drift apart.
+ *
+ * The glyphs are geometric characters rather than an icon font, matching the
+ * overlay pills — and each button carries a real `aria-label`, because a screen
+ * reader reading "↺" aloud is not a control name.
+ */
+function CameraButtons() {
+  const setFocusY = useTwin((s) => s.setFocusY)
+
+  const Btn = ({
+    onClick,
+    label,
+    title,
+    children,
+  }: {
+    onClick: () => void
+    label: string
+    title: string
+    children: ReactNode
+  }) => (
+    <button
+      onClick={onClick}
+      aria-label={label}
+      title={title}
+      className="flex-1 rounded-lg px-1 py-1 text-[11px] leading-none text-muted transition hover:bg-raised/60 hover:text-ink"
+    >
+      <span aria-hidden="true">{children}</span>
+    </button>
+  )
+
+  return (
+    <div className="flex flex-col gap-0.5 border-t border-line pt-1.5">
+      <div className="flex gap-0.5">
+        <Btn
+          label="Rotate left"
+          title="Rotate the view left (left arrow)"
+          onClick={() => cameraCommands()?.orbit(-ORBIT_STEP * 3, 0)}
+        >
+          ↺
+        </Btn>
+        <Btn
+          label="Rotate right"
+          title="Rotate the view right (right arrow)"
+          onClick={() => cameraCommands()?.orbit(ORBIT_STEP * 3, 0)}
+        >
+          ↻
+        </Btn>
+      </div>
+      <div className="flex gap-0.5">
+        <Btn
+          label="Zoom in"
+          title="Move closer (+)"
+          onClick={() => cameraCommands()?.dolly(1 / (DOLLY_STEP * 1.6))}
+        >
+          ＋
+        </Btn>
+        <Btn
+          label="Zoom out"
+          title="Move away (−)"
+          onClick={() => cameraCommands()?.dolly(DOLLY_STEP * 1.6)}
+        >
+          －
+        </Btn>
+      </div>
+      <button
+        onClick={() => {
+          const cam = cameraCommands()
+          // The commands own the azimuth; the store owns height and distance.
+          // With no scene mounted yet, still put the framing back, so the button
+          // is never a no-op.
+          if (cam) cam.reset()
+          else setFocusY(RESET_FRAMING.y, RESET_FRAMING.distance)
+        }}
+        title="Reset the framing to the whole body (0)"
+        className="rounded-lg px-1 py-1 text-[10px] leading-none text-muted transition hover:bg-raised/60 hover:text-ink"
+      >
+        Reset
+      </button>
     </div>
   )
 }
