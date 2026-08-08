@@ -16,6 +16,15 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run lint
+      - run: npm run test
+
+      # The claim lint. This one guards the repository's SCOPE rather than its
+      # code: D8 moved health interpretation upstream and D15 took health
+      # language out of the interface, and until now nothing stopped either from
+      # creeping back through a helpful tooltip. It reads source, which CI always
+      # has, so unlike the asset gates below it can actually run here.
+      - run: npm run lint:claims
+
       - run: npm run build
 
       # ⚠️ Three gates cannot run here, and their absence is not an oversight.
