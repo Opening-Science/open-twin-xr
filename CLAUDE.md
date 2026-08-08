@@ -163,10 +163,24 @@ groups; both sexes offered wherever an atlas provides them, including a complete
 female body; attribution rendered in-app as the licence condition it is; CI green.
 Health mapping remains explicitly out of scope here.
 
-**The next milestone is identity, not more geometry.** Structures are addressed by
-NAME, and that is now the thing holding the interesting work back — it is why an
-organ overlay cannot mask the anatomy it replaces without collateral damage, and
-why a mapping between atlases has to go through strings. `docs/ONTOLOGY_MAP.md`
-sets out what exists and what is missing; the first concrete step is writing the
-FMA crosswalks this repo already holds into the Z-Anatomy and BodyParts3D assets
-at build time. See the top of `docs/HANDOVER.md` for the current queue.
+**The next milestone is identity, not more geometry** — and as of 8 August 2026 a
+good deal of it is done, with two of its premises corrected by measurement.
+
+- **Z-Anatomy already carried 1,048 FMA CURIEs** before this milestone was worked
+  on. Nothing read them: `StructureEntry` did not declare the field, and
+  `docs/ONTOLOGY_MAP.md` had been generated against an older build and reported
+  zero, which this file and `HANDOVER.md` then repeated. The type now declares it,
+  `structureTerm()` resolves it, the UI shows it, and the map's prose is derived
+  from the same measurement as its table so the two cannot disagree again.
+- **BodyParts3D needs a REBUILD, not a code change.** `build-bodyparts3d.mjs`
+  already emits `_STRUCTURE`, a structure table and all 1,838 FMA ids; the shipped
+  asset simply predates the script.
+- ⚠️ **Ontology terms were NOT the fix for the one-sided ear**, which this file
+  and the handover both predicted. None of the eight ear structures carries an
+  `ontologyid`; `side` is what they all carry. The fix was a `side` filter plus
+  replacing the contiguous-range mask with a per-structure texture
+  (`src/scene/structureMask.ts`), because the two ears interleave.
+
+Still open: the other 71 % of the Z-Anatomy crosswalk, the BodyParts3D rebuild,
+and an FMA ↔ UBERON bridge, without which a cross-atlas join still cannot be made.
+See `docs/ROADMAP.md` Phase 5 and the top of `docs/HANDOVER.md`.

@@ -343,17 +343,79 @@ nearest bone is computable at load — 637 × 344 distances — and needs no reb
 
 ---
 
-## Phase 5 — Structure name → UBERON crosswalk
+## Phase 5 — Structure name → ontology crosswalk — **PART DONE, 8 August 2026**
 
 Depends on Phase 1, which is what makes ~1,824 Z-Anatomy names reachable at all.
 
-Z-Anatomy carries no ontology terms — names are Terminologia Anatomica English
-with `l`/`r`/`j` suffixes (D11). BodyParts3D is FMA-indexed and HRA mixes UBERON
-and FMA, so a crosswalk is what lets the three atlases agree on what a structure
-*is*, and is the join the health data will eventually need.
+Z-Anatomy's own names are Terminologia Anatomica English with `l`/`r`/`j`
+suffixes (D11). BodyParts3D is FMA-indexed and HRA mixes UBERON and FMA, so a
+crosswalk is what lets the three atlases agree on what a structure *is*, and is
+the join the health data will eventually need.
 
-Large and mostly mechanical. Worth doing incrementally: the organs that matter
-first, the long tail later. It should not block Phases 1–4.
+### What is done
+
+**Z-Anatomy carries 1,048 FMA CURIEs of 3,614 structures (29 %)** in the shipped
+asset, written by `scripts/apply-crosswalk.mjs` from `docs/z-anatomy-fma.tsv`.
+
+⚠️ **That was true before this phase was worked on, and nobody knew**, which is
+the more useful finding. `StructureEntry` did not declare `ontologyid`, so
+nothing in `src/` could read it; `docs/ONTOLOGY_MAP.md` had been generated
+against an older build and reported **zero**; and `HANDOVER.md` and `CLAUDE.md`
+both repeated the zero. A generated document disagreeing with the asset it was
+generated from is the failure mode this repository keeps hitting — the fix was to
+make the map's prose derive from the same measurement as its table, so the claim
+cannot drift from the number again.
+
+Now: the type declares it, `structureTerm()` resolves it, the selection card and
+the XR panel display it, and the `Ontology` inspect mode colours the body by
+which structures have one — so coverage is visible on the geometry rather than
+only in a table.
+
+### Still to do
+
+- ~~**BodyParts3D.**~~ **DONE, 8 August 2026.** `build-bodyparts3d.mjs` already
+  wrote a structure table with all 1,838 FMA ids and a `_STRUCTURE` attribute;
+  the shipped asset simply predated the script, so this was a **rebuild, not a
+  code change**. Rebuilt from `isa_BP3D_4.0_obj_99` across all nine systems,
+  `check:structures` and `check:winding` both pass, and the DEFAULT atlas now has
+  100 % term coverage — better than Z-Anatomy's 29 %.
+
+  **It cost load time, and most of that has been recovered.** Measured clean, all
+  three on the same machine:
+
+  | | first paint | notes |
+  |---|---|---|
+  | before the rebuild | **2.9 s** | no `_STRUCTURE`, so the explode precompute never ran |
+  | after, precompute on the critical path | **6.3 s** | +3.4 s, all of it CPU — the asset is *smaller* (10.84 → 10.33 MB) |
+  | after, precompute **deferred to idle** | **4.3 s** | precompute measured separately at 1.54 s, after first paint |
+
+  ⚠️ **Deferred, NOT lazy-on-first-drag**, and the difference matters. Computing
+  on the first non-zero `explode` would move the stall into the middle of an
+  interaction — drag the slider, watch the app freeze for a second and a half with
+  the body not moving. A wait while a page loads is tolerable; a freeze in
+  response to your own input reads as broken. It runs on `requestIdleCallback`
+  with a 2 s timeout instead, with an escape hatch that arms it immediately if
+  anyone reaches the slider first. See `explodeArmed` in `AtlasBody`.
+
+  ⚠️ That change made `perStructureExplode` newly load-bearing in the material
+  effect's hand-maintained dep array: the flag now flips with `entries` unchanged,
+  so omitting it would leave the explode permanently dead on the first atlas
+  loaded and working on the next one switched to — the exact signature this file
+  documents twice already.
+
+  The residual +1.4 s over the original is the `_STRUCTURE` attribute upload and
+  the 254 KB structure table, which are the thing being bought.
+- **The other 71 % of Z-Anatomy**, which is unmapped crosswalk rather than a
+  pipeline failure. Mechanical, and worth doing incrementally.
+- **FMA ↔ UBERON.** Both nomenclatures are in play and there is no bridge here
+  yet, so a cross-atlas join still cannot be made.
+
+### What the crosswalk turned out NOT to fix
+
+The one-sided ear overlay. `HANDOVER.md` predicted ontology terms were the fix
+for masking one ear; measured, **none of the eight ear structures carries an
+`ontologyid` at all**. `side` does, on every one of them. See D16 and
+`src/scene/structureMask.ts`.
 
 ---
 
@@ -385,6 +447,31 @@ Note what was already ruled out: **cadaver CT cannot yield an organ atlas**
 (D10). The Visible Human CT has ~60 HU of noise against the 10–30 HU that
 separates soft-tissue organs, and a cadaver has no circulation, so no contrast.
 That walked back an earlier decision of my own; do not re-propose it.
+
+### Status, 8 August 2026 — a skin envelope exists; the organs do not follow it
+
+**D16** added a parametric skin envelope (ANNY), which is the standard vehicle for
+this phase and closes D14's separate gap. **D16a then measured that it is
+geometrically standalone**: it reads nothing about the atlas, so morphing it would
+move the skin while the organs inside stayed a fixed adult male TARO. That is
+worse than not morphing it, so the parametric version was deliberately NOT built.
+
+⚠️ **The blocking objection, which any plan for this phase has to answer rather
+than route around: deforming organs by a skin-surface transform yields a WRONG
+organ, not a personalised one, because organ shape is not a function of skin
+shape.** Plausible-looking geometry that misstates anatomy is the failure mode D10
+already rejected once.
+
+Doing it defensibly means a statistical shape model per organ, which is a research
+project rather than a task. **Specified — not started — in
+[`research/ORGAN_SHAPE_MODELS.md`](research/ORGAN_SHAPE_MODELS.md)**: state of the
+art and reported accuracy, open toolkits and their licences, the deformable
+computational phantoms that are the closest prior art (several of which are
+non-free, which matters under D12b), whether organ position is predictable from
+body surface at all and with what error, open training data, and whether an organ
+SSM can even be expressed as glTF morph targets within a Quest VRAM budget. Read
+its recommendation before committing effort — "do not do this, here is why" is a
+possible outcome and would be a useful one.
 
 ---
 
