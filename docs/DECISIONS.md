@@ -1338,3 +1338,134 @@ See [`reports/06-app-store-publication.md`](reports/06-app-store-publication.md)
 for any public or store distribution, the question is what the scale *means*, and an
 honest label is not a substitute for a validated methodology. This is currently an
 internal tool, which is why that question is deferred rather than answered.
+
+---
+
+## D16 — Parametric body envelopes live in their own registry, and are not atlases
+
+**7–8 August 2026.** Closes the gap D14 measured, and refuses the obvious way of
+doing it.
+
+### The gap
+
+D14 recorded that the glass hull is a per-atlas capability because two of seven
+sources ship no skin. It is now three of seven — `z-anatomy`,
+`z-anatomy-regions` and both CT atlases carry no `integumentary` geometry at all —
+and `useHasHull()` disabled the control with an inline "no skin" note. So **the
+richest anatomy in the repository was exactly where the best-looking hull was
+impossible**, which is an unsatisfying place to leave a rendering feature.
+
+A parametric human body model is a skin generator. **ANNY** (NAVER LABS Europe,
+Apache-2.0 code over CC0 MakeHuman-derived shape assets) is the only permissive
+one with infant-to-elder coverage, and its static bake is 13,718 vertices — cheap
+enough to add to any scene.
+
+### The decision
+
+**A separate `BODY_ENVELOPES` registry in `src/scene/bodyEnvelopes.ts`, not an
+eighth `AnatomySource`.**
+
+`AnatomySource` requires `donor: { label, derivedFrom, sex }`, and both
+`sourceBreakdown()` and `AtlasAttribution` assume one. A parametric body has **no
+donor** — it is scan-free, which is an ethical feature rather than a gap — and
+**no ontology terms at all**, in a registry whose entire current purpose is
+structure identity. Making `donor` optional for the sake of one entry would
+weaken a field seven entries depend on.
+
+This repository has already made this exact call once, for organ overlays, which
+`docs/HANDOVER.md` describes as "a separate mechanism from atlases". Same
+reasoning, same answer.
+
+### What it costs, and this is the part that matters
+
+**The envelope does not follow the atlas's pose, and cannot be made to.** ANNY
+bakes in its own rest pose; every atlas here has its own. Measured on Z-Anatomy:
+
+| | across the arms | front to back |
+|---|---|---|
+| envelope | 1.124 m | 0.436 m |
+| atlas | 0.646 m | 0.242 m |
+
+It encloses the torso and it does not enclose the limbs. A uniform scale cannot
+fix that, because the difference is angular, not dimensional — and the atlas even
+protrudes ~5 mm behind the envelope's back.
+
+So the envelope is presented as **a reference silhouette, not as this body's
+skin**, and the interface says so in those words rather than only in a comment.
+Rendering it as clear glass with a lit rim rather than as opaque skin is the
+visual half of the same statement. Fixing it properly means rigging the envelope
+and posing it per atlas, which is real work and is not done here.
+
+### Two corrections to the source material, both measured
+
+The research notes this was built from had ANNY's preset table wrong twice, and
+both errors would have shipped a body labelled as something it is not.
+
+1. **`gender` runs male (0) to female (1)**, not the reverse. Confirmed three
+   ways: `PHENOTYPE_VARIATIONS` in the package declares `gender=["male","female"]`
+   and the scalar interpolates that ordered list; `shape_distribution.py` splits
+   with `torch.where(gender <= 0.5, boys_height, girls_height)`; and measured
+   stature falls monotonically 1.697 m → 1.560 m as the value goes 0 → 1. The
+   notes' `pregnant` preset was `gender: 0.0`, which is a **male** body.
+2. **`age: 0.5` is an adolescent, not an adult.** ANNY's five age stops are spaced
+   uniformly over 0..1, unlike MakeHuman's macro where 0.5 means 25 years.
+   Measured at neutral gender, height climbs to a plateau at **0.75** (1.831 m)
+   and declines slightly to 1.0 (1.812 m) — growth, then age-related stature
+   loss. The adult presets sit at 0.75.
+
+`scripts/anny/bake.py` carries the measurements; the registry carries the
+corrected parameters, and every preset records its own provenance so the bake can
+be reproduced.
+
+### The licence trap
+
+**ANNY is three licence buckets in one package**, and recording only the headline
+Apache-2.0 would misstate what is on screen: the code is Apache-2.0, the shape
+assets this geometry derives from are **CC0-1.0**, and a SOMA topology ships
+alongside under Apache-2.0. All three are declared in the registry and rendered
+in-app.
+
+⚠️ **Never select `topology="smpl"` or `"smplx"`.** Both trigger a **runtime**
+download of a non-commercial archive from NAVER's CDN inside
+`download_noncommercial_data()`. Because it happens at runtime rather than at
+install time, **a dependency audit does not catch it**. `scripts/anny/bake.py`
+hardcodes the safe topology and exposes no flag for it.
+
+### D16a — Amendment: the envelope is STANDALONE, and the pairing is now checked
+
+**8 August 2026, same day.** Two things the entry above did not say, both of which
+came out of the question "does this mean it is kinda standalone?".
+
+**It is standalone, measurably.** `BodyEnvelope` reads four store fields —
+`bodyEnvelope`, `envelopeAvailability`, `hullOpacity`, `glassHull`. **Not one says
+anything about which atlas is loaded, whose body it is, or which sex.** The only
+thing the two share is the canonical frame and a scale to 1.7 m. It is a shape
+drawn *around* the anatomy, not a shape the anatomy participates in.
+
+⚠️ **Which means a parametric envelope would be MORE standalone, not less** — and
+that reverses the obvious next step. A continuously morphable envelope lets you
+dial up "child" while the organs inside stay adult male TARO. A fixed adult
+envelope around adult anatomy is at least coherent; a child envelope around adult
+organs is a claim the geometry cannot support. **Morph targets would make a better
+shape browser and a worse body.** Not built, deliberately.
+
+**The pairing was unchecked, which was out of character for this app.** You could
+select "Adult male" while viewing the female CT donor and nothing said a word —
+while `AttributionBar` carries three separate donor-mismatch warnings for atlases
+and overlays. Fixed: `envelopeSex()` derives a preset's sex from
+`provenance.parameters.gender` (not from its label, so a mislabelled bake cannot
+lie), the envelope swaps to the donor's sex when the ATLAS changes, and a
+deliberate mismatch is labelled rather than undone.
+
+⚠️ **The trap in that fix, because it is not obvious.** Keying the swap effect on
+`envelopeId` re-runs it on a pill click, sees the mismatch the click just created,
+and swaps straight back — so the override becomes impossible and the warning
+becomes unreachable code. It is keyed on the DONOR alone, with the envelope read
+through `getState()`. Caught by testing the override, not by reading the code:
+the first version's own comment claimed it did not fire on a click, and it did.
+
+**What would genuinely couple the two is Phase 7, and it is hard for a stateable
+reason:** deforming organs by a skin-surface transform yields a *wrong* organ, not
+a personalised one, because organ shape is not a function of skin shape. That is
+the same class of objection D10 used to reject cadaver CT. Specified as future
+work in [`research/ORGAN_SHAPE_MODELS.md`](research/ORGAN_SHAPE_MODELS.md).

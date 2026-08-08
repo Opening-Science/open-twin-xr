@@ -5,7 +5,9 @@ import { AtlasBody, useAtlasAvailability } from './AtlasBody'
 import { OrganOverlays } from './OrganOverlay'
 import { activeSources, ANATOMY_SOURCES } from './anatomySources'
 import { AssetErrorBoundary } from './AssetErrorBoundary'
+import { BodyEnvelope } from './BodyEnvelope'
 import { StructureLabel } from './StructureLabel'
+import { BODY_ENVELOPES, BODY_ENVELOPE_IDS } from './bodyEnvelopes'
 
 /**
  * The body, from whichever geometry source is available.
@@ -55,6 +57,20 @@ function BodyContent() {
   const clearSel = useTwin((s) => s.selectSystem)
   const mode = useResolvedAnatomyMode()
   const publishAvailability = useTwin((s) => s.setAtlasAvailability)
+  const envelope = useTwin((s) => s.bodyEnvelope)
+
+  /**
+   * Probe the envelopes the same way the atlases are probed, and for the same
+   * reason: the app must run with no binary assets at all, so a build that ships
+   * none of these is a supported state and the dock has to be able to say
+   * "not installed" rather than let a 404 throw inside the Canvas.
+   */
+  const envelopeUrls = useMemo(() => BODY_ENVELOPE_IDS.map((id) => BODY_ENVELOPES[id].url), [])
+  const envelopeAvailability = useAtlasAvailability(envelopeUrls)
+  const publishEnvelopes = useTwin((s) => s.setEnvelopeAvailability)
+  useEffect(() => {
+    publishEnvelopes(envelopeAvailability)
+  }, [envelopeAvailability, publishEnvelopes])
 
   // Probe every registered atlas, not just the ones this mode needs, so the
   // switcher can say up front which options will actually render.
@@ -120,6 +136,29 @@ function BodyContent() {
         — can be used as a world position with no per-atlas offset table.
       */}
       <StructureLabel />
+
+      {/*
+        The parametric skin envelope, at the same canonical level and for the
+        same reason as the overlays above.
+
+        ⚠️ It is a GENERATED SURFACE, not anatomy and not a donor — see
+        `bodyEnvelopes.ts`. It exists because D14 measured that three of the seven
+        sources ship no skin at all, so the glass hull is unavailable on exactly
+        the atlases with the richest anatomy. Off unless the viewer asks for it.
+
+        Its own error boundary and Suspense: an envelope that fails to load must
+        cost the envelope, not the body. Same isolation rule the overlays follow.
+      */}
+      <AssetErrorBoundary
+        label="body envelope"
+        consequence="the envelope was left off"
+        resetKey={String(envelope)}
+        fallback={null}
+      >
+        <Suspense fallback={null}>
+          <BodyEnvelope />
+        </Suspense>
+      </AssetErrorBoundary>
     </group>
   )
 }
