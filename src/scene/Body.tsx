@@ -5,6 +5,7 @@ import { AtlasBody, useAtlasAvailability } from './AtlasBody'
 import { OrganOverlays } from './OrganOverlay'
 import { activeSources, ANATOMY_SOURCES } from './anatomySources'
 import { AssetErrorBoundary } from './AssetErrorBoundary'
+import { StructureLabel } from './StructureLabel'
 
 /**
  * The body, from whichever geometry source is available.
@@ -111,6 +112,14 @@ function BodyContent() {
       <Suspense fallback={null}>
         <OrganOverlays />
       </Suspense>
+
+      {/*
+        The selected structure's name, floating at the structure. Mounted at this
+        level for the same reason the overlays are: this IS the canonical frame,
+        so `StructureEntry.centroid` — recorded in canonical metres at build time
+        — can be used as a world position with no per-atlas offset table.
+      */}
+      <StructureLabel />
     </group>
   )
 }

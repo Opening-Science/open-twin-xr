@@ -1,5 +1,13 @@
 import { create } from 'zustand'
 import type { TwinMetrics, SystemId } from './data/schema'
+/**
+ * From the LEAF module, deliberately, not from `AtlasBody` where these types
+ * used to live. `AtlasBody` imports this store, so taking them from the
+ * component would close a cycle — safe while it stayed `import type`, and a real
+ * one the moment anybody needed a value from it. `structureEntry.ts` imports
+ * nothing, so there is no cycle to reason about at all.
+ */
+import type { AtlasComponent, StructureEntry } from './scene/structureEntry'
 import { resolveMode, type AnatomyMode, type Sex } from './scene/anatomySources'
 import { BPM_RANGE, DEFAULT_BPM, type OrganOverlayId } from './scene/organOverlays'
 
@@ -252,12 +260,113 @@ interface TwinState {
   /** Label of the structure under the pointer, for the readout. */
   hoveredLabel: string | null
   /**
+   * The individual structure the viewer last clicked, or null.
+   *
+   * ⚠️ THIS WAS COMPONENT-LOCAL `useState` INSIDE `AtlasBody`, and lifting it is
+   * what makes structure-level work possible outside that file at all. Nothing
+   * mounted in `Body.tsx` — an anchored label, an overlay, anything sitting in
+   * the canonical frame as a SIBLING of the atlas — could see which structure
+   * was selected, because the only copy of that fact lived inside the component
+   * rendering the atlas.
+   *
+   * `entry` carries the structure's centroid in canonical metres, which is why
+   * an anchor needs no per-atlas offset table: `AtlasBody` scales each atlas
+   * into the canonical frame inside its own group, so a centroid from the table
+   * is already in the frame anything else mounts into.
+   *
+   * ⚠️ Keyed by `sourceId` as well as `structureId` because `composed` mounts one
+   * `AtlasBody` per atlas and the ids are per-asset — structure 412 means one
+   * thing in Z-Anatomy and something else entirely in BodyParts3D. Without the
+   * source, clicking in one atlas would highlight a stranger in the other.
+   *
+   * `structureId` is the raw `_STRUCTURE` value, so a consumer can index the
+   * table itself; `entry` is the resolved row, so most consumers need not.
+   */
+  selectedStructure: {
+    sourceId: string
+    structureId: number
+    entry: StructureEntry
+  } | null
+  /**
+   * Third-party components embedded in the mounted atlases, keyed by component
+   * id, so a structure's `component` can be resolved to a holder and a licence.
+   *
+   * ⚠️ This is licence machinery, not a convenience. Z-Anatomy's own licence is
+   * CC BY-SA 4.0, but eight of its structures come from components that are
+   * NON-COMMERCIAL — a stricter obligation that the atlas-level credit in
+   * `AttributionBar` cannot express, because it applies to eight structures and
+   * not to the other 3,606. Published per structure so the answer is given at
+   * the granularity the condition actually has.
+   *
+   * Flat rather than keyed by source: component ids are already distinct
+   * (`inner-ear-dundee`, `kidney-lissiecowley`) and `composed` mounts two
+   * atlases that may legitimately share one.
+   */
+  atlasComponents: Record<string, AtlasComponent>
+  /**
+   * Which source contributed which components — the bookkeeping behind
+   * `atlasComponents`, kept so an unmount can withdraw exactly one atlas's
+   * entries instead of clearing the flat map and losing the other's.
+   *
+   * Underscored because nothing outside `setAtlasComponents` should read it.
+   */
+  _componentsBySource: Record<string, AtlasComponent[]>
+  /**
    * How structures are coloured. `anatomical` is the atlas look — red muscle,
    * ivory bone — with the metric carried by emissive lift instead of hue.
    * `metrics` is the red/amber/green score scale. They cannot be combined
    * without one lying, so the viewer picks. See `anatomyPalette.ts`.
    */
   colourMode: 'anatomical' | 'metrics'
+  /**
+   * Tint individual structures by a fact the ASSET carries. Off by default.
+   *
+   * This is the per-structure tinting capability, and what it is pointed at is
+   * deliberately chosen to stay on the rendering side of D8's line: both modes
+   * colour by something the GLB literally contains, and neither interprets
+   * anything. Nothing here says a structure is good, bad, healthy or at risk.
+   *
+   *   `ontology` — which structures carry an ontology term and which do not.
+   *     The repository's current milestone is structure identity, and until now
+   *     the only way to see coverage was a table in `docs/ONTOLOGY_MAP.md`. On
+   *     Z-Anatomy that is 1,048 of 3,614, and seeing WHICH 1,048 — the skeleton
+   *     is largely mapped, the muscle attachments are not — is a different and
+   *     more useful fact than the percentage.
+   *
+   *   `licence` — which structures come from a third-party component under
+   *     terms stricter than the atlas's own. Eight of Z-Anatomy's structures are
+   *     non-commercial, and "where exactly are they" is a question the credits
+   *     panel cannot answer because it is a property of geometry, not of text.
+   *
+   * ⚠️ Only atlases carrying `_STRUCTURE` can honour this — Z-Anatomy and the
+   * regions atlas today, plus BodyParts3D once its asset is rebuilt from the
+   * current pipeline. The dock disables the control elsewhere rather than
+   * offering a toggle that does nothing, which is the same rule the glass hull
+   * already applies to an atlas with no skin.
+   */
+  structureInspect: 'none' | 'ontology' | 'licence'
+  /**
+   * How many structures each mounted atlas can address individually, keyed by
+   * source id. Zero, or absent, means the asset carries no structure table.
+   *
+   * Published from the loaded asset rather than declared in `anatomySources.ts`,
+   * because a hand-kept table would be wrong right now: `build-bodyparts3d.mjs`
+   * writes a structure table today, and the shipped BodyParts3D asset predates
+   * it, so the same source id answers differently depending on when its GLB was
+   * built. Only the file knows.
+   */
+  structureCounts: Record<string, number>
+  /**
+   * Show a floating label at the selected structure, in the 3D scene.
+   *
+   * On by default: it names what you just clicked, at the thing you clicked,
+   * which is the question a click is asking. It costs one draw call and appears
+   * only while something is selected, so the idle scene is unchanged.
+   *
+   * ⚠️ It can only anchor on atlases carrying a structure table, because the
+   * anchor IS `StructureEntry.centroid`. See `scene/StructureLabel.tsx`.
+   */
+  structureLabel: boolean
   /**
    * Height in metres the camera orbits around, 0 at the feet to ~1.75 at the
    * crown. The orbit target used to be pinned to the chest, which made the head
@@ -300,7 +409,14 @@ interface TwinState {
   setStage: (v: boolean) => void
   setSmoothTransparency: (v: boolean) => void
   setHoveredLabel: (l: string | null) => void
+  setSelectedStructure: (s: TwinState['selectedStructure']) => void
+  /** Pass null to withdraw a source's components, which unmount does. */
+  setAtlasComponents: (sourceId: string, components: AtlasComponent[] | null) => void
   setColourMode: (m: 'anatomical' | 'metrics') => void
+  setStructureInspect: (m: TwinState['structureInspect']) => void
+  /** Pass null to withdraw a source's count, which unmount does. */
+  setStructureCount: (sourceId: string, count: number | null) => void
+  setStructureLabel: (v: boolean) => void
   setFocusY: (y: number, distance?: number | null) => void
 }
 
@@ -344,7 +460,13 @@ export const useTwin = create<TwinState>((set) => ({
   stage: false,
   smoothTransparency: false,
   hoveredLabel: null,
+  selectedStructure: null,
+  atlasComponents: {},
+  _componentsBySource: {},
   colourMode: 'anatomical',
+  structureInspect: 'none',
+  structureCounts: {},
+  structureLabel: true,
   focusY: 0.95,
   focusDistance: null,
 
@@ -398,9 +520,53 @@ export const useTwin = create<TwinState>((set) => ({
   setStage: (stage) => set({ stage }),
   setSmoothTransparency: (smoothTransparency) => set({ smoothTransparency }),
   setHoveredLabel: (hoveredLabel) => set({ hoveredLabel }),
+  setSelectedStructure: (selectedStructure) => set({ selectedStructure }),
+  // Merged rather than replaced, because `composed` mounts two atlases and each
+  // publishes independently — the second must not erase the first. Withdrawal
+  // removes only the ids that source contributed, tracked by re-deriving from
+  // what is left, so an unmount cannot strand a component that is still on screen.
+  setAtlasComponents: (sourceId, components) =>
+    set((st) => {
+      const owned = { ...(st._componentsBySource ?? {}) }
+      if (components === null) delete owned[sourceId]
+      else owned[sourceId] = components
+      const flat: Record<string, AtlasComponent> = {}
+      for (const list of Object.values(owned)) for (const c of list) flat[c.id] = c
+      return { _componentsBySource: owned, atlasComponents: flat }
+    }),
   setColourMode: (colourMode) => set({ colourMode }),
+  setStructureInspect: (structureInspect) => set({ structureInspect }),
+  setStructureLabel: (structureLabel) => set({ structureLabel }),
+  setStructureCount: (sourceId, count) =>
+    set((st) => {
+      const next = { ...st.structureCounts }
+      if (count === null) delete next[sourceId]
+      else next[sourceId] = count
+      return { structureCounts: next }
+    }),
   setFocusY: (focusY, focusDistance = null) => set({ focusY, focusDistance }),
 }))
+
+/**
+ * Dev-only handle on the store, for headless checks.
+ *
+ * The same reasoning as `window.__openTwin` in `scene/tuning.ts`, and for a
+ * limitation this repository has already measured and written down: the
+ * automated browser pane delivers NO pointer events to the canvas — synthetic
+ * ones carry no `offsetX`/`offsetY`, which is what r3f reads, and injected ones
+ * never arrive (`docs/ROADMAP.md`, phase 1, "Not verified: interactive hover").
+ *
+ * So anything gated behind clicking a structure cannot be checked in a browser
+ * pane at all, and the selection-driven UI would ship on a typecheck and a
+ * human's word. This makes the state reachable, so the RENDERING half can be
+ * verified against real asset data even though the CLICK half cannot.
+ *
+ * `import.meta.env.DEV` is replaced with `false` at build time, so the whole
+ * block drops out of a production bundle.
+ */
+if (import.meta.env.DEV && typeof window !== 'undefined') {
+  ;(window as unknown as { __twinStore?: typeof useTwin }).__twinStore = useTwin
+}
 
 /**
  * The atlas mode with the sex choice already applied.
@@ -415,3 +581,4 @@ export function useResolvedAnatomyMode(): AnatomyMode {
   const sex = useTwin((s) => s.sex)
   return resolveMode(mode, sex)
 }
+

@@ -75,6 +75,7 @@ export function StructurePanel() {
   const explode = useTwin((s) => s.explode)
   const setExplode = useTwin((s) => s.setExplode)
   const hovered = useTwin((s) => s.hoveredLabel)
+  const selectedStructure = useTwin((s) => s.selectedStructure)
   const selected = useTwin((s) => s.selectedSystem)
   const selectedLayer = useTwin((s) => s.selectedLayer)
   const presentLayers = useTwin((s) => s.presentLayers)
@@ -126,9 +127,47 @@ export function StructurePanel() {
         ))}
       </div>
 
-      {/* Hover readout. Reserves its line so the panel does not jump. */}
+      {/* Hover readout. Reserves its line so the panel does not jump.
+
+          Deliberately NOT a live region — see the one below. */}
       <div className="min-h-[18px] text-[11px] leading-tight text-ink/70">
         {hovered ?? <span className="text-muted">Hover a structure to identify it</span>}
+      </div>
+
+      {/*
+        The announcement channel for assistive technology.
+
+        ⚠️ IT ANNOUNCES SELECTION, NOT HOVER, AND THAT IS THE WHOLE DESIGN.
+        Putting `role="status"` on the hover readout above is the obvious move and
+        is wrong: hover fires on every pointer move across the body, so dragging
+        the mouse over the abdomen would queue dozens of announcements, each
+        interrupting the last. A live region that cannot be listened to is worse
+        than none, because it also floods the screen reader's own speech.
+
+        Selection is deliberate, infrequent, and is the thing a user actually
+        wants read back. It also has the property hover lacks: it is reachable
+        without a pointer, because clicking a system name in the list below sets
+        it too. So this is the one readout that works on a keyboard.
+
+        `role="status"` implies `aria-live="polite"`, which waits for a pause
+        rather than cutting in. Both are written out because the pairing is what
+        makes the intent legible to the next reader.
+
+        Visually hidden rather than shown: the selection is already obvious on
+        the body (the structure is highlighted) and in this list (the name goes
+        bold), so a third copy would be redundant on screen and is only needed
+        by someone who cannot see either.
+      */}
+      <div role="status" aria-live="polite" className="sr-only">
+        {selectedStructure
+          ? `Selected: ${selectedStructure.entry.name}${
+              selectedStructure.entry.side ? `, ${selectedStructure.entry.side}` : ''
+            }${selectedStructure.entry.system ? `, ${selectedStructure.entry.system} system` : ''}`
+          : selected
+            ? `Selected: ${systems.find((s) => s.id === selected)?.name ?? selected}${
+                selectedLayer ? `, ${selectedLayer}` : ''
+              }`
+            : ''}
       </div>
 
       <div className="flex flex-col gap-1">
