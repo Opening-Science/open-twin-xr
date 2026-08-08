@@ -151,6 +151,23 @@ export default defineConfig(({ command }) => ({
     host: true, // expose on LAN so a headset on the same network can load it
     port: 5173,
   },
+  /**
+   * ⚠️ EXCLUDE SIBLING GIT WORKTREES FROM THE TEST SWEEP.
+   *
+   * Agent sessions create worktrees under `.claude/worktrees/`, each a full
+   * checkout of this repository — so vitest's default glob finds a SECOND copy
+   * of every test file and runs it. Observed: `npm test` reporting "16 passed
+   * (2 files)" for a suite with eight tests in one file.
+   *
+   * It is not merely a confusing count. Those checkouts are other sessions' work
+   * in progress, so a half-finished test over there fails the run over here, and
+   * the failure names a path that is not part of this working tree. CI never sees
+   * it (no worktrees on a fresh clone), which is exactly what makes it the kind
+   * of local-only puzzle that costs an hour.
+   */
+  test: {
+    exclude: ['**/node_modules/**', '**/dist/**', '.claude/**'],
+  },
   build: {
     target: 'es2020',
     sourcemap: true,
