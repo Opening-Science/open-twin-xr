@@ -1,7 +1,8 @@
 # Open Twin XR — technical stack, models, and publishability
 
 **Snapshot: 29 July 2026.** Describes the build currently deployed at
-`https://opentwin.opening.science` (gated presentation, basic auth).
+A gated presentation behind basic auth. ⚠️ The host is deliberately not named
+here — see the box at the top of `DEPLOY.md`; substitute your own `$SITE`.
 
 > ⚠️ **This is a point-in-time export, not a maintained table.** The living sources
 > of truth are generated from the shipped assets and cannot drift:
