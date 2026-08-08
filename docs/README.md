@@ -18,7 +18,7 @@ conversations that produced it.
 | 2 | [`HANDOVER.md`](HANDOVER.md) | The orientation document. What this is, what it is *not*, where everything lives |
 | 3 | [`ARCHITECTURE.md`](ARCHITECTURE.md) | How the code is arranged and why |
 | 4 | [`MODEL_PIPELINE.md`](MODEL_PIPELINE.md) | How to get real anatomy on screen instead of the placeholder |
-| 5 | [`DECISIONS.md`](DECISIONS.md) | D1–D15. **Read this before proposing a change** — several obvious ideas were tried and reversed, and the reversals are recorded |
+| 5 | [`DECISIONS.md`](DECISIONS.md) | D1–D17. **Read this before proposing a change** — several obvious ideas were tried and reversed, and the reversals are recorded |
 
 After that, follow whatever you are actually working on — and read
 [`reports/`](reports/README.md) for the five areas where the reasoning matters more
@@ -61,6 +61,8 @@ because the reasoning is worth more than the conclusion.
 | [`PERMISSIVE_ANATOMY.md`](PERMISSIVE_ANATOMY.md) | Could the whole model be CC BY, with no share-alike? |
 | [`PHOTOREALISM_AND_PERSONALISATION.md`](PHOTOREALISM_AND_PERSONALISATION.md) | Materials, lighting, and personalisation from a person's own imaging |
 | [`COMMERCIAL_LICENSES.md`](COMMERCIAL_LICENSES.md) | The paid alternatives, considered and rejected |
+| [`research/`](research/README.md) | ⚠️ **Six EXTERNAL input documents, imported 8 August 2026 — not this repo's plans.** Provenance for D16 and the ANNY bake. Two of the six describe a health-proposals fork that is **out of scope here**; read `research/README.md` first, which records the three claims in the set that measurement disproved |
+| [`research/ORGAN_SHAPE_MODELS.md`](research/ORGAN_SHAPE_MODELS.md) | **This repo's own**, and the one file in `research/` that is not imported. A **spec for future work, not started**: what it would take to deform an organ atlas to a person defensibly. Referenced by Roadmap Phase 7 and D16a. Recommendation is **go-if**; it kills the skin-driven route on measured evidence (adult organ position is r² ≤ 0.439 from the exterior), and finds that vertex correspondence does not exist in any shipped asset. ⚠️ Raises one licence question about a **shipped** asset — see its register item 19 |
 
 ## Historical — accurate when written, superseded since
 
