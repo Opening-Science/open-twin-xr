@@ -1,4 +1,4 @@
-import { scoreToColor } from '../scene/metricColor'
+import { scoreToColor, NO_DATA_SWATCH_CSS } from '../scene/metricColor'
 import { anatomicalColor } from '../scene/anatomyPalette'
 import { useTwin, type AnatomyLayer } from '../store'
 
@@ -75,6 +75,7 @@ export function StructurePanel() {
   const explode = useTwin((s) => s.explode)
   const setExplode = useTwin((s) => s.setExplode)
   const hovered = useTwin((s) => s.hoveredLabel)
+  const selectedStructure = useTwin((s) => s.selectedStructure)
   const selected = useTwin((s) => s.selectedSystem)
   const selectedLayer = useTwin((s) => s.selectedLayer)
   const presentLayers = useTwin((s) => s.presentLayers)
@@ -126,9 +127,47 @@ export function StructurePanel() {
         ))}
       </div>
 
-      {/* Hover readout. Reserves its line so the panel does not jump. */}
+      {/* Hover readout. Reserves its line so the panel does not jump.
+
+          Deliberately NOT a live region — see the one below. */}
       <div className="min-h-[18px] text-[11px] leading-tight text-ink/70">
         {hovered ?? <span className="text-muted">Hover a structure to identify it</span>}
+      </div>
+
+      {/*
+        The announcement channel for assistive technology.
+
+        ⚠️ IT ANNOUNCES SELECTION, NOT HOVER, AND THAT IS THE WHOLE DESIGN.
+        Putting `role="status"` on the hover readout above is the obvious move and
+        is wrong: hover fires on every pointer move across the body, so dragging
+        the mouse over the abdomen would queue dozens of announcements, each
+        interrupting the last. A live region that cannot be listened to is worse
+        than none, because it also floods the screen reader's own speech.
+
+        Selection is deliberate, infrequent, and is the thing a user actually
+        wants read back. It also has the property hover lacks: it is reachable
+        without a pointer, because clicking a system name in the list below sets
+        it too. So this is the one readout that works on a keyboard.
+
+        `role="status"` implies `aria-live="polite"`, which waits for a pause
+        rather than cutting in. Both are written out because the pairing is what
+        makes the intent legible to the next reader.
+
+        Visually hidden rather than shown: the selection is already obvious on
+        the body (the structure is highlighted) and in this list (the name goes
+        bold), so a third copy would be redundant on screen and is only needed
+        by someone who cannot see either.
+      */}
+      <div role="status" aria-live="polite" className="sr-only">
+        {selectedStructure
+          ? `Selected: ${selectedStructure.entry.name}${
+              selectedStructure.entry.side ? `, ${selectedStructure.entry.side}` : ''
+            }${selectedStructure.entry.system ? `, ${selectedStructure.entry.system} system` : ''}`
+          : selected
+            ? `Selected: ${systems.find((s) => s.id === selected)?.name ?? selected}${
+                selectedLayer ? `, ${selectedLayer}` : ''
+              }`
+            : ''}
       </div>
 
       <div className="flex flex-col gap-1">
@@ -138,12 +177,22 @@ export function StructurePanel() {
           // actually painted with — tissue hue in anatomical mode, the metric
           // scale in metrics mode. It used to always show the metric scale, which
           // made it disagree with the render in the default mode.
+          //
+          // ⚠️ NO DATA IS HATCHED, NOT FILLED, and that is a legibility
+          // requirement rather than decoration. The metrics ramp is now
+          // sequential and single-hue, so LIGHTNESS carries the value — which
+          // means any flat grey reads as a position on the scale. The 3D body
+          // escapes this because unmeasured anatomy is already dithered there
+          // (D13), but a 14px swatch has no dither to inherit. See
+          // `NO_DATA_SWATCH_CSS` in `metricColor.ts`.
+          const noData = colourMode === 'metrics' && !sys.hasData
           const colour =
             '#' +
             (colourMode === 'anatomical'
               ? anatomicalColor(sys.id)
               : scoreToColor(sys.hasData ? sys.score : null)
             ).getHexString()
+          const swatch = noData ? { background: NO_DATA_SWATCH_CSS } : { background: colour }
           return (
             <div key={sys.id} className="flex flex-col gap-1">
               <div className="flex items-center gap-2">
@@ -155,7 +204,7 @@ export function StructurePanel() {
                   'h-3.5 w-3.5 shrink-0 rounded-[4px] border transition ' +
                   (off ? 'border-line bg-transparent' : 'border-transparent')
                 }
-                style={off ? undefined : { background: colour }}
+                style={off ? undefined : swatch}
               />
               {/* Clicking the name selects, matching a click on the organ itself. */}
               <button
@@ -197,6 +246,12 @@ export function StructurePanel() {
                         ? anatomicalColor(sys.id, mine[0])
                         : scoreToColor(sys.hasData ? sys.score : null)
                       ).getHexString()
+                    // Same hatch as the parent row — a sub-row of an unmeasured
+                    // system is equally unmeasured, and a flat fill here would
+                    // undo the distinction one line above.
+                    const rowSwatch = noData
+                      ? { background: NO_DATA_SWATCH_CSS }
+                      : { background: rowColour }
                     return (
                       <div key={r.label} className="flex items-center gap-2 pl-5">
                         <button
@@ -207,7 +262,7 @@ export function StructurePanel() {
                             'h-2.5 w-2.5 shrink-0 rounded-[3px] border transition ' +
                             (rowOn ? 'border-transparent' : 'border-line bg-transparent')
                           }
-                          style={rowOn ? { background: rowColour } : undefined}
+                          style={rowOn ? rowSwatch : undefined}
                         />
                         <button
                           onClick={() =>

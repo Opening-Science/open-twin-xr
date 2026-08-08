@@ -8,6 +8,7 @@ import { StructurePanel } from './ui/StructurePanel'
 import { SceneDock } from './ui/SceneDock'
 import { OsfLogo } from './ui/OsfLogo'
 import { CanvasKeyboardShell } from './ui/CanvasKeyboardShell'
+import { SelectedStructureCard } from './ui/SelectedStructureCard'
 
 /**
  * An open-source human body viewer.
@@ -149,6 +150,10 @@ export default function App() {
 
         <div className="flex flex-col gap-5 overflow-y-auto">
           <StructurePanel />
+          {/* Between the anatomy controls and the credits, because it is both:
+              it names what is selected and it states that structure's OWN
+              licence where that differs from the atlas's. See the file. */}
+          <SelectedStructureCard />
           <AtlasAttribution />
         </div>
       </main>

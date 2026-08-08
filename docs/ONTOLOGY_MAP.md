@@ -18,13 +18,13 @@ A crosswalk in `docs/` is not a join the app can make. Unless the term travels i
 |---|---|---|---|
 | `hra` | 96 mesh nodes | 85 (89 %) | node `extras.ontologyid` |
 | `hra-m` | 85 mesh nodes | 76 (89 %) | node `extras.ontologyid` |
-| `bodyparts3d` | 11 mesh nodes | 0 (0 %) | **nowhere — name only** |
-| `z-anatomy` | 3,617 in the structure table | 0 (0 %) | **nowhere — name only** |
+| `bodyparts3d` | 1,838 in the structure table | 1,838 (100 %) | structure table |
+| `z-anatomy` | 3,614 in the structure table | 1,048 (29 %) | structure table |
 | `z-anatomy-regions` | 257 in the structure table | 0 (0 %) | **nowhere — name only** |
 | `htb-ct-f` | 33 mesh nodes | 33 (100 %) | node `extras.ontologyid` |
 | `ct-atlas-f` | 109 mesh nodes | 109 (100 %) | node `extras.ontologyid` |
 
-**So the two richest atlases are the two with no terms in the asset.** Z-Anatomy ships 3,617 named structures and carries none, though `docs/z-anatomy-fma.tsv` maps 618 distinct terms across 676 rows; BodyParts3D is merged to eleven draw calls and loses the FMA id that `docs/bodyparts3d-system-map.tsv` holds for all 1,838 of its source meshes. Writing those crosswalks into the structure table at build time is the concrete next step — it is a change to `build-z-anatomy.mjs` and `build-bodyparts3d.mjs`, not new research.
+**1 of the 7 built assets carry no term at all: `z-anatomy-regions`.** Z-Anatomy ships 3,614 named structures and now carries 1,048 of them (29 %), written into the structure table from `docs/z-anatomy-fma.tsv`, which maps 618 distinct terms across 676 rows. The remainder is unmapped crosswalk, not a pipeline failure. BodyParts3D carries 1,838 of 1,838 (100 %), from `docs/bodyparts3d-system-map.tsv`. It is still merged to eleven draw calls — the ids travel in the structure table and the `_STRUCTURE` attribute, not in the node graph, so the draw-call budget is unaffected.
 
 ## Crosswalks in this repository
 

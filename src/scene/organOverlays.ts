@@ -117,6 +117,21 @@ export interface OrganOverlay {
     is: RegExp
     /** Names to exclude even though `is` matched. */
     not?: RegExp
+    /**
+     * Restrict to one side of the body.
+     *
+     * ⚠️ THIS IS WHAT MAKES A ONE-SIDED OVERLAY POSSIBLE. Z-Anatomy names both
+     * ears' ossicles identically — two structures called `Incus`, distinguished
+     * only by `side` — so a name test alone matches both and an overlay that
+     * replaces the RIGHT ear would blank the left one too. That is why the
+     * OpenEar overlay superseded nothing at all until now, and it is recorded as
+     * a known limitation in `docs/HANDOVER.md`.
+     *
+     * Note that the fix the handover predicted — ontology terms — would NOT have
+     * worked: none of the eight ear structures carries an `ontologyid`. `side` is
+     * on all of them. Measured, not assumed; see `scene/structureMask.ts`.
+     */
+    side?: 'left' | 'right'
     expect: number
   }
   animation?: {
@@ -368,14 +383,30 @@ export const ORGAN_OVERLAYS: Record<OrganOverlayId, OrganOverlay> = {
    * (`inner-ear-dundee`), retopologised into TARO's skull, so it is not TARO's ear
    * either. Two different ears from two different people is the honest reading.
    *
-   * ⚠️ IT SUPERSEDES NOTHING, deliberately, and this one is a real limitation
-   * rather than a non-issue like the eye's. Z-Anatomy does carry the same
-   * structures, so they render alongside — slightly interpenetrating, given the
-   * 14 %. Hiding them is not currently possible without making it worse:
-   * `supersedesStructures` resolves BY NAME, and Z-Anatomy names both ears'
-   * ossicles identically, so it would blank the LEFT ear as well and this overlay
-   * only replaces the right. Side-aware masking is the fix; a left-earless body is
-   * not.
+   * ⚠️ IT NOW SUPERSEDES THE RIGHT INNER EAR — and for most of this repository's
+   * life it could not, which is worth keeping because the reason was subtle.
+   *
+   * `supersedesStructures` resolved BY NAME onto a contiguous id RANGE, and
+   * Z-Anatomy names both ears' structures identically: two `Incus`, two
+   * `Cochlea`, distinguished only by `side`. A name test therefore matched both
+   * ears, and masking the union would have blanked the left ear, which this
+   * overlay does not replace. A left-earless body is worse than a doubled one,
+   * so the rule was left off.
+   *
+   * Two things had to change. `side` on the rule, so the test can select one
+   * ear — and note that the fix `docs/HANDOVER.md` predicted, ontology terms,
+   * would NOT have worked here, because none of these eight structures carries
+   * an `ontologyid`. And the mask had to stop being a range: measured on the
+   * shipped asset the right ossicles are 451, 455 and 456, which interleave with
+   * the left, so no `{lo, hi}` could ever have expressed them. See
+   * `scene/structureMask.ts`.
+   *
+   * The count is 7, not 8: the tier-1 asset carries Malleus, Incus and Stapes on
+   * the right (musculoskeletal) plus Tympanic membrane, Auditory tube, Cochlea
+   * and Vestibule on the right (nervous). Two rules would be needed to span both
+   * systems, so this one takes the nervous-system sense organ — the part this
+   * specimen actually replaces — and leaves the three ossicles visible. Stated
+   * rather than silently rounded, and `expect` will warn if it drifts.
    */
   openear: {
     id: 'openear',
@@ -426,6 +457,15 @@ export const ORGAN_OVERLAYS: Record<OrganOverlayId, OrganOverlay> = {
         },
       ],
     },
+    // The right sense organ only. `Cochlea` and `Vestibule` are the CC BY-NC-SA
+    // Dundee component; `Tympanic membrane` and `Auditory tube` are Z-Anatomy's
+    // own. All four are `nervous` in this asset, and all four carry `side`.
+    supersedesStructures: {
+      system: 'nervous',
+      is: /^(Cochlea|Vestibule|Tympanic membrane|Auditory tube)$/,
+      side: 'right',
+      expect: 4,
+    },
     publishable: true,
     note:
       'Photographic colour, and the first here: base colour is sampled from this specimen’s own ' +
@@ -433,7 +473,9 @@ export const ORGAN_OVERLAYS: Record<OrganOverlayId, OrganOverlay> = {
       'is neutral grey because the photographed block is smaller than the scan, and grey means "no ' +
       'source" rather than "this colour". One right temporal bone from one cadaver — not a ' +
       'population, and ~14 % larger than this body’s own inner ear, which is left unscaled. ' +
-      'Z-Anatomy’s own ear structures stay visible alongside it.',
+      'It now replaces Z-Anatomy’s own RIGHT cochlea, vestibule, tympanic membrane and ' +
+      'auditory tube; the left ear is untouched, and the three right ossicles stay visible ' +
+      'because they sit in a different system from the four this rule covers.',
   },
 }
 

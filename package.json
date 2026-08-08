@@ -22,13 +22,17 @@
     "convert:bodyparts3d": "gltf-transform optimize public/models/bodyparts3d.glb public/models/bodyparts3d.opt.glb --compress meshopt --join false --instance false --weld true --simplify true --simplify-ratio 0.5 --simplify-error 0.005 && node scripts/bake-ao.mjs public/models/bodyparts3d.opt.glb --out public/models/bodyparts3d.ao.glb",
     "strip:atlas": "node --stack-size=4000 scripts/strip-atlas.mjs",
     "check:structures": "node scripts/check-structures.mjs public/models/z-anatomy.ao.glb",
-    "check:winding": "node scripts/check-winding.mjs public/models/bodyparts3d.ao.glb public/models/z-anatomy.ao.glb public/models/hra.ao.glb public/models/hra-m.ao.glb public/models/htb-ct-003.glb public/models/biv-heart.glb public/models/eye.glb public/models/openear-zeta.glb",
+    "check:winding": "node scripts/check-winding.mjs public/models/bodyparts3d.ao.glb public/models/z-anatomy.ao.glb public/models/hra.ao.glb public/models/hra-m.ao.glb public/models/htb-ct-003.glb public/models/biv-heart.glb public/models/eye.glb public/models/openear-zeta.glb public/models/anny-adult-m.glb public/models/anny-adult-f.glb public/models/anny-child.glb public/models/anny-elder.glb public/models/anny-pregnant.glb",
     "check:licences": "node scripts/check-licences.mjs",
     "convert:z-anatomy-regions": "gltf-transform optimize public/models/z-anatomy-regions.glb public/models/z-anatomy-regions.opt.glb --compress meshopt --join false --instance false --weld true --simplify true --simplify-ratio 0.5 --simplify-error 0.001 && node scripts/bake-ao.mjs public/models/z-anatomy-regions.opt.glb --out public/models/z-anatomy-regions.ao.glb",
     "build:openear": "node scripts/build-openear.mjs",
     "convert:openear": "gltf-transform webp public/models/openear-zeta.raw.glb public/models/openear-zeta.glb --lossless true",
+    "bake:anny": "python3 scripts/anny/bake.py --out public/models",
+    "convert:anny": "for f in adult-m adult-f child elder pregnant; do gltf-transform optimize public/models/anny-$f.raw.glb public/models/anny-$f.opt.glb --compress meshopt --join false --instance false --weld true --simplify false && node scripts/bake-ao.mjs public/models/anny-$f.opt.glb --out public/models/anny-$f.glb && node scripts/set-copyright.mjs public/models/anny-$f.glb \"ANNY \u2014 NAVER LABS Europe / NAVER Corporation. Apache-2.0 code over CC0-1.0 MakeHuman-derived shape assets. arXiv:2511.03589. Baked by open-twin-openXR scripts/anny/bake.py; no scan of any person.\" || exit 1; done",
     "typecheck": "tsc -b --pretty false",
     "lint": "eslint . --report-unused-disable-directives --max-warnings 0",
+    "test": "vitest run",
+    "lint:claims": "node scripts/lint-claims.mjs",
     "gen:ontology": "node scripts/gen-ontology-map.mjs",
     "gen:preview": "node scripts/gen-preview.mjs --url http://localhost:5173"
   },
@@ -57,7 +61,8 @@
     "tailwindcss": "^3.4.14",
     "typescript": "^5.6.3",
     "typescript-eslint": "^8.66.0",
-    "vite": "^5.4.10"
+    "vite": "^5.4.10",
+    "vitest": "2.1.9"
   },
   "engines": {
     "node": ">=20"

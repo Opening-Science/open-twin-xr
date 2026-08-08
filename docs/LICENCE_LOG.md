@@ -12,6 +12,61 @@ Project stance: **open source, non-commercial, fully attributed — the twin wil
 
 ## Assets
 
+### `public/models/anny-adult-f.glb`
+
+- **Licence:** Apache-2.0 (code) + CC0-1.0 (shape assets)
+- **Source:** https://github.com/naver/anny — anny==0.6.0, baked by scripts/anny/bake.py
+- **Loaded by the app:** yes
+- **Required credit:** ANNY, a free-to-use 3D human parametric model for all ages — NAVER LABS Europe / NAVER Corporation. Apache-2.0 code over CC0 shape assets derived from MakeHuman. Cite arXiv:2511.03589. Baked to static geometry by this repository; no scan of any person was used.
+- **Embedded `asset.copyright`:** ✅ present
+- **Why:** THE ONLY GEOMETRY HERE THAT IS NOT SOMEBODY'S BODY, and that is the point. Every atlas and every overlay in this register derives from a real donor — a cadaver, a scan, a segmented patient — and carries the provenance and consent questions that come with one. A parametric body is scan-free: it is generated from shape targets, so there is no donor, no consent chain and no re-identification surface. RESEARCH.md argues that is an ethical feature rather than a shortfall, and this register should say so rather than leave a blank where a donor line would be.
+
+It exists to close D14: three of the seven atlases ship NO integumentary geometry, so the glass hull was unavailable on exactly the sources with the richest anatomy. An envelope is a skin, so the control works again. See D16.
+
+### `public/models/anny-adult-m.glb`
+
+- **Licence:** Apache-2.0 (code) + CC0-1.0 (shape assets)
+- **Source:** https://github.com/naver/anny — anny==0.6.0, baked by scripts/anny/bake.py
+- **Loaded by the app:** yes
+- **Required credit:** ANNY, a free-to-use 3D human parametric model for all ages — NAVER LABS Europe / NAVER Corporation. Apache-2.0 code over CC0 shape assets derived from MakeHuman. Cite arXiv:2511.03589. Baked to static geometry by this repository; no scan of any person was used.
+- **Embedded `asset.copyright`:** ✅ present
+- **Why:** THE ONLY GEOMETRY HERE THAT IS NOT SOMEBODY'S BODY, and that is the point. Every atlas and every overlay in this register derives from a real donor — a cadaver, a scan, a segmented patient — and carries the provenance and consent questions that come with one. A parametric body is scan-free: it is generated from shape targets, so there is no donor, no consent chain and no re-identification surface. RESEARCH.md argues that is an ethical feature rather than a shortfall, and this register should say so rather than leave a blank where a donor line would be.
+
+It exists to close D14: three of the seven atlases ship NO integumentary geometry, so the glass hull was unavailable on exactly the sources with the richest anatomy. An envelope is a skin, so the control works again. See D16.
+
+### `public/models/anny-child.glb`
+
+- **Licence:** Apache-2.0 (code) + CC0-1.0 (shape assets)
+- **Source:** https://github.com/naver/anny — anny==0.6.0, baked by scripts/anny/bake.py
+- **Loaded by the app:** yes
+- **Required credit:** ANNY, a free-to-use 3D human parametric model for all ages — NAVER LABS Europe / NAVER Corporation. Apache-2.0 code over CC0 shape assets derived from MakeHuman. Cite arXiv:2511.03589. Baked to static geometry by this repository; no scan of any person was used.
+- **Embedded `asset.copyright`:** ✅ present
+- **Why:** THE ONLY GEOMETRY HERE THAT IS NOT SOMEBODY'S BODY, and that is the point. Every atlas and every overlay in this register derives from a real donor — a cadaver, a scan, a segmented patient — and carries the provenance and consent questions that come with one. A parametric body is scan-free: it is generated from shape targets, so there is no donor, no consent chain and no re-identification surface. RESEARCH.md argues that is an ethical feature rather than a shortfall, and this register should say so rather than leave a blank where a donor line would be.
+
+It exists to close D14: three of the seven atlases ship NO integumentary geometry, so the glass hull was unavailable on exactly the sources with the richest anatomy. An envelope is a skin, so the control works again. See D16.
+
+### `public/models/anny-elder.glb`
+
+- **Licence:** Apache-2.0 (code) + CC0-1.0 (shape assets)
+- **Source:** https://github.com/naver/anny — anny==0.6.0, baked by scripts/anny/bake.py
+- **Loaded by the app:** yes
+- **Required credit:** ANNY, a free-to-use 3D human parametric model for all ages — NAVER LABS Europe / NAVER Corporation. Apache-2.0 code over CC0 shape assets derived from MakeHuman. Cite arXiv:2511.03589. Baked to static geometry by this repository; no scan of any person was used.
+- **Embedded `asset.copyright`:** ✅ present
+- **Why:** THE ONLY GEOMETRY HERE THAT IS NOT SOMEBODY'S BODY, and that is the point. Every atlas and every overlay in this register derives from a real donor — a cadaver, a scan, a segmented patient — and carries the provenance and consent questions that come with one. A parametric body is scan-free: it is generated from shape targets, so there is no donor, no consent chain and no re-identification surface. RESEARCH.md argues that is an ethical feature rather than a shortfall, and this register should say so rather than leave a blank where a donor line would be.
+
+It exists to close D14: three of the seven atlases ship NO integumentary geometry, so the glass hull was unavailable on exactly the sources with the richest anatomy. An envelope is a skin, so the control works again. See D16.
+
+### `public/models/anny-pregnant.glb`
+
+- **Licence:** Apache-2.0 (code) + CC0-1.0 (shape assets)
+- **Source:** https://github.com/naver/anny — anny==0.6.0, baked by scripts/anny/bake.py
+- **Loaded by the app:** yes
+- **Required credit:** ANNY, a free-to-use 3D human parametric model for all ages — NAVER LABS Europe / NAVER Corporation. Apache-2.0 code over CC0 shape assets derived from MakeHuman. Cite arXiv:2511.03589. Baked to static geometry by this repository; no scan of any person was used.
+- **Embedded `asset.copyright`:** ✅ present
+- **Why:** THE ONLY GEOMETRY HERE THAT IS NOT SOMEBODY'S BODY, and that is the point. Every atlas and every overlay in this register derives from a real donor — a cadaver, a scan, a segmented patient — and carries the provenance and consent questions that come with one. A parametric body is scan-free: it is generated from shape targets, so there is no donor, no consent chain and no re-identification surface. RESEARCH.md argues that is an ethical feature rather than a shortfall, and this register should say so rather than leave a blank where a donor line would be.
+
+It exists to close D14: three of the seven atlases ship NO integumentary geometry, so the glass hull was unavailable on exactly the sources with the richest anatomy. An envelope is a skin, so the control works again. See D16.
+
 ### `public/models/biv-heart.glb`
 
 - **Licence:** Apache-2.0
@@ -27,6 +82,7 @@ Project stance: **open source, non-commercial, fully attributed — the twin wil
 - **Licence:** CC BY 4.0
 - **Source:** https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html
 - **Loaded by the app:** yes
+- **Structures:** 1,838
 - **Required credit:** BodyParts3D, © The Database Center for Life Science licensed under CC Attribution 4.0 International.
 - **Embedded `asset.copyright`:** ✅ present
 - **Why:** Relicensed from CC BY-SA 2.1 Japan on 2025-02-27. See D2 — several upstream pages still say share-alike, and the stale ones are the easier ones to find. Tier 1 under either reading.
@@ -35,10 +91,12 @@ Project stance: **open source, non-commercial, fully attributed — the twin wil
 
 - **Licence:** CC BY 4.0 (MOOSE weights) over CC BY 4.0 source CT
 - **Source:** docs/CT_ATLAS_PIPELINE.md
-- **Loaded by the app:** no
+- **Loaded by the app:** yes
 - **Required credit:** Segmented with MOOSE 3.2 (ENHANCE-PET), CC BY 4.0 weights.
-- **Embedded `asset.copyright`:** ❌ MISSING
+- **Embedded `asset.copyright`:** ✅ present
 - **Why:** Built by the MOOSE pipeline and tier 1 throughout, but not registered in anatomySources.ts, so nothing loads it. Registered here anyway — an asset on disk needs an entry whether or not it renders.
+
+⚠️ `loaded` read FALSE until 8 August 2026 and was simply stale: this atlas is a registered `AnatomySource`, an offered pill in the switcher, and 12.5 MB of the shipped bundle. The licence log therefore printed "Loaded by the app: no" for an asset every visitor can select — understating exposure for the one asset here whose licence is UNRESOLVED, which is exactly the wrong direction to be wrong in.
 
 ### `public/models/eye.glb`
 
@@ -130,7 +188,6 @@ no decision of ours can relax — unlike a licence choice, which is ours to make
 
 ## Action list before publishing
 
-- [ ] **public/models/ct-atlas-f.glb** carries no `asset.copyright` — the credit is not travelling with the file.
 - [ ] **bodyparts3d**: DBCLS have not confirmed the relicence in writing. Chase it before relying on the CC BY reading for anything that matters.
 - [ ] **z-anatomy**: ⚠️ DISTRIBUTION GATE: the University of Washington white-matter component (3 structures) has NO licence statement, and serving to logged-in users is still distribution — a login wall does not change this. Build with `npm run build:z-anatomy -- --publishable`, which drops exactly that component and keeps the non-commercial ones (they need attribution, not removal). See docs/DEPLOY.md. The permanent fix is written permission or CT-segmented white matter from MOOSE (Apache-2.0).
 - [ ] **ct-atlas-f**: If the pipeline is ever re-run with TotalSegmentator's GATED subtasks (tissue_types, appendicular_bones, face), the output becomes tier 2 and needs its own id here — the academic weights licence is non-commercial.
@@ -140,3 +197,28 @@ no decision of ours can relax — unlike a licence choice, which is ours to make
 - [ ] **openear-zeta**: Nothing outstanding on rights, and the pipeline blocker is fixed: all 12 structures now carry baked photographic colour, and it renders as the `openear` organ overlay. Three properties travel with any use of it. It is ONE cadaveric RIGHT temporal bone, not a population. 71.5% of its surface has a colour source and the rest is neutral grey, because the micro-sliced block (~39.6 x 39.6 x 51.8 mm) is smaller than the scan -- grey means 'no source', never 'this colour', and the per-structure split is in the asset's own extras. And it is ~14% larger than Z-Anatomy's inner ear, left unscaled deliberately; see the note in src/scene/organOverlays.ts.
 - [ ] **inter-font**: RESOLVED — no external runtime fetch remains. Verified twice: no fonts.googleapis or fonts.gstatic reference in src/ or index.html, and a full network capture of the running app shows every request on localhost with /fonts/InterVariable.woff2 served 200. Kept as a record because re-adding a CDN font link would silently reopen a GDPR exposure — LG Muenchen I (3 O 17493/20) held the IP disclosure alone sufficient. The only characters that still fall back are the emoji and geometric icons Inter genuinely lacks, which is correct: self-hosting an emoji font is neither wanted nor generally licensed.
 - [ ] **npm-runtime**: Re-run the checker after any dependency bump. The one historical trap is @pmndrs/assets (CC0, fine) pulling a re-resolution of the whole pmndrs stack.
+- [ ] **anny-adult-m**: THREE LICENCE BUCKETS IN ONE PACKAGE, and recording only the headline Apache-2.0 would misstate what is on screen. The code is Apache-2.0 (NAVER Corporation); the MakeHuman-derived shape assets this geometry actually comes from are CC0-1.0; a SOMA topology ships alongside under Apache-2.0 and is NOT used by these bakes. All three are declared in src/scene/bodyEnvelopes.ts and rendered in-app.
+
+⚠️ NEVER BAKE WITH topology="smpl" OR "smplx". Both trigger a RUNTIME download of a non-commercial archive from download.europe.naverlabs.com inside download_noncommercial_data() (anny/paths.py). Because it happens at runtime rather than at install time, A DEPENDENCY AUDIT DOES NOT CATCH IT. scripts/anny/bake.py hardcodes the safe topology and exposes no flag for it — keep it that way.
+
+NOT A MEASUREMENT INSTRUMENT. The shape space is artist priors from MakeHuman, not anthropometric ground truth, so no body-composition, ergonomic or health claim may be attached. And its rest pose is not any atlas's: measured on Z-Anatomy it spans 1.124 m across the arms against the atlas's 0.646 m, so it wraps the torso and not the limbs. The interface states that; keep it stated.
+- [ ] **anny-adult-f**: THREE LICENCE BUCKETS IN ONE PACKAGE, and recording only the headline Apache-2.0 would misstate what is on screen. The code is Apache-2.0 (NAVER Corporation); the MakeHuman-derived shape assets this geometry actually comes from are CC0-1.0; a SOMA topology ships alongside under Apache-2.0 and is NOT used by these bakes. All three are declared in src/scene/bodyEnvelopes.ts and rendered in-app.
+
+⚠️ NEVER BAKE WITH topology="smpl" OR "smplx". Both trigger a RUNTIME download of a non-commercial archive from download.europe.naverlabs.com inside download_noncommercial_data() (anny/paths.py). Because it happens at runtime rather than at install time, A DEPENDENCY AUDIT DOES NOT CATCH IT. scripts/anny/bake.py hardcodes the safe topology and exposes no flag for it — keep it that way.
+
+NOT A MEASUREMENT INSTRUMENT. The shape space is artist priors from MakeHuman, not anthropometric ground truth, so no body-composition, ergonomic or health claim may be attached. And its rest pose is not any atlas's: measured on Z-Anatomy it spans 1.124 m across the arms against the atlas's 0.646 m, so it wraps the torso and not the limbs. The interface states that; keep it stated.
+- [ ] **anny-child**: THREE LICENCE BUCKETS IN ONE PACKAGE, and recording only the headline Apache-2.0 would misstate what is on screen. The code is Apache-2.0 (NAVER Corporation); the MakeHuman-derived shape assets this geometry actually comes from are CC0-1.0; a SOMA topology ships alongside under Apache-2.0 and is NOT used by these bakes. All three are declared in src/scene/bodyEnvelopes.ts and rendered in-app.
+
+⚠️ NEVER BAKE WITH topology="smpl" OR "smplx". Both trigger a RUNTIME download of a non-commercial archive from download.europe.naverlabs.com inside download_noncommercial_data() (anny/paths.py). Because it happens at runtime rather than at install time, A DEPENDENCY AUDIT DOES NOT CATCH IT. scripts/anny/bake.py hardcodes the safe topology and exposes no flag for it — keep it that way.
+
+NOT A MEASUREMENT INSTRUMENT. The shape space is artist priors from MakeHuman, not anthropometric ground truth, so no body-composition, ergonomic or health claim may be attached. And its rest pose is not any atlas's: measured on Z-Anatomy it spans 1.124 m across the arms against the atlas's 0.646 m, so it wraps the torso and not the limbs. The interface states that; keep it stated.
+- [ ] **anny-elder**: THREE LICENCE BUCKETS IN ONE PACKAGE, and recording only the headline Apache-2.0 would misstate what is on screen. The code is Apache-2.0 (NAVER Corporation); the MakeHuman-derived shape assets this geometry actually comes from are CC0-1.0; a SOMA topology ships alongside under Apache-2.0 and is NOT used by these bakes. All three are declared in src/scene/bodyEnvelopes.ts and rendered in-app.
+
+⚠️ NEVER BAKE WITH topology="smpl" OR "smplx". Both trigger a RUNTIME download of a non-commercial archive from download.europe.naverlabs.com inside download_noncommercial_data() (anny/paths.py). Because it happens at runtime rather than at install time, A DEPENDENCY AUDIT DOES NOT CATCH IT. scripts/anny/bake.py hardcodes the safe topology and exposes no flag for it — keep it that way.
+
+NOT A MEASUREMENT INSTRUMENT. The shape space is artist priors from MakeHuman, not anthropometric ground truth, so no body-composition, ergonomic or health claim may be attached. And its rest pose is not any atlas's: measured on Z-Anatomy it spans 1.124 m across the arms against the atlas's 0.646 m, so it wraps the torso and not the limbs. The interface states that; keep it stated.
+- [ ] **anny-pregnant**: THREE LICENCE BUCKETS IN ONE PACKAGE, and recording only the headline Apache-2.0 would misstate what is on screen. The code is Apache-2.0 (NAVER Corporation); the MakeHuman-derived shape assets this geometry actually comes from are CC0-1.0; a SOMA topology ships alongside under Apache-2.0 and is NOT used by these bakes. All three are declared in src/scene/bodyEnvelopes.ts and rendered in-app.
+
+⚠️ NEVER BAKE WITH topology="smpl" OR "smplx". Both trigger a RUNTIME download of a non-commercial archive from download.europe.naverlabs.com inside download_noncommercial_data() (anny/paths.py). Because it happens at runtime rather than at install time, A DEPENDENCY AUDIT DOES NOT CATCH IT. scripts/anny/bake.py hardcodes the safe topology and exposes no flag for it — keep it that way.
+
+NOT A MEASUREMENT INSTRUMENT. The shape space is artist priors from MakeHuman, not anthropometric ground truth, so no body-composition, ergonomic or health claim may be attached. And its rest pose is not any atlas's: measured on Z-Anatomy it spans 1.124 m across the arms against the atlas's 0.646 m, so it wraps the torso and not the limbs. The interface states that; keep it stated.

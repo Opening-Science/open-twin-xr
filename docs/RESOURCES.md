@@ -101,8 +101,11 @@ opposite of the usual instinct.
 ## Key sources worth keeping
 
 - three.js `ShaderChunk/lights_fragment_maps.glsl.js` — the `USE_ENVMAP` guard that made indirect specular exactly zero
-- **BOSS** — Shetty et al., *Comput Biol Med* 165 (2023). **8.11 mm** organ error from height/weight/sex vs **8.68 mm** from a full 3D body scan
-- **HIT** — Keller et al., CVPR 2024. Read the limitations section
+- **BOSS** — Shetty et al., *Comput Biol Med* 165:107383 (2023), [arXiv:2303.04923](https://arxiv.org/abs/2303.04923), PMID 37657357. **8.11 mm** from height/weight/sex vs **8.68 mm** from a full 3D body scan — three numbers beat the whole skin surface. ⚠️ Those are **whole-model, vertex-weighted** figures and bone is 63 % of the vertices; **organs alone from the skin surface are ~15–25 mm**. This line used to say "organ error" and was wrong. **Cite it, never include it** — nothing was released, and its own licence position (SMPL + BodyParts3D) was unsatisfiable. Full assessment in `docs/research/ORGAN_SHAPE_MODELS.md` §4c
+- **Articulated digital twins from one full-body CT** — Zhang, Zhao & Unberath (JHU), [arXiv:2607.02156](https://arxiv.org/abs/2607.02156), July 2026, CC BY 4.0. BOSS's successor, and the architecture to copy: fit a body model as a **kinematic scaffold only**, bind the patient's own segmented anatomy to it, re-pose. Never predicts interior from exterior. ⚠️ n = 3, no code. `ORGAN_SHAPE_MODELS.md` §5a
+- **SOMA-X** — NVIDIA, [arXiv:2603.16858](https://arxiv.org/abs/2603.16858), **Apache-2.0**. Unifies **ANNY** (already shipped) with MHR and SMPL under one canonical rig, plus pose correctives ANNY lacks. Surface only. ⚠️ SMPL needs an explicit `model_path`, so it cannot be tripped by accident the way ANNY's `topology="smpl"` can
+- **MHR** — Meta, **Apache-2.0**. The other permissive parametric human; SOMA-X's default identity model. A skeletal rig, not bone geometry
+- **HIT** — Keller et al., CVPR 2024. Read the limitations section. Its *code* licence permits redistribution with notice; the weights and dataset do not, and it needs SMPL
 - **Klarqvist et al.**, *npj Digital Medicine* 2022, n=40,032 — VAT from a silhouette at **R² 0.885**
 - **Comaniciu et al.**, *Med Image Analysis* 33 (2016) — Siemens Cinematic Rendering
 - **Learn2Reg** ([arXiv 2112.04489](https://arxiv.org/abs/2112.04489)) — best inter-patient abdominal CT registration is **Dice 0.69**. Plan around it.

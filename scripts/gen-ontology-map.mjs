@@ -327,15 +327,59 @@ L.push('')
 const zaSrc = perSource.find((s) => s.id === 'z-anatomy')
 const bpSrc = perSource.find((s) => s.id === 'bodyparts3d')
 const zaAsset = assetTerms.find((a) => a.id === 'z-anatomy')
+const bpAsset = assetTerms.find((a) => a.id === 'bodyparts3d')
+// ⚠️ THIS PARAGRAPH IS DERIVED, AND IT HAS TO BE.
+//
+// It used to assert that Z-Anatomy "carries none", as a fixed string beside a
+// table computed from the asset. When `apply-crosswalk.mjs` wrote 1,048 FMA
+// terms into the build, the table updated and the sentence did not, so this
+// generated document spent a while contradicting itself one line apart — and
+// `docs/HANDOVER.md` and `CLAUDE.md` both went on repeating the sentence rather
+// than the table. A generated document that states a conclusion the same run
+// disproved is worse than a hand-maintained one, because it carries the
+// authority of having been measured.
+//
+// So the claim is now computed. If a future build writes terms into
+// BodyParts3D, this paragraph changes on its own.
+const zaCarry = zaAsset?.tableWithTerm ?? 0
+const zaTotal = zaAsset?.table ?? 0
+const withoutTerms = assetTerms.filter(
+  (a) => !a.missing && !(a.table ? a.tableWithTerm : a.nodesWithTerm),
+)
 L.push(
-  '**So the two richest atlases are the two with no terms in the asset.** Z-Anatomy ships ' +
-    `${(zaAsset?.table ?? 0).toLocaleString()} named structures and carries none, though ` +
-    `\`${zaSrc?.file}\` maps ${(zaSrc?.distinct ?? 0).toLocaleString()} distinct terms across ` +
-    `${(zaSrc?.rows ?? 0).toLocaleString()} rows; BodyParts3D is merged to eleven draw calls and ` +
-    `loses the FMA id that \`${bpSrc?.file}\` holds for all ` +
-    `${(bpSrc?.rows ?? 0).toLocaleString()} of its source meshes. Writing those crosswalks into ` +
-    'the structure table at build time is the concrete next step — it is a change to ' +
-    '`build-z-anatomy.mjs` and `build-bodyparts3d.mjs`, not new research.',
+  (withoutTerms.length
+    ? `**${withoutTerms.length} of the ${assetTerms.filter((a) => !a.missing).length} built assets ` +
+      `carry no term at all: ${withoutTerms.map((a) => `\`${a.id}\``).join(', ')}.** `
+    : '**Every built asset now carries at least some terms.** ') +
+    (zaCarry
+      ? `Z-Anatomy ships ${zaTotal.toLocaleString()} named structures and now carries ` +
+        `${zaCarry.toLocaleString()} of them (${((100 * zaCarry) / (zaTotal || 1)).toFixed(0)} %), ` +
+        `written into the structure table from \`${zaSrc?.file}\`, which maps ` +
+        `${(zaSrc?.distinct ?? 0).toLocaleString()} distinct terms across ` +
+        `${(zaSrc?.rows ?? 0).toLocaleString()} rows. The remainder is unmapped crosswalk, not a ` +
+        'pipeline failure. '
+      : `Z-Anatomy ships ${zaTotal.toLocaleString()} named structures and carries none, though ` +
+        `\`${zaSrc?.file}\` maps ${(zaSrc?.distinct ?? 0).toLocaleString()} distinct terms across ` +
+        `${(zaSrc?.rows ?? 0).toLocaleString()} rows. `) +
+    // ⚠️ DERIVED FOR THE SAME REASON AS THE SENTENCE ABOVE. This half described
+    // BodyParts3D as having lost its FMA ids to the merge and needing a rebuild.
+    // It was rebuilt on 8 August 2026 and now carries all 1,838, at which point
+    // a fixed string would have gone stale within one run of this script — the
+    // exact failure the previous paragraph had just been fixed for. Twice in one
+    // paragraph is enough to make the rule general: if a sentence states a
+    // measurement, it computes the measurement.
+    (bpAsset?.tableWithTerm
+      ? `BodyParts3D carries ${bpAsset.tableWithTerm.toLocaleString()} of ` +
+        `${(bpAsset.table ?? 0).toLocaleString()} ` +
+        `(${((100 * bpAsset.tableWithTerm) / (bpAsset.table || 1)).toFixed(0)} %), from ` +
+        `\`${bpSrc?.file}\`. It is still merged to eleven draw calls — the ids travel in the ` +
+        'structure table and the `_STRUCTURE` attribute, not in the node graph, so the draw-call ' +
+        'budget is unaffected.'
+      : 'BodyParts3D is merged to eleven draw calls and ' +
+        `loses the FMA id that \`${bpSrc?.file}\` holds for all ` +
+        `${(bpSrc?.rows ?? 0).toLocaleString()} of its source meshes — note that ` +
+        '`build-bodyparts3d.mjs` already WRITES a structure table with those ids, so the shipped ' +
+        'asset is simply older than the pipeline and needs only a rebuild, not a code change.'),
 )
 L.push('')
 

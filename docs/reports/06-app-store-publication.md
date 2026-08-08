@@ -290,7 +290,7 @@ currently an internal tool with no public distribution, so items 2, 3, 6, 7, 8 a
 not live questions — they become live only if a store route is chosen.
 
 **Cheapest honest option.** Publishing as a **web app at a URL** — which is what
-`opentwin.opening.science` already is — avoids items 2, 3, 6, 7, 8 and 9 entirely, because
+the gated preview already is — avoids items 2, 3, 6, 7, 8 and 9 entirely, because
 no store DRM is applied, no marketplace is involved, and there is no listing metadata to
 satisfy. Items 1, 4, 5, 10 and 11 remain, and 1 and 5 are worth doing this week whatever
 the distribution route.

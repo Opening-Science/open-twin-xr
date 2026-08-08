@@ -27,6 +27,29 @@ atlas is showing. They need no AO bake — see the note on the ear below.
 | Schematic eye | `eye.glb` | `node scripts/build-eye.mjs` — needs no download at all |
 | Ear (photographic) | `openear-zeta.glb` | `npm run build:openear -- --src DIR` then `npm run convert:openear` |
 
+**Body envelopes** are a third mechanism again: a parametric SKIN with no anatomy
+inside it, drawn around whichever atlas is showing. They exist because three of
+the seven atlases ship no integumentary geometry at all, so the glass hull was
+dead on exactly the sources with the best anatomy (D14, resolved in D16).
+
+| Envelope | What the app loads | Build |
+|---|---|---|
+| Adult male / female, Child, Elder, Pregnant | `anny-*.glb` | `npm run bake:anny` then `npm run convert:anny` |
+
+`bake:anny` needs Python with `anny` and `trimesh` installed — it is the only
+asset here with a Python dependency, and the only one that downloads nothing:
+
+```bash
+python3 -m venv .venv && .venv/bin/pip install anny trimesh
+.venv/bin/python scripts/anny/bake.py --out public/models
+npm run convert:anny
+```
+
+⚠️ **An envelope is not anatomy and is not a donor.** It has no organs, no
+ontology terms and no scan of any person. It is also baked in ANNY's own rest
+pose, which is not any atlas's, so it wraps the torso and not the limbs — the
+interface says so, and that wording should not be quietly dropped.
+
 The `.ao.glb` step is not cosmetic bookkeeping: it bakes per-vertex ambient
 occlusion into `COLOR_0`, and `AtlasBody` switches `vertexColors` on per mesh
 according to whether that attribute is present. Load an `.opt.glb` where the app

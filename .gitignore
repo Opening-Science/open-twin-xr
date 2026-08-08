@@ -14,6 +14,19 @@ public/models/*.glb
 public/models/*.blend
 public/models/*.gltf
 public/models/*.bin
+# ⚠️ AND ANY SUFFIXED VARIANT OF THOSE. `*.glb` does not match
+# `bodyparts3d.ao.glb.prev`, which is the shape a hand-made backup takes when
+# swapping a rebuilt asset in — and a `git add -A` during the 8 August rebuild
+# duly staged 10.8 MB of it. Caught before it left the machine, but the comment
+# above is explicit that one accidental add is effectively unrecoverable from
+# history, so the pattern is widened rather than the habit trusted.
+public/models/*.glb.*
+public/models/*.gltf.*
+# The ANNY bake's provenance manifest. It describes assets that are not
+# committed, so committing it would leave a record of a build nobody has —
+# and the parameters it records are already in `src/scene/bodyEnvelopes.ts`
+# and `licences.json`, which ARE reviewed. `npm run bake:anny` rewrites it.
+public/models/anny-provenance.json
 
 # build info
 tsconfig.tsbuildinfo

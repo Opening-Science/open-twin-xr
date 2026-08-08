@@ -1,8 +1,9 @@
 import { useState, type ReactNode } from 'react'
-import { useTwin } from '../store'
+import { useDonorSex, useTwin } from '../store'
 import { AtlasControls, OrganOverlayRow } from './AttributionBar'
 import { FramingControls } from './FocusSlider'
 import { MaterialTuner } from './MaterialTuner'
+import { BODY_ENVELOPES, BODY_ENVELOPE_IDS, envelopeSex } from '../scene/bodyEnvelopes'
 
 /**
  * Every control that floats over the 3D view, in one place.
@@ -79,6 +80,12 @@ export function SceneDock() {
             <AtlasControls />
             <DockGroup label="Overlays">
               <OrganOverlayRow />
+            </DockGroup>
+            <DockGroup label="Envelope">
+              <EnvelopeControls />
+            </DockGroup>
+            <DockGroup label="Inspect">
+              <InspectControls />
             </DockGroup>
             <DockGroup label="Look">
               <LookControls />
@@ -158,6 +165,224 @@ export function DockPill({
       {children}
     </button>
   )
+}
+
+/**
+ * The parametric skin envelope, and which preset.
+ *
+ * ⚠️ THE LABELS NAME PARAMETERS, NOT PEOPLE. Each preset is a point in ANNY's
+ * phenotype space, and the shape space is artist priors from MakeHuman rather
+ * than anthropometric ground truth — so "Adult female" means "the shape these
+ * parameters produce", not "what a woman looks like". No measurement, body
+ * composition or ergonomic claim attaches to any of them. The caption below the
+ * pills says so in the interface, not only in a comment, because the interface
+ * is where the claim would otherwise be made.
+ *
+ * Mutually exclusive rather than additive: two envelopes would be two skins.
+ * Clicking the active one switches it off, matching every other pill here.
+ */
+function EnvelopeControls() {
+  const envelope = useTwin((s) => s.bodyEnvelope)
+  const setEnvelope = useTwin((s) => s.setBodyEnvelope)
+  const availability = useTwin((s) => s.envelopeAvailability)
+  // The donor actually on screen, NOT the requested `sex` — the two come apart
+  // on male-only atlases. See `useDonorSex`.
+  const donorSex = useDonorSex()
+  const activeSex = envelope ? envelopeSex(envelope) : null
+  const mismatched = donorSex !== null && activeSex !== null && activeSex !== donorSex
+
+  const installed = BODY_ENVELOPE_IDS.filter(
+    (id) => availability?.[BODY_ENVELOPES[id].url] ?? false,
+  )
+
+  // Assets are optional by design — a build may ship none of these. Say so
+  // rather than showing five pills that cannot do anything.
+  if (availability !== null && installed.length === 0) {
+    return (
+      <div className="text-[10px] leading-snug text-muted">
+        No envelope installed. Run <span className="font-mono">npm run bake:anny</span> then{' '}
+        <span className="font-mono">npm run convert:anny</span>.
+      </div>
+    )
+  }
+
+  return (
+    <div className="flex flex-col gap-1">
+      <div className="flex flex-wrap gap-0.5">
+        {BODY_ENVELOPE_IDS.map((id) => {
+          const e = BODY_ENVELOPES[id]
+          const present = availability?.[e.url] ?? false
+          const matchesDonor = donorSex !== null && envelopeSex(id) === donorSex
+          return (
+            <DockPill
+              key={id}
+              on={envelope === id}
+              disabled={!present}
+              onClick={() => setEnvelope(envelope === id ? null : id)}
+              title={
+                present
+                  ? `${matchesDonor ? `Matches this atlas's donor (${donorSex}). ` : ''}${e.note} ` +
+                    `Baked from ${e.provenance.package} at ${Object.entries(e.provenance.parameters)
+                      .map(([k, v]) => `${k} ${v}`)
+                      .join(', ')} — ${e.heightM} m before scaling to the canonical body.`
+                  : 'Not installed — see public/models/README.md'
+              }
+            >
+              {e.label}
+              {/* A dot, not a word: the pill row is already five items wide and a
+                  label per pill would wrap it. The tooltip says what it means. */}
+              {matchesDonor && (
+                <span aria-hidden="true" className="text-[9px] leading-none text-[#4f9c84]">
+                  ●
+                </span>
+              )}
+              {matchesDonor && <span className="sr-only">matches this donor</span>}
+            </DockPill>
+          )
+        })}
+      </div>
+      {/*
+        The honesty lines, in the interface rather than only in the source.
+
+        ⚠️ THE POSE CAVEAT IS THE IMPORTANT ONE AND IT IS MEASURED. ANNY has its
+        own rest pose and every atlas here has a different one, so the envelope
+        does not follow the limbs — on Z-Anatomy it spans 1.124 m across the arms
+        against the atlas's 0.646 m. It encloses the torso and it does not enclose
+        the arms. Saying so is what keeps this a reference silhouette rather than
+        a claim about this body's shape, and it is why the surface is rendered as
+        clear glass rather than as skin.
+      */}
+      <div className="text-[9px] leading-snug text-muted/70">
+        A generated surface — no organs, no donor, no scan of anyone.{' '}
+        {envelope ? 'Apache-2.0 code over CC0 shapes; credited in full below.' : ''}
+      </div>
+      {envelope && (
+        <div className="text-[9px] leading-snug text-[#8a6d3b]">
+          Its rest pose is not the atlas’s, so it wraps the torso but not the limbs. A reference
+          silhouette, not this body’s skin.
+        </div>
+      )}
+
+      {/*
+        ⚠️ THE PAIRING WARNING. The envelope is switched to match the donor
+        automatically when the atlas changes (see `BodyEnvelope`), so this only
+        appears when a viewer has deliberately chosen the mismatched preset. That
+        is allowed — but it must be labelled, because every other donor mismatch
+        in this app is (`AttributionBar` has three such warnings) and a silent one
+        here would be the odd exception.
+      */}
+      {mismatched && (
+        <div className="text-[9px] leading-snug font-semibold text-[#8a6d3b]">
+          This envelope is {activeSex}; the anatomy inside it is a {donorSex} donor. The two do not
+          describe the same body.
+        </div>
+      )}
+    </div>
+  )
+}
+
+/**
+ * Colour individual structures by a fact the ASSET carries.
+ *
+ * WHY THIS IS A SEPARATE GROUP FROM "LOOK"
+ * ----------------------------------------
+ * `Look` is explicitly the group where nothing on screen changes meaning — its
+ * own comment says so. These two do change meaning: they repaint the body to
+ * answer a question about the DATA, and that is a different kind of control.
+ * Grouping them with the theme toggle would blur a line this project keeps
+ * deliberately sharp.
+ *
+ * ⚠️ AND NEITHER OF THEM INTERPRETS ANYTHING. `Ontology` colours by whether a
+ * structure carries an ontology term; `Licence` by whether it came from a
+ * component under stricter terms. Both are properties of the GLB, checkable by
+ * parsing it. Nothing here is a score, and the palette is deliberately not
+ * red-amber-green so it cannot be read as one — see `scene/structureMask.ts`.
+ *
+ * Disabled where the atlas cannot honour it, rather than offered as a control
+ * that does nothing: only assets carrying `_STRUCTURE` and a structure table can
+ * address a structure at all. Same rule the glass hull applies to a skinless
+ * atlas, and the pill says why.
+ */
+function InspectControls() {
+  const inspect = useTwin((s) => s.structureInspect)
+  const setInspect = useTwin((s) => s.setStructureInspect)
+  const label = useTwin((s) => s.structureLabel)
+  const setLabel = useTwin((s) => s.setStructureLabel)
+  const hasStructures = useHasStructures()
+
+  const MODES = [
+    {
+      id: 'ontology' as const,
+      label: 'Ontology',
+      title:
+        'Colour each structure by whether it carries an ontology term — blue mapped, sand not ' +
+        'yet mapped. On Z-Anatomy that is 1,048 of 3,614; this shows which ones.',
+    },
+    {
+      id: 'licence' as const,
+      label: 'Licence',
+      title:
+        'Colour each structure by whether it comes from a third-party component under terms ' +
+        'stricter than the atlas’s own. Violet structures are non-commercial.',
+    },
+  ]
+
+  return (
+    <div className="flex flex-wrap gap-0.5">
+      {MODES.map((m) => (
+        <DockPill
+          key={m.id}
+          on={inspect === m.id}
+          disabled={!hasStructures}
+          onClick={() => setInspect(inspect === m.id ? 'none' : m.id)}
+          title={
+            hasStructures
+              ? m.title
+              : 'This atlas carries no per-structure identity, so there is nothing to colour ' +
+                'structure by. Try Z-Anatomy.'
+          }
+        >
+          {m.label}
+          {!hasStructures && <span className="text-[9px] text-muted/60">n/a</span>}
+        </DockPill>
+      ))}
+
+      {/*
+        The in-scene label. Grouped with the inspect modes rather than with
+        `Look`, because it answers a question about the data — what is this — and
+        `Look` is explicitly the group where nothing changes meaning.
+      */}
+      <DockPill
+        on={label}
+        disabled={!hasStructures}
+        onClick={() => setLabel(!label)}
+        title={
+          hasStructures
+            ? 'Float the selected structure’s name and ontology term at the structure itself. ' +
+              'Hidden while the exploded view is open, because the explode happens in the ' +
+              'vertex shader and a label cannot follow it.'
+            : 'This atlas carries no per-structure identity, so there is nothing to label.'
+        }
+      >
+        Label
+        {!hasStructures && <span className="text-[9px] text-muted/60">n/a</span>}
+      </DockPill>
+    </div>
+  )
+}
+
+/**
+ * Whether the mounted atlas can address individual structures.
+ *
+ * Published by `AtlasBody` from the asset it actually loaded, for the same
+ * reason `useHasHull` is: a hand-kept list of which atlas has a structure table
+ * goes stale the first time an asset is rebuilt — and that is not hypothetical
+ * here, because `build-bodyparts3d.mjs` already writes one and the shipped
+ * BodyParts3D asset simply predates it.
+ */
+function useHasStructures(): boolean {
+  const counts = useTwin((s) => s.structureCounts)
+  return Object.values(counts).some((n) => (n ?? 0) > 0)
 }
 
 /**
@@ -255,7 +480,17 @@ function LookControls() {
  */
 function useHasHull(): boolean {
   const bySource = useTwin((s) => s.presentSystemsBySource)
+  const envelope = useTwin((s) => s.bodyEnvelope)
   // The UNION across mounted atlases: `composed` routes integumentary to one of
   // them, and asking only the last one to publish gets the wrong answer.
-  return Object.values(bySource).some((systems) => systems?.includes('integumentary'))
+  const atlasHasSkin = Object.values(bySource).some((systems) =>
+    systems?.includes('integumentary'),
+  )
+  // ⚠️ THIS IS THE D14 GAP CLOSED. The control used to be dead on three of the
+  // seven sources — Z-Anatomy, the regions atlas and both CT atlases ship no
+  // integumentary geometry — which meant the glass hull was unavailable on
+  // exactly the atlases with the richest anatomy. A parametric envelope is a
+  // skin, so where one is switched on there is now something for the effect to
+  // act on, and the control comes back.
+  return atlasHasSkin || envelope !== null
 }

@@ -135,12 +135,31 @@ deploy, skip this entirely and save ~97 MB of transfer.
 rsync -az public/models/*.ao.glb public/models/ct-atlas-f.glb \
   public/models/biv-heart.glb public/models/eye.glb \
   public/models/openear-zeta.glb public/models/htb-ct-003.glb \
+  public/models/anny-*.glb \
   "$DEPLOY_USER@$DEPLOY_HOST":/srv/opentwin/dist/models/
 ```
 
 **Only what the app loads. NOT the `.raw`/`.opt`/`.stripped` intermediates** — hundreds
 of megabytes, never requested. `npm run build` already prunes them from `dist`; this list
 is the same set, spelled out because the rsync bypasses `dist`.
+
+⚠️ **THIS HAND-KEPT LIST IS THE WEAK POINT, AND IT HAS ALREADY BEEN WRONG ONCE.** The five
+`anny-*.glb` body envelopes (D16) were added on 8 August 2026 and were missing here — so a
+deploy would have shipped the app with the envelope feature live and its assets absent,
+and the failure would have been *honest but silent*: five pills reading "not installed",
+exactly as a missing atlas presents.
+
+**The reliable move is to copy what the build actually produced**, since `npm run build`
+has already pruned `dist/models` down to precisely the shipped set:
+
+```bash
+rsync -az dist/models/ "$DEPLOY_USER@$DEPLOY_HOST":/srv/opentwin/dist/models/
+```
+
+That cannot drift, because the prune is driven by the registries themselves. Prefer it;
+the explicit list above is kept only for the case where you are shipping assets without a
+fresh build. **If you do use the explicit list, cross-check it against `ls dist/models/`
+first.**
 
 ### The credits
 
