@@ -29,7 +29,9 @@ model of organ position from body surface (BOSS, Siemens + FAU, 2023) reports
 **8.11 mm mean error from height/weight/sex alone, and 8.68 mm from the full 3D
 skin surface** — the scan is *slightly worse*. A body scan gives you a real
 exterior and genuinely good fat-compartment volumes; it does not tell you where
-someone's organs are. Section 6.
+someone's organs are. Section 6. ⚠️ Both figures are **whole-model and
+vertex-weighted**, dominated by well-fitting bone; **organs alone are ~15–25 mm**.
+See the correction in §6.1.
 
 **Four systems currently marked "no data" can be filled in a weekend**, without
 any mesh work, from one CT through Apache-2.0-licensed TotalSegmentator tasks.
@@ -649,6 +651,17 @@ direction is the point: the bottleneck is not input richness. Individual organ
 position genuinely does not correlate with body surface beyond what body size
 already tells you.
 
+> ⚠️ **Correction, 8 August 2026 — the quote is right, this section's reading of it
+> was not.** The paper was read in full and 8.11 / 8.68 mm are **whole-model,
+> vertex-weighted** figures. Bone is **65,617 of the template's 104,546 vertices, 63 %**,
+> and bone is the part that fits well. Read off Fig. 7b, the skin-surface error is
+> ~6–7 mm for vertebrae, pelvis and skeleton but **~15–25 mm for liver, kidneys, spleen
+> and heart**. **These are not organ figures**, and this document and
+> `docs/RESOURCES.md` both presented them as though they were. The conclusion is
+> unaffected and in fact strengthened — the true organ gap is two to three times wider
+> than the headline suggests. Full assessment, including why nothing was ever released
+> and what *is* reusable from the paper, in `docs/research/ORGAN_SHAPE_MODELS.md` §4c.
+
 Corroborating: **HIT** (CVPR 2024, Max Planck) — the paper that looks like it
 answers this question — lumps every organ into one undifferentiated "lean tissue"
 class, explicitly drops visceral-fat localisation, and reports that its volume
@@ -692,6 +705,15 @@ assets generated via scripting, not just the GUI export — the widely-repeated
 Everything else is closed: SMPL, SMPL-X, SMPL+H, STAR, SUPR are non-commercial
 (commercial licensing via Meshcapade, price unpublished); GHUM states no licence
 at all; TailorMe is CC BY-NC-SA; OSSO, SKEL, HIT and BOSS all inherit SMPL.
+
+⚠️ **Two precisions added 8 August 2026, both verified from `LICENSE` bodies.** OSSO and
+SKEL are **not merely non-commercial — they bar copying, distributing and
+sub-licensing outright**, which is a different and stricter class, and the one D12b
+cannot reach at all. HIT is the opposite: its *code* licence is a BSD-3 variant that
+**does** permit redistribution with notice, and the real blocker is its SMPL dependency
+plus registration-gated weights. ✅ And two **Apache-2.0** additions that were not on
+this list: **SOMA-X** (NVIDIA), which unifies the already-shipped ANNY with MHR and SMPL
+under one rig, and **MHR** (Meta). Neither has viscera.
 
 "Targets and modifiers" is the load-bearing phrase — morph targets on a
 fixed-topology base mesh *are* a parametric shape space. Reimplement blendshape

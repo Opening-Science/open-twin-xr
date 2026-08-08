@@ -171,11 +171,11 @@
       "id": "ct-atlas-f",
       "kind": "derived-atlas",
       "file": "public/models/ct-atlas-f.glb",
-      "loaded": false,
+      "loaded": true,
       "licence": "CC BY 4.0 (MOOSE weights) over CC BY 4.0 source CT",
       "source": "docs/CT_ATLAS_PIPELINE.md",
       "attribution": "Segmented with MOOSE 3.2 (ENHANCE-PET), CC BY 4.0 weights.",
-      "why": "Built by the MOOSE pipeline and tier 1 throughout, but not registered in anatomySources.ts, so nothing loads it. Registered here anyway — an asset on disk needs an entry whether or not it renders.",
+      "why": "Built by the MOOSE pipeline and tier 1 throughout, but not registered in anatomySources.ts, so nothing loads it. Registered here anyway — an asset on disk needs an entry whether or not it renders.\n\n⚠️ `loaded` read FALSE until 8 August 2026 and was simply stale: this atlas is a registered `AnatomySource`, an offered pill in the switcher, and 12.5 MB of the shipped bundle. The licence log therefore printed \"Loaded by the app: no\" for an asset every visitor can select — understating exposure for the one asset here whose licence is UNRESOLVED, which is exactly the wrong direction to be wrong in.",
       "verify": "If the pipeline is ever re-run with TotalSegmentator's GATED subtasks (tissue_types, appendicular_bones, face), the output becomes tier 2 and needs its own id here — the academic weights licence is non-commercial.",
       "holder": "unidentified — source scan not recorded",
       "ownLicence": "⚠️ unresolved (MOOSE weights CC BY 4.0)"

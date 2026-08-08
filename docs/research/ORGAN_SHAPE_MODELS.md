@@ -110,6 +110,7 @@ directions:
 | a better external measure would fix it | error **plateaus at 17.6 %** vs 20.3 % for height+weight (Stepusin 2017) |
 | an affine fit is approximately right | organ **Dice 0.2–0.6** (Fu 2021) — recognisably mislocated |
 | a transform with no learned prior | **62 ± 28.5 mm** (Yao & Summers 2009) |
+| a purpose-built model trained on 306 CT would fix it | sex+height+weight at **8.11 mm** *beats* the full skin surface at **8.68 mm** (BOSS 2023) **[V]** |
 
 And the physiological floor underneath all of them is larger than the difference
 between a good and a bad surface model: **the liver moves 10–25 mm in quiet
@@ -117,8 +118,11 @@ breathing** (AAPM TG-76) [L]. **Quoting an organ position to better than ~1 cm i
 meaningful for any static body model, however it was built.**
 
 Note the direction of travel: this argument used to rest on a single citation, and now
-rests on four independent lines that agree. The single citation (BOSS) is **demoted
-and no longer load-bearing** — see §4c.
+rests on **five** independent lines that agree. The fifth is that original citation
+(BOSS), demoted as unverifiable in the first draft and since **read in the paper and
+restored** — see §4c. It is the sharpest of the five, because it is the only one where
+a purpose-built model was given the whole skin surface and did *worse* than three
+numbers.
 
 So a skin-driven organ transform would be rendering a ±1–3 cm estimate with the
 same crisp silhouette as measured anatomy. D17 has already ruled on the general
@@ -337,8 +341,15 @@ hedge.
 
 ### There is no fitted model to download for any organ we care about
 
-**No ready-made SSM exists for liver, spleen, pancreas, stomach or kidneys** [L]. The
-only downloadable fitted models are cardiac:
+**No ready-made SSM exists for liver, spleen, pancreas or kidneys** [L]. ⚠️ **One
+correction since the first draft: the stomach is no longer on that list.** Posner et
+al., arXiv:2509.06464 (September 2025), release a fitted 3D stomach SSM plus a synthetic
+dataset at `gitlab.com/Erez.Posner/stomach_pytorch`. It is a genuine counterexample and
+the only one found — see §10. ⚠️ Two caveats before it carries weight: the repository
+carries **MIT** while the preprint carries **CC BY-NC-SA 4.0**, and which of those covers
+the model asset is **[?]** (this is exactly the "an article's licence is not the model's"
+trap from §5); and it is trained partly on **synthetic** shapes. The remaining
+downloadable fitted models are cardiac:
 
 - **Cardiac Atlas Project** biventricular modes. ⚠️ **The page states no licence** —
   which is the same failure mode as XCAT, ViP and ICRP 110 in §5, and it is now in
@@ -570,12 +581,66 @@ than quietly avoid them.
 | **AAPM 246's own "11 % and 15 %"** attributed to Tian et al. 2016 | ⚠️ Subtle: the figures **are** in AAPM Report 246, but those strings **do not appear in the cited paper** — a report-level mis-citation. So the report may be quoted for it, the primary may not, and it is safer to use Stepusin or Ye instead. |
 | **Goparaju et al. 2022** compactness numbers | The paper reports compactness/generalisation/specificity **as figures only, with no tabulated numbers**. The *ranking* is citable; no number from it is. |
 
-⚠️ **The BOSS citation is demoted.** §1 previously rested on BOSS (Shetty et al. 2023)
-reporting 8.11 mm from metadata against 8.68 mm from the skin surface [R]. It **could
-not be re-verified in this session** (search budget exhausted), and the phantom
-literature review never encountered it while reaching the same conclusion by an
-independent route. It is therefore **not load-bearing** — §1 stands on
-Segars/Stepusin/Fu. Kept only as a pointer, and as register item 18.
+### ✅ The BOSS citation is restored — read in the paper, and it is now the sharpest line in §1
+
+The first draft demoted BOSS (Shetty et al. 2023) as unverifiable `[R]` and removed its
+weight. **The PDF was read on 8 August 2026** and the sentence is on p. 10, verbatim
+[V]:
+
+> "We observe an average overall error of **8.11 mm and 8.68 mm using metadata and
+> skin surface**, respectively."
+
+Metadata here is **sex, height and weight through a linear regressor**. It **beats
+registering the person's actual skin surface**. Not by much — but the direction is the
+finding: the exterior does not merely carry little information about the interior;
+*adding more of it makes the estimate slightly worse*. Register item 18 is closed, and
+§1 now rests on five agreeing lines rather than four.
+
+⚠️ **But the number must be read correctly, and this repository has been quoting it
+wrong.** 8.11 / 8.68 mm are **vertex-weighted whole-model** figures, and bone is
+**65,617 of the template's 104,546 vertices — 63 %** [V]. Read off Fig. 7b (a box plot;
+per-structure values are not tabulated, so this is approximate) the skin-surface boxes
+are ~6–7 mm for vertebrae, pelvis and skeleton but **~15–25 mm for liver, kidneys,
+spleen and heart**. Against Fig. 7a — the same model *fitted to the target's own CT*,
+organs ~5–10 mm at 50 components — predicting organs from outside roughly **doubles to
+triples** organ error. **Do not quote 8.68 mm as an organ figure.**
+`docs/RESOURCES.md` and `docs/PHOTOREALISM_AND_PERSONALISATION.md` §6.1 both did; both
+are corrected.
+
+The fitted-to-scan figures, for the record: **3.66 mm bone, 8.83 mm organs, 2.52 mm
+centroid**, all at 25 shape components; the first 10 components capture 88 % of
+variance and the first 20 capture 92 % [V].
+
+**Nothing was ever released, and it could not have been.** No code, no weights, no
+data; the paper's *Disclaimer* section reads *"The concepts and information presented in
+this article are based on research and are not commercially available."* The preprint is
+under arXiv `nonexclusive-distrib/1.0`, so even the figures are not reusable [V]. And
+the licence position is unsatisfiable regardless: the skin layer is **SMPL**
+(non-redistributable, §10) and the bone-organ template is **BodyParts3D** (CC BY-SA
+2.1 JP). Share-alike and non-redistributable in one asset cannot both be honoured — a
+plausible reason it stayed unreleased, offered as a hypothesis rather than a fact.
+Segmentation was done with **AI-Rad Companion Organs RT1**, a proprietary Siemens
+product, so it is not independently reproducible either, even though the training scans
+are public (42 whole-body + 58 partial from **VISCERAL** — see register item 27, that
+project appears defunct — and 206 from **QIN-HeadNeck** via TCIA; 306 total, oncology
+cohorts).
+
+⭐ **The one thing in it that is reusable is the rig recipe, and a method is not
+copyrightable.** BOSS's template *is* BodyParts3D, which this repository already ships,
+and the paper documents how they articulated it in enough detail to follow: **70 bones
+collapsed to 63 kinematic segments** (femur–patella and the cervical vertebrae merged),
+blend weights authored in Blender, and **virtual inter- and intra-segment edges added to
+the template to stop mesh interpenetration** during non-rigid registration (Fig. 3).
+That is a concrete route for articulating the asset already on disk, and it points the
+same way as the JHU work in §5a: **rig the atlas, do not try to learn a population shape
+space you have no licence to ship.**
+
+⚠️ Three further limitations, because they bear directly on this repository's own
+commitments: BOSS is a **single neutral model** — the authors declined to split by sex
+on sample-size grounds, which is what Phase 6 exists to refuse; it keeps only subjects
+with **12 thoracic and 5 lumbar vertebrae**, so transitional variants are
+unrepresentable; and **stomach and intestines are one undifferentiated hull**, not
+segmented structures.
 
 ---
 
@@ -755,6 +820,34 @@ directly — the *method* is open (DukeSeg, Apache-2.0), the geometry is not.
 That last point is the most telling thing in this section: **the field's own flagship
 moved away from morphing a template and towards segmenting the individual.** §12's
 Phase 4 lands in the same place.
+
+### 5a. ⭐ BOSS's successor, three years later, and it is the architecture to copy
+
+**Patient-Specific Articulated Digital Twins from a Single Full-Body CT Scan** — Han
+Zhang, Boyang Zhao, Mathias Unberath (Johns Hopkins), arXiv:2607.02156, 2 July 2026,
+**paper CC BY 4.0**. This is the same problem BOSS posed, restated after the field
+learned what §4b measures, and the reframing is the point:
+
+**It never predicts the interior from the exterior.** A parametric body model is fitted
+only as a **kinematic scaffold**; the patient's own segmented bones and organs are then
+**bound to an anatomy-aware rig** and re-posed. So the geometry shown is always the
+person's measured anatomy, and the model supplies articulation — not anatomy. That is
+exactly the line D17 draws for colour, drawn for shape: *the silhouette stays a fact,
+the pose becomes the estimate.*
+
+Reported: **15.8 ± 4.0 mm** chamfer for the scaffold fit, **95.9 ± 1.8 %** skeletal
+enclosure, **94.4 ± 0.4 %** enclosure across unseen target poses.
+
+⚠️ **n = 3 subjects.** Treat the numbers as existence-proof, not as a benchmark. **No
+code was found** [?] — searched 8 August 2026. And the scaffold is SMPL, so a
+reimplementation here would substitute ANNY or MHR (§10).
+
+**Why it matters to this repository more than any other paper in this document:** it and
+BOSS's rig recipe (§4c) point the same way, and it is a way this project can already
+go. The atlas on disk is static, individually identifiable geometry from named donors.
+Rigging it is a licensing-free, correspondence-free operation on assets already shipped.
+Learning a population shape space is neither. **Rig the atlas; do not learn a shape
+space you have no licence to ship.**
 
 ---
 
@@ -1377,7 +1470,14 @@ geodesic.
 | `opensim-models` .vtp bone meshes | ⚠️ **no LICENSE file exists** [L] | ⛔ do not assume |
 | MIDA, ICRP 143/156, MedShapeNet collection level | **[?]** / per-source | §5, §6 |
 | MakeHuman / MPFB2 base mesh **and morph targets** | **CC0 1.0**, covering assets generated via scripting [R] | ✅ the one parametric body model that is usable; already the basis of ANNY (D16) |
-| SMPL / SMPL-X / STAR / SUPR / TailorMe / OSSO / SKEL / HIT / BOSS | non-commercial or unstated [R] | ⛔ and ⚠️ **D16's runtime trap applies**: never select `topology="smpl"`/`"smplx"` in ANNY — it downloads a non-commercial archive at *runtime*, which a dependency audit does not catch |
+| SMPL / SMPL-X / STAR / SUPR | non-commercial [R] | ⛔ and ⚠️ **D16's runtime trap applies**: never select `topology="smpl"`/`"smplx"` in ANNY — it downloads a non-commercial archive at *runtime*, which a dependency audit does not catch |
+| **OSSO, SKEL** (MPI) | ⛔ **not merely non-commercial — non-redistributable** [V], `LICENSE.txt` body: the software *"shall not be copied, shared, distributed, re-sold, offered for re-sale, transferred or sub-licensed in whole or in part"* | ⛔ **This is XCAT-class, not CC-BY-NC-class**, and the distinction is the one §5 insists on. D12b cannot reach it: this repository's entire model is bundle-plus-credit. ⚠️ Correct the shorthand "non-commercial" wherever it appears |
+| **HIT** (Keller 2024) | ⚠️ **correction to the blanket row this replaces.** The *code* is a BSD-3 variant that **does permit redistribution** with notice, plus clause 1: *"Before commercial usage of source code, the copyright holder must be contacted"* [V]. Weights and dataset are registration-gated at `hit.is.tue.mpg.de`, and the demo needs SMPL `.pkl` files | ⛔ in practice — the **SMPL dependency** is the blocker, not the code licence. ⭐ Read it anyway: it is the field's best surface→interior model and it **deliberately stops at tissue classes** (bone / lean / adipose / empty) rather than drawing an organ boundary. §4b's conclusion, reached by the people best placed to disprove it |
+| **TailorMe** | **CC BY-NC-SA 4.0** [V], repo `LICENSE` body | ⚠️ NC is fine under D12b; the **SA** is §6's ShareAlike interaction. Volumetric skeleton + soft tissue, **no viscera** |
+| **BOSS** (Shetty 2023) | ⛔ **nothing was ever released** [V] — no code, weights or data; the paper's *Disclaimer* says *"not commercially available"*; preprint is arXiv `nonexclusive-distrib/1.0`, so not even the figures are reusable | ⛔ **cite, never include.** §4c has the full assessment, including why its licence position was unsatisfiable (SMPL + BodyParts3D) and the one thing worth taking from it — the rig recipe |
+| **SOMA-X** (NVIDIA, arXiv:2603.16858, active June 2026) | **Apache-2.0** [V] | ✅ the permissive option in this space, and ⚠️ **it already ships here**: `scripts/anny/bake.py` declares `data/soma/ Apache-2.0 "adapted from NVlabs SOMA-X"` and it is the third `EnvelopeLicence` bucket in `bodyEnvelopes.ts`, *"shipped in the package, not used by these bakes"* [M]. So the licence work is done and the question is only whether to use it. Unifies ANNY with MHR and SMPL under one canonical rig and back-fills pose correctives ANNY lacks. Surface only — **no viscera**. ⚠️ **Bake-time only** — Python + PyTorch + NVIDIA Warp; it can never run in the browser. ⚠️ SMPL support needs an explicit `model_path`, so unlike ANNY's `topology="smpl"` it cannot be tripped by accident |
+| **MHR** (Meta, active August 2026) | **Apache-2.0** [V] | ✅ the other permissive parametric human, and SOMA-X's default identity model: parametric skeletal **rig** + skinned mesh + blendshapes. A rig, not bone geometry |
+| **Stomach SSM** (Posner et al., arXiv:2509.06464) | repo **MIT**; preprint **CC BY-NC-SA 4.0**; which covers the model asset is **[?]** | ⭐ the **only fitted single-organ SSM found that is actually downloadable** — §4a is corrected. Fills exactly the structure BOSS hulls over and SPARC lacks. ⚠️ partly synthetic training data |
 | NAKO, UK Biobank, Zygote | signed MTA / proprietary EULA | ⛔ already in `licences.json` `closed` |
 
 ---
@@ -1472,6 +1572,7 @@ records where each landed, because "resolved" and "never looked" must not read a
 | **7.** Proportion of TotalSegmentator labels human-verified | ✅ **Resolved, and it reversed the concern** — all 1,204 v1 examinations manually reviewed | **§6** |
 | **11.** Quest WebGL2 limits | ✅ **Resolved.** `MAX_VERTEX_UNIFORM_VECTORS` 256, `MAX_ARRAY_TEXTURE_LAYERS` 2048, texture size browser-clamped to 8192/4096 | **§7** |
 | **12.** Whether WebXR runs the vertex shader once or twice per frame | ✅ **Resolved.** `GL_OVR_multiview2` is present on Quest 3, halves vertex work, and is essential to this route | **§7** |
+| **18.** BOSS could not be re-verified, so it was demoted | ✅ **Resolved — read in the paper and restored to §1**, which now rests on five lines. ⚠️ And it was being quoted wrongly across this repository: 8.11 / 8.68 mm are **whole-model vertex-weighted** figures, not organ figures. Two docs corrected | **§4c** |
 
 ### [?] — researched, could not verify. Somebody looked and could not confirm.
 
@@ -1498,8 +1599,6 @@ records where each landed, because "resolved" and "never looked" must not read a
     literature figure was graded read-in-paper / read-in-a-quoting-paper /
     search-snippet-only, and this document carries one marker for all three. Recover
     the grading before quoting any `[L]` figure externally.
-18. **BOSS (Shetty et al. 2023)** could not be re-verified — search budget exhausted.
-    **Demoted and not load-bearing**; §1 stands on Segars/Stepusin/Fu. §4c.
 8.  ⚠️ **Six datasets state contradictory licences across their own channels** — AMOS,
     CHAOS, KiTS19, CTPelvic1K, LiTS, WORD. §6, §10. Each needs an author email.
 9.  **AbdomenCT-1K's data grant** is undeclared; Apache-2.0 covers the repo only.

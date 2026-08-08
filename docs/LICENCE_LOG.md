@@ -91,10 +91,12 @@ It exists to close D14: three of the seven atlases ship NO integumentary geometr
 
 - **Licence:** CC BY 4.0 (MOOSE weights) over CC BY 4.0 source CT
 - **Source:** docs/CT_ATLAS_PIPELINE.md
-- **Loaded by the app:** no
+- **Loaded by the app:** yes
 - **Required credit:** Segmented with MOOSE 3.2 (ENHANCE-PET), CC BY 4.0 weights.
-- **Embedded `asset.copyright`:** ❌ MISSING
+- **Embedded `asset.copyright`:** ✅ present
 - **Why:** Built by the MOOSE pipeline and tier 1 throughout, but not registered in anatomySources.ts, so nothing loads it. Registered here anyway — an asset on disk needs an entry whether or not it renders.
+
+⚠️ `loaded` read FALSE until 8 August 2026 and was simply stale: this atlas is a registered `AnatomySource`, an offered pill in the switcher, and 12.5 MB of the shipped bundle. The licence log therefore printed "Loaded by the app: no" for an asset every visitor can select — understating exposure for the one asset here whose licence is UNRESOLVED, which is exactly the wrong direction to be wrong in.
 
 ### `public/models/eye.glb`
 
@@ -186,7 +188,6 @@ no decision of ours can relax — unlike a licence choice, which is ours to make
 
 ## Action list before publishing
 
-- [ ] **public/models/ct-atlas-f.glb** carries no `asset.copyright` — the credit is not travelling with the file.
 - [ ] **bodyparts3d**: DBCLS have not confirmed the relicence in writing. Chase it before relying on the CC BY reading for anything that matters.
 - [ ] **z-anatomy**: ⚠️ DISTRIBUTION GATE: the University of Washington white-matter component (3 structures) has NO licence statement, and serving to logged-in users is still distribution — a login wall does not change this. Build with `npm run build:z-anatomy -- --publishable`, which drops exactly that component and keeps the non-commercial ones (they need attribution, not removal). See docs/DEPLOY.md. The permanent fix is written permission or CT-segmented white matter from MOOSE (Apache-2.0).
 - [ ] **ct-atlas-f**: If the pipeline is ever re-run with TotalSegmentator's GATED subtasks (tissue_types, appendicular_bones, face), the output becomes tier 2 and needs its own id here — the academic weights licence is non-commercial.
