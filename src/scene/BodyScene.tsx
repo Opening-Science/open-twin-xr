@@ -295,6 +295,63 @@ function FirstHitOnly() {
   return null
 }
 
+/**
+ * Carry the flat-screen framing into the immersive session.
+ *
+ * WHAT THIS IS FOR
+ * ----------------
+ * Everything else about the scene survives entering VR for free, because
+ * `createXRStore` is module-level and the Zustand store is global — the atlas,
+ * the hidden systems, the explode, the x-ray, the selected structure, all of it
+ * is already the same objects. The ONE thing that does not survive is where you
+ * were looking from, and that is the thing a viewer notices: they line up a
+ * shot of the heart on the desktop, put the headset on, and find themselves
+ * standing in front of a whole body again.
+ *
+ * ⚠️ THE CAMERA CANNOT BE MOVED IN A SESSION, so this moves the BODY instead.
+ * `FocusControls` (drei `OrbitControls`) sits outside `<XR>` and disables itself
+ * on session start, and three overwrites the camera with `xr.getCamera()` every
+ * frame while presenting, so writing `camera.position` would be silently
+ * discarded. The runtime owns the camera; the scene is ours.
+ *
+ * So the body is translated down by the focus height and back by the focus
+ * distance, which puts the region the viewer had framed at roughly their eye
+ * level and an arm's length away. `EYE_HEIGHT` is a constant rather than a
+ * measurement because `local-floor` reference spaces put the origin on the floor
+ * and the headset's own height is not knowable before the first frame.
+ *
+ * It restores the identity transform on exit, so leaving VR returns to exactly
+ * the flat-screen scene rather than a body sunk into the floor.
+ */
+const EYE_HEIGHT = 1.6
+
+function XRFraming() {
+  const session = useXR((s) => s.session)
+  const focusY = useTwin((s) => s.focusY)
+  const focusDistance = useTwin((s) => s.focusDistance)
+  const scene = useThree((s) => s.scene)
+
+  useEffect(() => {
+    // `Body` and the overlays are children of the scene root, so the whole
+    // canonical frame moves together and nothing inside it has to know.
+    const root = scene
+    if (!session) {
+      root.position.set(0, 0, 0)
+      return
+    }
+    // Put the framed height at eye level, and stand the viewer back by whatever
+    // distance the flat view had chosen (a preset sets one; a free zoom leaves
+    // it null, in which case a whole-body distance is the honest default).
+    const distance = focusDistance ?? 2.2
+    root.position.set(0, EYE_HEIGHT - focusY, -distance)
+    return () => {
+      root.position.set(0, 0, 0)
+    }
+  }, [session, focusY, focusDistance, scene])
+
+  return null
+}
+
 export function BodyScene() {
   const theme = useTwin((s) => s.theme)
   const stage = useTwin((s) => s.stage)
@@ -335,6 +392,7 @@ export function BodyScene() {
       <directionalLight position={[-3, 1.5, -2]} intensity={0.35} />
 
       <XR store={xrStore}>
+        <XRFraming />
         {/* The body stands on y=0 in the canonical frame, so no offset here:
             shifting it would break the shared origin the atlas geometry assumes. */}
         {/* Hover brute-forced a raycast against every triangle in the atlas on

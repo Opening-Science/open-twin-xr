@@ -80,6 +80,9 @@ export function SceneDock() {
             <DockGroup label="Overlays">
               <OrganOverlayRow />
             </DockGroup>
+            <DockGroup label="Inspect">
+              <InspectControls />
+            </DockGroup>
             <DockGroup label="Look">
               <LookControls />
             </DockGroup>
@@ -158,6 +161,110 @@ export function DockPill({
       {children}
     </button>
   )
+}
+
+/**
+ * Colour individual structures by a fact the ASSET carries.
+ *
+ * WHY THIS IS A SEPARATE GROUP FROM "LOOK"
+ * ----------------------------------------
+ * `Look` is explicitly the group where nothing on screen changes meaning — its
+ * own comment says so. These two do change meaning: they repaint the body to
+ * answer a question about the DATA, and that is a different kind of control.
+ * Grouping them with the theme toggle would blur a line this project keeps
+ * deliberately sharp.
+ *
+ * ⚠️ AND NEITHER OF THEM INTERPRETS ANYTHING. `Ontology` colours by whether a
+ * structure carries an ontology term; `Licence` by whether it came from a
+ * component under stricter terms. Both are properties of the GLB, checkable by
+ * parsing it. Nothing here is a score, and the palette is deliberately not
+ * red-amber-green so it cannot be read as one — see `scene/structureMask.ts`.
+ *
+ * Disabled where the atlas cannot honour it, rather than offered as a control
+ * that does nothing: only assets carrying `_STRUCTURE` and a structure table can
+ * address a structure at all. Same rule the glass hull applies to a skinless
+ * atlas, and the pill says why.
+ */
+function InspectControls() {
+  const inspect = useTwin((s) => s.structureInspect)
+  const setInspect = useTwin((s) => s.setStructureInspect)
+  const label = useTwin((s) => s.structureLabel)
+  const setLabel = useTwin((s) => s.setStructureLabel)
+  const hasStructures = useHasStructures()
+
+  const MODES = [
+    {
+      id: 'ontology' as const,
+      label: 'Ontology',
+      title:
+        'Colour each structure by whether it carries an ontology term — blue mapped, sand not ' +
+        'yet mapped. On Z-Anatomy that is 1,048 of 3,614; this shows which ones.',
+    },
+    {
+      id: 'licence' as const,
+      label: 'Licence',
+      title:
+        'Colour each structure by whether it comes from a third-party component under terms ' +
+        'stricter than the atlas’s own. Violet structures are non-commercial.',
+    },
+  ]
+
+  return (
+    <div className="flex flex-wrap gap-0.5">
+      {MODES.map((m) => (
+        <DockPill
+          key={m.id}
+          on={inspect === m.id}
+          disabled={!hasStructures}
+          onClick={() => setInspect(inspect === m.id ? 'none' : m.id)}
+          title={
+            hasStructures
+              ? m.title
+              : 'This atlas carries no per-structure identity, so there is nothing to colour ' +
+                'structure by. Try Z-Anatomy.'
+          }
+        >
+          {m.label}
+          {!hasStructures && <span className="text-[9px] text-muted/60">n/a</span>}
+        </DockPill>
+      ))}
+
+      {/*
+        The in-scene label. Grouped with the inspect modes rather than with
+        `Look`, because it answers a question about the data — what is this — and
+        `Look` is explicitly the group where nothing changes meaning.
+      */}
+      <DockPill
+        on={label}
+        disabled={!hasStructures}
+        onClick={() => setLabel(!label)}
+        title={
+          hasStructures
+            ? 'Float the selected structure’s name and ontology term at the structure itself. ' +
+              'Hidden while the exploded view is open, because the explode happens in the ' +
+              'vertex shader and a label cannot follow it.'
+            : 'This atlas carries no per-structure identity, so there is nothing to label.'
+        }
+      >
+        Label
+        {!hasStructures && <span className="text-[9px] text-muted/60">n/a</span>}
+      </DockPill>
+    </div>
+  )
+}
+
+/**
+ * Whether the mounted atlas can address individual structures.
+ *
+ * Published by `AtlasBody` from the asset it actually loaded, for the same
+ * reason `useHasHull` is: a hand-kept list of which atlas has a structure table
+ * goes stale the first time an asset is rebuilt — and that is not hypothetical
+ * here, because `build-bodyparts3d.mjs` already writes one and the shipped
+ * BodyParts3D asset simply predates it.
+ */
+function useHasStructures(): boolean {
+  const counts = useTwin((s) => s.structureCounts)
+  return Object.values(counts).some((n) => (n ?? 0) > 0)
 }
 
 /**

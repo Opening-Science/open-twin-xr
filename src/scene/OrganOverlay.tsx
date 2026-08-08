@@ -197,20 +197,33 @@ function PlacedOverlay({ id }: { id: OrganOverlayId }) {
  * only HRA ships the heart as its own node, so only HRA can be masked cleanly.
  */
 /**
- * The contiguous `_STRUCTURE` id range an active overlay replaces, or null.
+ * The set of `_STRUCTURE` ids the active overlays replace, or null.
  *
  * Resolved from the atlas's own structure table BY NAME every time it loads, so a
- * rebuild that renumbers structures cannot point this at the wrong organ. Returns
- * a single `[lo, hi]` because the shader test is a range compare; if a future
- * overlay's structures are not contiguous this warns and hides nothing rather than
- * hiding the span between them.
+ * rebuild that renumbers structures cannot point this at the wrong organ.
+ *
+ * ⚠️ THIS RETURNS A SET, WHERE IT USED TO RETURN A CONTIGUOUS `{lo, hi}` RANGE,
+ * and the change is what unblocks the one-sided ear. The old shape could only
+ * express consecutively-numbered structures, and when it could not it warned and
+ * hid NOTHING — deliberately, because hiding the span between them would have
+ * blanked unrelated anatomy. On the shipped Z-Anatomy the two ears interleave
+ * (right ossicles are 451, 455, 456), so no range could ever mask one ear, and
+ * the limitation was permanent rather than incidental. See `structureMask.ts`
+ * for the measurement and for the texture that consumes this.
+ *
+ * ⚠️ ALL active overlays are accumulated, not just the first match. The old
+ * version `return`ed inside the loop, so switching on two overlays that both
+ * supersede structures silently masked only whichever came first in key order.
+ * Nothing hit that yet — only the heart has a rule today — but it was a trap
+ * waiting for the second one.
  */
-export function useHiddenStructureRange(
-  structures: readonly { name: string; system?: string }[] | null,
-): { lo: number; hi: number } | null {
+export function useHiddenStructureIds(
+  structures: readonly { name: string; system?: string; side?: 'left' | 'right' }[] | null,
+): ReadonlySet<number> | null {
   const overlays = useTwin((s) => s.overlays)
   return useMemo(() => {
     if (!structures) return null
+    const out = new Set<number>()
     for (const id of Object.keys(ORGAN_OVERLAYS) as OrganOverlayId[]) {
       if (!overlays[id]) continue
       const rule = ORGAN_OVERLAYS[id].supersedesStructures
@@ -220,6 +233,11 @@ export function useHiddenStructureRange(
         if (s.system !== rule.system) return
         if (!rule.is.test(s.name)) return
         if (rule.not?.test(s.name)) return
+        // Side filter. An overlay that replaces ONE side must not blank the
+        // other, and `side` is the only discriminator these structures carry —
+        // the ossicles and the inner ear have no ontology term at all, so the
+        // term-based fix the handover proposes could not do this job.
+        if (rule.side && s.side !== rule.side) return
         ids.push(i)
       })
       if (ids.length === 0) continue
@@ -231,18 +249,9 @@ export function useHiddenStructureRange(
             `Names have probably drifted upstream — check supersedesStructures.`,
         )
       }
-      const lo = ids[0]
-      const hi = ids[ids.length - 1]
-      if (hi - lo + 1 !== ids.length) {
-        console.warn(
-          `[overlay ${id}] the ${ids.length} superseded structures are NOT contiguous ` +
-            `(${lo}..${hi}); hiding nothing rather than hiding what sits between them.`,
-        )
-        continue
-      }
-      return { lo, hi }
+      for (const i of ids) out.add(i)
     }
-    return null
+    return out.size ? out : null
   }, [overlays, structures])
 }
 

@@ -27,7 +27,15 @@ import { scoreToColor, scoreToEmissive } from './metricColor'
 import { anatomicalColor, scoreLift, tissueSurface } from './anatomyPalette'
 import { TERM_TO_SYSTEM } from './anatomy/layout'
 import { sourceForSystem, type AnatomyMode, type AnatomySource } from './anatomySources'
-import { useHiddenStructureRange, useSupersededBy } from './OrganOverlay'
+import { useHiddenStructureIds, useSupersededBy } from './OrganOverlay'
+import { createStructureMask, inspectTint, writeStructureMask, MASK_WIDTH } from './structureMask'
+import {
+  normalise,
+  structureTerm,
+  NO_TERM,
+  type AtlasComponent,
+  type StructureEntry,
+} from './structureEntry'
 import { clearTunables, registerTunable } from './tuning'
 import { setHoverCursor, useHoverRelease } from './hoverCursor'
 
@@ -114,19 +122,6 @@ const BVH_OPTIONS: MeshBVHOptions & { indirect: boolean } = {
   indirect: true,
 }
 
-/** `UBERON:0002097`, `UBERON_0002097`, and the FMA purl tail `fma73166`. */
-const CURIE = /\b(UBERON|FMA|CL|ASCTB)[:_]?(\d+)\b/i
-
-/** HRA writes this literal when a node has no ontology term. */
-const NO_TERM = '-'
-
-/** All spellings collapse to one: `UBERON:0002097`, `FMA:73166`. */
-function normalise(raw: string): string | null {
-  const m = raw.match(CURIE)
-  if (!m) return null
-  return `${m[1].toUpperCase()}:${m[2]}`
-}
-
 function readTerm(o: Object3D): string | null {
   const ud = (o.userData ?? {}) as Record<string, unknown>
   // `ontologyid` is HRA's actual key (lowercase, no separator) and is checked
@@ -200,18 +195,6 @@ function useTermMap(): Map<string, SystemId> {
 const EXPLODE_GAIN = 1.6
 const EXPLODE_Y_DAMP = 0.35
 
-export interface StructureEntry {
-  name: string
-  side?: 'left' | 'right'
-  system?: string
-  layer?: string
-  /** Set when this mesh is a muscle attachment footprint painted on bone. */
-  attachment?: 'origin' | 'insertion'
-  /** Which slip, where a tendon splits (extensor digitorum longus has four). */
-  slip?: number
-  /** Mean vertex position at build time, in canonical metres. */
-  centroid?: [number, number, number]
-}
 
 /**
  * The outer body ENVELOPE, as distinct from other integumentary tissue.
@@ -544,6 +527,57 @@ export function AtlasBody({
   )
 
   /**
+   * The third-party components embedded in this atlas, published so the panel
+   * can name the rights holder of the structure under the pointer.
+   *
+   * Two of Z-Anatomy's components are NON-COMMERCIAL while the atlas itself is
+   * CC BY-SA, so "which licence am I looking at" has a per-structure answer that
+   * the atlas-level credit cannot give. Published from the asset rather than
+   * hardcoded, for the reason every table in this repository is: a hand-kept
+   * copy goes stale the first time an asset is rebuilt.
+   */
+  const setAtlasComponents = useTwin((s) => s.setAtlasComponents)
+  useEffect(() => {
+    const list = (scene.userData?.components as AtlasComponent[] | undefined) ?? []
+    setAtlasComponents(source.id, list.length ? list : null)
+    return () => setAtlasComponents(source.id, null)
+  }, [scene, source.id, setAtlasComponents])
+
+  /**
+   * How many structures carry a resolvable ontology term. Dev only.
+   *
+   * This is the check that the crosswalk actually reached the asset, and it
+   * exists because `docs/ONTOLOGY_MAP.md` claimed Z-Anatomy carried ZERO terms
+   * while the built GLB carried 1,048 — the document had been generated against
+   * an older build and nobody noticed, because nothing in `src/` read the field.
+   * A number in the console at load is what makes that kind of drift visible.
+   *
+   * ⚠️ Expect 0 on `z-anatomy-regions` and on the node-termed atlases, and that
+   * is CORRECT rather than a failure: the regions atlas has 257 structures with
+   * no CURIE at all, and HRA carries its terms on NODES, where `readTerm` finds
+   * them. Gating on a non-zero count here would report a false failure on four
+   * of the seven sources.
+   */
+  // Tell the dock whether this atlas can address structures at all, so the
+  // inspect controls disable themselves rather than doing nothing.
+  const setStructureCount = useTwin((s) => s.setStructureCount)
+  useEffect(() => {
+    setStructureCount(source.id, structures?.length ?? 0)
+    return () => setStructureCount(source.id, null)
+  }, [structures, source.id, setStructureCount])
+
+  useEffect(() => {
+    if (!import.meta.env.DEV || !structures) return
+    const withTerm = structures.filter((s) => structureTerm(s)).length
+    const restricted = structures.filter((s) => s.licence).length
+    console.info(
+      `[AtlasBody ${source.id}] ${structures.length.toLocaleString()} structures, ` +
+        `${withTerm.toLocaleString()} with an ontology term` +
+        (restricted ? `, ${restricted} under a component licence` : ''),
+    )
+  }, [structures, source.id])
+
+  /**
    * The `_STRUCTURE` id range an active organ overlay stands in for, if any.
    *
    * This is how a MERGED node gives up part of itself. Node-level hiding
@@ -552,7 +586,48 @@ export function AtlasBody({
    * system into one draw call, so its heart has to be masked per vertex instead.
    * BodyParts3D can do neither — it carries no `_STRUCTURE` at all.
    */
-  const hiddenRange = useHiddenStructureRange(structures)
+  const hiddenIds = useHiddenStructureIds(structures)
+  const structureInspect = useTwin((s) => s.structureInspect)
+
+  /**
+   * The per-structure lookup table, as an RGBA texture indexed by `_STRUCTURE`.
+   *
+   * Carries BOTH the overlay mask (alpha) and the inspect tint (rgb), because
+   * they are read at the same index in the same draw and splitting them would
+   * cost a second texture fetch per vertex for nothing. See `structureMask.ts`
+   * for why this replaced the contiguous `{lo, hi}` range it grew out of.
+   *
+   * The TEXTURE OBJECT is stable for the life of an atlas and only its bytes
+   * change, which is what keeps toggling an overlay or an inspect mode from
+   * recompiling anything: the uniform still points at the same object, so no
+   * material and no program is invalidated. Only `needsUpdate` is set.
+   */
+  const mask = useMemo(
+    () => (structures ? createStructureMask(structures.length) : null),
+    [structures],
+  )
+  useEffect(() => () => mask?.texture.dispose(), [mask])
+
+  useEffect(() => {
+    if (!mask || !structures) return
+    writeStructureMask(
+      mask,
+      structures,
+      hiddenIds,
+      structureInspect === 'none' ? null : (e) => inspectTint(structureInspect, e),
+    )
+  }, [mask, structures, hiddenIds, structureInspect])
+
+  /**
+   * Whether the mask shader variant is needed at all.
+   *
+   * ⚠️ A SHADER VARIANT FLAG, so it belongs in the material cache key AND in the
+   * hand-maintained dep array below — the two traps this file documents. It is
+   * deliberately a BOOLEAN rather than the mask contents: the contents live in
+   * the texture and change without a recompile, so keying on them would mint a
+   * fresh program every time somebody dragged a toggle.
+   */
+  const maskOn = mask !== null && (hiddenIds !== null || structureInspect !== 'none')
 
   /**
    * PER-STRUCTURE EXPLODE — roadmap phase 4.
@@ -578,8 +653,62 @@ export function AtlasBody({
    * The body centre is still computed in canonical space across every mesh, or
    * each mesh would explode about its own centre and the body would not separate.
    */
+  /**
+   * DEFERRED, not lazy — and the distinction is the whole design.
+   *
+   * ⚠️ THIS PRECOMPUTE IS THE COST OF STRUCTURE IDENTITY, AND IT LANDED ON THE
+   * LANDING SCREEN. It is O(vertices) twice over — once to accumulate per-structure
+   * centroids in two spaces, once to write a vec3 per vertex — plus a 637 × ~344
+   * nearest-bone search. Measured on the BodyParts3D rebuild: the atlas went from
+   * 2.9 s to 6.3 s to first paint, because that asset previously had no
+   * `_STRUCTURE` and skipped this path entirely. `src/store.ts` justifies
+   * BodyParts3D as the DEFAULT precisely on the grounds that it "has to look like
+   * something in a few seconds on a link someone was sent", so ~3.4 s spent before
+   * anything appears is spent against the one requirement that default exists for.
+   *
+   * ⚠️ LAZY-ON-FIRST-DRAG WOULD BE THE WRONG FIX, and it is the obvious one.
+   * Computing on the first non-zero `explode` moves the whole stall into the
+   * middle of an interaction: the viewer drags the slider and the app freezes for
+   * three seconds with the body not yet moving. A freeze while you are waiting for
+   * a page is tolerable; a freeze in response to your own input reads as broken.
+   *
+   * So the work is DEFERRED to an idle callback instead. The body paints on the
+   * fast path, the attribute is built in the first idle moment after it, and by
+   * the time anyone reaches for the slider it is there. `requestIdleCallback` has
+   * a 2 s timeout so a permanently busy main thread cannot starve it forever, and
+   * a `setTimeout` fallback covers Safari, which still does not implement it.
+   *
+   * The escape hatch matters too: if the viewer somehow reaches the slider first
+   * — a scripted run, a very fast hand — the second effect arms it immediately
+   * rather than making them wait for idle.
+   */
+  const [explodeArmed, setExplodeArmed] = useState(false)
+
+  useEffect(() => {
+    // A new atlas needs a new attribute, so disarm and re-schedule.
+    setExplodeArmed(false)
+    const w = window as unknown as {
+      requestIdleCallback?: (cb: () => void, o?: { timeout: number }) => number
+      cancelIdleCallback?: (h: number) => void
+    }
+    if (w.requestIdleCallback) {
+      const h = w.requestIdleCallback(() => setExplodeArmed(true), { timeout: 2000 })
+      return () => w.cancelIdleCallback?.(h)
+    }
+    const t = setTimeout(() => setExplodeArmed(true), 400)
+    return () => clearTimeout(t)
+  }, [entries])
+
+  // Reaching the slider before idle fires arms it now. One-way: once armed it
+  // stays armed, so returning the slider to zero cannot throw the work away and
+  // pay for it again.
+  useEffect(() => {
+    if (explode > 0) setExplodeArmed(true)
+  }, [explode])
+
   const explodeAttr = useMemo(() => {
-    if (!structures) return null
+    if (!structures || !explodeArmed) return null
+    const t0 = performance.now()
     type Acc = { sum: Float64Array; count: Uint32Array; mesh: Mesh }
     const per: Acc[] = []
     const canonical = new Map<number, [number, number, number]>()
@@ -697,13 +826,17 @@ export function AtlasBody({
     console.info(
       `[AtlasBody] ${url}: per-structure explode on ${written.length} mesh(es), ` +
         `${canonical.size}/${structures.length} structures anchored` +
-        (reanchored ? `, ${reanchored} attachment decals re-anchored to their nearest bone` : ''),
+        (reanchored ? `, ${reanchored} attachment decals re-anchored to their nearest bone` : '') +
+        // Timed and printed because this is the cost that pushed the default
+        // atlas past its load budget, and a deferred cost nobody measures is a
+        // cost that creeps back. See the note on `explodeArmed`.
+        ` — ${Math.round(performance.now() - t0)}ms, off the first-paint path`,
     )
     return written.length ? written : null
     // `url` is read only by the log line, but it is listed so the message can
     // never name a different atlas than the one just measured. It changes in
     // lockstep with `entries` anyway, so it costs no extra pass.
-  }, [entries, structures, url])
+  }, [entries, structures, url, explodeArmed])
 
   /** Cleanup: the attribute belongs to this component, not to the cached GLTF. */
   useEffect(() => {
@@ -876,21 +1009,49 @@ export function AtlasBody({
     baked: boolean,
     /** The atlas's own group key — colours groups that resolve to no system. */
     group?: string,
+    /**
+     * Whether THIS mesh carries `_structure`.
+     *
+     * ⚠️ NOT the same question as `maskOn`, and conflating them is a silent
+     * mesh-eater. `maskOn` says the atlas has a mask; this says the mesh can be
+     * indexed by it. A mesh without the attribute still compiles the injection
+     * fine — WebGL supplies 0.0 for an unbound attribute — so every one of its
+     * vertices would look up STRUCTURE 0 and take its mask. If structure 0
+     * happens to be hidden by an overlay, the entire mesh collapses to the
+     * origin and vanishes, with no error anywhere.
+     *
+     * Measured on the shipped Z-Anatomy: all 11 meshes carry it, so nothing hits
+     * this today. It is guarded because the failure is invisible and the cost is
+     * one boolean.
+     */
+    hasStructure = false,
   ): MeshPhysicalMaterial => {
     // `perStructureExplode` is part of the key: a material compiled without the
     // injection cannot gain it later without a recompile, and the two kinds must
     // not be shared.
     //
-    // The hide RANGE, not merely whether one exists, for the same reason. This
-    // cache is only emptied on unmount, so a key that ignored the range would
-    // hand back the material compiled for the previous range — and on the way
-    // back to no overlay at all, that means the heart stays hidden with nothing
-    // standing in for it.
-    const hideKey = hiddenRange ? `${hiddenRange.lo}-${hiddenRange.hi}` : ''
+    // `maskOn` is a BOOLEAN here, and that is a change worth explaining rather
+    // than a loosening. The key used to carry the hide RANGE verbatim, because
+    // the range travelled as a uniform baked in at compile time: two atlases
+    // masking different ranges under one key would both take whichever compiled
+    // first, and on the way back to no overlay the heart stayed hidden with
+    // nothing standing in for it.
+    //
+    // The mask is now a TEXTURE whose object identity never changes for the life
+    // of an atlas — only its bytes do, and a byte change needs no recompile. So
+    // the only thing the program depends on is whether the injection is present
+    // at all, which is exactly what this boolean says. Keying on the contents
+    // now would be actively wrong: it would mint a new program, and leak one
+    // from the cache, every time somebody dragged a toggle.
+    //
+    // The per-atlas collision the old comment worried about is gone for the same
+    // reason: each `AtlasBody` builds its own texture and its own material cache,
+    // so two atlases cannot share a mask by sharing a key.
     // Scoped to the hull, so flipping the toggle cannot mint a duplicate
     // program for each of the ~65 organ materials that ignore it.
     const glassOn = glassHull && isBodyHull(systemId, group)
-    const key = `${systemId}|${layer}|${group}|${colourMode}|${selected}|${hullOpacity.toFixed(2)}|${baked}|${perStructureExplode}|${xrayOn}|${smoothOn}|${hideKey}|${glassOn}`
+    const maskThis = maskOn && hasStructure
+    const key = `${systemId}|${layer}|${group}|${colourMode}|${selected}|${hullOpacity.toFixed(2)}|${baked}|${perStructureExplode}|${xrayOn}|${smoothOn}|${maskThis}|${glassOn}`
     const cache = materials.current
     const hit = cache.get(key)
     if (hit) return hit
@@ -1252,20 +1413,72 @@ export function AtlasBody({
      * name is not safe to declare in a shader. The alias shares the very same
      * `BufferAttribute`, so it costs no memory.
      */
-    if (hiddenRange) {
+    if (maskThis && mask) {
       const prevHide = m.onBeforeCompile
       m.onBeforeCompile = (shader, renderer) => {
         prevHide?.(shader, renderer)
-        shader.uniforms.uHideLo = { value: hiddenRange.lo }
-        shader.uniforms.uHideHi = { value: hiddenRange.hi }
+        shader.uniforms.uMask = { value: mask.texture }
+        shader.uniforms.uMaskSize = { value: [MASK_WIDTH, mask.height] }
+
+        /**
+         * The lookup, shared by both stages.
+         *
+         * Sampled at the TEXEL CENTRE (`+ 0.5`) rather than at the corner. Off
+         * by that half texel and a lookup lands on the boundary between two
+         * entries, where the sampler is free to pick either — so a structure
+         * would intermittently take its neighbour's mask, and only on some
+         * drivers. `NearestFilter` makes the choice stable, not correct.
+         *
+         * `aStructure` rather than `_structure`: GLSL reserves leading-underscore
+         * identifiers, so the alias created at enumeration time is the only legal
+         * name. Same reason the explode injection uses its own attribute.
+         */
+        const lookup = `
+vec4 otStructureMask( float id ) {
+  float x = mod( id, uMaskSize.x );
+  float y = floor( id / uMaskSize.x );
+  vec2 uv = ( vec2( x, y ) + 0.5 ) / uMaskSize;
+  return texture2D( uMask, uv );
+}`
+
         shader.vertexShader = shader.vertexShader
           .replace(
             '#include <common>',
-            '#include <common>\nattribute float aStructure;\nuniform float uHideLo;\nuniform float uHideHi;',
+            '#include <common>\nattribute float aStructure;\nuniform sampler2D uMask;\nuniform vec2 uMaskSize;\nvarying vec3 vStructureTint;' +
+              lookup,
           )
+          /**
+           * Collapsing a hidden vertex to the origin makes every triangle
+           * touching it degenerate, so it rasterises to nothing. Deliberately
+           * not a `discard`: a fragment discard costs the early-z optimisation
+           * on every fragment of a mesh that is millions of triangles, where
+           * this costs one compare in the vertex shader.
+           *
+           * The tint is carried to the fragment stage through a varying rather
+           * than sampled again there — one texture fetch per vertex instead of
+           * one per fragment, and the value is constant across a structure so
+           * interpolation cannot change it.
+           */
           .replace(
             '#include <begin_vertex>',
-            '#include <begin_vertex>\nif ( aStructure >= uHideLo - 0.5 && aStructure <= uHideHi + 0.5 ) transformed = vec3( 0.0 );',
+            '#include <begin_vertex>\nvec4 otMask = otStructureMask( aStructure );\nvStructureTint = otMask.rgb;\nif ( otMask.a < 0.5 ) transformed = vec3( 0.0 );',
+          )
+
+        shader.fragmentShader = shader.fragmentShader
+          .replace('#include <common>', '#include <common>\nvarying vec3 vStructureTint;')
+          /**
+           * MULTIPLIED into the lit colour, not substituted for it.
+           *
+           * Replacing the albedo would flatten every structure it touched into a
+           * silhouette, which destroys exactly the form the AO bake and the
+           * material work exist to build — and the default texel is white, so a
+           * multiply is a true no-op wherever no tint is set. `<color_fragment>`
+           * is the same insertion point three.js uses for vertex colours, so
+           * this composes with the baked AO rather than fighting it.
+           */
+          .replace(
+            '#include <color_fragment>',
+            '#include <color_fragment>\ndiffuseColor.rgb *= vStructureTint;',
           )
       }
     }
@@ -1316,8 +1529,8 @@ export function AtlasBody({
      * program to reuse. Verified by logging — the injection ran on every toggle
      * while the compile hook fired only once per atlas.
      */
-    if (xrayOn || perStructureExplode || hiddenRange || glassOn) {
-      const variant = `${xrayOn ? 'x' : ''}${perStructureExplode ? 'e' : ''}${hideKey ? `h${hideKey}` : ''}${glassOn ? 'g' : ''}`
+    if (xrayOn || perStructureExplode || maskThis || glassOn) {
+      const variant = `${xrayOn ? 'x' : ''}${perStructureExplode ? 'e' : ''}${maskThis ? 'm' : ''}${glassOn ? 'g' : ''}`
       m.customProgramCacheKey = () => variant
     }
 
@@ -1396,6 +1609,7 @@ export function AtlasBody({
         e.systemId === selectedSystem && (selectedLayer === null || e.layer === selectedLayer),
         e.mesh.geometry.hasAttribute('color'),
         e.groupKey,
+        e.mesh.geometry.hasAttribute('_structure'),
       )
     }
     // `xrayOn` is a SHADER VARIANT, so this effect has to re-run when it flips
@@ -1413,6 +1627,17 @@ export function AtlasBody({
     // it to the mesh unless this effect re-runs. The symptom was the toggle doing
     // nothing on the atlas already loaded while appearing to work perfectly on the
     // next atlas switched to, because a remount rebuilds materials anyway.
+    //
+    // ⚠️ `maskOn` belongs here for exactly the same reason as `xrayOn` and
+    // `glassHull`: it is a SHADER VARIANT. `materialFor` mints a new material the
+    // moment it flips, but nothing hands that material to a mesh unless this
+    // effect re-runs — so switching an inspect mode on would do nothing on the
+    // atlas already loaded and appear to work perfectly on the next one switched
+    // to, because a remount rebuilds materials anyway. That is the bug this file
+    // has now documented three times.
+    //
+    // The mask CONTENTS are deliberately absent, and belong in the effect that
+    // writes the texture instead: rewriting bytes must not reassign materials.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     entries,
@@ -1424,6 +1649,15 @@ export function AtlasBody({
     byId,
     xrayOn,
     glassHull,
+    maskOn,
+    // ⚠️ NEWLY LOAD-BEARING. `perStructureExplode` used to change only when
+    // `entries` did, so listing `entries` covered it. Deferring the precompute
+    // broke that: the flag now flips on an idle callback with `entries`
+    // unchanged, so without this the materials compiled before the attribute
+    // existed would never be replaced and the explode slider would be
+    // permanently dead on the first atlas loaded — working perfectly on the next
+    // one switched to, which is the exact signature this file documents twice.
+    perStructureExplode,
   ])
 
   const byMesh = useMemo(() => {
@@ -1503,12 +1737,38 @@ export function AtlasBody({
    * including the exploded-view offset. `polygonOffset` keeps it off the surface
    * it is coincident with instead of z-fighting against it.
    */
-  const [selectedStructure, setSelectedStructure] = useState<{ mesh: Mesh; id: number } | null>(null)
-  useEffect(() => setSelectedStructure(null), [entries])
+  /**
+   * The MESH carrying the selection, which the store deliberately does not hold.
+   *
+   * The store publishes `{ sourceId, structureId, entry }` — facts about the
+   * ANATOMY, which anything in the app can act on. It does not publish the
+   * three.js `Mesh`, because a live scene object in global state outlives the
+   * component that owns it: switching atlas disposes these meshes, and a store
+   * still holding one would keep a disposed geometry alive and hand it to
+   * whatever read the field next.
+   *
+   * So the mesh stays local and the store carries identity. This ref is the join
+   * between them, and it is scoped to this component's own selection: the
+   * effect below does nothing unless the published selection names THIS source.
+   */
+  const [selectedMesh, setSelectedMesh] = useState<{ mesh: Mesh; id: number } | null>(null)
+  const selectedStructure = useTwin((s) => s.selectedStructure)
+  const setSelectedStructure = useTwin((s) => s.setSelectedStructure)
+
+  // A new atlas invalidates both halves. The store half is cleared only if it
+  // still refers to THIS source — in `composed` the other atlas may legitimately
+  // own the selection, and clearing it here would delete a live selection
+  // whenever the sibling remounted.
+  useEffect(() => {
+    setSelectedMesh(null)
+    if (useTwin.getState().selectedStructure?.sourceId === source.id) setSelectedStructure(null)
+  }, [entries, source.id, setSelectedStructure])
 
   useEffect(() => {
-    if (!selectedStructure) return
-    const { mesh, id } = selectedStructure
+    if (!selectedMesh) return
+    // Ignore a selection published by the other atlas in `composed` mode.
+    if (selectedStructure && selectedStructure.sourceId !== source.id) return
+    const { mesh, id } = selectedMesh
     const r = rangesFor(mesh).get(id)
     if (!r) return
 
@@ -1545,7 +1805,7 @@ export function AtlasBody({
       g.dispose()
       m.dispose()
     }
-  }, [selectedStructure])
+  }, [selectedMesh, selectedStructure, source.id])
 
   /**
    * Which structure a raycast hit belongs to.
@@ -1565,7 +1825,7 @@ export function AtlasBody({
     // still in the BVH — the raycast happily hits geometry nobody can see. Without
     // this, hovering an overlaid heart reports the static "Left ventricle" that was
     // masked out, which is worse than reporting nothing.
-    if (hiddenRange && id >= hiddenRange.lo && id <= hiddenRange.hi) return null
+    if (hiddenIds?.has(id)) return null
     return structures[id] ?? null
   }
 
@@ -1610,9 +1870,17 @@ export function AtlasBody({
               : null
           // Clicking the same structure again clears it; clicking a different
           // one moves the highlight rather than needing a deselect first.
-          const same =
-            id != null && selectedStructure?.mesh === mesh && selectedStructure?.id === id
-          setSelectedStructure(same || id == null ? null : { mesh, id })
+          const same = id != null && selectedMesh?.mesh === mesh && selectedMesh?.id === id
+          const next = same || id == null ? null : { mesh, id }
+          setSelectedMesh(next)
+          // Publish the ANATOMY half. `structures[id]` can legitimately be
+          // absent — an atlas may carry the attribute without a table row for
+          // every id — and in that case there is nothing to anchor a label to,
+          // so nothing is published rather than a half-empty entry.
+          const entry = next && structures ? (structures[next.id] ?? null) : null
+          setSelectedStructure(
+            entry ? { sourceId: source.id, structureId: next!.id, entry } : null,
+          )
           // Carry the LAYER through, so clicking a bone selects the skeleton
           // rather than the whole musculoskeletal system. Clicking the same
           // system+layer again clears, as before.
