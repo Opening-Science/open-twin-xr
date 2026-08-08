@@ -5,6 +5,7 @@ import { AgXToneMapping, PMREMGenerator } from 'three'
 import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment.js'
 import type { OrbitControls as OrbitControlsImpl } from 'three-stdlib'
 import { SCENE_DEFAULTS, registerScene, type DevSceneHandle } from './tuning'
+import { makeCameraCommands, registerCameraCommands } from './cameraCommands'
 import { useTwin } from '../store'
 import { XR, createXRStore, useXR } from '@react-three/xr'
 import { Body } from './Body'
@@ -73,6 +74,21 @@ function FocusControls() {
   const focusY = useTwin((s) => s.focusY)
   const focusDistance = useTwin((s) => s.focusDistance)
   const setFocusY = useTwin((s) => s.setFocusY)
+
+  /**
+   * Publish the discrete camera moves for the keyboard handler and the dock
+   * buttons, neither of which can reach into the Canvas. See `cameraCommands.ts`
+   * for why that indirection is needed and what it is copied from.
+   *
+   * Registered here because this is the component that owns the OrbitControls
+   * ref, and withdrawn on unmount so a stale control can never be driven.
+   */
+  useEffect(() => {
+    const c = ref.current
+    if (!c) return
+    registerCameraCommands(makeCameraCommands(c, setFocusY))
+    return () => registerCameraCommands(null)
+  }, [setFocusY])
 
   // Follow the slider, without fighting a pan the user is performing.
   useEffect(() => {

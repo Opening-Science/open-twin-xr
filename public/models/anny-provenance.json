@@ -1,0 +1,85 @@
+{
+  "adult-m": {
+    "package": "anny==0.6.0",
+    "topology": "anny",
+    "rig": "anny",
+    "local_changes": "default",
+    "parameters": {
+      "phenotype_kwargs": {
+        "gender": 0.0,
+        "age": 0.75
+      }
+    },
+    "height_m": 1.9051,
+    "vertices": 13718,
+    "triangles": 27420,
+    "script": "scripts/anny/bake.py"
+  },
+  "adult-f": {
+    "package": "anny==0.6.0",
+    "topology": "anny",
+    "rig": "anny",
+    "local_changes": "default",
+    "parameters": {
+      "phenotype_kwargs": {
+        "gender": 1.0,
+        "age": 0.75
+      }
+    },
+    "height_m": 1.765,
+    "vertices": 13718,
+    "triangles": 27420,
+    "script": "scripts/anny/bake.py"
+  },
+  "child": {
+    "package": "anny==0.6.0",
+    "topology": "anny",
+    "rig": "anny",
+    "local_changes": "default",
+    "parameters": {
+      "phenotype_kwargs": {
+        "gender": 0.5,
+        "age": 0.25
+      }
+    },
+    "height_m": 1.2269,
+    "vertices": 13718,
+    "triangles": 27420,
+    "script": "scripts/anny/bake.py"
+  },
+  "elder": {
+    "package": "anny==0.6.0",
+    "topology": "anny",
+    "rig": "anny",
+    "local_changes": "default",
+    "parameters": {
+      "phenotype_kwargs": {
+        "gender": 0.5,
+        "age": 1.0
+      }
+    },
+    "height_m": 1.812,
+    "vertices": 13718,
+    "triangles": 27420,
+    "script": "scripts/anny/bake.py"
+  },
+  "pregnant": {
+    "package": "anny==0.6.0",
+    "topology": "anny",
+    "rig": "anny",
+    "local_changes": "default",
+    "parameters": {
+      "phenotype_kwargs": {
+        "gender": 1.0,
+        "age": 0.75
+      },
+      "local_changes_kwargs": {
+        "stomach-pregnant-incr": 1.0
+      }
+    },
+    "height_m": 1.7659,
+    "vertices": 13718,
+    "triangles": 27420,
+    "script": "scripts/anny/bake.py"
+  }
+}
