@@ -95,7 +95,8 @@ async function lookup(label, attempt = 0) {
     const out = hit ? `FMA:${String(hit.obo_id ?? hit.short_form).replace(/^fma/i, '')}` : null
     cache[label] = out
     return out
-  } catch (e) {
+  } catch {
+    // Binding omitted deliberately: the error is not inspected, only retried.
     if (attempt < 2) {
       await new Promise((r) => setTimeout(r, 500 * (attempt + 1)))
       return lookup(label, attempt + 1)

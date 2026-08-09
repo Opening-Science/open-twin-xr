@@ -187,7 +187,8 @@ async function fetchFmaChildren(fmaId, attempt = 0) {
       fma: `FMA:${String(t.obo_id ?? t.short_form ?? '').replace(/^fma/i, '')}`,
       label: t.label ?? '',
     }))
-  } catch (e) {
+  } catch {
+    // Binding omitted deliberately: the error is not inspected, only retried.
     if (attempt < 2) {
       await new Promise((r) => setTimeout(r, 500 * (attempt + 1)))
       return fetchFmaChildren(fmaId, attempt + 1)
