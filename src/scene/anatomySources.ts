@@ -925,7 +925,16 @@ export function soleComposedSource(mode: AnatomyMode): AnatomySourceId | null {
  * choice stays a single substitution inside `resolveMode` — everything
  * downstream keeps taking one opaque mode, as it did before.
  */
-export type AnatomyMode = 'composed' | 'composed-f' | AnatomySourceId
+/**
+ * ⚠️ `'parametric'` IS NOT AN ATLAS, and `activeSources` returns [] for it.
+ *
+ * It selects the generated parametric body INSTEAD of anatomy, rather than as a
+ * skin over it — D16a measured that the envelope reads no atlas state, so
+ * overlaying an adjustable shape on fixed organs builds bodies whose outside and
+ * inside describe different people. As its own mode there is no inside to
+ * disagree with.
+ */
+export type AnatomyMode = 'composed' | 'composed-f' | 'parametric' | AnatomySourceId
 
 /**
  * The sex builds an atlas offers, keyed by the id the switcher shows.
@@ -951,6 +960,8 @@ const SEX_VARIANTS: Map<AnatomySourceId, Map<Sex, AnatomySourceId>> = (() => {
  * asking for a female body has an answer.
  */
 export function sexesFor(mode: AnatomyMode): Sex[] {
+  // Sex is a slider here, not a donor choice, so the switcher offers no row.
+  if (mode === 'parametric') return []
   if (mode === 'composed' || mode === 'composed-f') return ['male', 'female']
   const base = ANATOMY_SOURCES[mode].variantOf ?? mode
   return [...(SEX_VARIANTS.get(base)?.keys() ?? [])]
@@ -967,6 +978,8 @@ export function sexesFor(mode: AnatomyMode): Sex[] {
  * rather than imply the request was honoured.
  */
 export function resolveMode(mode: AnatomyMode, sex: Sex): AnatomyMode {
+  // The parametric body has no donor and no per-sex build; it resolves to itself.
+  if (mode === 'parametric') return mode
   // A composed mode swaps to the whole other map rather than to a variant of
   // one atlas, since the two sexes are composed from different sources
   // entirely — TARO for him, Visible Human Female for her.
@@ -978,8 +991,19 @@ export function resolveMode(mode: AnatomyMode, sex: Sex): AnatomyMode {
 }
 
 
-/** Which atlas provides a given system under the current mode. */
+/**
+ * Which atlas provides a given system under the current mode.
+ *
+ * ⚠️ Throws for `'parametric'`, deliberately. That mode has no atlas and no
+ * systems, so every caller here is already asking the wrong question — returning
+ * an arbitrary atlas would answer it wrongly and silently. `Body.tsx` never
+ * mounts an `AtlasBody` in that mode, so this is unreachable rather than
+ * defensive.
+ */
 export function sourceForSystem(mode: AnatomyMode, system: SystemId): AnatomySource {
+  if (mode === 'parametric') {
+    throw new Error('sourceForSystem: the parametric body has no atlas sources')
+  }
   if (mode === 'composed' || mode === 'composed-f') {
     return ANATOMY_SOURCES[composedMap(mode)[system]]
   }
@@ -991,6 +1015,8 @@ export function sourceForSystem(mode: AnatomyMode, system: SystemId): AnatomySou
  * credit what is on screen, not the whole registry.
  */
 export function activeSources(mode: AnatomyMode): AnatomySource[] {
+  // The parametric body is not sourced from an atlas, so it contributes none.
+  if (mode === 'parametric') return []
   if (mode !== 'composed' && mode !== 'composed-f') return [ANATOMY_SOURCES[mode]]
   const ids = new Set(Object.values(composedMap(mode)))
   return [...ids].map((id) => ANATOMY_SOURCES[id])
@@ -1006,6 +1032,9 @@ export function activeSources(mode: AnatomyMode): AnatomySource[] {
  * than listing two names and leaving the join invisible.
  */
 export function sourceBreakdown(mode: AnatomyMode): { source: AnatomySource; systems: SystemId[] }[] {
+  // No donor, no atlas, nothing to break down. The parametric body is credited
+  // by `ParametricPanel` instead, which can say what it actually is.
+  if (mode === 'parametric') return []
   if (mode !== 'composed' && mode !== 'composed-f') {
     return [{ source: ANATOMY_SOURCES[mode], systems: [] }]
   }

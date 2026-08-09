@@ -1558,3 +1558,98 @@ validate. A calmer scale lowers the framing risk; it does not turn an unvalidate
 metric into a validated one, and it is not a substitute for the methodology
 question D15 raises for any public or store distribution. **Recolouring is no more
 a regulatory answer than renaming was.** The bundled sample remains fictional.
+
+## D18 — The parametric body is its own mode, and it carries its own topology
+
+**8 August 2026.** D16a made the ANNY envelope standalone rather than an overlay.
+This extends it: the six phenotype macros are exposed as live sliders, backed by a
+baked shape grid the browser interpolates, and the result is a selectable atlas
+mode (`parametric`) rather than a skin drawn over one.
+
+### Why a mode and not a slider on the envelope
+
+D16a's reasoning gets *stronger* once the shape is adjustable. An envelope over an
+atlas already paired an outside and an inside that nothing reconciled; every
+slider is another way to build a body whose surface and organs describe different
+people — an adult male surface around a female donor, a child surface around adult
+organs. As its own mode there is no inside to disagree with, `activeSources`
+returns `[]`, and the sliders are what they plainly are: a shape space.
+
+The anatomy panel is replaced by the shape panel in this mode rather than left
+beside it, because there are no systems, layers or structures to control.
+
+### Why a grid, and not morph targets
+
+Four mechanisms were measured against the true model, as maximum vertex
+displacement at random interior slider positions on a 1.7 m body:
+
+| mechanism | worst error |
+|---|---|
+| per-axis deltas as glTF morph targets | 103 mm |
+| multilinear over the 2⁶ hypercube corners | 284 mm |
+| stops-aligned core, height/proportions as corrections | 116 mm |
+| **full 6-D tensor at the model's own stops** | **5.97 mm** (median 5.14) |
+
+The first three fail for one reason twice over. MakeHuman's macros are a *tensor*
+of pre-combined targets — the files are named
+`universal-{gender}-{age}-{muscle}-{weight}.target.gz` — so independent per-axis
+deltas miss every cross-term. And each axis is non-linear along its own length:
+`age` has five stops, so interpolating newborn straight to old puts age 0.5 at
+1.24 m where the model says 1.63 m. Sampling at the model's own stops fixes both.
+
+360 points, 28 MB quantised to int16 — the same order as `htb-ct-003.glb` (27 MB),
+which this app already ships. Evaluation is a weighted sum over at most 64 of
+those points, a few milliseconds on a slider change and nothing per frame. No
+PyTorch in the browser.
+
+### ⚠️ The grid ships its own triangle indices, and must keep doing so
+
+It first shipped positions only and took the index buffer from
+`anny-adult-f.glb`, reasoning that the topology is identical at every grid point.
+That is true of the **model** and false of the **asset**: `npm run convert:anny`
+runs meshopt, which reorders vertices for cache locality, so the compressed GLB
+numbers its vertices differently from the model the grid was baked against. Every
+triangle was scrambled.
+
+**Nothing on screen could show it, in three separate ways.** Positions come from
+the grid, so height and every slider read exactly correct against ANNY's own
+figures. A scrambled surface still fills the body's silhouette, so a "does it
+render" pixel count passed. And the vertex counts matched on both sides, so the
+obvious assertion passed too.
+
+Signed volume is what exposed it — 0.56 L where the same positions under the
+model's own face order give 51.20 L. It is the only one of these numbers that
+depends on positions **and** topology **and** winding at once, which is why
+`bake_grid.py` now asserts on it and `src/scene/annyGrid.test.ts` pins it.
+
+Two related measurement defects were found the same way and are recorded here
+because each produced a plausible wrong number rather than a visible fault:
+ANNY's winding is inconsistent as it comes out of the model (13,706 triangles one
+way against 13,714 the other), which made the volume integral cancel and left half
+the computed normals inward — fixed with `fix_normals()` at the bake, which
+reorders faces only and so leaves the vertex-indexed grid intact. And the waist
+slice at 60 % of standing height catches the arms, so a convex hull wrapped elbow
+to elbow and read 222 cm.
+
+⚠️ `npm run check:winding` does **not** catch the winding defect. It compares −x
+against +x, which is a left/right *symmetry* test, not an orientation one.
+
+### What is deliberately not exposed
+
+`race` is not baked, though ANNY offers it and excludes it from
+`phenotypes="default"` itself. "african / asian / caucasian" as interpolable shape
+axes is a claim about human variation this project has no basis to make, and not
+the kind of thing to ship because the data happened to contain it. `cupsize` and
+`firmness` are excluded for a different reason: they are body-shape controls of
+the sort `docs/research/FORK_PLAN.md` §7 flags for their disordered-eating
+association, on a rendered 3D body that is already a body-image surface.
+
+### What this does NOT settle
+
+⚠️ **It is not anatomy and not a measurement instrument.** No organs, no ontology
+terms, no donor. The shape space is artist priors from MakeHuman, not
+anthropometric ground truth. The panel reports height, volume, mass and BMI of the
+*generated surface*, and mass and BMI are derived from volume under a single
+assumed uniform density — properties of a shape under a stated assumption, not
+measurements of a person. Nothing here supports a body-composition, ergonomic or
+health claim, and the interface says so; that wording is load-bearing.

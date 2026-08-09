@@ -50,6 +50,36 @@ ontology terms and no scan of any person. It is also baked in ANNY's own rest
 pose, which is not any atlas's, so it wraps the torso and not the limbs — the
 interface says so, and that wording should not be quietly dropped.
 
+**The shape grid** is the same model sampled rather than fixed, and it backs the
+standalone `Parametric body` mode with its six live sliders. Three files, all
+written by one command:
+
+| File | What it holds | Size |
+|---|---|---|
+| `anny-grid.bin` | neutral positions + int16 deltas at 360 grid points | 28 MB |
+| `anny-grid.idx` | ANNY's triangle indices, outward-wound | 321 KB |
+| `anny-grid.json` | axes, stops, quantisation scale, measured error | 29 KB |
+
+```bash
+.venv/bin/pip install scipy          # fix_normals() needs it
+.venv/bin/python scripts/anny/bake_grid.py --out public/models/anny-grid
+```
+
+There is no `convert:` step and there must not be one. ⚠️ **The grid carries its
+own topology precisely because compression reorders vertices.** It first borrowed
+the index buffer from `anny-adult-f.glb`, and `convert:anny` runs meshopt, which
+renumbers vertices for cache locality — so the indices addressed a different
+vertex array than the grid was baked against and every triangle was scrambled.
+Nothing on screen showed it: positions come from the grid, so height and every
+slider read exactly correct, and the vertex counts matched on both sides. Signed
+volume is what exposed it, at 0.56 L against the 51.20 L the same positions give
+under the model's own face order. `bake_grid.py` now asserts on that volume and
+`src/scene/annyGrid.test.ts` pins it.
+
+⚠️ The mode shows height, volume, mass and BMI **of the generated surface**. Mass
+and BMI are derived from volume under one assumed uniform density — properties of
+a shape under an assumption, not measurements of anybody. The panel says so.
+
 The `.ao.glb` step is not cosmetic bookkeeping: it bakes per-vertex ambient
 occlusion into `COLOR_0`, and `AtlasBody` switches `vertexColors` on per mesh
 according to whether that attribute is present. Load an `.opt.glb` where the app

@@ -11,6 +11,8 @@ import type { AtlasComponent, StructureEntry } from './scene/structureEntry'
 import { activeSources, resolveMode, type AnatomyMode, type Sex } from './scene/anatomySources'
 import { BPM_RANGE, DEFAULT_BPM, type OrganOverlayId } from './scene/organOverlays'
 import type { BodyEnvelopeId } from './scene/bodyEnvelopes'
+import { ANNY_NEUTRAL, type AnnyParams } from './scene/annyGrid'
+import type { BodyMeasurements } from './scene/annyGrid'
 
 /** Depth layers an atlas can declare, outermost first. */
 export const ANATOMY_LAYERS = ['organ', 'connective', 'muscle', 'bone'] as const
@@ -389,6 +391,29 @@ interface TwinState {
    */
   envelopeAvailability: Record<string, boolean> | null
   /**
+   * Where the parametric body sits in ANNY's phenotype space.
+   *
+   * ⚠️ SIX NUMBERS, AND EVERY ONE DESCRIBES A SHAPE RATHER THAN A PERSON. The
+   * shape space is MakeHuman artist priors, not anthropometric ground truth, so
+   * no measurement, body-composition or health claim attaches to any position in
+   * it — see `annyGrid.ts` and the caption in `ParametricPanel`.
+   *
+   * `gender` runs male(0) to female(1) and `age` spans five stops with the adult
+   * at 0.75; both were measured, and both are the opposite of what the source
+   * notes claimed. `race`, `cupsize` and `firmness` are deliberately absent — see
+   * `scripts/anny/bake_grid.py`.
+   */
+  annyParams: AnnyParams
+  /**
+   * Geometry read off the evaluated body, published so the panel can show it
+   * without re-deriving it. Null until the grid has been evaluated once.
+   *
+   * ⚠️ `massKg` and `bmi` are NOT measured — they follow from volume under one
+   * assumed uniform density, which the panel states beside them. Height, waist
+   * and volume come off the mesh.
+   */
+  bodyMeasurements: BodyMeasurements | null
+  /**
    * Height in metres the camera orbits around, 0 at the feet to ~1.75 at the
    * crown. The orbit target used to be pinned to the chest, which made the head
    * and feet unreachable at any zoom.
@@ -441,6 +466,9 @@ interface TwinState {
   /** Pass null to remove the envelope, which is the default state. */
   setBodyEnvelope: (id: BodyEnvelopeId | null) => void
   setEnvelopeAvailability: (a: Record<string, boolean> | null) => void
+  setAnnyParam: (axis: keyof AnnyParams, value: number) => void
+  resetAnnyParams: () => void
+  setBodyMeasurements: (m: BodyMeasurements | null) => void
   setFocusY: (y: number, distance?: number | null) => void
 }
 
@@ -493,6 +521,8 @@ export const useTwin = create<TwinState>((set) => ({
   structureLabel: true,
   bodyEnvelope: null,
   envelopeAvailability: null,
+  annyParams: { ...ANNY_NEUTRAL },
+  bodyMeasurements: null,
   focusY: 0.95,
   focusDistance: null,
 
@@ -564,6 +594,10 @@ export const useTwin = create<TwinState>((set) => ({
   setStructureInspect: (structureInspect) => set({ structureInspect }),
   setBodyEnvelope: (bodyEnvelope) => set({ bodyEnvelope }),
   setEnvelopeAvailability: (envelopeAvailability) => set({ envelopeAvailability }),
+  setAnnyParam: (axis, value) =>
+    set((st) => ({ annyParams: { ...st.annyParams, [axis]: Math.min(1, Math.max(0, value)) } })),
+  resetAnnyParams: () => set({ annyParams: { ...ANNY_NEUTRAL } }),
+  setBodyMeasurements: (bodyMeasurements) => set({ bodyMeasurements }),
   setStructureLabel: (structureLabel) => set({ structureLabel }),
   setStructureCount: (sourceId, count) =>
     set((st) => {

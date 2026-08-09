@@ -27,6 +27,14 @@ public/models/*.gltf.*
 # and the parameters it records are already in `src/scene/bodyEnvelopes.ts`
 # and `licences.json`, which ARE reviewed. `npm run bake:anny` rewrites it.
 public/models/anny-provenance.json
+# The phenotype grid's sidecar, likewise: it describes a 28 MB .bin that is not
+# committed, and `npm run bake:anny-grid` rewrites both together.
+public/models/anny-grid.json
+# And the grid's topology. `*.bin` above does not match `.idx`, so without this
+# line a `git add -A` commits 321 KB of binary that the same bake regenerates —
+# the third time a generated asset has slipped past a pattern that looked
+# exhaustive. All three grid files are written by one command; none is committed.
+public/models/anny-grid.idx
 
 # build info
 tsconfig.tsbuildinfo

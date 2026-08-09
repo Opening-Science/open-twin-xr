@@ -45,6 +45,7 @@ export function SceneDock() {
    * panel would be a worse default than reloading to a visible one.
    */
   const [open, setOpen] = useState(true)
+  const parametric = useTwin((s) => s.anatomyMode) === 'parametric'
 
   return (
     <div className="pointer-events-none absolute inset-2.5 z-20 flex items-start justify-between gap-3">
@@ -81,9 +82,24 @@ export function SceneDock() {
             <DockGroup label="Overlays">
               <OrganOverlayRow />
             </DockGroup>
-            <DockGroup label="Envelope">
-              <EnvelopeControls />
-            </DockGroup>
+            {/*
+              ⚠️ NO ENVELOPE ROW IN THE PARAMETRIC MODE. `Body` returns early
+              there and never mounts `BodyEnvelope`, so every pill here was a
+              control that changed stored state and nothing on screen.
+
+              That is the failure `AtlasControls` already names for the donor
+              toggle — offering a control that silently does nothing is worse
+              than offering none, because it implies the request was honoured.
+              It is also the wrong offer twice over: an envelope over the
+              parametric body would be an ANNY surface drawn around an ANNY
+              surface, and the whole point of D18 is that this mode replaces
+              the body rather than wrapping one.
+            */}
+            {!parametric && (
+              <DockGroup label="Envelope">
+                <EnvelopeControls />
+              </DockGroup>
+            )}
             <DockGroup label="Inspect">
               <InspectControls />
             </DockGroup>

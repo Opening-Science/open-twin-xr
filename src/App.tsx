@@ -9,6 +9,7 @@ import { SceneDock } from './ui/SceneDock'
 import { OsfLogo } from './ui/OsfLogo'
 import { CanvasKeyboardShell } from './ui/CanvasKeyboardShell'
 import { SelectedStructureCard } from './ui/SelectedStructureCard'
+import { ParametricPanel } from './ui/ParametricPanel'
 
 /**
  * An open-source human body viewer.
@@ -55,6 +56,7 @@ export default function App() {
   const setData = useTwin((s) => s.setData)
   const theme = useTwin((s) => s.theme)
   const stage = useTwin((s) => s.stage)
+  const parametric = useTwin((s) => s.anatomyMode) === 'parametric'
 
   /*
    * The theme class goes on <html>, not on this div, because the CSS variables
@@ -149,7 +151,11 @@ export default function App() {
         </div>
 
         <div className="flex flex-col gap-5 overflow-y-auto">
-          <StructurePanel />
+          {/* The anatomy controls have nothing to control in the parametric
+              mode — there are no systems, layers or structures — so the shape
+              sliders take their place rather than sitting beside a panel of
+              inert rows. */}
+          {parametric ? <ParametricPanel /> : <StructurePanel />}
           {/* Between the anatomy controls and the credits, because it is both:
               it names what is selected and it states that structure's OWN
               licence where that differs from the atlas's. See the file. */}
