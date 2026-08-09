@@ -194,14 +194,21 @@ Still open, measured on the shipped assets rather than assumed:
 
 | gap | state |
 |---|---|
-| Z-Anatomy crosswalk | 1,048 / 3,614 (29 %) — 2,566 structures unmapped |
+| Z-Anatomy crosswalk | 1,078 / 3,614 (30 %) — 2,536 structures unmapped |
 | `z-anatomy-regions` | 0 / 257, name only |
-| overlay → atlas join | **0 of 18 overlay parts** resolve to a term |
-| FMA ↔ UBERON bridge | does not exist |
+| overlay → atlas join | 7 of 18 parts (eye **3/3**, ear 4/12, heart 0/3) |
+| FMA ↔ UBERON bridge | ✅ `npm run build:bridge`, 75 of 153 UBERON ids reach FMA geometry |
 
-The bridge is the one that blocks the others: BodyParts3D and Z-Anatomy are
-addressed in **FMA**, while HRA and both CT atlases speak **UBERON**, so no
-cross-atlas join can be made today. UBERON publishes FMA cross-references itself,
-so that bridge should be *ingested and measured*, never hand-authored.
+**The overlay residual is mostly not fixable by more terms, and the table says
+which.** Of the 11 unmatched parts, 8 are `adds an organ` — scala tympani, facial
+nerve, the heart's epicardium and endocardia — anatomy no atlas here models, so
+there is nothing to supersede. Only `Chorda Tympani` is a genuine missing term.
+
+Three concepts were left termless ON PURPOSE, because FMA names them differently
+and picking one is a terminology judgement rather than a lookup: `Vestibule`
+(FMA has *Vestibule of bony labyrinth*, and a bare "vestibule" is ambiguous —
+mouth, nose, vagina), `Auditory tube` (*Pharyngotympanic tube*) and `Zonular
+fibres` (*Set of zonular fibers*, a different granularity). Resolve them
+deliberately or leave them; do not let a script guess.
 
 See `docs/ROADMAP.md` Phase 5 and the top of `docs/HANDOVER.md`.
