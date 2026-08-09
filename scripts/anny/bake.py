@@ -140,6 +140,26 @@ def main() -> int:
         # silently changes the vertex count and breaks any later assumption that
         # indices line up with ANNY's own.
         mesh = trimesh.Trimesh(vertices=verts, faces=model.faces, process=False)
+
+        # ⚠️ ANNY'S TRIANGLE WINDING IS INCONSISTENT AS IT COMES OUT OF THE MODEL.
+        # Measured on the shipped mesh: 13,706 triangles wound one way and 13,714
+        # the other, on a topologically CLOSED manifold (0 boundary edges,
+        # E = 3F/2 exactly). Two consequences, and neither is obvious:
+        #
+        #   - `computeVertexNormals()` averages face normals, so half of them
+        #     point inward and the shading is subtly wrong rather than visibly
+        #     broken.
+        #   - any signed-volume integral cancels to nothing. The parametric
+        #     body's volume read 0.43 L instead of ~50 L, and mass and BMI with it.
+        #
+        # `fix_normals()` flips windings to agree and orients them outward. It
+        # reorders FACE indices only, never the vertex array, so the shape grid in
+        # `bake_grid.py` — which is indexed by vertex — still lines up exactly.
+        #
+        # ⚠️ `npm run check:winding` does NOT catch this. That script compares -x
+        # against +x, which is a left/right symmetry test, not an orientation one.
+        mesh.fix_normals()
+
         mesh.apply_transform(R)
 
         lo, hi = mesh.bounds[0][1], mesh.bounds[1][1]

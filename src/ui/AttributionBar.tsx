@@ -52,6 +52,15 @@ const COMPARE_MODES: { value: AnatomyMode; label: string; title: string }[] = [
       '⚠️ Its source scan is not recorded, so its licence is unresolved: research use only.',
   },
   {
+    value: 'parametric',
+    label: 'Parametric body',
+    title:
+      'A generated body you can reshape — six phenotype sliders from ANNY (Apache-2.0 code over ' +
+      'CC0 MakeHuman shapes). ⚠️ Not anatomy and not a donor: no organs, no ontology terms, and ' +
+      'no scan of anyone. It REPLACES the atlas rather than wrapping it, because an adjustable ' +
+      'outside over fixed organs would describe two different people.',
+  },
+  {
     value: 'z-anatomy-regions',
     label: ANATOMY_SOURCES['z-anatomy-regions'].label,
     title:
@@ -83,6 +92,9 @@ export function AtlasControls() {
   // The CHOSEN atlas, not the sex-resolved one: the pressed tab should be
   // "HuBMAP HRA" whichever body it is currently showing.
   const mode = useTwin((s) => s.anatomyMode)
+  // Read from the CHOSEN mode, not the sex-resolved one: `parametric` resolves
+  // to itself, and the two rows below are wrong for it in opposite directions.
+  const parametric = mode === 'parametric'
   const setMode = useTwin((s) => s.setAnatomyMode)
   const sex = useTwin((s) => s.sex)
   const setSex = useTwin((s) => s.setSex)
@@ -185,7 +197,22 @@ export function AtlasControls() {
         request.
       */}
       <DockGroup label="Donor">
-        {sexes.length > 1 ? (
+        {/*
+          ⚠️ THE PARAMETRIC BODY HAS NO DONOR, and this row said "single donor"
+          for it — the one claim about that mode the project is most careful to
+          avoid making. It falls out of the same `activeSources() === []` that the
+          banner below tripped on: no sources means no sexes, which the branch
+          below reads as "one donor whose sex we could not name" rather than as
+          "there is nobody here". Generated geometry is scan-free, which is the
+          reason it is worth having; saying it has a donor gives that away.
+
+          The `gender` SLIDER is not this control and must not be conflated with
+          it. That is a shape parameter running male to female; this row is whose
+          body you are looking at.
+        */}
+        {parametric ? (
+          <div className="px-0.5 text-[11px] text-muted">no donor — generated</div>
+        ) : sexes.length > 1 ? (
           <div className="flex flex-wrap gap-0.5">
             {(['female', 'male'] as const)
               .filter((s) => sexes.includes(s))
@@ -207,7 +234,18 @@ export function AtlasControls() {
         )}
       </DockGroup>
 
-      {installed.length === 0 && availability !== null && (
+      {/*
+        ⚠️ NOT IN THE PARAMETRIC MODE, which needs no atlas by design.
+
+        The test is "no atlas is installed", and `activeSources('parametric')`
+        returns [] on purpose — the mode REPLACES the atlas rather than wrapping
+        one (D18) — so an empty list read as "nothing is installed, you are
+        seeing the fallback". It isn't: what is on screen is ANNY, fully
+        credited, and calling it a procedural placeholder both misdescribes the
+        geometry and drops an attribution obligation onto a banner that denies
+        one is owed.
+      */}
+      {!parametric && installed.length === 0 && availability !== null && (
         <div className="border-t border-line bg-[#fdf6e7]/90 px-2.5 py-1.5 text-[10px] leading-snug text-[#8a6d3b]">
           Showing <strong>procedural placeholder</strong> geometry — no atlas installed for this
           selection. See docs/MODEL_PIPELINE.md.
@@ -352,6 +390,7 @@ export function AtlasAttribution() {
   // The envelope is credited only while it is actually rendering, exactly as
   // the atlases and overlays are — a licence obligation attaches to what is
   // distributed on screen, not to what the registry could offer.
+  const parametricMode = useTwin((s) => s.anatomyMode) === 'parametric'
   const envelopeId = useTwin((s) => s.bodyEnvelope)
   const envelope = envelopeId ? BODY_ENVELOPES[envelopeId] : null
   const mixedDonors = donorsDisagree(mode)
@@ -369,6 +408,53 @@ export function AtlasAttribution() {
   const overlaysOn = (Object.keys(ORGAN_OVERLAYS) as OrganOverlayId[])
     .filter((id) => overlays[id])
     .map((id) => ORGAN_OVERLAYS[id])
+
+  /**
+   * ⚠️ THE PARAMETRIC BODY NEEDS ITS OWN CREDIT, AND IT WAS GETTING THE WRONG ONE.
+   *
+   * `activeSources('parametric')` returns [], so this component fell through to
+   * the no-atlas branch below and told the viewer the body was "procedural
+   * placeholder geometry generated in-app" for which "nothing here requires
+   * attribution". Both halves were false: it is ANNY, and Apache-2.0 notice
+   * retention is a condition rather than a courtesy. A credits panel that
+   * actively denies an attribution obligation is worse than one that is merely
+   * absent.
+   */
+  if (parametricMode) {
+    const licences = BODY_ENVELOPES['anny-adult-f'].licences
+    return (
+      <div className="rounded-3xl border border-line bg-panel p-4 text-[11px] leading-relaxed text-muted backdrop-blur-panel">
+        <h3 className="mb-2 text-sm font-semibold text-ink">Credits</h3>
+        <p>{BODY_ENVELOPES['anny-adult-f'].attribution} arXiv:2511.03589</p>
+        <ul className="mt-1 space-y-0.5 border-l border-line pl-2">
+          {licences.map((l) => (
+            <li key={l.covers}>
+              <a
+                href={l.url}
+                target="_blank"
+                rel="noreferrer noopener"
+                className="whitespace-nowrap underline underline-offset-2 hover:text-ink"
+              >
+                {l.spdx}
+              </a>{' '}
+              — {l.covers}
+            </li>
+          ))}
+        </ul>
+        <p className="mt-2 font-semibold text-[#8a6d3b]">
+          Not a person and not a donor: a generated surface with no organs, no ontology terms and
+          no scan of anyone. The shape space is artist priors from MakeHuman, not measured
+          population data.
+        </p>
+        <p className="mt-1 text-ink/60">
+          Shape evaluated in-browser from a 360-point grid baked by{' '}
+          <code>scripts/anny/bake_grid.py</code>; interpolation differs from the model itself by a
+          median 5.1 mm.
+        </p>
+        <SourcesButton />
+      </div>
+    )
+  }
 
   if (sources.length === 0 && overlaysOn.length === 0) {
     return (

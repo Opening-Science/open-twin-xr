@@ -28,6 +28,7 @@
     "build:openear": "node scripts/build-openear.mjs",
     "convert:openear": "gltf-transform webp public/models/openear-zeta.raw.glb public/models/openear-zeta.glb --lossless true",
     "bake:anny": "python3 scripts/anny/bake.py --out public/models",
+    "bake:anny-grid": "python3 scripts/anny/bake_grid.py --out public/models/anny-grid --verify 10",
     "convert:anny": "for f in adult-m adult-f child elder pregnant; do gltf-transform optimize public/models/anny-$f.raw.glb public/models/anny-$f.opt.glb --compress meshopt --join false --instance false --weld true --simplify false && node scripts/bake-ao.mjs public/models/anny-$f.opt.glb --out public/models/anny-$f.glb && node scripts/set-copyright.mjs public/models/anny-$f.glb \"ANNY \u2014 NAVER LABS Europe / NAVER Corporation. Apache-2.0 code over CC0-1.0 MakeHuman-derived shape assets. arXiv:2511.03589. Baked by open-twin-openXR scripts/anny/bake.py; no scan of any person.\" || exit 1; done",
     "typecheck": "tsc -b --pretty false",
     "lint": "eslint . --report-unused-disable-directives --max-warnings 0",

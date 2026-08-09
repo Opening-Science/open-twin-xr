@@ -49,7 +49,7 @@ function pruneUnshippedModels(): Plugin {
        * literal, which is the second half of the same bug.
        */
       let sources = ''
-      for (const f of ['anatomySources.ts', 'organOverlays.ts', 'bodyEnvelopes.ts']) {
+      for (const f of ['anatomySources.ts', 'organOverlays.ts', 'bodyEnvelopes.ts', 'annyGrid.ts']) {
         try {
           sources += readFileSync(join(__dirname, 'src', 'scene', f), 'utf8')
         } catch {
@@ -58,8 +58,19 @@ function pruneUnshippedModels(): Plugin {
           // catches the case where NOTHING was found.
         }
       }
+      /**
+       * ⚠️ NOT ONLY `.glb`. The parametric body ships a shape GRID — a `.bin` of
+       * quantised vertex deltas plus its `.json` sidecar — and the first version
+       * of this regex matched the extension literally, so both were pruned and
+       * the whole parametric mode shipped as an empty canvas. Same class of bug
+       * as the body envelopes a few commits earlier, and invisible for the same
+       * reason: `npm run dev` serves `public/` directly and never runs this.
+       *
+       * Matching any extension is the fix, because the whitelist's job is "is
+       * this url referenced by a registry", not "is this a mesh".
+       */
       const keep = new Set(
-        [...sources.matchAll(/\/models\/([A-Za-z0-9._-]+\.glb)/g)].map((m) => m[1]),
+        [...sources.matchAll(/\/models\/([A-Za-z0-9._-]+\.[A-Za-z0-9]+)/g)].map((m) => m[1]),
       )
       if (keep.size === 0) {
         // Better to ship too much than to ship an empty models directory because

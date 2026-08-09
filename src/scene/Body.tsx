@@ -7,6 +7,7 @@ import { activeSources, ANATOMY_SOURCES } from './anatomySources'
 import { AssetErrorBoundary } from './AssetErrorBoundary'
 import { BodyEnvelope } from './BodyEnvelope'
 import { StructureLabel } from './StructureLabel'
+import { ParametricBody } from './ParametricBody'
 import { BODY_ENVELOPES, BODY_ENVELOPE_IDS } from './bodyEnvelopes'
 
 /**
@@ -90,6 +91,35 @@ function BodyContent() {
 
   // Still probing: show the procedural body rather than an empty frame.
   const useAtlas = availability !== null && present.length > 0
+
+  /**
+   * ⚠️ THE PARAMETRIC MODE REPLACES THE ANATOMY, IT DOES NOT SIT OVER IT.
+   *
+   * `activeSources('parametric')` returns [], so without this branch the atlas
+   * path would fall through to the PROCEDURAL placeholder — the app would show
+   * its zero-asset fallback body beside the parametric one and look broken. The
+   * early return is what makes "standalone" true rather than merely intended.
+   */
+  if (mode === 'parametric') {
+    return (
+      <group>
+        <mesh position={[0, 1, -0.6]} visible={false} onClick={() => clearSel(null)}>
+          <planeGeometry args={[4, 4]} />
+          <meshBasicMaterial />
+        </mesh>
+        <AssetErrorBoundary
+          label="parametric body"
+          consequence="the parametric body did not render"
+          resetKey="parametric"
+          fallback={null}
+        >
+          <Suspense fallback={null}>
+            <ParametricBody />
+          </Suspense>
+        </AssetErrorBoundary>
+      </group>
+    )
+  }
 
   return (
     <group>
