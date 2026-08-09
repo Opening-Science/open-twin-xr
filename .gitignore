@@ -63,3 +63,8 @@ nako_verf.txt
 
 # MOOSE/CT working cache — rebuildable, and large.
 scripts/ct-atlas/.cache/
+
+# OLS4 response cache for the FMA ↔ UBERON bridge. Pure derived data — every
+# entry is re-fetchable from the EBI API, and committing it would freeze a
+# snapshot of somebody else's ontology inside this repository.
+.cache/

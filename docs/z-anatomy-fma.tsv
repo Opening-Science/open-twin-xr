@@ -675,3 +675,33 @@ Ureter	left	FMA:15572	metabolic	organ
 Urinary bladder		FMA:15900	metabolic	organ
 Kidney	left	FMA:7205	metabolic	organ
 Prostate		FMA:9600	reproductive	organ
+Incus	right	FMA:74050	musculoskeletal	bone
+Stapes	left	FMA:74049	musculoskeletal	bone
+Malleus	left	FMA:74053	musculoskeletal	bone
+Incus	left	FMA:74051	musculoskeletal	bone
+Malleus	right	FMA:74052	musculoskeletal	bone
+Stapes	right	FMA:74048	musculoskeletal	bone
+Suspensory ligament of eyeball	left	FMA:322155	nervous	organ
+Suspensory ligament of eyeball	right	FMA:322154	nervous	organ
+Cornea	right	FMA:58239	nervous	organ
+Posterior segment of eyeball	right	FMA:58869	nervous	organ
+Vitreous body	right	FMA:58828	nervous	organ
+Iris	right	FMA:58236	nervous	organ
+Lens	left	FMA:58243	nervous	organ
+Anterior segment of eyeball	left	FMA:58867	nervous	organ
+Anterior chamber of eyeball	left	FMA:58082	nervous	organ
+Posterior segment of eyeball	left	FMA:58870	nervous	organ
+Vitreous body	left	FMA:58829	nervous	organ
+Retina	left	FMA:58303	nervous	organ
+Sclera	left	FMA:58272	nervous	organ
+Sclera	right	FMA:58271	nervous	organ
+Lens	right	FMA:58242	nervous	organ
+Anterior segment of eyeball	right	FMA:58866	nervous	organ
+Anterior chamber of eyeball	right	FMA:58081	nervous	organ
+Cornea	left	FMA:58240	nervous	organ
+Retina	right	FMA:58302	nervous	organ
+Iris	left	FMA:58237	nervous	organ
+Tympanic membrane	left	FMA:56428	nervous	organ
+Tympanic membrane	right	FMA:56427	nervous	organ
+Cochlea	left	FMA:60203	nervous	organ
+Cochlea	right	FMA:60202	nervous	organ

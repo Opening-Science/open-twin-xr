@@ -172,15 +172,43 @@ good deal of it is done, with two of its premises corrected by measurement.
   zero, which this file and `HANDOVER.md` then repeated. The type now declares it,
   `structureTerm()` resolves it, the UI shows it, and the map's prose is derived
   from the same measurement as its table so the two cannot disagree again.
-- **BodyParts3D needs a REBUILD, not a code change.** `build-bodyparts3d.mjs`
-  already emits `_STRUCTURE`, a structure table and all 1,838 FMA ids; the shipped
-  asset simply predates the script.
+- **BodyParts3D is DONE — the rebuild has happened.** It was listed here as
+  outstanding for a while after it stopped being true. Measured on the shipped
+  asset: **1,838 of 1,838 structures carry an FMA term**, the only atlas here at
+  100 %. Run `npm run gen:ontology` before believing any coverage number in this
+  file, including this one.
 - ⚠️ **Ontology terms were NOT the fix for the one-sided ear**, which this file
   and the handover both predicted. None of the eight ear structures carries an
   `ontologyid`; `side` is what they all carry. The fix was a `side` filter plus
   replacing the contiguous-range mask with a per-structure texture
   (`src/scene/structureMask.ts`), because the two ears interleave.
 
-Still open: the other 71 % of the Z-Anatomy crosswalk, the BodyParts3D rebuild,
-and an FMA ↔ UBERON bridge, without which a cross-atlas join still cannot be made.
+- ⚠️ **`docs/ONTOLOGY_MAP.md` carried hand-typed structure IDS in a generated
+  document, and they had gone wrong.** It stated the Z-Anatomy eye globe as "20
+  structures at ids 2631–2650"; the asset says **22 at 2626–2647**. Ids are what
+  the mask consumes, so this was not a rounding error — 2648 and 2649 are not eye
+  structures, and implementing the documented mask would have hidden the wrong
+  anatomy. The generator now measures them. **Never type an id into prose.**
+
+Still open, measured on the shipped assets rather than assumed:
+
+| gap | state |
+|---|---|
+| Z-Anatomy crosswalk | 1,078 / 3,614 (30 %) — 2,536 structures unmapped |
+| `z-anatomy-regions` | 0 / 257, name only |
+| overlay → atlas join | 7 of 18 parts (eye **3/3**, ear 4/12, heart 0/3) |
+| FMA ↔ UBERON bridge | ✅ `npm run build:bridge`, 75 of 153 UBERON ids reach FMA geometry |
+
+**The overlay residual is mostly not fixable by more terms, and the table says
+which.** Of the 11 unmatched parts, 8 are `adds an organ` — scala tympani, facial
+nerve, the heart's epicardium and endocardia — anatomy no atlas here models, so
+there is nothing to supersede. Only `Chorda Tympani` is a genuine missing term.
+
+Three concepts were left termless ON PURPOSE, because FMA names them differently
+and picking one is a terminology judgement rather than a lookup: `Vestibule`
+(FMA has *Vestibule of bony labyrinth*, and a bare "vestibule" is ambiguous —
+mouth, nose, vagina), `Auditory tube` (*Pharyngotympanic tube*) and `Zonular
+fibres` (*Set of zonular fibers*, a different granularity). Resolve them
+deliberately or leave them; do not let a script guess.
+
 See `docs/ROADMAP.md` Phase 5 and the top of `docs/HANDOVER.md`.

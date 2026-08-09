@@ -94,6 +94,7 @@ Tab-separated, and the machine-readable authority for the mappings that
 | [`z-anatomy-fma.tsv`](z-anatomy-fma.tsv) | 676 | Z-Anatomy structure + side → FMA |
 | [`moose-uberon-crosswalk.tsv`](moose-uberon-crosswalk.tsv) | 139 | MOOSE class → UBERON |
 | [`healthy-total-body-cts-crosswalk.tsv`](healthy-total-body-cts-crosswalk.tsv) | 33 | TCIA labelmap class → UBERON |
+| [`fma-uberon-bridge.tsv`](fma-uberon-bridge.tsv) | 143 | **UBERON ↔ FMA**, so the two vocabularies here can be joined. Generated — `npm run build:bridge` |
 | [`healthy-total-body-cts-labels.tsv`](healthy-total-body-cts-labels.tsv) | 35 | The TCIA label map itself |
 | [`hra-assets.tsv`](hra-assets.tsv) | 83 | HRA reference-organ GLB and crosswalk URLs |
 | [`bodyparts3d-musculoskeletal.txt`](bodyparts3d-musculoskeletal.txt) | — | Working list behind `PERMISSIVE_ANATOMY.md` |
