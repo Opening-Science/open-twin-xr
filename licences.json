@@ -367,6 +367,36 @@
         "measuredHeightM": 1.766,
         "script": "scripts/anny/bake.py"
       }
+    },
+    {
+      "id": "anny-grid",
+      "kind": "shape-grid",
+      "file": "public/models/anny-grid.bin + .idx + .json",
+      "loaded": true,
+      "licence": "Apache-2.0 (code) + CC0-1.0 (shape assets)",
+      "source": "https://github.com/naver/anny — anny==0.6.0, baked by scripts/anny/bake_grid.py",
+      "attribution": "ANNY, a free-to-use 3D human parametric model for all ages — NAVER LABS Europe / NAVER Corporation. Apache-2.0 code over CC0 shape assets derived from MakeHuman. Cite arXiv:2511.03589. Baked to static geometry by this repository; no scan of any person was used.",
+      "why": "THE SAME MODEL AS THE FIVE ENVELOPES, SAMPLED RATHER THAN FIXED. The envelopes are five static bakes; this is ANNY's phenotype space itself, sampled at the model's own stops so the browser can interpolate between them and the six sliders are live. It backs the standalone `parametric` mode, which replaces the atlas rather than wrapping it — see D16a for why an adjustable outside over fixed organs was the wrong pairing to offer.\n\nRegistered separately from the envelopes because it is a different artefact with a different question attached: it is not a rendering of one body but the space all of them come from. The answer is the same — Apache-2.0 code over CC0 shape assets, no donor — but it is recorded rather than inferred.",
+      "verify": "SAME THREE LICENCE BUCKETS AND THE SAME topology TRAP as the envelopes above; scripts/anny/bake_grid.py likewise hardcodes topology=\"anny\" and exposes no flag for it.\n\n⚠️ `race` IS DELIBERATELY NOT BAKED, though the model offers it. \"african / asian / caucasian\" as interpolable shape axes is a claim about human variation this project has no basis to make. `cupsize` and `firmness` are excluded separately, as body-shape controls on a rendered 3D body that is already a body-image surface. Six axes ship: gender, age, muscle, weight, height, proportions.\n\nNOT A MEASUREMENT INSTRUMENT, and the sliders make that easier to forget than the fixed envelopes did. The interface shows height, volume, mass and BMI for the generated SURFACE; mass and BMI are derived from volume under one assumed uniform density and are properties of a shape, not of a person.\n\nTHE GRID CARRIES ITS OWN TOPOLOGY (.idx), and must keep doing so. It first borrowed the index buffer from anny-adult-f.glb, whose vertices meshopt reorders during compression — so the indices numbered a different vertex array and every triangle was scrambled. Invisible on screen: positions come from the grid, so height and every slider read exactly correct, and the vertex counts matched. Signed volume exposed it (0.56 L against 51.20 L). src/scene/annyGrid.test.ts pins it and bake_grid.py asserts on it.",
+      "holder": "NAVER Corporation / NAVER LABS Europe (code); MakeHuman community (CC0 shape assets)",
+      "ownLicence": "Apache-2.0",
+      "donor": null,
+      "provenance": {
+        "package": "anny==0.6.0",
+        "topology": "anny",
+        "rig": "anny",
+        "axes": "gender, age, muscle, weight, height, proportions",
+        "gridPoints": 360,
+        "sampling": "2 x 5 x 3 x 3 x 2 x 2 at the model's own MakeHuman stops, tent-basis interpolation",
+        "vertices": 13718,
+        "triangles": 27420,
+        "measuredErrorMm": {
+          "worst": 5.97,
+          "median": 5.14,
+          "note": "max vertex displacement vs the true ANNY model at random interior slider positions"
+        },
+        "script": "scripts/anny/bake_grid.py"
+      }
     }
   ],
   "closed": [
@@ -389,5 +419,5 @@
       "why": "As UK Biobank."
     }
   ],
-  "stance": "open source, non-commercial, fully attributed — the twin will be published under an open licence with every required credit rendered in-app and embedded in each asset. Non-commercial components (CC BY-NC, CC BY-NC-SA) are therefore compatible with the intended use, and the obligation they carry is attribution plus not selling it. ⚠️ One exception the stance cannot cover: geometry with NO licence statement grants nothing at all, so it needs written permission rather than a credit line."
+  "stance": "OPEN SOURCE, FULLY ATTRIBUTED, AND NOTHING IS EXCLUDED ON LICENCE GROUNDS. This project takes what each source offers, credits every one of them, and keeps an accurate account of what is inside. Commercial use is not a goal, so a non-commercial term (CC BY-NC, CC BY-NC-SA) costs this project nothing and is NOT a reason to drop a component — the obligation it carries is attribution, and attribution is rendered in-app and embedded in every asset. Copyleft is the same: share-alike and AGPL ask for source and onward terms, which an open-source project supplies anyway. ⚠️ THE ONE THING THIS STANCE CANNOT COVER, and it is not about commerce: geometry with NO LICENCE STATEMENT grants nothing at all. Silence is not permission, so it needs written permission rather than a credit line, and `--publishable` drops it. That is a question of whether a grant exists, not of what it permits. The point of this register is therefore DILIGENT DOCUMENTATION, not gatekeeping: say precisely which licence and which permissions apply to every asset, so anyone downstream can make their own call with the facts in front of them."
 }

@@ -82,10 +82,85 @@ for (const f of onDisk.sort()) {
   rows.push(row)
 }
 
+/**
+ * ⚠️ ASSETS THAT ARE NOT GLB. THE SCAN ABOVE CANNOT SEE THEM AT ALL.
+ *
+ * `onDisk` filters to `.glb`, which was every shipped asset until the parametric
+ * body arrived with a 28 MB `.bin` of vertex deltas, a `.idx` of triangle indices
+ * and a `.json` sidecar. None of the three could ever appear here, so an
+ * unrecorded binary would ship in silence — the precise failure this register
+ * exists to make impossible, just outside the extension it was written for.
+ *
+ * Two differences from a GLB, both stated rather than papered over. There is no
+ * `asset.copyright` to read, because that is a glTF field — some of these formats
+ * do carry a credit of their own (a WOFF2 has an OpenType name table,
+ * `package.json` has `license`) and some carry none at all, but either way THIS
+ * script does not read it, so reporting a missing embedded copyright would assert
+ * something it never checked. And there is no structure table, because these are
+ * single artefacts rather than sets of named organs.
+ */
+const GLB_ONLY = /\.glb$/
+
+/**
+ * One entry may cover several files — the grid's three are one artefact with one
+ * licence position, and splitting them would state the same thing three times.
+ *
+ * The shorthand is `path/base.ext + .ext2 + .ext3`, where a continuation
+ * beginning with a dot swaps the extension on the first path rather than naming
+ * a file in the repository root. Expanding it wrongly is not cosmetic: the
+ * unregistered-file check below compares against these strings, so a bare
+ * `.idx` in the set means the real `public/models/anny-grid.idx` matches
+ * nothing and is reported as unrecorded.
+ */
+function expandFiles(spec) {
+  const parts = spec.split('+').map((f) => f.trim()).filter(Boolean)
+  const first = parts[0]
+  return parts.map((f) => (f.startsWith('.') ? first.replace(/\.[^./]+$/, f) : f))
+}
+
+const otherRegistered = register.assets.filter((a) => a.file && !GLB_ONLY.test(a.file))
+for (const a of otherRegistered) {
+  const files = expandFiles(a.file)
+  const missing = files.filter((f) => !existsSync(join(ROOT, f)))
+  rows.push({
+    file: a.file,
+    entry: a,
+    embedded: null,
+    embeddable: false,
+    components: [],
+    structures: 0,
+    absent: missing,
+  })
+  if (missing.length && missing.length < files.length) {
+    actions.push(
+      `**${a.id}** is registered as ${files.length} files but ${missing.join(', ')} ` +
+        `${missing.length === 1 ? 'is' : 'are'} absent. A partially present artefact is worse ` +
+        `than a missing one: the app loads what is there and fails on the rest.`,
+    )
+  }
+}
+
+/**
+ * And the other direction — a non-GLB file on disk that nothing registers.
+ *
+ * Restricted to the extensions the app actually fetches. `public/models/` doubles
+ * as the pipeline's working directory, so it is full of intermediates that are
+ * not assets and never ship; `pruneUnshippedModels` drops those from `dist`.
+ */
+const SHIPPED_DATA = /\.(bin|idx)$/
+const registeredFiles = new Set(register.assets.flatMap((a) => (a.file ? expandFiles(a.file) : [])))
+if (existsSync(modelDir)) {
+  for (const f of readdirSync(modelDir).filter((f) => SHIPPED_DATA.test(f)).sort()) {
+    if (!registeredFiles.has(`public/models/${f}`)) unregistered.push(`public/models/${f}`)
+  }
+}
+
 // --- the action list ---------------------------------------------------------
 // What a human has to DO before publishing, as opposed to what is merely true.
 for (const r of rows) {
-  if (!r.embedded?.trim()) {
+  // `embeddable === false` means this script never looked, because the file is not
+  // glTF — which is not the same as a GLB that has the field and left it blank.
+  if (r.embeddable !== false && !r.embedded?.trim()) {
     actions.push(`**${r.file}** carries no \`asset.copyright\` — the credit is not travelling with the file.`)
   }
   for (const c of r.components) {
@@ -138,7 +213,13 @@ for (const r of rows) {
   L.push(`- **Loaded by the app:** ${r.entry.loaded ? 'yes' : 'no'}`)
   if (r.structures) L.push(`- **Structures:** ${r.structures.toLocaleString()}`)
   L.push(`- **Required credit:** ${r.entry.attribution ?? '—'}`)
-  L.push(`- **Embedded \`asset.copyright\`:** ${r.embedded?.trim() ? '✅ present' : '❌ MISSING'}`)
+  L.push(
+    r.embeddable === false
+      ? '- **Embedded credit:** not checked — `asset.copyright` is a glTF field and this is not a ' +
+          'glTF file. The required credit above is rendered in-app and recorded here; whether ' +
+          'this format carries one internally is not read by this script.'
+      : `- **Embedded \`asset.copyright\`:** ${r.embedded?.trim() ? '✅ present' : '❌ MISSING'}`,
+  )
   if (r.entry.why) L.push(`- **Why:** ${r.entry.why}`)
   if (r.error) L.push(`- ⚠️ **Could not read:** ${r.error}`)
   L.push('')
@@ -189,7 +270,7 @@ for (const r of rows) {
     : ''
   console.log(
     `  ${r.file.replace('public/models/', '').padEnd(24)}${r.entry.licence.padEnd(34)}` +
-      `${r.embedded?.trim() ? '✓ credited' : '✗ NO CREDIT'}${extra}`,
+      `${r.embeddable === false ? '— not glTF' : r.embedded?.trim() ? '✓ credited' : '✗ NO CREDIT'}${extra}`,
   )
 }
 if (unregistered.length) {

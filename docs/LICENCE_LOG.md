@@ -8,7 +8,7 @@ attribution its sources require; this file is how the licence position stays kno
 rather than assumed. Structure counts are read out of the shipped GLBs, not from a
 hand-maintained table, so they cannot drift from what actually ships.
 
-Project stance: **open source, non-commercial, fully attributed — the twin will be published under an open licence with every required credit rendered in-app and embedded in each asset. Non-commercial components (CC BY-NC, CC BY-NC-SA) are therefore compatible with the intended use, and the obligation they carry is attribution plus not selling it. ⚠️ One exception the stance cannot cover: geometry with NO licence statement grants nothing at all, so it needs written permission rather than a credit line.**.
+Project stance: **OPEN SOURCE, FULLY ATTRIBUTED, AND NOTHING IS EXCLUDED ON LICENCE GROUNDS. This project takes what each source offers, credits every one of them, and keeps an accurate account of what is inside. Commercial use is not a goal, so a non-commercial term (CC BY-NC, CC BY-NC-SA) costs this project nothing and is NOT a reason to drop a component — the obligation it carries is attribution, and attribution is rendered in-app and embedded in every asset. Copyleft is the same: share-alike and AGPL ask for source and onward terms, which an open-source project supplies anyway. ⚠️ THE ONE THING THIS STANCE CANNOT COVER, and it is not about commerce: geometry with NO LICENCE STATEMENT grants nothing at all. Silence is not permission, so it needs written permission rather than a credit line, and `--publishable` drops it. That is a question of whether a grant exists, not of what it permits. The point of this register is therefore DILIGENT DOCUMENTATION, not gatekeeping: say precisely which licence and which permissions apply to every asset, so anyone downstream can make their own call with the facts in front of them.**.
 
 ## Assets
 
@@ -175,6 +175,35 @@ Third-party components inside this asset:
 - **Anatomy of the Inner Ear:** Non-commercial and share-alike. Attribution is required and is rendered by AttributionBar. The sense organ only — the cochlear and vestibular NERVES and NUCLEI are Z-Anatomy’s own and are not tagged.
 - **Kidney:** Non-commercial. Attribution required.
 
+### `public/fonts/InterVariable.woff2`
+
+- **Licence:** SIL Open Font License 1.1
+- **Source:** https://github.com/rsms/inter/releases/tag/v4.1
+- **Loaded by the app:** yes
+- **Required credit:** Inter typeface by Rasmus Andersson, SIL Open Font License 1.1.
+- **Embedded credit:** not checked — `asset.copyright` is a glTF field and this is not a glTF file. The required credit above is rendered in-app and recorded here; whether this format carries one internally is not read by this script.
+- **Why:** Self-hosted from the official Inter 4.1 release: web/InterVariable.woff2, the COMPLETE variable font, 344 KB. Not a Google subset — a subset carries a `unicode-range`, which does not merely describe the file but restricts which characters the face may render, so anything outside it falls back to system-ui silently. Audited 29 July 2026: `->` and `~=` appear in rendered strings and Inter has both, yet the latin subset was letting the system font draw them. public/fonts/OFL.txt is byte-identical to LICENSE.txt in that release.
+
+### `package.json`
+
+- **Licence:** MIT / Apache-2.0 / BSD throughout
+- **Source:** package-lock.json
+- **Loaded by the app:** yes
+- **Required credit:** —
+- **Embedded credit:** not checked — `asset.copyright` is a glTF field and this is not a glTF file. The required credit above is rendered in-app and recorded here; whether this format carries one internally is not read by this script.
+- **Why:** three, r3f, drei, @react-three/xr, three-mesh-bvh, zustand, recharts and the whole build chain are permissive. Deliberately NOT enumerated here — a hand-written copy of the dependency tree is the thing that goes stale. Run `npx license-checker --summary` for the live answer.
+
+### `public/models/anny-grid.bin + .idx + .json`
+
+- **Licence:** Apache-2.0 (code) + CC0-1.0 (shape assets)
+- **Source:** https://github.com/naver/anny — anny==0.6.0, baked by scripts/anny/bake_grid.py
+- **Loaded by the app:** yes
+- **Required credit:** ANNY, a free-to-use 3D human parametric model for all ages — NAVER LABS Europe / NAVER Corporation. Apache-2.0 code over CC0 shape assets derived from MakeHuman. Cite arXiv:2511.03589. Baked to static geometry by this repository; no scan of any person was used.
+- **Embedded credit:** not checked — `asset.copyright` is a glTF field and this is not a glTF file. The required credit above is rendered in-app and recorded here; whether this format carries one internally is not read by this script.
+- **Why:** THE SAME MODEL AS THE FIVE ENVELOPES, SAMPLED RATHER THAN FIXED. The envelopes are five static bakes; this is ANNY's phenotype space itself, sampled at the model's own stops so the browser can interpolate between them and the six sliders are live. It backs the standalone `parametric` mode, which replaces the atlas rather than wrapping it — see D16a for why an adjustable outside over fixed organs was the wrong pairing to offer.
+
+Registered separately from the envelopes because it is a different artefact with a different question attached: it is not a rendering of one body but the space all of them come from. The answer is the same — Apache-2.0 code over CC0 shape assets, no donor — but it is recorded rather than inferred.
+
 ## Not usable at any point
 
 Recorded so nobody re-investigates them. These are closed by **contract or price**, which
@@ -222,3 +251,10 @@ NOT A MEASUREMENT INSTRUMENT. The shape space is artist priors from MakeHuman, n
 ⚠️ NEVER BAKE WITH topology="smpl" OR "smplx". Both trigger a RUNTIME download of a non-commercial archive from download.europe.naverlabs.com inside download_noncommercial_data() (anny/paths.py). Because it happens at runtime rather than at install time, A DEPENDENCY AUDIT DOES NOT CATCH IT. scripts/anny/bake.py hardcodes the safe topology and exposes no flag for it — keep it that way.
 
 NOT A MEASUREMENT INSTRUMENT. The shape space is artist priors from MakeHuman, not anthropometric ground truth, so no body-composition, ergonomic or health claim may be attached. And its rest pose is not any atlas's: measured on Z-Anatomy it spans 1.124 m across the arms against the atlas's 0.646 m, so it wraps the torso and not the limbs. The interface states that; keep it stated.
+- [ ] **anny-grid**: SAME THREE LICENCE BUCKETS AND THE SAME topology TRAP as the envelopes above; scripts/anny/bake_grid.py likewise hardcodes topology="anny" and exposes no flag for it.
+
+⚠️ `race` IS DELIBERATELY NOT BAKED, though the model offers it. "african / asian / caucasian" as interpolable shape axes is a claim about human variation this project has no basis to make. `cupsize` and `firmness` are excluded separately, as body-shape controls on a rendered 3D body that is already a body-image surface. Six axes ship: gender, age, muscle, weight, height, proportions.
+
+NOT A MEASUREMENT INSTRUMENT, and the sliders make that easier to forget than the fixed envelopes did. The interface shows height, volume, mass and BMI for the generated SURFACE; mass and BMI are derived from volume under one assumed uniform density and are properties of a shape, not of a person.
+
+THE GRID CARRIES ITS OWN TOPOLOGY (.idx), and must keep doing so. It first borrowed the index buffer from anny-adult-f.glb, whose vertices meshopt reorders during compression — so the indices numbered a different vertex array and every triangle was scrambled. Invisible on screen: positions come from the grid, so height and every slider read exactly correct, and the vertex counts matched. Signed volume exposed it (0.56 L against 51.20 L). src/scene/annyGrid.test.ts pins it and bake_grid.py asserts on it.
