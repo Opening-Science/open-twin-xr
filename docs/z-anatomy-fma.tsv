@@ -354,12 +354,10 @@ Posterior crico-arytenoid muscle	left	FMA:46578	musculoskeletal	muscle
 Lateral crico-arytenoid muscle	left	FMA:46581	musculoskeletal	muscle
 Posterior crico-arytenoid muscle	right	FMA:46577	musculoskeletal	muscle
 Transverse arytenoid muscle		FMA:46582	musculoskeletal	muscle
-Iliolumbar ligament	right	FMA:18903	musculoskeletal	connective
-Iliolumbar ligament	left	FMA:18904	musculoskeletal	connective
-Stylohyoid ligament	left	FMA:45827	musculoskeletal	connective
-Stylohyoid ligament	right	FMA:45826	musculoskeletal	connective
-Trapezoid ligament	left	FMA:24445	musculoskeletal	connective
-Trapezoid ligament	right	FMA:23725	musculoskeletal	connective
+Iliolumbar ligament	right	FMA:21494	musculoskeletal	connective
+Iliolumbar ligament	left	FMA:21495	musculoskeletal	connective
+Stylohyoid ligament	left	FMA:72311	musculoskeletal	connective
+Stylohyoid ligament	right	FMA:72309	musculoskeletal	connective
 Middle frontal gyrus	right	FMA:72655	nervous	organ
 Precentral gyrus	right	FMA:72661	nervous	organ
 Superior frontal gyrus	right	FMA:72653	nervous	organ
@@ -395,38 +393,38 @@ Pons	left	FMA:67943	nervous	organ
 Pons	right	FMA:67943	nervous	organ
 Ophthalmic nerve	right	FMA:52622	nervous	organ
 Ophthalmic nerve	left	FMA:52623	nervous	organ
-Radial nerve	right	FMA:22948	nervous	organ
-Radial nerve	left	FMA:22949	nervous	organ
-Axillary nerve	right	FMA:13330	nervous	organ
-Axillary nerve	left	FMA:13331	nervous	organ
-Ulnar nerve	right	FMA:22951	nervous	organ
-Ulnar nerve	left	FMA:22952	nervous	organ
-Subclavian nerve	right	FMA:4755	nervous	organ
-Subclavian nerve	left	FMA:4763	nervous	organ
+Radial nerve	right	FMA:37070	nervous	organ
+Radial nerve	left	FMA:37071	nervous	organ
+Axillary nerve	right	FMA:37073	nervous	organ
+Axillary nerve	left	FMA:37074	nervous	organ
+Ulnar nerve	right	FMA:37320	nervous	organ
+Ulnar nerve	left	FMA:37321	nervous	organ
+Subclavian nerve	right	FMA:65285	nervous	organ
+Subclavian nerve	left	FMA:65286	nervous	organ
 Dorsal scapular nerve	right	FMA:4057	nervous	organ
 Dorsal scapular nerve	left	FMA:10552	nervous	organ
-Femoral nerve	right	FMA:21188	nervous	organ
-Femoral nerve	left	FMA:21189	nervous	organ
-Obturator nerve	right	FMA:18915	nervous	organ
-Obturator nerve	left	FMA:18916	nervous	organ
-Superior gluteal nerve	left	FMA:18910	nervous	organ
-Lateral plantar nerve	left	FMA:43926	nervous	organ
-Medial plantar nerve	left	FMA:43925	nervous	organ
-Lateral plantar nerve	right	FMA:43926	nervous	organ
-Medial plantar nerve	right	FMA:43925	nervous	organ
-Superior gluteal nerve	right	FMA:18909	nervous	organ
-Vertebral artery	left	FMA:3956	cardiovascular	organ
+Femoral nerve	right	FMA:16499	nervous	organ
+Femoral nerve	left	FMA:16500	nervous	organ
+Obturator nerve	right	FMA:16501	nervous	organ
+Obturator nerve	left	FMA:16502	nervous	organ
+Superior gluteal nerve	left	FMA:45345	nervous	organ
+Lateral plantar nerve	left	FMA:45451	nervous	organ
+Medial plantar nerve	left	FMA:45435	nervous	organ
+Lateral plantar nerve	right	FMA:45450	nervous	organ
+Medial plantar nerve	right	FMA:45434	nervous	organ
+Superior gluteal nerve	right	FMA:45344	nervous	organ
+Vertebral artery	left	FMA:4066	cardiovascular	organ
 Posterior inferior cerebellar artery	left	FMA:50520	cardiovascular	organ
-Axillary artery	left	FMA:13331	cardiovascular	organ
-Subscapular artery	left	FMA:23115	cardiovascular	organ
+Axillary artery	left	FMA:22656	cardiovascular	organ
+Subscapular artery	left	FMA:22679	cardiovascular	organ
 Circumflex scapular artery	left	FMA:23181	cardiovascular	organ
 Thoracodorsal artery	left	FMA:66322	cardiovascular	organ
 Posterior circumflex humeral artery	left	FMA:22687	cardiovascular	organ
 Anterior circumflex humeral artery	left	FMA:22683	cardiovascular	organ
 Lateral thoracic artery	left	FMA:22676	cardiovascular	organ
-Radial artery	left	FMA:22949	cardiovascular	organ
-Ulnar artery	left	FMA:22952	cardiovascular	organ
-Common interosseous artery	left	FMA:22806	cardiovascular	organ
+Radial artery	left	FMA:22734	cardiovascular	organ
+Ulnar artery	left	FMA:22798	cardiovascular	organ
+Common interosseous artery	left	FMA:22808	cardiovascular	organ
 Recurrent interosseous artery	left	FMA:268669	cardiovascular	organ
 Dorsal carpal branch of ulnar artery	left	FMA:22822	cardiovascular	organ
 Deep brachial artery	left	FMA:22697	cardiovascular	organ
@@ -434,35 +432,35 @@ Inferior ulnar collateral artery	left	FMA:22713	cardiovascular	organ
 Superior ulnar collateral artery	left	FMA:22708	cardiovascular	organ
 Thyrocervical trunk	left	FMA:4084	cardiovascular	organ
 Suprascapular artery	left	FMA:10681	cardiovascular	organ
-Transverse cervical artery	left	FMA:10664	cardiovascular	organ
+Transverse cervical artery	left	FMA:10682	cardiovascular	organ
 Inferior thyroid artery	left	FMA:10680	cardiovascular	organ
-Internal thoracic artery	left	FMA:3960	cardiovascular	organ
+Internal thoracic artery	left	FMA:4068	cardiovascular	organ
 Musculophrenic artery	left	FMA:4077	cardiovascular	organ
 Superior epigastric artery	left	FMA:4083	cardiovascular	organ
 Costocervical trunk	left	FMA:4086	cardiovascular	organ
 Second posterior intercostal artery	left	FMA:4112	cardiovascular	organ
 First posterior intercostal artery	left	FMA:66243	cardiovascular	organ
 Deep cervical artery	left	FMA:4134	cardiovascular	organ
-Femoral artery	right	FMA:21188	cardiovascular	organ
-Deep femoral artery	right	FMA:51042	cardiovascular	organ
+Femoral artery	right	FMA:70249	cardiovascular	organ
+Deep femoral artery	right	FMA:20796	cardiovascular	organ
 Medial circumflex femoral artery	right	FMA:44918	cardiovascular	organ
 Lateral circumflex femoral artery	right	FMA:20801	cardiovascular	organ
 Popliteal artery	right	FMA:77380	cardiovascular	organ
 Anterior tibial artery	right	FMA:44336	cardiovascular	organ
-Dorsalis pedis artery	right	FMA:43915	cardiovascular	organ
+Dorsalis pedis artery	right	FMA:43916	cardiovascular	organ
 Lateral tarsal artery	right	FMA:69490	cardiovascular	organ
 Arcuate artery	right	FMA:69494	cardiovascular	organ
 Inferior medial genicular artery	right	FMA:43890	cardiovascular	organ
 Posterior tibial artery	right	FMA:43898	cardiovascular	organ
-Medial plantar artery	right	FMA:43925	cardiovascular	organ
-Lateral plantar artery	right	FMA:43926	cardiovascular	organ
+Medial plantar artery	right	FMA:43929	cardiovascular	organ
+Lateral plantar artery	right	FMA:43931	cardiovascular	organ
 Plantar arch	right	FMA:43943	cardiovascular	organ
 Fibular artery	right	FMA:44885	cardiovascular	organ
 Middle genicular artery	right	FMA:22562	cardiovascular	organ
 Inferior lateral genicular artery	right	FMA:43892	cardiovascular	organ
 Superficial epigastric artery	right	FMA:20735	cardiovascular	organ
-Occipital artery	right	FMA:52735	cardiovascular	organ
-Internal carotid artery	right	FMA:3947	cardiovascular	organ
+Occipital artery	right	FMA:49587	cardiovascular	organ
+Internal carotid artery	right	FMA:3949	cardiovascular	organ
 Artery of precentral sulcus	right	FMA:50480	cardiovascular	organ
 Artery of central sulcus	right	FMA:77439	cardiovascular	organ
 Posterior parietal artery	right	FMA:50489	cardiovascular	organ
@@ -481,39 +479,39 @@ Callosomarginal artery	right	FMA:50347	cardiovascular	organ
 Pericallosal artery	right	FMA:50359	cardiovascular	organ
 Anterior spinal artery	right	FMA:50532	cardiovascular	organ
 Anterior spinal artery	left	FMA:50533	cardiovascular	organ
-Vertebral artery	right	FMA:3956	cardiovascular	organ
+Vertebral artery	right	FMA:3958	cardiovascular	organ
 Basilar artery		FMA:50542	cardiovascular	organ
-Anterior inferior cerebellar artery	left	FMA:50544	cardiovascular	organ
+Anterior inferior cerebellar artery	left	FMA:50546	cardiovascular	organ
 Superior cerebellar artery	right	FMA:50574	cardiovascular	organ
 Superior cerebellar artery	left	FMA:50575	cardiovascular	organ
-Medial occipital artery	left	FMA:50638	cardiovascular	organ
-Lateral occipital artery	left	FMA:50633	cardiovascular	organ
-Anterior inferior cerebellar artery	right	FMA:50544	cardiovascular	organ
-Medial occipital artery	right	FMA:50638	cardiovascular	organ
-Lateral occipital artery	right	FMA:50633	cardiovascular	organ
+Medial occipital artery	left	FMA:50646	cardiovascular	organ
+Lateral occipital artery	left	FMA:50644	cardiovascular	organ
+Anterior inferior cerebellar artery	right	FMA:50545	cardiovascular	organ
+Medial occipital artery	right	FMA:50645	cardiovascular	organ
+Lateral occipital artery	right	FMA:50643	cardiovascular	organ
 Posterior inferior cerebellar artery	right	FMA:50519	cardiovascular	organ
 Costocervical trunk	right	FMA:5039	cardiovascular	organ
 Second posterior intercostal artery	right	FMA:5041	cardiovascular	organ
 First posterior intercostal artery	right	FMA:66242	cardiovascular	organ
 Deep cervical artery	right	FMA:10660	cardiovascular	organ
 Thyrocervical trunk	right	FMA:3992	cardiovascular	organ
-Transverse cervical artery	right	FMA:10664	cardiovascular	organ
+Transverse cervical artery	right	FMA:10699	cardiovascular	organ
 Suprascapular artery	right	FMA:10698	cardiovascular	organ
 Inferior thyroid artery	right	FMA:10697	cardiovascular	organ
-Internal thoracic artery	right	FMA:3960	cardiovascular	organ
+Internal thoracic artery	right	FMA:3969	cardiovascular	organ
 Musculophrenic artery	right	FMA:10692	cardiovascular	organ
 Superior epigastric artery	right	FMA:3988	cardiovascular	organ
-Axillary artery	right	FMA:13330	cardiovascular	organ
+Axillary artery	right	FMA:22655	cardiovascular	organ
 Lateral thoracic artery	right	FMA:22675	cardiovascular	organ
-Radial artery	right	FMA:22948	cardiovascular	organ
+Radial artery	right	FMA:22733	cardiovascular	organ
 Deep brachial artery	right	FMA:22696	cardiovascular	organ
 Superior ulnar collateral artery	right	FMA:22707	cardiovascular	organ
 Inferior ulnar collateral artery	right	FMA:22712	cardiovascular	organ
-Ulnar artery	right	FMA:22951	cardiovascular	organ
+Ulnar artery	right	FMA:22797	cardiovascular	organ
 Dorsal carpal branch of ulnar artery	right	FMA:22821	cardiovascular	organ
-Common interosseous artery	right	FMA:22806	cardiovascular	organ
+Common interosseous artery	right	FMA:22807	cardiovascular	organ
 Recurrent interosseous artery	right	FMA:268667	cardiovascular	organ
-Subscapular artery	right	FMA:23114	cardiovascular	organ
+Subscapular artery	right	FMA:22678	cardiovascular	organ
 Thoracodorsal artery	right	FMA:66321	cardiovascular	organ
 Circumflex scapular artery	right	FMA:23180	cardiovascular	organ
 Anterior circumflex humeral artery	right	FMA:22682	cardiovascular	organ
@@ -533,47 +531,47 @@ Middle colic artery		FMA:14810	cardiovascular	organ
 Inferior pancreaticoduodenal artery		FMA:14805	cardiovascular	organ
 Anterior inferior pancreaticoduodenal artery		FMA:70479	cardiovascular	organ
 Common iliac artery	left	FMA:21388	cardiovascular	organ
-External iliac artery	left	FMA:18886	cardiovascular	organ
+External iliac artery	left	FMA:18807	cardiovascular	organ
 Inferior epigastric artery	left	FMA:20689	cardiovascular	organ
 Internal iliac artery	left	FMA:18810	cardiovascular	organ
 Inferior gluteal artery	left	FMA:18913	cardiovascular	organ
-Internal pudendal artery	left	FMA:18919	cardiovascular	organ
+Internal pudendal artery	left	FMA:18837	cardiovascular	organ
 Dorsal artery of penis	left	FMA:20819	cardiovascular	organ
-Superior gluteal artery	left	FMA:18910	cardiovascular	organ
-Iliolumbar artery	left	FMA:18904	cardiovascular	organ
+Superior gluteal artery	left	FMA:18870	cardiovascular	organ
+Iliolumbar artery	left	FMA:18847	cardiovascular	organ
 Median sacral artery		FMA:77168	cardiovascular	organ
 Internal iliac artery	right	FMA:18809	cardiovascular	organ
-Obturator artery	left	FMA:18916	cardiovascular	organ
-Obturator artery	right	FMA:18915	cardiovascular	organ
-Internal pudendal artery	right	FMA:18918	cardiovascular	organ
+Obturator artery	left	FMA:18867	cardiovascular	organ
+Obturator artery	right	FMA:18866	cardiovascular	organ
+Internal pudendal artery	right	FMA:18836	cardiovascular	organ
 Dorsal artery of penis	right	FMA:20818	cardiovascular	organ
 Inferior gluteal artery	right	FMA:18912	cardiovascular	organ
-Iliolumbar artery	right	FMA:18903	cardiovascular	organ
-Superior gluteal artery	right	FMA:18909	cardiovascular	organ
-External iliac artery	right	FMA:18885	cardiovascular	organ
+Iliolumbar artery	right	FMA:18846	cardiovascular	organ
+Superior gluteal artery	right	FMA:18869	cardiovascular	organ
+External iliac artery	right	FMA:18806	cardiovascular	organ
 Inferior epigastric artery	right	FMA:20688	cardiovascular	organ
 Ascending aorta		FMA:3736	cardiovascular	organ
 Subcostal artery	left	FMA:4654	cardiovascular	organ
 Subcostal artery	right	FMA:4634	cardiovascular	organ
-Femoral artery	left	FMA:21189	cardiovascular	organ
+Femoral artery	left	FMA:70250	cardiovascular	organ
 Superficial epigastric artery	left	FMA:20736	cardiovascular	organ
 Popliteal artery	left	FMA:77381	cardiovascular	organ
 Inferior lateral genicular artery	left	FMA:43893	cardiovascular	organ
 Inferior medial genicular artery	left	FMA:43891	cardiovascular	organ
 Anterior tibial artery	left	FMA:44337	cardiovascular	organ
-Dorsalis pedis artery	left	FMA:43915	cardiovascular	organ
+Dorsalis pedis artery	left	FMA:43917	cardiovascular	organ
 Lateral tarsal artery	left	FMA:69491	cardiovascular	organ
 Arcuate artery	left	FMA:69495	cardiovascular	organ
 Posterior tibial artery	left	FMA:43899	cardiovascular	organ
-Lateral plantar artery	left	FMA:43926	cardiovascular	organ
+Lateral plantar artery	left	FMA:43932	cardiovascular	organ
 Plantar arch	left	FMA:43944	cardiovascular	organ
 Fibular artery	left	FMA:44886	cardiovascular	organ
-Medial plantar artery	left	FMA:43925	cardiovascular	organ
+Medial plantar artery	left	FMA:43930	cardiovascular	organ
 Middle genicular artery	left	FMA:22563	cardiovascular	organ
-Deep femoral artery	left	FMA:51043	cardiovascular	organ
+Deep femoral artery	left	FMA:20797	cardiovascular	organ
 Lateral circumflex femoral artery	left	FMA:20802	cardiovascular	organ
 Medial circumflex femoral artery	left	FMA:44919	cardiovascular	organ
-Internal carotid artery	left	FMA:3947	cardiovascular	organ
+Internal carotid artery	left	FMA:4062	cardiovascular	organ
 Ophthalmic artery	left	FMA:49870	cardiovascular	organ
 Supratrochlear artery	left	FMA:52644	cardiovascular	organ
 Posterior ethmoidal artery	left	FMA:52716	cardiovascular	organ
@@ -584,7 +582,7 @@ Artery of central sulcus	left	FMA:77439	cardiovascular	organ
 Prefrontal artery	left	FMA:50478	cardiovascular	organ
 Lateral frontobasal artery	left	FMA:50444	cardiovascular	organ
 Artery of precentral sulcus	left	FMA:50481	cardiovascular	organ
-Occipital artery	left	FMA:52735	cardiovascular	organ
+Occipital artery	left	FMA:49588	cardiovascular	organ
 Posterior communicating artery	right	FMA:50085	cardiovascular	organ
 Posterior communicating artery	left	FMA:50086	cardiovascular	organ
 Anterior communicating artery		FMA:50169	cardiovascular	organ
@@ -603,14 +601,13 @@ Basilic vein	left	FMA:22910	cardiovascular	organ
 Median cubital vein	left	FMA:22965	cardiovascular	organ
 Median antebrachial vein	left	FMA:22969	cardiovascular	organ
 Cephalic vein	left	FMA:13326	cardiovascular	organ
-Posterior circumflex humeral vein	left	FMA:22687	cardiovascular	organ
 Lateral thoracic vein	left	FMA:71212	cardiovascular	organ
 Superior vena cava		FMA:4720	cardiovascular	organ
-Vertebral vein	right	FMA:3956	cardiovascular	organ
-Occipital vein	right	FMA:52735	cardiovascular	organ
+Vertebral vein	right	FMA:4756	cardiovascular	organ
+Occipital vein	right	FMA:51489	cardiovascular	organ
 Azygos vein		FMA:4838	cardiovascular	organ
-Vertebral vein	left	FMA:3956	cardiovascular	organ
-Occipital vein	left	FMA:52735	cardiovascular	organ
+Vertebral vein	left	FMA:4764	cardiovascular	organ
+Occipital vein	left	FMA:51490	cardiovascular	organ
 Hepatic portal vein		FMA:50735	cardiovascular	organ
 Internal jugular vein	left	FMA:4762	cardiovascular	organ
 Internal jugular vein	right	FMA:4754	cardiovascular	organ
@@ -630,7 +627,6 @@ Subscapular vein	right	FMA:23114	cardiovascular	organ
 Circumflex scapular vein	right	FMA:77949	cardiovascular	organ
 Thoracodorsal vein	right	FMA:71214	cardiovascular	organ
 Cephalic vein	right	FMA:13325	cardiovascular	organ
-Posterior circumflex humeral vein	right	FMA:22685	cardiovascular	organ
 Lateral thoracic vein	right	FMA:71211	cardiovascular	organ
 Basilic vein	right	FMA:22909	cardiovascular	organ
 Median cubital vein	right	FMA:22964	cardiovascular	organ
@@ -705,3 +701,781 @@ Tympanic membrane	left	FMA:56428	nervous	organ
 Tympanic membrane	right	FMA:56427	nervous	organ
 Cochlea	left	FMA:60203	nervous	organ
 Cochlea	right	FMA:60202	nervous	organ
+Patellar ligament	right	FMA:44585	musculoskeletal	bone
+Patella	left	FMA:24487	musculoskeletal	bone
+Patellar ligament	left	FMA:44586	musculoskeletal	bone
+Transverse head of adductor hallucis	left	FMA:46021	musculoskeletal	bone
+Oblique head of adductor hallucis	left	FMA:46019	musculoskeletal	bone
+Oblique head of adductor hallucis	right	FMA:46018	musculoskeletal	bone
+Transverse head of adductor hallucis	right	FMA:46020	musculoskeletal	bone
+Extensor digitorum brevis	left	FMA:51143	musculoskeletal	bone
+Lateral head of flexor hallucis brevis	right	FMA:45973	musculoskeletal	bone
+Medial head of flexor hallucis brevis	right	FMA:45971	musculoskeletal	bone
+Extensor digitorum brevis	right	FMA:51142	musculoskeletal	bone
+Medial head of flexor hallucis brevis	left	FMA:45972	musculoskeletal	bone
+Lateral head of flexor hallucis brevis	left	FMA:45974	musculoskeletal	bone
+Long plantar ligament	left	FMA:44250	musculoskeletal	bone
+Long plantar ligament	right	FMA:44249	musculoskeletal	bone
+Patella	right	FMA:24486	musculoskeletal	bone
+Medial head of gastrocnemius	left	FMA:45958	musculoskeletal	bone
+Lateral head of gastrocnemius	left	FMA:45961	musculoskeletal	bone
+Femur	right	FMA:24474	musculoskeletal	bone
+Medial head of gastrocnemius	right	FMA:45957	musculoskeletal	bone
+Lateral head of gastrocnemius	right	FMA:45960	musculoskeletal	bone
+Short head of biceps femoris	left	FMA:45892	musculoskeletal	bone
+Long head of biceps femoris	right	FMA:45888	musculoskeletal	bone
+Levator ani	right	FMA:82938	musculoskeletal	bone
+Levator ani	left	FMA:82939	musculoskeletal	bone
+Long head of biceps femoris	left	FMA:45889	musculoskeletal	bone
+Coccyx		FMA:20229	musculoskeletal	bone
+Depressor labii inferioris	right	FMA:46817	musculoskeletal	bone
+Masseter	left	FMA:48998	musculoskeletal	bone
+Masseter	right	FMA:48997	musculoskeletal	bone
+Depressor anguli oris	left	FMA:46830	musculoskeletal	bone
+Depressor labii inferioris	left	FMA:46818	musculoskeletal	bone
+Depressor anguli oris	right	FMA:46829	musculoskeletal	bone
+Depressor septi nasi	right	FMA:55608	musculoskeletal	bone
+Levator labii superioris	right	FMA:46806	musculoskeletal	bone
+Orbital part of orbicularis oculi	right	FMA:46782	musculoskeletal	bone
+Levator anguli oris	right	FMA:46823	musculoskeletal	bone
+Zygomatic bone	left	FMA:52893	musculoskeletal	bone
+Depressor septi nasi	left	FMA:55609	musculoskeletal	bone
+Orbital part of orbicularis oculi	left	FMA:46783	musculoskeletal	bone
+Levator anguli oris	left	FMA:46824	musculoskeletal	bone
+Levator labii superioris	left	FMA:46807	musculoskeletal	bone
+Zygomatic bone	right	FMA:52892	musculoskeletal	bone
+Body of sternum		FMA:7487	musculoskeletal	bone
+Xiphoid process		FMA:7488	musculoskeletal	bone
+Ulnar head of flexor carpi ulnaris	left	FMA:38620	musculoskeletal	bone
+Extensor carpi ulnaris	left	FMA:38508	musculoskeletal	bone
+Adductor pollicis	right	FMA:37392	musculoskeletal	bone
+Flexor digitorum superficialis	right	FMA:38470	musculoskeletal	bone
+Pronator teres	right	FMA:38451	musculoskeletal	bone
+Medial head of triceps brachii	right	FMA:37695	musculoskeletal	bone
+Lateral head of triceps brachii	right	FMA:37697	musculoskeletal	bone
+Flexor digitorum superficialis	left	FMA:38471	musculoskeletal	bone
+Deep head of flexor pollicis brevis	left	FMA:46111	musculoskeletal	bone
+Extensor carpi ulnaris	right	FMA:38507	musculoskeletal	bone
+Deep head of flexor pollicis brevis	right	FMA:46110	musculoskeletal	bone
+Adductor pollicis	left	FMA:37393	musculoskeletal	bone
+Ulnar head of flexor carpi ulnaris	right	FMA:38619	musculoskeletal	bone
+Pronator teres	left	FMA:38452	musculoskeletal	bone
+Flexor carpi ulnaris	right	FMA:38466	musculoskeletal	bone
+Flexor carpi ulnaris	left	FMA:38467	musculoskeletal	bone
+Lateral head of triceps brachii	left	FMA:37698	musculoskeletal	bone
+Medial head of triceps brachii	left	FMA:37696	musculoskeletal	bone
+Short head of biceps brachii	left	FMA:37685	musculoskeletal	bone
+Long head of biceps brachii	right	FMA:37686	musculoskeletal	bone
+Long head of triceps brachii	right	FMA:37699	musculoskeletal	bone
+Long head of biceps brachii	left	FMA:37687	musculoskeletal	bone
+Long head of triceps brachii	left	FMA:37700	musculoskeletal	bone
+Sciatic bursa of obturator internus	left	FMA:45080	musculoskeletal	muscle
+Suprapatellar bursa	left	FMA:75409	musculoskeletal	muscle
+Subtendinous bursa of tibialis anterior	right	FMA:45034	musculoskeletal	muscle
+Sciatic bursa of obturator internus	right	FMA:45079	musculoskeletal	muscle
+Subcutaneous prepatellar bursa	right	FMA:45199	musculoskeletal	muscle
+Subcutaneous prepatellar bursa	left	FMA:45200	musculoskeletal	muscle
+Subcutaneous calcaneal bursa	left	FMA:45047	musculoskeletal	muscle
+Subtendinous prepatellar bursa	left	FMA:45053	musculoskeletal	muscle
+Anserine bursa	right	FMA:45202	musculoskeletal	muscle
+Subcutaneous infrapatellar bursa	right	FMA:43792	musculoskeletal	muscle
+Suprapatellar bursa	right	FMA:75408	musculoskeletal	muscle
+Subcutaneous bursa of medial malleolus	left	FMA:45044	musculoskeletal	muscle
+Subtendinous bursa of tibialis anterior	left	FMA:45035	musculoskeletal	muscle
+Subcutaneous infrapatellar bursa	left	FMA:43793	musculoskeletal	muscle
+Subcutaneous bursa of lateral malleolus	left	FMA:45041	musculoskeletal	muscle
+Subcutaneous bursa of medial malleolus	right	FMA:45043	musculoskeletal	muscle
+Anserine bursa	left	FMA:45203	musculoskeletal	muscle
+Subcutaneous calcaneal bursa	right	FMA:45046	musculoskeletal	muscle
+Subcutaneous trochanteric bursa	right	FMA:43582	musculoskeletal	muscle
+Subtendinous bursa of obturator internus	left	FMA:45024	musculoskeletal	muscle
+Subtendinous prepatellar bursa	right	FMA:45052	musculoskeletal	muscle
+Deep infrapatellar bursa	left	FMA:43796	musculoskeletal	muscle
+Subcutaneous bursa of lateral malleolus	right	FMA:45040	musculoskeletal	muscle
+Subcutaneous trochanteric bursa	left	FMA:43583	musculoskeletal	muscle
+Deep infrapatellar bursa	right	FMA:43795	musculoskeletal	muscle
+Subtendinous bursa of obturator internus	right	FMA:45023	musculoskeletal	muscle
+Iliotibial tract	left	FMA:58777	musculoskeletal	muscle
+Iliotibial tract	right	FMA:58776	musculoskeletal	muscle
+Tendon of extensor digitorum longus	right	FMA:47081	musculoskeletal	muscle
+Tendon of extensor digitorum longus	left	FMA:47082	musculoskeletal	muscle
+Short head of biceps femoris	right	FMA:45891	musculoskeletal	muscle
+Calcaneal tendon	right	FMA:258847	musculoskeletal	muscle
+Calcaneal tendon	left	FMA:264844	musculoskeletal	muscle
+Medial patellar retinaculum	right	FMA:44588	musculoskeletal	muscle
+Lateral patellar retinaculum	left	FMA:44592	musculoskeletal	muscle
+Lateral patellar retinaculum	right	FMA:44591	musculoskeletal	muscle
+Medial patellar retinaculum	left	FMA:44589	musculoskeletal	muscle
+Corrugator supercilii	right	FMA:46796	musculoskeletal	muscle
+Palpebral part of orbicularis oculi	right	FMA:46785	musculoskeletal	muscle
+Palpebral part of orbicularis oculi	left	FMA:46786	musculoskeletal	muscle
+Corrugator supercilii	left	FMA:46797	musculoskeletal	muscle
+Superficial part of masseter	left	FMA:49002	musculoskeletal	muscle
+Deep part of masseter	right	FMA:49004	musculoskeletal	muscle
+Deep part of masseter	left	FMA:49005	musculoskeletal	muscle
+Superficial part of masseter	right	FMA:49001	musculoskeletal	muscle
+Common tendinous ring	left	FMA:49073	musculoskeletal	muscle
+Common tendinous ring	right	FMA:49072	musculoskeletal	muscle
+Short head of biceps brachii	right	FMA:37684	musculoskeletal	muscle
+Humeral head of flexor carpi ulnaris	right	FMA:38617	musculoskeletal	muscle
+Radial head of flexor digitorum superficialis	right	FMA:38640	musculoskeletal	muscle
+Humeral head of flexor carpi ulnaris	left	FMA:38618	musculoskeletal	muscle
+Radial head of flexor digitorum superficialis	left	FMA:38641	musculoskeletal	muscle
+Humeral head of extensor carpi ulnaris	left	FMA:298174	musculoskeletal	muscle
+Ulnar head of extensor carpi ulnaris	left	FMA:298181	musculoskeletal	muscle
+Ulnar head of extensor carpi ulnaris	right	FMA:298177	musculoskeletal	muscle
+Humeral head of extensor carpi ulnaris	right	FMA:298172	musculoskeletal	muscle
+Superficial head of flexor pollicis brevis	left	FMA:65199	musculoskeletal	muscle
+Oblique head of adductor pollicis	left	FMA:46122	musculoskeletal	muscle
+Transverse head of adductor pollicis	right	FMA:46123	musculoskeletal	muscle
+Oblique head of adductor pollicis	right	FMA:46121	musculoskeletal	muscle
+Superficial head of flexor pollicis brevis	right	FMA:65198	musculoskeletal	muscle
+Transverse head of adductor pollicis	left	FMA:46124	musculoskeletal	muscle
+Subtendinous bursa of infraspinatus muscle	right	FMA:35519	musculoskeletal	muscle
+Bicipitoradial bursa	left	FMA:42283	musculoskeletal	muscle
+Subdeltoid bursa	right	FMA:35081	musculoskeletal	muscle
+Subacromial bursa	left	FMA:35517	musculoskeletal	muscle
+Subcutaneous acromial bursa	right	FMA:34991	musculoskeletal	muscle
+Subcutaneous acromial bursa	left	FMA:34992	musculoskeletal	muscle
+Subacromial bursa	right	FMA:35516	musculoskeletal	muscle
+Subtendinous bursa of infraspinatus muscle	left	FMA:35520	musculoskeletal	muscle
+Subdeltoid bursa	left	FMA:35082	musculoskeletal	muscle
+Bicipitoradial bursa	right	FMA:42282	musculoskeletal	muscle
+Lateral intermuscular septum of arm	right	FMA:37892	musculoskeletal	muscle
+Antebrachial fascia	left	FMA:38853	musculoskeletal	muscle
+Extensor retinaculum of wrist	left	FMA:40119	musculoskeletal	muscle
+Brachial fascia	right	FMA:37787	musculoskeletal	muscle
+Medial intermuscular septum of arm	right	FMA:37890	musculoskeletal	muscle
+Antebrachial fascia	right	FMA:38852	musculoskeletal	muscle
+Extensor retinaculum of wrist	right	FMA:40118	musculoskeletal	muscle
+Flexor retinaculum of wrist	right	FMA:40120	musculoskeletal	muscle
+Palmar aponeurosis	right	FMA:42440	musculoskeletal	muscle
+Dorsal fascia of hand	right	FMA:42445	musculoskeletal	muscle
+Palmar aponeurosis	left	FMA:42441	musculoskeletal	muscle
+Flexor retinaculum of wrist	left	FMA:40121	musculoskeletal	muscle
+Medial intermuscular septum of arm	left	FMA:37891	musculoskeletal	muscle
+Superficial transverse metacarpal ligament	left	FMA:42461	musculoskeletal	muscle
+Brachial fascia	left	FMA:37788	musculoskeletal	muscle
+Lateral intermuscular septum of arm	left	FMA:37893	musculoskeletal	muscle
+Dorsal fascia of hand	left	FMA:42446	musculoskeletal	muscle
+Superficial transverse metacarpal ligament	right	FMA:42460	musculoskeletal	muscle
+Clavipectoral fascia	right	FMA:37662	musculoskeletal	muscle
+Pectoral fascia	left	FMA:38174	musculoskeletal	muscle
+Pectoral fascia	right	FMA:38173	musculoskeletal	muscle
+Clavipectoral fascia	left	FMA:37663	musculoskeletal	muscle
+Crural fascia	left	FMA:58792	musculoskeletal	muscle
+Anterior intermuscular septum of leg	left	FMA:58757	musculoskeletal	muscle
+Superior fibular retinaculum	left	FMA:51122	musculoskeletal	muscle
+Medial femoral intermuscular septum	right	FMA:58750	musculoskeletal	muscle
+Inferior extensor retinaculum of ankle	left	FMA:49387	musculoskeletal	muscle
+Inferior fibular retinaculum	left	FMA:51120	musculoskeletal	muscle
+Inferior extensor retinaculum of ankle	right	FMA:49386	musculoskeletal	muscle
+Plantar aponeurosis	left	FMA:45174	musculoskeletal	muscle
+Medial femoral intermuscular septum	left	FMA:58751	musculoskeletal	muscle
+Lateral femoral intermuscular septum	right	FMA:58747	musculoskeletal	muscle
+Inferior fibular retinaculum	right	FMA:51119	musculoskeletal	muscle
+Anterior intermuscular septum of leg	right	FMA:58756	musculoskeletal	muscle
+Superficial transverse metatarsal ligament	right	FMA:44562	musculoskeletal	muscle
+Superior fibular retinaculum	right	FMA:51121	musculoskeletal	muscle
+Superficial transverse metatarsal ligament	left	FMA:44563	musculoskeletal	muscle
+Lateral femoral intermuscular septum	left	FMA:58748	musculoskeletal	muscle
+Plantar aponeurosis	right	FMA:45172	musculoskeletal	muscle
+Crural fascia	right	FMA:58791	musculoskeletal	muscle
+Flexor retinaculum of ankle	right	FMA:49373	musculoskeletal	muscle
+Posterior intermuscular septum of leg	right	FMA:58759	musculoskeletal	muscle
+Flexor retinaculum of ankle	left	FMA:49374	musculoskeletal	muscle
+Posterior intermuscular septum of leg	left	FMA:58760	musculoskeletal	muscle
+Diaphragmatic fascia		FMA:18093	musculoskeletal	muscle
+Iliopsoas fascia	left	FMA:20644	musculoskeletal	muscle
+Iliopsoas fascia	right	FMA:20643	musculoskeletal	muscle
+Transversalis fascia		FMA:12265	musculoskeletal	muscle
+Inguinal ligament	left	FMA:21965	musculoskeletal	muscle
+Linea alba		FMA:11336	musculoskeletal	muscle
+Inguinal ligament	right	FMA:21964	musculoskeletal	muscle
+Cricopharyngeal ligament	right	FMA:55377	musculoskeletal	connective
+Cricopharyngeal ligament	left	FMA:55378	musculoskeletal	connective
+Quadrangular membrane	left	FMA:55249	musculoskeletal	connective
+Quadrangular membrane	right	FMA:55248	musculoskeletal	connective
+Median cricothyroid ligament		FMA:55237	musculoskeletal	connective
+Lateral thyrohyoid ligament	left	FMA:55141	musculoskeletal	connective
+Median thyrohyoid ligament		FMA:55138	musculoskeletal	connective
+Lateral thyrohyoid ligament	right	FMA:55140	musculoskeletal	connective
+Sacrospinous ligament	left	FMA:21487	musculoskeletal	connective
+Sacrotuberous ligament	right	FMA:21483	musculoskeletal	connective
+Sacrotuberous ligament	left	FMA:21484	musculoskeletal	connective
+Obturator membrane	right	FMA:25727	musculoskeletal	connective
+Sacrospinous ligament	right	FMA:21486	musculoskeletal	connective
+Obturator membrane	left	FMA:25728	musculoskeletal	connective
+Pubic symphysis		FMA:16950	musculoskeletal	connective
+Superior pubic ligament		FMA:21489	musculoskeletal	connective
+Posterior tibiofibular ligament	left	FMA:312029	musculoskeletal	connective
+Posterior tibiofibular ligament	right	FMA:312027	musculoskeletal	connective
+Anterior tibiofibular ligament	left	FMA:312033	musculoskeletal	connective
+Anterior tibiofibular ligament	right	FMA:312031	musculoskeletal	connective
+Interosseous membrane of leg	left	FMA:35193	musculoskeletal	connective
+Interosseous membrane of leg	right	FMA:35192	musculoskeletal	connective
+Transverse ligament of knee	right	FMA:312035	musculoskeletal	connective
+Popliteofibular ligament	right	FMA:311975	musculoskeletal	connective
+Arcuate popliteal ligament	right	FMA:44597	musculoskeletal	connective
+Lateral meniscus	left	FMA:44633	musculoskeletal	connective
+Anterior cruciate ligament	right	FMA:44615	musculoskeletal	connective
+Fibular collateral ligament	right	FMA:44609	musculoskeletal	connective
+Articular capsule of knee joint	right	FMA:43610	musculoskeletal	connective
+Anterior cruciate ligament	left	FMA:44616	musculoskeletal	connective
+Medial meniscus	right	FMA:44622	musculoskeletal	connective
+Articular capsule of knee joint	left	FMA:43611	musculoskeletal	connective
+Popliteofibular ligament	left	FMA:311977	musculoskeletal	connective
+Fibular collateral ligament	left	FMA:44610	musculoskeletal	connective
+Transverse ligament of knee	left	FMA:312037	musculoskeletal	connective
+Posterior cruciate ligament	right	FMA:44618	musculoskeletal	connective
+Lateral meniscus	right	FMA:44632	musculoskeletal	connective
+Arcuate popliteal ligament	left	FMA:44599	musculoskeletal	connective
+Oblique popliteal ligament	right	FMA:44583	musculoskeletal	connective
+Posterior cruciate ligament	left	FMA:44619	musculoskeletal	connective
+Medial meniscus	left	FMA:44623	musculoskeletal	connective
+Oblique popliteal ligament	left	FMA:44584	musculoskeletal	connective
+Deep transverse metatarsal ligament	left	FMA:44492	musculoskeletal	connective
+Deep transverse metatarsal ligament	right	FMA:44491	musculoskeletal	connective
+Plantar cuneocuboid ligament	left	FMA:44268	musculoskeletal	connective
+Calcaneonavicular ligament	right	FMA:44237	musculoskeletal	connective
+Medial talocalcaneal ligament	left	FMA:44290	musculoskeletal	connective
+Plantar calcaneocuboid ligament	right	FMA:44252	musculoskeletal	connective
+Lateral talocalcaneal ligament	left	FMA:44288	musculoskeletal	connective
+Talocalcaneal interosseous ligament	left	FMA:44203	musculoskeletal	connective
+Calcaneocuboid ligament	right	FMA:44235	musculoskeletal	connective
+Talonavicular ligament	right	FMA:44217	musculoskeletal	connective
+Dorsal cuboideonavicular ligament	left	FMA:44222	musculoskeletal	connective
+Lateral talocalcaneal ligament	right	FMA:44287	musculoskeletal	connective
+Talocalcaneal interosseous ligament	right	FMA:44202	musculoskeletal	connective
+Plantar calcaneonavicular ligament	left	FMA:44256	musculoskeletal	connective
+Plantar cuneocuboid ligament	right	FMA:44267	musculoskeletal	connective
+Plantar cuboideonavicular ligament	right	FMA:44261	musculoskeletal	connective
+Plantar cuboideonavicular ligament	left	FMA:44262	musculoskeletal	connective
+Dorsal cuboideonavicular ligament	right	FMA:44221	musculoskeletal	connective
+Calcaneocuboid ligament	left	FMA:44236	musculoskeletal	connective
+Cuneocuboid interosseous ligament	right	FMA:44205	musculoskeletal	connective
+Plantar calcaneocuboid ligament	left	FMA:44253	musculoskeletal	connective
+Talonavicular ligament	left	FMA:44218	musculoskeletal	connective
+Dorsal cuneocuboid ligament	right	FMA:44229	musculoskeletal	connective
+Dorsal cuneocuboid ligament	left	FMA:44230	musculoskeletal	connective
+Medial talocalcaneal ligament	right	FMA:44289	musculoskeletal	connective
+Dorsal calcaneocuboid ligament	left	FMA:44244	musculoskeletal	connective
+Plantar calcaneonavicular ligament	right	FMA:44255	musculoskeletal	connective
+Dorsal calcaneocuboid ligament	right	FMA:44243	musculoskeletal	connective
+Cuneocuboid interosseous ligament	left	FMA:44206	musculoskeletal	connective
+Calcaneonavicular ligament	left	FMA:44238	musculoskeletal	connective
+Articular capsule of hip joint	right	FMA:42979	musculoskeletal	connective
+Transverse acetabular ligament	right	FMA:43519	musculoskeletal	connective
+Pubofemoral ligament	left	FMA:43026	musculoskeletal	connective
+Acetabular labrum	left	FMA:43529	musculoskeletal	connective
+Pubofemoral ligament	right	FMA:43025	musculoskeletal	connective
+Articular capsule of hip joint	left	FMA:42980	musculoskeletal	connective
+Transverse part of iliofemoral ligament	right	FMA:43038	musculoskeletal	connective
+Descending part of iliofemoral ligament	right	FMA:43036	musculoskeletal	connective
+Transverse part of iliofemoral ligament	left	FMA:43039	musculoskeletal	connective
+Acetabular labrum	right	FMA:43528	musculoskeletal	connective
+Ischiofemoral ligament	left	FMA:43029	musculoskeletal	connective
+Ischiofemoral ligament	right	FMA:43028	musculoskeletal	connective
+Transverse acetabular ligament	left	FMA:43520	musculoskeletal	connective
+Descending part of iliofemoral ligament	left	FMA:43037	musculoskeletal	connective
+Calcaneofibular ligament	right	FMA:44090	musculoskeletal	connective
+Posterior talofibular ligament	left	FMA:44088	musculoskeletal	connective
+Anterior talofibular ligament	right	FMA:44085	musculoskeletal	connective
+Anterior talofibular ligament	left	FMA:44086	musculoskeletal	connective
+Calcaneofibular ligament	left	FMA:44091	musculoskeletal	connective
+Posterior talofibular ligament	right	FMA:44087	musculoskeletal	connective
+Articular capsule of temporomandibular joint	right	FMA:57051	musculoskeletal	connective
+Articular capsule of temporomandibular joint	left	FMA:57052	musculoskeletal	connective
+Stylomandibular ligament	right	FMA:57084	musculoskeletal	connective
+Stylomandibular ligament	left	FMA:57086	musculoskeletal	connective
+Sphenomandibular ligament	right	FMA:57078	musculoskeletal	connective
+Pterygospinous ligament	left	FMA:72312	musculoskeletal	connective
+Pterygospinous ligament	right	FMA:72310	musculoskeletal	connective
+Sphenomandibular ligament	left	FMA:57079	musculoskeletal	connective
+Interosseous membrane of forearm	right	FMA:23707	musculoskeletal	connective
+Interosseous membrane of forearm	left	FMA:23708	musculoskeletal	connective
+Articular capsule of elbow joint	left	FMA:38889	musculoskeletal	connective
+Articular capsule of elbow joint	right	FMA:38888	musculoskeletal	connective
+Deep transverse metacarpal ligament	right	FMA:42462	musculoskeletal	connective
+Deep transverse metacarpal ligament	left	FMA:42463	musculoskeletal	connective
+Dorsal ulnocarpal ligament	right	FMA:40011	musculoskeletal	connective
+Pisometacarpal ligament	right	FMA:42314	musculoskeletal	connective
+Dorsal ulnocarpal ligament	left	FMA:40012	musculoskeletal	connective
+Pisohamate ligament	left	FMA:42313	musculoskeletal	connective
+Radiate carpal ligament	right	FMA:42306	musculoskeletal	connective
+Ulnar collateral ligament of wrist joint	right	FMA:40015	musculoskeletal	connective
+Radial collateral ligament of wrist joint	right	FMA:40017	musculoskeletal	connective
+Radiate carpal ligament	left	FMA:42307	musculoskeletal	connective
+Pisometacarpal ligament	left	FMA:42315	musculoskeletal	connective
+Pisohamate ligament	right	FMA:42312	musculoskeletal	connective
+Superior glenohumeral ligament	left	FMA:35440	musculoskeletal	connective
+Glenoid labrum	left	FMA:23292	musculoskeletal	connective
+Coracohumeral ligament	left	FMA:34953	musculoskeletal	connective
+Transverse humeral ligament	left	FMA:38408	musculoskeletal	connective
+Inferior glenohumeral ligament	right	FMA:35443	musculoskeletal	connective
+Coracohumeral ligament	right	FMA:34952	musculoskeletal	connective
+Superior glenohumeral ligament	right	FMA:35439	musculoskeletal	connective
+Articular capsule of glenohumeral joint	right	FMA:34945	musculoskeletal	connective
+Glenoid labrum	right	FMA:23291	musculoskeletal	connective
+Articular capsule of glenohumeral joint	left	FMA:34946	musculoskeletal	connective
+Transverse humeral ligament	right	FMA:38407	musculoskeletal	connective
+Inferior glenohumeral ligament	left	FMA:35444	musculoskeletal	connective
+Middle glenohumeral ligament	right	FMA:35441	musculoskeletal	connective
+Middle glenohumeral ligament	left	FMA:35442	musculoskeletal	connective
+Ulnar collateral ligament of wrist joint	left	FMA:40016	musculoskeletal	connective
+Dorsal radiocarpal ligament	right	FMA:40007	musculoskeletal	connective
+Radial collateral ligament of wrist joint	left	FMA:40018	musculoskeletal	connective
+Dorsal radiocarpal ligament	left	FMA:40008	musculoskeletal	connective
+Superior transverse scapular ligament	left	FMA:26005	musculoskeletal	connective
+Inferior transverse scapular ligament	right	FMA:26006	musculoskeletal	connective
+Coraco-acromial ligament	left	FMA:26003	musculoskeletal	connective
+Coraco-acromial ligament	right	FMA:26002	musculoskeletal	connective
+Inferior transverse scapular ligament	left	FMA:26007	musculoskeletal	connective
+Superior transverse scapular ligament	right	FMA:26004	musculoskeletal	connective
+Costoclavicular ligament	right	FMA:26023	musculoskeletal	connective
+Anterior sternoclavicular ligament	left	FMA:26020	musculoskeletal	connective
+Posterior sternoclavicular ligament	left	FMA:26022	musculoskeletal	connective
+Anterior sternoclavicular ligament	right	FMA:26019	musculoskeletal	connective
+Costoclavicular ligament	left	FMA:26024	musculoskeletal	connective
+Posterior sternoclavicular ligament	right	FMA:26021	musculoskeletal	connective
+Articular capsule of sternoclavicular joint	right	FMA:26015	musculoskeletal	connective
+Articular capsule of sternoclavicular joint	left	FMA:26016	musculoskeletal	connective
+Articular capsule of acromioclavicular joint	right	FMA:26042	musculoskeletal	connective
+Articular capsule of acromioclavicular joint	left	FMA:26043	musculoskeletal	connective
+Intercornual ligament	left	FMA:21508	musculoskeletal	connective
+Intercornual ligament	right	FMA:21507	musculoskeletal	connective
+Supraspinous ligament		FMA:13425	musculoskeletal	connective
+Posterior longitudinal ligament		FMA:31894	musculoskeletal	connective
+Anterior longitudinal ligament		FMA:31893	musculoskeletal	connective
+Intra-articular ligament of head of rib		FMA:8962	musculoskeletal	connective
+Falx cerebri		FMA:83967	nervous	organ
+Putamen	left	FMA:72829	nervous	organ
+Putamen	right	FMA:72828	nervous	organ
+Caudate nucleus	right	FMA:72826	nervous	organ
+Caudate nucleus	left	FMA:72827	nervous	organ
+Lentiform nucleus	right	FMA:273356	nervous	organ
+Globus pallidus	left	FMA:72831	nervous	organ
+Globus pallidus	right	FMA:72830	nervous	organ
+Lentiform nucleus	left	FMA:273358	nervous	organ
+Transverse occipital sulcus	right	FMA:275441	nervous	organ
+Transverse occipital sulcus	left	FMA:275443	nervous	organ
+Calcarine sulcus	left	FMA:275265	nervous	organ
+Occipital pole	right	FMA:272833	nervous	organ
+Cuneus	right	FMA:72679	nervous	organ
+Occipital pole	left	FMA:272835	nervous	organ
+Lunate sulcus	right	FMA:275449	nervous	organ
+Lingual gyrus	left	FMA:72682	nervous	organ
+Calcarine sulcus	right	FMA:275263	nervous	organ
+Lunate sulcus	left	FMA:275451	nervous	organ
+Cuneus	left	FMA:72680	nervous	organ
+Lingual gyrus	right	FMA:72681	nervous	organ
+Opercular part of inferior frontal gyrus	left	FMA:72753	nervous	organ
+Triangular part of inferior frontal gyrus	left	FMA:72751	nervous	organ
+Paracentral sulcus	left	FMA:275341	nervous	organ
+Olfactory sulcus	right	FMA:275369	nervous	organ
+Triangular part of inferior frontal gyrus	right	FMA:72750	nervous	organ
+Inferior frontal sulcus	right	FMA:275319	nervous	organ
+Superior frontal sulcus	right	FMA:275295	nervous	organ
+Paracentral sulcus	right	FMA:275339	nervous	organ
+Superior frontal sulcus	left	FMA:275297	nervous	organ
+Inferior frontal sulcus	left	FMA:275321	nervous	organ
+Opercular part of inferior frontal gyrus	right	FMA:72752	nervous	organ
+Olfactory sulcus	left	FMA:275371	nervous	organ
+Stria terminalis	left	FMA:72940	nervous	organ
+Stria terminalis	right	FMA:72939	nervous	organ
+Anterior commissure		FMA:61961	nervous	organ
+Corpus callosum		FMA:86464	nervous	organ
+Temporal pole	right	FMA:272829	nervous	organ
+Inferior temporal sulcus	left	FMA:275427	nervous	organ
+Temporal pole	left	FMA:272831	nervous	organ
+Inferior temporal sulcus	right	FMA:275425	nervous	organ
+Superior temporal sulcus	right	FMA:275421	nervous	organ
+Superior temporal sulcus	left	FMA:275423	nervous	organ
+Septum pellucidum		FMA:61844	nervous	organ
+Hippocampus	right	FMA:275022	nervous	organ
+Posterior transverse collateral sulcus	right	FMA:275540	nervous	organ
+Subparietal sulcus	right	FMA:275397	nervous	organ
+Posterior transverse collateral sulcus	left	FMA:275542	nervous	organ
+Circular sulcus of insula	left	FMA:275285	nervous	organ
+Subparietal sulcus	left	FMA:275399	nervous	organ
+Circular sulcus of insula	right	FMA:275283	nervous	organ
+Parieto-occipital sulcus	right	FMA:275287	nervous	organ
+Central sulcus	right	FMA:275275	nervous	organ
+Collateral sulcus	left	FMA:275273	nervous	organ
+Collateral sulcus	right	FMA:275271	nervous	organ
+Central sulcus	left	FMA:275277	nervous	organ
+Parieto-occipital sulcus	left	FMA:275289	nervous	organ
+Postcentral sulcus	right	FMA:275385	nervous	organ
+Precuneus	right	FMA:72673	nervous	organ
+Precuneus	left	FMA:72674	nervous	organ
+Intraparietal sulcus	left	FMA:275383	nervous	organ
+Postcentral sulcus	left	FMA:275387	nervous	organ
+Intraparietal sulcus	right	FMA:275381	nervous	organ
+Optic tract	left	FMA:67936	nervous	organ
+Medial geniculate body	right	FMA:73309	nervous	organ
+Thalamus	left	FMA:258716	nervous	organ
+Posterior commissure		FMA:62072	nervous	organ
+Medial geniculate body	left	FMA:73310	nervous	organ
+Optic tract	right	FMA:62382	nervous	organ
+Lateral geniculate body	right	FMA:73303	nervous	organ
+Thalamus	right	FMA:258714	nervous	organ
+Lateral geniculate body	left	FMA:73304	nervous	organ
+Tonsil of cerebellum	left	FMA:256397	nervous	organ
+Posterior quadrangular lobule	left	FMA:256406	nervous	organ
+Tonsil of cerebellum	right	FMA:256395	nervous	organ
+Anterior quadrangular lobule	right	FMA:73660	nervous	organ
+Anterior quadrangular lobule	left	FMA:73661	nervous	organ
+Superior cerebellar peduncle	right	FMA:73614	nervous	organ
+Gracile lobule	left	FMA:73674	nervous	organ
+Inferior semilunar lobule	left	FMA:73672	nervous	organ
+Inferior semilunar lobule	right	FMA:73671	nervous	organ
+Superior semilunar lobule	right	FMA:73669	nervous	organ
+Peduncle of flocculus	left	FMA:73696	nervous	organ
+Posterior quadrangular lobule	right	FMA:256404	nervous	organ
+Superior cerebellar peduncle	left	FMA:73615	nervous	organ
+Gracile lobule	right	FMA:73673	nervous	organ
+Superior semilunar lobule	left	FMA:73670	nervous	organ
+Peduncle of flocculus	right	FMA:73695	nervous	organ
+Anterior cochlear nucleus	right	FMA:54622	nervous	organ
+Inferior salivatory nucleus	left	FMA:73802	nervous	organ
+Posterior cochlear nucleus	left	FMA:54626	nervous	organ
+Posterior cochlear nucleus	right	FMA:54625	nervous	organ
+Inferior salivatory nucleus	right	FMA:73801	nervous	organ
+Nucleus ambiguus	right	FMA:54589	nervous	organ
+Anterior cochlear nucleus	left	FMA:54623	nervous	organ
+Nucleus ambiguus	left	FMA:54590	nervous	organ
+Red nucleus	left	FMA:73492	nervous	organ
+Red nucleus	right	FMA:73491	nervous	organ
+Motor nucleus of facial nerve	left	FMA:54584	nervous	organ
+Superior salivatory nucleus	right	FMA:73594	nervous	organ
+Superior salivatory nucleus	left	FMA:73595	nervous	organ
+Motor nucleus of facial nerve	right	FMA:54583	nervous	organ
+Lateral fasciculus proprius		FMA:77027	nervous	organ
+Posterior spinocerebellar tract		FMA:72641	nervous	organ
+Rubrospinal tract		FMA:72640	nervous	organ
+Anterior spinocerebellar tract		FMA:72642	nervous	organ
+Lateral reticulospinal tract		FMA:75689	nervous	organ
+Lateral corticospinal tract		FMA:72635	nervous	organ
+Anterior corticospinal tract		FMA:268255	nervous	organ
+Medial reticulospinal tract		FMA:75688	nervous	organ
+Tectospinal tract		FMA:72620	nervous	organ
+Gracile fasciculus		FMA:258416	nervous	organ
+Lateral spinothalamic tract		FMA:73965	nervous	organ
+Nucleus proprius		FMA:286864	nervous	organ
+Spinal reticular process		FMA:74025	nervous	organ
+Intermediomedial nucleus		FMA:73918	nervous	organ
+Intermediolateral nucleus		FMA:73915	nervous	organ
+Sympathetic trunk	left	FMA:6260	nervous	organ
+Sympathetic trunk	right	FMA:6259	nervous	organ
+Buccal nerve	left	FMA:53068	nervous	organ
+Buccal nerve	right	FMA:53067	nervous	organ
+Lingual nerve	left	FMA:53220	nervous	organ
+Inferior alveolar nerve	left	FMA:53245	nervous	organ
+Mental nerve	left	FMA:53252	nervous	organ
+Inferior alveolar nerve	right	FMA:53244	nervous	organ
+Mental nerve	right	FMA:53251	nervous	organ
+Lingual nerve	right	FMA:53219	nervous	organ
+Sensory root of trigeminal nerve	right	FMA:52613	nervous	organ
+Maxillary nerve	right	FMA:52725	nervous	organ
+Motor root of trigeminal nerve	right	FMA:52615	nervous	organ
+Maxillary nerve	left	FMA:52726	nervous	organ
+Sensory root of trigeminal nerve	left	FMA:52614	nervous	organ
+Motor root of trigeminal nerve	left	FMA:52616	nervous	organ
+Chorda tympani	right	FMA:53229	nervous	organ
+Vestibular nerve	left	FMA:53409	nervous	organ
+Cochlear nerve		FMA:53431	nervous	organ
+Vestibular nerve	right	FMA:53402	nervous	organ
+Chorda tympani	left	FMA:53230	nervous	organ
+Superficial branch of radial nerve	right	FMA:292887	nervous	organ
+Inferior subscapular nerve	right	FMA:65308	nervous	organ
+Superficial branch of radial nerve	left	FMA:292889	nervous	organ
+Superior subscapular nerve	left	FMA:65306	nervous	organ
+Thoracodorsal nerve	left	FMA:65292	nervous	organ
+Thoracodorsal nerve	right	FMA:65291	nervous	organ
+Inferior subscapular nerve	left	FMA:65309	nervous	organ
+Median nerve	left	FMA:37068	nervous	organ
+Palmar branch of median nerve	left	FMA:65328	nervous	organ
+Medial pectoral nerve	right	FMA:65294	nervous	organ
+Medial pectoral nerve	left	FMA:65295	nervous	organ
+Deep branch of ulnar nerve	right	FMA:44680	nervous	organ
+Palmar branch of ulnar nerve	right	FMA:65349	nervous	organ
+Dorsal branch of ulnar nerve	right	FMA:292830	nervous	organ
+Superficial branch of ulnar nerve	right	FMA:44894	nervous	organ
+Palmar branch of ulnar nerve	left	FMA:65350	nervous	organ
+Deep branch of ulnar nerve	left	FMA:80210	nervous	organ
+Dorsal branch of ulnar nerve	left	FMA:292832	nervous	organ
+Superficial branch of ulnar nerve	left	FMA:44932	nervous	organ
+Suprascapular nerve	right	FMA:66083	nervous	organ
+Long thoracic nerve	right	FMA:65281	nervous	organ
+Suprascapular nerve	left	FMA:66084	nervous	organ
+Long thoracic nerve	left	FMA:65282	nervous	organ
+Median nerve	right	FMA:37067	nervous	organ
+Palmar branch of median nerve	right	FMA:65327	nervous	organ
+Lateral pectoral nerve	right	FMA:65298	nervous	organ
+Musculocutaneous nerve	right	FMA:37065	nervous	organ
+Musculocutaneous nerve	left	FMA:37066	nervous	organ
+Lateral pectoral nerve	left	FMA:65297	nervous	organ
+Iliohypogastric nerve	right	FMA:16491	nervous	organ
+Iliohypogastric nerve	left	FMA:16492	nervous	organ
+Lateral femoral cutaneous nerve	left	FMA:16498	nervous	organ
+Superior subscapular nerve	right	FMA:65305	nervous	organ
+Lateral femoral cutaneous nerve	right	FMA:16497	nervous	organ
+Saphenous nerve	right	FMA:45263	nervous	organ
+Infrapatellar branch of saphenous nerve	right	FMA:45326	nervous	organ
+Saphenous nerve	left	FMA:45264	nervous	organ
+Infrapatellar branch of saphenous nerve	left	FMA:45327	nervous	organ
+Genitofemoral nerve	right	FMA:20630	nervous	organ
+Genital branch of genitofemoral nerve	right	FMA:20632	nervous	organ
+Femoral branch of genitofemoral nerve	right	FMA:20634	nervous	organ
+Posterior branch of obturator nerve	right	FMA:45310	nervous	organ
+Anterior branch of obturator nerve	right	FMA:45308	nervous	organ
+Genitofemoral nerve	left	FMA:20631	nervous	organ
+Genital branch of genitofemoral nerve	left	FMA:20633	nervous	organ
+Femoral branch of genitofemoral nerve	left	FMA:20635	nervous	organ
+Posterior branch of obturator nerve	left	FMA:45311	nervous	organ
+Anterior branch of obturator nerve	left	FMA:45309	nervous	organ
+Posterior femoral cutaneous nerve	right	FMA:45338	nervous	organ
+Sciatic nerve	left	FMA:22112	nervous	organ
+Tibial nerve	left	FMA:22110	nervous	organ
+Medial sural cutaneous nerve	left	FMA:45423	nervous	organ
+Sural nerve	left	FMA:45425	nervous	organ
+Common fibular nerve	left	FMA:45358	nervous	organ
+Superficial fibular nerve	left	FMA:45364	nervous	organ
+Deep fibular nerve	left	FMA:45388	nervous	organ
+Pudendal nerve	right	FMA:21863	nervous	organ
+Pudendal nerve	left	FMA:21864	nervous	organ
+Sciatic nerve	right	FMA:22111	nervous	organ
+Tibial nerve	right	FMA:22109	nervous	organ
+Medial sural cutaneous nerve	right	FMA:45422	nervous	organ
+Sural nerve	right	FMA:45424	nervous	organ
+Common fibular nerve	right	FMA:45357	nervous	organ
+Superficial fibular nerve	right	FMA:45363	nervous	organ
+Deep fibular nerve	right	FMA:45387	nervous	organ
+Posterior femoral cutaneous nerve	left	FMA:45339	nervous	organ
+Cauda equina		FMA:52590	nervous	organ
+Lacrimal sac	left	FMA:59546	nervous	organ
+Lacrimal gland	right	FMA:59102	nervous	organ
+Lacrimal gland	left	FMA:59103	nervous	organ
+Lacrimal sac	right	FMA:59545	nervous	organ
+Lacrimal canaliculus	right	FMA:59582	nervous	organ
+Ampulla of lacrimal canaliculus	right	FMA:59586	nervous	organ
+Nasolacrimal duct	left	FMA:59556	nervous	organ
+Lacrimal canaliculus	left	FMA:59583	nervous	organ
+Ampulla of lacrimal canaliculus	left	FMA:59587	nervous	organ
+Nasolacrimal duct	right	FMA:59555	nervous	organ
+Left subclavian artery		FMA:4694	cardiovascular	organ
+Thoraco-acromial artery	left	FMA:22673	cardiovascular	organ
+Brachial artery	left	FMA:22692	cardiovascular	organ
+Deep palmar arch	left	FMA:22840	cardiovascular	organ
+Palmar carpal branch of radial artery	left	FMA:22768	cardiovascular	organ
+Posterior interosseous artery	left	FMA:22815	cardiovascular	organ
+Deep external pudendal artery	right	FMA:20794	cardiovascular	organ
+Superficial external pudendal artery	right	FMA:20792	cardiovascular	organ
+Descending branch of lateral circumflex femoral artery		FMA:20805	cardiovascular	organ
+Deep plantar artery	right	FMA:69514	cardiovascular	organ
+Right common carotid artery		FMA:3941	cardiovascular	organ
+External carotid artery	right	FMA:3945	cardiovascular	organ
+Superficial temporal artery	right	FMA:49651	cardiovascular	organ
+Frontal branch of superficial temporal artery	right	FMA:49673	cardiovascular	organ
+Transverse facial artery	right	FMA:49658	cardiovascular	organ
+Ascending pharyngeal artery	right	FMA:49498	cardiovascular	organ
+Facial artery	right	FMA:49550	cardiovascular	organ
+Superior labial artery	right	FMA:49571	cardiovascular	organ
+Submental artery	right	FMA:49562	cardiovascular	organ
+Inferior labial artery	right	FMA:49568	cardiovascular	organ
+Angular artery	right	FMA:49584	cardiovascular	organ
+Maxillary artery	right	FMA:49676	cardiovascular	organ
+Infra-orbital artery	right	FMA:49768	cardiovascular	organ
+Posterior superior alveolar artery	right	FMA:49758	cardiovascular	organ
+Artery of pterygoid canal	right	FMA:85529	cardiovascular	organ
+Anterior deep temporal artery	right	FMA:49747	cardiovascular	organ
+Buccal artery	right	FMA:49755	cardiovascular	organ
+Inferior alveolar artery	right	FMA:49696	cardiovascular	organ
+Posterior deep temporal artery	right	FMA:49749	cardiovascular	organ
+Middle meningeal artery	right	FMA:49712	cardiovascular	organ
+Accessory branch of middle meningeal artery	right	FMA:49721	cardiovascular	organ
+Descending palatine artery	right	FMA:49792	cardiovascular	organ
+Greater palatine artery	right	FMA:49798	cardiovascular	organ
+Lacrimal artery	right	FMA:49928	cardiovascular	organ
+Central retinal artery	right	FMA:49880	cardiovascular	organ
+Right subclavian artery		FMA:3953	cardiovascular	organ
+Posterior cerebral artery	left	FMA:50585	cardiovascular	organ
+Posterior cerebral artery	right	FMA:50584	cardiovascular	organ
+Brachial artery	right	FMA:22691	cardiovascular	organ
+Deep palmar arch	right	FMA:22839	cardiovascular	organ
+Palmar carpal branch of radial artery	right	FMA:22767	cardiovascular	organ
+Posterior interosseous artery	right	FMA:22814	cardiovascular	organ
+Thoraco-acromial artery	right	FMA:22672	cardiovascular	organ
+Left gastric artery		FMA:14768	cardiovascular	organ
+Left testicular artery		FMA:14760	cardiovascular	organ
+Left colic artery		FMA:14826	cardiovascular	organ
+Ascending branch of left colic artery		FMA:14828	cardiovascular	organ
+Descending branch of left colic artery		FMA:14829	cardiovascular	organ
+Right renal artery		FMA:14752	cardiovascular	organ
+Left renal artery		FMA:14753	cardiovascular	organ
+Right colic artery		FMA:14811	cardiovascular	organ
+Anterior division of internal iliac artery	left	FMA:69800	cardiovascular	organ
+Deep artery of penis	left	FMA:20821	cardiovascular	organ
+Posterior division of internal iliac artery	left	FMA:69802	cardiovascular	organ
+Anterior division of internal iliac artery	right	FMA:69799	cardiovascular	organ
+Deep artery of penis	right	FMA:20820	cardiovascular	organ
+Posterior division of internal iliac artery	right	FMA:69801	cardiovascular	organ
+Thoracic aorta		FMA:3786	cardiovascular	organ
+Superficial external pudendal artery	left	FMA:20793	cardiovascular	organ
+Deep plantar artery	left	FMA:69515	cardiovascular	organ
+Deep external pudendal artery	left	FMA:20795	cardiovascular	organ
+Left common carotid artery		FMA:4058	cardiovascular	organ
+Lacrimal artery	left	FMA:49929	cardiovascular	organ
+Central retinal artery	left	FMA:49881	cardiovascular	organ
+External carotid artery	left	FMA:4060	cardiovascular	organ
+Superficial temporal artery	left	FMA:49652	cardiovascular	organ
+Transverse facial artery	left	FMA:49659	cardiovascular	organ
+Frontal branch of superficial temporal artery	left	FMA:49674	cardiovascular	organ
+Facial artery	left	FMA:49551	cardiovascular	organ
+Inferior labial artery	left	FMA:49569	cardiovascular	organ
+Submental artery	left	FMA:49563	cardiovascular	organ
+Angular artery	left	FMA:49585	cardiovascular	organ
+Superior labial artery	left	FMA:49572	cardiovascular	organ
+Ascending pharyngeal artery	left	FMA:49499	cardiovascular	organ
+Maxillary artery	left	FMA:49677	cardiovascular	organ
+Inferior alveolar artery	left	FMA:49697	cardiovascular	organ
+Middle meningeal artery	left	FMA:49713	cardiovascular	organ
+Accessory branch of middle meningeal artery	left	FMA:49722	cardiovascular	organ
+Descending palatine artery	left	FMA:49793	cardiovascular	organ
+Greater palatine artery	left	FMA:49799	cardiovascular	organ
+Anterior deep temporal artery	left	FMA:49748	cardiovascular	organ
+Artery of pterygoid canal	left	FMA:85530	cardiovascular	organ
+Infra-orbital artery	left	FMA:49769	cardiovascular	organ
+Posterior deep temporal artery	left	FMA:49750	cardiovascular	organ
+Buccal artery	left	FMA:49756	cardiovascular	organ
+Posterior superior alveolar artery	left	FMA:49759	cardiovascular	organ
+Bifurcation of pulmonary trunk		FMA:8700	cardiovascular	organ
+Right pulmonary artery		FMA:50872	cardiovascular	organ
+Left pulmonary artery		FMA:50873	cardiovascular	organ
+Left ventricle		FMA:7101	cardiovascular	organ
+Left atrium		FMA:7097	cardiovascular	organ
+Right atrium		FMA:7096	cardiovascular	organ
+Right ventricle		FMA:7098	cardiovascular	organ
+Anterior papillary muscle of right ventricle		FMA:7260	cardiovascular	organ
+Septal papillary muscle of right ventricle		FMA:7262	cardiovascular	organ
+Left coronary artery		FMA:50040	cardiovascular	organ
+Right coronary artery		FMA:50039	cardiovascular	organ
+Left superior pulmonary vein		FMA:49916	cardiovascular	organ
+Left inferior pulmonary vein		FMA:49913	cardiovascular	organ
+Right superior pulmonary vein		FMA:49914	cardiovascular	organ
+Right inferior pulmonary vein		FMA:49911	cardiovascular	organ
+Left subclavian vein		FMA:4763	cardiovascular	organ
+External jugular vein	left	FMA:13112	cardiovascular	organ
+Posterior auricular vein	left	FMA:50853	cardiovascular	organ
+Anterior jugular vein	left	FMA:13320	cardiovascular	organ
+Dorsal venous network of hand	left	FMA:62507	cardiovascular	organ
+Right brachiocephalic vein		FMA:4751	cardiovascular	organ
+Right subcostal vein		FMA:4844	cardiovascular	organ
+Right superior intercostal vein		FMA:4877	cardiovascular	organ
+Left subcostal vein		FMA:4951	cardiovascular	organ
+Left ascending lumbar vein		FMA:4950	cardiovascular	organ
+Right ascending lumbar vein		FMA:4843	cardiovascular	organ
+Left brachiocephalic vein		FMA:4761	cardiovascular	organ
+Left superior intercostal vein		FMA:4797	cardiovascular	organ
+Superior thyroid vein	left	FMA:50809	cardiovascular	organ
+Lingual vein	left	FMA:52566	cardiovascular	organ
+Retromandibular vein	left	FMA:50930	cardiovascular	organ
+Facial vein	left	FMA:50877	cardiovascular	organ
+Angular vein	left	FMA:50896	cardiovascular	organ
+Superior labial vein	left	FMA:52540	cardiovascular	organ
+Submental vein	left	FMA:50927	cardiovascular	organ
+Superior thyroid vein	right	FMA:50808	cardiovascular	organ
+Retromandibular vein	right	FMA:50929	cardiovascular	organ
+Facial vein	right	FMA:50876	cardiovascular	organ
+Submental vein	right	FMA:50926	cardiovascular	organ
+Angular vein	right	FMA:50895	cardiovascular	organ
+Superior labial vein	right	FMA:52539	cardiovascular	organ
+Lingual vein	right	FMA:52565	cardiovascular	organ
+Right colic vein		FMA:15407	cardiovascular	organ
+Inferior petrosal sinus	left	FMA:51292	cardiovascular	organ
+Inferior petrosal sinus	right	FMA:51291	cardiovascular	organ
+Basilar venous plexus		FMA:50783	cardiovascular	organ
+Posterior intercavernous sinus		FMA:50775	cardiovascular	organ
+Anterior intercavernous sinus		FMA:50774	cardiovascular	organ
+Cavernous sinus	right	FMA:51402	cardiovascular	organ
+Cavernous sinus	left	FMA:51403	cardiovascular	organ
+Sigmoid sinus	right	FMA:51293	cardiovascular	organ
+Transverse sinus	right	FMA:50764	cardiovascular	organ
+Superior petrosal sinus	right	FMA:51289	cardiovascular	organ
+Superior sagittal sinus		FMA:50767	cardiovascular	organ
+Straight sinus		FMA:50769	cardiovascular	organ
+Inferior sagittal sinus		FMA:50768	cardiovascular	organ
+Occipital sinus		FMA:50781	cardiovascular	organ
+Sigmoid sinus	left	FMA:51294	cardiovascular	organ
+Transverse sinus	left	FMA:50765	cardiovascular	organ
+Superior petrosal sinus	left	FMA:51290	cardiovascular	organ
+Inferior ophthalmic vein	right	FMA:51250	cardiovascular	organ
+Inferior ophthalmic vein	left	FMA:51251	cardiovascular	organ
+Superior ophthalmic vein	right	FMA:51248	cardiovascular	organ
+Superior ophthalmic vein	left	FMA:51249	cardiovascular	organ
+Right subclavian vein		FMA:4755	cardiovascular	organ
+Dorsal venous network of hand	right	FMA:62506	cardiovascular	organ
+External jugular vein	right	FMA:13111	cardiovascular	organ
+Anterior jugular vein	right	FMA:13319	cardiovascular	organ
+Posterior auricular vein	right	FMA:50852	cardiovascular	organ
+Right renal vein		FMA:14335	cardiovascular	organ
+Left renal vein		FMA:14336	cardiovascular	organ
+Left testicular vein		FMA:14345	cardiovascular	organ
+Right testicular vein		FMA:14341	cardiovascular	organ
+Node of ligamentum arteriosum		FMA:74033	lymphoid	organ
+Node of arch of azygos vein		FMA:76843	lymphoid	organ
+Spleen		FMA:7196	lymphoid	organ
+Palatine tonsil	left	FMA:54974	lymphoid	organ
+Palatine tonsil	right	FMA:54973	lymphoid	organ
+Lymph node		FMA:5034	lymphoid	organ
+Right lobe of thymus		FMA:71194	lymphoid	organ
+Left lobe of thymus		FMA:71195	lymphoid	organ
+Pleura		FMA:9583	respiratory	organ
+Nasopharynx		FMA:54878	respiratory	organ
+Epiglottis		FMA:55130	respiratory	organ
+Right main bronchus		FMA:7395	respiratory	organ
+Right inferior lobar bronchus		FMA:7404	respiratory	organ
+Right superior lobar bronchus		FMA:7397	respiratory	organ
+Left main bronchus		FMA:7396	respiratory	organ
+Left superior lobar bronchus		FMA:7423	respiratory	organ
+Left inferior lobar bronchus		FMA:7432	respiratory	organ
+Middle lobe of right lung		FMA:7383	respiratory	organ
+Laryngopharynx		FMA:54880	digestive	organ
+Oropharynx		FMA:54879	digestive	organ
+Liver		FMA:7197	digestive	organ
+Bile duct		FMA:9706	digestive	organ
+Accessory pancreatic duct		FMA:14534	digestive	organ
+Soft palate		FMA:55021	digestive	organ
+Parotid gland	right	FMA:59797	digestive	organ
+Parotid gland	left	FMA:59798	digestive	organ
+Parotid duct	left	FMA:59867	digestive	organ
+Sublingual gland	right	FMA:59804	digestive	organ
+Parotid duct	right	FMA:59866	digestive	organ
+Sublingual gland	left	FMA:59805	digestive	organ
+Gingiva		FMA:59762	digestive	organ
+Jejunum		FMA:7207	digestive	organ
+Sigmoid colon		FMA:14548	digestive	organ
+Omental taenia		FMA:76892	digestive	organ
+Free taenia		FMA:76893	digestive	organ
+Mesocolic taenia		FMA:76891	digestive	organ
+Oesophagus		FMA:7131	digestive	organ
+Lesser omentum		FMA:9715	digestive	organ
+Greater omentum		FMA:9580	digestive	organ
+Renal pelvis	right	FMA:15578	metabolic	organ
+Renal pelvis	left	FMA:15579	metabolic	organ
+Superior parathyroid gland	right	FMA:55560	endocrine	organ
+Inferior parathyroid gland	left	FMA:55563	endocrine	organ
+Inferior parathyroid gland	right	FMA:55562	endocrine	organ
+Superior parathyroid gland	left	FMA:55561	endocrine	organ
+Thyroid gland		FMA:9603	endocrine	organ
+Neurohypophysis		FMA:74628	endocrine	organ
+Adenohypophysis		FMA:74627	endocrine	organ
+Corpus spongiosum of penis		FMA:19617	reproductive	organ
+Corpus cavernosum of penis		FMA:19618	reproductive	organ
+Glans penis		FMA:18247	reproductive	organ
+Testis	right	FMA:7211	reproductive	organ
+Epididymis	left	FMA:18257	reproductive	organ
+Ejaculatory duct	left	FMA:19327	reproductive	organ
+Ejaculatory duct	right	FMA:19326	reproductive	organ
+Epididymis	right	FMA:18256	reproductive	organ
+Testis	left	FMA:7212	reproductive	organ

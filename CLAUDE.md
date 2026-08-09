@@ -194,10 +194,10 @@ Still open, measured on the shipped assets rather than assumed:
 
 | gap | state |
 |---|---|
-| Z-Anatomy crosswalk | 1,078 / 3,614 (30 %) — 2,536 structures unmapped |
+| Z-Anatomy crosswalk | 1,840 / 3,614 (51 %) — 1,774 structures unmapped |
 | `z-anatomy-regions` | 0 / 257, name only |
-| overlay → atlas join | 7 of 18 parts (eye **3/3**, ear 4/12, heart 0/3) |
-| FMA ↔ UBERON bridge | ✅ `npm run build:bridge`, 75 of 153 UBERON ids reach FMA geometry |
+| overlay → atlas join | 8 of 18 parts (eye **3/3**, ear 5/12, heart 0/3) |
+| FMA ↔ UBERON bridge | ✅ `npm run build:bridge`, 89 of 153 UBERON ids reach FMA geometry |
 
 **The overlay residual is mostly not fixable by more terms, and the table says
 which.** Of the 11 unmatched parts, 8 are `adds an organ` — scala tympani, facial

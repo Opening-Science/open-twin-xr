@@ -52,6 +52,22 @@ const SEARCH = 'https://www.ebi.ac.uk/ols4/api/search'
 
 const argv = process.argv.slice(2)
 const WRITE = argv.includes('--write')
+/**
+ * ⚠️ `--force` RE-RESOLVES STRUCTURES THAT ALREADY CARRY A TERM, and in write mode
+ * it REPLACES the crosswalk row rather than skipping it.
+ *
+ * It exists because the pre-existing crosswalk was measured to contain 32 FMA ids
+ * shared across DIFFERENT structures — `Axillary artery`, `Axillary nerve` and
+ * `Axillary vein` all carrying one id, and the same for the femoral, radial,
+ * ulnar and obturator bundles. Anatomically distinct structures that merely share
+ * a name stem, collapsed by an earlier name join. Selecting the femoral artery
+ * would identify the femoral nerve.
+ *
+ * Every replacement is printed as `old -> new` because this edits data a human
+ * reviewed. Default off: re-resolving the whole crosswalk on a whim would throw
+ * away that review for no reason.
+ */
+const FORCE = argv.includes('--force')
 const filterArg = argv[argv.indexOf('--filter') + 1]
 if (!filterArg || filterArg.startsWith('--')) {
   console.error('need --filter <regex|senses>')
@@ -145,30 +161,68 @@ const table = scene.getExtras()?.structures ?? []
 
 const targets = table
   .map((s, id) => ({ id, ...s }))
-  .filter((s) => !s.ontologyid && FILTER.test(String(s.name ?? '').trim()))
+  .filter((s) => (FORCE || !s.ontologyid) && FILTER.test(String(s.name ?? '').trim()))
 
 console.log(`${targets.length} untermed structures match the filter\n`)
 
 const resolved = []
 const unresolved = []
-for (const t of targets) {
-  let got = null
-  let via = null
-  for (const c of candidates(t.name, t.side)) {
-    got = await lookup(c)
+
+/**
+ * A small worker pool, because the whole-atlas run is ~3,300 distinct queries and
+ * sequential it takes the better part of an hour.
+ *
+ * ⚠️ DELIBERATELY SMALL. This is a free public service run by EBI for the whole
+ * research community, and the retry in `lookup` already backs off. Six in flight
+ * is enough to make the run practical without being the reason anyone else's
+ * query is slow. Do not raise it to "make it finish"; the disk cache means a
+ * resumed run costs only the queries it has not already made.
+ *
+ * Ordering of `resolved` no longer follows the table, so output is sorted before
+ * it is written. The log stays chronological, which is what you want while
+ * watching a long run.
+ */
+const CONCURRENCY = 6
+const VERBOSE = argv.includes('--verbose')
+let done = 0
+let cursor = 0
+
+async function worker() {
+  for (;;) {
+    const i = cursor++
+    if (i >= targets.length) return
+    const t = targets[i]
+    let got = null
+    let via = null
+    for (const c of candidates(t.name, t.side)) {
+      got = await lookup(c)
+      if (got) {
+        via = c
+        break
+      }
+    }
     if (got) {
-      via = c
-      break
+      resolved.push({ ...t, fma: got, via })
+      if (VERBOSE)
+        console.log(`  ✓ ${String(t.name).padEnd(32)} ${String(t.side ?? '-').padEnd(6)} ${got}   (${via})`)
+    } else {
+      unresolved.push(t)
+      if (VERBOSE)
+        console.log(`  ✗ ${String(t.name).padEnd(32)} ${String(t.side ?? '-').padEnd(6)} no exact FMA label`)
+    }
+    done++
+    if (!VERBOSE && done % 50 === 0) {
+      process.stdout.write(`\r  ${done}/${targets.length}  resolved ${resolved.length}`)
+      // Checkpoint the cache mid-run: a 3,000-query sweep that dies at 90 %
+      // should not throw away 90 % of the queries.
+      mkdirSync(dirname(CACHE), { recursive: true })
+      writeFileSync(CACHE, JSON.stringify(cache, null, 2))
     }
   }
-  if (got) {
-    resolved.push({ ...t, fma: got, via })
-    console.log(`  ✓ ${String(t.name).padEnd(32)} ${String(t.side ?? '-').padEnd(6)} ${got}   (${via})`)
-  } else {
-    unresolved.push(t)
-    console.log(`  ✗ ${String(t.name).padEnd(32)} ${String(t.side ?? '-').padEnd(6)} no exact FMA label`)
-  }
 }
+await Promise.all(Array.from({ length: CONCURRENCY }, () => worker()))
+if (!VERBOSE) process.stdout.write('\n')
+resolved.sort((a, b) => a.id - b.id)
 
 mkdirSync(dirname(CACHE), { recursive: true })
 writeFileSync(CACHE, JSON.stringify(cache, null, 2))
@@ -186,25 +240,46 @@ if (!WRITE) {
 
 // Append, never rewrite: the file is hand-reviewed and other rows are not ours.
 const existing = readFileSync(CROSSWALK, 'utf8')
-const have = new Set(
-  existing
-    .split('\n')
-    .filter((l) => l && !l.startsWith('#'))
-    .map((l) => {
-      const c = l.split('\t')
-      return `${(c[0] ?? '').toLowerCase()}|${(c[1] ?? '').toLowerCase()}`
-    }),
-)
+const lines = existing.split('\n')
+const keyOf = (c) => `${(c[0] ?? '').toLowerCase()}|${(c[1] ?? '').toLowerCase()}`
+const rowIndex = new Map()
+lines.forEach((l, i) => {
+  if (!l || l.startsWith('#')) return
+  const c = l.split('\t')
+  if (c.length < 3) return
+  rowIndex.set(keyOf(c), i)
+})
+
 const add = []
+let replaced = 0
+let unchanged = 0
 for (const r of resolved) {
   const key = `${String(r.name).toLowerCase()}|${String(r.side ?? '').toLowerCase()}`
-  if (have.has(key)) continue
-  have.add(key)
-  add.push(`${r.name}\t${r.side ?? ''}\t${r.fma}\t${r.system ?? ''}\t${r.layer ?? ''}`)
+  const row = `${r.name}\t${r.side ?? ''}\t${r.fma}\t${r.system ?? ''}\t${r.layer ?? ''}`
+  const at = rowIndex.get(key)
+  if (at === undefined) {
+    rowIndex.set(key, -1)
+    add.push(row)
+    continue
+  }
+  if (at < 0) continue
+  const wasFma = (lines[at].split('\t')[2] ?? '').trim()
+  if (wasFma === r.fma) {
+    unchanged++
+    continue
+  }
+  if (!FORCE) {
+    unchanged++
+    continue
+  }
+  console.log(`  ~ ${String(r.name).padEnd(34)} ${String(r.side ?? '-').padEnd(6)} ${wasFma} -> ${r.fma}`)
+  lines[at] = row
+  replaced++
 }
-if (!add.length) {
-  console.log('\nnothing new to add')
-  process.exit(0)
-}
-writeFileSync(CROSSWALK, existing.replace(/\n*$/, '\n') + add.join('\n') + '\n')
-console.log(`\nappended ${add.length} rows to ${CROSSWALK}`)
+
+let out = lines.join('\n')
+if (add.length) out = out.replace(/\n*$/, '\n') + add.join('\n') + '\n'
+writeFileSync(CROSSWALK, out)
+console.log(
+  `\nappended ${add.length} rows, replaced ${replaced}, left ${unchanged} unchanged — ${CROSSWALK}`,
+)
