@@ -237,7 +237,7 @@ Explain, in the handover doc:
 
 ## Item 19 — the crosswalk, done and measured
 
-**676 of 2,916 Z-Anatomy structures (23 %) now carry an FMA term**, joined
+**1,048 of 3,614 Z-Anatomy structures (29 %) now carry an FMA term**, joined
 against BodyParts3D — the atlas Z-Anatomy was retopologised from — and applied to
 the built asset without a rebuild. Detail in `docs/HANDOVER.md`; the yield ceiling
 and the two genuine findings (BodyParts3D has no patella; terminology differs)

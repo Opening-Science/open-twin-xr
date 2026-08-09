@@ -1,0 +1,167 @@
+# FMA ↔ UBERON bridge — GENERATED, do not edit by hand.
+#
+# Rebuild:  node scripts/build-fma-uberon-bridge.mjs
+#
+# Every row comes from UBERON's OWN published cross-references, read from the
+# EBI OLS4 API — the same route the MOOSE and TCIA crosswalks in this directory
+# were built by. Nothing here is hand-authored: this project has no standing to
+# assert an equivalence between two vocabularies it does not maintain.
+#
+# ⚠️ AN XREF IS NOT PROOF OF EXACT EQUIVALENCE. `confidence` is `ambiguous` where
+# UBERON lists MORE THAN ONE FMA term for the same concept, which is a one-to-many
+# correspondence rather than an identity. Do not collapse those to the first id —
+# a wrong ontology id hides the wrong structure, which is worse than hiding none.
+#
+# `in_repo` is the subset of `fma` that some asset or crosswalk here actually uses.
+# An empty `in_repo` is a valid bridge to anatomy this repository does not hold.
+#
+# 153 UBERON ids queried, 143 carry an FMA xref, 75 join to geometry here.
+# `via` is how the join was made. `direct` means UBERON's own xref id is used
+# by an asset here. `fma-child` means it is not, and the ids in `in_repo` are the
+# SIDED FMA terms found by descending FMA's is_a hierarchy from that xref —
+# `tibia` FMA:24476 has children FMA:24477 right and FMA:24478 left, which is what
+# the atlases actually use. Both are authoritative; neither is a name match.
+uberon	label	fma	confidence	via	in_repo
+UBERON:0000033	head	FMA:7154	single	none	
+UBERON:0000945	stomach	FMA:7148	single	direct	FMA:7148
+UBERON:0000947	aorta	FMA:3734	single	none	
+UBERON:0000948	heart	FMA:7088	single	none	
+UBERON:0000955	brain	FMA:50801	single	none	
+UBERON:0000959	optic chiasma	FMA:62045	single	none	
+UBERON:0000975	sternum	FMA:7485	single	none	
+UBERON:0000976	humerus	FMA:13303	single	fma-child	FMA:23130|FMA:23131
+UBERON:0000979	tibia	FMA:24476	single	fma-child	FMA:24477|FMA:24478
+UBERON:0000981	femur	FMA:9611	single	fma-child	FMA:24475
+UBERON:0000996	vagina	FMA:19949	single	none	
+UBERON:0000998	seminal vesicle	FMA:19386	single	none	
+UBERON:0001043	esophagus	FMA:7131	single	direct	FMA:7131
+UBERON:0001072	inferior vena cava	FMA:10951	single	direct	FMA:10951
+UBERON:0001092	vertebral bone 1	FMA:12519	single	direct	FMA:12519
+UBERON:0001093	vertebral bone 2	FMA:12520	single	direct	FMA:12520
+UBERON:0001105	clavicle bone	FMA:13321	single	fma-child	FMA:13322|FMA:13323
+UBERON:0001119	right lobe of thyroid gland	FMA:13368	single	none	
+UBERON:0001120	left lobe of thyroid gland	FMA:13369	single	none	
+UBERON:0001130	vertebral column	FMA:13478	single	none	
+UBERON:0001134	skeletal muscle tissue	FMA:14069	single	none	
+UBERON:0001139	common iliac vein	FMA:14333	single	fma-child	FMA:21387|FMA:21388
+UBERON:0001149	bare area of liver	FMA:14480	single	none	
+UBERON:0001150	body of pancreas	FMA:14518	single	none	
+UBERON:0001151	tail of pancreas	FMA:14519	single	none	
+UBERON:0001152	cystic duct	FMA:14539	single	direct	FMA:14539
+UBERON:0001155	colon	FMA:14543	single	none	
+UBERON:0001156	ascending colon	FMA:14545	single	direct	FMA:14545
+UBERON:0001176	right hepatic duct	FMA:14669	single	direct	FMA:14669
+UBERON:0001222	right ureter	FMA:15571	single	direct	FMA:15571
+UBERON:0001223	left ureter	FMA:15572	single	direct	FMA:15572
+UBERON:0001224	renal pelvis	FMA:15575	single	none	
+UBERON:0001226	major calyx	FMA:15613	single	none	
+UBERON:0001227	minor calyx	FMA:15614	single	none	
+UBERON:0001233	right adrenal gland	FMA:15629	single	direct	FMA:15629
+UBERON:0001234	left adrenal gland	FMA:15630	single	direct	FMA:15630
+UBERON:0001255	urinary bladder	FMA:15900	single	direct	FMA:15900
+UBERON:0001264	pancreas	FMA:7198	single	direct	FMA:7198
+UBERON:0001270	bony pelvis	FMA:16580	single	none	
+UBERON:0001272	innominate bone	FMA:16585	single	none	
+UBERON:0001370	gluteus maximus	FMA:22314	single	fma-child	FMA:22328|FMA:22329
+UBERON:0001371	gluteus medius	FMA:22315	single	fma-child	FMA:22330|FMA:22331
+UBERON:0001423	radius bone	FMA:23463	single	fma-child	FMA:23464|FMA:23465
+UBERON:0001424	ulna	FMA:23466	single	fma-child	FMA:23467|FMA:23468
+UBERON:0001435	carpal bone	FMA:23889	single	none	
+UBERON:0001436	phalanx of manus	FMA:23914	single	none	
+UBERON:0001446	fibula	FMA:24479	single	fma-child	FMA:24480|FMA:24481
+UBERON:0001447	tarsal bone	FMA:24491	single	none	
+UBERON:0001448	metatarsal bone	FMA:24492	single	none	
+UBERON:0001449	phalanx of pes	FMA:24493	single	none	
+UBERON:0001639	hepatic portal vein	FMA:50735	single	direct	FMA:50735
+UBERON:0001685	hyoid bone	FMA:52749	single	direct	FMA:52749
+UBERON:0001999	iliopsoas	FMA:64918	single	none	
+UBERON:0002012	pulmonary artery	FMA:66326	single	fma-child	FMA:50872|FMA:50873|FMA:68192
+UBERON:0002015	kidney capsule	FMA:66610	single	none	
+UBERON:0002046	thyroid gland	FMA:9603	single	none	
+UBERON:0002048	lung	FMA:7195	single	none	
+UBERON:0002078	right cardiac atrium	FMA:7096	single	none	
+UBERON:0002079	left cardiac atrium	FMA:7097	single	none	
+UBERON:0002080	heart right ventricle	FMA:7098	single	none	
+UBERON:0002084	heart left ventricle	FMA:7101	single	none	
+UBERON:0002094	interventricular septum	FMA:7133	single	none	
+UBERON:0002097	skin of body	FMA:7163	single	direct	FMA:7163
+UBERON:0002100	trunk	FMA:7181	single	none	
+UBERON:0002106	spleen	FMA:7196	single	none	
+UBERON:0002107	liver	FMA:7197	single	none	
+UBERON:0002108	small intestine	FMA:7200	single	none	
+UBERON:0002110	gallbladder	FMA:7202	single	direct	FMA:7202
+UBERON:0002114	duodenum	FMA:7206	single	direct	FMA:7206
+UBERON:0002116	ileum	FMA:7208	single	none	
+UBERON:0002135	mitral valve	FMA:7235	single	none	
+UBERON:0002170	upper lobe of right lung	FMA:7333	single	none	
+UBERON:0002171	lower lobe of right lung	FMA:7337	single	none	
+UBERON:0002174	middle lobe of right lung	FMA:7383	single	none	
+UBERON:0002177	right main bronchus	FMA:7395	single	direct	FMA:7395
+UBERON:0002178	left main bronchus	FMA:7396	single	none	
+UBERON:0002190	subcutaneous adipose tissue	FMA:74315	single	none	
+UBERON:0002264	olfactory bulb	FMA:77624	single	none	
+UBERON:0002349	myocardium	FMA:9462	single	none	
+UBERON:0002363	dura mater	FMA:9592	single	none	
+UBERON:0002369	adrenal gland	FMA:9604	single	fma-child	FMA:15629|FMA:15630
+UBERON:0002374	metacarpal bone	FMA:9612	single	none	
+UBERON:0002446	patella	FMA:24485	single	none	
+UBERON:0002462	erector spinae muscle group	FMA:71302	single	none	
+UBERON:0003126	trachea	FMA:7394	single	direct	FMA:7394
+UBERON:0003129	skull	FMA:46565	single	none	
+UBERON:0003252	thoracic rib cage	FMA:7480	single	none	
+UBERON:0003688	omentum	FMA:14650	single	none	
+UBERON:0003690	fused sacrum	FMA:16202	single	direct	FMA:16202
+UBERON:0004230	urinary bladder neck smooth muscle	FMA:67990	single	none	
+UBERON:0004538	left kidney	FMA:7205	single	direct	FMA:7205
+UBERON:0004539	right kidney	FMA:7204	single	direct	FMA:7204
+UBERON:0004601	rib 1	FMA:7597	single	fma-child	FMA:7857|FMA:7987
+UBERON:0004602	rib 2	FMA:7620	single	fma-child	FMA:7882|FMA:8012
+UBERON:0004603	rib 3	FMA:7638	single	fma-child	FMA:7909|FMA:8039
+UBERON:0004604	rib 4	FMA:7749	single	fma-child	FMA:7957|FMA:8148
+UBERON:0004605	rib 5	FMA:7776	single	fma-child	FMA:8066|FMA:8093
+UBERON:0004606	rib 6	FMA:8147	single	fma-child	FMA:8175|FMA:8202
+UBERON:0004607	rib 7	FMA:7830	single	fma-child	FMA:8229|FMA:8256
+UBERON:0004608	rib 9	FMA:8337	single	fma-child	FMA:8364|FMA:8391
+UBERON:0004609	rib 10	FMA:8418	single	fma-child	FMA:8445|FMA:8472
+UBERON:0004610	rib 11	FMA:8499	single	fma-child	FMA:8531|FMA:8532
+UBERON:0004611	rib 12	FMA:8515	single	fma-child	FMA:8533|FMA:8534
+UBERON:0004612	mammalian cervical vertebra 3	FMA:12521	single	direct	FMA:12521
+UBERON:0004613	mammalian cervical vertebra 4	FMA:12522	single	direct	FMA:12522
+UBERON:0004614	mammalian cervical vertebra 5	FMA:12523	single	direct	FMA:12523
+UBERON:0004615	mammalian cervical vertebra 6	FMA:12524	single	direct	FMA:12524
+UBERON:0004616	mammalian cervical vertebra 7	FMA:12525	single	direct	FMA:12525
+UBERON:0004617	lumbar vertebra 1	FMA:13072	single	direct	FMA:13072
+UBERON:0004618	lumbar vertebra 2	FMA:13073	single	direct	FMA:13073
+UBERON:0004619	lumbar vertebra 3	FMA:13074	single	direct	FMA:13074
+UBERON:0004620	lumbar vertebra 4	FMA:13075	single	direct	FMA:13075
+UBERON:0004621	lumbar vertebra 5	FMA:13076	single	direct	FMA:13076
+UBERON:0004626	thoracic vertebra 1	FMA:9165	single	direct	FMA:9165
+UBERON:0004627	thoracic vertebra 2	FMA:9187	single	direct	FMA:9187
+UBERON:0004628	thoracic vertebra 3	FMA:9209	single	direct	FMA:9209
+UBERON:0004629	thoracic vertebra 4	FMA:9248	single	direct	FMA:9248
+UBERON:0004630	thoracic vertebra 5	FMA:9922	single	direct	FMA:9922
+UBERON:0004631	thoracic vertebra 6	FMA:9945	single	direct	FMA:9945
+UBERON:0004632	thoracic vertebra 7	FMA:9968	single	direct	FMA:9968
+UBERON:0004633	thoracic vertebra 9	FMA:10014	single	direct	FMA:10014
+UBERON:0004634	thoracic vertebra 10	FMA:10037	single	direct	FMA:10037
+UBERON:0004635	thoracic vertebra 11	FMA:10059	single	direct	FMA:10059
+UBERON:0004636	thoracic vertebra 12	FMA:10081	single	direct	FMA:10081
+UBERON:0004887	left lung hilus	FMA:9751	single	none	
+UBERON:0004913	hepatopancreatic ampulla	FMA:15076	single	none	
+UBERON:0005429	dorsal pancreatic duct	FMA:14534	single	none	
+UBERON:0005457	left thymus lobe	FMA:71195	single	none	
+UBERON:0006082	fundus of urinary bladder	FMA:15908	single	none	
+UBERON:0006469	C1 segment of cervical spinal cord	FMA:71179	single	none	
+UBERON:0006849	scapula	FMA:13394	single	fma-child	FMA:13395|FMA:13396
+UBERON:0007265	intervertebral disk of axis	FMA:25058	single	direct	FMA:25058
+UBERON:0008255	right clavicle	FMA:13322	single	direct	FMA:13322
+UBERON:0008256	left clavicle	FMA:13323	single	direct	FMA:13323
+UBERON:0008521	gluteus minimus	FMA:22317	single	fma-child	FMA:22332|FMA:22333
+UBERON:0008952	upper lobe of left lung	FMA:7370	single	none	
+UBERON:0008953	lower lobe of left lung	FMA:7371	single	none	
+UBERON:0010757	rib 8	FMA:8120	single	fma-child	FMA:8283|FMA:8310
+UBERON:0010927	thyroepiglotticus muscle	FMA:46594	single	none	
+UBERON:0011050	thoracic vertebra 8	FMA:9991	single	direct	FMA:9991
+UBERON:0022277	hepatic flexure of colon	FMA:14550	single	none	
+UBERON:0035322	right common iliac artery	FMA:14765	single	none	
+UBERON:0035529	left common iliac artery	FMA:14766	single	none	

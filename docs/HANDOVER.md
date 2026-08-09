@@ -320,7 +320,7 @@ the digestive system needs an ontology id per structure. The state of that:
 | BodyParts3D | ✅ FMA on all 1,838 |
 | HRA | ✅ UBERON |
 | CT atlas | ✅ UBERON |
-| Z-Anatomy | ⚠️ **FMA on 676 of 2,916 (23 %)** — the rest are termless |
+| Z-Anatomy | ⚠️ **FMA on 1,048 of 3,614 (29 %)** — the rest are termless |
 
 Z-Anatomy was the whole gap; it is now a partial one.
 `scripts/build-crosswalk.mjs` closes it by joining against **BodyParts3D — the
@@ -337,9 +337,17 @@ while Z-Anatomy keeps a separate `side`, and FMA gives left and right *different
 ids, so they are matched per side rather than collapsed. Missing that is what
 held the first attempt at 7 %.
 
-**23 % is closer to the ceiling than it looks.** BodyParts3D names only 1,838
-structures against Z-Anatomy's 2,916, so roughly a thousand have no counterpart
-to match at any quality of matcher. Two shortfalls are real findings rather than
+⚠️ **Two numbers here were wrong, and in different ways — re-measure before
+quoting them.** This table said "676 of 2,916 (23 %)". `676` is the ROW count of
+`z-anatomy-fma.tsv`, not the number of structures tagged: one row is a name+side
+pair and tags every structure matching it, so 676 rows carry **1,048** structures.
+And `2,916` predates the `NervousSystem100.fbx` import — the asset ships **3,614**.
+`npm run gen:ontology` prints all of these from the shipped GLB.
+
+**29 % is closer to the ceiling than it looks.** BodyParts3D names only 1,838
+structures against Z-Anatomy's 3,614, so about 1,776 — nearly half — have no
+counterpart to match at any quality of matcher. **The name-join ceiling is
+therefore ~51 %**, and 29 % of it is already taken. Two shortfalls are real findings rather than
 matcher bugs: BodyParts3D contains **no patella at all**, and the atlases differ
 on terminology the synonym list does not yet cover. The remaining route to full
 coverage is a dedicated FMA/UBERON pass, not a better string algorithm.
