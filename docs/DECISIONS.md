@@ -1656,3 +1656,64 @@ anthropometric ground truth. The panel reports height, volume, mass and BMI of t
 assumed uniform density — properties of a shape under a stated assumption, not
 measurements of a person. Nothing here supports a body-composition, ergonomic or
 health claim, and the interface says so; that wording is load-bearing.
+
+## D19 — The schematic eye supersedes its three surfaces, and two concepts stay termless
+
+**10 August 2026.** Three open judgements, put to the maintainer rather than
+guessed at, because each is a terminology or product call and not a lookup.
+
+### The eye overlay masks cornea, lens and retina — nothing else
+
+Z-Anatomy carries a complete bilateral globe: 22 structures, 11 parts a side.
+Three options were real, and the middle one is the only one that adds without
+subtracting.
+
+| option | outcome |
+|---|---|
+| mask all 22 | one clean eye, but LESS anatomy — loses sclera, iris, vitreous, chambers |
+| mask nothing | two overlapping globes whenever the overlay is on over Z-Anatomy |
+| **mask the 3 refracting surfaces** | correct optics inside Z-Anatomy's own shell |
+
+The overlay's own note says it is "not a substitute for an anatomical eye", so
+masking the sclera and iris it does not model would have made the interface
+contradict its own caption.
+
+⚠️ **This was blocked by a stale claim, not by a real constraint.**
+`ONTOLOGY_MAP.md` recorded the narrow mask as unavailable because the three ids
+"are not contiguous, and the masking mechanism takes a range". True when written;
+false from the moment `structureMask.ts` became a per-structure texture for the
+ear. Measured on the shipped asset the six sided structures are at ids 2628,
+2632, 2638, 2641, 2645, 2646 — which no `{lo, hi}` could ever have expressed.
+The document had also been carrying hand-typed ids that a rebuild invalidated
+(D18), so the generator now measures them.
+
+### Vestibule takes FMA's name; two others deliberately do not
+
+`Vestibule` → **`Vestibule of bony labyrinth`**, per side (FMA:60184 right,
+FMA:60185 left, from FMA's own `is_a` children rather than a name guess).
+Z-Anatomy's bare "Vestibule" is ambiguous in general — mouth, nose, vagina — but
+unambiguous in the ear.
+
+⚠️ **`Auditory tube` and `Zonular fibres` stay termless**, though both were
+offered. FMA names them `Pharyngotympanic tube` and `Set of zonular fibers`; the
+second is a COLLECTION class, a different granularity from the individual fibres
+the atlas models. Adopting either is defensible and neither is a lookup, so they
+wait for a deliberate call. Missing is visibly missing; wrong is silently trusted.
+
+### The kidney is metabolic
+
+The procedural placeholder said `endocrine` while BodyParts3D (FMA7204/7205) and
+MOOSE both say `metabolic` — so one organ changed system depending on which body
+you were looking at. Two sources against one.
+
+⚠️ This is a consistency call and **not** a claim the kidney has no endocrine
+function; it produces renin and erythropoietin. If the system taxonomy ever gains
+multi-membership, this is the first entry to revisit.
+
+### What this does NOT settle
+
+The remaining overlay residual is mostly not a term problem. Of the parts still
+unmatched, most are `adds an organ` — scala tympani and vestibuli, the facial
+nerve, the heart's epicardium and endocardia — anatomy no atlas here models, so
+there is nothing to supersede and no term would change it. `Chorda Tympani` is
+the one genuine missing term.
