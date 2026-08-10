@@ -37,6 +37,7 @@
     "gen:ontology": "node scripts/gen-ontology-map.mjs",
     "build:bridge": "node scripts/build-fma-uberon-bridge.mjs",
     "check:crosswalk": "node scripts/check-crosswalk.mjs",
+    "check:dist": "node scripts/check-dist-assets.mjs",
     "gen:preview": "node scripts/gen-preview.mjs --url http://localhost:5173"
   },
   "dependencies": {
