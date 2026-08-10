@@ -1664,17 +1664,18 @@ guessed at, because each is a terminology or product call and not a lookup.
 
 ### The eye overlay masks cornea, lens and retina — nothing else
 
-Z-Anatomy carries a complete bilateral globe: 22 structures, 11 parts a side.
+Z-Anatomy carries a complete bilateral globe — `npm run gen:ontology` reports the
+current part count and ids.
 Three options were real, and the middle one is the only one that adds without
 subtracting.
 
 | option | outcome |
 |---|---|
-| mask all 22 | one clean eye, but LESS anatomy — loses sclera, iris, vitreous, chambers |
+| mask the whole globe | one clean eye, but LESS anatomy — loses sclera, iris, vitreous, chambers |
 | mask nothing | two overlapping globes whenever the overlay is on over Z-Anatomy |
-| **mask the 3 refracting surfaces** | correct optics inside Z-Anatomy's own shell |
+| **mask the 3 optical structures** | correct optics inside Z-Anatomy's own shell |
 
-The overlay's own note says it is "not a substitute for an anatomical eye", so
+⚠️ Two of the three REFRACT (cornea, lens); the retina does not — it is the photosensitive surface they focus onto. Calling all three "refracting surfaces" was wrong and is corrected here. The overlay's own note says it is "not a substitute for an anatomical eye", so
 masking the sclera and iris it does not model would have made the interface
 contradict its own caption.
 
@@ -1682,8 +1683,13 @@ contradict its own caption.
 `ONTOLOGY_MAP.md` recorded the narrow mask as unavailable because the three ids
 "are not contiguous, and the masking mechanism takes a range". True when written;
 false from the moment `structureMask.ts` became a per-structure texture for the
-ear. Measured on the shipped asset the six sided structures are at ids 2628,
-2632, 2638, 2641, 2645, 2646 — which no `{lo, hi}` could ever have expressed.
+ear. The six sided structures they resolve to are not contiguous, so no `{lo, hi}`
+could ever have expressed them.
+
+⚠️ **This paragraph used to name those ids, which is the exact rule D18 wrote and
+CodeRabbit caught two entries later.** Ids drift on an asset rebuild and prose
+cannot follow. `npm run gen:ontology` measures and prints them; the mask resolves
+them by NAME at runtime and never from a number typed here.
 The document had also been carrying hand-typed ids that a rebuild invalidated
 (D18), so the generator now measures them.
 

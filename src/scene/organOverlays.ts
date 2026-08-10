@@ -300,7 +300,7 @@ export const ORGAN_OVERLAYS: Record<OrganOverlayId, OrganOverlay> = {
    * left/right obstacle either, because this overlay already places two instances.
    *
    * It is deliberately NOT wired up, because the swap would trade anatomy for
-   * optics. This asset models three refracting surfaces; Z-Anatomy's eye models the
+   * optics. This asset models three optical structures — two refracting (cornea, lens) and the photosensitive retina; Z-Anatomy's eye models the
    * sclera and iris this one does not have, so superseding would render LESS
    * anatomy in exchange for a correct optical model — and the note below already
    * tells the viewer this is "not a substitute for an anatomical eye". Making that
@@ -337,7 +337,7 @@ export const ORGAN_OVERLAYS: Record<OrganOverlayId, OrganOverlay> = {
       { side: 'Right', position: [-0.0315, 1.5839, 0.056], quaternion: [0, 0, 0, 1] },
     ],
     /**
-     * ⚠️ SUPERSEDES ONLY THE THREE REFRACTING SURFACES, not the whole globe.
+     * ⚠️ SUPERSEDES ONLY ITS OWN THREE OPTICAL STRUCTURES, not the whole globe.
      *
      * Z-Anatomy carries a complete bilateral eye — 22 structures, 11 parts per
      * side: cornea, lens, retina, sclera, iris, vitreous body, zonular fibres,
@@ -355,8 +355,9 @@ export const ORGAN_OVERLAYS: Record<OrganOverlayId, OrganOverlay> = {
      * `docs/ONTOLOGY_MAP.md` recorded it as unavailable because "those ids are
      * not contiguous, and the masking mechanism takes a range" — true when
      * written, and false since `structureMask.ts` moved to a per-structure
-     * texture for the ear. Measured on the shipped asset the three sit at ids
-     * 2628, 2632, 2638, 2641, 2645 and 2646, which no `{lo, hi}` could express.
+     * texture for the ear. The six sided structures they resolve to do not form a
+     * contiguous range, so no `{lo, hi}` could express them — `npm run gen:ontology`
+     * reports the current ids, which is where to look rather than here.
      *
      * Both sides, unlike the ear: this overlay already places two instances, so
      * there is no one-sided obstacle to work around.

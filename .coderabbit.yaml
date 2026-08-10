@@ -1,0 +1,94 @@
+# CodeRabbit configuration.
+#
+# ⚠️ WHY THIS FILE EXISTS, AND WHAT IT CANNOT DO.
+#
+# The intent is to merge faster without merging past review. Measured on PR #11:
+# CodeRabbit left THIRTEEN inline comments — including a real anatomical error and
+# a documentation rule this repository had just written and then broken — and its
+# status check still reported `pass`, "Review completed". Its review state was
+# COMMENTED, never CHANGES_REQUESTED.
+#
+# So GitHub's native auto-merge would have merged straight past all thirteen. The
+# check means "I have finished reviewing", not "I approve".
+#
+# `request_changes_workflow` below is what turns a finding into a machine-readable
+# blocking signal instead of a comment nobody reads.
+#
+# ⚠️ NOTHING HERE IS ENFORCED BY GITHUB ON THIS PLAN. Branch protection and
+# rulesets both return 403 — "Upgrade to GitHub Pro or make this repository
+# public" — so there are no required checks and no required reviews. A
+# CHANGES_REQUESTED review cannot physically block a merge here. The gate is
+# `npm run pr:gate`, which is discipline rather than enforcement. Making the repo
+# public, or moving to a plan with rulesets, is what would make it enforcement.
+
+language: en-GB
+early_access: false
+
+reviews:
+  profile: chill
+  # THE SETTING THAT MATTERS. Without it every review is COMMENTED and there is
+  # nothing to gate on.
+  request_changes_workflow: true
+  high_level_summary: true
+  poem: false
+  review_status: true
+  auto_review:
+    enabled: true
+    drafts: false
+
+  path_filters:
+    # Generated artefacts. Reviewing them wastes the reviewer's attention on
+    # output rather than on the script that produced it — and this repository has
+    # four generated documents precisely because hand-maintained ancestors went
+    # stale. If a table is wrong, the generator is the bug.
+    - '!docs/LICENCE_LOG.md'
+    - '!docs/ONTOLOGY_MAP.md'
+    - '!src/scene/bridgeData.ts'
+    - '!docs/fma-uberon-bridge.tsv'
+    # Crosswalk data: thousands of rows of ontology ids, guarded by
+    # `npm run check:crosswalk`, which tests the property that actually matters
+    # (no FMA id naming two different structures) far better than prose review.
+    - '!docs/*.tsv'
+    - '!package-lock.json'
+
+  path_instructions:
+    - path: 'docs/**/*.md'
+      instructions: >-
+        NEVER accept a hard-coded structure id, count or percentage typed into
+        prose. This repository has been burned by it: ONTOLOGY_MAP.md carried
+        hand-written eye-structure ids that an asset rebuild silently
+        invalidated, and a mask built from them would have hidden the wrong
+        anatomy (D18). Numbers must come from a generator or be labelled as
+        measured on a stated date. Flag any claim of coverage, counts or ids that
+        cannot be regenerated with `npm run gen:ontology` or
+        `npm run check:licences`.
+
+        Also flag contradictions BETWEEN documents — which plan is live, which
+        decision range is current, how many reports exist. Several of those have
+        gone stale independently.
+
+    - path: 'src/**/*.{ts,tsx}'
+      instructions: >-
+        This is a body viewer, not a health product. Flag any user-facing copy
+        that interprets, scores or diagnoses — D8 moved scoring upstream and D15
+        removed health language from the interface.
+
+        Flag any ontology term matched approximately. Exact-only is a hard rule:
+        the one lapse produced 32 FMA ids shared across different structures,
+        putting `Axillary artery`, `Axillary nerve` and `Axillary vein` on one
+        term. A wrong ontology id hides the wrong structure, which is worse than
+        hiding nothing.
+
+        Flag anatomy described inaccurately in comments or UI copy — for example
+        calling the retina a refracting surface.
+
+    - path: 'scripts/**/*.mjs'
+      instructions: >-
+        These generate documentation and assets. Flag anything that would let a
+        generated document disagree with the asset it describes, and any check
+        whose success message claims more than it measured — `check:winding`
+        reported "All meshes consistently wound" while testing 64 of 259 meshes
+        and only for mirror symmetry.
+
+chat:
+  auto_reply: true
