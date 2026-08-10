@@ -141,6 +141,14 @@ interface TwinState {
    */
   overlayAvailability: Record<string, boolean> | null
   /**
+   * Whether the parametric shape grid's three files are on disk.
+   *
+   * Separate from `atlasAvailability` because the parametric mode declares no
+   * atlas sources at all — that is what let it ship as the one mode which could
+   * never report itself missing. See `Body.tsx`.
+   */
+  gridAvailability: Record<string, boolean> | null
+  /**
    * Exploded view, 0..1. Pushes each structure group radially away from the body
    * centre so the systems separate. 0 is the assembled body.
    */
@@ -443,6 +451,7 @@ interface TwinState {
   setSpin: (v: boolean) => void
   setTheme: (t: 'light' | 'dark') => void
   setAtlasAvailability: (a: Record<string, boolean> | null) => void
+  setGridAvailability: (a: Record<string, boolean> | null) => void
   setOverlayAvailability: (a: Record<string, boolean> | null) => void
   toggleSystem: (id: SystemId) => void
   toggleLayer: (l: AnatomyLayer) => void
@@ -501,6 +510,7 @@ export const useTwin = create<TwinState>((set) => ({
   sex: 'female',
   atlasAvailability: null,
   overlayAvailability: null,
+  gridAvailability: null,
   explode: 0,
   spin: !prefersReducedMotion(),
   theme: 'dark',
@@ -551,6 +561,7 @@ export const useTwin = create<TwinState>((set) => ({
   setTheme: (theme) => set({ theme }),
   setAtlasAvailability: (atlasAvailability) => set({ atlasAvailability }),
   setOverlayAvailability: (overlayAvailability) => set({ overlayAvailability }),
+  setGridAvailability: (gridAvailability) => set({ gridAvailability }),
   toggleSystem: (id) =>
     set((s) => ({
       hiddenSystems: s.hiddenSystems.includes(id)

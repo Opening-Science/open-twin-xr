@@ -52,6 +52,8 @@ const io = new NodeIO()
   .registerDependencies({ 'meshopt.decoder': MeshoptDecoder })
 
 let bad = 0
+let checked = 0
+let skipped = 0
 
 for (const file of files) {
   const doc = await io.read(file)
@@ -118,6 +120,8 @@ for (const file of files) {
         ? 'consistent'
         : 'OPPOSITE SIGNS'
     if (comparable && !agree) bad++
+    if (comparable) checked++
+    else skipped++
     console.log(
       `  ${node.getName().padEnd(28)} -x ${lVol.toFixed(5).padStart(10)}   ` +
         `+x ${rVol.toFixed(5).padStart(10)}   ${verdict}`,
@@ -133,4 +137,26 @@ if (bad) {
   )
   process.exit(1)
 }
-console.log('\nAll meshes consistently wound.')
+/**
+ * ⚠️ SAY WHAT WAS ACTUALLY TESTED, NOT "all meshes consistently wound".
+ *
+ * That old summary claimed far more than this script measures, and it MISLED in
+ * practice: ANNY's mesh has 13,706 triangles wound one way against 13,714 the
+ * other — inconsistent enough to cancel a signed-volume integral to nothing —
+ * and this reported clean throughout, because it never looked.
+ *
+ * What it compares is the signed volume of the -x half against the +x half. That
+ * is a MIRROR-SYMMETRY test for the specific importer bug in D11b, where a
+ * negative-determinant transform is baked without reversing triangle order. It
+ * is not an orientation check and not a manifold check, and a structure with no
+ * mirrored counterpart is skipped entirely rather than judged.
+ */
+console.log(
+  `\nNo mirrored-half inversion detected — ${checked} mesh(es) compared, ${skipped} skipped ` +
+    `(one-sided or under the 100 ml floor, so a signed volume says nothing about them).`,
+)
+console.log(
+  '⚠️  This is a MIRROR-SYMMETRY test only. It does not verify that a mesh is\n' +
+    '   consistently wound or closed — ANNY passed it while half its triangles\n' +
+    '   faced inward. See D18.',
+)

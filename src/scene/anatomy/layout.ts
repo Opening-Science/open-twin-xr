@@ -96,7 +96,12 @@ export const ORGAN_PARTS: OrganPart[] = [
 
   // --- endocrine ----------------------------------------------------------
   { term: 'UBERON:0002046', label: 'thyroid gland', system: 'endocrine', build: buildThyroid, position: [0, 1.435, 0.042] },
-  { term: 'UBERON:0002113', label: 'kidney', system: 'endocrine', build: buildKidneys, position: [0, 0.985, -0.030] },
+  // ⚠️ `metabolic`, not `endocrine`. The placeholder said endocrine while BOTH
+  // atlas crosswalks — BodyParts3D (FMA7204/7205) and MOOSE — say metabolic, so
+  // the same organ changed system depending on which body you were looking at.
+  // The kidney genuinely has endocrine function (renin, erythropoietin); this is
+  // a consistency call, not a claim that it has none.
+  { term: 'UBERON:0002113', label: 'kidney', system: 'metabolic', build: buildKidneys, position: [0, 0.985, -0.030] },
 
   // --- reproductive -------------------------------------------------------
   { term: 'UBERON:0000991', label: 'gonad', system: 'reproductive', build: buildReproductive, position: [0, 0.735, 0.012] },

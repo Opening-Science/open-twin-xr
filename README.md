@@ -170,13 +170,14 @@ pelvis, so that gap is now closed. Photographic tissue colour is answered too: t
 OpenEar temporal bone carries colour sampled from its own micro-slicing volume, on
 71.5 % of its surface, with the remainder left honestly grey.
 
-⚠️ **Ontology coverage is worse than this section used to claim, and the
-correction is worth reading.** It said terms were "complete on BodyParts3D (FMA)".
-They are complete in the *crosswalk* and absent from the *asset*: HRA carries
-`ontologyid` on 89 % of its structures and both CT atlases on 100 %, but
-BodyParts3D and Z-Anatomy carry **none at all**, because the terms are never
-written into the GLB. The crosswalks exist — 1,838 rows for BodyParts3D, 676 for
-Z-Anatomy — so this is a change to two build scripts rather than new research.
+⚠️ **This section has now been wrong TWICE, in opposite directions, which is the
+argument for never stating coverage here by hand.** It first claimed terms were
+"complete on BodyParts3D (FMA)". That was corrected to "BodyParts3D and Z-Anatomy
+carry none at all" — true when written, and false within days of it.
+
+Measured on the shipped assets: BodyParts3D **1,838 of 1,838**, Z-Anatomy
+**1,840 of 3,614**, HRA 89 %, both CT atlases 100 %. Run `npm run gen:ontology`
+before believing any of those numbers, including these.
 [`docs/ONTOLOGY_MAP.md`](docs/ONTOLOGY_MAP.md) has the full picture and is
 generated, so it cannot drift the way that sentence did.
 

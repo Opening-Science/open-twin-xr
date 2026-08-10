@@ -16,15 +16,20 @@
 >
 > **Read `docs/HANDOVER.md` first**, then `docs/README.md` for the documentation
 > index — it says which documents are current and which are historical. Decisions
-> and their reversals are in `docs/DECISIONS.md` (D1–D15). There are **two live
+> and their reversals are in `docs/DECISIONS.md` (D1–D18). There are **two live
 > plans, deliberately**: `docs/PLAN_NEXT.md` for repo quality and
 > `docs/PLAN_INTEGRATION.md` for new geometry. `docs/ROADMAP.md` holds the phases.
 >
-> **Two documents are generated and must not be hand-edited** —
-> `docs/LICENCE_LOG.md` (`npm run check:licences`) and `docs/ONTOLOGY_MAP.md`
-> (`npm run gen:ontology`). Both had hand-maintained ancestors that went stale
+> **Four documents are generated and must not be hand-edited** —
+> `docs/LICENCE_LOG.md` (`npm run check:licences`), `docs/ONTOLOGY_MAP.md`
+> (`npm run gen:ontology`), the component table inside `docs/HANDOVER.md`
+> (`node scripts/gen-component-table.mjs`) and `docs/preview.png`
+> (`npm run gen:preview`). Each had a hand-maintained ancestor that went stale
 > without anyone noticing. If a table in them is wrong, fix the script or the
-> asset.
+> asset. ⚠️ **Never type a structure id, a count or a percentage into prose** —
+> `ONTOLOGY_MAP.md` carried hand-written eye-structure ids that a rebuild
+> silently invalidated, and the mask built from them would have hidden the wrong
+> anatomy. See D18.
 >
 > Everything below this box predates the scope change. It is kept because its
 > constraints on licensing, privacy and honest rendering still hold, but its
@@ -194,10 +199,10 @@ Still open, measured on the shipped assets rather than assumed:
 
 | gap | state |
 |---|---|
-| Z-Anatomy crosswalk | 1,078 / 3,614 (30 %) — 2,536 structures unmapped |
+| Z-Anatomy crosswalk | 1,840 / 3,614 (51 %) — 1,774 structures unmapped |
 | `z-anatomy-regions` | 0 / 257, name only |
-| overlay → atlas join | 7 of 18 parts (eye **3/3**, ear 4/12, heart 0/3) |
-| FMA ↔ UBERON bridge | ✅ `npm run build:bridge`, 75 of 153 UBERON ids reach FMA geometry |
+| overlay → atlas join | 8 of 18 parts (eye **3/3**, ear 5/12, heart 0/3) |
+| FMA ↔ UBERON bridge | ✅ `npm run build:bridge`, 89 of 153 UBERON ids reach FMA geometry |
 
 **The overlay residual is mostly not fixable by more terms, and the table says
 which.** Of the 11 unmatched parts, 8 are `adds an organ` — scala tympani, facial

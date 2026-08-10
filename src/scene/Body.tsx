@@ -8,6 +8,7 @@ import { AssetErrorBoundary } from './AssetErrorBoundary'
 import { BodyEnvelope } from './BodyEnvelope'
 import { StructureLabel } from './StructureLabel'
 import { ParametricBody } from './ParametricBody'
+import { ANNY_GRID_URLS } from './annyGrid'
 import { BODY_ENVELOPES, BODY_ENVELOPE_IDS } from './bodyEnvelopes'
 
 /**
@@ -73,6 +74,32 @@ function BodyContent() {
     publishEnvelopes(envelopeAvailability)
   }, [envelopeAvailability, publishEnvelopes])
 
+  /**
+   * ⚠️ THE SHAPE GRID IS PROBED TOO, AND IT WAS THE ONE ASSET THAT WAS NOT.
+   *
+   * Every other selectable thing here degrades honestly when its files are
+   * absent — the pill reads "not installed" and the procedural body shows. The
+   * parametric mode could not, for three reasons that compounded: its files are
+   * gitignored like every other asset, `activeSources('parametric')` returns []
+   * so the "is anything missing" test had nothing to test, and the early return
+   * below removes the procedural fallback on purpose. `ParametricBody` then
+   * caught the load failure itself and rendered `null`.
+   *
+   * The result on a fresh clone was a SILENT EMPTY CANVAS — no body, no pill
+   * state, no error, nothing but a console warning. That is precisely the
+   * "subtly wrong rather than visibly wrong" failure `docs/DEPLOY.md` credits
+   * this app with avoiding.
+   *
+   * All THREE grid files are probed, not just the binary: the mode needs the
+   * `.bin`, the `.idx` and the `.json` together, and a partial set fails in a
+   * much more confusing way than a missing one.
+   */
+  const gridAvailability = useAtlasAvailability(ANNY_GRID_URLS as unknown as string[])
+  const publishGrid = useTwin((s) => s.setGridAvailability)
+  useEffect(() => {
+    publishGrid(gridAvailability)
+  }, [gridAvailability, publishGrid])
+
   // Probe every registered atlas, not just the ones this mode needs, so the
   // switcher can say up front which options will actually render.
   const urls = useMemo(() => Object.values(ANATOMY_SOURCES).map((s) => s.url), [])
@@ -100,7 +127,26 @@ function BodyContent() {
    * its zero-asset fallback body beside the parametric one and look broken. The
    * early return is what makes "standalone" true rather than merely intended.
    */
-  if (mode === 'parametric') {
+  /**
+   * ⚠️ ONLY TAKE THIS BRANCH IF THE GRID IS ACTUALLY THERE.
+   *
+   * The early return exists so the procedural placeholder does not appear BESIDE
+   * a generated body. When there is no generated body — the grid is not
+   * installed — that reason evaporates, and returning early instead produces a
+   * blank canvas: no body, no fallback, and an error boundary whose `fallback`
+   * is `null` by design because a 3D scene has nowhere to put a message.
+   *
+   * So a missing grid falls through to the ordinary path, which draws the
+   * procedural placeholder exactly as every other uninstalled mode does. The
+   * dock already reads "not installed" from the same probe, so the two agree.
+   *
+   * `null` means "not probed yet" and is treated as available — the mode renders
+   * as soon as it can, and a slow first probe does not flash the placeholder.
+   */
+  const gridMissing =
+    gridAvailability !== null && Object.values(gridAvailability).some((ok) => !ok)
+
+  if (mode === 'parametric' && !gridMissing) {
     return (
       <group>
         <mesh position={[0, 1, -0.6]} visible={false} onClick={() => clearSel(null)}>
@@ -111,9 +157,25 @@ function BodyContent() {
           label="parametric body"
           consequence="the parametric body did not render"
           resetKey="parametric"
-          fallback={null}
+          /**
+           * ⚠️ `fallback={null}` HERE WAS HALF THE BLANK-CANVAS BUG.
+           *
+           * A 3D scene has nowhere to put an error message, so this boundary was
+           * given nothing to render — which meant a failed grid load produced an
+           * empty canvas rather than a visibly wrong one. The probe in
+           * `gridAvailability` catches the ordinary case before we ever get
+           * here, but it is asynchronous, and on the first paint it is still
+           * `null`. This is what covers that window, and any failure the probe
+           * cannot foresee: a truncated file, a corrupt bake, a 200 that is
+           * really an SPA fallback page.
+           *
+           * The procedural body is the correct thing to show — it is what every
+           * other uninstalled mode falls back to, so the app looks the same way
+           * for the same reason.
+           */
+          fallback={<ProceduralBody />}
         >
-          <Suspense fallback={null}>
+          <Suspense fallback={<ProceduralBody />}>
             <ParametricBody />
           </Suspense>
         </AssetErrorBoundary>

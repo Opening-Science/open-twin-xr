@@ -18,10 +18,10 @@ conversations that produced it.
 | 2 | [`HANDOVER.md`](HANDOVER.md) | The orientation document. What this is, what it is *not*, where everything lives |
 | 3 | [`ARCHITECTURE.md`](ARCHITECTURE.md) | How the code is arranged and why |
 | 4 | [`MODEL_PIPELINE.md`](MODEL_PIPELINE.md) | How to get real anatomy on screen instead of the placeholder |
-| 5 | [`DECISIONS.md`](DECISIONS.md) | D1–D17. **Read this before proposing a change** — several obvious ideas were tried and reversed, and the reversals are recorded |
+| 5 | [`DECISIONS.md`](DECISIONS.md) | D1–D19. **Read this before proposing a change** — several obvious ideas were tried and reversed, and the reversals are recorded |
 
 After that, follow whatever you are actually working on — and read
-[`reports/`](reports/README.md) for the five areas where the reasoning matters more
+[`reports/`](reports/README.md) for the 6 areas where the reasoning matters more
 than the result.
 
 ## Current — these describe how things are now
@@ -39,9 +39,10 @@ than the result.
 | [`DATA_CONTRACT.md`](DATA_CONTRACT.md) | `TwinMetrics`, the one boundary between this repo and the data upstream |
 | [`RESOURCES.md`](RESOURCES.md) | Every resource evaluated, with licence and standing |
 | [`DEPLOY.md`](DEPLOY.md) | Shipping it, including the publishable-build gate |
-| [`reports/`](reports/README.md) | **Five technical reports** — photographic colour (answers D4), the CT pipeline, the geometry survey, ontology identity, the licence position |
+| [`reports/`](reports/README.md) | **6 technical reports** — photographic colour (answers D4), the CT pipeline, the geometry survey, ontology identity, the licence position |
 | [`STACK_AND_MODELS.md`](STACK_AND_MODELS.md) | Dated snapshot: the stack, all ten models, and how publishable each is as presented. Point-in-time — the generated docs above win on conflict |
 | [`ROADMAP.md`](ROADMAP.md) | Phases and their state |
+| [`PLAN_IDENTITY.md`](PLAN_IDENTITY.md) | **Proposal, not a record** — the next milestone: cross-atlas structure search and selection |
 | [`PLAN_NEXT.md`](PLAN_NEXT.md) | Numbered repo-quality queue; items 19–21 are open |
 
 ⚠️ **One live plan now.** `PLAN_NEXT.md` is the repo-quality queue; items 19–21 are
@@ -91,7 +92,7 @@ Tab-separated, and the machine-readable authority for the mappings that
 | file | rows | what it maps |
 |---|---|---|
 | [`bodyparts3d-system-map.tsv`](bodyparts3d-system-map.tsv) | 1,838 | BodyParts3D mesh → system, layer, FMA |
-| [`z-anatomy-fma.tsv`](z-anatomy-fma.tsv) | 676 | Z-Anatomy structure + side → FMA |
+| [`z-anatomy-fma.tsv`](z-anatomy-fma.tsv) | 1,482 | Z-Anatomy structure + side → FMA |
 | [`moose-uberon-crosswalk.tsv`](moose-uberon-crosswalk.tsv) | 139 | MOOSE class → UBERON |
 | [`healthy-total-body-cts-crosswalk.tsv`](healthy-total-body-cts-crosswalk.tsv) | 33 | TCIA labelmap class → UBERON |
 | [`fma-uberon-bridge.tsv`](fma-uberon-bridge.tsv) | 143 | **UBERON ↔ FMA**, so the two vocabularies here can be joined. Generated — `npm run build:bridge` |
@@ -101,9 +102,15 @@ Tab-separated, and the machine-readable authority for the mappings that
 
 ## Generated documents — do not edit by hand
 
-Two documents are written by scripts, because both had hand-maintained ancestors
-that went stale without anyone noticing. If a table here is wrong, fix the script
-or the asset, not the markdown.
+These documents are written by scripts, because each had a hand-maintained
+ancestor that went stale without anyone noticing. If a table here is wrong, fix
+the script or the asset, not the markdown.
+
+⚠️ **Never type a structure id, a count or a percentage into prose anywhere in
+`docs/`.** `ONTOLOGY_MAP.md` carried hand-written eye-structure ids that a
+rebuild silently invalidated, and a mask built from them would have hidden the
+wrong anatomy (D18). This index has itself been wrong about the crosswalk row
+count and the decision range.
 
 ```bash
 npm run check:licences   # -> docs/LICENCE_LOG.md, read from the shipped GLBs

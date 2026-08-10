@@ -99,6 +99,7 @@ export function AtlasControls() {
   const sex = useTwin((s) => s.sex)
   const setSex = useTwin((s) => s.setSex)
   const availability = useTwin((s) => s.atlasAvailability)
+  const gridAvailability = useTwin((s) => s.gridAvailability)
   const installed = useInstalledSources()
 
   /**
@@ -137,10 +138,25 @@ export function AtlasControls() {
    * current sex actually selects, so "not installed" tracks the body that would
    * load rather than the other one.
    */
-  const missingFor = (m: AnatomyMode) =>
-    availability === null
+  /**
+   * ⚠️ `parametric` IS SPECIAL-CASED, because `activeSources` returns [] for it.
+   *
+   * That empty list is deliberate — the mode replaces the atlas rather than
+   * wrapping one (D18) — but it also meant `.filter(...)` over nothing always
+   * produced "nothing missing", so this was the one mode that could never report
+   * itself uninstalled. Its files are gitignored like every other asset, so on a
+   * fresh clone the pill invited you into a blank canvas.
+   */
+  const missingFor = (m: AnatomyMode): { label: string }[] => {
+    if (m === 'parametric') {
+      if (gridAvailability === null) return []
+      const absent = Object.entries(gridAvailability).filter(([, ok]) => !ok)
+      return absent.length ? [{ label: 'ANNY shape grid' }] : []
+    }
+    return availability === null
       ? []
       : activeSources(resolveMode(m, sex)).filter((s) => !availability[s.url])
+  }
 
   // Which sexes the SELECTED atlas can render. One entry means no choice to
   // offer, so the control is not drawn at all rather than shown inert.
@@ -166,7 +182,8 @@ export function AtlasControls() {
             // against the male map while the female body is the one on screen.
             const unavailable =
               missing.length > 0 &&
-              missing.length === activeSources(resolveMode(m.value, sex)).length
+              (m.value === 'parametric' ||
+                missing.length === activeSources(resolveMode(m.value, sex)).length)
             return (
               <DockPill
                 key={m.value}
@@ -174,7 +191,11 @@ export function AtlasControls() {
                 onClick={() => setMode(m.value)}
                 title={
                   unavailable
-                    ? `${missing.map((s) => s.label).join(', ')} is not installed — shows the procedural placeholder instead`
+                    ? m.value === 'parametric'
+                      ? `${missing.map((s) => s.label).join(', ')} is not installed — shows the ` +
+                        'procedural placeholder instead. Run `npm run bake:anny-grid` to generate ' +
+                        'it; the five fixed ANNY envelopes do not need it.'
+                      : `${missing.map((s) => s.label).join(', ')} is not installed — shows the procedural placeholder instead`
                     : m.title
                 }
               >

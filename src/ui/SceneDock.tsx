@@ -79,9 +79,17 @@ export function SceneDock() {
         {open && (
           <div id={DOCK_BODY_ID} className="flex flex-col">
             <AtlasControls />
-            <DockGroup label="Overlays">
-              <OrganOverlayRow />
-            </DockGroup>
+            {/*
+              Overlays are organ replacements for an ATLAS, and the parametric
+              mode has no atlas — `Body` returns early and never mounts them. The
+              row was still drawn and still toggling state, which is the same
+              inert-control problem the envelope row had directly below.
+            */}
+            {!parametric && (
+              <DockGroup label="Overlays">
+                <OrganOverlayRow />
+              </DockGroup>
+            )}
             {/*
               ⚠️ NO ENVELOPE ROW IN THE PARAMETRIC MODE. `Body` returns early
               there and never mounts `BodyEnvelope`, so every pill here was a

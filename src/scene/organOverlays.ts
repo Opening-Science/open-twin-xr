@@ -336,11 +336,43 @@ export const ORGAN_OVERLAYS: Record<OrganOverlayId, OrganOverlay> = {
       { side: 'Left', position: [0.0315, 1.5839, 0.056], quaternion: [0, 0, 0, 1] },
       { side: 'Right', position: [-0.0315, 1.5839, 0.056], quaternion: [0, 0, 0, 1] },
     ],
+    /**
+     * ⚠️ SUPERSEDES ONLY THE THREE REFRACTING SURFACES, not the whole globe.
+     *
+     * Z-Anatomy carries a complete bilateral eye — 22 structures, 11 parts per
+     * side: cornea, lens, retina, sclera, iris, vitreous body, zonular fibres,
+     * both segments, the anterior chamber and the suspensory ligament. This
+     * overlay models three of them.
+     *
+     * Masking all 22 would render LESS anatomy in exchange for better optics,
+     * which contradicts this overlay's own note that it is "not a substitute for
+     * an anatomical eye". Masking none draws two overlapping globes. Masking
+     * exactly what the schematic replaces leaves Z-Anatomy's sclera and iris as
+     * the shell around correct optics, which is the only option that adds
+     * something without taking anything away.
+     *
+     * ⚠️ THIS BECAME POSSIBLE ONLY WHEN THE MASK STOPPED BEING A RANGE.
+     * `docs/ONTOLOGY_MAP.md` recorded it as unavailable because "those ids are
+     * not contiguous, and the masking mechanism takes a range" — true when
+     * written, and false since `structureMask.ts` moved to a per-structure
+     * texture for the ear. Measured on the shipped asset the three sit at ids
+     * 2628, 2632, 2638, 2641, 2645 and 2646, which no `{lo, hi}` could express.
+     *
+     * Both sides, unlike the ear: this overlay already places two instances, so
+     * there is no one-sided obstacle to work around.
+     */
+    supersedesStructures: {
+      system: 'nervous',
+      is: /^(Cornea|Lens|Retina)$/,
+      expect: 6,
+    },
     publishable: true,
     note:
       'A SCHEMATIC OPTICAL model: cornea, lens and retina only. No sclera, iris, ciliary body, ' +
       'extraocular muscles, optic nerve or vasculature, because a schematic eye does not model ' +
-      'them. Correct as optics, not a substitute for an anatomical eye.',
+      'them. Correct as optics, not a substitute for an anatomical eye. It replaces Z-Anatomy’s ' +
+      'own cornea, lens and retina on both sides so the two do not draw over each other, and ' +
+      'leaves the sclera and iris it does not model visible around it.',
   },
 
   /**

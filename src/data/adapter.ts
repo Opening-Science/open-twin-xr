@@ -52,7 +52,7 @@
  * unimplemented rather than faked, because a plausible-looking wrong score is
  * worse than an obvious gap.
  */
-import type { TwinMetrics } from './schema'
+import type { Provenance, SystemId, TwinMetrics } from './schema'
 
 const SCORED_TWIN_URL = '/data/sample-twin.json'
 
@@ -106,17 +106,163 @@ export function fromFhirBundle(_result: OpenTwinResult): TwinMetrics {
   )
 }
 
-/** Validate that a payload matches the viewer contract before rendering it. */
+/**
+ * The system ids the viewer knows how to render, as a runtime value.
+ *
+ * ⚠️ Kept in step with `SystemId` by the type assertion below — add an id to the
+ * union without adding it here and TypeScript fails the build, rather than the
+ * validator silently rejecting valid data at runtime.
+ */
+const SYSTEM_IDS = [
+  'cardiovascular',
+  'respiratory',
+  'nervous',
+  'digestive',
+  'musculoskeletal',
+  'endocrine',
+  'reproductive',
+  'metabolic',
+  'integumentary',
+] as const satisfies readonly SystemId[]
+
+const PROVENANCES = [
+  'oura',
+  'google-health',
+  'vitronic-bodyloop',
+  'open-wearables',
+  'derived',
+] as const satisfies readonly Provenance[]
+
+/**
+ * The contract versions this build knows how to read.
+ *
+ * ⚠️ READ FROM THE DATA, NOT INVENTED. The first draft of this list said `1.0`,
+ * which is the obvious guess and is wrong — the bundled sample declares `0.2.0`,
+ * so the validator would have rejected the app's own payload on first load.
+ * `schema.ts` documents the field but pins no value, so the shipped sample is
+ * the only authority for what this build actually reads.
+ */
+const SUPPORTED_SCHEMA = ['0.2.0'] as const
+
+/**
+ * Validate that a payload matches the viewer contract before rendering it.
+ *
+ * ⚠️ THIS IS THE TRUST BOUNDARY, AND IT USED TO CHECK ALMOST NOTHING. It tested
+ * that `profile` existed, that `systems` was an array, and one invariant. It
+ * accepted unknown system ids, duplicate ids, a string where a score belongs, a
+ * score of 47 on a 0–10 scale, `hasData: true` with a null score, an unknown
+ * provenance, and any `schemaVersion` at all — including none, despite the
+ * schema documenting that field as what makes migration possible.
+ *
+ * Why that matters here more than in most apps: a score drives the COLOUR of a
+ * body part. Malformed data does not crash, it renders — as a confident green
+ * organ. The whole reason `hasData: false` exists is that this project refuses
+ * to show a number it does not have, and a validator that lets `score: "high"`
+ * through defeats that from a different direction.
+ *
+ * ⚠️ HAND-WRITTEN GUARDS, NOT A SCHEMA LIBRARY, and that is deliberate. Adding
+ * Zod or Valibot for one function would be a runtime dependency in a repository
+ * that hand-rolls every other check — and the failure MESSAGES are the product
+ * here. "System 'liver' is not a body system this viewer knows" tells you what
+ * to fix; `invalid_enum_value at systems.3.id` does not.
+ *
+ * It throws on the FIRST problem rather than collecting them, because this runs
+ * on a payload that is either from your own backend or from the bundled sample.
+ * Neither case benefits from a list.
+ */
 export function assertTwinMetrics(raw: unknown): TwinMetrics {
-  const data = raw as TwinMetrics
-  if (!data || !data.profile || !Array.isArray(data.systems)) {
-    throw new Error('Payload does not match the TwinMetrics contract')
+  if (!raw || typeof raw !== 'object') {
+    throw new Error('TwinMetrics payload is not an object')
   }
-  for (const s of data.systems) {
-    if (!s.hasData && s.score !== null) {
-      throw new Error(`System "${s.id}" has no data but carries a score. Refusing to render a fabricated value.`)
+  const data = raw as TwinMetrics
+
+  if (!data.profile || typeof data.profile !== 'object') {
+    throw new Error('TwinMetrics payload has no `profile`')
+  }
+  if (!Array.isArray(data.systems)) {
+    throw new Error('TwinMetrics payload has no `systems` array')
+  }
+
+  /**
+   * ⚠️ An unsupported version is refused rather than read optimistically.
+   * `schema.ts` documents `schemaVersion` as the field that makes migration
+   * possible; reading an unknown version anyway is what makes migration
+   * impossible, because it means old builds silently half-render new payloads.
+   */
+  if (typeof data.schemaVersion !== 'string' || !data.schemaVersion) {
+    throw new Error('TwinMetrics payload has no `schemaVersion`')
+  }
+  if (!(SUPPORTED_SCHEMA as readonly string[]).includes(data.schemaVersion)) {
+    throw new Error(
+      `TwinMetrics schemaVersion "${data.schemaVersion}" is not supported by this build ` +
+        `(supports ${SUPPORTED_SCHEMA.join(', ')}). Refusing to guess at a payload it may only ` +
+        'half understand.',
+    )
+  }
+
+  for (const field of ['trend', 'connectedSources', 'journey'] as const) {
+    if (!Array.isArray(data[field])) {
+      throw new Error(`TwinMetrics payload has no \`${field}\` array`)
     }
   }
+
+  const seen = new Set<string>()
+  for (const s of data.systems) {
+    if (!s || typeof s !== 'object') throw new Error('`systems` contains a non-object entry')
+
+    if (!(SYSTEM_IDS as readonly string[]).includes(s.id)) {
+      throw new Error(
+        `"${s.id}" is not a body system this viewer knows. Expected one of: ${SYSTEM_IDS.join(', ')}.`,
+      )
+    }
+    // A duplicate silently wins or loses depending on iteration order, and the
+    // one that loses is invisible. That is a data bug, not a rendering choice.
+    if (seen.has(s.id)) throw new Error(`System "${s.id}" appears more than once`)
+    seen.add(s.id)
+
+    if (typeof s.hasData !== 'boolean') {
+      throw new Error(`System "${s.id}" has a non-boolean \`hasData\``)
+    }
+
+    if (!s.hasData) {
+      if (s.score !== null) {
+        throw new Error(
+          `System "${s.id}" has no data but carries a score. Refusing to render a fabricated value.`,
+        )
+      }
+    } else {
+      // The mirror of the invariant above, and the one that was missing:
+      // `hasData: true` with a null score renders as "measured" while having
+      // nothing to show.
+      if (typeof s.score !== 'number' || !Number.isFinite(s.score)) {
+        throw new Error(
+          `System "${s.id}" claims to have data but its score is ${JSON.stringify(s.score)}, ` +
+            'not a finite number.',
+        )
+      }
+      if (s.score < 0 || s.score > 10) {
+        throw new Error(
+          `System "${s.id}" has a score of ${s.score}, outside the documented 0–10 range. ` +
+            'The colour ramp would clamp it and show a confident value that is not in the data.',
+        )
+      }
+    }
+
+    if (s.provenance !== undefined) {
+      if (!Array.isArray(s.provenance)) {
+        throw new Error(`System "${s.id}" has a non-array \`provenance\``)
+      }
+      for (const p of s.provenance) {
+        if (!(PROVENANCES as readonly string[]).includes(p)) {
+          throw new Error(
+            `System "${s.id}" cites an unknown provenance "${p}". Expected one of: ` +
+              `${PROVENANCES.join(', ')}.`,
+          )
+        }
+      }
+    }
+  }
+
   return data
 }
 

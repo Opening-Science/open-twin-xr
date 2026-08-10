@@ -25,6 +25,34 @@ import { MeshoptDecoder } from 'meshoptimizer'
 
 const ROOT = process.cwd()
 const REVIEW = process.argv.includes('--review')
+/**
+ * ⚠️ `--verify` IS THE ONLY MODE THAT CAN FAIL, AND THAT SPLIT IS THE POINT.
+ *
+ * D12b replaced a licence GATE with a licence RECORD, deliberately: this project
+ * takes what every atlas offers and documents it, rather than dropping
+ * components to keep a checker quiet. So the default run regenerates the log,
+ * prints the position and exits 0 no matter what it finds.
+ *
+ * But "not a gate" quietly became "nothing can ever fail", and several documents
+ * went on describing this command as though running it protected a release. It
+ * cannot: with 15 outstanding actions, an unregistered asset and geometry
+ * carrying no licence statement at all, it still exits 0.
+ *
+ * `--verify` is the release-time question, which is narrower than the action
+ * list and is NOT about commerce. It fails only on things that mean the bundle
+ * cannot lawfully be distributed or cannot be reasoned about:
+ *
+ *   - an asset on disk with no entry in the register
+ *   - a shipped GLB carrying no embedded `asset.copyright`
+ *   - a registered multi-file artefact that is only partly present
+ *   - a component with NO LICENCE STATEMENT, which grants nothing
+ *
+ * ⚠️ The last one is why `--publishable` exists in the Z-Anatomy build. A local
+ * research build legitimately contains that geometry, so `--verify` is a
+ * RELEASE check to run against the publishable build, not a pre-commit hook.
+ * CI cannot run it at all — no assets are committed.
+ */
+const VERIFY = process.argv.includes('--verify')
 const LOG_PATH = join(ROOT, 'docs/LICENCE_LOG.md')
 const register = JSON.parse(readFileSync(join(ROOT, 'licences.json'), 'utf8'))
 
@@ -280,4 +308,39 @@ console.log(`\n${actions.length} item(s) on the pre-publication action list.`)
 if (REVIEW) {
   console.log('')
   for (const a of actions) console.log(`  - ${a.replace(/\*\*/g, '')}\n`)
+}
+
+if (VERIFY) {
+  const blockers = []
+  for (const u of unregistered) {
+    blockers.push(`${u} is on disk with no entry in licences.json — an unrecorded asset cannot be reasoned about.`)
+  }
+  for (const r of rows) {
+    if (r.embeddable !== false && !r.embedded?.trim()) {
+      blockers.push(`${r.file} carries no embedded asset.copyright — the credit does not travel with the file.`)
+    }
+    if (r.absent?.length) {
+      blockers.push(`${r.entry.id}: ${r.absent.join(', ')} missing from a multi-file artefact — the app loads part of it and fails on the rest.`)
+    }
+    for (const c of r.components) {
+      if (/none stated|unlicensed|unknown/i.test(c.licence)) {
+        blockers.push(
+          `${r.file}: ${c.count} structures from "${c.title}" (${c.holder}) have NO LICENCE STATEMENT. ` +
+            `Silence is not permission — attribution satisfies a licence's conditions, it cannot create a grant. ` +
+            `Build with --publishable, or obtain written permission.`,
+        )
+      }
+    }
+  }
+  console.log('')
+  if (blockers.length) {
+    console.error(`✗ NOT RELEASABLE — ${blockers.length} blocker(s):`)
+    for (const b of blockers) console.error(`   ${b}`)
+    console.error(
+      '\n  These are distribution questions, not commercial ones. Non-commercial and\n' +
+        '  share-alike terms are fine here (D12b); a MISSING GRANT is not.',
+    )
+    process.exit(1)
+  }
+  console.log('✓ releasable: every asset registered, credited, complete, and carrying a grant')
 }

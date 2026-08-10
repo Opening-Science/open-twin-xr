@@ -70,7 +70,7 @@ The same applies to third-party reference documents. If you drop a PDF or a spec
 into the repo to read it, `.gitignore` it *first* — untracking it later does **not**
 remove it from history.
 
-### 2. Two documents are generated. Do not hand-edit them
+### 2. Four documents are generated. Do not hand-edit them
 
 | file | regenerate with |
 |---|---|
@@ -79,7 +79,7 @@ remove it from history.
 | the component table inside `docs/HANDOVER.md` | `node scripts/gen-component-table.mjs` |
 | `docs/preview.png` | `npm run gen:preview` (needs `npm run dev` running) |
 
-Both generated documents had hand-maintained ancestors that went stale without
+These generated documents had hand-maintained ancestors that went stale without
 anyone noticing — which is the whole reason they are generated. **If a table in one
 of them is wrong, fix the script or the asset, not the markdown.**
 

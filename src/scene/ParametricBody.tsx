@@ -117,14 +117,28 @@ export function ParametricBody() {
     setMeasurements(measureBody(out, grid.indices))
   }, [geometry, grid, params, setMeasurements])
 
-  useEffect(() => {
-    if (failed) {
-      console.warn(
-        `[ParametricBody] shape grid unavailable (${failed}). ` +
-          'Run `npm run bake:anny-grid`; the fixed presets still work without it.',
-      )
-    }
-  }, [failed])
+  /**
+   * ⚠️ RETHROW. Catching this and rendering `null` is what made a fresh clone show
+   * a silent empty canvas.
+   *
+   * The `AssetErrorBoundary` wrapping this component exists precisely to say
+   * "the parametric body did not render", and it never fired, because the load
+   * failure was swallowed here and turned into a `console.warn` nobody sees. A
+   * caught error that produces no UI is indistinguishable from a body that has
+   * not finished loading.
+   *
+   * Thrown during render so the boundary receives it. The dock reports the same
+   * fact independently from `gridAvailability`, so the pill reads "not
+   * installed" before you ever get here — this is the second line of defence,
+   * not the only one.
+   */
+  if (failed) {
+    throw new Error(
+      `The ANNY shape grid could not be loaded (${failed}). ` +
+        'Run `npm run bake:anny-grid` to generate it — see public/models/README.md. ' +
+        'The five fixed ANNY envelopes do not need it.',
+    )
+  }
 
   if (!geometry) return null
   return (
