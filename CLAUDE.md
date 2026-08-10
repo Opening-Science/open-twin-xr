@@ -16,15 +16,20 @@
 >
 > **Read `docs/HANDOVER.md` first**, then `docs/README.md` for the documentation
 > index — it says which documents are current and which are historical. Decisions
-> and their reversals are in `docs/DECISIONS.md` (D1–D15). There are **two live
+> and their reversals are in `docs/DECISIONS.md` (D1–D18). There are **two live
 > plans, deliberately**: `docs/PLAN_NEXT.md` for repo quality and
 > `docs/PLAN_INTEGRATION.md` for new geometry. `docs/ROADMAP.md` holds the phases.
 >
-> **Two documents are generated and must not be hand-edited** —
-> `docs/LICENCE_LOG.md` (`npm run check:licences`) and `docs/ONTOLOGY_MAP.md`
-> (`npm run gen:ontology`). Both had hand-maintained ancestors that went stale
+> **Four documents are generated and must not be hand-edited** —
+> `docs/LICENCE_LOG.md` (`npm run check:licences`), `docs/ONTOLOGY_MAP.md`
+> (`npm run gen:ontology`), the component table inside `docs/HANDOVER.md`
+> (`node scripts/gen-component-table.mjs`) and `docs/preview.png`
+> (`npm run gen:preview`). Each had a hand-maintained ancestor that went stale
 > without anyone noticing. If a table in them is wrong, fix the script or the
-> asset.
+> asset. ⚠️ **Never type a structure id, a count or a percentage into prose** —
+> `ONTOLOGY_MAP.md` carried hand-written eye-structure ids that a rebuild
+> silently invalidated, and the mask built from them would have hidden the wrong
+> anatomy. See D18.
 >
 > Everything below this box predates the scope change. It is kept because its
 > constraints on licensing, privacy and honest rendering still hold, but its

@@ -4,8 +4,11 @@ Decisions taken for **open-twin-openXR**, in the same spirit as upstream
 open-twin's `DECISIONS.md`: what was decided, why, and — the part that matters
 six months later — **what it commits us to**.
 
-Nothing here is implemented yet. These are recorded so the next session starts
-from the decision rather than re-litigating it.
+⚠️ **This used to say "nothing here is implemented yet", and that stopped being
+true long ago** — most entries from D12 onward describe work that has shipped.
+Read each entry's own text for its status; several record a decision that was
+later REVERSED, which is the point of keeping them. They are here so the next
+session starts from the decision rather than re-litigating it.
 
 **Read D7 first.** It changes the criterion the earlier entries were decided
 under, and supersedes part of their reasoning.
