@@ -5,9 +5,10 @@
 substantial and entirely invisible: 3,800 structures carry a term and nothing in
 the interface lets anyone use one.
 
-> **Status: not started.** This is a plan, not a record. Everything below is a
-> proposal; nothing here has shipped. Contrast `docs/ONTOLOGY_MAP.md` and
-> `docs/LICENCE_LOG.md`, which are generated from what actually exists.
+> **Status: resolution layer landed, interface not built.**
+> `src/scene/structureSearch.ts` and the bundled bridge exist and are tested; no
+> search box is wired into the UI yet. Everything under "Shape of the work" below
+> that is not marked ✅ is still a proposal.
 
 ## Why this and not more coverage
 
@@ -37,18 +38,29 @@ before the bridge existed.
 
 ## Shape of the work
 
-**1. A search index, generated, not hand-written.**
-One artefact joining label → term → {atlas, structure id, side, system}, built
-from the shipped GLBs and the crosswalks by a script alongside
-`gen-ontology-map.mjs`. It must be generated for the reason every other table
-here is: `ONTOLOGY_MAP.md` carried hand-typed structure ids that a rebuild
-silently invalidated (D18), and ids are what a selection consumes.
+**1. ~~A search index, generated~~ — ✅ done, and the plan was WRONG here.**
 
-⚠️ **Include the synonyms the vocabularies already publish.** FMA and UBERON both
-carry synonym lists; a search that only matches the primary label will miss
-`Eustachian tube` for `Pharyngotympanic tube`. Ingest them, do not invent them.
+This proposed generating a static index joining label → term → structure. That
+was the wrong shape, and building it revealed why: **every loaded atlas already
+carries exactly that table inside its own GLB** — `name`, `side`, `system` and
+`ontologyid` per structure. It is always in step with the geometry because it
+travels in the same file, and it costs nothing to search.
 
-**2. Resolution through the bridge.**
+A generated index would have had to be rebuilt whenever an asset changed, could
+not be committed (the assets are gitignored), and would have been one more thing
+to go stale — in a repository that has now corrected stale generated numbers
+three times. `searchStructures()` reads the live table instead.
+
+The one piece that DOES have to ship separately is the bridge, because it maps
+between two vocabularies rather than describing one atlas. It is compiled into
+`src/scene/bridgeData.ts` by `npm run gen:bridge-module` and bundled — 143 rows,
+committed, so it can never be "not installed".
+
+⚠️ **Still open: the synonyms the vocabularies publish.** FMA and UBERON both
+carry synonym lists, and a label search will miss `Eustachian tube` for
+`Pharyngotympanic tube` without them. Ingest them, do not invent them.
+
+**2. ~~Resolution through the bridge~~ — ✅ done.**
 A query resolves to a *concept*, then to structures in the loaded atlas. Where
 only the other vocabulary has it, the bridge translates. ⚠️ `fma-uberon-bridge.tsv`
 marks rows `ambiguous` where UBERON lists several FMA terms; a search result must
@@ -67,14 +79,15 @@ overlay table already reports 8 such parts. It must be distinguishable from "no
 term for it yet" and from "not installed", because those have different fixes.
 The three states already exist in the data; the UI needs to say which one it is.
 
-## Tests it must come with
+## Tests
 
-Nothing here needs a browser to be worth testing:
+✅ 25 tests in `src/scene/structureSearch.test.ts`, none needing a browser or an
+asset: CURIE parsing, both bridge directions, the `ambiguous` flag, ranking,
+punctuation folding, the three empty-state reasons, and — the one that guards the
+discipline — that `tibea` matches nothing.
 
-- label → term resolution, including a synonym and a miss
-- bridge translation, including an `ambiguous` row
-- an atlas that has the concept, one that does not, one not installed
-- the index regenerates identically from the same assets
+Still to test once the interface exists: selection actually masking the right
+ids, and an atlas that is not installed.
 
 ## What it must not do
 
