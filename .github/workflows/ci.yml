@@ -15,6 +15,12 @@ jobs:
           node-version: 20
           cache: npm
       - run: npm ci
+
+      # Typecheck FIRST. It was missing entirely, so a type error only surfaced
+      # via `npm run build` several steps later, with a rollup stack rather than
+      # the file and line tsc would have named.
+      - run: npm run typecheck
+
       - run: npm run lint
       - run: npm run test
 
@@ -25,9 +31,24 @@ jobs:
       # has, so unlike the asset gates below it can actually run here.
       - run: npm run lint:claims
 
+      # The crosswalk's integrity. Reads a TSV, not an asset, so CI CAN run it:
+      # it fails if one FMA id is assigned to two different structures, which is
+      # not hypothetical — the crosswalk was measured to do exactly that for 32
+      # ids, collapsing `Axillary artery`, `Axillary nerve` and `Axillary vein`
+      # onto one term. A wrong ontology id hides the wrong structure.
+      - run: npm run check:crosswalk
+
       - run: npm run build
 
-      # ⚠️ Three gates cannot run here, and their absence is not an oversight.
-      # `check:licences`, `check:winding` and `check:structures` read the shipped
-      # GLBs, and no asset is committed to this repository — CI has nothing to
-      # read. Run them locally after a conversion. See CONTRIBUTING.md.
+      # ⚠️ RUN AFTER THE BUILD, because it inspects the build's OUTPUT. The prune
+      # plugin has eaten shipped assets three times, and never in dev — `npm run
+      # dev` serves `public/` directly and never runs it. On a CI checkout no
+      # binary assets exist, so this passes trivially; it earns its place on any
+      # machine that has them, and costs nothing here.
+      - run: npm run check:dist
+
+      # ⚠️ These gates cannot run here, and their absence is not an oversight.
+      # `check:licences`, `licences:verify`, `check:winding` and
+      # `check:structures` read the shipped GLBs, and no asset is committed to
+      # this repository — CI has nothing to read. Run them locally after a
+      # conversion, and `licences:verify` before any release. See CONTRIBUTING.md.
