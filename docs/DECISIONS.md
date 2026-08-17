@@ -1723,3 +1723,84 @@ unmatched, most are `adds an organ` — scala tympani and vestibuli, the facial
 nerve, the heart's epicardium and endocardia — anatomy no atlas here models, so
 there is nothing to supersede and no term would change it. `Chorda Tympani` is
 the one genuine missing term.
+
+---
+
+## D20 — The "University of Washington white matter" was two things, and both are licensed
+
+**17 August 2026.** The one component `--publishable` existed to drop is
+re-identified, relicensed and restored. The publishable and research builds
+converge: nothing in the Z-Anatomy asset is excluded any more.
+
+### What the credit said, and who denied it
+
+Z-Anatomy's `Resources/Models/License.txt` lists, alone among its components
+with **no licence**: *"'Brainder' and 'White matter' from the University of
+Washington"*. Silence grants nothing, so those structures were excluded from
+every served build — correctly, on what was then known.
+
+Then the named source answered. **Anderson M. Winkler, the author of Brainder
+(brainder.org), wrote on 17 August 2026 that neither he nor Brainder has ever
+been affiliated with the University of Washington.** The upstream credit is
+wrong on its face — and "Brainder" is not an institution's project to name; it
+IS Winkler's site.
+
+### The discriminator he gave, and what measurement found
+
+Winkler's test: Brainder ships **cortical** surfaces — pial, and a "white"
+surface that is the grey/white **boundary**, not white matter proper. Tracts and
+fasciculi are not his; a folded boundary shell could be.
+
+Measured on `NervousSystem100.fbx` (weld → union-find → Euler characteristic,
+plus area/volume sphericity), the component is **two different objects that one
+name regex had lumped together**:
+
+| | telencephalon pair (l, r) | spinal cord |
+|---|---|---|
+| topology | closed, one dominant shell each | open tube, 255 boundary edges |
+| folding | sphericity 0.219 — the folded-cortical range | smooth; thin, not folded |
+| reading | a FreeSurfer-style **white surface** — his description exactly | modelled anatomy following the vertebral canal |
+
+The two hemispheres are exact mirrors of one source hemisphere — how a
+downloaded reference is used, not how anatomy is sculpted. Renders were sent to
+Winkler for confirmation.
+
+### Why publishable without waiting for his reply
+
+The remaining uncertainty is *which* licensed branch applies, not *whether* one
+does:
+
+- **Derived from Brain for Blender** → CC BY-SA 3.0, whose §4(b) permits
+  distributing adaptations under a later licence version. Our CC BY-SA 4.0
+  asset qualifies.
+- **"Used as reference" only** (upstream's other phrasing) → the geometry is
+  Z-Anatomy's own CC BY-SA 4.0 work.
+
+The only reading that ever blocked distribution — an unlicensed University of
+Washington release — is the one its alleged source denies. Winkler's
+confirmation from the renders decides the **credit wording**; it does not gate
+the publishability, and the register says so.
+
+### What changed
+
+- `COMPONENTS` in `build-z-anatomy.mjs`: `white-matter-uw` (NONE STATED) became
+  `white-matter-brainder` (CC BY-SA 3.0), **telencephalon only**.
+- The spinal cord is deliberately **untagged**: Brainder is cortex-only by its
+  author's statement, and the only line tying that tube to any third party was
+  the discredited UW credit. It returns to the file's default — Z-Anatomy's own
+  work — because tagging it to any component now would be over-attribution, the
+  inner-ear pattern's mistake again. Item 2 of `docs/OUTREACH.md` asks upstream
+  to confirm.
+- `COPYRIGHT_MAIN`, `licences.json`, and the in-app credit in
+  `anatomySources.ts` now name Brain for Blender and Winkler; `needsPermission`
+  is gone.
+- The asset was rebuilt from the FBX set (byte-verified against upstream's
+  repository) so the three structures are actually in the shipped build.
+
+### What this does NOT settle
+
+The credit **wording** waits for Winkler; upstream's own licence file still
+carries the wrong attribution, which item 2 of `docs/OUTREACH.md` raises so the
+error stops propagating downstream of Z-Anatomy; and if Winkler unexpectedly
+says the cortical pair is not his, the component reverts to Z-Anatomy's own
+CC BY-SA 4.0 — still licensed, different credit line.

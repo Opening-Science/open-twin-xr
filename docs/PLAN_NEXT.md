@@ -206,6 +206,12 @@ Z-Anatomy is an aggregate:
 Generate it from `licences.json` + the asset roster rather than typing it, so it
 cannot drift. Counts above are from the current build and should be regenerated.
 
+⚠️ **The sketch above has since drifted twice, which is the point of generating it.**
+The Dundee count halved when the middle ear was untagged, and the "Brainder / white
+matter — none stated — no" row is superseded entirely by **D20**: the credit's named
+source denies it, the cortical pair ships as Brain for Blender CC BY-SA 3.0, and the
+spinal cord is Z-Anatomy's own. The generated table in `HANDOVER.md` is the truth.
+
 ### 4. How health markers map to organs
 
 The part most likely to be misunderstood by whoever picks this up, because the

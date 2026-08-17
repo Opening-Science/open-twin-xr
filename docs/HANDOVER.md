@@ -258,10 +258,11 @@ are not.
 
 | component | rights holder | licence | structures | publishable |
 |---|---|---|---|---|
-| bodyparts3d — own geometry | The Database Center for Life Science (DBCLS) | CC BY 4.0 | no table | yes |
-| z-anatomy — own geometry | Z-Anatomy authors | CC BY-SA 4.0 | 3,606 | yes |
+| bodyparts3d — own geometry | The Database Center for Life Science (DBCLS) | CC BY 4.0 | 1,838 | yes |
+| z-anatomy — own geometry | Z-Anatomy authors | CC BY-SA 4.0 | 3,607 | yes |
 | Anatomy of the Inner Ear | University of Dundee School of Medicine | CC BY-NC-SA 4.0 | 4 | non-commercial only |
 | Kidney | lissiecowley | CC BY-NC 4.0 | 4 | non-commercial only |
+| Brain for Blender — white (grey/white boundary) surface | Anderson M. Winkler (Brainder) | CC BY-SA 3.0 | 2 | yes |
 | z-anatomy-regions — own geometry | Z-Anatomy authors | CC BY-SA 4.0 | 257 | yes |
 | hra — own geometry | HuBMAP Consortium | CC BY 4.0 | no table | yes |
 | hra-m — own geometry | HuBMAP Consortium | CC BY 4.0 | no table | yes |

@@ -10,12 +10,22 @@
  * ⚠️ LICENCE — READ BEFORE ADDING A FILE HERE
  * -------------------------------------------
  * Z-Anatomy is an AGGREGATE. Its README shows a blanket CC BY-SA 4.0 badge and
- * its own `Resources/Models/License.txt` contradicts it — three components come
+ * its own `Resources/Models/License.txt` contradicts it — FOUR components come
  * from third parties on other terms:
  *
- *     Anatomy of the Inner Ear   CC BY-NC-SA 4.0   University of Dundee
- *     Kidney (lissiecowley)      CC BY-NC 4.0
- *     Brainder / white matter    NO LICENCE STATED  University of Washington
+ *     Anatomy of the Inner Ear     CC BY-NC-SA 4.0    University of Dundee
+ *     Cranial Nerves and Foramina  CC BY 4.0          University of Dundee, CAHID
+ *     Kidney (lissiecowley)        CC BY-NC 4.0
+ *     "Brainder / White matter"    upstream credit WRONG — resolved, see below
+ *
+ * ⚠️ THREE OF THE FOUR ARE IN `COMPONENTS`; THE CAHID CRANIAL NERVES ARE NOT, AND
+ * THAT IS DELIBERATE (docs/PLAN_NEXT.md item 3). Their geometry is not separable
+ * from Z-Anatomy's own nerves by name, and a guessed pattern once caught the
+ * cochlear NERVE along with the cochlea. A confidently wrong tag is worse than an
+ * honest gap. What is NOT foregone is the credit: CC BY 4.0 requires attribution,
+ * so the component is named in `COPYRIGHT_MAIN` below, in `licences.json`, and in-app
+ * by `AtlasAttribution`. It was missing from the first two until 17 August 2026 —
+ * i.e. from exactly the two credits that travel with the file.
  *
  * **Per D12b this script imports all of it.** The project is not becoming a
  * commercial product, stays open source, and renders every attribution its
@@ -24,11 +34,17 @@
  * `COMPONENTS` below, and `npm run check:licences` turns those tags into
  * `docs/LICENCE_LOG.md` for pre-publication due diligence.
  *
- * ⚠️ One item attribution cannot settle: the University of Washington white
- * matter has NO licence at all. Attribution satisfies a licence's conditions; it
- * cannot create a grant that was never made. It is imported and flagged so a
- * permission request can be sent before publication — that is a task, not a
- * blocker on the build.
+ * ⚠️ The "one item attribution cannot settle" is SETTLED (D20, 17 August 2026).
+ * The upstream credit — "'Brainder' and 'White matter' from the University of
+ * Washington", no licence — spent three weeks as this build's one
+ * undistributable component. Then its named source answered: Anderson M.
+ * Winkler of brainder.org denies any UW affiliation, ever, and the measured
+ * geometry splits the component in two. The telencephalon pair is a
+ * Brainder-style grey/white boundary surface — CC BY-SA 3.0, see
+ * `white-matter-brainder` in `COMPONENTS`. The spinal-cord tube cannot be his
+ * (Brainder is cortex-only) and returns to Z-Anatomy's own default — see the
+ * note where its tag used to be. Nothing in this file is excluded by
+ * `--publishable` any more; the flag stays, for the next unlicensed component.
  *
  * ⚠️ Three of the four systems added on 28 July — Nervous, CardioVascular and
  * Lymphoid — were NEVER licence-blocked. They are plain CC BY-SA and were simply
@@ -207,18 +223,59 @@ const COMPONENTS = [
     note: 'Non-commercial. Attribution required.',
   },
   {
-    id: 'white-matter-uw',
-    match: /^White_matter_of_(telencephalon|spinal_cord)[lr]?$/i,
-    licence: 'NONE STATED',
-    holder: 'University of Washington',
-    title: 'Brainder / White matter',
+    id: 'white-matter-brainder',
+    /**
+     * ⚠️ TELENCEPHALON ONLY — the spinal cord is deliberately NOT here (below).
+     *
+     * This component was `white-matter-uw`, `NONE STATED`, University of
+     * Washington, and `--publishable` dropped it. Re-identified and relicensed
+     * on 17 August 2026 (D20) on three legs, each independent of the others:
+     *
+     *   1. Z-Anatomy's own licence file names the component "Brainder" — and
+     *      Brainder IS brainder.org, Anderson M. Winkler's project. The
+     *      "University of Washington" half of that credit is DENIED by Winkler
+     *      himself, in writing: neither he nor Brainder was ever affiliated
+     *      with UW.
+     *   2. Winkler's discriminator: Brainder ships CORTICAL surfaces — pial,
+     *      and a "white" surface that is the grey/white BOUNDARY. Measured on
+     *      this very FBX: each hemisphere is one closed folded shell,
+     *      sphericity 0.219 (folded-cortical range), gyri and sulci throughout,
+     *      smooth medial wall — exactly a FreeSurfer-style white surface, and
+     *      nothing like tract geometry.
+     *   3. Left and right are exact mirrors of one source hemisphere, which is
+     *      how you use a downloaded reference model, not how you sculpt.
+     *
+     * WHY PUBLISHABLE EITHER WAY: if derived from Brain for Blender, the grant
+     * is CC BY-SA 3.0, and §4(b) of that licence permits distributing
+     * adaptations under a later version — our CC BY-SA 4.0 asset qualifies. If
+     * instead it was "used as reference" only (upstream's other phrasing), the
+     * geometry is Z-Anatomy's own CC BY-SA 4.0. BOTH branches carry a licence;
+     * the only reading that blocked distribution — an unlicensed UW release —
+     * is the one the named source denies. Winkler's confirmation from the
+     * renders decides the CREDIT WORDING, not the publishability.
+     */
+    match: /^White_matter_of_telencephalon[lr]?$/i,
+    licence: 'CC BY-SA 3.0',
+    holder: 'Anderson M. Winkler (Brainder)',
+    title: 'Brain for Blender — white (grey/white boundary) surface',
     note:
-      '⚠️ THE ONE ITEM ATTRIBUTION CANNOT SETTLE. Z-Anatomy’s own licence file lists ' +
-      'this component with no licence at all, and silence grants nothing — not even ' +
-      'non-commercial redistribution. Attribution answers a licence’s conditions; it ' +
-      'cannot manufacture a grant that was never made. Included here as instructed and ' +
-      'flagged in the log so a permission request can be sent before publication.',
+      'The grey/white BOUNDARY surface of the cerebral hemispheres, not white matter ' +
+      'proper — Winkler’s own distinction, and the measured geometry agrees. Credit ' +
+      'wording awaits his preference; the identification and the licence do not.',
   },
+  /**
+   * ⚠️ `White_matter_of_spinal_cord` is NO LONGER TAGGED, and that is a
+   * decision, not an oversight (D20). It was swept into `white-matter-uw` by a
+   * name regex, but it is a different object entirely: an open smooth tube
+   * following the vertebral canal — measured 255 boundary edges, no folding.
+   * Brainder is cortex-only by its author's statement, so it cannot be his;
+   * and the only line ever tying it to a third party was the UW credit that
+   * source denies. With that line discredited, the mesh returns to the file's
+   * default: Z-Anatomy's own CC BY-SA 4.0 work, like every other untagged
+   * structure. Tagging it to ANY component now would be over-attribution — the
+   * inner-ear pattern's mistake again. Item 2 of docs/OUTREACH.md asks
+   * upstream to confirm.
+   */
 ]
 
 /**
@@ -817,18 +874,46 @@ console.log(
  * import.
  */
 /**
- * `asset.copyright` names every rights holder whose geometry is in the file.
+ * `asset.copyright` names every rights holder whose geometry is in THAT file —
+ * two strings, because the two assets do not contain the same work.
  *
- * All four are required credits under their own terms, and this is the credit
- * that travels INSIDE the asset when everything around it is lost. The in-app
- * `AttributionBar` renders the same set.
+ * These are the credits that travel INSIDE the assets when everything around them
+ * is lost. The in-app `AttributionBar` renders the same sets.
+ *
+ * ⚠️ `COPYRIGHT_MAIN` IS THE FULL SET FROM UPSTREAM'S `License.txt`, NOT THE SET
+ * IN `COMPONENTS`. The CAHID cranial nerves are credited here and never tagged per
+ * structure — see the licence note at the top of this file. Deriving this string
+ * from `COMPONENTS` would therefore drop a required credit, which is how it went
+ * missing in the first place.
  */
-const COPYRIGHT =
-  'Z-Anatomy - The open source atlas of anatomy - CC-BY-SA 4.0; ' +
-  'incl. Anatomy of the Inner Ear by University of Dundee School of Medicine (CC-BY-NC-SA 4.0), ' +
-  'Kidney by lissiecowley (CC-BY-NC 4.0), ' +
-  'and Brainder/white matter by University of Washington (NO LICENCE STATED); ' +
+const ZA_AND_BP3D =
+  'Z-Anatomy - The open source atlas of anatomy - CC-BY-SA 4.0; '
+const DERIVED_FROM =
   'derived from BodyParts3D - The Database Center for Life Science - CC-BY-SA 2.1 Japan'
+
+const COPYRIGHT_MAIN =
+  ZA_AND_BP3D +
+  'incl. Anatomy of the Inner Ear by University of Dundee School of Medicine (CC-BY-NC-SA 4.0), ' +
+  'Cranial Nerves and Foramina by University of Dundee, CAHID (CC-BY 4.0), ' +
+  'Kidney by lissiecowley (CC-BY-NC 4.0), ' +
+  'and white matter boundary surfaces from Brain for Blender by Anderson M. Winkler, brainder.org (CC-BY-SA 3.0); ' +
+  DERIVED_FROM
+
+/**
+ * ⚠️ THE REGIONS ASSET GETS A NARROWER CREDIT, AND MUST.
+ *
+ * `Regions of human body100.fbx` contains none of the four third-party
+ * components — it is body-surface topography and the cleanest asset in the set,
+ * which is what `licences.json` records for `z-anatomy-regions`. Both assets were
+ * given the aggregate string until 17 August 2026, so the regions file claimed a
+ * non-commercial inner ear and an unlicensed white matter that are not in it.
+ *
+ * That is over-attribution, and over-attribution is its own kind of wrong: it
+ * marks geometry as more restricted than it is, and the same mistake in the
+ * opposite direction — an over-broad inner-ear tag — is already recorded in
+ * `COMPONENTS` above. A credit should name what is actually inside the file.
+ */
+const COPYRIGHT_REGIONS = ZA_AND_BP3D + DERIVED_FROM
 
 const ASSET_OUT = {
   main: OUT,
@@ -839,7 +924,7 @@ function makeAsset(id) {
   const doc = new Document()
   doc.createBuffer()
   const scene = doc.createScene(id === 'regions' ? 'Z-Anatomy surface regions' : 'Z-Anatomy')
-  doc.getRoot().getAsset().copyright = COPYRIGHT
+  doc.getRoot().getAsset().copyright = id === 'regions' ? COPYRIGHT_REGIONS : COPYRIGHT_MAIN
   return { id, doc, scene, structures: [] }
 }
 

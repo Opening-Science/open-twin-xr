@@ -111,9 +111,11 @@ rejected.
 
 Third-party components inside Z-Anatomy — the inner ear (Univ. of Dundee,
 CC BY-NC-SA 4.0), the kidney (lissiecowley, CC BY-NC 4.0), Cranial Nerves and
-Foramina (Univ. of Dundee CAHID, CC BY 4.0), and white matter (Univ. of
-Washington, **no licence stated**) — are credited in-app and recorded per
-structure. See the generated table in `docs/HANDOVER.md`.
+Foramina (Univ. of Dundee CAHID, CC BY 4.0), and the white matter boundary
+surfaces (Brain for Blender, Anderson M. Winkler, CC BY-SA 3.0 — upstream
+miscredits them to the University of Washington, which their author denies;
+see D20) — are credited in-app and recorded per structure. See the generated
+table in `docs/HANDOVER.md`.
 
 ### Segmentation and mesh pipeline
 

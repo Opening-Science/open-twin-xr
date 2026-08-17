@@ -116,8 +116,9 @@ sent to them.** Serving to logged-in users is still distribution.
 | **BodyParts3D** | CC BY 4.0 | ✅ Yes | Attribution + indicate changes | **(!)** DBCLS have not confirmed the 2025 relicence in writing; several upstream pages still say CC BY-SA 2.1 JP |
 | **Z-Anatomy** — own geometry, 3,606 structures | CC BY-SA 4.0 | ✅ Yes | Attribution, indicate changes, **share-alike attaches to this asset** | — |
 | ↳ Dundee inner ear — 4 structures (cochlea, vestibule, per side) | CC BY-NC-SA 4.0 | ⚠️ Non-commercial only | Attribution + share-alike; must not be sold | — attribution suffices |
+| ↳ Dundee CAHID cranial nerves and foramina — **credited, not counted** | CC BY 4.0 | ✅ Yes | Attribution. Deliberately not tagged per structure — Dundee's nerves and Z-Anatomy's own are not separable by name (`PLAN_NEXT.md` item 3), so no row of this table can carry a count for it | — attribution suffices. ⚠️ It was missing from the register and the assets' embedded copyright until 17 August 2026 |
 | ↳ lissiecowley kidney — 4 structures | CC BY-NC 4.0 | ⚠️ Non-commercial only | Attribution; must not be sold | — attribution suffices |
-| ↳ UW white matter — **0 structures, excluded** | no licence stated | ⛔ **Excluded from the build** | Absent by `--publishable`; no grant exists, and attribution cannot create one | **(!)** written permission required before it can ever return |
+| ↳ white matter boundary surfaces — **restored** (was "UW, no licence, excluded") | CC BY-SA 3.0 (Brain for Blender, Anderson M. Winkler) | ✅ Yes, since D20 (17 Aug 2026) | Attribution + share-alike; BY-SA 3.0 §4(b) permits the BY-SA 4.0 aggregate. Upstream's UW credit is denied by the named source; the spinal-cord mesh proved to be Z-Anatomy's own | — credit wording awaits Winkler's reply; publishability does not |
 | ↳ ossicles in `SkeletalSystem100.fbx` (incus, stapes, malleus) | assumed Z-Anatomy's own, **untagged** | ⚠️ Attribution unresolved | Currently credited as Z-Anatomy's | **(!)** verify against upstream `License.txt` — they may belong to the Dundee component |
 | **Z-Anatomy regions** | CC BY-SA 4.0 | ✅ Yes | Attribution + share-alike. Cleanest asset in the set — no third-party components | — |
 | **HuBMAP HRA** (female + male) | CC BY 4.0 | ✅ Yes | Attribution + indicate changes. Derived from NLM Visible Human, public domain since 2019 | — |
@@ -154,11 +155,13 @@ the obligation off the CC BY geometry and off the MIT code.
    Sunnybrook CC0 fitted models. A ready-to-send draft is in
    `docs/PLAN_INTEGRATION.md` under B6. **This blocks any public release of the
    heart.**
-2. **(!) University of Washington** — written permission for the Brainder white
-   matter, or replace it with CT-segmented white matter from MOOSE (Apache-2.0).
-   Currently excluded, so nothing is blocked today.
+2. ~~**(!) University of Washington**~~ — **resolved without them (D20, 17 Aug
+   2026).** Brainder's author denies any UW affiliation; the cortical pair is his
+   CC BY-SA 3.0 boundary surface, restored to the build, and the spinal cord is
+   Z-Anatomy's own. Only the credit wording still waits on his reply.
 3. **(!) Z-Anatomy upstream** — check `License.txt` on the ossicle attribution, so
-   the incus, stapes and malleus are credited to whoever actually owns them.
+   the incus, stapes and malleus are credited to whoever actually owns them — and
+   tell them their "'Brainder' / University of Washington" credit is wrong, per D20.
 4. **(!) DBCLS** — written confirmation of the BodyParts3D CC BY 4.0 relicence.
 5. **(!) Internal** — establish or replace the CT atlas's source scan. No third
    party to contact; this is a record that was never kept.
@@ -177,10 +180,12 @@ the obligation off the CC BY geometry and off the MIT code.
 
 - **Z-Anatomy** — Lluís Vinent et al. CC BY-SA 4.0.
   <https://github.com/LluisV/Z-Anatomy> · <https://www.z-anatomy.com/>
-  Derived from BodyParts3D. Contains third-party components: *Anatomy of the Inner
-  Ear* (University of Dundee School of Medicine, CC BY-NC-SA 4.0), *Kidney*
-  (lissiecowley, CC BY-NC 4.0), and *Brainder / white matter* (University of
-  Washington, no licence stated — excluded from the deployed build).
+  Derived from BodyParts3D. Contains **four** third-party components, per its own
+  `Resources/Models/License.txt`: *Anatomy of the Inner Ear* (University of Dundee
+  School of Medicine, CC BY-NC-SA 4.0), *Cranial Nerves and Foramina* (University of
+  Dundee, CAHID, CC BY 4.0), *Kidney* (lissiecowley, CC BY-NC 4.0), and the white
+  matter boundary surfaces (*Brain for Blender*, Anderson M. Winkler, CC BY-SA 3.0 —
+  miscredited upstream to a "University of Washington" the author disclaims; D20).
 
 - **HuBMAP Human Reference Atlas (HRA)** — CC BY 4.0.
   <https://humanatlas.io/> ·

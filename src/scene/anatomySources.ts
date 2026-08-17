@@ -450,12 +450,18 @@ export const ANATOMY_SOURCES: Record<AnatomySourceId, AnatomySource> = {
         licence: 'CC BY 4.0',
       },
       {
-        title: 'Brainder / white matter',
-        holder: 'University of Washington',
-        licence: 'no licence stated',
-        // The one item a credit line cannot resolve: attribution satisfies a
-        // licence's conditions, it does not create a grant that was never made.
-        needsPermission: true,
+        // Was 'Brainder / white matter — University of Washington, no licence
+        // stated', and --publishable dropped it. Resolved 17 August 2026 (D20):
+        // Anderson M. Winkler of brainder.org denies any UW affiliation, and
+        // the measured geometry is his project's grey/white BOUNDARY surface —
+        // closed folded hemispheres, sphericity in the cortical range — not
+        // white matter proper. Under CC BY-SA 3.0 §4(b) an adaptation may be
+        // distributed under a later licence version, which this CC BY-SA 4.0
+        // asset is. The spinal-cord tube was never his (Brainder is
+        // cortex-only) and is Z-Anatomy's own work, so it needs no entry here.
+        title: 'Brain for Blender — white (grey/white boundary) surfaces',
+        holder: 'Anderson M. Winkler (brainder.org)',
+        licence: 'CC BY-SA 3.0',
       },
     ],
     donor: {

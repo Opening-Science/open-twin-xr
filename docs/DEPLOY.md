@@ -24,10 +24,13 @@ server can be small" below.
 preview; it does not change what may lawfully be sent to them. Three things follow, none
 of which auth relaxes:
 
-1. **The University of Washington white matter must not go up.** It carries no licence
-   statement, and silence grants nothing — attribution answers a licence's conditions, it
-   cannot create a grant. Build with `--publishable`, which drops it and nothing else
-   (see below).
+1. **The unlicensed-component gate is currently EMPTY (D20, 17 August 2026).** For three
+   weeks this item read "the University of Washington white matter must not go up" — no
+   licence statement, and silence grants nothing. That component is resolved: its named
+   source (Anderson M. Winkler, Brainder) denies any UW affiliation, the telencephalon
+   pair is his CC BY-SA 3.0 grey/white boundary surface, and the spinal cord is
+   Z-Anatomy's own. Keep building with `--publishable` — the flag is the mechanism that
+   catches the *next* unlicensed component, and today it drops nothing.
 2. **The Z-Anatomy-derived GLB is CC BY-SA.** Share-alike attaches to the *adapted* work,
    so once it is being distributed it has to be redistributable under the same terms,
    with attribution and an indication of changes.
@@ -54,16 +57,16 @@ npm run check:winding && npm run check:structures && npm run check:licences
 **`--publishable` is the flag that matters.** It drops components with no licence
 statement and leaves everything else — the non-commercial components stay, because
 non-commercial is compatible with this project's stance and they need attribution, not
-removal. Without it you get the full research build, which is correct locally and
-unlawful to serve.
+removal.
 
-Confirm the roll-call reads `0 structures NONE STATED ... excluded by --publishable`
-before shipping:
-
-```
-0 structures  NONE STATED   Brainder / White matter (University of Washington)
-                            <- excluded by --publishable
-```
+⚠️ **Since D20 (17 August 2026) it drops NOTHING**, because its one caseload — the
+"University of Washington" white matter — turned out to be a wrongly credited CC BY-SA
+3.0 Brainder surface plus Z-Anatomy's own spinal cord, and both now ship. The
+publishable and research builds are currently identical. Keep the flag anyway: it is
+the mechanism, and the next import may need it. What to confirm before shipping is
+therefore the roll-call itself — every component named with a real licence, and **no
+`NONE STATED` line at all**. If one appears, a new unlicensed component has arrived
+and this document's earlier rule applies to it unchanged.
 
 `bodyparts3d`, `hra` and `hra-m` have no unlicensed components, so their existing
 `.ao.glb` builds can go up as they are.
@@ -71,8 +74,10 @@ before shipping:
 ⚠️ Rebuilding also refreshes the component tags, which only change on a rebuild. That is
 how the Dundee inner-ear tag went from 8 structures to **4** — cochlea and vestibule per
 side, dropping the tympanic membrane and auditory tube, which are MIDDLE ear and were
-being over-attributed. 3,617 structures became 3,614. If your counts differ from
-`LICENCE_LOG.md`, the log is right and your build is stale.
+being over-attributed. The structure count has moved twice for tag reasons: down when
+the then-unlicensed white matter was excluded, back up when D20 restored it under its
+real licence. If your counts differ from `LICENCE_LOG.md`, the log is right and your
+build is stale.
 
 ## 2. Build the app
 
