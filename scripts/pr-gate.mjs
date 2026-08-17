@@ -45,6 +45,7 @@ const gh = (jsonArgs) => {
 }
 
 const REPO = 'Opening-Science/open-twin-xr'
+const failuresEarly = []
 let number = prArg
 if (!number) {
   const branch = execFileSync('git', ['rev-parse', '--abbrev-ref', 'HEAD'], {
@@ -63,13 +64,43 @@ const pr = gh([
   'view',
   number,
   '--json',
-  'number,title,isDraft,mergeable,mergeStateStatus,statusCheckRollup,reviewDecision',
+  'number,title,isDraft,mergeable,mergeStateStatus,statusCheckRollup,reviewDecision,headRefName,headRefOid',
 ])
+
+/**
+ * ⚠️ THE STALENESS CHECK, AND THE FIRST RUN OF THIS GATE NEEDED IT.
+ *
+ * `gh pr view` reports a `statusCheckRollup` without saying which COMMIT it
+ * describes, and GitHub's PR object lags a push by a noticeable window. Measured:
+ * seconds after pushing `da9df2b`, the remote branch was already at `da9df2b`
+ * while the PR still reported head `17438eb`, no CI run existed for the new
+ * commit at all, and CodeRabbit had reviewed only the old one. The gate printed
+ * "✓ ready to merge" against results for a SUPERSEDED commit — precisely the
+ * failure it exists to prevent.
+ *
+ * So the authority is the branch ref on the server, not the PR object and not the
+ * local checkout. Everything below must correspond to that SHA.
+ */
+const branchRef = gh(['api', `repos/${REPO}/git/ref/heads/${pr.headRefName}`])
+const tip = branchRef?.object?.sha
+if (!tip) {
+  console.error('✗ could not read the remote branch tip')
+  process.exit(2)
+}
+if (tip !== pr.headRefOid) {
+  failuresEarly.push(
+    `the PR object is STALE — branch is at ${tip.slice(0, 7)} but the PR reports ` +
+      `${pr.headRefOid.slice(0, 7)}. GitHub has not caught up with the push yet; ` +
+      'every check and review below describes the older commit.',
+  )
+}
 
 const failures = []
 const notes = []
+for (const f of failuresEarly) failures.push(f)
 
-console.log(`PR #${pr.number} — ${pr.title}\n`)
+console.log(`PR #${pr.number} — ${pr.title}`)
+console.log(`branch tip ${tip.slice(0, 7)}\n`)
 
 // --- 1. draft -----------------------------------------------------------------
 if (pr.isDraft) failures.push('it is still a draft')
@@ -78,6 +109,11 @@ if (pr.isDraft) failures.push('it is still a draft')
 const checks = (pr.statusCheckRollup ?? []).filter((c) => c.__typename !== 'StatusContext' || c.state)
 const state = (c) => c.conclusion || c.state || 'PENDING'
 const bad = checks.filter((c) => !['SUCCESS', 'NEUTRAL', 'SKIPPED'].includes(state(c)))
+// A green check that ran on an older commit says nothing about this one.
+const runs = gh(['run', 'list', '--branch', pr.headRefName, '--limit', '20', '--json', 'headSha,status,conclusion'])
+if (runs.length && !runs.some((r) => r.headSha === tip)) {
+  failures.push(`no CI run exists for the current commit ${tip.slice(0, 7)} — the green build below ran on an earlier one`)
+}
 for (const c of checks) console.log(`  ${state(c).padEnd(9)} ${c.name || c.context}`)
 if (!checks.length) failures.push('no status checks reported yet')
 for (const c of bad) {
@@ -96,7 +132,21 @@ if (!rabbit.length) {
   failures.push('CodeRabbit has not reviewed yet — its check going green is not the same thing')
 } else {
   const last = rabbit[rabbit.length - 1]
-  notes.push(`CodeRabbit reviewed ${rabbit.length}x, last state ${last.state}`)
+  notes.push(
+    `CodeRabbit reviewed ${rabbit.length}x, last state ${last.state} on ` +
+      `${String(last.commit_id).slice(0, 7)}`,
+  )
+  /**
+   * ⚠️ A review of an EARLIER commit is not a review of this one. Same reasoning
+   * as the branch-tip check above: the run that exposed this had CodeRabbit's
+   * only review pointing at the superseded commit while the gate passed.
+   */
+  if (!rabbit.some((r) => r.commit_id === tip)) {
+    failures.push(
+      `CodeRabbit has not reviewed the current commit ${tip.slice(0, 7)} — its latest ` +
+        `review is of ${String(last.commit_id).slice(0, 7)}`,
+    )
+  }
   if (last.state === 'CHANGES_REQUESTED') {
     failures.push('CodeRabbit requested changes')
   }
