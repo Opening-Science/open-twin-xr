@@ -22,11 +22,21 @@ public/models/*.bin
 # history, so the pattern is widened rather than the habit trusted.
 public/models/*.glb.*
 public/models/*.gltf.*
-# The ANNY bake's provenance manifest. It describes assets that are not
-# committed, so committing it would leave a record of a build nobody has —
-# and the parameters it records are already in `src/scene/bodyEnvelopes.ts`
-# and `licences.json`, which ARE reviewed. `npm run bake:anny` rewrites it.
-public/models/anny-provenance.json
+# ⚠️ `public/models/anny-provenance.json` USED TO BE LISTED HERE AND IS TRACKED
+# ANYWAY, which made this file lie about the repository for as long as both were
+# true. A `.gitignore` entry has NO effect on an already-tracked path, so the
+# line sat here reading like a policy while every bake's changes were committed
+# straight past it — including the posed variants added for D25.
+#
+# The line is removed rather than the file untracked, because on inspection the
+# tracked state is the right one: D16 requires that a baked body be
+# regenerable, the manifest is what records the parameters to regenerate it, and
+# it is a few kB of text. The reasoning the old comment gave — "it describes
+# assets that are not committed" — is true of `docs/LICENCE_LOG.md` too, and
+# that is committed for the same reason.
+#
+# If it should ever genuinely stop being tracked, `git rm --cached` it FIRST;
+# adding the ignore line back on its own would change nothing at all.
 # The phenotype grid's sidecar, likewise: it describes a 28 MB .bin that is not
 # committed, and `npm run bake:anny-grid` rewrites both together.
 public/models/anny-grid.json
