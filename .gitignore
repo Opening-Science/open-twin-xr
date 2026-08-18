@@ -68,3 +68,4 @@ scripts/ct-atlas/.cache/
 # entry is re-fetchable from the EBI API, and committing it would freeze a
 # snapshot of somebody else's ontology inside this repository.
 .cache/
+public/data/definitions.json

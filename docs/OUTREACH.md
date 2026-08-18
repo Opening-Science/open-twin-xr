@@ -23,10 +23,10 @@ Sources, in order of authority:
 >    a recipient asks for exact figures, run `npm run check:licences` and read them off
 >    `LICENCE_LOG.md` on the day you reply. Square brackets in the drafts mark a *name*
 >    or a *credit line* to paste in, never a number to invent.
-> 2. **Both repositories are PRIVATE** (checked 17 August 2026:
->    `Opening-Science/open-twin-xr` and `etzm/open-twin-openXR`). The drafts therefore
->    do not link source we cannot show. If a repository is public by the time you
->    send, add the link — it makes every one of these questions easier to answer.
+> 2. **The site and the main repository are PUBLIC** (since 18 August 2026:
+>    <https://opentwin.opening.science> and `Opening-Science/open-twin-xr`;
+>    `etzm/open-twin-openXR` remains private). Drafts may link both — a recipient who
+>    can read `licences.json` and see their credit rendered answers faster.
 > 3. **Verify each address at its source before sending.** Where an address was read
 >    off the rights holder's own page it is marked ✅ *verified*; where it is a channel
 >    rather than a mailbox it is marked ⚠️. Two of the addresses below are not
@@ -42,12 +42,13 @@ Sources, in order of authority:
 | # | recipient | address | question | blocks launch? |
 |---|---|---|---|---|
 | 1 | **biv-me authors** — Joshua R. Dillon, Charlène Mauger | ✅ sent | **✅ ANSWERED 18 Aug 2026.** CARDIOHANCE, local ethics approval, no restrictions; cite the repo + the 2026 Med Image Anal paper (D21) | ~~YES~~ — resolved; the heart ships |
-| 2 | **Z-Anatomy** — Gauthier Kervyn (the modeller), via the **models** repo | ⚠️ no address published; issue on `Z-Anatomy/Models-of-human-anatomy` — **not** the Unity repos | Tell them their "UW, no licence" credit is wrong (the source denies it — D20) and ask which BodyParts3D licence to print | Attribution accuracy of an asset that **is** shipping |
+| 2 | **Z-Anatomy** — Gauthier Kervyn (the modeller), via the **models** repo | ✅ sent | **✅ SENT 18 Aug 2026** as [`Z-Anatomy/Models-of-human-anatomy#7`](https://github.com/Z-Anatomy/Models-of-human-anatomy/issues/7) — the wrong UW credit, the BodyParts3D licence question, and the #5 comparison findings. Awaiting reply | Attribution accuracy of an asset that **is** shipping |
 | 3 | **Brainder** — Anderson M. Winkler | ✅ sent | **✅ ANSWERED 17 Aug 2026.** UW attribution denied; a reply with renders is drafted below | No — the component is excluded today |
 | 4 | ~~**University of Washington**~~ | — | ⛔ **Do not send.** The named source denies any UW affiliation, so the premise is gone | No |
 | 5 | **DBCLS** (BodyParts3D) | ✅ `bodyparts@dbcls.rois.ac.jp` | Written confirmation of the 2025-02-27 CC BY 4.0 relicence | No — but the default atlas rests on an unconfirmed reading |
 | 6 | **HuBMAP HRA** — MC-IU | ✅ `infoccf@indiana.edu` | Which version-specific citation must we render? | No — but the exact wording is a CC BY condition |
-| 7 | **University of Dundee, CAHID** | ⚠️ `sketchfab.com/anatomy_dundee`; `dundee.ac.uk/cahid` | Confirm the credit wording for **both** their components | No — courtesy plus a wording check |
+| 7 | **University of Dundee** — Caroline Erolin (CAHID) | ✅ sent | **✅ ANSWERED TWICE, 18 Aug 2026.** The fuller chains ship (D23); then: the cranial-nerves model has **no CC licence at all** and she gave express permission instead, with the attribution she wants (D23b). She also independently corroborated the DBCLS relicence | No — but it changed what we print |
+| 7b | **University of Dundee** — Eve Laws (Medical School) | ⏳ **awaiting reply** — she is on Caroline's thread, so a reply-all reaches her | The inner ear is the medical school's, not CAHID's: does the McGill → UNC/Duke chain belong in the credit, and which spelling? | No |
 | 8 | **Courtesy notices** — OpenEar, TCIA, NAVER LABS Europe, lissiecowley | see §8 | None. "We are using your work, here is the credit" | No |
 
 Nothing in this table is a licence *fee*, and nothing here is a negotiation. Items
@@ -152,112 +153,92 @@ question. **If there is no reply:** treat as unresolved — the heart stays out.
 
 ---
 
-## 2. Z-Anatomy — two attribution questions, and a courtesy their licence asks for
+## 2. Z-Anatomy — ✅ SENT 18 AUGUST 2026, awaiting reply
 
-> ### ⚠️ Venue and recipient, checked 17 August 2026 — the obvious address is the wrong one
+> **The canonical text is the issue itself:**
+> [`Z-Anatomy/Models-of-human-anatomy#7`](https://github.com/Z-Anatomy/Models-of-human-anatomy/issues/7),
+> filed 18 August 2026 — a lightly tightened edit of the draft below, same claims,
+> same three points, same give-back offer. What lands next depends on the reply:
+> a `License.txt` correction upstream closes the white-matter miscredit at its
+> source; a BodyParts3D answer decides which licence line we print; an ossicle
+> correction, if any, changes one register note. None of it gates anything here.
 >
-> **Post this as an issue on <https://github.com/Z-Anatomy/Models-of-human-anatomy>.**
-> That is the *models* repository: the rights holder answers there under the `Z-Anatomy`
-> account, it is auto-updated from a Blender export every day, and two provenance issues
-> are already open or answered on it (#5 on the kidney, #6 on the lung lobes).
->
-> **Not `LluisV/Z-Anatomy`, and not the new `Z-Anatomy-Community/Z-Anatomy`.** The
-> authors list distinguishes them: Gauthier **Kervyn** did the design, 3D and anatomy;
-> Lluís **Vinent** did the Unity app. Geometry provenance is Kervyn's to answer. The
-> community repo is a fork created 10 August 2026 by one contributor (chepo92) to
-> migrate the Unity project to 6.5; its three issues are its owner's own UI bugs, it has
-> no discussions, and its `Resources/Models/License.txt` is **byte-identical** to
-> LluisV's. It adds nothing on licensing and has no standing over the models.
->
-> **The authoritative licence record is a Google Doc**, linked from the root `LICENSE`
-> of both Unity repos, and the maintainer's position is that it "contains all there is
-> to know":
-> <https://docs.google.com/document/d/1peWW_7IiVgTTAwcI_auv38YSJ6qGWRuTMxzzhkRpXIk/edit>
->
-> **Three things read off that doc and those threads before writing.** ① It lists the
-> same four components — and still gives the white matter **no licence**, with the
-> telling phrasing *"used as reference/included and adapted"*. ② It credits BodyParts3D
-> as **CC BY 4.0**, where both `License.txt` files still say CC BY-SA 2.1 Japan — so the
-> credit line we copied from `License.txt` repeats a statement its own author has since
-> revised. ③ **Per-mesh provenance is not recorded upstream.** Asked in #5 exactly which
-> objects are the Cowley kidney, the answer was "the best would be to find the original
-> model and to compare them." Expect the same for the ossicles and the CAHID nerves:
-> that work is ours to do by comparison, not a record to request.
->
-> **Two notes on how to write it.** In #5 the maintainer reacted badly — reasonably so —
-> to an unidentified requester asking provenance questions while contemplating a
-> commercial product: *"very annoying talking with someone hiding its identity"*. Lead
-> with who you are, the Foundation, and the non-commercial open-source stance. And note
-> that in #6 he states a **maximalist reading of share-alike**: that any app reading the
-> model must release its whole code under CC BY-SA. Our position — the model is a
-> separate asset, the app an aggregate, code stays MIT — is a reading of the licence
-> text, not his to redefine; asking him to bless it would only put a "no" in a public
-> thread. Say plainly what we ship and under what terms, and let the licence govern.
+> **Found after sending:** the same wrong credit is live in a third place — the
+> licence panel of z-anatomy.com's own web app (Unity WebGL) shows *"'Brainder' and
+> 'White matter' from the University of Washington"* and the stale
+> *BodyParts3D CC-BY-SA 2.1 Japan* line. Worth a one-line follow-up comment on #7 so
+> the fix reaches the app too, not only `License.txt`.
 
-**To:** ⚠️ no email address is published anywhere — not in either repo, not in the
-licence doc. A GitHub issue is the channel; the text below works unchanged as one.
+> ### Venue, in brief
+>
+> Post as an issue on **<https://github.com/Z-Anatomy/Models-of-human-anatomy>** — the
+> models repo, where the rights holder answers (Gauthier Kervyn did the geometry;
+> Lluís Vinent only the Unity app). Not the Unity repos, not the community fork.
+> ⚠️ "No email exists" was wrong: the About panel of z-anatomy.com publishes
+> `kervyngauthier@gmail.com` and `lluisvinentdev@gmail.com`, and a 2026 job posting
+> uses `gauthier.kervyn@z-anatomy.com`. The public issue remains the right venue for
+> a public correction; the addresses are the nudge channel if #7 goes quiet.
+> Three things their existing threads establish: per-mesh provenance is
+> **not recorded upstream** (#5 — "compare against the original model" is the answer,
+> so bring comparison results rather than asking for records); introduce yourself and
+> the project's non-commercial open-source stance up front, which the licence-file
+> request to be informed invites anyway; and state plainly what we ship under which
+> terms, with the licence text as the shared reference — that is more useful to both
+> sides than asking for interpretations.
 
-**Subject:** Attribution questions from a derivative work — the white matter component, and the BodyParts3D credit
+**Subject:** Your white-matter credit names the wrong source; which BodyParts3D licence should derivatives print; and the comparison #5 asked for
 
 > Dear Gauthier, dear Z-Anatomy authors,
 >
-> Z-Anatomy is the richest individually-named anatomy we have found under an open
-> licence, and it is the source that made a browsable body possible for us at all.
-> `Resources/Models/License.txt` says "a good practice is to inform the authors when
-> derivated works are produced", so this note is first of all that: we ship a glTF
-> conversion of your skeletal, muscular, joint, cardiovascular, nervous, lymphoid and
-> visceral files, plus the body-surface regions as a separate asset, in an open-source
-> WebXR body viewer published by the Open Science Foundation
-> (<https://opentwin.opening.science>, login-gated at present). Both required credits
-> are rendered in the interface and embedded in every asset:
+> Z-Anatomy is the richest individually-named open anatomy there is, and the source
+> that made our project possible: an open-source WebXR body viewer by the Open Science
+> Foundation — public at <https://opentwin.opening.science>, source at
+> <https://github.com/Opening-Science/open-twin-xr>. Your licence file asks that
+> derivative works inform you — this is that note. We ship glTF conversions of your
+> seven system files plus the surface regions, under CC BY-SA 4.0 as separate assets,
+> changes stated, both required credits and all four component credits rendered in
+> the interface and embedded in the files (`licences.json` in the repo is the full
+> register).
 >
-> > Z-Anatomy - The open source atlas of anatomy - CC-BY-SA 4.0; derived from
-> > BodyParts3D - The Database Center for Life Science - CC-BY-SA 2.1 Japan.
+> Three points, all about crediting accurately:
 >
-> The adapted geometry is distributed under CC BY-SA 4.0, kept as its own file so the
-> share-alike stays attached to your work rather than reaching assets that do not carry
-> it, and the changes we made are stated — decimation, baked ambient occlusion, and an
-> application palette. Every one of your four listed components is credited too, in the
-> interface and inside the asset. Three questions, all about crediting them accurately.
+> 1. **Your "Brainder / White matter — University of Washington" credit is wrong, on
+>    its author's word.** Anderson M. Winkler (Brainder) told us in writing that he
+>    has never been affiliated with UW — and that Brainder ships grey/white *boundary*
+>    surfaces, not white matter proper. Your `White_matter_of_telencephalon` pair
+>    measures as exactly that (one closed folded hemisphere, mirrored), so we credit
+>    it *Brain for Blender, Anderson M. Winkler, CC BY-SA 3.0*. The spinal cord
+>    cannot be his (cortex-only), so we treat it as your own work. Please correct
+>    `License.txt` so the unlicensed-looking listing stops propagating downstream —
+>    and correct us if either identification is wrong.
+> 2. **Which BodyParts3D licence should derivatives print?** Your licence document
+>    says CC BY 4.0; `License.txt` in the repos still says CC BY-SA 2.1 Japan, which
+>    is what we copied. DBCLS's own page has said CC BY 4.0 since 2025-02-27 — can
+>    you confirm the document is current so we print what you intend?
+> 3. **We ran the comparison your answer on #5 recommends — against BodyParts3D — and
+>    the findings are yours to reuse.** Method: both atlases in one frame,
+>    per-structure chamfer distance across 71 name-matched structures, centroid-aligned;
+>    rigid retopologies (frontal bone, sphenoid) land at ~2 mm median.
+>    **(a) Ossicles and inner ear:** BodyParts3D contains no incus, stapes, malleus,
+>    cochlea, vestibule — or renal pelvis. TARO is a 2 mm MRI phantom and cannot
+>    resolve ossicles, so none of these can be BodyParts3D retopologies. We credit the
+>    ossicles as your own modelling (middle-ear bones, and Dundee's component is the
+>    *inner* ear) — correct us if they are Dundee's. Same for the CAHID nerves: credited
+>    as a component, untagged per mesh, since theirs and yours are not separable by name.
+>    **(b) White matter**, supporting point 1: your telencephalon pair are *exact
+>    mirrors* of one another (2.4 mm median), where BodyParts3D's `cerebral white
+>    matter` pair is asymmetric like any real segmentation, and the two models diverge
+>    entirely — a single downloaded hemisphere, mirrored, is the natural reading.
+>    **(c) The #5 kidney question:** your kidney diverges from BodyParts3D's at ~15 mm
+>    median — several times the clean-retopology baseline — and the renal pelvis has no
+>    BodyParts3D ancestor at all. Both consistent with your own credit of the Cowley
+>    model. The one step we could not take is comparing against the Cowley model
+>    itself: its Sketchfab download needs an account, so that last confirmation is
+>    yours, or anyone's with a login.
 >
-> 1. **The "Brainder / White matter" credit in your licence file is wrong, and we can
->    tell you what it should say.** Your document lists *"'Brainder' and 'White matter'
->    from the University of Washington"* — alone among your components, with no licence.
->    We wrote to Brainder's author, Anderson M. Winkler, and he answered two things: he
->    and Brainder have **never been affiliated with the University of Washington**, and
->    Brainder ships *cortical* surfaces — a pial surface and the grey/white *boundary*
->    surface, not white matter proper. Measured against that, your
->    `White_matter_of_telencephalon` pair is exactly such a boundary surface — one
->    closed folded hemisphere, mirrored — so we now credit it as *Brain for Blender,
->    Anderson M. Winkler, CC BY-SA 3.0* and ship it under that grant. Your
->    `White_matter_of_spinal_cord` cannot be his (Brainder is cortex-only): we treat it
->    as your own CC BY-SA work. Two asks: correct the credit in `License.txt`, so the
->    unlicensed-looking listing stops propagating to everyone downstream of you — and
->    tell us if either identification is wrong, since you would know.
-> 2. **Which BodyParts3D licence should a derivative print?** Your licence document
->    credits *"BodyParts3D — The Database Center for Life Science — CC-BY 4.0"*, while
->    `Resources/Models/License.txt` in both Unity repositories still says CC-BY-SA 2.1
->    Japan. We copied the credit from the file, so we are currently printing the older
->    one. DBCLS's own licence page has said CC BY 4.0 since 2025-02-27, which suggests
->    the document is the current statement and the file is stale — can you confirm, so we
->    print what you intend? (Related and trivial: your document names the kidney's author
->    "Lissie Cowley" where we print the handle "lissiecowley". We will follow you.)
-> 3. **The ossicles, if you happen to remember.** `SkeletalSystem100.fbx` contains the
->    incus, stapes and malleus, and we credit them as your own on the reasoning that they
->    are middle-ear bones in a skeleton file while the Dundee component is the *inner*
->    ear. Same question for the CAHID cranial nerves: we credit the component but cannot
->    say which meshes are theirs, so we tag none of them rather than guess — a name match
->    once caught the cochlear *nerve* along with the cochlea, and a confidently wrong tag
->    is worse than an honest gap. I have read your answer on issue #5 and take the point
->    that comparing against the original models is the way to settle this; that work is
->    ours, not yours. If either answer is simply known to you, it saves us the comparison.
->
-> Two things we can give back, whichever way the answers go. Our importer produces
-> per-structure tags recording which component each mesh belongs to, and we built a
-> structure-name → FMA crosswalk by joining your names against BodyParts3D, the atlas
-> yours was retopologised from. Both are exactly the comparison material issue #5 asks
-> for, both are yours under the same licence, and either may be worth more to you than to
-> us. Say the word and we will open a pull request or send the files.
+> In return: our importer's per-structure component tags and a name → FMA crosswalk
+> built against BodyParts3D — exactly the comparison material #5 asks for, yours under
+> the same licence. Say the word and we will open a pull request.
 >
 > With thanks and admiration for the atlas,
 >
@@ -333,7 +314,10 @@ licence doc. A GitHub issue is the channel; the text below works unchanged as on
 >
 > Either way I will correct our own record to say that the University of Washington
 > attribution is denied by the named source, and raise it with Z-Anatomy so the error
-> stops propagating to everyone downstream of them.
+> stops propagating to everyone downstream of them. One thing to know: our rights
+> register and these working notes are public (github.com/Opening-Science/open-twin-xr),
+> so your answer is recorded there in substance — tell me if you would rather it be
+> worded differently, or quoted verbatim, or attributed some other way.
 >
 > Thank you for answering so quickly, and for the offer of a call — I will take it up if
 > the screenshots leave it open.
@@ -532,7 +516,181 @@ Library page.
 
 ---
 
-## 7. University of Dundee, CAHID — one letter, two components
+## 7. University of Dundee — ✅ SENT, AND ANSWERED 18 AUGUST 2026
+
+> ### The answer changed what we print (D23), and left one question
+>
+> **Caroline Erolin** (Reader in Medical Art, `c.d.erolin@dundee.ac.uk`) replied that
+> both models are themselves derivatives, and gave the wording:
+>
+> - **Anatomy of the Inner Ear** — a derivative of *"3D Ear"* by W. Robert J. Funnell,
+>   Sam Daniel and Daren Nicholson at **McGill University**, under **CC BY-NC-SA 1.0**.
+>   (Also: it belongs to the medical school's account, not CAHID's.)
+> - **Cranial Nerves and Foramina** — produced by **Sophia Lappe**, based upon
+>   **BodyParts3D**, © DBCLS, CC BY-SA 2.1 Japan.
+>
+> Both chains now ship — register, embedded copyright, and in-app under each parent
+> credit via `RightsComponent.derivedFrom`. Verification added three things her mail
+> did not: the McGill host is dead (the 1.0 licence is confirmed from the Internet
+> Archive), behind McGill sits **uncredited** cadaver MRI from the Hensons at UNC
+> Chapel Hill scanned at Duke, and CC SA 1.0 does not actually permit the 1.0 → 4.0
+> step Dundee took. None of that changes our position: the NC term flows down under
+> every reading and this project is non-commercial.
+>
+> **⚠️ Worth one more short mail.** The Cranial Nerves and Foramina Sketchfab page
+> states **no licence at all** — an empty licence object, as on every model on that
+> account — and is not downloadable. The CC BY 4.0 we print comes from Z-Anatomy's
+> file, not from Dundee's page, and a sibling Dundee cranial-nerves model by Claire
+> Cooper is listed CC BY-SA 4.0 elsewhere. She was asked about wording, not licence,
+> and neither confirmed nor disputed it. Ask plainly: *is the model CC BY 4.0, and
+> how did Z-Anatomy obtain a model that cannot be downloaded?* The second half is
+> really a question for Z-Anatomy (issue #7), and their answer may matter more.
+
+> ### ✅ ANSWERED 18 August 2026 — and it changed the licence, not just the wording
+>
+> **The cranial-nerves model has no CC licence at all.** Her words: it "is not
+> downloadable [so] it does not have any CC license attached on our Sketchfab page",
+> and the licence its description states is *the licence of the data it is based on*.
+> So the `CC BY 4.0` we printed for weeks was Z-Anatomy's inference, not Dundee's
+> grant — the page we could not find a licence on genuinely has none.
+>
+> **What we have instead is better: express written permission.** "As this is based
+> on the open-source Body Parts 3D data I don't have a problem with it being
+> re-purposed for this project", plus the attribution she asked for, naming the
+> BodyParts3D chain. The in-app credit now reads *used with permission* and names
+> that chain rather than asserting a grant nobody made (D23b).
+>
+> **She corroborated the DBCLS relicence independently**, which is worth more than it
+> looks: checking BodyParts3D's page to answer us, she found it now states CC BY 4.0
+> where it said CC BY-SA 2.1 Japan when she published five years ago — "Which matches
+> what is on Z-anatomy." That is a second party reaching item 5's reading without
+> being told it. Still not written confirmation from DBCLS, but no longer only ours.
+>
+> **The inner ear is not hers** — the medical school holds it, and she referred those
+> questions to Eve Laws. See §7b.
+>
+> **Reply to send:** thank her, quote back the exact credit line now rendered so she
+> can object to the wording, and note the one small thing we did not adopt verbatim —
+> her proposed string contains a copy-paste doubling ("licensed under BodyParts3D, ©
+> The Database Center for Life Science licensed under CC Attribution 4.0"), so we
+> render the un-doubled form and she can correct us if she wants it as written.
+
+<details>
+<summary>The first exchange, sent 18 August 2026</summary>
+>
+> Sent to `c.d.erolin@dundee.ac.uk`, cc Eve. A lightly edited version of the draft
+> below; every question and commitment survived. Two wording differences worth
+> knowing if her reply turns on them:
+>
+> - **The NoAI paragraph was generalised.** The sent version explains what a NoAI
+>   clause does ("forbids using it as training data, putting it into datasets built
+>   for model development, or feeding it to a generative system as input") rather
+>   than quoting Sketchfab's terms verbatim — *"in datasets for, in the development
+>   of, or as inputs to generative AI programs"*, effective 23 March 2023. Same
+>   scope, and the quotable source is here if it is ever needed.
+> - **The "we would ask first" clause was cut** — the draft promised that any future
+>   AI-consuming work would be asked about in advance with her model excluded by
+>   default. Not sent, so it is not a commitment she has been given. Worth honouring
+>   anyway, and worth re-stating explicitly if that work is ever proposed.
+>
+> **What lands next:** a licence answer replaces the `CC BY 4.0` we print on
+> Z-Anatomy's authority; a yes on the UNC/Duke layer adds one more `derivedFrom`
+> line; a spelling preference flips Nicholson/Nicolson. None of it gates anything.
+> If she asks for screenshots, the credit block is under "All models and sources".
+
+**The draft, as prepared — to `c.d.erolin@dundee.ac.uk`, cc Eve (medical school):**
+
+**Subject:** Re: Credit wording — both chains are live, and two questions back
+
+> Dear Caroline,
+>
+> Thank you — that was exactly the detail we were missing, and both chains are now
+> live at <https://opentwin.opening.science>. The credits read:
+>
+> > Anatomy of the Inner Ear — University of Dundee School of Medicine — CC BY-NC-SA 4.0
+> > ↳ a derivative of "3D Ear" by W. Robert J. Funnell, Sam Daniel and Daren Nicholson
+> >   at McGill University, used under CC BY-NC-SA 1.0
+> >
+> > Cranial Nerves and Foramina — University of Dundee, CAHID — produced by Sophia
+> > Lappe — CC BY 4.0
+> > ↳ based upon the BodyParts3D data set, © The Database Center for Life Science,
+> >   licensed under CC Attribution-Share Alike 2.1 Japan
+>
+> They appear in the interface (open "All models and sources"), in the machine-readable
+> register in the repository, and inside the asset files themselves, so the credit
+> travels if a file is ever handed on without the app around it.
+>
+> On where they are used: they reach us through **Z-Anatomy**, not from your Sketchfab
+> pages directly. Z-Anatomy publishes a Blender/FBX distribution whose licence file
+> lists both of your models among its included components; we convert those files to
+> glTF for the browser. That is why you could not find them on their website — the web
+> app there shows only the skeleton, while the downloadable model set is the full body.
+>
+> Two questions back, if you have the patience for them.
+>
+> 1. **Is Cranial Nerves and Foramina really CC BY 4.0?** We print that on Z-Anatomy's
+>    authority, but your Sketchfab page for it states no licence at all, and the model
+>    is not downloadable there. (Your inner-ear page, by contrast, states CC BY-NC-SA
+>    4.0 explicitly and is downloadable.) If the licence is something else — a
+>    colleague's similar cranial-nerves model is listed CC BY-SA 4.0 elsewhere — we
+>    would rather print what you intend. And if you know how Z-Anatomy obtained it, we
+>    would be glad to know; we have an open question with them about their licence
+>    file and can pass anything on.
+>
+> **On the NoAI marking, since you will have seen how this project is built.** Your
+> cranial nerves model carries Sketchfab's NoAI tag (the inner ear does not). I want
+> to be precise rather than reassuring about it.
+>
+> Sketchfab's marking forbids use "in datasets for, in the development of, or as
+> inputs to generative AI programs". It does not restrict viewing, rendering or
+> redistribution — and rendering is the whole of what we do. The geometry is converted
+> by ordinary deterministic tooling — FBX to glTF, welded, decimated, compressed, with
+> ambient occlusion baked per vertex — and then drawn by a WebGL renderer. It is never
+> a training input, never part of a dataset, and never fed to a model.
+>
+> The distinction matters here because the software genuinely is written by an AI
+> agent, as I mentioned. The line is this: **the agent writes the code; the anatomy is
+> data that code renders.** The agent reads licence files, writes conversion scripts
+> and edits the interface. No mesh passes into a model, and none will. If we ever
+> wanted to do anything that did — shape learning across atlases, say — that would be
+> a separate question and we would ask first, with your model excluded by default.
+>
+> Rather than leave that as an assurance in an email, we have written it into the
+> project: the component now carries a `noAI` flag in our machine-readable rights
+> register, and the interface renders "marked NoAI by its creator — rendered here,
+> never used as training data or as input to a generative model" beneath your credit.
+> Your request now travels with the work instead of stopping at the platform it was
+> posted on. If you would rather we not display the models at all, tell us and we will
+> withdraw them — but we hope the answer is that this is exactly the kind of use they
+> were shared for.
+> 2. **The chain behind McGill.** In verifying the "3D Ear" credit I found that the
+>    McGill site (`audilab.bmed.mcgill.ca`) no longer resolves — the licence statement
+>    is confirmed only from the Internet Archive — and that its own about page says the
+>    models derive from MRI of a human cadaver provided by Drs O. W. Henson Jr and
+>    Miriam Henson at UNC Chapel Hill, scanned at Duke. Nobody downstream credits them.
+>    If you agree that is the same chain, we will add them; you are better placed than
+>    we are to say whether it is right. Also, a small one: McGill spell it
+>    **Nicholson** where your notice has "Nicolson" — we have followed McGill, but say
+>    if you would rather we match yours.
+>
+> One thing you may want to know, offered as information and not as a complaint: CC
+> ShareAlike **1.0** requires adaptations under exactly 1.0 — the "or later version"
+> option only arrives with 2.0 — so the 1.0 → 4.0 step in the inner ear's notice is
+> not something that licence offers, and Sketchfab has no 1.0 option to choose. It
+> makes no difference to us, since the non-commercial term flows down under any
+> reading and this project is non-commercial and open source, but it might matter for
+> a future release of yours.
+>
+> Happy to send screenshots of how the credits render, or to change any wording you
+> would prefer.
+>
+> With thanks,
+>
+> Martin Etzrodt
+> Open Science Foundation · Matten bei Interlaken, Switzerland
+
+<details>
+<summary>The letter as sent, 17 August 2026</summary>
 
 **To:** ⚠️ no direct address confirmed. Findable routes: a message to
 <https://sketchfab.com/anatomy_dundee>, where both models are published, or the
@@ -564,6 +722,121 @@ Centre's contact page at <https://www.dundee.ac.uk/cahid>.
 >
 > The models are good, and being able to name a source is worth more to us than any
 > single mesh.
+>
+> With thanks,
+>
+> Martin Etzrodt
+> Open Science Foundation · Matten bei Interlaken, Switzerland
+
+</details>
+
+---
+
+</details>
+
+---
+
+> ### ✅ SENT 18 August 2026 — thread closed with Caroline
+>
+> The thanks went out; nothing is outstanding with CAHID. If she comes back on the
+> doubled attribution string, the only change is one line in
+> `src/scene/anatomySources.ts` and a rebuild of the credit — no asset work.
+
+**Sent — to `c.d.erolin@dundee.ac.uk`:**
+
+> Dear Caroline,
+>
+> That is exactly what I needed, and it corrects something on our side rather than
+> yours: we had been printing "CC BY 4.0" for the cranial nerves on Z-Anatomy's
+> authority, and you have just told me no CC licence was ever attached. We have
+> stopped asserting one. The credit now reads:
+>
+> > Cranial Nerves and Foramina — University of Dundee, CAHID — produced by Sophia
+> > Lappe — used with permission
+> > ↳ based on the BodyParts3D data set, © The Database Center for Life Science,
+> >   licensed under CC Attribution 4.0 International
+>
+> That is your wording with one small tidy: the string you sent has a doubling in it
+> ("licensed under BodyParts3D, © The Database Center for Life Science licensed
+> under CC Attribution 4.0"), which I have taken as a copy-paste slip rather than
+> intent. If you would rather it appear exactly as you wrote it, say so and it will.
+> Your permission is recorded alongside it in our public rights register, quoted, so
+> anyone downstream can see the basis rather than guess at it.
+>
+> Thank you also for checking BodyParts3D's licence page. You reached the same
+> conclusion we did, independently — it now states CC BY 4.0 where it said CC BY-SA
+> 2.1 Japan five years ago — and that is useful to us beyond this model: several
+> upstream pages still carry the old wording, and we have an open question with
+> DBCLS about exactly this. Two parties arriving at the same reading separately is
+> the next best thing to their confirmation.
+>
+> I will take the inner-ear questions to Eve, and will not trouble you with them
+> again.
+>
+> With thanks — this was a genuinely useful exchange, and the credit is better for it.
+>
+> Martin Etzrodt
+> Open Science Foundation · Matten bei Interlaken, Switzerland
+
+---
+
+## 7b. University of Dundee, Medical School — the inner ear, referred on by Caroline
+
+> Caroline's second reply drew the line clearly: the inner ear model belongs to the
+> **medical school**, not to CAHID, and she referred the McGill-chain question to
+> **Eve Laws** there, whom she had already copied in. So the remaining inner-ear
+> questions go to Eve, and Caroline should not be asked them again.
+>
+> ⏳ **Status, 18 August 2026: waiting on Eve.** Caroline had already copied her in,
+> so she is on the thread and a reply-all carries the context — the letter below can
+> be sent as a follow-up in that thread rather than cold, which also spares her the
+> re-introduction.
+>
+> Nothing here gates anything: the inner ear's own licence (CC BY-NC-SA 4.0) is
+> stated on its Sketchfab page and is downloadable, so the grant is not in doubt.
+> What is open is whether the credit chain should run one link further back — and
+> if Eve never replies, the credit stays exactly as it is, one link short of a
+> chain nobody else credits either.
+
+**Subject:** The inner-ear model's own source chain — one question Caroline referred on
+
+> Dear Eve,
+>
+> Caroline Erolin suggested I ask you: she tells me the "Anatomy of the Inner Ear"
+> model is the medical school's rather than CAHID's.
+>
+> Briefly, we run an open-source WebXR body viewer for the Open Science Foundation
+> (<https://opentwin.opening.science>, source at
+> <https://github.com/Opening-Science/open-twin-xr>). Your inner ear reaches us
+> through Z-Anatomy's downloadable model set, and we render it with the credit
+> Caroline supplied:
+>
+> > Anatomy of the Inner Ear — University of Dundee School of Medicine —
+> > CC BY-NC-SA 4.0
+> > ↳ a derivative of "3D Ear" by W. Robert J. Funnell, Sam Daniel and Daren
+> >   Nicholson at McGill University, used under CC BY-NC-SA 1.0
+>
+> Two small questions, neither urgent:
+>
+> 1. **Does the chain run further back?** McGill's site no longer resolves — we
+>    confirmed the CC BY-NC-SA 1.0 statement through the Internet Archive — and its
+>    own about page says those models derive from MRI of a human cadaver provided by
+>    Drs O. W. Henson Jr and Miriam Henson at UNC Chapel Hill, scanned at Duke.
+>    Nobody downstream credits them. If you agree that is the same chain, we will add
+>    them; you are far better placed than we are to judge it.
+> 2. **A spelling.** McGill write "Nicholson"; the notice we were given has
+>    "Nicolson". We have followed McGill — say if you would rather we match yours.
+>
+> One thing offered as information rather than complaint: CC ShareAlike 1.0 has no
+> "or later version" clause — that arrives only with 2.0 — so the 1.0 → 4.0 step in
+> the notice is not something 1.0 itself permits, and Sketchfab offers no 1.0 option
+> to choose. It changes nothing for us, since the non-commercial term flows down
+> under any reading and this project is non-commercial and open source, but it may
+> matter for a future release.
+>
+> Happy to send screenshots of how the credit renders, or to change any wording you
+> would prefer. If you would rather we not display the model at all, say so and we
+> will withdraw it.
 >
 > With thanks,
 >

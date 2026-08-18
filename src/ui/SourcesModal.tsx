@@ -373,6 +373,15 @@ export function SourcesDialog({ open, onClose }: { open: boolean; onClose: () =>
                           {c.needsPermission && (
                             <strong className="text-[#8a6d3b]"> (no grant given)</strong>
                           )}
+                          {c.derivedFrom && (
+                            <span className="block pl-2 text-ink/35">↳ {c.derivedFrom}</span>
+                          )}
+                          {c.noAI && (
+                            <span className="block pl-2 text-ink/35">
+                              marked NoAI by its creator — rendered here, never used as training
+                              data or as input to a generative model
+                            </span>
+                          )}
                         </span>
                       ))}
                     </div>

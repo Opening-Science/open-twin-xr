@@ -1,5 +1,7 @@
+import { useEffect, useState } from 'react'
 import { useTwin } from '../store'
 import { structureTerm } from '../scene/structureEntry'
+import { definitionFor, type Definition } from '../data/definitions'
 
 /**
  * What the viewer has selected, named precisely — and credited precisely.
@@ -39,6 +41,30 @@ export function SelectedStructureCard() {
   const selected = useTwin((s) => s.selectedStructure)
   const components = useTwin((s) => s.atlasComponents)
 
+  /**
+   * The definition for whatever is selected, or null.
+   *
+   * ⚠️ ABOVE THE EARLY RETURN, because hooks cannot run conditionally — the
+   * component returns null when nothing is selected, so the lookup has to be
+   * declared before that line rather than beside the code that renders it.
+   *
+   * `cancelled` is the repo's standard guard (see `useAtlasAvailability`): a
+   * fast click-through would otherwise let an earlier structure's definition
+   * land after a later one's.
+   */
+  const selectedTerm = structureTerm(selected?.entry ?? null)
+  const [definition, setDefinition] = useState<Definition | null>(null)
+  useEffect(() => {
+    let cancelled = false
+    setDefinition(null)
+    definitionFor(selectedTerm).then((d) => {
+      if (!cancelled) setDefinition(d)
+    })
+    return () => {
+      cancelled = true
+    }
+  }, [selectedTerm])
+
   if (!selected) return null
 
   const { entry } = selected
@@ -67,6 +93,33 @@ export function SelectedStructureCard() {
           {term ?? 'no ontology term'}
         </span>
       </div>
+
+      {/*
+        The ontology's own definition of this term.
+        ⚠️ Silent when there is none, which is the common case on the FMA-keyed
+        atlases: FMA publishes definitions for a couple of thousand of its
+        ~100,000 classes, so most fine-grained structures have no published
+        definition anywhere. Absence is the world's state, not a load failure,
+        and inventing prose to fill the gap would be the one unacceptable
+        answer. The source is named because attribution is these licences'
+        condition.
+      */}
+      {definition && (
+        <div className="flex flex-col gap-1 border-t border-line/60 pt-1.5">
+          <p className="text-[11px] leading-snug text-ink/70">{definition.text}</p>
+          <span className="text-[9px] text-muted">
+            {definition.source} · {definition.licence}
+            {/*
+              A BORROWED definition, and the interface says so. The term this
+              structure carries has none of its own, so this is the definition
+              of the equivalent term in another vocabulary — a curated xref, not
+              an identity. Naming the term it came from lets a reader judge the
+              substitution instead of being told FMA wrote something it did not.
+            */}
+            {definition.via && ` · defined at ${definition.via}`}
+          </span>
+        </div>
+      )}
 
       {/*
         The per-structure licence. Rendered ONLY when the structure carries one

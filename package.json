@@ -37,6 +37,7 @@
     "lint:claims": "node scripts/lint-claims.mjs",
     "gen:ontology": "node scripts/gen-ontology-map.mjs",
     "build:bridge": "node scripts/build-fma-uberon-bridge.mjs",
+    "build:definitions": "node scripts/build-definitions.mjs",
     "gen:bridge-module": "node scripts/gen-bridge-module.mjs",
     "check:crosswalk": "node scripts/check-crosswalk.mjs",
     "check:dist": "node scripts/check-dist-assets.mjs",

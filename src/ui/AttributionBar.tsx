@@ -565,6 +565,27 @@ export function AtlasAttribution() {
                         (no grant given; permission being sought)
                       </strong>
                     )}
+                    {/*
+                      The chain, where the rights holder has told us there is
+                      one. A component can be several links deep, and crediting
+                      only the nearest link drops whoever it rests on — Dundee
+                      asked for exactly this when we checked our wording.
+                    */}
+                    {c.derivedFrom && (
+                      <span className="block pl-2 text-ink/35">↳ {c.derivedFrom}</span>
+                    )}
+                    {/*
+                      The creator asked that this not feed AI training. Rendering
+                      it carries the request past the platform it was made on —
+                      and this app is written by an AI agent, so saying where the
+                      line falls is worth more than assuming it is obvious.
+                    */}
+                    {c.noAI && (
+                      <span className="block pl-2 text-ink/35">
+                        marked NoAI by its creator — rendered here, never used as
+                        training data or as input to a generative model
+                      </span>
+                    )}
                   </span>
                 ))}
               </span>

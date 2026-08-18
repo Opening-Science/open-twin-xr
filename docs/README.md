@@ -45,10 +45,12 @@ than the result.
 | [`ROADMAP.md`](ROADMAP.md) | Phases and their state |
 | [`PLAN_IDENTITY.md`](PLAN_IDENTITY.md) | **Proposal, not a record** — the next milestone: cross-atlas structure search and selection |
 | [`PLAN_NEXT.md`](PLAN_NEXT.md) | Numbered repo-quality queue; items 19–21 are open |
+| [`PLAN_ANATOMED.md`](PLAN_ANATOMED.md) | **Proposal, nothing started** — take Anatomed's Latin names, derive structure adjacency from our own geometry, copy none of its CC BY-SA code |
 
-⚠️ **One live plan now.** `PLAN_NEXT.md` is the repo-quality queue; items 19–21 are
-open. The new-geometry queue is finished — `PLAN_INTEGRATION.md` moved to Historical
-below, and its findings are in [`reports/`](reports/README.md).
+⚠️ **Three live plans.** `PLAN_NEXT.md` is the repo-quality queue (items 19–21 open);
+`PLAN_IDENTITY.md` is the current milestone; `PLAN_ANATOMED.md` feeds it and is
+unstarted. The new-geometry queue is finished — `PLAN_INTEGRATION.md` moved to
+Historical below, and its findings are in [`reports/`](reports/README.md).
 
 ## Research and survey — read when you need the background
 

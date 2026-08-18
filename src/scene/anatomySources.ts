@@ -63,6 +63,34 @@ export interface RightsComponent {
   title: string
   holder: string
   licence: string
+  /**
+   * What this component is ITSELF derived from, where the rights holder says so.
+   *
+   * A component inside an aggregate can be two or three links down a chain, and
+   * crediting only the nearest link drops the people whose work it rests on.
+   * Dundee's inner ear is a derivative of a McGill model; their cranial nerves
+   * derive from BodyParts3D. Both strings here were supplied by Dundee on
+   * request (18 August 2026) — asked for, not inferred, which is the only way
+   * to get a chain like this right.
+   */
+  derivedFrom?: string
+  /**
+   * The source carries Sketchfab's **NoAI** marking.
+   *
+   * Scope, from Sketchfab's own terms (23 March 2023): NoAI content may not be
+   * used "in datasets for, in the development of, or as inputs to generative AI
+   * programs". It does NOT restrict viewing, rendering or redistribution — this
+   * viewer's entire relationship with the geometry.
+   *
+   * Recorded anyway, and rendered, for two reasons. It is the creator's stated
+   * wish and it should travel with their work rather than stop at the platform
+   * they posted it on. And this project is written by an AI agent, which makes
+   * the distinction worth stating out loud rather than leaving to inference:
+   * the agent writes the code, and the anatomy is data that code renders. No
+   * mesh here is training data, a dataset entry, or an input to a generative
+   * model, and none will be.
+   */
+  noAI?: boolean
   /** True when the component grants nothing and needs written permission. */
   needsPermission?: boolean
 }
@@ -435,9 +463,18 @@ export const ANATOMY_SOURCES: Record<AnatomySourceId, AnatomySource> = {
      */
     components: [
       {
+        /**
+         * The fuller chain, supplied by Dundee themselves on 18 August 2026 —
+         * Caroline Erolin, Reader in Medical Art, replying to our credit-wording
+         * query. Their model is itself a derivative, and their own Sketchfab
+         * description carries this text; we were crediting only the last link.
+         */
         title: 'Anatomy of the Inner Ear',
         holder: 'University of Dundee School of Medicine',
         licence: 'CC BY-NC-SA 4.0',
+        derivedFrom:
+          'a derivative of "3D Ear" by W. Robert J. Funnell, Sam Daniel and ' +
+          'Daren Nicholson at McGill University, used under CC BY-NC-SA 1.0',
       },
       { title: 'Kidney', holder: 'lissiecowley', licence: 'CC BY-NC 4.0' },
       {
@@ -446,8 +483,32 @@ export const ANATOMY_SOURCES: Record<AnatomySourceId, AnatomySource> = {
         // and we were rendering none — it was missing from this list until the
         // licence file was read directly rather than quoted second-hand.
         title: 'Cranial Nerves and Foramina',
-        holder: 'University of Dundee, CAHID',
-        licence: 'CC BY 4.0',
+        holder: 'University of Dundee, CAHID — produced by Sophia Lappe',
+        /**
+         * ⚠️ NOT A CC LICENCE ON THE MODEL, AND WE PRINTED ONE FOR WEEKS.
+         *
+         * Z-Anatomy's licence file says "CC-BY 4.0" and we copied it. Caroline
+         * Erolin (Reader in Medical Art, Dundee) confirmed on 18 August 2026
+         * that the model carries no CC licence at all — it is not downloadable
+         * from their Sketchfab page, so none was ever attached — and that what
+         * their page states is the licence of the DATA IT IS BASED ON.
+         *
+         * What we have instead is better than an inferred licence and worth
+         * saying exactly: her written permission for this project ("As this is
+         * based on the open-source Body Parts 3D data I don't have a problem
+         * with it being re-purposed for this project"), plus the attribution
+         * SHE ASKED FOR, which is the BodyParts3D chain. So the licence line
+         * names the underlying data's licence, which is the only licence in
+         * play, and the permission is recorded in licences.json where a reader
+         * can find it.
+         */
+        licence: 'used with permission — underlying BodyParts3D data CC BY 4.0',
+        derivedFrom:
+          'based on the BodyParts3D data set, © The Database Center for Life ' +
+          'Science, licensed under CC Attribution 4.0 International',
+        // Verified on its Sketchfab page, 18 August 2026. The inner ear does
+        // NOT carry the marking; this one does, so only this one says so.
+        noAI: true,
       },
       {
         // Was 'Brainder / white matter — University of Washington, no licence
