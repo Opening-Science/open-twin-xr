@@ -1804,3 +1804,55 @@ carries the wrong attribution, which item 2 of `docs/OUTREACH.md` raises so the
 error stops propagating downstream of Z-Anatomy; and if Winkler unexpectedly
 says the cortical pair is not his, the component reverts to Z-Anatomy's own
 CC BY-SA 4.0 — still licensed, different credit line.
+
+---
+
+## D21 — The heart's donor is CARDIOHANCE, and the login wall comes down
+
+**18 August 2026.** The last provenance gate on the beating heart is answered by
+its corresponding author, and with it the last reason the site was gated. Two
+changes follow, plus one new mechanism the public state required.
+
+### The answer, verbatim in substance
+
+Joshua Dillon (Auckland Bioengineering Institute) wrote on 18 August 2026: the
+bundled `patient1` demo case is from **CARDIOHANCE**, for which the authors hold
+**local ethics approval to share online**, and there are **no restrictions** on
+our further use. Requested credit: the GitHub repository plus a biv-me paper —
+preferring the **2026 Medical Image Analysis paper** over the superseded FIMH
+2025 one this register had been citing:
+
+> Dillon, J., Mauger, C., Zhao, D., Petersen, S. E., McCulloch, A. D., Young,
+> A. A., & Nash, M. P. (2026). biv-me: Open-source software for generating
+> time-varying biventricular meshes from cine cardiovascular magnetic resonance
+> imaging with multi-cohort validation. *Medical Image Analysis*, 114, 104252.
+> doi:10.1016/j.media.2026.104252
+
+So the UK Biobank branch — the one that would have forced withdrawal — is dead,
+and the Sunnybrook CC0 fallback (`INTEGRATION_CANDIDATES.md` C3) stays recorded
+as history only. `beating-heart` flips to `publishable: true`; the attribution
+names the cohort, the ethics basis and the 2026 citation.
+
+### The wall comes down — and what that made mechanical
+
+With the heart resolved, exactly one asset still failed the public bar:
+**`ct-atlas-f`**, whose source scan was never recorded (a record we failed to
+keep, not a party we failed to ask — report 05). Until now only memory kept it
+out of a public deploy, which `docs/OUTREACH.md` had flagged as the gap.
+
+Now it is mechanical, and driven by the rights register rather than by a list
+in build config: `pruneUnshippedModels` (vite.config.ts) reads `licences.json`
+and **withholds from `dist` any asset whose `ownLicence` says "unresolved" or
+that carries a `gate` field**; `scripts/check-dist-assets.mjs` asserts the same
+rule from the other side, failing if a withheld asset leaks into `dist`.
+Resolving an asset in the register is what ships it — no code change, no
+memory. The CT-atlas pill degrades to "not installed" on the public site, which
+is the documented honest state.
+
+### What this does NOT settle
+
+`ct-atlas-f` itself — establish the source scan's provenance or regenerate from
+a scan with a known licence, then clear its register entry and it ships
+automatically. And the site being public raises the stakes on every remaining
+credit-wording thread in `docs/OUTREACH.md`; none of them gates, all of them
+are now visible to their subjects.

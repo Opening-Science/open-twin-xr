@@ -203,11 +203,12 @@ export const ORGAN_OVERLAYS: Record<OrganOverlayId, OrganOverlay> = {
     licenceUrl: 'https://www.apache.org/licenses/LICENSE-2.0',
     attribution:
       'Beating biventricular heart from biv-me (UOA Heart Mechanics Research), Apache-2.0 — ' +
-      'a model fitted to one subject’s cine MRI, 25 cardiac phases.',
+      'fitted to cine CMR of a CARDIOHANCE study participant, shared with local ethics ' +
+      'approval; 25 cardiac phases. Cite Dillon et al. 2026, Medical Image Analysis 114:104252.',
     shareAlike: false,
     system: 'cardiovascular',
     donor: {
-      label: 'biv-me demo subject',
+      label: 'CARDIOHANCE participant (biv-me demo case)',
       derivedFrom: 'cine MRI, fitted biventricular model, 25 phases across one cardiac cycle',
     },
     // Fallback = the HRA placement, since HRA is where the heart was first
@@ -260,10 +261,20 @@ export const ORGAN_OVERLAYS: Record<OrganOverlayId, OrganOverlay> = {
         'phase, fitted upstream to one subject’s cine MRI.',
     },
     animation: { name: 'cardiac-cycle', baseCycleSeconds: 1 },
-    publishable: false,
+    /**
+     * RESOLVED 18 August 2026 (D21). This was `false` for three weeks on one
+     * open question — which cohort the bundled demo case came from, UK Biobank
+     * or CARDIOHANCE. Answered in writing by the corresponding author, Joshua
+     * Dillon (Auckland Bioengineering Institute): it is a CARDIOHANCE
+     * participant, with local ethics approval to share online and no
+     * restrictions on further use. Requested credit: the GitHub repository and
+     * the 2026 Medical Image Analysis paper (preferred over the superseded
+     * FIMH 2025 one) — both are in the attribution above.
+     */
+    publishable: true,
     note:
-      'The demo subject’s provenance is unconfirmed upstream, so this is for local ' +
-      'evaluation and not for publication.',
+      'One CARDIOHANCE study participant’s heart, shared with local ethics approval — ' +
+      'a different person from the body it sits inside, at their measured size.',
   },
 
   /**

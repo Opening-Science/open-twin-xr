@@ -79,6 +79,34 @@ function pruneUnshippedModels(): Plugin {
         return
       }
       /**
+       * ⚠️ RIGHTS WITHHOLDING — an asset the register says is unresolved must not
+       * reach `dist`, however much the registries reference it.
+       *
+       * The rule reads `licences.json`, the rights register, so resolving an
+       * asset THERE is what ships it — no build-config edit, no memory. An entry
+       * is withheld while its `ownLicence` says "unresolved" or it carries a
+       * `gate` field. `ct-atlas-f` is the standing case: its source scan was
+       * never recorded, so its licence cannot be stated, and D21 made this
+       * mechanical when the login wall came down — before this, nothing but
+       * memory kept it out of a public deploy, which `docs/OUTREACH.md` called
+       * out as the gap. `scripts/check-dist-assets.mjs` applies the SAME rule
+       * from the other side: withheld-but-present in dist is a failure there.
+       */
+      const register = JSON.parse(readFileSync(join(__dirname, 'licences.json'), 'utf8'))
+      const withheld = new Set<string>()
+      for (const a of register.assets ?? []) {
+        const m = /^public\/models\/([A-Za-z0-9._-]+\.[A-Za-z0-9]+)$/.exec(a.file ?? '')
+        if (!m) continue
+        if (/unresolved/i.test(a.ownLicence ?? '') || a.gate) withheld.add(m[1])
+      }
+      for (const f of withheld) {
+        if (keep.delete(f)) {
+          console.log(
+            `\x1b[33m⚠\x1b[0m withholding ${f} from dist — rights unresolved per licences.json`,
+          )
+        }
+      }
+      /**
        * ⚠️ `closeBundle` ALSO RUNS WHEN THE BUILD FAILED, and without this guard
        * that turns every real build error into a misleading one.
        *

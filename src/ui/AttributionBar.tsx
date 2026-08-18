@@ -300,8 +300,9 @@ export function OrganOverlayRow() {
           /**
            * An overlay whose asset is not on the server cannot be switched on.
            *
-           * A publishable build may withhold one on purpose — the beating heart is
-           * `publishable: false` — and an enabled toggle for a file that 404s inside
+           * A publishable build may withhold one on purpose — the beating heart
+           * was `publishable: false` until D21 resolved its provenance — and an
+           * enabled toggle for a file that 404s inside
            * the Canvas is a worse outcome than a disabled one that says why. Same
            * treatment the atlas pills already give a missing GLB. `null` means the
            * probe has not answered yet, and is treated as available so the control

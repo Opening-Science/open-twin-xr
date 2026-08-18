@@ -103,11 +103,16 @@ leaving it to be noticed.
 
 ## 4. Publishability — as we currently present them
 
-Assessed **for the build now deployed**: Z-Anatomy is the `--publishable` build, and
-the whole site is behind a login wall.
+Assessed **for the build now deployed**: Z-Anatomy is the `--publishable` build.
+⚠️ Snapshot drift: when this was written the site sat behind a login wall; **since
+18 August 2026 (D21) it is public**, the heart's provenance having been answered
+(CARDIOHANCE, local ethics approval) and the one unresolved asset (`ct-atlas-f`)
+withheld from `dist` mechanically.
 
 **A login wall limits *who* sees the work; it does not change what may lawfully be
-sent to them.** Serving to logged-in users is still distribution.
+sent to them.** Serving to logged-in users is still distribution — which is why
+going public changed less here than it might seem: the same rights bar applied
+throughout.
 
 **(!) marks where contacting the creators or rights holders is necessary.**
 
@@ -124,7 +129,7 @@ sent to them.** Serving to logged-in users is still distribution.
 | **HuBMAP HRA** (female + male) | CC BY 4.0 | ✅ Yes | Attribution + indicate changes. Derived from NLM Visible Human, public domain since 2019 | — |
 | **CT (female)** — TCIA | CC BY 4.0 | ✅ Yes | Attribution + DOI. Two properties must travel: labels are **grouped**, and it is low-dose non-contrast CT so bone is trustworthy and soft tissue is not | — |
 | **CT atlas** — MOOSE | ⚠️ **unresolved** | ⛔ **No — internal/research only** | MOOSE weights are CC BY 4.0, but the licence of a segmentation follows its **source image**, and that scan was never recorded | **(!)** provenance must be established, or the asset regenerated from a scan with a known licence. *Not a creator problem — an internal record problem.* |
-| **Beating heart** — biv-me | Apache-2.0 at the repo root | ⛔ **No — gated only** | Ships to this gated audience as a knowingly accepted risk | **(!) HIGHEST PRIORITY.** The paper acknowledges participants of **UK Biobank and CARDIOHANCE**; the repo has no data statement and bundles input DICOMs for a case named `patient1`. One question: which cohort is it? Apache-2.0 cannot grant rights the licensor does not hold. |
+| **Beating heart** — biv-me | Apache-2.0 | ✅ **Yes, since D21 (18 Aug 2026)** | Attribution names the cohort and ethics basis; cite the repo and Dillon et al. 2026, *Med Image Anal* 114:104252 | ~~(!)~~ **Answered by the corresponding author:** `patient1` is a **CARDIOHANCE** participant, local ethics approval to share online, no restrictions on further use. The UK Biobank branch is dead. |
 | **Schematic eye** | none required — ours | ✅ Yes, unconditionally | Must always be described as a **schematic optical** model: no sclera, iris, ciliary body, extraocular muscles, optic nerve or vasculature | — the only asset with no upstream rights holder at all |
 | **Ear (photographic)** — OpenEar | CC BY 4.0 | ✅ Yes | Attribution. Three properties travel: **71.5 %** of the surface has photographed colour and the rest is honest grey; it is **one cadaveric temporal bone**, not a population; it is ~14 % larger than the body's own ear and left unscaled | — |
 | **Inter** (typeface) | SIL OFL 1.1 | ✅ Yes | Self-hosted complete font — no CDN, so no visitor IP disclosure. `OFL.txt` ships beside it, verified byte-identical to upstream | — |
@@ -143,18 +148,12 @@ the obligation off the CC BY geometry and off the MIT code.
 
 ### Outreach needed — in priority order
 
-1. **(!) biv-me authors** — **joshua.dillon@auckland.ac.nz** (Joshua R. Dillon,
-   corresponding author, Auckland Bioengineering Institute) and
-   **charlene.1.mauger@kcl.ac.uk** (Charlène Mauger, KCL), both listed as contacts
-   in the repository README. The question is now precise: the FIMH 2025 paper
-   (`doi:10.1007/978-3-031-94562-5_34`) acknowledges participants of **both UK
-   Biobank and CARDIOHANCE**, and the repo carries no data statement — so ask which
-   cohort the bundled `patient1` demo case is. If UK Biobank, redistribution of
-   derived geometry is almost certainly barred by their access terms and
-   Apache-2.0 cannot override the authors' obligations to them; replace with the
-   Sunnybrook CC0 fitted models. A ready-to-send draft is in
-   `docs/PLAN_INTEGRATION.md` under B6. **This blocks any public release of the
-   heart.**
+1. ~~**(!) biv-me authors**~~ — **asked and answered, 18 Aug 2026 (D21).** Joshua
+   Dillon confirmed the `patient1` demo case is a **CARDIOHANCE** participant with
+   local ethics approval to share online and no restrictions on further use, and
+   asked that the credit cite the repository and the 2026 *Medical Image Analysis*
+   paper (doi:10.1016/j.media.2026.104252) rather than the superseded FIMH one.
+   Nothing blocks the heart; the Sunnybrook fallback is history.
 2. ~~**(!) University of Washington**~~ — **resolved without them (D20, 17 Aug
    2026).** Brainder's author denies any UW affiliation; the cortical pair is his
    CC BY-SA 3.0 boundary surface, restored to the build, and the spinal cord is

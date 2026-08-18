@@ -67,9 +67,32 @@ if (!wanted.length) {
 const onDisk = new Set(existsSync(PUBLIC) ? readdirSync(PUBLIC) : [])
 const inDist = new Set(readdirSync(DIST))
 
+/**
+ * ⚠️ RIGHTS WITHHOLDING — the same rule `pruneUnshippedModels` applies, read
+ * from the same place, checked from the other side.
+ *
+ * `licences.json` entries whose `ownLicence` says "unresolved" or that carry a
+ * `gate` field must NOT be in `dist`, however much the registries reference
+ * them — `dist` is what gets deployed, and since D21 the site is public.
+ * Withheld-and-absent is the pass condition here; withheld-but-present means
+ * the plugin's rule and this one have drifted apart, which is a failure.
+ */
+const register = JSON.parse(readFileSync(join(ROOT, 'licences.json'), 'utf8'))
+const withheld = new Set()
+for (const a of register.assets ?? []) {
+  const m = /^public\/models\/([A-Za-z0-9._-]+\.[A-Za-z0-9]+)$/.exec(a.file ?? '')
+  if (!m) continue
+  if (/unresolved/i.test(a.ownLicence ?? '') || a.gate) withheld.add(m[1])
+}
+
 const missing = []
 const skipped = []
+const leaked = []
 for (const f of wanted) {
+  if (withheld.has(f)) {
+    if (inDist.has(f)) leaked.push(f)
+    continue
+  }
   if (!onDisk.has(f)) {
     skipped.push(f)
     continue
@@ -80,6 +103,22 @@ for (const f of wanted) {
 console.log(`registries reference ${wanted.length} asset(s)`)
 console.log(`  present in public/ : ${wanted.length - skipped.length}`)
 console.log(`  not installed      : ${skipped.length} (fine — the app runs with zero assets)`)
+if (withheld.size) {
+  console.log(
+    `  rights-withheld    : ${withheld.size} (${[...withheld].join(', ')}) — unresolved per licences.json, must be absent from dist`,
+  )
+}
+
+if (leaked.length) {
+  console.error(`\n✗ ${leaked.length} rights-withheld asset(s) reached dist anyway:`)
+  for (const m of leaked) console.error(`    ${m}`)
+  console.error(
+    '\n  licences.json says their rights are unresolved, and dist is what deploys.\n' +
+      '  The withhold rule in `pruneUnshippedModels` (vite.config.ts) and this one\n' +
+      '  must agree — one of them has drifted.',
+  )
+  process.exit(1)
+}
 
 if (missing.length) {
   console.error(`\n✗ ${missing.length} asset(s) are in public/models but were PRUNED from dist:`)
@@ -92,4 +131,4 @@ if (missing.length) {
   process.exit(1)
 }
 
-console.log('\n✓ every installed asset a mode can request survived the build')
+console.log('\n✓ every installed asset a mode can request survived the build, and nothing rights-withheld leaked')

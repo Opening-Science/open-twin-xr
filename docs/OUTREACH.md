@@ -41,7 +41,7 @@ Sources, in order of authority:
 
 | # | recipient | address | question | blocks launch? |
 |---|---|---|---|---|
-| 1 | **biv-me authors** — Joshua R. Dillon, Charlène Mauger | ✅ `joshua.dillon@auckland.ac.nz`, `charlene.1.mauger@kcl.ac.uk` | Which cohort is the bundled `patient1` demo case? | **YES** — the beating heart cannot go public unanswered |
+| 1 | **biv-me authors** — Joshua R. Dillon, Charlène Mauger | ✅ sent | **✅ ANSWERED 18 Aug 2026.** CARDIOHANCE, local ethics approval, no restrictions; cite the repo + the 2026 Med Image Anal paper (D21) | ~~YES~~ — resolved; the heart ships |
 | 2 | **Z-Anatomy** — Gauthier Kervyn (the modeller), via the **models** repo | ⚠️ no address published; issue on `Z-Anatomy/Models-of-human-anatomy` — **not** the Unity repos | Tell them their "UW, no licence" credit is wrong (the source denies it — D20) and ask which BodyParts3D licence to print | Attribution accuracy of an asset that **is** shipping |
 | 3 | **Brainder** — Anderson M. Winkler | ✅ sent | **✅ ANSWERED 17 Aug 2026.** UW attribution denied; a reply with renders is drafted below | No — the component is excluded today |
 | 4 | ~~**University of Washington**~~ | — | ⛔ **Do not send.** The named source denies any UW affiliation, so the premise is gone | No |
@@ -55,7 +55,48 @@ Nothing in this table is a licence *fee*, and nothing here is a negotiation. Ite
 
 ---
 
-## 1. biv-me — the one that blocks a public release
+## 1. biv-me — ✅ SENT, AND ANSWERED 18 AUGUST 2026
+
+> ### What Joshua Dillon answered, and what changed on its strength (D21)
+>
+> The bundled `patient1` demo case is a **CARDIOHANCE** participant, for which the
+> authors hold **local ethics approval to share online**, and there are **no
+> restrictions** on our further use. Requested credit: the GitHub repository plus a
+> biv-me paper — preferring the **2026 Medical Image Analysis paper** over the
+> superseded FIMH 2025 one this project had been citing:
+>
+> > Dillon, J., Mauger, C., Zhao, D., Petersen, S. E., McCulloch, A. D., Young, A. A.,
+> > & Nash, M. P. (2026). biv-me: Open-source software for generating time-varying
+> > biventricular meshes from cine cardiovascular magnetic resonance imaging with
+> > multi-cohort validation. *Medical Image Analysis*, 114, 104252.
+> > doi:10.1016/j.media.2026.104252
+>
+> Acted on the same day: `publishable: true` in `src/scene/organOverlays.ts`, the
+> attribution and register now name the cohort, the ethics basis and the 2026
+> citation, the UK Biobank withdrawal branch is dead, and the Sunnybrook CC0
+> fallback stays recorded as history only. **This was the letter that blocked the
+> public release, and with it answered the login wall came down** — see D21 for the
+> one asset still withheld (`ct-atlas-f`) and the mechanism that now withholds it.
+
+**Short acknowledgement to send:**
+
+> Dear Joshua,
+>
+> Thank you — that answers it completely. We have updated the credit to cite the
+> repository and the 2026 Medical Image Analysis paper as you prefer, and the
+> interface now states the cohort and the ethics basis alongside it: "fitted to cine
+> CMR of a CARDIOHANCE study participant, shared with local ethics approval." The
+> beating heart is public at <https://opentwin.opening.science> — you are welcome to
+> see how it is presented, and if you would like anything worded differently, say so
+> and we will change it.
+>
+> With thanks, also to Dr Mauger,
+>
+> Martin Etzrodt
+> Open Science Foundation · Matten bei Interlaken, Switzerland
+
+<details>
+<summary>The original letter, sent 17 August 2026 — kept for the record</summary>
 
 **To:** joshua.dillon@auckland.ac.nz
 **Cc:** charlene.1.mauger@kcl.ac.uk
@@ -106,6 +147,8 @@ Nothing in this table is a licence *fee*, and nothing here is a negotiation. Ite
 ([`INTEGRATION_CANDIDATES.md`](INTEGRATION_CANDIDATES.md) C3), which carry no such
 question. **If there is no reply:** treat as unresolved — the heart stays out.
 `publishable: false` in `src/scene/organOverlays.ts` is what enforces that today.
+
+</details>
 
 ---
 
@@ -597,15 +640,16 @@ Recorded so nobody re-opens them.
    `Resources/Models/Readme.txt` warns the repo FBX "may not be up to date"; the daily
    Blender export in `Z-Anatomy/Models-of-human-anatomy` is newer. Taking it is a
    re-import with its own verification, not a drop-in — do it deliberately.
-2. **Keep `biv-heart` and `ct-atlas-f` out of the public build.** Both shipped to the
-   gated preview as a knowingly accepted risk on 29 July 2026; `DEPLOY.md` §3b says
-   explicitly that the decision must not be carried into a public release. `biv-heart`
-   is held out by `publishable: false` in `src/scene/organOverlays.ts`. ⚠️ **`ct-atlas-f`
-   is not held out by anything.** Checked 17 August 2026: `publishable` exists only on
-   `OrganOverlay`, not on `AnatomySource`, so the CT atlas — the one asset here whose
-   licence is unresolved — is an offered pill in the switcher with nothing mechanical
-   keeping it out of a public build. Give `AnatomySource` the same flag, or resolve the
-   provenance, before the login wall comes down.
+2. ✅ **RESOLVED FOR ONE, MECHANICAL FOR THE OTHER (D21, 18 August 2026).**
+   `biv-heart` ships publicly: its donor is a CARDIOHANCE participant with local
+   ethics approval to share online and no restrictions (item 1), so
+   `publishable: true` and the credit cites the 2026 Medical Image Analysis paper.
+   **`ct-atlas-f` is now held out by machinery instead of memory** — the gap this
+   item flagged is closed: `pruneUnshippedModels` (vite.config.ts) reads
+   `licences.json` and withholds from `dist` any asset whose `ownLicence` is
+   unresolved or that carries a `gate`, and `scripts/check-dist-assets.mjs` fails
+   the build if a withheld asset leaks through. Resolving the CT atlas's
+   provenance in the register is what ships it — nothing else to remember.
 3. ✅ **The Dundee CAHID credit — FIXED 17 August 2026.** It was missing from two of the
    three places it must appear: `src/scene/anatomySources.ts` listed "Cranial Nerves and
    Foramina" and the interface rendered it, but the `attribution` in
