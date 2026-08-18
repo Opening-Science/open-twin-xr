@@ -565,6 +565,15 @@ export function AtlasAttribution() {
                         (no grant given; permission being sought)
                       </strong>
                     )}
+                    {/*
+                      The chain, where the rights holder has told us there is
+                      one. A component can be several links deep, and crediting
+                      only the nearest link drops whoever it rests on — Dundee
+                      asked for exactly this when we checked our wording.
+                    */}
+                    {c.derivedFrom && (
+                      <span className="block pl-2 text-ink/35">↳ {c.derivedFrom}</span>
+                    )}
                   </span>
                 ))}
               </span>

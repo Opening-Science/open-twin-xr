@@ -373,6 +373,9 @@ export function SourcesDialog({ open, onClose }: { open: boolean; onClose: () =>
                           {c.needsPermission && (
                             <strong className="text-[#8a6d3b]"> (no grant given)</strong>
                           )}
+                          {c.derivedFrom && (
+                            <span className="block pl-2 text-ink/35">↳ {c.derivedFrom}</span>
+                          )}
                         </span>
                       ))}
                     </div>

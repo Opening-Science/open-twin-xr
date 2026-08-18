@@ -63,6 +63,17 @@ export interface RightsComponent {
   title: string
   holder: string
   licence: string
+  /**
+   * What this component is ITSELF derived from, where the rights holder says so.
+   *
+   * A component inside an aggregate can be two or three links down a chain, and
+   * crediting only the nearest link drops the people whose work it rests on.
+   * Dundee's inner ear is a derivative of a McGill model; their cranial nerves
+   * derive from BodyParts3D. Both strings here were supplied by Dundee on
+   * request (18 August 2026) — asked for, not inferred, which is the only way
+   * to get a chain like this right.
+   */
+  derivedFrom?: string
   /** True when the component grants nothing and needs written permission. */
   needsPermission?: boolean
 }
@@ -435,9 +446,18 @@ export const ANATOMY_SOURCES: Record<AnatomySourceId, AnatomySource> = {
      */
     components: [
       {
+        /**
+         * The fuller chain, supplied by Dundee themselves on 18 August 2026 —
+         * Caroline Erolin, Reader in Medical Art, replying to our credit-wording
+         * query. Their model is itself a derivative, and their own Sketchfab
+         * description carries this text; we were crediting only the last link.
+         */
         title: 'Anatomy of the Inner Ear',
         holder: 'University of Dundee School of Medicine',
         licence: 'CC BY-NC-SA 4.0',
+        derivedFrom:
+          'a derivative of "3D Ear" by W. Robert J. Funnell, Sam Daniel and ' +
+          'Daren Nicholson at McGill University, used under CC BY-NC-SA 1.0',
       },
       { title: 'Kidney', holder: 'lissiecowley', licence: 'CC BY-NC 4.0' },
       {
@@ -446,8 +466,11 @@ export const ANATOMY_SOURCES: Record<AnatomySourceId, AnatomySource> = {
         // and we were rendering none — it was missing from this list until the
         // licence file was read directly rather than quoted second-hand.
         title: 'Cranial Nerves and Foramina',
-        holder: 'University of Dundee, CAHID',
+        holder: 'University of Dundee, CAHID — produced by Sophia Lappe',
         licence: 'CC BY 4.0',
+        derivedFrom:
+          'based upon the BodyParts3D data set, © The Database Center for Life ' +
+          'Science, licensed under CC Attribution-Share Alike 2.1 Japan',
       },
       {
         // Was 'Brainder / white matter — University of Washington, no licence

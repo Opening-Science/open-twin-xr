@@ -212,7 +212,12 @@ const COMPONENTS = [
     note:
       'Non-commercial and share-alike. Attribution is required and is rendered by ' +
       'AttributionBar. The sense organ only — the cochlear and vestibular NERVES and ' +
-      'NUCLEI are Z-Anatomy’s own and are not tagged.',
+      'NUCLEI are Z-Anatomy’s own and are not tagged. ⚠️ ITSELF A DERIVATIVE: of ' +
+      "'3D Ear' by W. Robert J. Funnell, Sam Daniel and Daren Nicholson at McGill " +
+      'University, used under CC BY-NC-SA 1.0 — told to us by Dundee on 18 August ' +
+      '2026 when we asked how they wanted to be credited (D23). Behind McGill sits a ' +
+      'further uncredited layer: cadaver MRI from the Hensons at UNC Chapel Hill, ' +
+      'scanned at Duke. Credit the chain, not just the nearest link.',
   },
   {
     id: 'kidney-lissiecowley',
@@ -894,7 +899,11 @@ const DERIVED_FROM =
 const COPYRIGHT_MAIN =
   ZA_AND_BP3D +
   'incl. Anatomy of the Inner Ear by University of Dundee School of Medicine (CC-BY-NC-SA 4.0), ' +
-  'Cranial Nerves and Foramina by University of Dundee, CAHID (CC-BY 4.0), ' +
+  "itself a derivative of '3D Ear' by W. Robert J. Funnell, Sam Daniel and Daren Nicholson " +
+  'at McGill University used under CC-BY-NC-SA 1.0; ' +
+  'Cranial Nerves and Foramina by University of Dundee, CAHID, produced by Sophia Lappe ' +
+  '(CC-BY 4.0), based upon the BodyParts3D data set, (c) The Database Center for Life Science, ' +
+  'CC-BY-SA 2.1 Japan; ' +
   'Kidney by lissiecowley (CC-BY-NC 4.0), ' +
   'and white matter boundary surfaces from Brain for Blender by Anderson M. Winkler, brainder.org (CC-BY-SA 3.0); ' +
   DERIVED_FROM

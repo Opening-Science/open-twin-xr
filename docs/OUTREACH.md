@@ -47,7 +47,7 @@ Sources, in order of authority:
 | 4 | ~~**University of Washington**~~ | — | ⛔ **Do not send.** The named source denies any UW affiliation, so the premise is gone | No |
 | 5 | **DBCLS** (BodyParts3D) | ✅ `bodyparts@dbcls.rois.ac.jp` | Written confirmation of the 2025-02-27 CC BY 4.0 relicence | No — but the default atlas rests on an unconfirmed reading |
 | 6 | **HuBMAP HRA** — MC-IU | ✅ `infoccf@indiana.edu` | Which version-specific citation must we render? | No — but the exact wording is a CC BY condition |
-| 7 | **University of Dundee, CAHID** | ⚠️ `sketchfab.com/anatomy_dundee`; `dundee.ac.uk/cahid` | Confirm the credit wording for **both** their components | No — courtesy plus a wording check |
+| 7 | **University of Dundee** — Caroline Erolin | ✅ sent | **✅ ANSWERED 18 Aug 2026.** Both components are themselves derivatives; the fuller chains now ship (D23). One question left: the cranial-nerves page states no licence at all | No — but it changed what we print |
 | 8 | **Courtesy notices** — OpenEar, TCIA, NAVER LABS Europe, lissiecowley | see §8 | None. "We are using your work, here is the credit" | No |
 
 Nothing in this table is a licence *fee*, and nothing here is a negotiation. Items
@@ -515,7 +515,38 @@ Library page.
 
 ---
 
-## 7. University of Dundee, CAHID — one letter, two components
+## 7. University of Dundee — ✅ SENT, AND ANSWERED 18 AUGUST 2026
+
+> ### The answer changed what we print (D23), and left one question
+>
+> **Caroline Erolin** (Reader in Medical Art, `c.d.erolin@dundee.ac.uk`) replied that
+> both models are themselves derivatives, and gave the wording:
+>
+> - **Anatomy of the Inner Ear** — a derivative of *"3D Ear"* by W. Robert J. Funnell,
+>   Sam Daniel and Daren Nicholson at **McGill University**, under **CC BY-NC-SA 1.0**.
+>   (Also: it belongs to the medical school's account, not CAHID's.)
+> - **Cranial Nerves and Foramina** — produced by **Sophia Lappe**, based upon
+>   **BodyParts3D**, © DBCLS, CC BY-SA 2.1 Japan.
+>
+> Both chains now ship — register, embedded copyright, and in-app under each parent
+> credit via `RightsComponent.derivedFrom`. Verification added three things her mail
+> did not: the McGill host is dead (the 1.0 licence is confirmed from the Internet
+> Archive), behind McGill sits **uncredited** cadaver MRI from the Hensons at UNC
+> Chapel Hill scanned at Duke, and CC SA 1.0 does not actually permit the 1.0 → 4.0
+> step Dundee took. None of that changes our position: the NC term flows down under
+> every reading and this project is non-commercial.
+>
+> **⚠️ Worth one more short mail.** The Cranial Nerves and Foramina Sketchfab page
+> states **no licence at all** — an empty licence object, as on every model on that
+> account — and is not downloadable. The CC BY 4.0 we print comes from Z-Anatomy's
+> file, not from Dundee's page, and a sibling Dundee cranial-nerves model by Claire
+> Cooper is listed CC BY-SA 4.0 elsewhere. She was asked about wording, not licence,
+> and neither confirmed nor disputed it. Ask plainly: *is the model CC BY 4.0, and
+> how did Z-Anatomy obtain a model that cannot be downloaded?* The second half is
+> really a question for Z-Anatomy (issue #7), and their answer may matter more.
+
+<details>
+<summary>The letter as sent, 17 August 2026</summary>
 
 **To:** ⚠️ no direct address confirmed. Findable routes: a message to
 <https://sketchfab.com/anatomy_dundee>, where both models are published, or the
@@ -552,6 +583,8 @@ Centre's contact page at <https://www.dundee.ac.uk/cahid>.
 >
 > Martin Etzrodt
 > Open Science Foundation · Matten bei Interlaken, Switzerland
+
+</details>
 
 ---
 

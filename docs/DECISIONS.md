@@ -1914,3 +1914,62 @@ rather than implying a reference body.
 forensic session because one filename was not written down;
 `docs/CT_ATLAS_PIPELINE.md` §5 already tells the next run to fill the donor
 block from the dataset's metadata — do it in the same commit as the build.
+
+---
+
+## D23 — Credit the chain, not the nearest link
+
+**18 August 2026.** We asked the University of Dundee how they wanted two
+components credited. Their answer added a layer we did not know existed, and
+the fix generalises: a component inside an aggregate can be several links deep,
+and crediting only the last one drops whoever it rests on.
+
+### What Dundee said
+
+Caroline Erolin (Reader in Medical Art) replied that each model is itself based
+on other source data:
+
+- **Anatomy of the Inner Ear** — a derivative of *"3D Ear"* by W. Robert J.
+  Funnell, Sam Daniel and Daren Nicholson at **McGill University**, used under
+  **CC BY-NC-SA 1.0**.
+- **Cranial Nerves and Foramina** — produced by **Sophia Lappe**, and based upon
+  the **BodyParts3D** data set, © DBCLS, CC BY-SA 2.1 Japan.
+
+Both strings now appear in the register, in the asset's embedded copyright, and
+in the interface through a new `RightsComponent.derivedFrom` field, rendered
+under its parent credit in `AttributionBar` and `SourcesModal`.
+
+### Three things verification added that the reply did not say
+
+1. **The McGill host is dead.** `audilab.bmed.mcgill.ca` no longer resolves; the
+   CC BY-NC-SA 1.0 statement is confirmed from the Internet Archive, where the
+   licence link sits on the page itself. A citation whose source has gone off
+   the web is still a citation, but say where it was read.
+2. **There is a further, uncredited layer.** McGill's own about page says the
+   models derive from **MRI of a human cadaver from Drs O. W. Henson Jr and
+   Miriam Henson (UNC Chapel Hill)**, scanned at Duke's Center for In Vivo
+   Microscopy. Nobody in the chain credits them. We cannot fix that upstream;
+   recording it is what we can do.
+3. **CC ShareAlike 1.0 does not offer the step Dundee took.** SA 1.0 requires
+   adaptations under *exactly* 1.0 — the "or later version" clause arrives with
+   2.0 — so the 1.0 → 4.0 relicence is not something the upstream licence
+   permits. Not ours to resolve, and it does not change what governs our use:
+   the **NC** term flows down under every reading, and this project is
+   non-commercial.
+
+### One question left open
+
+The **Cranial Nerves and Foramina** Sketchfab page states **no licence at all**
+— the API returns an empty licence object, as it does for every model on that
+account — and the model is not downloadable. The CC BY 4.0 we print comes from
+Z-Anatomy's licence file, not from Dundee's page. Caroline was asked about
+wording and neither confirmed nor disputed the licence, so it is worth asking
+plainly rather than assuming; a sibling Dundee cranial-nerves model by Claire
+Cooper is listed CC BY-SA 4.0 elsewhere, which is a different term again.
+
+### The rule
+
+**Ask the rights holder how they want to be credited — the answer is routinely
+longer than the credit you copied.** Both of these chains were sitting in plain
+text on the source's own page; we had read the licence badge and stopped there.
+`derivedFrom` exists so the next one has somewhere to go.
