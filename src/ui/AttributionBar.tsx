@@ -17,6 +17,7 @@ import { SourcesButton } from './SourcesModal'
 import { useTwin, useResolvedAnatomyMode } from '../store'
 import { DockGroup, DockPill } from './SceneDock'
 import { BODY_ENVELOPES } from '../scene/bodyEnvelopes'
+import { posedEnvelopeUrl } from '../scene/envelopePoses'
 
 const COMPARE_MODES: { value: AnatomyMode; label: string; title: string }[] = [
   {
@@ -415,6 +416,19 @@ export function AtlasAttribution() {
   const parametricMode = useTwin((s) => s.anatomyMode) === 'parametric'
   const envelopeId = useTwin((s) => s.bodyEnvelope)
   const envelope = envelopeId ? BODY_ENVELOPES[envelopeId] : null
+  /**
+   * Whether the POSED variant is the one that rendered — derived exactly as
+   * `BodyEnvelope` derives it, a url plus a successful probe.
+   *
+   * ⚠️ Not from the mode alone. A mode can have a pose while its bake is simply
+   * not installed, and a credit claiming a posed fit over the rest-pose asset
+   * would be describing something that is not on screen — the failure this
+   * whole panel exists to avoid.
+   */
+  const envelopeAvailability = useTwin((s) => s.envelopeAvailability)
+  const envelopePosedUrl = envelopeId ? posedEnvelopeUrl(mode, envelopeId) : null
+  const envelopePosed =
+    envelopePosedUrl !== null && (envelopeAvailability?.[envelopePosedUrl] ?? false)
   const mixedDonors = donorsDisagree(mode)
   // Which systems each atlas contributes, so the credit can name the join.
   const systemsBySource = useMemo(
@@ -680,17 +694,27 @@ export function AtlasAttribution() {
               and no scan of anyone.
             </strong>
             {/*
-              Measured, and stated where the claim would otherwise be made. The
-              envelope is baked in ANNY's rest pose and each atlas has its own, so
-              it encloses the torso and not the limbs — on Z-Anatomy, 1.124 m
-              across the arms against the atlas's 0.646 m. It is a reference
-              silhouette, and rendering it as clear glass rather than as skin is
-              the visual half of the same statement.
+              ⚠️ THIS CREDIT WAS LEFT ASSERTING THE OLD MISMATCH AFTER D25 FIXED
+              IT, WHICH IS THE SAME DEFECT IN A SECOND PLACE. `SceneDock`'s
+              caption was updated when the posed bakes landed and this one was
+              missed, so the dock said "posed to this atlas's limbs" while the
+              credit panel two clicks away still said it "wraps the torso but not
+              the limbs — 1.124 m against 0.646 m". Both are user-facing and they
+              contradicted each other.
+
+              It now reports which asset actually rendered, from the same probe
+              `BodyEnvelope` loads by, so it cannot drift from what is on screen.
+              What does NOT change is the framing the old sentence protected: a
+              generated surface, posed from an ATLAS's bones rather than its own,
+              with roll about each limb unconstrained. Reference silhouette
+              either way.
             */}
             <span className="mt-0.5 block text-[#8a6d3b]">
-              Its rest pose is not the atlas’s, so it wraps the torso but not the limbs — measured
-              on Z-Anatomy at 1.124 m across the arms against the atlas’s 0.646 m. Scaled to the
-              canonical 1.7 m body, so its own stature ({envelope.heightM} m) is not what you see.
+              {envelopePosed
+                ? 'Posed to this atlas’s limbs, from axes measured on its own bones (D25) — the arms follow it, the roll about each limb does not.'
+                : 'Its rest pose is not the atlas’s, so it wraps the torso but not the limbs — measured on Z-Anatomy at 1.124 m across the arms against the atlas’s 0.667 m.'}{' '}
+              Scaled to the canonical 1.7 m body, so its own stature ({envelope.heightM} m) is not
+              what you see.
             </span>
             <span className="mt-0.5 block text-[#8a6d3b]">{envelope.note}</span>
             <span className="mt-0.5 block text-ink/45">

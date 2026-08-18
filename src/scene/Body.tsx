@@ -10,6 +10,7 @@ import { StructureLabel } from './StructureLabel'
 import { ParametricBody } from './ParametricBody'
 import { ANNY_GRID_URLS } from './annyGrid'
 import { BODY_ENVELOPES, BODY_ENVELOPE_IDS } from './bodyEnvelopes'
+import { POSED_ENVELOPE_URL_LIST } from './envelopePoses'
 
 /**
  * The body, from whichever geometry source is available.
@@ -67,7 +68,17 @@ function BodyContent() {
    * none of these is a supported state and the dock has to be able to say
    * "not installed" rather than let a 404 throw inside the Canvas.
    */
-  const envelopeUrls = useMemo(() => BODY_ENVELOPE_IDS.map((id) => BODY_ENVELOPES[id].url), [])
+  /**
+   * ⚠️ THE POSED VARIANTS ARE PROBED TOO. `BodyEnvelope` prefers a bake posed
+   * like the atlas on screen and falls back to the rest-pose asset when there
+   * is none — and that fallback only works if the probe knows about both. Left
+   * out, every posed url reads as absent and the feature silently never
+   * engages, which is indistinguishable from it not being built.
+   */
+  const envelopeUrls = useMemo(
+    () => [...BODY_ENVELOPE_IDS.map((id) => BODY_ENVELOPES[id].url), ...POSED_ENVELOPE_URL_LIST],
+    [],
+  )
   const envelopeAvailability = useAtlasAvailability(envelopeUrls)
   const publishEnvelopes = useTwin((s) => s.setEnvelopeAvailability)
   useEffect(() => {

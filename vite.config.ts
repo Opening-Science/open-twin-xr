@@ -49,7 +49,26 @@ function pruneUnshippedModels(): Plugin {
        * literal, which is the second half of the same bug.
        */
       let sources = ''
-      for (const f of ['anatomySources.ts', 'organOverlays.ts', 'bodyEnvelopes.ts', 'annyGrid.ts']) {
+      /**
+       * ⚠️ AND IT HAS NOW BEEN INCOMPLETE A THIRD TIME. `envelopePoses.ts` (the
+       * posed envelope variants, D25) and `annyRig.ts` (the pose rig, D26) were
+       * added on 18 August 2026 and not listed here, so a build pruned all eight
+       * posed GLBs and both rig files. The symptom is the one this comment
+       * already describes and it is still not visible in development: the
+       * envelope silently falls back to its rest pose and the position sliders
+       * never appear, exactly as they would if the assets had never been baked.
+       *
+       * Caught by reading `dist/models` before a deploy, which is the only thing
+       * that catches it. If you add a registry, add it here in the same commit.
+       */
+      for (const f of [
+        'anatomySources.ts',
+        'organOverlays.ts',
+        'bodyEnvelopes.ts',
+        'annyGrid.ts',
+        'envelopePoses.ts',
+        'annyRig.ts',
+      ]) {
         try {
           sources += readFileSync(join(__dirname, 'src', 'scene', f), 'utf8')
         } catch {

@@ -49,7 +49,25 @@ if (!existsSync(DIST)) {
  * OUTPUT rather than re-deriving the intent from a hand-kept list that could
  * drift the same way the registry list did.
  */
-const REGISTRIES = ['anatomySources.ts', 'organOverlays.ts', 'bodyEnvelopes.ts', 'annyGrid.ts']
+/**
+ * ⚠️ THIS LIST AND `pruneUnshippedModels`' LIST MUST AGREE, AND THEY DRIFTED.
+ *
+ * They are two halves of one rule — the plugin decides what survives the build,
+ * this decides whether what survived is right — so a registry missing from
+ * either is unchecked from that side. `envelopePoses.ts` and `annyRig.ts` were
+ * missing from BOTH on 18 August 2026, which is how a build pruned eight posed
+ * GLBs and two rig files while this script reported success: it verified 18
+ * assets and never knew the other ten existed. A green check over an incomplete
+ * list is worse than no check, because it is read as coverage.
+ */
+const REGISTRIES = [
+  'anatomySources.ts',
+  'organOverlays.ts',
+  'bodyEnvelopes.ts',
+  'annyGrid.ts',
+  'envelopePoses.ts',
+  'annyRig.ts',
+]
 let sources = ''
 for (const f of REGISTRIES) {
   const p = join(ROOT, 'src', 'scene', f)
