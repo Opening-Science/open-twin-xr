@@ -87,20 +87,25 @@ here, and several rules below cite it as the authority:
 
 1. **Do NOT build the AI layer.** The chatbot is a visual stub on purpose
    (`src/ui/ChatbotStub.tsx`). No LLM calls in this repo.
-2. **Keep code (MIT) and anatomy assets separate.** The primary anatomy model is
+2. **No code from `pitfa19/anatomed-mcp` enters this repository** (D24). Its
+   `src/` and `widget/` are CC BY-SA 4.0 and cannot be relicensed to MIT — pasting
+   one file would put share-alike on the application, and deleting it afterwards
+   would not undo that. Its Latin nomenclature is taken and credited; its code,
+   especially `vendor/fuzzy.ts`, is read for reasoning and never copied.
+3. **Keep code (MIT) and anatomy assets separate.** The primary anatomy model is
    **HRA, CC BY 4.0 — attribution required, no share-alike**. Never paste model
    geometry into source; keep it in `public/models/`. See `ASSETS_LICENSE.md`,
    and note that the Z-Anatomy fallback described there is **CC-BY-SA** and
    re-attaches a share-alike obligation if used (`docs/MODEL_PIPELINE.md`).
-3. **Health data is sensitive (GDPR Article 9).** The connectors hold vendor API
+4. **Health data is sensitive (GDPR Article 9).** The connectors hold vendor API
    credentials, so they and the scoring step run **server-side** — never in the
    browser. The browser fetches an already-scored `TwinMetrics` and nothing
    else. Keep it on infrastructure the user controls or behind their own auth,
    never a third party. Never log it, and never put an API response body into an
    error message. Sample data must stay fake.
-4. **No paid dependencies** without flagging first. The whole v1 is free; see
+5. **No paid dependencies** without flagging first. The whole v1 is free; see
    `docs/COMMERCIAL_LICENSES.md`.
-5. **Never fabricate a score.** Missing data is `hasData: false, score: null`,
+6. **Never fabricate a score.** Missing data is `hasData: false, score: null`,
    rendered as "no data" — never 0, never a midpoint.
    `assertTwinMetrics()` enforces this; do not weaken it.
 

@@ -32,7 +32,16 @@ export interface StructureMatch {
   id: number
   entry: StructureEntry
   /** How the query reached this structure. Shown, not hidden. */
-  via: 'name' | 'term' | 'bridge'
+  /**
+   * How the match was made, so the interface can show the route.
+   *
+   * `latin` is a LABEL match like `name`, not a term resolution: D18 forbids
+   * approximate matching onto a term and permits it on a label, and Latin
+   * nomenclature is a label (D24). It ranks after the English name because a
+   * viewer typing "tibia" means the structure they can see, not a coincidence
+   * of Latin spelling.
+   */
+  via: 'name' | 'latin' | 'term' | 'bridge'
   /**
    * ⚠️ True when the bridge offered SEVERAL FMA terms for one UBERON concept.
    * A one-to-many correspondence, not an identity — surface it rather than
@@ -140,6 +149,19 @@ export function searchStructures(
     const rank = name === q ? 0 : name.startsWith(q) ? 1 : name.includes(q) ? 2 : -1
     if (rank < 0) return
     push({ id, entry: e, via: 'name', rank })
+  })
+
+  // 3. Then the Latin label, ranked BELOW every English match (+3) so it adds
+  //    reach without reordering what a viewer already found. For a structure
+  //    with no ontology term this is its only formal identity, and on the
+  //    regions atlas it is the only identity of any kind — so not searching it
+  //    would leave those structures reachable by English name alone.
+  entries.forEach((e, id) => {
+    const lat = fold(e.name_lat ?? '')
+    if (!lat) return
+    const rank = lat === q ? 0 : lat.startsWith(q) ? 1 : lat.includes(q) ? 2 : -1
+    if (rank < 0) return
+    push({ id, entry: e, via: 'latin', rank: rank + 3 })
   })
 
   matches.sort(

@@ -22,21 +22,58 @@ import { readFileSync, writeFileSync, renameSync } from 'node:fs'
 
 const args = process.argv.slice(2)
 const DRY = args.includes('--dry-run')
-const TSV = 'docs/z-anatomy-fma.tsv'
-const targets = args.filter((a) => !a.startsWith('--'))
+const flag = (name, fallback) => {
+  const i = args.indexOf(name)
+  return i >= 0 && args[i + 1] && !args[i + 1].startsWith('--') ? args[i + 1] : fallback
+}
+/**
+ * Which crosswalk, into which field. Defaulting to the FMA pair keeps every
+ * existing invocation and every doc line working unchanged; D24's Latin
+ * nomenclature is the second caller.
+ */
+const TSV = flag('--tsv', 'docs/z-anatomy-fma.tsv')
+const FIELD = flag('--field', 'ontologyid')
+const targets = args.filter(
+  (a, i) => !a.startsWith('--') && !['--tsv', '--field'].includes(args[i - 1]),
+)
 
 if (!targets.length) {
-  console.error('usage: node scripts/apply-crosswalk.mjs <asset.glb> [...] [--dry-run]')
+  console.error(
+    'usage: node scripts/apply-crosswalk.mjs <asset.glb> [...] [--tsv FILE] [--field NAME] [--dry-run]',
+  )
   process.exit(1)
 }
 
-// --- the crosswalk, keyed exactly as the structure table is ----------------
-const crosswalk = new Map()
-for (const line of readFileSync(TSV, 'utf8').split('\n').slice(1)) {
-  const [name, side, fma] = line.split('\t')
-  if (name && fma) crosswalk.set(`${name}|${side || ''}`, fma)
+/**
+ * The crosswalk, keyed exactly as the structure table is.
+ *
+ * ⚠️ READ BY HEADER, NOT BY COLUMN POSITION. This used to destructure
+ * `[name, side, fma]`, which silently binds to whatever the third column
+ * happens to be — the FMA file carries `system` and `layer` after it, and a
+ * second crosswalk with a different shape would have written the wrong string
+ * into the asset with no error at all. The header names the value column.
+ */
+const lines = readFileSync(TSV, 'utf8').split('\n').filter((l) => l && !l.startsWith('#'))
+const header = lines[0].split('\t').map((h) => h.trim())
+const nameCol = header.indexOf('name')
+const sideCol = header.indexOf('side')
+const valueCol = header.findIndex((h) => h === FIELD || (FIELD === 'ontologyid' && h === 'fma'))
+if (nameCol < 0 || sideCol < 0 || valueCol < 0) {
+  console.error(
+    `✗ ${TSV}: need columns name, side and a value column for --field ${FIELD}; header is [${header.join(', ')}]`,
+  )
+  process.exit(1)
 }
-console.log(`crosswalk: ${crosswalk.size.toLocaleString()} terms from ${TSV}`)
+const crosswalk = new Map()
+for (const line of lines.slice(1)) {
+  const cells = line.split('\t')
+  const name = cells[nameCol]
+  const value = cells[valueCol]
+  if (name && value) crosswalk.set(`${name}|${cells[sideCol] || ''}`, value.trim())
+}
+console.log(
+  `crosswalk: ${crosswalk.size.toLocaleString()} values from ${TSV} -> ${FIELD}`,
+)
 
 /** Split a GLB into its header, JSON chunk and everything after it. */
 function readGlb(path) {
@@ -94,18 +131,21 @@ for (const path of targets) {
       missing++
       continue
     }
-    if (s.ontologyid === term) already++
+    if (s[FIELD] === term) already++
     else {
-      s.ontologyid = term
+      s[FIELD] = term
       added++
     }
   }
 
   console.log(`\n${path}`)
   console.log(`  ${table.length.toLocaleString()} table entries`)
-  console.log(`  + ${added.toLocaleString()} gained an FMA term`)
+  // The field is a parameter now, so the wording follows it — a run that writes
+  // Latin names must not report "gained an FMA term".
+  const what = FIELD === 'ontologyid' ? 'an FMA term' : `a ${FIELD}`
+  console.log(`  + ${added.toLocaleString()} gained ${what}`)
   if (already) console.log(`  = ${already.toLocaleString()} already had it`)
-  console.log(`  · ${missing.toLocaleString()} stay termless (no exact match — never guessed)`)
+  console.log(`  · ${missing.toLocaleString()} have none (no exact match — never guessed)`)
 
   if (DRY) console.log('  (dry run — nothing written)')
   else if (added) {

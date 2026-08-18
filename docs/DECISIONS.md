@@ -2021,3 +2021,113 @@ The **inner ear** is the medical school's, not CAHID's — she referred that cha
 and Caroline is not asked again. Nothing here gates anything: the inner ear's own
 CC BY-NC-SA 4.0 is stated on its page, and the cranial nerves now ship on a
 permission we can quote.
+
+---
+
+## D24 — Take Anatomed's Latin names; copy none of its code
+
+**18 August 2026.** `pitfa19/anatomed-mcp` is an MCP server and R3F widget built on
+**the same Z-Anatomy atlas this repository ships**. `docs/PLAN_ANATOMED.md` measured
+it against our assets; this records what was taken, what was not, and one rule that
+binds future work.
+
+### Taken: the Latin nomenclature, and nothing else
+
+Their catalogue carries **no ontology terms at all** — `id`, `system`, `name_en`,
+`name_lat`, `side`. So it contributes nothing to the crosswalk work, with one
+exception that turns out to matter: it carries Latin names, and we carry none.
+
+For a structure with no FMA term, a Terminologia-style Latin name is **the only
+formal identity it has**. `z-anatomy-regions` is the clearest case — it ships names
+and nothing else, so this is the first identity of any kind those structures get.
+
+The join is exact after ordinal normalisation ("1st" → "First"), and it is a
+function: no `(name, side)` pair draws two different Latin strings. **No fuzzy
+matching, at any confidence** — D18, and the standing rule at the top of
+`structureSearch.ts`.
+
+### ⚠️ Not taken: their code, and this is the rule that binds
+
+**No file from `pitfa19/anatomed-mcp`'s `src/` or `widget/` enters this
+repository** — naming the tempting ones, because they are genuinely good:
+`vendor/fuzzy.ts`, `vendor/resolveParts.ts`, `region.ts`, `widget/RegionViewer.tsx`.
+
+Two separate reasons, and both hold on their own:
+
+1. **CC BY-SA 4.0 cannot be relicensed to MIT.** Our code is MIT and our assets are
+   separately licensed; that separation is the whole arrangement (D12b, and the
+   `ASSETS_LICENSE.md` note on why atlases stay separate files). Pasting BY-SA code
+   into `src/` would put share-alike on the application. **Deleting the file
+   afterwards does not undo it** — this is the one irreversible act in the whole
+   plan.
+2. **Their fuzzy matcher is exactly what this repository decided not to have.** Its
+   comments record the same class of accident D18 does. Read it for the reasoning;
+   do not paste it.
+
+If an MCP endpoint is ever built here, it is written against the MCP specification.
+Their server is a reference for *what* to build, never for *how it is written*.
+
+⚠️ **The reason to write this down at all** is that the person most likely to breach
+it is a future agent that finds a well-written fuzzy matcher and has no idea why
+this repository does not have one.
+
+### Also not taken
+
+Their geometry (same atlas, ours has AO and FMA terms), their English names and
+system labels (ours are normalised to `SystemId`), their insertion parts (we model
+these as `attachment` — a granularity difference, not a gap), and their neighbour
+graph: **96.3 % of its 84,360 edges have distance exactly zero**, so the distance
+carries almost no signal, and it joins to only a fraction of our structures. Better
+computed from geometry we already own.
+
+### ⚠️ What this must NOT become
+
+**Do not use Latin names to infer FMA terms** for the structures still lacking one.
+Matching a Latin string against FMA's Latin synonyms is approximate matching onto a
+*term*, which is precisely what produced 32 FMA ids shared across different
+structures the one time this discipline lapsed. It may be good work; it is
+*separate* work, with `check:crosswalk` as its gate.
+
+### D24a — The adjacency spike ran, and it does not ship
+
+**18 August 2026.** `PLAN_ANATOMED.md` Phase 2 argued we could compute a better
+neighbour graph than Anatomed's, because theirs has **96.3 % of its 84,360 edges at
+distance exactly zero** — a distance that carries almost no signal. Phase 2.3 put a
+decision gate on it: *measure the payload, then choose*. Measured, on
+`z-anatomy.ao.glb`, by axis-aligned box gap at a 2 mm threshold
+(`scripts/build-adjacency.mjs --measure`):
+
+| | Anatomed | ours |
+|---|---|---|
+| edges | 84,360 | 280,920 |
+| gap exactly zero | 96.3 % | **89.8 %** |
+| structures with any neighbour | a fraction of ours | 100 % |
+| payload | — | 395 KB at K=12 |
+
+> ⚠️ **These figures were corrected after review; the conclusion was not.** The
+> first run read `POSITION` without applying the node transform, and the atlas is
+> quantised — every mesh node carries its own scale (0.7853–0.8463) and Y
+> translation (0.7950–0.8540), so a bone and a ligament were measured on rulers
+> 59 mm apart against a 2 mm threshold, and the "body" was 2.000 units tall rather
+> than 1.700 m. It reported **91.9 %** zero-gap over 278,402 edges. Applying the
+> world matrix gives the row above: **89.8 %** over 280,920. The defect was real,
+> the numbers moved, and **the decision stands** — 89.8 % ties is the same answer.
+> `build-adjacency.mjs` now asserts the body height in metres before it measures
+> anything, because the wrong ruler was silent and every downstream number looked
+> plausible.
+
+**We reproduced the defect we criticised.** Not because the idea is wrong but
+because axis-aligned boxes overlap generously in dense anatomy: a box gap of zero
+means "these two boxes intersect", which in a torso is nearly everything against
+nearly everything. Covering 100 % of structures is not a win when the ranking
+inside that coverage is 90 % ties.
+
+**So it does not ship.** No feature is wired, no artifact is served, and
+`build-adjacency.mjs` stays as the measurement that produced this answer.
+
+**What would actually work, for whoever picks it up:** rank by *overlap volume*
+rather than by gap — a quantity that is still meaningful precisely where the gap
+degenerates — or measure vertex-level proximity per structure pair, which is
+honest but needs a BVH per structure and a real time budget. Either is a separate
+piece of work with its own gate. ⚠️ Do not ship the box-gap graph on the grounds
+that it covers everything; coverage was never the problem.

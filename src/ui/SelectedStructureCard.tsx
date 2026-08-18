@@ -85,6 +85,18 @@ export function SelectedStructureCard() {
         )}
       </div>
 
+      {/*
+        The Latin name, where the structure has one — a LABEL, so it is set as
+        prose in italic rather than in the mono the ontology term uses. The
+        visual difference is the point: a reader should not have to be told
+        which of the two is an identifier a machine resolves.
+      */}
+      {entry.name_lat && (
+        <span className="-mt-0.5 text-[11px] italic leading-snug text-ink/55">
+          {entry.name_lat}
+        </span>
+      )}
+
       <div className="flex flex-wrap gap-x-3 gap-y-0.5 text-[10px] text-muted">
         {entry.system && <span>{entry.system}</span>}
         {entry.layer && <span>{entry.layer}</span>}
