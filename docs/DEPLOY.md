@@ -219,7 +219,7 @@ register flags:
 | asset | flag | why it shipped anyway |
 |---|---|---|
 | `biv-heart` | ~~`publishable: false`~~ **RESOLVED 18 Aug 2026 (D21)** — CARDIOHANCE participant, local ethics approval, no restrictions | Ships publicly, crediting the repo and the 2026 *Medical Image Analysis* paper. The email that was owed was sent and answered. |
-| `ct-atlas-f` | licence unresolved — source scan never recorded | ⚠️ Still unresolved — and since D21 it is **withheld from `dist` mechanically**: the build reads `licences.json` and drops any asset with an unresolved `ownLicence` or a `gate` field, and `check:dist` fails if one leaks. Its pill reads "not installed" on the public site, which is the honest state. Resolve it in the register and it ships. |
+| `ct-atlas-f` | ~~licence unresolved~~ **RESOLVED 18 Aug 2026 (D22)** — source scan re-identified as ENHANCE.PET subject 1032 (Leipzig, CC BY 4.0) from three fingerprints | Ships publicly. The D21 withhold machinery released it the moment the register entry was cleared — which is that mechanism working as designed. It remains the machinery for the *next* unresolved asset. |
 
 ⚠️ **The one thing the gate did NOT relax is the unlicensed white matter.** No audience
 makes geometry servable when no grant exists, so Z-Anatomy was rebuilt with
@@ -245,10 +245,10 @@ curl -s -o /dev/null -w '%{http_code} %{size_download}\n' \
   "$VERIFY_URL/models/bodyparts3d.ao.glb"
 
 # 4. The PUBLIC name serves. Since D21 (wall down) the pass condition is 200;
-#    while the site was gated it was 401. Also confirm the withheld asset is
-#    genuinely absent — 404 here is the PASS condition, not a failure:
+#    while the site was gated it was 401. Any asset the build log says it is
+#    WITHHOLDING (rights unresolved per licences.json) must 404 here — as of
+#    D22 nothing is withheld, so there is currently no such URL to probe.
 curl -s -o /dev/null -w '%{http_code}\n' "https://$SITE/"
-curl -s -o /dev/null -w '%{http_code}\n' "https://$SITE/models/ct-atlas-f.glb"   # expect 404
 ```
 
 `$VERIFY_URL` is a route that reaches the site without credentials — on the current

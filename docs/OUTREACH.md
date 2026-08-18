@@ -626,7 +626,7 @@ Recorded so nobody re-opens them.
 | **Inter** (Rasmus Andersson) | SIL OFL 1.1, self-hosted complete font, `OFL.txt` shipped beside it. No condition unmet, no third-party request at runtime. |
 | **npm dependencies** | MIT / Apache-2.0 / BSD throughout. Re-run the checker after a bump; nobody to write to. |
 | **Schwiegerling / the Arizona eye model** | The schematic eye is generated from published measurements, which are not copyrightable expression. The credit is scholarship, not a licence condition. |
-| **`ct-atlas-f`** | ⚠️ **A record we failed to keep, not a party we failed to ask.** The MOOSE weights are CC BY 4.0, but a segmentation's licence follows its *source image*, and that scan was never recorded. There is nobody to write to: either establish the provenance internally or regenerate the atlas from a scan with a known licence. Until then it must not be in a public build. |
+| **`ct-atlas-f`** | ✅ **Resolved internally, 18 Aug 2026 (D22) — still nobody to write to, which was the point.** The unrecorded source scan was re-identified from three fingerprints (scan geometry to the millimetre, class census, the pipeline doc's own trail) as ENHANCE.PET subject 1032, University Hospital Leipzig — whose contribution is CC BY 4.0 per the dataset's paper. Chain now CC BY 4.0 end to end; the asset ships. |
 
 ## What outreach cannot fix — the internal list, before launch
 

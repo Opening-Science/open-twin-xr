@@ -1856,3 +1856,61 @@ a scan with a known licence, then clear its register entry and it ships
 automatically. And the site being public raises the stakes on every remaining
 credit-wording thread in `docs/OUTREACH.md`; none of them gates, all of them
 are now visible to their subjects.
+
+---
+
+## D22 — The CT atlas's source scan is identified: ENHANCE.PET 1032, Leipzig, CC BY 4.0
+
+**18 August 2026.** The register's last unresolved entry resolves — not by
+finding a lost note, but by re-deriving the identification from evidence that
+could not have drifted. `ct-atlas-f` ships.
+
+### The problem, restated
+
+The asset was built by the MOOSE pipeline before provenance was tracked, and a
+segmentation's licence follows its **source image** — which nobody wrote down.
+Report 05 called it "a record we failed to keep, not a party we failed to ask";
+D21's withhold machinery kept the GLB out of the public build.
+
+### The identification — three independent fingerprints
+
+1. **Scan geometry.** The shipped GLB holds 0.861 m of anatomy (measured; the
+   registration comment records raw −1.571 → −0.710). The NIfTI header of
+   ENHANCE.PET `imaging-data/images/CT/1032.nii.gz`, read over an HTTP range
+   request, gives 287 slices × 3.0 mm = **861.0 mm** — to the millimetre.
+2. **Class census.** `docs/CT_ATLAS_PIPELINE.md` records per-model found-class
+   counts for subject 1032 (13 cardiac + 27 vertebrae + 25 ribs + 19 organs +
+   10 muscles + 16 peripheral bones = **110**). The GLB has exactly 110 nodes,
+   with the same 15 peripheral-bone absentees the doc lists.
+3. **Documentary trail.** The pipeline document was developed on
+   `enhance_1032_F.nii.gz` — it measured that file's axis codes and ran the
+   bone census "on subject 1032".
+
+### The licence chain, each link verified at source
+
+- Subject 1032 is the **University Hospital Leipzig** contribution — per the
+  dataset's own `CT-details.xlsx` and `PT-details.xlsx` (which also record:
+  F, 81.8 y, 59 kg, **1.56 m**, lung cancer, 2009, Siemens Sensation 16).
+- The Leipzig and Careggi contributions are **CC BY 4.0** per the dataset paper
+  (Ferrara et al., *Scientific Data* 2026, doi:10.1038/s41597-026-07218-y) and
+  the AWS Open Data registry entry. Only the AutoPET subset is CC BY-NC.
+- MOOSE 3.2 weights are CC BY 4.0. So: **CC BY 4.0 end to end.**
+
+Clearing the register entry is all it took to ship — D21's machinery released
+the asset the moment `ownLicence` stopped saying "unresolved", which is that
+mechanism working exactly as designed.
+
+### What travels with the asset
+
+One 81.8-year-old oncology patient's low-dose CT — **not healthy reference
+anatomy**; skull base to mid-thigh only, arms raised; the registered donor
+height (1.56 m) is the dataset's, while placement stays `realScale` with the
+clavicle anchor. The interface states the donor and the diagnosis-era context
+rather than implying a reference body.
+
+### The lesson, made a rule
+
+**Record the subject id in the asset at build time.** This entry cost a
+forensic session because one filename was not written down;
+`docs/CT_ATLAS_PIPELINE.md` §5 already tells the next run to fill the donor
+block from the dataset's metadata — do it in the same commit as the build.

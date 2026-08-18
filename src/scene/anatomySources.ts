@@ -619,39 +619,49 @@ export const ANATOMY_SOURCES: Record<AnatomySourceId, AnatomySource> = {
    * the term join that D11 says is outstanding everywhere else already works on
    * this one. That makes it the natural proving ground for phase 5.
    *
-   * ⚠️⚠️ ITS SOURCE SCAN IS NOT RECORDED, AND THAT IS A LICENCE GAP.
+   * ⚠️ ITS SOURCE SCAN WAS NOT RECORDED AT BUILD TIME — RE-IDENTIFIED, D22.
    * `docs/CT_ATLAS_PIPELINE.md` is explicit that the licence is "set by the
-   * SOURCE IMAGE, not the weights" — MOOSE's weights are CC BY 4.0, but the
-   * geometry derives from a CT nobody wrote down. The GLB records its generator
-   * and no provenance, and no report survives in the repo.
+   * SOURCE IMAGE, not the weights", and for three weeks nobody could name the
+   * image, so this entry said "must not be published" and D21's withhold
+   * machinery kept the GLB out of `dist`.
    *
-   * So the licence below is the WEIGHTS' licence and is NOT a claim about the
-   * geometry, the donor fields say unidentified rather than guessing, and this
-   * must not be published until the scan is named. Registered anyway because it
-   * is usable for research locally (D12b) and because an asset nobody can load
-   * is an asset nobody will ever notice is unattributed.
+   * Re-identified 18 August 2026 from three independent fingerprints (D22,
+   * and the full evidence in `licences.json`): the scan geometry — subject
+   * 1032's NIfTI header gives 287 × 3.0 mm = 861.0 mm, the GLB's measured
+   * span to the millimetre; the class census — the pipeline doc's found-class
+   * counts for 1032 sum to the GLB's exact node count; and the doc itself
+   * developed on `enhance_1032_F.nii.gz`. Subject 1032 is the University
+   * Hospital Leipzig contribution to ENHANCE.PET 1.6k, which is CC BY 4.0 per
+   * the dataset's own paper (doi:10.1038/s41597-026-07218-y) — so the chain is
+   * CC BY 4.0 end to end and the asset ships.
    */
   'ct-atlas-f': {
     id: 'ct-atlas-f',
     label: 'CT atlas',
     url: '/models/ct-atlas-f.glb',
-    licence: 'MOOSE weights CC BY 4.0 — source scan unrecorded',
+    licence: 'CC BY 4.0',
     licenceUrl: 'https://creativecommons.org/licenses/by/4.0/',
     attribution:
-      'Segmented with MOOSE 3.2 (ENHANCE-PET), models CC BY 4.0. ' +
-      '⚠️ Source CT not recorded — provenance unresolved, not for publication.',
+      'CT from the ENHANCE.PET 1.6k dataset, subject 1032 (University Hospital Leipzig, ' +
+      'CC BY 4.0); segmented with MOOSE 3.2 (ENHANCE-PET), CC BY 4.0 weights.',
+    citation:
+      'Ferrara, D., Pires, M., Gutschmayer, S., et al. Sharing a whole-/total-body ' +
+      '[18F]FDG-PET/CT dataset with CT-derived segmentations: an ENHANCE.PET initiative. ' +
+      'Scientific Data (2026). doi:10.1038/s41597-026-07218-y',
     shareAlike: false,
     donor: {
       sex: 'female',
-      label: 'Unidentified CT subject',
-      derivedFrom: 'CT, source scan not recorded — see licences.json',
-      // Not measured: the asset was produced before provenance was tracked, and
-      // a height stated without measuring it is the kind of plausible number
-      // that gets believed. 1.7 is the canonical frame every atlas is scaled to.
-      heightM: 1.7,
+      label: 'ENHANCE.PET subject 1032 — F, 81, University Hospital Leipzig',
+      derivedFrom:
+        'FDG-PET/CT (CT series), 2009, Siemens Sensation 16 — an oncology patient, ' +
+        'not healthy reference anatomy; skull base to mid-thigh, arms raised',
+      // From the dataset's own PT-details.xlsx, not measured here. The scan is
+      // torso-only, so this never drives scaling (realScale below) — it is the
+      // donor's recorded standing height, shown as information.
+      heightM: 1.56,
     },
     sourceData: {
-      note: 'a CT scan segmented with MOOSE. ⚠️ Which scan is not recorded — see the licence note below.',
+      note: 'imaging-data/images/CT/1032.nii.gz from the public ENHANCE.PET 1.6k bucket, segmented with MOOSE 3.2. Identified retrospectively — see D22.',
     },
     /**
      * ⚠️ A PARTIAL atlas, and the default fit ruins it.
