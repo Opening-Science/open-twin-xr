@@ -90,7 +90,7 @@ are from the shipped files.
 | 4 | **HuBMAP HRA (female)** | Visible Human Female, 0.33 mm cryosection | Whole body except upper skeleton; uterus, ovaries, mammary glands | 96 nodes | 4.03 M | 15.4 MB |
 | 5 | **HuBMAP HRA (male)** | Visible Human Male, 0.33 mm cryosection | Same atlas, male donor | 85 nodes | 2.06 M | 8.5 MB |
 | 6 | **CT (female)** | TCIA Healthy-Total-Body-CTs subject 003 — F, 26, 1.7018 m | The only **complete female body**; at her measured size, arms raised | 33 grouped labels | 0.98 M | 27.0 MB |
-| 7 | **CT atlas** | ⚠️ unidentified CT subject | The only atlas with UBERON ids on every structure | 109 nodes | 0.44 M | 12.6 MB |
+| 7 | **CT atlas** | ENHANCE.PET subject 1032 — F, 81, Univ. Hospital Leipzig (re-identified, D22) | The only atlas with UBERON ids on every structure | 109 nodes | 0.44 M | 12.6 MB |
 | 8 | **Beating heart** (biv-me) | biv-me demo subject, cine MRI | **Time** — 25 cardiac phases as morph targets, adjustable rate | 3 surfaces | 0.01 M | 3.8 MB |
 | 9 | **Schematic eye** | nobody — generated | Optics: cornea, lens, retina from published radii and conics | 3 surfaces | 0.05 M | 1.2 MB |
 | 10 | **Ear (photographic)** | OpenEar specimen ZETA — one right temporal bone | **Real colour** sampled from the specimen's own micro-slicing photographs at 50 µm | 12 structures | 0.23 M | 9.1 MB |
@@ -106,8 +106,8 @@ leaving it to be noticed.
 Assessed **for the build now deployed**: Z-Anatomy is the `--publishable` build.
 ⚠️ Snapshot drift: when this was written the site sat behind a login wall; **since
 18 August 2026 (D21) it is public**, the heart's provenance having been answered
-(CARDIOHANCE, local ethics approval) and the one unresolved asset (`ct-atlas-f`)
-withheld from `dist` mechanically.
+(CARDIOHANCE, local ethics approval) and the then-unresolved asset (`ct-atlas-f`)
+withheld from `dist` mechanically — itself resolved the same day (D22) and shipping.
 
 **A login wall limits *who* sees the work; it does not change what may lawfully be
 sent to them.** Serving to logged-in users is still distribution — which is why
@@ -128,7 +128,7 @@ throughout.
 | **Z-Anatomy regions** | CC BY-SA 4.0 | ✅ Yes | Attribution + share-alike. Cleanest asset in the set — no third-party components | — |
 | **HuBMAP HRA** (female + male) | CC BY 4.0 | ✅ Yes | Attribution + indicate changes. Derived from NLM Visible Human, public domain since 2019 | — |
 | **CT (female)** — TCIA | CC BY 4.0 | ✅ Yes | Attribution + DOI. Two properties must travel: labels are **grouped**, and it is low-dose non-contrast CT so bone is trustworthy and soft tissue is not | — |
-| **CT atlas** — MOOSE | ⚠️ **unresolved** | ⛔ **No — internal/research only** | MOOSE weights are CC BY 4.0, but the licence of a segmentation follows its **source image**, and that scan was never recorded | **(!)** provenance must be established, or the asset regenerated from a scan with a known licence. *Not a creator problem — an internal record problem.* |
+| **CT atlas** — MOOSE | CC BY 4.0 end to end | ✅ **Yes, since D22 (18 Aug 2026)** | Attribution names the dataset, subject and both CC BY links; cite Ferrara et al., *Sci Data* 2026 (doi:10.1038/s41597-026-07218-y) | ~~(!)~~ **The internal record was reconstructed:** source scan re-identified as ENHANCE.PET 1032 (Leipzig, CC BY 4.0) from the scan geometry (861.0 mm, to the millimetre), the class census, and the pipeline doc’s own trail. |
 | **Beating heart** — biv-me | Apache-2.0 | ✅ **Yes, since D21 (18 Aug 2026)** | Attribution names the cohort and ethics basis; cite the repo and Dillon et al. 2026, *Med Image Anal* 114:104252 | ~~(!)~~ **Answered by the corresponding author:** `patient1` is a **CARDIOHANCE** participant, local ethics approval to share online, no restrictions on further use. The UK Biobank branch is dead. |
 | **Schematic eye** | none required — ours | ✅ Yes, unconditionally | Must always be described as a **schematic optical** model: no sclera, iris, ciliary body, extraocular muscles, optic nerve or vasculature | — the only asset with no upstream rights holder at all |
 | **Ear (photographic)** — OpenEar | CC BY 4.0 | ✅ Yes | Attribution. Three properties travel: **71.5 %** of the surface has photographed colour and the rest is honest grey; it is **one cadaveric temporal bone**, not a population; it is ~14 % larger than the body's own ear and left unscaled | — |
@@ -162,8 +162,10 @@ the obligation off the CC BY geometry and off the MIT code.
    the incus, stapes and malleus are credited to whoever actually owns them — and
    tell them their "'Brainder' / University of Washington" credit is wrong, per D20.
 4. **(!) DBCLS** — written confirmation of the BodyParts3D CC BY 4.0 relicence.
-5. **(!) Internal** — establish or replace the CT atlas's source scan. No third
-   party to contact; this is a record that was never kept.
+5. ~~**(!) Internal**~~ — **done, 18 Aug 2026 (D22).** The CT atlas's source scan
+   was re-identified from the scan geometry (861.0 mm z-extent, exact to the
+   millimetre), the class census, and the pipeline doc's own trail: ENHANCE.PET
+   subject 1032, University Hospital Leipzig, CC BY 4.0.
 
 ---
 
