@@ -219,6 +219,19 @@ function isBodyHull(systemId: SystemId | null, group?: string): boolean {
 }
 
 /**
+ * The `aStructure` attribute declaration, guarded so two shader patches can
+ * both ask for it.
+ *
+ * `aStructure` rather than `_structure` because GLSL reserves leading
+ * underscores; the alias shares the same BufferAttribute (see the enumeration
+ * step). Both the structure-mask patch and the hover-rim patch inject at
+ * `#include <common>`, and chained `.replace` keeps both injections — so an
+ * unguarded declaration appears twice and fails to compile.
+ */
+const OT_A_STRUCTURE =
+  '#ifndef OT_A_STRUCTURE\n#define OT_A_STRUCTURE\nattribute float aStructure;\n#endif'
+
+/**
  * Does the body hull currently read as a SOLID surface, i.e. should it catch
  * picks rather than let them through to the anatomy behind it?
  *
@@ -271,9 +284,23 @@ export function AtlasBody({
   const setPresentSystemsFor = useTwin((s) => s.setPresentSystemsFor)
   const setHoveredLabel = useTwin((s) => s.setHoveredLabel)
 
+  /**
+   * The structure under the pointer, or -1 for none — the hover rim's only
+   * input. Written straight from the pointer handlers, never through React
+   * state: this changes at pointer-move rate and a re-render per move would be
+   * absurd. Ids are small integers, exact in float32 well past any atlas's
+   * structure count. Declared here rather than beside the other uniforms
+   * because the unmount handler below closes over it.
+   */
+  const hoverUniform = useRef({ value: -1 })
+
   // Switching atlas unmounts this component straight out from under the pointer,
-  // and r3f fires no pointer-out for that. See `hoverCursor.ts`.
-  const hoverToken = useHoverRelease(() => setHoveredLabel(null))
+  // and r3f fires no pointer-out for that. See `hoverCursor.ts`. The rim uniform
+  // is cleared on the same path, for the same reason the label is.
+  const hoverToken = useHoverRelease(() => {
+    setHoveredLabel(null)
+    hoverUniform.current.value = -1
+  })
 
   const byId = useMemo(
     () => new Map<SystemId, SystemScore>((data?.systems ?? []).map((s) => [s.id, s])),
@@ -1078,7 +1105,10 @@ export function AtlasBody({
     // program for each of the ~65 organ materials that ignore it.
     const glassOn = glassHull && isBodyHull(systemId, group)
     const maskThis = maskOn && hasStructure
-    const key = `${systemId}|${layer}|${group}|${colourMode}|${selected}|${hullOpacity.toFixed(2)}|${baked}|${perStructureExplode}|${xrayOn}|${smoothOn}|${maskThis}|${glassOn}`
+    // The hover rim needs no store flag — the uniform decides at draw time — so
+    // this is geometry-only and never flips while the app runs.
+    const hoverThis = hasStructure
+    const key = `${systemId}|${layer}|${group}|${colourMode}|${selected}|${hullOpacity.toFixed(2)}|${baked}|${perStructureExplode}|${xrayOn}|${smoothOn}|${maskThis}|${glassOn}|${hoverThis}`
     const cache = materials.current
     const hit = cache.get(key)
     if (hit) return hit
@@ -1471,7 +1501,16 @@ vec4 otStructureMask( float id ) {
         shader.vertexShader = shader.vertexShader
           .replace(
             '#include <common>',
-            '#include <common>\nattribute float aStructure;\nuniform sampler2D uMask;\nuniform vec2 uMaskSize;\nvarying vec3 vStructureTint;' +
+            // ⚠️ The `#ifndef` guard is load-bearing, not decoration. This patch
+            // and the hover-rim patch below both need `aStructure` and both
+            // inject at `#include <common>`; chained `.replace` leaves BOTH
+            // declarations in the final source, and a redeclared attribute is a
+            // GLSL compile error that takes the whole material down. The guard
+            // makes the pair order-independent — whichever lands first declares
+            // it. Any future patch needing the attribute must use it too.
+            '#include <common>\n' +
+              OT_A_STRUCTURE +
+              '\nuniform sampler2D uMask;\nuniform vec2 uMaskSize;\nvarying vec3 vStructureTint;' +
               lookup,
           )
           /**
@@ -1528,6 +1567,96 @@ vec4 otStructureMask( float id ) {
     }
 
     /**
+     * The hovered structure, rimmed.
+     *
+     * A tint alone is hard to find in dense anatomy — hover a vessel among two
+     * hundred vessels and a slightly different shade of red is not an answer.
+     * A fresnel rim reads as a silhouette: it brightens exactly where the
+     * surface turns away from the eye, so the shape's outline lights up and the
+     * structure separates from everything behind it.
+     *
+     * ⚠️ A UNIFORM COMPARE, NOT A TEXTURE WRITE AND NOT A SECOND MESH.
+     *
+     *   - The structure mask could carry a "hovered" value in its alpha channel,
+     *     but the mask is rewritten wholesale (a 16 KB fill plus a full loop)
+     *     and `maskOn` is a shader VARIANT — so the first hover would recompile
+     *     every material on the atlas. At pointer-move rate.
+     *   - The green selection highlight is a second mesh with a draw range,
+     *     which cannot fresnel (it is a `MeshBasicMaterial`), churns objects at
+     *     pointer rate, and misses the `aExplode` injection — so it would
+     *     detach from its structure the moment the explode slider moves.
+     *
+     * This costs one float write per pointer move into a shared uniform object
+     * — no React state, no recompile, no allocation — and inherits explode,
+     * x-ray and the mask for free because it rides the same program.
+     *
+     * Gated on `hasStructure` ONLY, so the variant never flips at runtime and
+     * the first hover of a session costs nothing. That gate is the unbound
+     * attribute trap documented above: a mesh without `_structure` reads
+     * `aStructure` as 0.0 for every vertex, and would rim itself entirely
+     * whenever structure 0 happened to be hovered.
+     */
+    if (hoverThis) {
+      const prev = m.onBeforeCompile
+      m.onBeforeCompile = (shader, renderer) => {
+        prev?.(shader, renderer)
+        shader.uniforms.uHoverId = hoverUniform.current
+
+        shader.vertexShader = shader.vertexShader
+          .replace(
+            '#include <common>',
+            '#include <common>\n' +
+              OT_A_STRUCTURE +
+              '\nuniform float uHoverId;\nvarying float vHover;',
+          )
+          // Compared as floats with a half-unit tolerance rather than `==`:
+          // the id arrives as an integer in a float attribute and leaves as a
+          // float uniform, and exact equality on floats is a trap even when
+          // both sides are small integers.
+          .replace(
+            '#include <begin_vertex>',
+            '#include <begin_vertex>\nvHover = abs( aStructure - uHoverId ) < 0.5 ? 1.0 : 0.0;',
+          )
+
+        shader.fragmentShader = shader.fragmentShader
+          .replace('#include <common>', '#include <common>\nvarying float vHover;')
+          /**
+           * AFTER `<emissivemap_fragment>`, for the same reason the glass rim is:
+           * that chunk MULTIPLIES `totalEmissiveRadiance`, so anything added
+           * before it gets scaled by the material's emissive (zero here) and
+           * vanishes.
+           *
+           * Amber, deliberately: it has to be distinguishable from the green
+           * selection fill and from the glass hull's blue rim, and warm reads as
+           * "under the pointer" against tissue colours that are mostly red and
+           * pink.
+           *
+           * The 0.45 floor keeps a face-on surface lit — a pure fresnel term
+           * disappears exactly where the structure faces you, which is where the
+           * pointer is. ⚠️ The exponent is 1.1 where the glass hull's is 2.2, and
+           * that is measured rather than copied: at 2.2 the rim is a two-pixel
+           * edge on an organ that occupies thirty pixels, which is invisible at
+           * any sane window size. 1.1 spreads the falloff across the curve of
+           * the structure so its shape reads, while the floor keeps it from
+           * flattening into a flood fill. Tuned by hovering the stomach on
+           * BodyParts3D through the glass hull — the densest case, where an
+           * organ sits among a dozen others of nearly the same colour.
+           */
+          .replace(
+            '#include <emissivemap_fragment>',
+            [
+              '#include <emissivemap_fragment>',
+              'float hvRim = 0.0;',
+              '#ifndef FLAT_SHADED',
+              '  hvRim = pow( 1.0 - abs( dot( normalize( vNormal ), normalize( vViewPosition ) ) ), 1.1 );',
+              '#endif',
+              'totalEmissiveRadiance += vec3( 1.0, 0.80, 0.35 ) * ( 0.45 + 2.6 * hvRim ) * vHover;',
+            ].join('\n'),
+          )
+      }
+    }
+
+    /**
      * One key for every shader variant this material may carry.
      *
      * Without it three reuses a single compiled program across variants and
@@ -1556,8 +1685,8 @@ vec4 otStructureMask( float id ) {
      * program to reuse. Verified by logging — the injection ran on every toggle
      * while the compile hook fired only once per atlas.
      */
-    if (xrayOn || perStructureExplode || maskThis || glassOn) {
-      const variant = `${xrayOn ? 'x' : ''}${perStructureExplode ? 'e' : ''}${maskThis ? 'm' : ''}${glassOn ? 'g' : ''}`
+    if (xrayOn || perStructureExplode || maskThis || glassOn || hoverThis) {
+      const variant = `${xrayOn ? 'x' : ''}${perStructureExplode ? 'e' : ''}${maskThis ? 'm' : ''}${glassOn ? 'g' : ''}${hoverThis ? 'h' : ''}`
       m.customProgramCacheKey = () => variant
     }
 
@@ -1789,6 +1918,10 @@ vec4 otStructureMask( float id ) {
   useEffect(() => {
     setSelectedMesh(null)
     if (useTwin.getState().selectedStructure?.sourceId === source.id) setSelectedStructure(null)
+    // ⚠️ The hover rim too. `useGLTF` can swap the atlas under a live component,
+    // and structure ids are positional — a stale id would rim whatever structure
+    // now happens to hold that number.
+    hoverUniform.current.value = -1
   }, [entries, source.id, setSelectedStructure])
 
   useEffect(() => {
@@ -1934,6 +2067,7 @@ vec4 otStructureMask( float id ) {
             // pointer-out will arrive to clear a stale label.
             setHoveredLabel(null)
             setHoverCursor(false, hoverToken)
+            hoverUniform.current.value = -1
             return
           }
           e.stopPropagation()
@@ -1942,10 +2076,13 @@ vec4 otStructureMask( float id ) {
           const s = pick.structureId != null ? (structures?.[pick.structureId] ?? null) : null
           setHoveredLabel(s ? describe(s) : (pick.group.label ?? null))
           setHoverCursor(true, hoverToken)
+          // The rim, straight to the uniform. No store, no re-render.
+          hoverUniform.current.value = pick.structureId ?? -1
         }}
         onPointerOut={() => {
           setHoveredLabel(null)
           setHoverCursor(false, hoverToken)
+          hoverUniform.current.value = -1
         }}
         onClick={(e: ThreeEvent<MouseEvent>) => {
           // As above: unresolved geometry is still selectable. The per-structure
