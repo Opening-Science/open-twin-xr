@@ -3,78 +3,64 @@
  * Anatomical definitions for the structures this app can name, keyed by
  * ONTOLOGY TERM.
  *
- *   node scripts/build-definitions.mjs --measure   # what would resolve? writes nothing
+ *   node scripts/build-definitions.mjs --measure   # coverage only, writes nothing
  *   node scripts/build-definitions.mjs             # build public/data/definitions.json
  *
  * WHY THIS EXISTS. The app can already tell you a structure is `FMA:7163`. That
  * is an identifier, not an answer — a viewer who does not already know what the
- * structure is learns nothing from it. Z-Anatomy's viewer shows a definition per
- * structure and it is the thing their interface does that ours did not.
+ * structure is learns nothing from it.
  *
  * ⚠️ KEYED BY TERM, NOT BY NAME, AND THAT IS THE WHOLE DESIGN. Z-Anatomy's
- * definitions are name-keyed, which means a rename or a rebuild silently breaks
- * the join. Structure ids are positional and names drift; an FMA or UBERON CURIE
- * is stable across atlases and across rebuilds, so a definition fetched once
- * stays attached to the right structure — and the same file serves EVERY atlas,
- * because a term means the same thing in all of them. This is the first
- * user-visible payoff of the ontology work (D18-D19).
+ * definitions are name-keyed, so a rename or a rebuild silently breaks the join.
+ * Structure ids are positional and names drift; an FMA or UBERON CURIE is stable
+ * across atlases and across rebuilds, so one file serves EVERY atlas here — a
+ * term means the same thing in all of them. This is the first user-visible
+ * payoff of the ontology work (D18-D19).
  *
  * ⚠️ BUILT OFFLINE INTO A STATIC FILE, NEVER FETCHED AT RUNTIME. A visitor's
  * browser must talk to our host and nobody else — the Inter font was un-CDN'd
- * for exactly this reason (see `inter-font` in licences.json, and the German
- * ruling cited there). A live Wikipedia call per selection would reintroduce
- * that, and would also make the app's behaviour depend on someone else's
- * uptime.
+ * for exactly this reason (see `inter-font` in licences.json and the German
+ * ruling cited there).
  *
- * THE SOURCE IS WIKIPEDIA, VIA WIKIDATA. Wikidata records FMA (P1402) and UBERON
- * (P1554) ids on anatomical entities, so a CURIE resolves to an entity, and the
- * entity to an article. The text is CC BY-SA 4.0 — recorded in licences.json and
- * credited wherever it is shown, which is a licence condition and not a courtesy.
+ * ═══════════════════════════════════════════════════════════════════════════
+ * ⚠️ THE SOURCE IS THE ONTOLOGIES THEMSELVES, AND THE FIRST ATTEMPT WAS WRONG.
  *
- * ⚠️ EVERY EXTRACT IS RUN THROUGH THE CLAIMS LEXICON AND DROPPED IF IT TRIPS.
+ * This script first resolved terms to Wikipedia articles via Wikidata. Measured
+ * on the shipped assets, that reached 396 of 2,746 terms — 14.4 %, and only
+ * 8 % of Z-Anatomy, 11 % of BodyParts3D. The failure had a shape: Wikipedia has
+ * an article for "liver" and none for "ureteric segment of left renal artery",
+ * so coverage collapsed exactly where an atlas is fine-grained, and the two
+ * default bodies were the two worst served.
+ *
+ * The ontologies define their own terms, by construction. So:
+ *
+ *   UBERON -> OLS4 (the EBI service scripts/build-fma-uberon-bridge.mjs already
+ *             talks to), which serves each term's own definition.
+ *   FMA    -> NOT on OLS4 in any usable form (0 of 45 sampled Z-Anatomy terms).
+ *             Its authors publish it as one OWL release, and the `definition`
+ *             annotation is right there on the class.
+ *
+ * A definition written for the term cannot drift from the term the way an
+ * article can, and it is written by anatomists rather than for a general
+ * audience. Wikipedia is dropped rather than kept as a fallback.
+ * ═══════════════════════════════════════════════════════════════════════════
+ *
+ * LICENCES, both read at source rather than from a summary (18 August 2026):
+ *   - FMA 5.1.0: the release ships a LICENSE file that is the full CC BY 4.0
+ *     text. ⚠️ Secondary sources say "CC BY 3.0"; the release itself says 4.0.
+ *     Structural Informatics Group, University of Washington.
+ *   - UBERON: CC BY 3.0, per the ontology's own metadata.
+ * Both are attribution-only. Recorded in licences.json, rendered where the text
+ * is shown, which is a condition and not a courtesy.
+ *
+ * ⚠️ EVERY DEFINITION IS RUN THROUGH THE CLAIMS LEXICON AND DROPPED IF IT TRIPS.
  * `npm run lint:claims` guards this repository's own copy against health-claim
- * creep (D8, D15); pulling in outside prose would be a hole straight through
- * that gate. Anatomical description is what we want — "the largest organ of the
- * body" — and clinical or diagnostic language is what we do not.
- *
- * ═══════════════════════════════════════════════════════════════════════════
- * ⚠️ MEASURED 18 AUGUST 2026: WIKIPEDIA IS THE WRONG SOURCE FOR THIS REPO.
- *
- * Run `--measure` before building on any of this. What it found, on the
- * shipped assets, is why the definitions feature is NOT wired into the app yet:
- *
- *     2,746 distinct terms          ->  396 resolve to an article  (14.4 %)
- *       z-anatomy.ao.glb  1,479     ->  115                        ( 8 %)
- *       bodyparts3d.ao.glb 1,295    ->  142                        (11 %)
- *       hra.ao.glb / hra-m.ao.glb   ->                             (39-43 %)
- *       htb-ct-003.glb       33     ->   30                        (91 %)
- *
- * The failure has a shape: Wikipedia has an article for "liver" and none for
- * "ureteric segment of left renal artery". Coverage collapses exactly where an
- * atlas is fine-grained, which is the half a viewer most needs explained. The
- * two default bodies are the two worst served.
- *
- * TWO FURTHER SOURCES WERE PROBED, and they split by vocabulary:
- *
- *   - UBERON: OLS4 (the EBI service `build-fma-uberon-bridge.mjs` already
- *     talks to) serves the ontology's OWN definitions — 51 % of a sample of
- *     HRA's terms, authored by anatomists rather than by an encyclopedia.
- *   - FMA: NOT on OLS4 in any usable form — 0 of 45 sampled Z-Anatomy terms
- *     and 1 of 45 BodyParts3D terms were present at all. FMA is published as
- *     one 208 MB OWL file by its authors at the University of Washington
- *     (http://purl.org/sig/ont/fma.owl), which is a build-time ingest, not an
- *     API call, and needs its licence read at source first.
- *
- * SO THE REVISED DESIGN IS ONTOLOGY-FIRST: UBERON definitions from OLS4, FMA
- * definitions from the OWL release, Wikipedia dropped rather than kept as a
- * fallback — a definition written by an anatomist for the term is better than
- * a general-audience lede, and it cannot drift from the term the way an
- * article can. Not built here yet; this file measures, and the Wikipedia path
- * below still runs so the measurement is reproducible end to end.
- * ═══════════════════════════════════════════════════════════════════════════
+ * creep (D8, D15); ingesting outside prose would be a hole straight through that
+ * gate. Anatomical description is wanted; clinical or diagnostic language is not.
  */
-import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'node:fs'
+import { readFileSync, writeFileSync, existsSync, mkdirSync, createReadStream } from 'node:fs'
 import { join, dirname } from 'node:path'
+import { createInterface } from 'node:readline'
 import { createRequire } from 'node:module'
 import { lintClaims } from './claims/lexicon.mjs'
 
@@ -85,152 +71,169 @@ const { MeshoptDecoder } = require('meshoptimizer')
 
 const ROOT = process.cwd()
 const MEASURE_ONLY = process.argv.includes('--measure')
-const LIMIT = Number(process.argv.find((a) => a.startsWith('--limit='))?.split('=')[1] ?? 0)
 const MODELS = join(ROOT, 'public/models')
 const OUT = join(ROOT, 'public/data/definitions.json')
-const CACHE = join(ROOT, '.cache/definitions-wikidata.json')
-
-/** Wikidata's identifier properties for the two vocabularies this repo speaks. */
-const PROP = { FMA: 'P1402', UBERON: 'P1554' }
+const FMA_OWL = join(ROOT, '.cache/fma.owl')
+const FMA_URL = 'http://sig.biostr.washington.edu/share/downloads/fma/release/latest/fma.owl'
+const OLS_CACHE = join(ROOT, '.cache/ols4-definitions.json')
+const OLS = 'https://www.ebi.ac.uk/ols4/api/ontologies/uberon/terms'
 
 const io = new NodeIO()
   .registerExtensions(ALL_EXTENSIONS)
   .registerDependencies({ 'meshopt.decoder': MeshoptDecoder })
 
-/** Every CURIE any shipped asset carries, with the names that use it. */
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms))
+const CURIE = /\b(UBERON|FMA)[:_]?(\d+)\b/i
+
+/** Every CURIE any shipped asset carries, and which files carry it. */
 async function collectTerms() {
   const terms = new Map()
+  const add = (raw, file) => {
+    if (typeof raw !== 'string') return
+    const m = CURIE.exec(raw)
+    if (!m) return
+    const key = `${m[1].toUpperCase()}:${m[2]}`
+    const e = terms.get(key) ?? new Set()
+    e.add(file)
+    terms.set(key, e)
+  }
+  const { readdirSync } = await import('node:fs')
   const files = existsSync(MODELS)
-    ? (await import('node:fs')).readdirSync(MODELS).filter((f) => f.endsWith('.glb'))
+    ? readdirSync(MODELS).filter((f) => f.endsWith('.glb') && !/\.(raw|opt|stripped)\./.test(f))
     : []
   for (const f of files) {
     let doc
     try {
       doc = await io.read(join(MODELS, f))
     } catch {
-      continue // an intermediate or a half-written file is not an error here
+      continue // an intermediate or half-written file is not an error here
     }
-    const scene = doc.getRoot().listScenes()[0]
-    const rows = scene?.getExtras()?.structures ?? []
-    for (const s of rows) add(terms, s?.ontologyid, s?.name, f)
-    // Atlases without a structure table carry the term on the node instead.
-    for (const n of doc.getRoot().listNodes()) {
-      const ex = n.getExtras() ?? {}
-      add(terms, ex.ontologyid, ex.label ?? n.getName(), f)
-    }
+    for (const s of doc.getRoot().listScenes()[0]?.getExtras()?.structures ?? [])
+      add(s?.ontologyid, f)
+    for (const n of doc.getRoot().listNodes()) add(n.getExtras()?.ontologyid, f)
   }
   return terms
 }
 
-const CURIE = /\b(UBERON|FMA)[:_]?(\d+)\b/i
-function add(map, raw, name, file) {
-  if (typeof raw !== 'string') return
-  const m = CURIE.exec(raw)
-  if (!m) return
-  const key = `${m[1].toUpperCase()}:${m[2]}`
-  const e = map.get(key) ?? { names: new Set(), files: new Set() }
-  if (name) e.names.add(String(name))
-  e.files.add(file)
-  map.set(key, e)
-}
+/**
+ * FMA definitions, streamed out of the OWL release.
+ *
+ * ⚠️ STREAMED, NEVER PARSED AS A DOM. The file is 208 MB of RDF/XML; loading it
+ * would need most of a gigabyte of heap for a job that is really "read two
+ * fields per class". A line reader accumulating one class block at a time is
+ * flat in memory and takes seconds.
+ */
+async function fmaDefinitions(wanted) {
+  if (!existsSync(FMA_OWL)) {
+    console.error(
+      `✗ ${FMA_OWL} is missing. Fetch it once (~208 MB, CC BY 4.0):\n` +
+        `    mkdir -p .cache && curl -o .cache/fma.owl ${FMA_URL}`,
+    )
+    process.exit(1)
+  }
+  const out = new Map()
+  const rl = createInterface({ input: createReadStream(FMA_OWL), crlfDelay: Infinity })
+  let id = null
+  let label = null
+  let def = null
+  let inClass = false
+  const strip = (s) =>
+    s
+      .replace(/<[^>]+>/g, '')
+      .replace(/&lt;/g, '<')
+      .replace(/&gt;/g, '>')
+      .replace(/&amp;/g, '&')
+      .replace(/&quot;/g, '"')
+      .replace(/&apos;/g, "'")
+      .trim()
 
-const sleep = (ms) => new Promise((r) => setTimeout(r, ms))
+  for await (const line of rl) {
+    if (line.includes('<owl:Class ')) {
+      inClass = true
+      id = null
+      label = null
+      def = null
+    }
+    if (!inClass) continue
+    if (id === null) {
+      const m = /<fma:FMAID[^>]*>(\d+)</.exec(line)
+      if (m) id = `FMA:${m[1]}`
+    }
+    if (label === null) {
+      const m = /<rdfs:label[^>]*>([^<]+)</.exec(line)
+      if (m) label = strip(m[1])
+    }
+    if (def === null && line.includes('<fma:definition')) {
+      // The definition sits in a nested <fma:name>/<fma:value> pair or inline.
+      const m = /<fma:definition[^>]*>([\s\S]*?)<\/fma:definition>/.exec(line)
+      if (m) def = strip(m[1])
+      else def = '' // opened on this line; the value arrives below
+    } else if (def === '' && !line.includes('</fma:definition')) {
+      const v = strip(line)
+      if (v && !v.startsWith('<')) def = v
+    }
+    if (line.includes('</owl:Class>')) {
+      inClass = false
+      if (id && def && wanted.has(id)) out.set(id, { text: def, label })
+    }
+  }
+  return out
+}
 
 /**
- * Fetch JSON from a public Wikimedia endpoint, politely.
+ * The definition among OLS4's `description` entries — which is not always the
+ * first one.
  *
- * ⚠️ THESE ARE FREE SERVICES AND THEY RATE-LIMIT. The first run of this script
- * took a 429 on its second SPARQL batch. So: one descriptive User-Agent with a
- * contact route (Wikimedia asks for it), a pause between calls, and a backoff
- * that honours `Retry-After` when the server sends one. The alternative — retry
- * immediately in a loop — is how a build script gets an IP blocked.
+ * ⚠️ UBERON:0000948 (heart) is the case that caught this: entry 0 is
+ * `Taxon notes:" the ascidian tube-like heart lacks chambers..."` and entry 1 is
+ * the actual definition. Taking [0] put a note about sea squirts under the human
+ * heart, which is both wrong and absurd on a page about a person's body. Cross-
+ * species notes are UBERON doing its job — it is a multi-species ontology — but
+ * they are not what a viewer of a human atlas asked for.
  */
-async function getJSON(url, accept) {
-  const headers = {
-    Accept: accept,
-    'User-Agent': 'open-twin-xr/1.0 (https://github.com/Opening-Science/open-twin-xr)',
-  }
-  for (let attempt = 0; attempt < 5; attempt++) {
-    const r = await fetch(url, { headers })
-    if (r.ok) return r.json()
-    if (r.status === 404) return null
-    if (r.status === 429 || r.status >= 500) {
-      const after = Number(r.headers.get('retry-after'))
-      const wait = Number.isFinite(after) && after > 0 ? after * 1000 : 2000 * 2 ** attempt
-      process.stderr.write(`  ${r.status}; waiting ${Math.round(wait / 1000)}s\n`)
-      await sleep(wait)
-      continue
-    }
-    throw new Error(`${r.status} from ${url.slice(0, 80)}`)
-  }
-  throw new Error(`gave up after 5 attempts: ${url.slice(0, 80)}`)
+function pickDefinition(descriptions) {
+  const all = (descriptions ?? []).map((d) => String(d).trim()).filter(Boolean)
+  const isNote = (d) => /^(taxon notes?|note|comment|editor note)\b/i.test(d)
+  const best = all.find((d) => !isNote(d))
+  if (!best) return ''
+  // A definition that trails into a note keeps only the definition.
+  return best.split(/\s*Taxon notes?:/i)[0].trim()
 }
 
-/** Wikidata SPARQL: CURIEs -> entity + English article title, in batches. */
-async function resolve(terms, cache) {
-  const todo = [...terms.keys()].filter((t) => !(t in cache))
-  const batches = []
-  for (let i = 0; i < todo.length; i += 120) batches.push(todo.slice(i, i + 120))
-
-  for (const [i, batch] of batches.entries()) {
-    const byProp = { FMA: [], UBERON: [] }
-    for (const t of batch) {
-      const [pre, num] = t.split(':')
-      byProp[pre]?.push(num)
+/** UBERON definitions, one term at a time from OLS4, cached on disk. */
+async function uberonDefinitions(ids) {
+  const cache = existsSync(OLS_CACHE) ? JSON.parse(readFileSync(OLS_CACHE, 'utf8')) : {}
+  const todo = ids.filter((i) => !(i in cache))
+  for (const [n, id] of todo.entries()) {
+    const url = `${OLS}?obo_id=${encodeURIComponent(id)}&size=1`
+    let got = null
+    for (let a = 0; a < 4 && got === null; a++) {
+      const r = await fetch(url, {
+        headers: {
+          Accept: 'application/json',
+          'User-Agent': 'open-twin-xr/1.0 (https://github.com/Opening-Science/open-twin-xr)',
+        },
+      })
+      if (r.status === 429 || r.status >= 500) {
+        await sleep(1500 * (a + 1))
+        continue
+      }
+      if (!r.ok) break
+      const t = (await r.json())?._embedded?.terms?.[0]
+      got = t ? { text: pickDefinition(t.description), label: t.label } : false
+      if (got && !got.text) got = false
     }
-    const clauses = Object.entries(byProp)
-      .filter(([, ids]) => ids.length)
-      .map(
-        ([pre, ids]) =>
-          `{ VALUES ?id { ${ids.map((n) => `"${n}"`).join(' ')} } ` +
-          `?item wdt:${PROP[pre]} ?id . BIND("${pre}" AS ?vocab) }`,
-      )
-      .join(' UNION ')
-
-    const query = `SELECT ?id ?vocab ?item ?article WHERE { ${clauses}
-      OPTIONAL { ?article schema:about ?item ; schema:isPartOf <https://en.wikipedia.org/> . } }`
-
-    const url =
-      'https://query.wikidata.org/sparql?format=json&query=' + encodeURIComponent(query)
-    const json = await getJSON(url, 'application/sparql-results+json')
-    // Cache what has been learned SO FAR, so a rate-limit or a Ctrl-C costs the
-    // current batch and not the whole run.
-    mkdirSync(dirname(CACHE), { recursive: true })
-    writeFileSync(CACHE, JSON.stringify(cache, null, 2))
-
-    for (const t of batch) cache[t] = null // absence is a result, and is cached
-    for (const b of json.results.bindings) {
-      const key = `${b.vocab.value}:${b.id.value}`
-      const title = b.article?.value
-        ? decodeURIComponent(b.article.value.split('/wiki/')[1] ?? '').replace(/_/g, ' ')
-        : null
-      if (!title) continue
-      cache[key] = { title, url: b.article.value }
+    cache[id] = got === null ? false : got
+    if ((n + 1) % 25 === 0) {
+      mkdirSync(dirname(OLS_CACHE), { recursive: true })
+      writeFileSync(OLS_CACHE, JSON.stringify(cache, null, 1))
+      process.stderr.write(`  uberon ${n + 1}/${todo.length}\r`)
     }
-    process.stderr.write(`  wikidata batch ${i + 1}/${batches.length}\r`)
-    if (i < batches.length - 1) await sleep(1200)
+    await sleep(150)
   }
-  return cache
-}
-
-/** The lede of an article, trimmed to something a card can hold. */
-async function summarise(title) {
-  const url =
-    'https://en.wikipedia.org/api/rest_v1/page/summary/' + encodeURIComponent(title.replace(/ /g, '_'))
-  const j = await getJSON(url, 'application/json')
-  if (!j) return null
-  const text = String(j.extract ?? '').trim()
-  if (!text) return null
-  // Two sentences is a definition; a paragraph is an article. Cut on sentence
-  // boundaries so the text never ends mid-clause.
-  const sentences = text.match(/[^.!?]+[.!?]+(\s|$)/g) ?? [text]
-  let out = ''
-  for (const s of sentences) {
-    if (out && (out + s).length > 400) break
-    out += s
-    if (out.length > 240) break
-  }
-  return out.trim() || null
+  mkdirSync(dirname(OLS_CACHE), { recursive: true })
+  writeFileSync(OLS_CACHE, JSON.stringify(cache, null, 1))
+  return new Map(Object.entries(cache).filter(([, v]) => v && v.text))
 }
 
 const terms = await collectTerms()
@@ -238,83 +241,85 @@ if (!terms.size) {
   console.error('✗ no ontology terms found in public/models — install an atlas first')
   process.exit(1)
 }
+const fmaWanted = new Set([...terms.keys()].filter((t) => t.startsWith('FMA:')))
+const uberonWanted = [...terms.keys()].filter((t) => t.startsWith('UBERON:'))
 
-const cache = existsSync(CACHE) ? JSON.parse(readFileSync(CACHE, 'utf8')) : {}
-await resolve(terms, cache)
-mkdirSync(dirname(CACHE), { recursive: true })
-writeFileSync(CACHE, JSON.stringify(cache, null, 2))
+console.log(`terms carried by shipped assets : ${terms.size.toLocaleString()}`)
+console.log(`  FMA ${fmaWanted.size.toLocaleString()}   UBERON ${uberonWanted.length.toLocaleString()}`)
 
-const resolved = [...terms.keys()].filter((t) => cache[t]?.title)
-console.log(`\nterms carried by shipped assets : ${terms.size.toLocaleString()}`)
-console.log(
-  `  resolve to a Wikipedia article  : ${resolved.length.toLocaleString()}` +
-    ` (${((resolved.length / terms.size) * 100).toFixed(1)} %)`,
-)
+const fma = await fmaDefinitions(fmaWanted)
+console.log(`  FMA definitions found    : ${fma.size.toLocaleString()} / ${fmaWanted.size.toLocaleString()}`)
+const uberon = await uberonDefinitions(uberonWanted)
+console.log(`  UBERON definitions found : ${uberon.size.toLocaleString()} / ${uberonWanted.length.toLocaleString()}`)
 
-/** Per-atlas coverage, because one number hides which body is served. */
+/** Per-asset coverage, because one number hides which body is served. */
+const has = (t) => fma.has(t) || uberon.has(t)
 const byFile = new Map()
-for (const [t, e] of terms) {
-  for (const f of e.files) {
+for (const [t, files] of terms)
+  for (const f of files) {
     const c = byFile.get(f) ?? { total: 0, hit: 0 }
     c.total++
-    if (cache[t]?.title) c.hit++
+    if (has(t)) c.hit++
     byFile.set(f, c)
   }
-}
-for (const [f, c] of [...byFile].sort((a, b) => b[1].total - a[1].total)) {
+console.log('\n  per shipped asset:')
+for (const [f, c] of [...byFile].sort((a, b) => b[1].total - a[1].total))
   console.log(
-    `    ${f.padEnd(28)} ${String(c.hit).padStart(5)} / ${String(c.total).padEnd(5)}` +
+    `    ${f.padEnd(26)} ${String(c.hit).padStart(5)} / ${String(c.total).padEnd(5)}` +
       ` ${((c.hit / c.total) * 100).toFixed(0)} %`,
   )
-}
 
 if (MEASURE_ONLY) {
-  console.log('\n--measure: nothing written. Drop the flag to fetch extracts and build.')
+  console.log('\n--measure: nothing written.')
   process.exit(0)
 }
 
-const out = {}
+const defs = {}
 let dropped = 0
-let empty = 0
-const wanted = LIMIT ? resolved.slice(0, LIMIT) : resolved
-for (const [i, term] of wanted.entries()) {
-  const { title, url } = cache[term]
-  const text = await summarise(title)
-  if (!text) {
-    empty++
-    continue
+for (const [source, map, licence] of [
+  ['FMA 5.1.0 (Structural Informatics Group, University of Washington)', fma, 'CC BY 4.0'],
+  ['UBERON', uberon, 'CC BY 3.0'],
+]) {
+  for (const [term, v] of map) {
+    if (defs[term]) continue // FMA first: it is the vocabulary both big atlases speak
+    if (lintClaims(v.text).length) {
+      dropped++
+      continue
+    }
+    defs[term] = { text: v.text, label: v.label ?? null, source, licence }
   }
-  // The claims gate, applied to text this repository did not write.
-  const trips = lintClaims(text)
-  if (trips.length) {
-    dropped++
-    continue
-  }
-  out[term] = { text, title, url, lang: 'en' }
-  if ((i + 1) % 50 === 0) process.stderr.write(`  extracts ${i + 1}/${wanted.length}\r`)
 }
 
 const payload = {
   $meta: {
-    source: 'Wikipedia, resolved from FMA/UBERON identifiers via Wikidata',
-    licence: 'CC BY-SA 4.0',
-    licenceUrl: 'https://creativecommons.org/licenses/by-sa/4.0/',
     note:
-      'Built by scripts/build-definitions.mjs. Each entry carries the article it came ' +
-      'from; attribution is rendered wherever the text is shown. Extracts that trip ' +
-      "this repository's claims lexicon are dropped rather than displayed.",
+      'Definitions are the ontologies\' own, keyed by CURIE so they survive an asset ' +
+      'rebuild. Built by scripts/build-definitions.mjs; attribution is rendered ' +
+      'wherever the text is shown. Definitions tripping this repository\'s claims ' +
+      'lexicon are dropped rather than displayed.',
+    sources: [
+      {
+        name: 'Foundational Model of Anatomy 5.1.0',
+        holder: 'Structural Informatics Group, University of Washington',
+        licence: 'CC BY 4.0',
+        url: 'http://si.washington.edu/projects/fma',
+      },
+      {
+        name: 'Uberon multi-species anatomy ontology',
+        holder: 'the Uberon consortium',
+        licence: 'CC BY 3.0',
+        url: 'https://obophenotype.github.io/uberon/',
+      },
+    ],
     terms: terms.size,
-    resolved: resolved.length,
-    written: Object.keys(out).length,
+    written: Object.keys(defs).length,
     droppedByClaimsLint: dropped,
-    noExtract: empty,
   },
-  definitions: out,
+  definitions: defs,
 }
-
 mkdirSync(dirname(OUT), { recursive: true })
 writeFileSync(OUT, JSON.stringify(payload, null, 1))
 console.log(
-  `\n✓ ${Object.keys(out).length.toLocaleString()} definitions -> ${OUT}` +
-    `  (${dropped} dropped by the claims lint, ${empty} with no extract)`,
+  `\n✓ ${Object.keys(defs).length.toLocaleString()} definitions -> ${OUT}` +
+    ` (${dropped} dropped by the claims lint)`,
 )
