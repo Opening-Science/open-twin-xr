@@ -12,6 +12,7 @@ import {
   MeshBasicMaterial,
   MeshPhysicalMaterial,
   Vector3,
+  type Intersection,
   type Object3D,
 } from 'three'
 import {
@@ -215,6 +216,32 @@ const EXPLODE_Y_DAMP = 0.35
  */
 function isBodyHull(systemId: SystemId | null, group?: string): boolean {
   return systemId === 'integumentary' && !/adipose/i.test(group ?? '')
+}
+
+/**
+ * Does the body hull currently read as a SOLID surface, i.e. should it catch
+ * picks rather than let them through to the anatomy behind it?
+ *
+ * ⚠️ THIS EXISTS BECAUSE THE SKIN ATE EVERY PICK. three.js raycasting ignores
+ * `object.visible` and knows nothing about alpha, so on BodyParts3D — where the
+ * skin is one mesh enclosing all 1,837 other structures — the nearest hit was
+ * ALWAYS the skin. Hover and click reported "skin" wherever you pointed, in
+ * every mode, including the default one where the hull is glassed to 30 % and
+ * the organs are the visible subject. The app said `FMA:7163` while the user
+ * was looking straight at a kidney.
+ *
+ * The rule mirrors the three ways the interface says "the inside is the
+ * subject": the glass hull, a hull slider turned down, or x-ray turned up. In
+ * any of those the hull is scenery and picks pass through it; with an opaque
+ * hull and no x-ray the skin IS what you are pointing at, and picking it is
+ * correct — that is the mannequin view.
+ *
+ * 0.5 on both sliders is a threshold rather than a tuning parameter, and is
+ * deliberately not configurable: one number, in one place, that a reader can
+ * check against the two controls it names.
+ */
+function hullOccludesPicks(glassHull: boolean, hullOpacity: number, xray: number): boolean {
+  return !glassHull && hullOpacity >= 0.5 && xray <= 0.5
 }
 
 export function AtlasBody({
@@ -1814,19 +1841,76 @@ vec4 otStructureMask( float id ) {
    * buffer and read that vertex's id. Any corner does: a triangle cannot span
    * two structures, because the build keeps them topologically disconnected.
    */
-  const structureAt = (mesh: Mesh, faceIndex: number | null | undefined): StructureEntry | null => {
-    if (!structures || faceIndex == null) return null
+  const structureIdAt = (mesh: Mesh, faceIndex: number | null | undefined): number | null => {
+    if (faceIndex == null) return null
     const attr = mesh.geometry.getAttribute('_structure')
     const index = mesh.geometry.getIndex()
     if (!attr || !index) return null
-    const vertex = index.getX(faceIndex * 3)
-    const id = attr.getX(vertex)
-    // A hidden structure is collapsed in the VERTEX shader, so it is invisible but
-    // still in the BVH — the raycast happily hits geometry nobody can see. Without
-    // this, hovering an overlaid heart reports the static "Left ventricle" that was
-    // masked out, which is worse than reporting nothing.
-    if (hiddenIds?.has(id)) return null
-    return structures[id] ?? null
+    return attr.getX(index.getX(faceIndex * 3))
+  }
+
+  /**
+   * Which hit the pointer actually MEANS, walking outward through the geometry
+   * the viewer can see past.
+   *
+   * r3f hands us every intersection sorted by distance, and `firstHitOnly`
+   * (BodyScene) makes that one hit per MESH. Taking `e.object` — the nearest —
+   * is what made the skin unpickable-past; walking the list is the whole fix.
+   *
+   * Four reasons to skip a hit, and each is "the viewer cannot see this":
+   *
+   *   - the mesh is `visible === false`, i.e. a hidden system, layer or group.
+   *     three.js raycasts it anyway; nothing should ever pick it.
+   *   - it is the body hull while the hull is glassed, faded or x-rayed
+   *     (`hullOccludesPicks`).
+   *   - its structure is collapsed to a point by an organ overlay's mask
+   *     (`hiddenIds`), so the geometry is present in the BVH and absent on
+   *     screen. ⚠️ This CONTINUES the walk where the old code returned the
+   *     merged group's label instead — reporting "cardiovascular / heart" for a
+   *     ventricle the beating overlay had replaced. Naming geometry nobody can
+   *     see is worse than naming the thing in front of it.
+   *   - it belongs to no atlas of ours and is invisible: the background
+   *     click-catcher plane in `Body.tsx`, which must keep catching clicks.
+   *
+   * A VISIBLE mesh that is not ours ends the walk with `defer`: in composed mode
+   * the other `AtlasBody` receives the same event and resolves its own nearest
+   * hit, so deciding here would answer for geometry we do not own.
+   *
+   * ⚠️ Known limit of `firstHitOnly`: skipping advances to the next MESH, not to
+   * the next structure inside the same merged mesh. That is acceptable for the
+   * overlay case because the organ standing in for those structures is drawn in
+   * front and catches the pointer itself.
+   */
+  type Pick =
+    | { kind: 'hit'; group: (typeof entries)[number]; mesh: Mesh; structureId: number | null }
+    | { kind: 'defer' }
+    | { kind: 'none' }
+
+  const resolvePick = (
+    intersections: readonly Intersection[],
+    fromDistance: number,
+  ): Pick => {
+    for (const it of intersections) {
+      if (it.distance < fromDistance) continue
+      const obj = it.object
+      if (!(obj instanceof Mesh)) continue
+      const group = byMesh.get(obj)
+      if (!group) {
+        if (obj.visible) return { kind: 'defer' }
+        continue
+      }
+      if (!obj.visible) continue
+      if (
+        isBodyHull(group.systemId, group.groupKey) &&
+        !hullOccludesPicks(glassHull, hullOpacity, xray)
+      ) {
+        continue
+      }
+      const id = structureIdAt(obj, it.faceIndex)
+      if (id != null && hiddenIds?.has(id)) continue
+      return { kind: 'hit', group, mesh: obj, structureId: id }
+    }
+    return { kind: 'none' }
   }
 
   return (
@@ -1834,19 +1918,29 @@ vec4 otStructureMask( float id ) {
       <primitive
         object={scene}
         onPointerMove={(e: ThreeEvent<PointerEvent>) => {
-          const hit = e.object instanceof Mesh ? byMesh.get(e.object) : undefined
-          // ⚠️ Gate on "is this one of OUR meshes", NOT on "does it resolve to a
-          // SystemId". Those came apart once unresolved geometry became a
+          // ⚠️ Resolve through `resolvePick`, NOT from `e.object`. The nearest
+          // hit is whatever encloses the body, which on BodyParts3D is the skin.
+          //
+          // ⚠️ And gate on "is this one of OUR meshes", NOT on "does it resolve
+          // to a SystemId". Those came apart once unresolved geometry became a
           // deliberate category rather than a mapping failure: the lymphoid
           // organs and the whole body-regions atlas carry no SystemId on
           // purpose, and requiring one made 257 named surface regions
           // silently unhoverable — the one thing that atlas exists to do.
-          if (!hit) return
+          const pick = resolvePick(e.intersections, e.distance)
+          if (pick.kind === 'defer') return
+          if (pick.kind === 'none') {
+            // No stopPropagation: the pointer is still inside the hull, so no
+            // pointer-out will arrive to clear a stale label.
+            setHoveredLabel(null)
+            setHoverCursor(false, hoverToken)
+            return
+          }
           e.stopPropagation()
           // Prefer the structure under the pointer over the group it was merged
           // into: "Biceps brachii (left)" rather than "musculoskeletal / muscle".
-          const s = structureAt(e.object as Mesh, e.faceIndex)
-          setHoveredLabel(s ? describe(s) : (hit.label ?? null))
+          const s = pick.structureId != null ? (structures?.[pick.structureId] ?? null) : null
+          setHoveredLabel(s ? describe(s) : (pick.group.label ?? null))
           setHoverCursor(true, hoverToken)
         }}
         onPointerOut={() => {
@@ -1854,20 +1948,21 @@ vec4 otStructureMask( float id ) {
           setHoverCursor(false, hoverToken)
         }}
         onClick={(e: ThreeEvent<MouseEvent>) => {
-          const hit = e.object instanceof Mesh ? byMesh.get(e.object) : undefined
           // As above: unresolved geometry is still selectable. The per-structure
           // highlight works off `_STRUCTURE`, which every atlas carries; only the
           // system-level highlight needs a SystemId, and `selectSystem(null)`
           // simply clears it.
-          if (!hit) return
+          //
+          // `defer` and `none` both fall through WITHOUT stopPropagation, so the
+          // invisible click-catcher plane behind the body still receives the
+          // click and deselects — clicking through a glassed hull into an empty
+          // torso now behaves exactly like clicking beside the body.
+          const pick = resolvePick(e.intersections, e.distance)
+          if (pick.kind !== 'hit') return
           e.stopPropagation()
-          const mesh = e.object as Mesh
-          const attr = mesh.geometry.getAttribute('_structure')
-          const index = mesh.geometry.getIndex()
-          const id =
-            structures && attr && index && e.faceIndex != null
-              ? attr.getX(index.getX(e.faceIndex * 3))
-              : null
+          const hit = pick.group
+          const mesh = pick.mesh
+          const id = structures ? pick.structureId : null
           // Clicking the same structure again clears it; clicking a different
           // one moves the highlight rather than needing a deselect first.
           const same = id != null && selectedMesh?.mesh === mesh && selectedMesh?.id === id
