@@ -162,17 +162,18 @@ question. **If there is no reply:** treat as unresolved — the heart stays out.
 > source; a BodyParts3D answer decides which licence line we print; an ossicle
 > correction, if any, changes one register note. None of it gates anything here.
 
-> ### Venue, in brief (full reconnaissance in the git history of this file)
+> ### Venue, in brief
 >
 > Post as an issue on **<https://github.com/Z-Anatomy/Models-of-human-anatomy>** — the
 > models repo, where the rights holder answers (Gauthier Kervyn did the geometry;
 > Lluís Vinent only the Unity app). Not the Unity repos, not the community fork, and no
-> email exists. Three things to know from their existing threads: per-mesh provenance
-> is **not recorded upstream** (#5 — "compare against the original model" is the
-> answer, so don't ask for records); the maintainer reacted badly in #5 to an
-> unidentified requester, so lead with who you are and the non-commercial stance; and
-> in #6 he reads share-alike maximally (any app reading the model must open its whole
-> code), so **state** what we ship under which terms — don't ask for a blessing.
+> email exists. Three things their existing threads establish: per-mesh provenance is
+> **not recorded upstream** (#5 — "compare against the original model" is the answer,
+> so bring comparison results rather than asking for records); introduce yourself and
+> the project's non-commercial open-source stance up front, which the licence-file
+> request to be informed invites anyway; and state plainly what we ship under which
+> terms, with the licence text as the shared reference — that is more useful to both
+> sides than asking for interpretations.
 
 **Subject:** Your white-matter credit names the wrong source; which BodyParts3D licence should derivatives print; and the comparison #5 asked for
 
@@ -302,7 +303,10 @@ question. **If there is no reply:** treat as unresolved — the heart stays out.
 >
 > Either way I will correct our own record to say that the University of Washington
 > attribution is denied by the named source, and raise it with Z-Anatomy so the error
-> stops propagating to everyone downstream of them.
+> stops propagating to everyone downstream of them. One thing to know: our rights
+> register and these working notes are public (github.com/Opening-Science/open-twin-xr),
+> so your answer is recorded there in substance — tell me if you would rather it be
+> worded differently, or quoted verbatim, or attributed some other way.
 >
 > Thank you for answering so quickly, and for the offer of a call — I will take it up if
 > the screenshots leave it open.
