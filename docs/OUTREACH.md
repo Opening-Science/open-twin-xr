@@ -161,13 +161,23 @@ question. **If there is no reply:** treat as unresolved — the heart stays out.
 > a `License.txt` correction upstream closes the white-matter miscredit at its
 > source; a BodyParts3D answer decides which licence line we print; an ossicle
 > correction, if any, changes one register note. None of it gates anything here.
+>
+> **Found after sending:** the same wrong credit is live in a third place — the
+> licence panel of z-anatomy.com's own web app (Unity WebGL) shows *"'Brainder' and
+> 'White matter' from the University of Washington"* and the stale
+> *BodyParts3D CC-BY-SA 2.1 Japan* line. Worth a one-line follow-up comment on #7 so
+> the fix reaches the app too, not only `License.txt`.
 
 > ### Venue, in brief
 >
 > Post as an issue on **<https://github.com/Z-Anatomy/Models-of-human-anatomy>** — the
 > models repo, where the rights holder answers (Gauthier Kervyn did the geometry;
-> Lluís Vinent only the Unity app). Not the Unity repos, not the community fork, and no
-> email exists. Three things their existing threads establish: per-mesh provenance is
+> Lluís Vinent only the Unity app). Not the Unity repos, not the community fork.
+> ⚠️ "No email exists" was wrong: the About panel of z-anatomy.com publishes
+> `kervyngauthier@gmail.com` and `lluisvinentdev@gmail.com`, and a 2026 job posting
+> uses `gauthier.kervyn@z-anatomy.com`. The public issue remains the right venue for
+> a public correction; the addresses are the nudge channel if #7 goes quiet.
+> Three things their existing threads establish: per-mesh provenance is
 > **not recorded upstream** (#5 — "compare against the original model" is the answer,
 > so bring comparison results rather than asking for records); introduce yourself and
 > the project's non-commercial open-source stance up front, which the licence-file
