@@ -21,6 +21,14 @@ export interface Definition {
   /** Which ontology said this, rendered as the attribution its licence requires. */
   source: string
   licence: string
+  /**
+   * Present when the definition was BORROWED from an equivalent term in another
+   * vocabulary — most FMA structures have no definition of their own, so the
+   * UBERON term they cross-reference supplies one. Rendered, because an xref is
+   * a curated equivalence rather than an identity and a reader should see the
+   * substitution rather than be told this ontology wrote it.
+   */
+  via?: string
 }
 
 interface DefinitionFile {

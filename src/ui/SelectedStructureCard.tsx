@@ -109,6 +109,14 @@ export function SelectedStructureCard() {
           <p className="text-[11px] leading-snug text-ink/70">{definition.text}</p>
           <span className="text-[9px] text-muted">
             {definition.source} · {definition.licence}
+            {/*
+              A BORROWED definition, and the interface says so. The term this
+              structure carries has none of its own, so this is the definition
+              of the equivalent term in another vocabulary — a curated xref, not
+              an identity. Naming the term it came from lets a reader judge the
+              substitution instead of being told FMA wrote something it did not.
+            */}
+            {definition.via && ` · defined at ${definition.via}`}
           </span>
         </div>
       )}

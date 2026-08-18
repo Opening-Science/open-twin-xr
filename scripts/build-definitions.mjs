@@ -32,13 +32,17 @@
  * so coverage collapsed exactly where an atlas is fine-grained, and the two
  * default bodies were the two worst served.
  *
- * The ontologies define their own terms, by construction. So:
+ * The ontologies define their own terms, by construction — so both are read
+ * from their own releases, offline:
  *
- *   UBERON -> OLS4 (the EBI service scripts/build-fma-uberon-bridge.mjs already
- *             talks to), which serves each term's own definition.
- *   FMA    -> NOT on OLS4 in any usable form (0 of 45 sampled Z-Anatomy terms).
- *             Its authors publish it as one OWL release, and the `definition`
- *             annotation is right there on the class.
+ *   UBERON -> its OBO release. Defines nearly everything it names.
+ *   FMA    -> its OWL release. ⚠️ Publishes ~2,172 definitions for ~100,000
+ *             classes, and most sit on PROPERTIES rather than anatomical
+ *             classes, so on its own it reaches ~4 % of the terms here.
+ *   FMA via UBERON -> the release carries `xref: FMA:...` on 6,596 terms, so a
+ *             structure whose own ontology defines nothing borrows the
+ *             definition of the UBERON term it is equivalent to. That is what
+ *             takes Z-Anatomy from 3 % to 12 % and BodyParts3D from 5 % to 19 %.
  *
  * A definition written for the term cannot drift from the term the way an
  * article can, and it is written by anatomists rather than for a general
@@ -75,8 +79,8 @@ const MODELS = join(ROOT, 'public/models')
 const OUT = join(ROOT, 'public/data/definitions.json')
 const FMA_OWL = join(ROOT, '.cache/fma.owl')
 const FMA_URL = 'http://sig.biostr.washington.edu/share/downloads/fma/release/latest/fma.owl'
-const OLS_CACHE = join(ROOT, '.cache/ols4-definitions.json')
-const OLS = 'https://www.ebi.ac.uk/ols4/api/ontologies/uberon/terms'
+const UBERON_OBO = join(ROOT, '.cache/uberon.obo')
+const UBERON_URL = 'http://purl.obolibrary.org/obo/uberon.obo'
 
 const io = new NodeIO()
   .registerExtensions(ALL_EXTENSIONS)
@@ -181,59 +185,71 @@ async function fmaDefinitions(wanted) {
 }
 
 /**
- * The definition among OLS4's `description` entries — which is not always the
- * first one.
+ * UBERON, parsed once from its own release: definitions AND the FMA bridge.
  *
- * ⚠️ UBERON:0000948 (heart) is the case that caught this: entry 0 is
- * `Taxon notes:" the ascidian tube-like heart lacks chambers..."` and entry 1 is
- * the actual definition. Taking [0] put a note about sea squirts under the human
- * heart, which is both wrong and absurd on a page about a person's body. Cross-
- * species notes are UBERON doing its job — it is a multi-species ontology — but
- * they are not what a viewer of a human atlas asked for.
+ * ⚠️ THIS REPLACED 370 OLS4 CALLS, AND THE REASON IS NOT ONLY SPEED. Querying
+ * the API term by term gave definitions for the UBERON ids an asset happens to
+ * carry and nothing else. The release file carries `xref: FMA:...` on 6,596 of
+ * its terms, which is the FMA -> UBERON bridge this repository already wanted
+ * (see scripts/build-fma-uberon-bridge.mjs, built in the other direction for a
+ * different job). With it, an FMA-keyed structure whose own ontology defines
+ * nothing can borrow the definition of the UBERON term it is equivalent to.
+ *
+ * ⚠️ AN XREF IS A CURATED EQUIVALENCE, NOT AN IDENTITY, and the same caution
+ * the bridge script records applies here: some are broader or narrower matches.
+ * A definition is prose a reader judges for themselves, not a mask that hides
+ * geometry, so a near-equivalence is worth showing — but the borrow is RECORDED
+ * per definition (`via`), so the interface can say the term it came from and a
+ * reader can see the substitution rather than be told a UBERON definition is
+ * FMA's own.
+ *
+ * ⚠️ ONE-TO-MANY IS DROPPED. Where several UBERON terms xref the same FMA id,
+ * picking one would manufacture a precision the data does not have.
  */
-function pickDefinition(descriptions) {
-  const all = (descriptions ?? []).map((d) => String(d).trim()).filter(Boolean)
-  const isNote = (d) => /^(taxon notes?|note|comment|editor note)\b/i.test(d)
-  const best = all.find((d) => !isNote(d))
-  if (!best) return ''
-  // A definition that trails into a note keeps only the definition.
-  return best.split(/\s*Taxon notes?:/i)[0].trim()
-}
-
-/** UBERON definitions, one term at a time from OLS4, cached on disk. */
-async function uberonDefinitions(ids) {
-  const cache = existsSync(OLS_CACHE) ? JSON.parse(readFileSync(OLS_CACHE, 'utf8')) : {}
-  const todo = ids.filter((i) => !(i in cache))
-  for (const [n, id] of todo.entries()) {
-    const url = `${OLS}?obo_id=${encodeURIComponent(id)}&size=1`
-    let got = null
-    for (let a = 0; a < 4 && got === null; a++) {
-      const r = await fetch(url, {
-        headers: {
-          Accept: 'application/json',
-          'User-Agent': 'open-twin-xr/1.0 (https://github.com/Opening-Science/open-twin-xr)',
-        },
-      })
-      if (r.status === 429 || r.status >= 500) {
-        await sleep(1500 * (a + 1))
-        continue
-      }
-      if (!r.ok) break
-      const t = (await r.json())?._embedded?.terms?.[0]
-      got = t ? { text: pickDefinition(t.description), label: t.label } : false
-      if (got && !got.text) got = false
-    }
-    cache[id] = got === null ? false : got
-    if ((n + 1) % 25 === 0) {
-      mkdirSync(dirname(OLS_CACHE), { recursive: true })
-      writeFileSync(OLS_CACHE, JSON.stringify(cache, null, 1))
-      process.stderr.write(`  uberon ${n + 1}/${todo.length}\r`)
-    }
-    await sleep(150)
+function parseUberon() {
+  if (!existsSync(UBERON_OBO)) {
+    console.error(
+      `✗ ${UBERON_OBO} is missing. Fetch it once (~22 MB, CC BY 3.0):\n` +
+        `    mkdir -p .cache && curl -L -o .cache/uberon.obo ${UBERON_URL}`,
+    )
+    process.exit(1)
   }
-  mkdirSync(dirname(OLS_CACHE), { recursive: true })
-  writeFileSync(OLS_CACHE, JSON.stringify(cache, null, 1))
-  return new Map(Object.entries(cache).filter(([, v]) => v && v.text))
+  const defs = new Map() // UBERON:x -> { text, label }
+  const fmaToUberon = new Map() // FMA:y -> UBERON:x | null when ambiguous
+  let id = null
+  let name = null
+  let def = null
+  let obsolete = false
+  let xrefs = []
+  const flush = () => {
+    if (id && def && !obsolete) defs.set(id, { text: def, label: name })
+    if (id && !obsolete)
+      for (const f of xrefs) {
+        if (fmaToUberon.has(f) && fmaToUberon.get(f) !== id) fmaToUberon.set(f, null)
+        else if (!fmaToUberon.has(f)) fmaToUberon.set(f, id)
+      }
+    id = null
+    name = null
+    def = null
+    obsolete = false
+    xrefs = []
+  }
+  for (const line of readFileSync(UBERON_OBO, 'utf8').split('\n')) {
+    if (line === '[Term]') {
+      flush()
+      continue
+    }
+    if (line.startsWith('id: UBERON:')) id = line.slice(4).trim()
+    else if (line.startsWith('name: ')) name = line.slice(6).trim()
+    else if (line.startsWith('is_obsolete: true')) obsolete = true
+    else if (line.startsWith('def: ')) {
+      // `def: "The text." [refs]` — the quoted part is the definition.
+      const m = /^def:\s+"((?:[^"\\]|\\.)*)"/.exec(line)
+      if (m) def = m[1].replace(/\\"/g, '"').replace(/\\n/g, ' ').trim()
+    } else if (line.startsWith('xref: FMA:')) xrefs.push(line.slice(6).trim())
+  }
+  flush()
+  return { defs, fmaToUberon }
 }
 
 const terms = await collectTerms()
@@ -248,12 +264,26 @@ console.log(`terms carried by shipped assets : ${terms.size.toLocaleString()}`)
 console.log(`  FMA ${fmaWanted.size.toLocaleString()}   UBERON ${uberonWanted.length.toLocaleString()}`)
 
 const fma = await fmaDefinitions(fmaWanted)
-console.log(`  FMA definitions found    : ${fma.size.toLocaleString()} / ${fmaWanted.size.toLocaleString()}`)
-const uberon = await uberonDefinitions(uberonWanted)
-console.log(`  UBERON definitions found : ${uberon.size.toLocaleString()} / ${uberonWanted.length.toLocaleString()}`)
+console.log(`  FMA, defined by FMA itself   : ${fma.size.toLocaleString()} / ${fmaWanted.size.toLocaleString()}`)
+
+const { defs: uberonDefs, fmaToUberon } = parseUberon()
+const uberon = new Map()
+for (const id of uberonWanted) if (uberonDefs.has(id)) uberon.set(id, uberonDefs.get(id))
+console.log(`  UBERON, defined by UBERON    : ${uberon.size.toLocaleString()} / ${uberonWanted.length.toLocaleString()}`)
+
+/** The bridge: an FMA term with no definition of its own borrows UBERON's. */
+const borrowed = new Map()
+for (const t of fmaWanted) {
+  if (fma.has(t)) continue
+  const u = fmaToUberon.get(t)
+  if (!u) continue
+  const d = uberonDefs.get(u)
+  if (d) borrowed.set(t, { ...d, via: u })
+}
+console.log(`  FMA, borrowed via UBERON xref: ${borrowed.size.toLocaleString()} (bridge holds ${fmaToUberon.size.toLocaleString()} FMA ids)`)
 
 /** Per-asset coverage, because one number hides which body is served. */
-const has = (t) => fma.has(t) || uberon.has(t)
+const has = (t) => fma.has(t) || uberon.has(t) || borrowed.has(t)
 const byFile = new Map()
 for (const [t, files] of terms)
   for (const f of files) {
@@ -278,15 +308,24 @@ const defs = {}
 let dropped = 0
 for (const [source, map, licence] of [
   ['FMA 5.1.0 (Structural Informatics Group, University of Washington)', fma, 'CC BY 4.0'],
-  ['UBERON', uberon, 'CC BY 3.0'],
+  ['Uberon', uberon, 'CC BY 3.0'],
+  ['Uberon', borrowed, 'CC BY 3.0'],
 ]) {
   for (const [term, v] of map) {
-    if (defs[term]) continue // FMA first: it is the vocabulary both big atlases speak
+    if (defs[term]) continue // a term's own ontology wins over a borrowed one
     if (lintClaims(v.text).length) {
       dropped++
       continue
     }
-    defs[term] = { text: v.text, label: v.label ?? null, source, licence }
+    defs[term] = {
+      text: v.text,
+      label: v.label ?? null,
+      source,
+      licence,
+      // Present only on a borrowed definition, so the interface can say the
+      // equivalent term it came from rather than implying FMA wrote it.
+      ...(v.via ? { via: v.via } : {}),
+    }
   }
 }
 

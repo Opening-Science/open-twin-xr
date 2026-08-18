@@ -47,7 +47,8 @@ Sources, in order of authority:
 | 4 | ~~**University of Washington**~~ | — | ⛔ **Do not send.** The named source denies any UW affiliation, so the premise is gone | No |
 | 5 | **DBCLS** (BodyParts3D) | ✅ `bodyparts@dbcls.rois.ac.jp` | Written confirmation of the 2025-02-27 CC BY 4.0 relicence | No — but the default atlas rests on an unconfirmed reading |
 | 6 | **HuBMAP HRA** — MC-IU | ✅ `infoccf@indiana.edu` | Which version-specific citation must we render? | No — but the exact wording is a CC BY condition |
-| 7 | **University of Dundee** — Caroline Erolin | ✅ sent | **✅ ANSWERED 18 Aug 2026.** Both components are themselves derivatives; the fuller chains now ship (D23). One question left: the cranial-nerves page states no licence at all | No — but it changed what we print |
+| 7 | **University of Dundee** — Caroline Erolin (CAHID) | ✅ sent | **✅ ANSWERED TWICE, 18 Aug 2026.** The fuller chains ship (D23); then: the cranial-nerves model has **no CC licence at all** and she gave express permission instead, with the attribution she wants (D23b). She also independently corroborated the DBCLS relicence | No — but it changed what we print |
+| 7b | **University of Dundee** — Eve Laws (Medical School) | ⚠️ address not yet confirmed — Caroline copied her in | The inner ear is the medical school's, not CAHID's: does the McGill → UNC/Duke chain belong in the credit, and which spelling? | No |
 | 8 | **Courtesy notices** — OpenEar, TCIA, NAVER LABS Europe, lissiecowley | see §8 | None. "We are using your work, here is the credit" | No |
 
 Nothing in this table is a licence *fee*, and nothing here is a negotiation. Items
@@ -545,7 +546,37 @@ Library page.
 > how did Z-Anatomy obtain a model that cannot be downloaded?* The second half is
 > really a question for Z-Anatomy (issue #7), and their answer may matter more.
 
-> ### ✅ REPLY SENT 18 August 2026 — awaiting her answer
+> ### ✅ ANSWERED 18 August 2026 — and it changed the licence, not just the wording
+>
+> **The cranial-nerves model has no CC licence at all.** Her words: it "is not
+> downloadable [so] it does not have any CC license attached on our Sketchfab page",
+> and the licence its description states is *the licence of the data it is based on*.
+> So the `CC BY 4.0` we printed for weeks was Z-Anatomy's inference, not Dundee's
+> grant — the page we could not find a licence on genuinely has none.
+>
+> **What we have instead is better: express written permission.** "As this is based
+> on the open-source Body Parts 3D data I don't have a problem with it being
+> re-purposed for this project", plus the attribution she asked for, naming the
+> BodyParts3D chain. The in-app credit now reads *used with permission* and names
+> that chain rather than asserting a grant nobody made (D23b).
+>
+> **She corroborated the DBCLS relicence independently**, which is worth more than it
+> looks: checking BodyParts3D's page to answer us, she found it now states CC BY 4.0
+> where it said CC BY-SA 2.1 Japan when she published five years ago — "Which matches
+> what is on Z-anatomy." That is a second party reaching item 5's reading without
+> being told it. Still not written confirmation from DBCLS, but no longer only ours.
+>
+> **The inner ear is not hers** — the medical school holds it, and she referred those
+> questions to Eve Laws. See §7b.
+>
+> **Reply to send:** thank her, quote back the exact credit line now rendered so she
+> can object to the wording, and note the one small thing we did not adopt verbatim —
+> her proposed string contains a copy-paste doubling ("licensed under BodyParts3D, ©
+> The Database Center for Life Science licensed under CC Attribution 4.0"), so we
+> render the un-doubled form and she can correct us if she wants it as written.
+
+<details>
+<summary>The first exchange, sent 18 August 2026</summary>
 >
 > Sent to `c.d.erolin@dundee.ac.uk`, cc Eve. A lightly edited version of the draft
 > below; every question and commitment survived. Two wording differences worth
@@ -698,6 +729,106 @@ Centre's contact page at <https://www.dundee.ac.uk/cahid>.
 > Open Science Foundation · Matten bei Interlaken, Switzerland
 
 </details>
+
+---
+
+</details>
+
+---
+
+**Reply to send — to `c.d.erolin@dundee.ac.uk`:**
+
+> Dear Caroline,
+>
+> That is exactly what I needed, and it corrects something on our side rather than
+> yours: we had been printing "CC BY 4.0" for the cranial nerves on Z-Anatomy's
+> authority, and you have just told me no CC licence was ever attached. We have
+> stopped asserting one. The credit now reads:
+>
+> > Cranial Nerves and Foramina — University of Dundee, CAHID — produced by Sophia
+> > Lappe — used with permission
+> > ↳ based on the BodyParts3D data set, © The Database Center for Life Science,
+> >   licensed under CC Attribution 4.0 International
+>
+> That is your wording with one small tidy: the string you sent has a doubling in it
+> ("licensed under BodyParts3D, © The Database Center for Life Science licensed
+> under CC Attribution 4.0"), which I have taken as a copy-paste slip rather than
+> intent. If you would rather it appear exactly as you wrote it, say so and it will.
+> Your permission is recorded alongside it in our public rights register, quoted, so
+> anyone downstream can see the basis rather than guess at it.
+>
+> Thank you also for checking BodyParts3D's licence page. You reached the same
+> conclusion we did, independently — it now states CC BY 4.0 where it said CC BY-SA
+> 2.1 Japan five years ago — and that is useful to us beyond this model: several
+> upstream pages still carry the old wording, and we have an open question with
+> DBCLS about exactly this. Two parties arriving at the same reading separately is
+> the next best thing to their confirmation.
+>
+> I will take the inner-ear questions to Eve, and will not trouble you with them
+> again.
+>
+> With thanks — this was a genuinely useful exchange, and the credit is better for it.
+>
+> Martin Etzrodt
+> Open Science Foundation · Matten bei Interlaken, Switzerland
+
+---
+
+## 7b. University of Dundee, Medical School — the inner ear, referred on by Caroline
+
+> Caroline's second reply drew the line clearly: the inner ear model belongs to the
+> **medical school**, not to CAHID, and she referred the McGill-chain question to
+> **Eve Laws** there, whom she had already copied in. So the remaining inner-ear
+> questions go to Eve, and Caroline should not be asked them again.
+>
+> Nothing here gates anything: the inner ear's own licence (CC BY-NC-SA 4.0) is
+> stated on its Sketchfab page and is downloadable, so the grant is not in doubt.
+> What is open is whether the credit chain should run one link further back.
+
+**Subject:** The inner-ear model's own source chain — one question Caroline referred on
+
+> Dear Eve,
+>
+> Caroline Erolin suggested I ask you: she tells me the "Anatomy of the Inner Ear"
+> model is the medical school's rather than CAHID's.
+>
+> Briefly, we run an open-source WebXR body viewer for the Open Science Foundation
+> (<https://opentwin.opening.science>, source at
+> <https://github.com/Opening-Science/open-twin-xr>). Your inner ear reaches us
+> through Z-Anatomy's downloadable model set, and we render it with the credit
+> Caroline supplied:
+>
+> > Anatomy of the Inner Ear — University of Dundee School of Medicine —
+> > CC BY-NC-SA 4.0
+> > ↳ a derivative of "3D Ear" by W. Robert J. Funnell, Sam Daniel and Daren
+> >   Nicholson at McGill University, used under CC BY-NC-SA 1.0
+>
+> Two small questions, neither urgent:
+>
+> 1. **Does the chain run further back?** McGill's site no longer resolves — we
+>    confirmed the CC BY-NC-SA 1.0 statement through the Internet Archive — and its
+>    own about page says those models derive from MRI of a human cadaver provided by
+>    Drs O. W. Henson Jr and Miriam Henson at UNC Chapel Hill, scanned at Duke.
+>    Nobody downstream credits them. If you agree that is the same chain, we will add
+>    them; you are far better placed than we are to judge it.
+> 2. **A spelling.** McGill write "Nicholson"; the notice we were given has
+>    "Nicolson". We have followed McGill — say if you would rather we match yours.
+>
+> One thing offered as information rather than complaint: CC ShareAlike 1.0 has no
+> "or later version" clause — that arrives only with 2.0 — so the 1.0 → 4.0 step in
+> the notice is not something 1.0 itself permits, and Sketchfab offers no 1.0 option
+> to choose. It changes nothing for us, since the non-commercial term flows down
+> under any reading and this project is non-commercial and open source, but it may
+> matter for a future release.
+>
+> Happy to send screenshots of how the credit renders, or to change any wording you
+> would prefer. If you would rather we not display the model at all, say so and we
+> will withdraw it.
+>
+> With thanks,
+>
+> Martin Etzrodt
+> Open Science Foundation · Matten bei Interlaken, Switzerland
 
 ---
 

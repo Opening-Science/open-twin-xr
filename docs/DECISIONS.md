@@ -1973,3 +1973,51 @@ Cooper is listed CC BY-SA 4.0 elsewhere, which is a different term again.
 longer than the credit you copied.** Both of these chains were sitting in plain
 text on the source's own page; we had read the licence badge and stopped there.
 `derivedFrom` exists so the next one has somewhere to go.
+
+---
+
+## D23b — The cranial nerves have no licence; they have permission
+
+**18 August 2026.** Caroline Erolin's second reply corrected a licence this project
+had been printing for weeks, and the correction is the interesting part.
+
+### What we printed, and what is true
+
+Z-Anatomy's licence file lists *"Cranial Nerves and Foramina — by University of
+Dundee, CAHID — CC-BY 4.0"*, and we copied it. Their Sketchfab page states no
+licence at all, which D23 recorded as an open question rather than resolving.
+
+Her answer: the model **is not downloadable, so no CC licence was ever attached**,
+and the licence its description quotes is *the licence of the data it is based on* —
+BodyParts3D. So the CC BY 4.0 was never Dundee's grant. It was Z-Anatomy reading a
+description line as a licence, and us repeating it.
+
+### What replaced it is stronger
+
+Express written permission for this project — *"As this is based on the open-source
+Body Parts 3D data I don't have a problem with it being re-purposed for this
+project"* — plus the attribution she asked for. So the credit now says **used with
+permission** and names the BodyParts3D chain, and `licences.json` quotes the
+permission itself. A stated grant beats an inferred one, and naming the basis
+honestly beats naming a licence that does not exist.
+
+⚠️ **The general lesson, and this repository keeps relearning it:** a licence in an
+aggregator's manifest is a claim, not a grant. The white matter was miscredited to
+an institution that disowns it (D20); this one was credited with a licence its
+author never issued. Both were found by asking the named party.
+
+### A second party reached item 5's reading on their own
+
+Checking BodyParts3D's page to answer us, she found it now states CC BY 4.0 where it
+said CC BY-SA 2.1 Japan when she published five years ago — *"Which matches what is
+on Z-anatomy."* That is not DBCLS confirming the relicence in writing, which
+`docs/OUTREACH.md` item 5 still asks for, but it is no longer only our own inference:
+someone with no stake in our reading looked and saw the same thing.
+
+### What this does NOT settle
+
+The **inner ear** is the medical school's, not CAHID's — she referred that chain
+(McGill, and the UNC/Duke layer behind it) to Eve Laws, so `OUTREACH.md` gains §7b
+and Caroline is not asked again. Nothing here gates anything: the inner ear's own
+CC BY-NC-SA 4.0 is stated on its page, and the cranial nerves now ship on a
+permission we can quote.

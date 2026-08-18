@@ -484,10 +484,28 @@ export const ANATOMY_SOURCES: Record<AnatomySourceId, AnatomySource> = {
         // licence file was read directly rather than quoted second-hand.
         title: 'Cranial Nerves and Foramina',
         holder: 'University of Dundee, CAHID — produced by Sophia Lappe',
-        licence: 'CC BY 4.0',
+        /**
+         * ⚠️ NOT A CC LICENCE ON THE MODEL, AND WE PRINTED ONE FOR WEEKS.
+         *
+         * Z-Anatomy's licence file says "CC-BY 4.0" and we copied it. Caroline
+         * Erolin (Reader in Medical Art, Dundee) confirmed on 18 August 2026
+         * that the model carries no CC licence at all — it is not downloadable
+         * from their Sketchfab page, so none was ever attached — and that what
+         * their page states is the licence of the DATA IT IS BASED ON.
+         *
+         * What we have instead is better than an inferred licence and worth
+         * saying exactly: her written permission for this project ("As this is
+         * based on the open-source Body Parts 3D data I don't have a problem
+         * with it being re-purposed for this project"), plus the attribution
+         * SHE ASKED FOR, which is the BodyParts3D chain. So the licence line
+         * names the underlying data's licence, which is the only licence in
+         * play, and the permission is recorded in licences.json where a reader
+         * can find it.
+         */
+        licence: 'used with permission — underlying BodyParts3D data CC BY 4.0',
         derivedFrom:
-          'based upon the BodyParts3D data set, © The Database Center for Life ' +
-          'Science, licensed under CC Attribution-Share Alike 2.1 Japan',
+          'based on the BodyParts3D data set, © The Database Center for Life ' +
+          'Science, licensed under CC Attribution 4.0 International',
         // Verified on its Sketchfab page, 18 August 2026. The inner ear does
         // NOT carry the marking; this one does, so only this one says so.
         noAI: true,
