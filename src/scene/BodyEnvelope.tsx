@@ -1,9 +1,10 @@
 import { useEffect, useMemo, useRef } from 'react'
 import { useGLTF } from '@react-three/drei'
 import { Box3, DoubleSide, Mesh, MeshPhysicalMaterial, Vector3 } from 'three'
-import { useDonorSex, useTwin } from '../store'
+import { useDonorSex, useResolvedAnatomyMode, useTwin } from '../store'
 import type { Sex } from './anatomySources'
 import { BODY_ENVELOPES, envelopeForDonor, envelopeSex } from './bodyEnvelopes'
+import { posedEnvelopeUrl } from './envelopePoses'
 
 /**
  * A parametric skin envelope, drawn around whatever atlas is mounted.
@@ -38,6 +39,7 @@ export function BodyEnvelope() {
   const availability = useTwin((s) => s.envelopeAvailability)
   const setEnvelope = useTwin((s) => s.setBodyEnvelope)
   const donorSex = useDonorSex()
+  const mode = useResolvedAnatomyMode()
 
   /**
    * Keep the envelope's sex matched to the DONOR on screen.
@@ -90,9 +92,33 @@ export function BodyEnvelope() {
     setEnvelope(envelopeForDonor(donorSex))
   }, [donorSex, setEnvelope])
 
+  /**
+   * Load the variant posed like the atlas on screen, when one exists.
+   *
+   * ⚠️ THIS DELIBERATELY RELAXES D16a's "THE ENVELOPE READS NO ATLAS STATE".
+   * D16a's point was that the envelope must not CLAIM to be the donor's body —
+   * its sex, its age, its identity — and that a shape adjustable independently
+   * of the anatomy inside it is a way to build a body whose outside and inside
+   * describe different people. Reading the mode to align FRAMES is the opposite
+   * move: it makes the pairing more coherent rather than less, in the same way
+   * the donor-sex swap D16a itself introduced does. Nothing here says the
+   * envelope IS this donor; it says it stands the way this donor stands.
+   *
+   * ⚠️ THE POSED ASSET IS OPTIONAL, AND ITS ABSENCE IS A NORMAL STATE. Every GLB
+   * in this repository is gitignored, so a fresh clone has none of them; a mode
+   * with no posed bake, or a preset that was never posed (child, elder,
+   * pregnant), falls back to the rest-pose envelope rather than requesting a
+   * file that does not exist. Availability is probed for both, so "not
+   * installed" stays a thing the interface can say.
+   */
   const entry = envelopeId ? BODY_ENVELOPES[envelopeId] : null
-  const present = entry ? (availability?.[entry.url] ?? false) : false
-  if (!entry || !present) return null
+  const posedUrl = envelopeId ? posedEnvelopeUrl(mode, envelopeId) : null
+  const posedPresent = posedUrl ? (availability?.[posedUrl] ?? false) : false
+  const restPresent = entry ? (availability?.[entry.url] ?? false) : false
+
+  if (!entry) return null
+  if (posedUrl && posedPresent) return <EnvelopeMesh key={posedUrl} url={posedUrl} />
+  if (!restPresent) return null
   return <EnvelopeMesh key={entry.id} url={entry.url} />
 }
 

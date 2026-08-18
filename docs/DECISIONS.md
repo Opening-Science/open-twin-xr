@@ -1387,6 +1387,20 @@ reasoning, same answer.
 
 ### What it costs, and this is the part that matters
 
+> ⚠️ **SUPERSEDED BY [D25](#d25--the-envelope-is-posed-to-the-atlas-from-the-atlases-own-bones).**
+> The paragraph below says the pose mismatch "cannot be made to" go away. That
+> was true of the static BAKE and false of the model it came from: ANNY is rigged,
+> and the bake simply never used it. The envelope is now posed per atlas from the
+> atlas's own bones, and the 1.124 m against 0.646 m below became 0.681 m against
+> 0.667 m. The measurement is kept as written because it is what motivated the
+> work; the conclusion drawn from it is not current.
+>
+> ⚠️ The atlas figure differs between the two entries — **0.646 m here, 0.667 m in
+> D25** — for the same body. D25's is measured on the shipped `.ao.glb` through
+> full node transforms; this one predates that method. Prefer D25's, and see
+> `scripts/anny/measure_atlas_pose.mjs` for why the difference is a measurement
+> method rather than a change in the asset.
+
 **The envelope does not follow the atlas's pose, and cannot be made to.** ANNY
 bakes in its own rest pose; every atlas here has its own. Measured on Z-Anatomy:
 
@@ -2131,3 +2145,158 @@ degenerates — or measure vertex-level proximity per structure pair, which is
 honest but needs a BVH per structure and a real time budget. Either is a separate
 piece of work with its own gate. ⚠️ Do not ship the box-gap graph on the grounds
 that it covers everything; coverage was never the problem.
+
+---
+
+## D25 — The envelope is posed to the atlas, from the atlas's own bones
+
+**18 August 2026.** Closes by measurement the gap **D16** recorded as unfixable
+here, and corrects one thing D16a said along the way.
+
+### What D16 left
+
+> The envelope does not follow the atlas's pose, and cannot be made to. […] It
+> encloses the torso and it does not enclose the limbs. […] Fixing it properly
+> means rigging the envelope and posing it per atlas, which is real work and is
+> not done here.
+
+True of the **static bake**, not of the **model** it came from. ANNY is a rigged
+model with 104 bones and three pose parameterizations; the bake simply never
+used them. The work was real, and it is now done.
+
+### The decision
+
+**One bake per DISTINCT atlas pose, chosen at runtime by the mode on screen.**
+Prebaked rather than skinned at runtime: the pose set is small and static, a
+shipped envelope is ~107 KB, and every existing pipeline step is reused
+unchanged.
+
+Poses are **measured, not authored**. `scripts/anny/measure_atlas_pose.mjs`
+fits a principal axis to each atlas's humerus, radius+ulna, femur and
+tibia+fibula, per side, and writes `scripts/anny/atlas-poses.json`;
+`bake.py --pose <id>` aims ANNY's bones along those axes with the minimal
+rotation. ⚠️ Both the spec and `src/scene/envelopePoses.ts` are **generated** —
+D18's rule, because a hand-typed pose vector mis-poses a body invisibly.
+
+Nine modes resolve to **four** poses (`bodyparts3d`, `hra`, `hra-m`,
+`htb-ct-f`) plus rest for `ct-atlas-f`; two adult presets each, so 8 assets and
+~850 KB.
+
+### What it bought, measured in D16's own metric
+
+| | across the arms | containment |
+|---|---|---|
+| Z-Anatomy, unposed | 1.124 m vs atlas 0.667 m (**+0.456**) | 33.3 % |
+| Z-Anatomy, posed | 0.681 m vs 0.667 m (**+0.013**) | 74.1 % |
+| BodyParts3D, posed | 0.681 m vs 0.659 m (+0.021) | 78.7 % |
+| HRA, posed | 1.002 m vs 0.986 m (+0.016) | 77.2 % |
+| CT (arms overhead), posed | 0.531 m vs 0.460 m (+0.071) | 69.5 % |
+
+A 46 cm error became 1.3 cm. **`SceneDock`'s caveat had to change with it** —
+it said the envelope "wraps the torso but not the limbs", which the posed bake
+makes false. An over-cautious warning is still a wrong one.
+
+### ⚠️ Three things measured the opposite of the obvious guess
+
+1. **"Proximal is the end nearer the body's centre" is false for arms.** The
+   bounding-box centre sits at navel height and the elbow is nearer it than the
+   shoulder, so every arm axis came out at y = +0.98 — pointing up. Segments are
+   oriented by **the joint they share** instead: the elbow is where the humerus
+   and forearm clouds are closest. That survives the raised-arm CT, where a
+   shoulder sits below an elbow and every height-based rule inverts.
+2. **Borrowing another atlas's limb is worse than leaving it at rest.** HRA has
+   no arm bones, so its arms were filled from the standing atlas — and measured
+   **34 cm wrong**, because HRA's arms are abducted. A limb that cannot be
+   measured now keeps ANNY's rest pose; nothing is imported from a different
+   body. HRA's arms are measured from its **skin**, by tracing the outermost
+   surface cluster down through slices.
+3. **Span alone cannot judge a pose.** Rest-pose arms matched HRA's total width
+   to 8 cm while containment collapsed to 22 % — the right width at the wrong
+   angle. Both metrics or neither.
+
+### It relaxes D16a, deliberately
+
+D16a established that the envelope reads no atlas state. It now reads the
+**mode**, to pick a pose. That is not the thing D16a was protecting against:
+its concern was an envelope CLAIMING to be the donor — sex, age, identity —
+and a shape adjustable independently of the anatomy inside it. Aligning frames
+makes the pairing more coherent, exactly as the donor-sex swap D16a itself
+added does. The envelope still asserts nothing about whose body it is.
+
+### What it is still not
+
+Roll about each limb axis is **unconstrained**, because a bone direction does
+not carry one — hands may sit at an odd twist. Containment is 66–79 %, not 100 %:
+ANNY's proportions are not TARO's, and no pose fixes that. `ct-atlas-f` is a
+torso with fragmentary limbs and is deliberately left **unposed** rather than
+posed from two measured segments. And it remains a generated surface with no
+organs, no donor and no scan of anyone — which was always the point.
+
+---
+
+## D26 — The parametric body can be posed, and the measurements ignore the pose
+
+**18 August 2026.** The standalone half of the work D25 did for the overlay.
+D18 gave the parametric mode six SHAPE sliders backed by a baked grid; this adds
+four POSITION sliders backed by a baked rig, so the body can put its arms down
+or bend its knees.
+
+### Why a rig and not more grid
+
+The shape grid is a full tensor — 360 points, 28 MB — because MakeHuman's macros
+are a tensor and nothing cheaper reproduced them (D18 measured four mechanisms).
+A pose is not like that. Three stops of one joint angle would MULTIPLY the grid
+by three, and there are eight joints. Linear blend skinning is exact, costs a
+weight table, and the whole rig is **395 KB** beside the grid's 28 MB.
+
+`scripts/anny/bake_rig.py` writes it: per-vertex skinning weights, the driven
+joint positions **at every grid point**, and per bone the list of driven joints
+above it. `src/scene/annyRig.ts` evaluates it on a slider change and never per
+frame, the same rule `evaluateAnny` follows.
+
+⚠️ **Joint positions interpolate with the shape**, and that is the piece it would
+be natural to leave out. An elbow is not in the same place on a child and on a
+tall adult, so a single rest skeleton would bend every body at the neutral body's
+joints. They ride the same tent basis as the vertices.
+
+### ⚠️ The measurements are taken BEFORE the pose, deliberately
+
+`measureBody` reports height, waist, volume, mass and BMI. Every one is a claim
+about a SHAPE and none survives a pose: the standing height of a body with bent
+knees is not its stature, and linear blend skinning pinches volume at every joint
+it bends. Measuring after posing would let the knee slider quietly change the
+reported BMI — a number a viewer would reasonably believe. So the rest shape is
+measured and the pose is applied to a copy on its way to the screen. The panel
+says so when a slider is off zero.
+
+### Arms and legs only, and the ranges stop short
+
+Four sliders — arms out, elbows, stance, knees — side-linked. Head, neck and
+spine were offered at review and declined: they are the most artefact-prone under
+LBS and are not what the atlas mismatch was about. Each range stops before the
+surface starts to pinch at the joint. **A range cap is honest; a broken shoulder
+is not**, and the interface states which it is.
+
+### ⚠️ Three defects, each of which failed silently
+
+1. **Byte alignment.** A `Float32Array` view needs a 4-byte-aligned offset. The
+   rig file wrote uint8 indices first, pushing the joint block to byte 370,386,
+   and the constructor threw — which the caller caught as "the rig is not
+   installed". The sliders simply never appeared. The file now writes the widest
+   type first, and `RigNotInstalled` separates *absent* from *broken* so a real
+   defect can never again present as a slim build.
+2. **Ungrounded pivots.** `ParametricBody` grounds the body to y = 0 by
+   subtracting ~0.9 m; the rig's joints are in ANNY's own frame. Rotating
+   grounded vertices about ungrounded pivots swung every limb around a point
+   most of a metre from its joint, and the body rendered as **flat stretched
+   sheets**. Nothing threw.
+3. **Weight truncation.** "Keep the top 4 influences" is the standard move and
+   drops up to **21.96 %** of one vertex's weight here. Measured per K: top-4
+   21.96 %, top-6 5.72 %, top-8 0.10 %, all-9 exact. The full table is 362 KB
+   beside a 28 MB grid, so it is kept whole — approximating to save a rounding
+   error of the download would have traded correctness for nothing.
+
+`src/scene/annyRig.test.ts` pins all three against the real baked files: finite
+output, a body-sized body on the floor, a knee that moves the shin and not the
+head, and arms that move symmetrically. A "does it render" check passes through
+defects 2 and 3.
