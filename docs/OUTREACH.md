@@ -23,10 +23,10 @@ Sources, in order of authority:
 >    a recipient asks for exact figures, run `npm run check:licences` and read them off
 >    `LICENCE_LOG.md` on the day you reply. Square brackets in the drafts mark a *name*
 >    or a *credit line* to paste in, never a number to invent.
-> 2. **Both repositories are PRIVATE** (checked 17 August 2026:
->    `Opening-Science/open-twin-xr` and `etzm/open-twin-openXR`). The drafts therefore
->    do not link source we cannot show. If a repository is public by the time you
->    send, add the link — it makes every one of these questions easier to answer.
+> 2. **The site and the main repository are PUBLIC** (since 18 August 2026:
+>    <https://opentwin.opening.science> and `Opening-Science/open-twin-xr`;
+>    `etzm/open-twin-openXR` remains private). Drafts may link both — a recipient who
+>    can read `licences.json` and see their credit rendered answers faster.
 > 3. **Verify each address at its source before sending.** Where an address was read
 >    off the rights holder's own page it is marked ✅ *verified*; where it is a channel
 >    rather than a mailbox it is marked ⚠️. Two of the addresses below are not
@@ -152,112 +152,58 @@ question. **If there is no reply:** treat as unresolved — the heart stays out.
 
 ---
 
-## 2. Z-Anatomy — two attribution questions, and a courtesy their licence asks for
+## 2. Z-Anatomy — tell them their white-matter credit is wrong, and ask which BodyParts3D licence to print
 
-> ### ⚠️ Venue and recipient, checked 17 August 2026 — the obvious address is the wrong one
+> ### Venue, in brief (full reconnaissance in the git history of this file)
 >
-> **Post this as an issue on <https://github.com/Z-Anatomy/Models-of-human-anatomy>.**
-> That is the *models* repository: the rights holder answers there under the `Z-Anatomy`
-> account, it is auto-updated from a Blender export every day, and two provenance issues
-> are already open or answered on it (#5 on the kidney, #6 on the lung lobes).
->
-> **Not `LluisV/Z-Anatomy`, and not the new `Z-Anatomy-Community/Z-Anatomy`.** The
-> authors list distinguishes them: Gauthier **Kervyn** did the design, 3D and anatomy;
-> Lluís **Vinent** did the Unity app. Geometry provenance is Kervyn's to answer. The
-> community repo is a fork created 10 August 2026 by one contributor (chepo92) to
-> migrate the Unity project to 6.5; its three issues are its owner's own UI bugs, it has
-> no discussions, and its `Resources/Models/License.txt` is **byte-identical** to
-> LluisV's. It adds nothing on licensing and has no standing over the models.
->
-> **The authoritative licence record is a Google Doc**, linked from the root `LICENSE`
-> of both Unity repos, and the maintainer's position is that it "contains all there is
-> to know":
-> <https://docs.google.com/document/d/1peWW_7IiVgTTAwcI_auv38YSJ6qGWRuTMxzzhkRpXIk/edit>
->
-> **Three things read off that doc and those threads before writing.** ① It lists the
-> same four components — and still gives the white matter **no licence**, with the
-> telling phrasing *"used as reference/included and adapted"*. ② It credits BodyParts3D
-> as **CC BY 4.0**, where both `License.txt` files still say CC BY-SA 2.1 Japan — so the
-> credit line we copied from `License.txt` repeats a statement its own author has since
-> revised. ③ **Per-mesh provenance is not recorded upstream.** Asked in #5 exactly which
-> objects are the Cowley kidney, the answer was "the best would be to find the original
-> model and to compare them." Expect the same for the ossicles and the CAHID nerves:
-> that work is ours to do by comparison, not a record to request.
->
-> **Two notes on how to write it.** In #5 the maintainer reacted badly — reasonably so —
-> to an unidentified requester asking provenance questions while contemplating a
-> commercial product: *"very annoying talking with someone hiding its identity"*. Lead
-> with who you are, the Foundation, and the non-commercial open-source stance. And note
-> that in #6 he states a **maximalist reading of share-alike**: that any app reading the
-> model must release its whole code under CC BY-SA. Our position — the model is a
-> separate asset, the app an aggregate, code stays MIT — is a reading of the licence
-> text, not his to redefine; asking him to bless it would only put a "no" in a public
-> thread. Say plainly what we ship and under what terms, and let the licence govern.
+> Post as an issue on **<https://github.com/Z-Anatomy/Models-of-human-anatomy>** — the
+> models repo, where the rights holder answers (Gauthier Kervyn did the geometry;
+> Lluís Vinent only the Unity app). Not the Unity repos, not the community fork, and no
+> email exists. Three things to know from their existing threads: per-mesh provenance
+> is **not recorded upstream** (#5 — "compare against the original model" is the
+> answer, so don't ask for records); the maintainer reacted badly in #5 to an
+> unidentified requester, so lead with who you are and the non-commercial stance; and
+> in #6 he reads share-alike maximally (any app reading the model must open its whole
+> code), so **state** what we ship under which terms — don't ask for a blessing.
 
-**To:** ⚠️ no email address is published anywhere — not in either repo, not in the
-licence doc. A GitHub issue is the channel; the text below works unchanged as one.
-
-**Subject:** Attribution questions from a derivative work — the white matter component, and the BodyParts3D credit
+**Subject:** Your white-matter credit names the wrong source — and which BodyParts3D licence should derivatives print?
 
 > Dear Gauthier, dear Z-Anatomy authors,
 >
-> Z-Anatomy is the richest individually-named anatomy we have found under an open
-> licence, and it is the source that made a browsable body possible for us at all.
-> `Resources/Models/License.txt` says "a good practice is to inform the authors when
-> derivated works are produced", so this note is first of all that: we ship a glTF
-> conversion of your skeletal, muscular, joint, cardiovascular, nervous, lymphoid and
-> visceral files, plus the body-surface regions as a separate asset, in an open-source
-> WebXR body viewer published by the Open Science Foundation
-> (<https://opentwin.opening.science>, login-gated at present). Both required credits
-> are rendered in the interface and embedded in every asset:
+> Z-Anatomy is the richest individually-named open anatomy there is, and the source
+> that made our project possible: an open-source WebXR body viewer by the Open Science
+> Foundation — public at <https://opentwin.opening.science>, source at
+> <https://github.com/Opening-Science/open-twin-xr>. Your licence file asks that
+> derivative works inform you — this is that note. We ship glTF conversions of your
+> seven system files plus the surface regions, under CC BY-SA 4.0 as separate assets,
+> changes stated, both required credits and all four component credits rendered in
+> the interface and embedded in the files (`licences.json` in the repo is the full
+> register).
 >
-> > Z-Anatomy - The open source atlas of anatomy - CC-BY-SA 4.0; derived from
-> > BodyParts3D - The Database Center for Life Science - CC-BY-SA 2.1 Japan.
+> Three points, all about crediting accurately:
 >
-> The adapted geometry is distributed under CC BY-SA 4.0, kept as its own file so the
-> share-alike stays attached to your work rather than reaching assets that do not carry
-> it, and the changes we made are stated — decimation, baked ambient occlusion, and an
-> application palette. Every one of your four listed components is credited too, in the
-> interface and inside the asset. Three questions, all about crediting them accurately.
+> 1. **Your "Brainder / White matter — University of Washington" credit is wrong, on
+>    its author's word.** Anderson M. Winkler (Brainder) told us in writing that he
+>    has never been affiliated with UW — and that Brainder ships grey/white *boundary*
+>    surfaces, not white matter proper. Your `White_matter_of_telencephalon` pair
+>    measures as exactly that (one closed folded hemisphere, mirrored), so we credit
+>    it *Brain for Blender, Anderson M. Winkler, CC BY-SA 3.0*. The spinal cord
+>    cannot be his (cortex-only), so we treat it as your own work. Please correct
+>    `License.txt` so the unlicensed-looking listing stops propagating downstream —
+>    and correct us if either identification is wrong.
+> 2. **Which BodyParts3D licence should derivatives print?** Your licence document
+>    says CC BY 4.0; `License.txt` in the repos still says CC BY-SA 2.1 Japan, which
+>    is what we copied. DBCLS's own page has said CC BY 4.0 since 2025-02-27 — can
+>    you confirm the document is current so we print what you intend?
+> 3. **Small, only if you happen to know:** we credit the ossicles in
+>    `SkeletalSystem100.fbx` as yours (middle-ear bones; Dundee's component is the
+>    *inner* ear), and we credit the CAHID cranial nerves without tagging individual
+>    meshes, since theirs and yours are not separable by name. Corrections welcome;
+>    otherwise we will settle both by comparison, per your answer on #5.
 >
-> 1. **The "Brainder / White matter" credit in your licence file is wrong, and we can
->    tell you what it should say.** Your document lists *"'Brainder' and 'White matter'
->    from the University of Washington"* — alone among your components, with no licence.
->    We wrote to Brainder's author, Anderson M. Winkler, and he answered two things: he
->    and Brainder have **never been affiliated with the University of Washington**, and
->    Brainder ships *cortical* surfaces — a pial surface and the grey/white *boundary*
->    surface, not white matter proper. Measured against that, your
->    `White_matter_of_telencephalon` pair is exactly such a boundary surface — one
->    closed folded hemisphere, mirrored — so we now credit it as *Brain for Blender,
->    Anderson M. Winkler, CC BY-SA 3.0* and ship it under that grant. Your
->    `White_matter_of_spinal_cord` cannot be his (Brainder is cortex-only): we treat it
->    as your own CC BY-SA work. Two asks: correct the credit in `License.txt`, so the
->    unlicensed-looking listing stops propagating to everyone downstream of you — and
->    tell us if either identification is wrong, since you would know.
-> 2. **Which BodyParts3D licence should a derivative print?** Your licence document
->    credits *"BodyParts3D — The Database Center for Life Science — CC-BY 4.0"*, while
->    `Resources/Models/License.txt` in both Unity repositories still says CC-BY-SA 2.1
->    Japan. We copied the credit from the file, so we are currently printing the older
->    one. DBCLS's own licence page has said CC BY 4.0 since 2025-02-27, which suggests
->    the document is the current statement and the file is stale — can you confirm, so we
->    print what you intend? (Related and trivial: your document names the kidney's author
->    "Lissie Cowley" where we print the handle "lissiecowley". We will follow you.)
-> 3. **The ossicles, if you happen to remember.** `SkeletalSystem100.fbx` contains the
->    incus, stapes and malleus, and we credit them as your own on the reasoning that they
->    are middle-ear bones in a skeleton file while the Dundee component is the *inner*
->    ear. Same question for the CAHID cranial nerves: we credit the component but cannot
->    say which meshes are theirs, so we tag none of them rather than guess — a name match
->    once caught the cochlear *nerve* along with the cochlea, and a confidently wrong tag
->    is worse than an honest gap. I have read your answer on issue #5 and take the point
->    that comparing against the original models is the way to settle this; that work is
->    ours, not yours. If either answer is simply known to you, it saves us the comparison.
->
-> Two things we can give back, whichever way the answers go. Our importer produces
-> per-structure tags recording which component each mesh belongs to, and we built a
-> structure-name → FMA crosswalk by joining your names against BodyParts3D, the atlas
-> yours was retopologised from. Both are exactly the comparison material issue #5 asks
-> for, both are yours under the same licence, and either may be worth more to you than to
-> us. Say the word and we will open a pull request or send the files.
+> In return: our importer's per-structure component tags and a name → FMA crosswalk
+> built against BodyParts3D — exactly the comparison material #5 asks for, yours under
+> the same licence. Say the word and we will open a pull request.
 >
 > With thanks and admiration for the atlas,
 >
