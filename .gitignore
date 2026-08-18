@@ -35,6 +35,12 @@ public/models/anny-grid.json
 # the third time a generated asset has slipped past a pattern that looked
 # exhaustive. All three grid files are written by one command; none is committed.
 public/models/anny-grid.idx
+# And the pose rig, for exactly the same reason as the line above. `*.bin` does
+# not match `.rig`, and `anny-grid-rig.json` is a sidecar describing a binary
+# that is not here — so without these two a `git add -A` commits 395 KB that
+# `scripts/anny/bake_rig.py` regenerates from the same pinned package.
+public/models/anny-grid.rig
+public/models/anny-grid-rig.json
 
 # build info
 tsconfig.tsbuildinfo

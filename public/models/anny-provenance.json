@@ -81,5 +81,817 @@
     "vertices": 13718,
     "triangles": 27420,
     "script": "scripts/anny/bake.py"
+  },
+  "adult-f.pose-bodyparts3d": {
+    "package": "anny==0.6.0",
+    "topology": "anny",
+    "rig": "anny",
+    "local_changes": "default",
+    "parameters": {
+      "phenotype_kwargs": {
+        "gender": 1.0,
+        "age": 0.75
+      }
+    },
+    "height_m": 1.7717,
+    "span_x_m": 0.6603,
+    "vertices": 13718,
+    "triangles": 27420,
+    "script": "scripts/anny/bake.py",
+    "pose": {
+      "id": "bodyparts3d",
+      "spec": "/Users/martinetzrodt/open-twin-openXR/scripts/anny/atlas-poses.json",
+      "spec_sha256_12": "52650fbef2f2",
+      "covers": [
+        "bodyparts3d",
+        "z-anatomy",
+        "composed",
+        "z-anatomy-regions"
+      ],
+      "measured_from": "bodyparts3d.ao.glb",
+      "driven_bones": {
+        "upperarm01.L": {
+          "deg": 31.94,
+          "from": "upperarm.L",
+          "source": "measured"
+        },
+        "upperarm02.L": {
+          "deg": 31.4,
+          "from": "upperarm.L",
+          "source": "measured"
+        },
+        "lowerarm01.L": {
+          "deg": 44.68,
+          "from": "forearm.L",
+          "source": "measured"
+        },
+        "lowerarm02.L": {
+          "deg": 44.27,
+          "from": "forearm.L",
+          "source": "measured"
+        },
+        "upperleg01.L": {
+          "deg": 14.41,
+          "from": "thigh.L",
+          "source": "measured"
+        },
+        "upperleg02.L": {
+          "deg": 10.93,
+          "from": "thigh.L",
+          "source": "measured"
+        },
+        "lowerleg01.L": {
+          "deg": 6.75,
+          "from": "shank.L",
+          "source": "measured"
+        },
+        "lowerleg02.L": {
+          "deg": 7.64,
+          "from": "shank.L",
+          "source": "measured"
+        },
+        "upperarm01.R": {
+          "deg": 31.82,
+          "from": "upperarm.R",
+          "source": "measured"
+        },
+        "upperarm02.R": {
+          "deg": 31.28,
+          "from": "upperarm.R",
+          "source": "measured"
+        },
+        "lowerarm01.R": {
+          "deg": 43.6,
+          "from": "forearm.R",
+          "source": "measured"
+        },
+        "lowerarm02.R": {
+          "deg": 43.17,
+          "from": "forearm.R",
+          "source": "measured"
+        },
+        "upperleg01.R": {
+          "deg": 14.49,
+          "from": "thigh.R",
+          "source": "measured"
+        },
+        "upperleg02.R": {
+          "deg": 11.44,
+          "from": "thigh.R",
+          "source": "measured"
+        },
+        "lowerleg01.R": {
+          "deg": 6.84,
+          "from": "shank.R",
+          "source": "measured"
+        },
+        "lowerleg02.R": {
+          "deg": 7.71,
+          "from": "shank.R",
+          "source": "measured"
+        }
+      }
+    }
+  },
+  "adult-m.pose-bodyparts3d": {
+    "package": "anny==0.6.0",
+    "topology": "anny",
+    "rig": "anny",
+    "local_changes": "default",
+    "parameters": {
+      "phenotype_kwargs": {
+        "gender": 0.0,
+        "age": 0.75
+      }
+    },
+    "height_m": 1.9138,
+    "span_x_m": 0.7552,
+    "vertices": 13718,
+    "triangles": 27420,
+    "script": "scripts/anny/bake.py",
+    "pose": {
+      "id": "bodyparts3d",
+      "spec": "/Users/martinetzrodt/open-twin-openXR/scripts/anny/atlas-poses.json",
+      "spec_sha256_12": "52650fbef2f2",
+      "covers": [
+        "bodyparts3d",
+        "z-anatomy",
+        "composed",
+        "z-anatomy-regions"
+      ],
+      "measured_from": "bodyparts3d.ao.glb",
+      "driven_bones": {
+        "upperarm01.L": {
+          "deg": 31.94,
+          "from": "upperarm.L",
+          "source": "measured"
+        },
+        "upperarm02.L": {
+          "deg": 31.4,
+          "from": "upperarm.L",
+          "source": "measured"
+        },
+        "lowerarm01.L": {
+          "deg": 44.68,
+          "from": "forearm.L",
+          "source": "measured"
+        },
+        "lowerarm02.L": {
+          "deg": 44.27,
+          "from": "forearm.L",
+          "source": "measured"
+        },
+        "upperleg01.L": {
+          "deg": 14.41,
+          "from": "thigh.L",
+          "source": "measured"
+        },
+        "upperleg02.L": {
+          "deg": 10.93,
+          "from": "thigh.L",
+          "source": "measured"
+        },
+        "lowerleg01.L": {
+          "deg": 6.75,
+          "from": "shank.L",
+          "source": "measured"
+        },
+        "lowerleg02.L": {
+          "deg": 7.64,
+          "from": "shank.L",
+          "source": "measured"
+        },
+        "upperarm01.R": {
+          "deg": 31.82,
+          "from": "upperarm.R",
+          "source": "measured"
+        },
+        "upperarm02.R": {
+          "deg": 31.28,
+          "from": "upperarm.R",
+          "source": "measured"
+        },
+        "lowerarm01.R": {
+          "deg": 43.6,
+          "from": "forearm.R",
+          "source": "measured"
+        },
+        "lowerarm02.R": {
+          "deg": 43.17,
+          "from": "forearm.R",
+          "source": "measured"
+        },
+        "upperleg01.R": {
+          "deg": 14.49,
+          "from": "thigh.R",
+          "source": "measured"
+        },
+        "upperleg02.R": {
+          "deg": 11.44,
+          "from": "thigh.R",
+          "source": "measured"
+        },
+        "lowerleg01.R": {
+          "deg": 6.84,
+          "from": "shank.R",
+          "source": "measured"
+        },
+        "lowerleg02.R": {
+          "deg": 7.71,
+          "from": "shank.R",
+          "source": "measured"
+        }
+      }
+    }
+  },
+  "adult-f.pose-htb-ct-f": {
+    "package": "anny==0.6.0",
+    "topology": "anny",
+    "rig": "anny",
+    "local_changes": "default",
+    "parameters": {
+      "phenotype_kwargs": {
+        "gender": 1.0,
+        "age": 0.75
+      }
+    },
+    "height_m": 1.7485,
+    "span_x_m": 0.5382,
+    "vertices": 13718,
+    "triangles": 27420,
+    "script": "scripts/anny/bake.py",
+    "pose": {
+      "id": "htb-ct-f",
+      "spec": "/Users/martinetzrodt/open-twin-openXR/scripts/anny/atlas-poses.json",
+      "spec_sha256_12": "52650fbef2f2",
+      "covers": [
+        "htb-ct-f"
+      ],
+      "measured_from": "htb-ct-003.glb",
+      "driven_bones": {
+        "upperarm01.L": {
+          "deg": 104.7,
+          "from": "upperarm.L",
+          "source": "measured"
+        },
+        "upperarm02.L": {
+          "deg": 105.26,
+          "from": "upperarm.L",
+          "source": "measured"
+        },
+        "lowerarm01.L": {
+          "deg": 141.8,
+          "from": "forearm.L",
+          "source": "measured"
+        },
+        "lowerarm02.L": {
+          "deg": 142.87,
+          "from": "forearm.L",
+          "source": "measured"
+        },
+        "upperleg02.L": {
+          "deg": 11.57,
+          "from": "thigh.L",
+          "source": "measured"
+        },
+        "lowerleg01.L": {
+          "deg": 15.69,
+          "from": "shank.L",
+          "source": "measured"
+        },
+        "lowerleg02.L": {
+          "deg": 15.29,
+          "from": "shank.L",
+          "source": "measured"
+        },
+        "upperarm01.R": {
+          "deg": 113.8,
+          "from": "upperarm.R",
+          "source": "measured"
+        },
+        "upperarm02.R": {
+          "deg": 114.36,
+          "from": "upperarm.R",
+          "source": "measured"
+        },
+        "lowerarm01.R": {
+          "deg": 130.73,
+          "from": "forearm.R",
+          "source": "measured"
+        },
+        "lowerarm02.R": {
+          "deg": 131.8,
+          "from": "forearm.R",
+          "source": "measured"
+        },
+        "upperleg02.R": {
+          "deg": 14.37,
+          "from": "thigh.R",
+          "source": "measured"
+        },
+        "lowerleg01.R": {
+          "deg": 16.32,
+          "from": "shank.R",
+          "source": "measured"
+        },
+        "lowerleg02.R": {
+          "deg": 15.61,
+          "from": "shank.R",
+          "source": "measured"
+        }
+      }
+    }
+  },
+  "adult-m.pose-htb-ct-f": {
+    "package": "anny==0.6.0",
+    "topology": "anny",
+    "rig": "anny",
+    "local_changes": "default",
+    "parameters": {
+      "phenotype_kwargs": {
+        "gender": 0.0,
+        "age": 0.75
+      }
+    },
+    "height_m": 1.9009,
+    "span_x_m": 0.6168,
+    "vertices": 13718,
+    "triangles": 27420,
+    "script": "scripts/anny/bake.py",
+    "pose": {
+      "id": "htb-ct-f",
+      "spec": "/Users/martinetzrodt/open-twin-openXR/scripts/anny/atlas-poses.json",
+      "spec_sha256_12": "52650fbef2f2",
+      "covers": [
+        "htb-ct-f"
+      ],
+      "measured_from": "htb-ct-003.glb",
+      "driven_bones": {
+        "upperarm01.L": {
+          "deg": 104.7,
+          "from": "upperarm.L",
+          "source": "measured"
+        },
+        "upperarm02.L": {
+          "deg": 105.26,
+          "from": "upperarm.L",
+          "source": "measured"
+        },
+        "lowerarm01.L": {
+          "deg": 141.8,
+          "from": "forearm.L",
+          "source": "measured"
+        },
+        "lowerarm02.L": {
+          "deg": 142.87,
+          "from": "forearm.L",
+          "source": "measured"
+        },
+        "upperleg02.L": {
+          "deg": 11.57,
+          "from": "thigh.L",
+          "source": "measured"
+        },
+        "lowerleg01.L": {
+          "deg": 15.69,
+          "from": "shank.L",
+          "source": "measured"
+        },
+        "lowerleg02.L": {
+          "deg": 15.29,
+          "from": "shank.L",
+          "source": "measured"
+        },
+        "upperarm01.R": {
+          "deg": 113.8,
+          "from": "upperarm.R",
+          "source": "measured"
+        },
+        "upperarm02.R": {
+          "deg": 114.36,
+          "from": "upperarm.R",
+          "source": "measured"
+        },
+        "lowerarm01.R": {
+          "deg": 130.73,
+          "from": "forearm.R",
+          "source": "measured"
+        },
+        "lowerarm02.R": {
+          "deg": 131.8,
+          "from": "forearm.R",
+          "source": "measured"
+        },
+        "upperleg02.R": {
+          "deg": 14.37,
+          "from": "thigh.R",
+          "source": "measured"
+        },
+        "lowerleg01.R": {
+          "deg": 16.32,
+          "from": "shank.R",
+          "source": "measured"
+        },
+        "lowerleg02.R": {
+          "deg": 15.61,
+          "from": "shank.R",
+          "source": "measured"
+        }
+      }
+    }
+  },
+  "adult-f.pose-hra-m": {
+    "package": "anny==0.6.0",
+    "topology": "anny",
+    "rig": "anny",
+    "local_changes": "default",
+    "parameters": {
+      "phenotype_kwargs": {
+        "gender": 1.0,
+        "age": 0.75
+      }
+    },
+    "height_m": 1.7652,
+    "span_x_m": 1.017,
+    "vertices": 13718,
+    "triangles": 27420,
+    "script": "scripts/anny/bake.py",
+    "pose": {
+      "id": "hra-m",
+      "spec": "/Users/martinetzrodt/open-twin-openXR/scripts/anny/atlas-poses.json",
+      "spec_sha256_12": "354913494183",
+      "covers": [
+        "hra-m"
+      ],
+      "measured_from": "hra-m.glb",
+      "driven_bones": {
+        "upperarm01.L": {
+          "deg": 12.07,
+          "from": "upperarm.L",
+          "source": "measured"
+        },
+        "upperarm02.L": {
+          "deg": 11.8,
+          "from": "upperarm.L",
+          "source": "measured"
+        },
+        "upperarm01.R": {
+          "deg": 11.25,
+          "from": "upperarm.R",
+          "source": "measured"
+        },
+        "upperarm02.R": {
+          "deg": 11.01,
+          "from": "upperarm.R",
+          "source": "measured"
+        },
+        "lowerarm01.L": {
+          "deg": 38.59,
+          "from": "forearm.L",
+          "source": "measured"
+        },
+        "lowerarm02.L": {
+          "deg": 37.7,
+          "from": "forearm.L",
+          "source": "measured"
+        },
+        "lowerarm01.R": {
+          "deg": 38.29,
+          "from": "forearm.R",
+          "source": "measured"
+        },
+        "lowerarm02.R": {
+          "deg": 37.38,
+          "from": "forearm.R",
+          "source": "measured"
+        },
+        "upperleg01.L": {
+          "deg": 14.23,
+          "from": "thigh.L",
+          "source": "measured"
+        },
+        "lowerleg01.L": {
+          "deg": 5.47,
+          "from": "shank.L",
+          "source": "measured"
+        },
+        "upperleg01.R": {
+          "deg": 14.23,
+          "from": "thigh.R",
+          "source": "measured"
+        },
+        "lowerleg01.R": {
+          "deg": 5.47,
+          "from": "shank.R",
+          "source": "measured"
+        }
+      }
+    }
+  },
+  "adult-m.pose-hra-m": {
+    "package": "anny==0.6.0",
+    "topology": "anny",
+    "rig": "anny",
+    "local_changes": "default",
+    "parameters": {
+      "phenotype_kwargs": {
+        "gender": 0.0,
+        "age": 0.75
+      }
+    },
+    "height_m": 1.9043,
+    "span_x_m": 1.1632,
+    "vertices": 13718,
+    "triangles": 27420,
+    "script": "scripts/anny/bake.py",
+    "pose": {
+      "id": "hra-m",
+      "spec": "/Users/martinetzrodt/open-twin-openXR/scripts/anny/atlas-poses.json",
+      "spec_sha256_12": "354913494183",
+      "covers": [
+        "hra-m"
+      ],
+      "measured_from": "hra-m.glb",
+      "driven_bones": {
+        "upperarm01.L": {
+          "deg": 12.07,
+          "from": "upperarm.L",
+          "source": "measured"
+        },
+        "upperarm02.L": {
+          "deg": 11.8,
+          "from": "upperarm.L",
+          "source": "measured"
+        },
+        "upperarm01.R": {
+          "deg": 11.25,
+          "from": "upperarm.R",
+          "source": "measured"
+        },
+        "upperarm02.R": {
+          "deg": 11.01,
+          "from": "upperarm.R",
+          "source": "measured"
+        },
+        "lowerarm01.L": {
+          "deg": 38.59,
+          "from": "forearm.L",
+          "source": "measured"
+        },
+        "lowerarm02.L": {
+          "deg": 37.7,
+          "from": "forearm.L",
+          "source": "measured"
+        },
+        "lowerarm01.R": {
+          "deg": 38.29,
+          "from": "forearm.R",
+          "source": "measured"
+        },
+        "lowerarm02.R": {
+          "deg": 37.38,
+          "from": "forearm.R",
+          "source": "measured"
+        },
+        "upperleg01.L": {
+          "deg": 14.23,
+          "from": "thigh.L",
+          "source": "measured"
+        },
+        "lowerleg01.L": {
+          "deg": 5.47,
+          "from": "shank.L",
+          "source": "measured"
+        },
+        "upperleg01.R": {
+          "deg": 14.23,
+          "from": "thigh.R",
+          "source": "measured"
+        },
+        "lowerleg01.R": {
+          "deg": 5.47,
+          "from": "shank.R",
+          "source": "measured"
+        }
+      }
+    }
+  },
+  "adult-f.pose-hra": {
+    "package": "anny==0.6.0",
+    "topology": "anny",
+    "rig": "anny",
+    "local_changes": "default",
+    "parameters": {
+      "phenotype_kwargs": {
+        "gender": 1.0,
+        "age": 0.75
+      }
+    },
+    "height_m": 1.7731,
+    "span_x_m": 0.9721,
+    "vertices": 13718,
+    "triangles": 27420,
+    "script": "scripts/anny/bake.py",
+    "pose": {
+      "id": "hra",
+      "spec": "/Users/martinetzrodt/open-twin-openXR/scripts/anny/atlas-poses.json",
+      "spec_sha256_12": "354913494183",
+      "covers": [
+        "hra",
+        "composed-f"
+      ],
+      "measured_from": "hra.glb",
+      "driven_bones": {
+        "upperarm01.L": {
+          "deg": 15.12,
+          "from": "upperarm.L",
+          "source": "measured"
+        },
+        "upperarm02.L": {
+          "deg": 14.86,
+          "from": "upperarm.L",
+          "source": "measured"
+        },
+        "upperarm01.R": {
+          "deg": 14.89,
+          "from": "upperarm.R",
+          "source": "measured"
+        },
+        "upperarm02.R": {
+          "deg": 14.64,
+          "from": "upperarm.R",
+          "source": "measured"
+        },
+        "lowerarm01.L": {
+          "deg": 37.56,
+          "from": "forearm.L",
+          "source": "measured"
+        },
+        "lowerarm02.L": {
+          "deg": 36.72,
+          "from": "forearm.L",
+          "source": "measured"
+        },
+        "lowerarm01.R": {
+          "deg": 37.43,
+          "from": "forearm.R",
+          "source": "measured"
+        },
+        "lowerarm02.R": {
+          "deg": 36.59,
+          "from": "forearm.R",
+          "source": "measured"
+        },
+        "upperleg01.L": {
+          "deg": 11.9,
+          "from": "thigh.L",
+          "source": "measured"
+        },
+        "upperleg02.L": {
+          "deg": 7.29,
+          "from": "thigh.L",
+          "source": "measured"
+        },
+        "lowerleg01.L": {
+          "deg": 5.91,
+          "from": "shank.L",
+          "source": "measured"
+        },
+        "lowerleg02.L": {
+          "deg": 6.9,
+          "from": "shank.L",
+          "source": "measured"
+        },
+        "upperleg01.R": {
+          "deg": 11.9,
+          "from": "thigh.R",
+          "source": "measured"
+        },
+        "upperleg02.R": {
+          "deg": 7.29,
+          "from": "thigh.R",
+          "source": "measured"
+        },
+        "lowerleg01.R": {
+          "deg": 5.92,
+          "from": "shank.R",
+          "source": "measured"
+        },
+        "lowerleg02.R": {
+          "deg": 6.91,
+          "from": "shank.R",
+          "source": "measured"
+        }
+      }
+    }
+  },
+  "adult-m.pose-hra": {
+    "package": "anny==0.6.0",
+    "topology": "anny",
+    "rig": "anny",
+    "local_changes": "default",
+    "parameters": {
+      "phenotype_kwargs": {
+        "gender": 0.0,
+        "age": 0.75
+      }
+    },
+    "height_m": 1.9139,
+    "span_x_m": 1.1119,
+    "vertices": 13718,
+    "triangles": 27420,
+    "script": "scripts/anny/bake.py",
+    "pose": {
+      "id": "hra",
+      "spec": "/Users/martinetzrodt/open-twin-openXR/scripts/anny/atlas-poses.json",
+      "spec_sha256_12": "354913494183",
+      "covers": [
+        "hra",
+        "composed-f"
+      ],
+      "measured_from": "hra.glb",
+      "driven_bones": {
+        "upperarm01.L": {
+          "deg": 15.12,
+          "from": "upperarm.L",
+          "source": "measured"
+        },
+        "upperarm02.L": {
+          "deg": 14.86,
+          "from": "upperarm.L",
+          "source": "measured"
+        },
+        "upperarm01.R": {
+          "deg": 14.89,
+          "from": "upperarm.R",
+          "source": "measured"
+        },
+        "upperarm02.R": {
+          "deg": 14.64,
+          "from": "upperarm.R",
+          "source": "measured"
+        },
+        "lowerarm01.L": {
+          "deg": 37.56,
+          "from": "forearm.L",
+          "source": "measured"
+        },
+        "lowerarm02.L": {
+          "deg": 36.72,
+          "from": "forearm.L",
+          "source": "measured"
+        },
+        "lowerarm01.R": {
+          "deg": 37.43,
+          "from": "forearm.R",
+          "source": "measured"
+        },
+        "lowerarm02.R": {
+          "deg": 36.59,
+          "from": "forearm.R",
+          "source": "measured"
+        },
+        "upperleg01.L": {
+          "deg": 11.9,
+          "from": "thigh.L",
+          "source": "measured"
+        },
+        "upperleg02.L": {
+          "deg": 7.29,
+          "from": "thigh.L",
+          "source": "measured"
+        },
+        "lowerleg01.L": {
+          "deg": 5.91,
+          "from": "shank.L",
+          "source": "measured"
+        },
+        "lowerleg02.L": {
+          "deg": 6.9,
+          "from": "shank.L",
+          "source": "measured"
+        },
+        "upperleg01.R": {
+          "deg": 11.9,
+          "from": "thigh.R",
+          "source": "measured"
+        },
+        "upperleg02.R": {
+          "deg": 7.29,
+          "from": "thigh.R",
+          "source": "measured"
+        },
+        "lowerleg01.R": {
+          "deg": 5.92,
+          "from": "shank.R",
+          "source": "measured"
+        },
+        "lowerleg02.R": {
+          "deg": 6.91,
+          "from": "shank.R",
+          "source": "measured"
+        }
+      }
+    }
   }
 }
