@@ -583,6 +583,33 @@ Library page.
 >    would rather print what you intend. And if you know how Z-Anatomy obtained it, we
 >    would be glad to know; we have an open question with them about their licence
 >    file and can pass anything on.
+>
+> **On the NoAI marking, since you will have seen how this project is built.** Your
+> cranial nerves model carries Sketchfab's NoAI tag (the inner ear does not). I want
+> to be precise rather than reassuring about it.
+>
+> Sketchfab's marking forbids use "in datasets for, in the development of, or as
+> inputs to generative AI programs". It does not restrict viewing, rendering or
+> redistribution — and rendering is the whole of what we do. The geometry is converted
+> by ordinary deterministic tooling — FBX to glTF, welded, decimated, compressed, with
+> ambient occlusion baked per vertex — and then drawn by a WebGL renderer. It is never
+> a training input, never part of a dataset, and never fed to a model.
+>
+> The distinction matters here because the software genuinely is written by an AI
+> agent, as I mentioned. The line is this: **the agent writes the code; the anatomy is
+> data that code renders.** The agent reads licence files, writes conversion scripts
+> and edits the interface. No mesh passes into a model, and none will. If we ever
+> wanted to do anything that did — shape learning across atlases, say — that would be
+> a separate question and we would ask first, with your model excluded by default.
+>
+> Rather than leave that as an assurance in an email, we have written it into the
+> project: the component now carries a `noAI` flag in our machine-readable rights
+> register, and the interface renders "marked NoAI by its creator — rendered here,
+> never used as training data or as input to a generative model" beneath your credit.
+> Your request now travels with the work instead of stopping at the platform it was
+> posted on. If you would rather we not display the models at all, tell us and we will
+> withdraw them — but we hope the answer is that this is exactly the kind of use they
+> were shared for.
 > 2. **The chain behind McGill.** In verifying the "3D Ear" credit I found that the
 >    McGill site (`audilab.bmed.mcgill.ca`) no longer resolves — the licence statement
 >    is confirmed only from the Internet Archive — and that its own about page says the

@@ -74,6 +74,23 @@ export interface RightsComponent {
    * to get a chain like this right.
    */
   derivedFrom?: string
+  /**
+   * The source carries Sketchfab's **NoAI** marking.
+   *
+   * Scope, from Sketchfab's own terms (23 March 2023): NoAI content may not be
+   * used "in datasets for, in the development of, or as inputs to generative AI
+   * programs". It does NOT restrict viewing, rendering or redistribution — this
+   * viewer's entire relationship with the geometry.
+   *
+   * Recorded anyway, and rendered, for two reasons. It is the creator's stated
+   * wish and it should travel with their work rather than stop at the platform
+   * they posted it on. And this project is written by an AI agent, which makes
+   * the distinction worth stating out loud rather than leaving to inference:
+   * the agent writes the code, and the anatomy is data that code renders. No
+   * mesh here is training data, a dataset entry, or an input to a generative
+   * model, and none will be.
+   */
+  noAI?: boolean
   /** True when the component grants nothing and needs written permission. */
   needsPermission?: boolean
 }
@@ -471,6 +488,9 @@ export const ANATOMY_SOURCES: Record<AnatomySourceId, AnatomySource> = {
         derivedFrom:
           'based upon the BodyParts3D data set, © The Database Center for Life ' +
           'Science, licensed under CC Attribution-Share Alike 2.1 Japan',
+        // Verified on its Sketchfab page, 18 August 2026. The inner ear does
+        // NOT carry the marking; this one does, so only this one says so.
+        noAI: true,
       },
       {
         // Was 'Brainder / white matter — University of Washington, no licence
