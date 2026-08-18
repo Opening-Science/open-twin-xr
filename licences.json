@@ -79,7 +79,7 @@
           "file": "SkeletalSystem100.fbx",
           "licence": "CC BY-SA 4.0",
           "imported": true,
-          "verify": "⚠️ UNRESOLVED: contains Incus, Stapes and Malleus. Those are middle-ear bones and belong in a skeleton, so they are most likely Z-Anatomy's own — but the CC BY-NC-SA 'Anatomy of the Inner Ear' component is also ear geometry, and the component-to-file mapping is an inference nobody has checked against upstream's License.txt. They are currently untagged, i.e. credited as Z-Anatomy's. Check against License.txt before publishing."
+          "verify": "⚠️ NARROWED BY MEASUREMENT, 18 August 2026 — one branch eliminated, one remains. Contains Incus, Stapes and Malleus, untagged, i.e. credited as Z-Anatomy's own. The comparison run for docs/OUTREACH.md item 2 established they CANNOT be BodyParts3D retopologies: the imported BodyParts3D set has no ossicles at all, and TARO is a 2 mm MRI phantom that physically cannot resolve millimetre-scale bones. So they are either Z-Anatomy's own modelling or part of Dundee's ear component. We credit them as Z-Anatomy's on the middle-ear/inner-ear distinction (Dundee's component is 'Anatomy of the INNER Ear'; ossicles are middle ear, and they sit in the SKELETON file); upstream is asked to correct us if that is wrong."
         },
         {
           "file": "MuscularSystem100.fbx",

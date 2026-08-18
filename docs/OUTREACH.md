@@ -166,7 +166,7 @@ question. **If there is no reply:** treat as unresolved — the heart stays out.
 > in #6 he reads share-alike maximally (any app reading the model must open its whole
 > code), so **state** what we ship under which terms — don't ask for a blessing.
 
-**Subject:** Your white-matter credit names the wrong source — and which BodyParts3D licence should derivatives print?
+**Subject:** Your white-matter credit names the wrong source; which BodyParts3D licence should derivatives print; and the comparison #5 asked for
 
 > Dear Gauthier, dear Z-Anatomy authors,
 >
@@ -195,11 +195,26 @@ question. **If there is no reply:** treat as unresolved — the heart stays out.
 >    says CC BY 4.0; `License.txt` in the repos still says CC BY-SA 2.1 Japan, which
 >    is what we copied. DBCLS's own page has said CC BY 4.0 since 2025-02-27 — can
 >    you confirm the document is current so we print what you intend?
-> 3. **Small, only if you happen to know:** we credit the ossicles in
->    `SkeletalSystem100.fbx` as yours (middle-ear bones; Dundee's component is the
->    *inner* ear), and we credit the CAHID cranial nerves without tagging individual
->    meshes, since theirs and yours are not separable by name. Corrections welcome;
->    otherwise we will settle both by comparison, per your answer on #5.
+> 3. **We ran the comparison your answer on #5 recommends — against BodyParts3D — and
+>    the findings are yours to reuse.** Method: both atlases in one frame,
+>    per-structure chamfer distance across 71 name-matched structures, centroid-aligned;
+>    rigid retopologies (frontal bone, sphenoid) land at ~2 mm median.
+>    **(a) Ossicles and inner ear:** BodyParts3D contains no incus, stapes, malleus,
+>    cochlea, vestibule — or renal pelvis. TARO is a 2 mm MRI phantom and cannot
+>    resolve ossicles, so none of these can be BodyParts3D retopologies. We credit the
+>    ossicles as your own modelling (middle-ear bones, and Dundee's component is the
+>    *inner* ear) — correct us if they are Dundee's. Same for the CAHID nerves: credited
+>    as a component, untagged per mesh, since theirs and yours are not separable by name.
+>    **(b) White matter**, supporting point 1: your telencephalon pair are *exact
+>    mirrors* of one another (2.4 mm median), where BodyParts3D's `cerebral white
+>    matter` pair is asymmetric like any real segmentation, and the two models diverge
+>    entirely — a single downloaded hemisphere, mirrored, is the natural reading.
+>    **(c) The #5 kidney question:** your kidney diverges from BodyParts3D's at ~15 mm
+>    median — several times the clean-retopology baseline — and the renal pelvis has no
+>    BodyParts3D ancestor at all. Both consistent with your own credit of the Cowley
+>    model. The one step we could not take is comparing against the Cowley model
+>    itself: its Sketchfab download needs an account, so that last confirmation is
+>    yours, or anyone's with a login.
 >
 > In return: our importer's per-structure component tags and a name → FMA crosswalk
 > built against BodyParts3D — exactly the comparison material #5 asks for, yours under
