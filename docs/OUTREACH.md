@@ -545,7 +545,29 @@ Library page.
 > how did Z-Anatomy obtain a model that cannot be downloaded?* The second half is
 > really a question for Z-Anatomy (issue #7), and their answer may matter more.
 
-**Reply to send — to `c.d.erolin@dundee.ac.uk`, cc Eve (medical school) as she copied in:**
+> ### ✅ REPLY SENT 18 August 2026 — awaiting her answer
+>
+> Sent to `c.d.erolin@dundee.ac.uk`, cc Eve. A lightly edited version of the draft
+> below; every question and commitment survived. Two wording differences worth
+> knowing if her reply turns on them:
+>
+> - **The NoAI paragraph was generalised.** The sent version explains what a NoAI
+>   clause does ("forbids using it as training data, putting it into datasets built
+>   for model development, or feeding it to a generative system as input") rather
+>   than quoting Sketchfab's terms verbatim — *"in datasets for, in the development
+>   of, or as inputs to generative AI programs"*, effective 23 March 2023. Same
+>   scope, and the quotable source is here if it is ever needed.
+> - **The "we would ask first" clause was cut** — the draft promised that any future
+>   AI-consuming work would be asked about in advance with her model excluded by
+>   default. Not sent, so it is not a commitment she has been given. Worth honouring
+>   anyway, and worth re-stating explicitly if that work is ever proposed.
+>
+> **What lands next:** a licence answer replaces the `CC BY 4.0` we print on
+> Z-Anatomy's authority; a yes on the UNC/Duke layer adds one more `derivedFrom`
+> line; a spelling preference flips Nicholson/Nicolson. None of it gates anything.
+> If she asks for screenshots, the credit block is under "All models and sources".
+
+**The draft, as prepared — to `c.d.erolin@dundee.ac.uk`, cc Eve (medical school):**
 
 **Subject:** Re: Credit wording — both chains are live, and two questions back
 
