@@ -23,6 +23,11 @@ const atlas: StructureEntry[] = [
   { name: 'Stomach', system: 'digestive', ontologyid: 'FMA:7148' },
   { name: 'Cochlea', side: 'right', system: 'nervous', ontologyid: 'FMA:60202' },
   { name: 'Vestibule', side: 'right', system: 'nervous', ontologyid: 'FMA:60184' },
+  // Latin nomenclature (D24): one structure that also has a term, and one that
+  // has Latin and NOTHING else — the regions case, where Latin is its only
+  // formal identity.
+  { name: 'Stomach', side: 'left', system: 'digestive', name_lat: 'Gaster' },
+  { name: 'Nuchal region', system: 'regions', name_lat: 'Regio nuchalis' },
 ]
 
 describe('parseTerm', () => {
@@ -155,5 +160,41 @@ describe('explainEmpty', () => {
     expect(explainEmpty(untagged, 'FMA:24477')).toBe('atlas-has-no-terms')
     // A NAME search there is still an ordinary miss.
     expect(explainEmpty(untagged, 'pancreas')).toBe('not-in-this-atlas')
+  })
+})
+
+
+describe('Latin nomenclature (D24)', () => {
+  it('finds a structure by its Latin name', () => {
+    const hits = searchStructures(atlas, 'Regio nuchalis')
+    expect(hits.map((h) => h.entry.name)).toEqual(['Nuchal region'])
+    expect(hits[0].via).toBe('latin')
+  })
+
+  it('matches Latin by prefix and substring, as a label may be', () => {
+    // ⚠️ The fragment has to be one the ENGLISH name does not also contain.
+    // "regio" alone is inside "Nuchal region", so the English match wins and
+    // dedup keeps it — which is the intended ranking, and cost this test a
+    // revision when it first asserted otherwise.
+    expect(searchStructures(atlas, 'regio n').some((h) => h.via === 'latin')).toBe(true)
+    expect(searchStructures(atlas, 'nuchalis').some((h) => h.via === 'latin')).toBe(true)
+  })
+
+  it('prefers the English name when a fragment matches both', () => {
+    const hits = searchStructures(atlas, 'regio')
+    expect(hits.find((h) => h.entry.name === 'Nuchal region')?.via).toBe('name')
+  })
+
+  it('ranks an English match above a Latin one, and never returns a structure twice', () => {
+    const hits = searchStructures(atlas, 'Stomach')
+    const stomachs = hits.filter((h) => h.entry.name === 'Stomach')
+    expect(stomachs.every((h) => h.via === 'name')).toBe(true)
+    expect(new Set(hits.map((h) => h.id)).size).toBe(hits.length)
+  })
+
+  it('does not let Latin resolve a TERM — that would be approximate matching onto an identifier', () => {
+    // "Gaster" is the Latin for stomach; it must not produce an FMA resolution.
+    const hits = searchStructures(atlas, 'Gaster')
+    expect(hits.every((h) => h.via === 'latin')).toBe(true)
   })
 })

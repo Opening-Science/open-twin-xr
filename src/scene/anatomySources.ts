@@ -451,7 +451,9 @@ export const ANATOMY_SOURCES: Record<AnatomySourceId, AnatomySource> = {
     // from.
     attribution:
       'Z-Anatomy - The open source atlas of anatomy - CC-BY-SA 4.0; derived from ' +
-      'BodyParts3D - The Database Center for Life Science - CC-BY-SA 2.1 Japan.',
+      'BodyParts3D - The Database Center for Life Science - CC-BY-SA 2.1 Japan. ' +
+      'Latin nomenclature extracted by ' +
+      'Anatomed (pitfa19/anatomed-mcp) - CC-BY-SA 4.0.',
     shareAlike: true,
     /**
      * Z-Anatomy is an AGGREGATE, and these three are not the authors' own work.
@@ -580,7 +582,9 @@ export const ANATOMY_SOURCES: Record<AnatomySourceId, AnatomySource> = {
     licenceUrl: 'https://creativecommons.org/licenses/by-sa/4.0/',
     attribution:
       'Z-Anatomy - The open source atlas of anatomy - CC-BY-SA 4.0; derived from ' +
-      'BodyParts3D - The Database Center for Life Science - CC-BY-SA 2.1 Japan.',
+      'BodyParts3D - The Database Center for Life Science - CC-BY-SA 2.1 Japan. ' +
+      'Latin nomenclature extracted by ' +
+      'Anatomed (pitfa19/anatomed-mcp) - CC-BY-SA 4.0.',
     shareAlike: true,
     donor: {
       sex: 'male',

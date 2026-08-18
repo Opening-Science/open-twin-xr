@@ -4,6 +4,20 @@
 after measuring [`pitfa19/anatomed-mcp`](https://github.com/pitfa19/anatomed-mcp)
 (at `b34375d`) against the shipped assets.
 
+> ## ✅ EXECUTED 18 August 2026 — see D24 and D24a
+>
+> Phase 0, 1 and 3 are **done**: the Latin nomenclature is joined, applied to both
+> Z-Anatomy assets, declared on `StructureEntry`, rendered in the card, searchable
+> as a label with its own `via: 'latin'`, credited in the register and in-app, and
+> counted by `gen:ontology` so no figure here needs believing. Phase 2 **ran and
+> was rejected on its own measurement** — the box-gap graph reproduces the very
+> defect that disqualified Anatomed's (91.9 % of edges at distance zero against
+> their 96.3 %), so nothing ships and `scripts/build-adjacency.mjs` remains as the
+> spike that proved it. D24a records what would actually work.
+>
+> The figures below were the estimates that justified the work; every one of them
+> was confirmed exactly by the build. Kept as written.
+
 > **Status: nothing started. The licence question is parked on purpose.**
 > Anatomed's author relicensed his whole project because the Z-Anatomy author
 > objected to an MIT-code-over-BY-SA-model split — which is *our* arrangement. That

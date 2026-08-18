@@ -14,15 +14,15 @@ Organ overlays declare what they replace **by structure name**, and that is frag
 
 A crosswalk in `docs/` is not a join the app can make. Unless the term travels into the GLB, the only thing available at runtime is the structure’s name — which is exactly the situation the overlays are stuck in.
 
-| asset | structures | carry a term | where the term is |
-|---|---|---|---|
-| `hra` | 96 mesh nodes | 85 (89 %) | node `extras.ontologyid` |
-| `hra-m` | 85 mesh nodes | 76 (89 %) | node `extras.ontologyid` |
-| `bodyparts3d` | 1,838 in the structure table | 1,838 (100 %) | structure table |
-| `z-anatomy` | 3,617 in the structure table | 1,946 (54 %) | structure table |
-| `z-anatomy-regions` | 257 in the structure table | 0 (0 %) | **nowhere — name only** |
-| `htb-ct-f` | 33 mesh nodes | 33 (100 %) | node `extras.ontologyid` |
-| `ct-atlas-f` | 109 mesh nodes | 109 (100 %) | node `extras.ontologyid` |
+| asset | structures | carry a term | carry a Latin name | where the term is |
+|---|---|---|---|---|
+| `hra` | 96 mesh nodes | 85 (89 %) | — | node `extras.ontologyid` |
+| `hra-m` | 85 mesh nodes | 76 (89 %) | — | node `extras.ontologyid` |
+| `bodyparts3d` | 1,838 in the structure table | 1,838 (100 %) | — | structure table |
+| `z-anatomy` | 3,617 in the structure table | 1,946 (54 %) | 2,117 (59 %), 851 with no term | structure table |
+| `z-anatomy-regions` | 257 in the structure table | 0 (0 %) | 218 (85 %), 218 with no term | **nowhere — name only** |
+| `htb-ct-f` | 33 mesh nodes | 33 (100 %) | — | node `extras.ontologyid` |
+| `ct-atlas-f` | 109 mesh nodes | 109 (100 %) | — | node `extras.ontologyid` |
 
 **1 of the 7 built assets carry no term at all: `z-anatomy-regions`.** Z-Anatomy ships 3,617 named structures and now carries 1,946 of them (54 %), written into the structure table from `docs/z-anatomy-fma.tsv`, which maps 1,479 distinct terms across 1,482 rows. The remainder is unmapped crosswalk, not a pipeline failure. BodyParts3D carries 1,838 of 1,838 (100 %), from `docs/bodyparts3d-system-map.tsv`. It is still merged to eleven draw calls — the ids travel in the structure table and the `_STRUCTURE` attribute, not in the node graph, so the draw-call budget is unaffected.
 

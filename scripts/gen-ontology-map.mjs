@@ -170,7 +170,31 @@ for (const a of ASSETS) {
   const tableWithTerm = table.filter((s) =>
     Object.values(s).some((v) => typeof v === 'string' && TERM_RE.test(v)),
   ).length
-  assetTerms.push({ ...a, nodes, nodesWithTerm, table: table.length, tableWithTerm, terms })
+  /**
+   * Latin nomenclature (D24), counted here so the number is GENERATED.
+   *
+   * It belongs in this document because it is identity: for a structure with no
+   * ontology term a Terminologia-style Latin name is the only formal identity it
+   * carries, and on the regions atlas it is the only identity of any kind. The
+   * `termless` count is the one that says what was actually gained.
+   */
+  const tableWithLatin = table.filter((s) => typeof s.name_lat === 'string' && s.name_lat).length
+  const latinTermless = table.filter(
+    (s) =>
+      typeof s.name_lat === 'string' &&
+      s.name_lat &&
+      !Object.values(s).some((v) => typeof v === 'string' && TERM_RE.test(v)),
+  ).length
+  assetTerms.push({
+    ...a,
+    nodes,
+    nodesWithTerm,
+    table: table.length,
+    tableWithTerm,
+    tableWithLatin,
+    latinTermless,
+    terms,
+  })
 }
 
 /**
@@ -302,11 +326,11 @@ L.push(
     'situation the overlays are stuck in.',
 )
 L.push('')
-L.push('| asset | structures | carry a term | where the term is |')
-L.push('|---|---|---|---|')
+L.push('| asset | structures | carry a term | carry a Latin name | where the term is |')
+L.push('|---|---|---|---|---|')
 for (const a of assetTerms) {
   if (a.missing) {
-    L.push(`| \`${a.id}\` | — | — | not built |`)
+    L.push(`| \`${a.id}\` | — | — | — | not built |`)
     continue
   }
   const unit = a.table ? `${a.table.toLocaleString()} in the structure table` : `${a.nodes} mesh nodes`
@@ -319,8 +343,12 @@ for (const a of assetTerms) {
     : a.nodesWithTerm
       ? 'node `extras.ontologyid`'
       : '**nowhere — name only**'
+  const lat = a.tableWithLatin
+    ? `${a.tableWithLatin.toLocaleString()} (${((100 * a.tableWithLatin) / (a.table || 1)).toFixed(0)} %)` +
+      (a.latinTermless ? `, ${a.latinTermless.toLocaleString()} with no term` : '')
+    : '—'
   L.push(
-    `| \`${a.id}\` | ${unit} | ${carry.toLocaleString()} (${pct.toFixed(0)} %) | ${where} |`,
+    `| \`${a.id}\` | ${unit} | ${carry.toLocaleString()} (${pct.toFixed(0)} %) | ${lat} | ${where} |`,
   )
 }
 L.push('')

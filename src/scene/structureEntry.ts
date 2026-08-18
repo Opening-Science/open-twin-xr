@@ -71,6 +71,21 @@ export interface StructureEntry {
    * distinct terms against 3,614 structures. Absence means "not yet mapped",
    * never "has no term".
    */
+  /**
+   * Terminologia-style Latin name, where the structure has one.
+   *
+   * ⚠️ A LABEL, NOT A TERM, and the distinction is load-bearing. An `ontologyid`
+   * is an identifier a machine resolves; this is nomenclature a reader reads.
+   * Approximate matching onto a term is forbidden (D18); matching a label is
+   * ordinary search. Never derive one from the other — inferring FMA ids from
+   * Latin synonyms is exactly the move that once produced 32 terms shared across
+   * structures that were not the same structure (D24).
+   *
+   * For a structure with no ontology term this is the ONLY formal identity it
+   * carries — which is most of `z-anatomy-regions`. Counts live in
+   * `docs/ONTOLOGY_MAP.md`, generated; do not type one here.
+   */
+  name_lat?: string
   ontologyid?: string
   /** The merged mesh this structure ended up in, e.g. `musculoskeletal/bone`. */
   mesh?: string

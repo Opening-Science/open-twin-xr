@@ -1,0 +1,2345 @@
+# Z-Anatomy structure -> Latin name — GENERATED, do not edit by hand.
+#
+# Rebuild:  node scripts/build-latin-crosswalk.mjs --src <parts-catalog.json>
+# Apply:    node scripts/apply-crosswalk.mjs public/models/z-anatomy.ao.glb \
+#             public/models/z-anatomy-regions.ao.glb --tsv docs/z-anatomy-latin.tsv --field name_lat
+#
+# Joined from Anatomed (pitfa19/anatomed-mcp, CC BY-SA 4.0) by exact match on
+# (name, side) after ordinal normalisation. The nomenclature is Z-Anatomy's;
+# Anatomed extracted it. Both are credited — see licences.json and D24.
+name	side	name_lat
+(Abdominal part of pectoralis major muscle)	left	(Pars abdominalis musculi pectoralis majoris)
+(Abdominal part of pectoralis major muscle)	right	(Pars abdominalis musculi pectoralis majoris)
+(Adductor minimus)	left	(Adductor minimus)
+(Adductor minimus)	right	(Adductor minimus)
+(Opponens digiti minimi muscle of foot)	left	(Musculus opponens digiti minimi pedis)
+(Opponens digiti minimi muscle of foot)	right	(Musculus opponens digiti minimi pedis)
+Abducens nerve (VI)	left	Nervus abducens (VI)
+Abducens nerve (VI)	right	Nervus abducens (VI)
+Abductor digiti minimi of foot	left	Abductor digiti minimi pedis
+Abductor digiti minimi of foot	right	Abductor digiti minimi pedis
+Abductor digiti minimi of hand	left	Abductor digiti minimi manus
+Abductor digiti minimi of hand	right	Abductor digiti minimi manus
+Abductor hallucis	left	Abductor hallucis
+Abductor hallucis	right	Abductor hallucis
+Abductor pollicis brevis	left	Abductor brevis pollicis
+Abductor pollicis brevis	right	Abductor brevis pollicis
+Abductor pollicis longus	left	Abductor longus pollicis
+Abductor pollicis longus	right	Abductor longus pollicis
+Accessory branch of middle meningeal artery	left	Ramus accessorius arteriae meningeae mediae
+Accessory branch of middle meningeal artery	right	Ramus accessorius arteriae meningeae mediae
+Accessory hemi-azygos vein		Vena hemiazyga accessoria
+Accessory nerve (XI)	left	Nervus accessorius (XI)
+Accessory nerve (XI)	right	Nervus accessorius (XI)
+Accessory pancreatic duct		Ductus pancreaticus accessorius
+Acetabular labrum	left	Labrum acetabuli
+Acetabular labrum	right	Labrum acetabuli
+Acromial part of deltoid muscle	left	Pars acromialis musculi deltoidei
+Acromial part of deltoid muscle	right	Pars acromialis musculi deltoidei
+Acromioclavicular ligament	left	Ligamentum acromioclaviculare
+Acromioclavicular ligament	right	Ligamentum acromioclaviculare
+Adductor brevis	left	Adductor brevis
+Adductor brevis	right	Adductor brevis
+Adductor longus	left	Adductor longus
+Adductor longus	right	Adductor longus
+Adductor magnus	left	Adductor magnus
+Adductor magnus	right	Adductor magnus
+Adenohypophysis		Adenohypophysis
+Amygdaloid body	left	Corpus amygdaloideum
+Amygdaloid body	right	Corpus amygdaloideum
+Anal region	left	Regio analis
+Anal region	right	Regio analis
+Anconeus muscle	left	Musculus anconeus
+Anconeus muscle	right	Musculus anconeus
+Angle of mouth	left	Angulus oris
+Angle of mouth	right	Angulus oris
+Angular artery	left	Arteria angularis
+Angular artery	right	Arteria angularis
+Angular gyrus	left	Gyrus angularis
+Angular gyrus	right	Gyrus angularis
+Angular vein	left	Vena angularis
+Angular vein	right	Vena angularis
+Annular ligament of radius	left	Ligamentum anulare radii
+Annular ligament of radius	right	Ligamentum anulare radii
+Antebrachial fascia	left	Fascia antebrachii
+Antebrachial fascia	right	Fascia antebrachii
+Anterior basal segmental artery of left lung		Arteria segmentalis basalis anterior pulmonis sinistri
+Anterior basal segmental artery of right lung		Arteria segmentalis basalis anterior pulmonis dextri
+Anterior belly of digastric muscle	left	Venter anterior musculi digastrici
+Anterior belly of digastric muscle	right	Venter anterior musculi digastrici
+Anterior branch of medial antebrachial cutaneous nerve	left	Ramus anterior nervi cutanei medialis antebrachii
+Anterior branch of medial antebrachial cutaneous nerve	right	Ramus anterior nervi cutanei medialis antebrachii
+Anterior branch of obturator nerve	left	Ramus anterior nervi obturatorii
+Anterior branch of obturator nerve	right	Ramus anterior nervi obturatorii
+Anterior branch of renal artery	left	Ramus anterior arteriae renalis
+Anterior cerebral artery	left	Arteria cerebri anterior
+Anterior cerebral artery	right	Arteria cerebri anterior
+Anterior chamber of eyeball	left	Camera anterior bulbi oculi
+Anterior chamber of eyeball	right	Camera anterior bulbi oculi
+Anterior circumflex humeral artery	left	Arteria circumflexa anterior humeri
+Anterior circumflex humeral artery	right	Arteria circumflexa anterior humeri
+Anterior circumflex humeral vein	left	Vena circumflexa anterior humeri
+Anterior circumflex humeral vein	right	Vena circumflexa anterior humeri
+Anterior cochlear nucleus	left	Nucleus cochlearis anterior
+Anterior cochlear nucleus	right	Nucleus cochlearis anterior
+Anterior commissure		Commissura anterior
+Anterior communicating artery		Arteria communicans anterior
+Anterior cruciate ligament	left	Ligamentum cruciatum anterius
+Anterior cruciate ligament	right	Ligamentum cruciatum anterius
+Anterior cutaneous branches of femoral nerve	left	Rami cutanei anteriores nervi femoralis
+Anterior cutaneous branches of femoral nerve	right	Rami cutanei anteriores nervi femoralis
+Anterior deep temporal artery	left	Arteria temporalis profunda anterior
+Anterior deep temporal artery	right	Arteria temporalis profunda anterior
+Anterior division of inferior trunk of brachial plexus	left	Divisio anterior trunci inferioris plexus brachialis
+Anterior division of inferior trunk of brachial plexus	right	Divisio anterior trunci inferioris plexus brachialis
+Anterior division of mandibular nerve	left	Divisio anterior nervi mandibularis
+Anterior division of mandibular nerve	right	Divisio anterior nervi mandibularis
+Anterior division of middle trunk of brachial plexus	left	Divisio anterior trunci medii plexus brachialis
+Anterior division of middle trunk of brachial plexus	right	Divisio anterior trunci medii plexus brachialis
+Anterior division of retromandibular vein	left	Divisio anterior venae mandibularis
+Anterior division of retromandibular vein	right	Divisio anterior venae mandibularis
+Anterior division of superior trunk of brachial plexus	left	Divisio anterior trunci superioris plexus brachialis
+Anterior division of superior trunk of brachial plexus	right	Divisio anterior trunci superioris plexus brachialis
+Anterior ethmoidal artery	left	Arteria ethmoidea anterior
+Anterior ethmoidal artery	right	Arteria ethmoidea anterior
+Anterior inferior cerebellar artery	left	Arteria cerebelli inferior anterior
+Anterior inferior cerebellar artery	right	Arteria cerebelli inferior anterior
+Anterior intercavernous sinus		Sinus intercavernosus anterior
+Anterior intermuscular septum of leg	left	Septum intermusculare anterius cruris
+Anterior intermuscular septum of leg	right	Septum intermusculare anterius cruris
+Anterior interosseous nerve of forearm	left	Nervus interosseus anterior antebrachii
+Anterior interosseous nerve of forearm	right	Nervus interosseus anterior antebrachii
+Anterior jugular vein	left	Vena iugularis anterior
+Anterior jugular vein	right	Vena iugularis anterior
+Anterior lateral segment of liver (VI)		Segmentum anterius laterale dextrum hepatis (VI)
+Anterior layer of thoracolumbar fascia	left	Lamina anterior fasciae thoracolumbaris
+Anterior layer of thoracolumbar fascia	right	Lamina anterior fasciae thoracolumbaris
+Anterior ligament of fibular head	left	Ligamentum anterius capitis fibulae
+Anterior ligament of fibular head	right	Ligamentum anterius capitis fibulae
+Anterior longitudinal ligament		Ligamentum longitudinale anterius
+Anterior medial segment of liver (V)		Segmentum anterius mediale dextrum hepatis (V)
+Anterior notch of auricle	left	Incisura anterior auriculae
+Anterior notch of auricle	right	Incisura anterior auriculae
+Anterior region of ankle	left	Regio anterior tali
+Anterior region of ankle	right	Regio anterior tali
+Anterior region of arm	left	Regio anterior brachii
+Anterior region of arm	right	Regio anterior brachii
+Anterior region of elbow	left	Regio anterior cubiti
+Anterior region of elbow	right	Regio anterior cubiti
+Anterior region of forearm	left	Regio anterior antebrachii
+Anterior region of forearm	right	Regio anterior antebrachii
+Anterior region of knee	left	Regio anterior genus
+Anterior region of knee	right	Regio anterior genus
+Anterior region of leg	left	Regio anterior cruris
+Anterior region of leg	right	Regio anterior cruris
+Anterior region of thigh	left	Regio anterior femoris
+Anterior region of thigh	right	Regio anterior femoris
+Anterior region of wrist	left	Regio anterior carpi
+Anterior region of wrist	right	Regio anterior carpi
+Anterior sacro-iliac ligament	left	Ligamentum sacroiliacum anterius
+Anterior sacro-iliac ligament	right	Ligamentum sacroiliacum anterius
+Anterior segment of eyeball	left	Segmentum anterius bulbi oculi
+Anterior segment of eyeball	right	Segmentum anterius bulbi oculi
+Anterior segmental artery of left lung		Arteria segmentalis anterior pulmonis sinistri
+Anterior segmental artery of right lung		Arteria segmentalis anterior pulmonis dextri
+Anterior segmental bronchus of left lung (BIII)		Bronchus segmentalis anterior pulmonis sinistri (BIII)
+Anterior semilunar leaflet of pulmonary valve		Valvula semilunaris anterior valvae trunci pulmonalis
+Anterior septal branches of anterior ethmoidal artery	left	Rami septales anteriores arteriae ethmoideae anterioris
+Anterior septal branches of anterior ethmoidal artery	right	Rami septales anteriores arteriae ethmoideae anterioris
+Anterior spinal artery	left	Arteria spinalis anterior
+Anterior spinal artery	right	Arteria spinalis anterior
+Anterior sternoclavicular ligament	left	Ligamentum sternoclaviculare anterius
+Anterior sternoclavicular ligament	right	Ligamentum sternoclaviculare anterius
+Anterior talocalcaneal ligament	left	Ligamentum talocalcaneum anterius
+Anterior talocalcaneal ligament	right	Ligamentum talocalcaneum anterius
+Anterior talofibular ligament	left	Ligamentum talofibulare anterius
+Anterior talofibular ligament	right	Ligamentum talofibulare anterius
+Anterior tibial artery	left	Arteria tibialis anterior
+Anterior tibial artery	right	Arteria tibialis anterior
+Anterior tibial veins	left	Venae tibiales anteriores
+Anterior tibial veins	right	Venae tibiales anteriores
+Anterior tibiofibular ligament	left	Ligamentum tibiofibulare anterius
+Anterior tibiofibular ligament	right	Ligamentum tibiofibulare anterius
+Anterior vein of left lung		Vena anterior pulmonis sinistri
+Anterior vein of right lung		Vena anterior pulmonis dextri
+Antihelix	left	Antihelix
+Antihelix	right	Antihelix
+Antitragus	left	Antitragus
+Antitragus	right	Antitragus
+Aortic arch		Arcus aortae
+Apical segmental artery of left lung		Arteria segmentalis apicalis pulmonis sinistri
+Apical segmental artery of right lung		Arteria segmentalis apicalis pulmonis dextri
+Apical segmental bronchus of right lung (BI)		Bronchus segmentalis apicalis pulmonis dextri (BI)
+Apical vein of right lung		Vena apicalis pulmonis dextri
+Apicoposterior segmental bronchus of left lung (BI+BII)		Bronchus segmentalis apicopost. pulmonis sinistri (BI+BII)
+Apicoposterior vein of left lung		Vena apicoposterior pulmonis sinistri
+Appendicular artery		Arteria appendicularis
+Arcuate artery	left	Arteria arcuata
+Arcuate artery	right	Arteria arcuata
+Artery of pterygoid canal	left	Arteria canalis pterygoidei
+Artery of pterygoid canal	right	Arteria canalis pterygoidei
+Articular capsule of elbow joint	left	Capsula articularis articulation cubiti
+Articular capsule of elbow joint	right	Capsula articularis articulation cubiti
+Articular capsule of knee joint	left	Capsula articularis genus
+Articular capsule of knee joint	right	Capsula articularis genus
+Articular capsule of radiocarpal joint	left	Capsula articularis articulatio radiocarpea
+Articular capsule of radiocarpal joint	right	Capsula articularis articulatio radiocarpea
+Articular capsules of metacarpophalangeal joints	left	Capsulae articulariae articulationes metacarpophalnageae
+Articular capsules of metacarpophalangeal joints	right	Capsulae articulariae articulationes metacarpophalnageae
+Articular disc of acromioclavicular joint	left	Discus articulationis acromioclavicularis
+Articular disc of acromioclavicular joint	right	Discus articulationis acromioclavicularis
+Articular disc of distal radio-ulnar joint	left	Discus articulationis radioulnaris distalis
+Articular disc of distal radio-ulnar joint	right	Discus articulationis radioulnaris distalis
+Articular disc of sternoclavicular joint	left	Discus articulationis sternoclavicularis
+Articular disc of sternoclavicular joint	right	Discus articulationis sternoclavicularis
+Articular disc of temporomandibular joint	left	Discus articulationis temporomandibularis
+Articular disc of temporomandibular joint	right	Discus articulationis temporomandibularis
+Ary-epiglottic part of oblique arytenoid muscle	left	Pars aryepiglottica musculi arytenoidei obliqui
+Ary-epiglottic part of oblique arytenoid muscle	right	Pars aryepiglottica musculi arytenoidei obliqui
+Arytenoid cartilage	left	Cartilago arytenoidea
+Arytenoid cartilage	right	Cartilago arytenoidea
+Ascending aorta		Aorta ascendens
+Ascending branch of left colic artery		Ramus ascendens arteriae
+Ascending colon		Colon ascendens
+Ascending part of trapezius muscle	left	Pars ascendens musculi trapezii
+Ascending part of trapezius muscle	right	Pars ascendens musculi trapezii
+Ascending pharyngeal artery	left	Arteria pharyngea ascendens
+Ascending pharyngeal artery	right	Arteria pharyngea ascendens
+Auricular region	left	Regio auricularis
+Auricular region	right	Regio auricularis
+Axillary artery	left	Arteria axillaris
+Axillary artery	right	Arteria axillaris
+Axillary nerve	left	Nervus axillaris
+Axillary nerve	right	Nervus axillaris
+Axillary vein	left	Vena axillaris
+Axillary vein	right	Vena axillaris
+Azygos vein		Vena azyga
+Basilar artery		Arteria basilaris
+Basilar venous plexus		Plexus venosus basilaris
+Basilic vein	left	Vena basilica
+Basilic vein	right	Vena basilica
+Bifurcation of pulmonary trunk		Bifurcatio trunci pulmonalis
+Bile duct		Ductus biliaris
+Body of sternum		Corpus sterni
+Brachial artery	left	Arteria brachialis
+Brachial artery	right	Arteria brachialis
+Brachial fascia	left	Fascia brachii
+Brachial fascia	right	Fascia brachii
+Brachial veins	left	Venae brachiales
+Brachial veins	right	Venae brachiales
+Brachialis muscle	left	Musculus brachialis
+Brachialis muscle	right	Musculus brachialis
+Brachiocephalic trunk		Truncus brachiocephalicus
+Brachioradialis muscle	left	Musculus brachioradialis
+Brachioradialis muscle	right	Musculus brachioradialis
+Buccal artery	left	Arteria buccalis
+Buccal artery	right	Arteria buccalis
+Buccal nerve	left	Nervus buccalis
+Buccal nerve	right	Nervus buccalis
+Buccal region	left	Regio buccalis
+Buccal region	right	Regio buccalis
+Bucinator	left	Bucinator
+Bucinator	right	Bucinator
+Calcaneal branches of fibular artery	left	Rami calcanei arteriae fibularis
+Calcaneal branches of fibular artery	right	Rami calcanei arteriae fibularis
+Calcaneal branches of posterior tibial artery	left	Rami calcanei arteriae tibialis posterioris
+Calcaneal branches of posterior tibial artery	right	Rami calcanei arteriae tibialis posterioris
+Calcaneal tendon	left	Tendo calcaneus
+Calcaneal tendon	right	Tendo calcaneus
+Calcaneocuboid ligament	left	Ligamentum calcaneocuboideum
+Calcaneocuboid ligament	right	Ligamentum calcaneocuboideum
+Calcaneofibular ligament	left	Ligamentum calcaneofibulare
+Calcaneofibular ligament	right	Ligamentum calcaneofibulare
+Calcaneonavicular ligament	left	Ligamentum calcaneonaviculare
+Calcaneonavicular ligament	right	Ligamentum calcaneonaviculare
+Calcaneus	left	Calcaneus
+Calcaneus	right	Calcaneus
+Calcarine sulcus	left	Sulcus calcarinus
+Calcarine sulcus	right	Sulcus calcarinus
+Callosomarginal artery	left	Arteria callosomarginalis
+Callosomarginal artery	right	Arteria callosomarginalis
+Capitate bone	left	Os capitatum
+Capitate bone	right	Os capitatum
+Carotid triangle	left	Trigonum caroticum
+Carotid triangle	right	Trigonum caroticum
+Caudate nucleus	left	Nucleus caudatus
+Caudate nucleus	right	Nucleus caudatus
+Cavernous sinus	left	Sinus cavernosus
+Cavernous sinus	right	Sinus cavernosus
+Cavity of concha	left	Cavitas conchae
+Cavity of concha	right	Cavitas conchae
+Central canal		Canalis centralis
+Central retinal artery	left	Arteria centralis retinae
+Central retinal artery	right	Arteria centralis retinae
+Central sulcus	left	Sulcus centralis
+Central sulcus	right	Sulcus centralis
+Cephalic vein	left	Vena cephalica
+Cephalic vein	right	Vena cephalica
+Chorda tympani	left	Chorda tympani
+Chorda tympani	right	Chorda tympani
+Choroid plexus	left	Plexus chorioideus
+Choroid plexus	right	Plexus chorioideus
+Circular sulcus of insula	left	Sulcus circularis insulae
+Circular sulcus of insula	right	Sulcus circularis insulae
+Circumflex artery of heart		Arteria circumflexa cordis
+Circumflex scapular artery	left	Arteria circumflexa scapulae
+Circumflex scapular artery	right	Arteria circumflexa scapulae
+Circumflex scapular vein	left	Vena circumflexa scapulae
+Circumflex scapular vein	right	Vena circumflexa scapulae
+Clavicle	left	Clavicula
+Clavicle	right	Clavicula
+Clavicular head of pectoralis major muscle	left	Pars clavicularis musculi pectoralis majoris
+Clavicular head of pectoralis major muscle	right	Pars clavicularis musculi pectoralis majoris
+Clavicular part of deltoid muscle	left	Pars clavicularis musculi deltoidei
+Clavicular part of deltoid muscle	right	Pars clavicularis musculi deltoidei
+Clavipectoral fascia	left	Fascia clavipectoralis
+Clavipectoral fascia	right	Fascia clavipectoralis
+Coccygeus muscle	left	Musculus coccygeus
+Coccygeus muscle	right	Musculus coccygeus
+Coccyx		Os coccygis
+Cochlea	left	Cochlea
+Cochlea	right	Cochlea
+Cochlear nerve		Nervus cochlearis
+Coeliac trunk		Truncus coeiiacus
+Colic branch of ileocolic artery		Ramus colicus arteriae ileocolicae
+Collateral interphalangeal ligaments of foot	left	Ligamenta interphalangea collateralia pedis
+Collateral interphalangeal ligaments of foot	right	Ligamenta interphalangea collateralia pedis
+Collateral interphalangeal ligaments of hand	left	Ligamenta interphalangea collateralia manus
+Collateral interphalangeal ligaments of hand	right	Ligamenta interphalangea collateralia manus
+Collateral metacarpophalangeal ligaments	left	Ligamenta metacarpophalangea collateralia
+Collateral metacarpophalangeal ligaments	right	Ligamenta metacarpophalangea collateralia
+Collateral metatarsophalangeal ligaments	left	Ligamenta metatarsophalangea collateralia
+Collateral metatarsophalangeal ligaments	right	Ligamenta metatarsophalangea collateralia
+Collateral sulcus	left	Sulcus collateralis
+Collateral sulcus	right	Sulcus collateralis
+Common facial vein	left	Vena facialis communis
+Common facial vein	right	Vena facialis communis
+Common fibular nerve	left	Nervus fibularis communis
+Common fibular nerve	right	Nervus fibularis communis
+Common hepatic artery		Arteria hepatica communis
+Common iliac artery	left	Arteria iliaca communis
+Common iliac vein	right	Vena iliaca communis
+Common interosseous artery	left	Arteria interossea communis
+Common interosseous artery	right	Arteria interossea communis
+Common palmar digital branches of ulnar nerve	left	Rami digitales palmares communes nervi ulnaris
+Common palmar digital branches of ulnar nerve	right	Rami digitales palmares communes nervi ulnaris
+Common plantar digital arteries	left	Arteriae digitales plantares communes
+Common plantar digital arteries	right	Arteriae digitales plantares communes
+Common plantar digital branches of lateral plantar nerve	left	Rami digitales plantares communes nervi plantaris lateralis
+Common plantar digital branches of lateral plantar nerve	right	Rami digitales plantares communes nervi plantaris lateralis
+Common plantar digital branches of medial plantar nerve		Rami digitales plantares communes nervi plantaris medialis
+Common tendinous ring	left	Anulus tendineus communis
+Common tendinous ring	right	Anulus tendineus communis
+Concha of auricle	left	Concha auriculae
+Concha of auricle	right	Concha auriculae
+Conoid ligament	left	Ligamentum conoideum
+Conoid ligament	right	Ligamentum conoideum
+Coraco-acromial ligament	left	Ligamentum coracoacromiale
+Coraco-acromial ligament	right	Ligamentum coracoacromiale
+Coracobrachialis muscle	left	Musculus coracobrachialis
+Coracobrachialis muscle	right	Musculus coracobrachialis
+Coracohumeral ligament	left	Ligamentum coracohumerale
+Coracohumeral ligament	right	Ligamentum coracohumerale
+Cornea	left	Cornea
+Cornea	right	Cornea
+Corniculate cartilage	left	Cartilago corniculata
+Corniculate cartilage	right	Cartilago corniculata
+Coronary sinus		Sinus coronarius
+Corpus callosum		Corpus callosum
+Corpus cavernosum of penis		Corpus cavernosum penis
+Corpus spongiosum of penis		Corpus spongiosum penis
+Corrugator supercilii	left	Musculus corrugator supercilii
+Corrugator supercilii	right	Musculus corrugator supercilii
+Costocervical trunk	left	Truncus costocervicalis
+Costocervical trunk	right	Truncus costocervicalis
+Costoclavicular ligament	left	Ligamentum costoclaviculare
+Costoclavicular ligament	right	Ligamentum costoclaviculare
+Costotransverse ligament	left	Ligamentum costotransversarium
+Costotransverse ligament	right	Ligamentum costotransversarium
+Cricoid cartilage		Cartilago cricoidea
+Cricopharyngeal ligament	left	Ligamentum cricopharyngeum
+Cricopharyngeal ligament	right	Ligamentum cricopharyngeum
+Crura of antihelix	left	Crura antihelicis
+Crura of antihelix	right	Crura antihelicis
+Crural fascia	left	Fascia cruris
+Crural fascia	right	Fascia cruris
+Cubital fossa	left	Fossa cubitalis
+Cubital fossa	right	Fossa cubitalis
+Cuboid bone	left	Os cuboideum
+Cuboid bone	right	Os cuboideum
+Cuneus	left	Cuneus
+Cuneus	right	Cuneus
+Cymba conchae	left	Cymba conchae
+Cymba conchae	right	Cymba conchae
+Deep artery of penis	left	Arteria profunda penis
+Deep artery of penis	right	Arteria profunda penis
+Deep branch of radial nerve	left	Ramus profundus nervi radialis
+Deep branch of radial nerve	right	Ramus profundus nervi radialis
+Deep branch of ulnar nerve	left	Ramus profundus nervi ulnaris
+Deep branch of ulnar nerve	right	Ramus profundus nervi ulnaris
+Deep cervical artery	left	Arteria cervicalis profunda
+Deep cervical artery	right	Arteria cervicalis profunda
+Deep dorsal vein of penis		Vena dorsalis profunda penis
+Deep external pudendal artery	left	Arteria pudendalis externa profunda
+Deep external pudendal artery	right	Arteria pudendalis externa profunda
+Deep femoral artery	left	Arteria profunda femoris
+Deep femoral artery	right	Arteria profunda femoris
+Deep femoral vein	left	Vena profunda femoris
+Deep femoral vein	right	Vena profunda femoris
+Deep fibular nerve	left	Nervus fibularis profundus
+Deep fibular nerve	right	Nervus fibularis profundus
+Deep head of flexor pollicis brevis	left	Caput profundum flexoris brevis pollicis
+Deep head of flexor pollicis brevis	right	Caput profundum flexoris brevis pollicis
+Deep head of pronator teres	left	Caput profundum pronatoris teretis
+Deep head of pronator teres	right	Caput profundum pronatoris teretis
+Deep palmar arch	left	Arcus palmaris profundus
+Deep palmar arch	right	Arcus palmaris profundus
+Deep part of masseter	left	Pars profunda masseteris
+Deep part of masseter	right	Pars profunda masseteris
+Deep part of tibial collateral ligament	left	Pars profunda ligamenti collateralis tibialis
+Deep part of tibial collateral ligament	right	Pars profunda ligamenti collateralis tibialis
+Deep plantar artery	left	Arteria plantaris profunda
+Deep plantar artery	right	Arteria plantaris profunda
+Deep transverse metacarpal ligament	left	Ligamentum metacarpeum transversum profundum
+Deep transverse metacarpal ligament	right	Ligamentum metacarpeum transversum profundum
+Deep transverse metatarsal ligament	left	Ligamentum metatarseum transversum profundum
+Deep transverse metatarsal ligament	right	Ligamentum metatarseum transversum profundum
+Deep venous palmar arch	left	Arcus venosus palmaris profundus
+Deep venous palmar arch	right	Arcus venosus palmaris profundus
+Deltoid fascia	left	Fascia deltoidea
+Deltoid fascia	right	Fascia deltoidea
+Deltoid region	left	Regio deltoidea
+Deltoid region	right	Regio deltoidea
+Deltopectoral triangle	left	Trigonum deltopectorale
+Deltopectoral triangle	right	Trigonum deltopectorale
+Depressor anguli oris	left	Depressor anguli oris
+Depressor anguli oris	right	Depressor anguli oris
+Depressor labii inferioris	left	Depressor labii inferioris
+Depressor labii inferioris	right	Depressor labii inferioris
+Depressor septi nasi	left	Depressor septi nasi
+Depressor septi nasi	right	Depressor septi nasi
+Descending branch of lateral circumflex femoral artery		Ramus descendens arteriae circumflexae lateralis femoris
+Descending branch of left colic artery		Ramus descendens arteriae colicae sinistrae
+Descending colon		Colon descendens
+Descending palatine artery	right	Arteria palatina descendens
+Descending part of iliofemoral ligament	left	Pars descendens ligamenti iliofemoralis
+Descending part of iliofemoral ligament	right	Pars descendens ligamenti iliofemoralis
+Descending part of trapezius muscle	left	Pars descendens musculi trapezii
+Descending part of trapezius muscle	right	Pars descendens musculi trapezii
+Diaphragm		Diaphragma
+Diaphragmatic fascia		Fascia diaphragmatica
+Distal phalanx of fifth finger of foot	left	Phalanx distalis quintum digitorum pedis
+Distal phalanx of fifth finger of foot	right	Phalanx distalis quintum digitorum pedis
+Distal phalanx of first finger of foot	left	Phalanx distalis primum digitorum pedis
+Distal phalanx of first finger of foot	right	Phalanx distalis primum digitorum pedis
+Distal phalanx of fourth finger of foot	left	Phalanx distalis quartum digitorum pedis
+Distal phalanx of fourth finger of foot	right	Phalanx distalis quartum digitorum pedis
+Distal phalanx of second finger of foot	left	Phalanx distalis secundum digitorum pedis
+Distal phalanx of second finger of foot	right	Phalanx distalis secundum digitorum pedis
+Distal phalanx of third finger of foot	left	Phalanx distalis tertium digitorum pedis
+Distal phalanx of third finger of foot	right	Phalanx distalis tertium digitorum pedis
+Distal transverse arch of foot	left	Arcus transversus distalis pedis
+Distal transverse arch of foot	right	Arcus transversus distalis pedis
+Dorsal artery of penis	left	Arteria dorsalis penis
+Dorsal artery of penis	right	Arteria dorsalis penis
+Dorsal branch of ulnar nerve	left	Ramus dorsalis nervi ulnaris
+Dorsal branch of ulnar nerve	right	Ramus dorsalis nervi ulnaris
+Dorsal calcaneocuboid ligament	left	Ligamentum calcaneocuboideum dorsale
+Dorsal calcaneocuboid ligament	right	Ligamentum calcaneocuboideum dorsale
+Dorsal carpal anastomosis	left	Rete dorsale carpi
+Dorsal carpal anastomosis	right	Rete dorsale carpi
+Dorsal carpal branch of ulnar artery	left	Ramus carpeus dorsalis arteriae ulnaris
+Dorsal carpal branch of ulnar artery	right	Ramus carpeus dorsalis arteriae ulnaris
+Dorsal carpometacarpal ligaments	left	Ligamenta carpometacarpea dorsalia
+Dorsal carpometacarpal ligaments	right	Ligamenta carpometacarpea dorsalia
+Dorsal cuneocuboid ligament	left	Ligamentum cuneocuboideum dorsale
+Dorsal cuneocuboid ligament	right	Ligamentum cuneocuboideum dorsale
+Dorsal cuneonavicular ligaments	left	Ligamenta cuneonavicularia dorsalia
+Dorsal cuneonavicular ligaments	right	Ligamenta cuneonavicularia dorsalia
+Dorsal digital arteries of foot	left	Arteriae digitales dorsales pedis
+Dorsal digital arteries of foot	right	Arteriae digitales dorsales pedis
+Dorsal digital arteries of hand	left	Arteriae digitales dorsales manus
+Dorsal digital arteries of hand	right	Arteriae digitales dorsales manus
+Dorsal digital branches of deep fibular nerve	left	Rami digitales dorsales nervi fibularis profundi
+Dorsal digital branches of deep fibular nerve	right	Rami digitales dorsales nervi fibularis profundi
+Dorsal digital branches of radial nerve	left	Rami digitales dorsales nervi radialis
+Dorsal digital branches of radial nerve	right	Rami digitales dorsales nervi radialis
+Dorsal digital branches of superficial fibular nerve	left	Rami digitales dorsales nervi fibularis superficialis
+Dorsal digital branches of superficial fibular nerve	right	Rami digitales dorsales nervi fibularis superficialis
+Dorsal digital branches of ulnar nerve	left	Rami digitales dorsales nervi ulnaris
+Dorsal digital branches of ulnar nerve	right	Rami digitales dorsales nervi ulnaris
+Dorsal digital veins of foot	left	Venae digitales dorsales pedis
+Dorsal digital veins of foot	right	Venae digitales dorsales pedis
+Dorsal digital veins of hand	left	Venae digitales dorsales manus
+Dorsal digital veins of hand	right	Venae digitales dorsales manus
+Dorsal fascia of hand	left	Fascia dorsalis manus
+Dorsal fascia of hand	right	Fascia dorsalis manus
+Dorsal intercarpal ligaments	left	Ligamenta intercarpea dorsalia
+Dorsal intercarpal ligaments	right	Ligamenta intercarpea dorsalia
+Dorsal intercuneiform ligaments	left	Ligamenta intercuneiformia dorsalia
+Dorsal intercuneiform ligaments	right	Ligamenta intercuneiformia dorsalia
+Dorsal interossei muscles of foot	left	Musculi interossei dorsales pedis
+Dorsal interossei muscles of foot	right	Musculi interossei dorsales pedis
+Dorsal interossei muscles of hand	left	Musculi interossei dorsales manus
+Dorsal interossei muscles of hand	right	Musculi interossei dorsales manus
+Dorsal metacarpal arteries	left	Arteriae metacarpeae dorsales
+Dorsal metacarpal arteries	right	Arteriae metacarpeae dorsales
+Dorsal metacarpal ligaments	left	Ligamenta metacarpea dorsalia
+Dorsal metacarpal ligaments	right	Ligamenta metacarpea dorsalia
+Dorsal metatarsal arteries	left	Arteriae metatarseae dorsales
+Dorsal metatarsal arteries	right	Arteriae metatarseae dorsales
+Dorsal metatarsal ligaments	left	Ligamenta metatarsea dorsalia
+Dorsal metatarsal ligaments	right	Ligamenta metatarsea dorsalia
+Dorsal metatarsal veins	left	Venae metatarseae dorsales
+Dorsal metatarsal veins	right	Venae metatarseae dorsales
+Dorsal parts of lateral intertransversarii lumborum muscles	left	Partes dors. musculorum intertransversariorum lat. lumborum
+Dorsal parts of lateral intertransversarii lumborum muscles	right	Partes dors. musculorum intertransversariorum lat. lumborum
+Dorsal radio-ulnar ligament	left	Ligamentum radioulnare dorsale
+Dorsal radio-ulnar ligament	right	Ligamentum radioulnare dorsale
+Dorsal radiocarpal ligament	left	Ligamentum radiocarpeum dorsale
+Dorsal radiocarpal ligament	right	Ligamentum radiocarpeum dorsale
+Dorsal scaphotriquetral ligament	left	Ligamentum scaphotriquetrum dorsale
+Dorsal scaphotriquetral ligament	right	Ligamentum scaphotriquetrum dorsale
+Dorsal scapular nerve	left	Nervus dorsalis scapulae
+Dorsal scapular nerve	right	Nervus dorsalis scapulae
+Dorsal surfaces of digits of foot	left	Facies dorsales digitorum
+Dorsal surfaces of digits of foot	right	Facies dorsales digitorum
+Dorsal surfaces of digits of hand	left	Facies dorsales digitorum manus
+Dorsal surfaces of digits of hand	right	Facies dorsales digitorum manus
+Dorsal tarsometatarsal ligaments	left	Ligamenta tarsometatarsea dorsalia
+Dorsal tarsometatarsal ligaments	right	Ligamenta tarsometatarsea dorsalia
+Dorsal ulnocarpal ligament	left	Ligamentum ulnocarpeum dorsale
+Dorsal ulnocarpal ligament	right	Ligamentum ulnocarpeum dorsale
+Dorsal venous arch of foot	left	Arcus venosus dorsalis pedis
+Dorsal venous arch of foot	right	Arcus venosus dorsalis pedis
+Dorsal venous network of hand	left	Rete venosum dorsale manus
+Dorsal venous network of hand	right	Rete venosum dorsale manus
+Dorsalis pedis artery	left	Arteria dorsalis pedis
+Dorsalis pedis artery	right	Arteria dorsalis pedis
+Dorsum of foot	left	Dorsum pedis
+Dorsum of foot	right	Dorsum pedis
+Dorsum of hand	left	Dorsum manus
+Dorsum of hand	right	Dorsum manus
+Ductus deferens	left	Ductus deferens
+Ductus deferens	right	Ductus deferens
+Duodenum		Duodenum
+Ejaculatory duct	left	Ductus ejaculatorius
+Ejaculatory duct	right	Ductus ejaculatorius
+Eleventh rib	left	Undecima costa
+Eleventh rib	right	Undecima costa
+Epicranial aponeurosis	left	Galea aponeurotica
+Epicranial aponeurosis	right	Galea aponeurotica
+Epididymis	left	Epididymis
+Epididymis	right	Epididymis
+Epigastric region	left	Regio epigastrica
+Epigastric region	right	Regio epigastrica
+Epiglottis		Epiglottis
+Ethmoid bone		Os ethmoideum
+Extensor carpi radialis brevis	left	Extensor radialis brevis carpi
+Extensor carpi radialis brevis	right	Extensor radialis brevis carpi
+Extensor carpi radialis longus	left	Extensor radialis longus carpi
+Extensor carpi radialis longus	right	Extensor radialis longus carpi
+Extensor digiti minimi	left	Extensor digiti minimi
+Extensor digiti minimi	right	Extensor digiti minimi
+Extensor digitorum	left	Extensor digitorum
+Extensor digitorum	right	Extensor digitorum
+Extensor digitorum brevis	left	Extensor brevis digitorum
+Extensor digitorum brevis	right	Extensor brevis digitorum
+Extensor digitorum longus	left	Extensor longus digitorum
+Extensor digitorum longus	right	Extensor longus digitorum
+Extensor hallucis brevis	left	Extensor brevis hallucis
+Extensor hallucis brevis	right	Extensor brevis hallucis
+Extensor hallucis longus	left	Extensor longus hallucis
+Extensor hallucis longus	right	Extensor longus hallucis
+Extensor indicis	left	Extensor indicis
+Extensor indicis	right	Extensor indicis
+Extensor pollicis brevis	left	Extensor brevis pollicis
+Extensor pollicis brevis	right	Extensor brevis pollicis
+Extensor pollicis longus	left	Extensor longus pollicis
+Extensor pollicis longus	right	Extensor longus pollicis
+Extensor retinaculum of wrist	left	Retinaculum extensorium carpi
+Extensor retinaculum of wrist	right	Retinaculum extensorium carpi
+External abdominal oblique muscle	left	Musculus obliquus externus abdominis
+External abdominal oblique muscle	right	Musculus obliquus externus abdominis
+External anal sphincter	left	Sphincter externus ani
+External anal sphincter	right	Sphincter externus ani
+External carotid artery	left	Carotis externa
+External carotid artery	right	Carotis externa
+External iliac artery	left	Arteria iliaca externa
+External iliac artery	right	Arteria iliaca externa
+External iliac vein	left	Vena iliaca externa
+External iliac vein	right	Vena iliaca externa
+External intercostal membrane	left	Membrana intercostalis externa
+External intercostal membrane	right	Membrana intercostalis externa
+External intercostal muscles	left	Musculi intercostales externi
+External intercostal muscles	right	Musculi intercostales externi
+External jugular vein	left	Vena iugularis externa
+External jugular vein	right	Vena iugularis externa
+External part of thyro-arytenoid muscle	left	Pars externa musculi thyreoarytenoidei
+External part of thyro-arytenoid muscle	right	Pars externa musculi thyreoarytenoidei
+Eyebrow	left	Supercilium
+Eyebrow	right	Supercilium
+Eyelashes	left	Cilia
+Eyelashes	right	Cilia
+Facial artery	left	Arteria facialis
+Facial artery	right	Arteria facialis
+Facial nerve (VII)	left	Nervus facialis (VII)
+Facial nerve (VII)	right	Nervus facialis (VII)
+Facial vein	left	Vena facialis
+Facial vein	right	Vena facialis
+Falx cerebri		Falx cerebri
+Fascia lata	left	Fascia lata
+Fascia lata	right	Fascia lata
+Femoral artery	left	Arteria femoralis
+Femoral artery	right	Arteria femoralis
+Femoral branch of genitofemoral nerve	left	Ramus femoralis nervi genitofemoralis
+Femoral branch of genitofemoral nerve	right	Ramus femoralis nervi genitofemoralis
+Femoral nerve	left	Nervus femoralis
+Femoral nerve	right	Nervus femoralis
+Femoral triangle	left	Trigonum femorale
+Femoral triangle	right	Trigonum femorale
+Femoral vein	left	Vena femoralis
+Femoral vein	right	Vena femoralis
+Femur	left	Os femoris
+Femur	right	Os femoris
+Fibula	left	Fibula
+Fibula	right	Fibula
+Fibular artery	left	Arteria fibularis
+Fibular artery	right	Arteria fibularis
+Fibular collateral ligament	left	Ligamentum collaterale fibulare
+Fibular collateral ligament	right	Ligamentum collaterale fibulare
+Fibular veins	left	Venae fibulares
+Fibular veins	right	Venae fibulares
+Fibularis brevis muscle	left	Musculus fibularis brevis
+Fibularis brevis muscle	right	Musculus fibularis brevis
+Fibularis longus muscle	left	Musculus fibularis longus
+Fibularis longus muscle	right	Musculus fibularis longus
+Fibularis tertius muscle	left	Musculus fibularis tertius
+Fibularis tertius muscle	right	Musculus fibularis tertius
+Fifth metatarsal bone	left	Os quintum metatarsi
+Fifth metatarsal bone	right	Os quintum metatarsi
+Fifth rib	left	Quinta costa
+Fifth rib	right	Quinta costa
+First metatarsal bone	left	Os primum metatarsi
+First metatarsal bone	right	Os primum metatarsi
+First posterior intercostal artery	left	Arteria intercostalis posterior prima
+First posterior intercostal artery	right	Arteria intercostalis posterior prima
+First rib	left	Costa prima
+First rib	right	Costa prima
+Flexor carpi radialis	left	Flexor radialis carpi
+Flexor carpi radialis	right	Flexor radialis carpi
+Flexor digiti minimi of foot	left	Flexor digiti minimi pedis pedis
+Flexor digiti minimi of foot	right	Flexor digiti minimi pedis pedis
+Flexor digiti minimi of hand	left	Flexor digiti minimi manus
+Flexor digiti minimi of hand	right	Flexor digiti minimi manus
+Flexor digitorum brevis	left	Flexor brevis digitorum
+Flexor digitorum brevis	right	Flexor brevis digitorum
+Flexor digitorum longus	left	Musculus flexor digitorum longus
+Flexor digitorum longus	right	Musculus flexor digitorum longus
+Flexor digitorum profundus	left	Flexor profundus digitorum
+Flexor digitorum profundus	right	Flexor profundus digitorum
+Flexor hallucis longus	right	Flexor longus hallucis
+Flexor pollicis longus	left	Flexor longus pollicis
+Flexor retinaculum of ankle	left	Retinaculum flexorium tali
+Flexor retinaculum of ankle	right	Retinaculum flexorium tali
+Flexor retinaculum of wrist	left	Retinaculum flexorium carpi
+Flexor retinaculum of wrist	right	Retinaculum flexorium carpi
+Fornix	left	Fornix
+Fornix	right	Fornix
+Fossa antihelica	left	Fossa antihelica
+Fossa antihelica	right	Fossa antihelica
+Fourth metatarsal bone	left	Os quatum metatarsi
+Fourth metatarsal bone	right	Os quatum metatarsi
+Fourth rib	left	Quarta costa
+Fourth rib	right	Quarta costa
+Fourth ventricle		Ventriculus quartus
+Free taenia		Taenia libera
+Frontal bone		Os frontale
+Frontal branch of superficial temporal artery	left	Ramus fontale arteriae temporalis superficialis
+Frontal branch of superficial temporal artery	right	Ramus fontale arteriae temporalis superficialis
+Frontal branches of callosomarginal artery	left	Rami frontales arteriae callosomarginal
+Frontal branches of callosomarginal artery	right	Rami frontales arteriae callosomarginal
+Frontal region	left	Regio frontalis
+Frontal region	right	Regio frontalis
+Frontalis muscle	left	Musculus frontalis
+Frontalis muscle	right	Musculus frontalis
+Gallbladder		Vesica biliaris
+Ganglia of sympathetic trunk	left	Ganglia trunci sympathici
+Ganglia of sympathetic trunk	right	Ganglia trunci sympathici
+Gastroduodenal artery		Arteria gastroduodenalis
+Genicular veins	left	Venae geniculares
+Genicular veins	right	Venae geniculares
+Genioglossus muscle	left	Musculus genioglossus
+Genioglossus muscle	right	Musculus genioglossus
+Geniohyoid muscle	left	Musculus geniohyoideus
+Geniohyoid muscle	right	Musculus geniohyoideus
+Genital branch of genitofemoral nerve	left	Ramus genitalis nervi genitofemoralis
+Genital branch of genitofemoral nerve	right	Ramus genitalis nervi genitofemoralis
+Genitofemoral nerve	left	Nervus genitofemoralis
+Genitofemoral nerve	right	Nervus genitofemoralis
+Gingiva		Gingiva
+Glans penis		Glans penis
+Glenoid labrum	left	Labrum glenoideum
+Glenoid labrum	right	Labrum glenoideum
+Globus pallidus	left	Globus pallidus
+Globus pallidus	right	Globus pallidus
+Glossopharyngeal nerve (IX)	left	Nervus glossopharyngeus (IX)
+Glossopharyngeal nerve (IX)	right	Nervus glossopharyngeus (IX)
+Gluteal fold	left	Sulcus gluteus
+Gluteal fold	right	Sulcus gluteus
+Gluteal region	left	Regio glutea
+Gluteal region	right	Regio glutea
+Gluteus maximus muscle	left	Musculus gluteus maximus
+Gluteus maximus muscle	right	Musculus gluteus maximus
+Gluteus medius muscle	left	Musculus gluteus medius
+Gluteus medius muscle	right	Musculus gluteus medius
+Gluteus minimus muscle	left	Musculus gluteus minimus
+Gluteus minimus muscle	right	Musculus gluteus minimus
+Gracilis muscle	left	Musculus gracilis
+Gracilis muscle	right	Musculus gracilis
+Great cardiac vein		Vena magna cordis
+Great saphenous vein	left	Vena saphena magna
+Great saphenous vein	right	Vena saphena magna
+Greater omentum		Omentum maius
+Greater palatine artery	left	Arteria palatina major
+Greater palatine artery	right	Arteria palatina major
+Habenula		Habenula
+Hallucial eminence	left	Eminentia hallucis
+Hallucial eminence	right	Eminentia hallucis
+Hamate bone	left	Os hamatum
+Hamate bone	right	Os hamatum
+Heel region	left	Regio calcanea
+Heel region	right	Regio calcanea
+Helix	left	Helix
+Helix	right	Helix
+Hemi-azygos vein		Vena hemiazyga
+Hepatic portal vein		Vena portae hepatis
+Hepatic veins		Venae hepaticae
+Hip bone	left	Os coxae
+Hip bone	right	Os coxae
+Hip region	left	Regio coxalis
+Hip region	right	Regio coxalis
+Hippocampal commissure		Commissura hippocampi
+Hippocampus	left	Hippocampus
+Hippocampus	right	Hippocampus
+Humeral head of extensor carpi ulnaris	left	Caput humerale extensoris ulnaris carpi
+Humeral head of extensor carpi ulnaris	right	Caput humerale extensoris ulnaris carpi
+Humerus	left	Humerus
+Humerus	right	Humerus
+Hyoglossus muscle	left	Musculus hyoglossus
+Hyoglossus muscle	right	Musculus hyoglossus
+Hyoid bone		Os hyoideum
+Hypochondriac region	left	Regio hypochondriaca
+Hypochondriac region	right	Regio hypochondriaca
+Hypogastric region	left	Regio hypogastrica
+Hypogastric region	right	Regio hypogastrica
+Ileal branch of ileocolic artery		Ramus ilealis arteriae ileocolicae
+Iliacus branch of iliolumbar artery	left	Ramus iliacus arteriae iliolumbalis
+Iliacus branch of iliolumbar artery	right	Ramus iliacus arteriae iliolumbalis
+Iliacus muscle	left	Musculus iliacus
+Iliacus muscle	right	Musculus iliacus
+Ilio-inguinal nerve	left	Nervus ilioinguinalis
+Ilio-inguinal nerve	right	Nervus ilioinguinalis
+Iliococcygeus muscle	left	Musculus iliococcygeus
+Iliococcygeus muscle	right	Musculus iliococcygeus
+Iliocostalis colli muscle		Musculus iliocostalis colli
+Iliocostalis lumborum muscle	left	Musculus iliocostalis lumborum
+Iliocostalis lumborum muscle	right	Musculus iliocostalis lumborum
+Iliocostalis thoracis muscle	left	Musculus iliocostalis thoracis
+Iliocostalis thoracis muscle	right	Musculus iliocostalis thoracis
+Iliohypogastric nerve	left	Nervus iliohypogastricus
+Iliohypogastric nerve	right	Nervus iliohypogastricus
+Iliolumbar artery	left	Arteria iliolumbalis
+Iliolumbar artery	right	Arteria iliolumbalis
+Iliolumbar ligament	left	Ligamentum iliolumbale
+Iliolumbar ligament	right	Ligamentum iliolumbale
+Iliolumbar vein	left	Vena iliolumbalis
+Iliolumbar vein	right	Vena iliolumbalis
+Iliopectineal arch	left	Arcus iliopectineus
+Iliopectineal arch	right	Arcus iliopectineus
+Iliopsoas fascia	left	Fascia iliopsoae
+Iliopsoas fascia	right	Fascia iliopsoae
+Iliotibial tract	left	Tractus iliotibialis
+Iliotibial tract	right	Tractus iliotibialis
+Incus	left	Incus
+Incus	right	Incus
+Inferior alveolar artery	left	Arteria alveolaris inferior
+Inferior alveolar artery	right	Arteria alveolaris inferior
+Inferior alveolar nerve	left	Nervus alveolaris inferior
+Inferior alveolar nerve	right	Nervus alveolaris inferior
+Inferior basal vein of left lung		Vena basalis inferior pulmonis sinistri
+Inferior basal vein of right lung		Vena basalis inferior pulmonis dextri
+Inferior colliculus	left	Colliculus inferior
+Inferior colliculus	right	Colliculus inferior
+Inferior epigastric artery	left	Arteria epigastrica inferior
+Inferior epigastric artery	right	Arteria epigastrica inferior
+Inferior epigastric vein	left	Vena epigastrica inferior
+Inferior epigastric vein	right	Vena epigastrica inferior
+Inferior extensor retinaculum of ankle	left	Retinaculum extensorium inferius tali
+Inferior extensor retinaculum of ankle	right	Retinaculum extensorium inferius tali
+Inferior fibular retinaculum	left	Retinaculum fibulare inferius
+Inferior fibular retinaculum	right	Retinaculum fibulare inferius
+Inferior frontal sulcus	left	Sulcus frontalis inferior
+Inferior frontal sulcus	right	Sulcus frontalis inferior
+Inferior gemellus muscle	left	Musculus gemellus inferior
+Inferior gemellus muscle	right	Musculus gemellus inferior
+Inferior glenohumeral ligament	left	Ligamentum glenohumerale inferius
+Inferior glenohumeral ligament	right	Ligamentum glenohumerale inferius
+Inferior gluteal artery	left	Arteria glutea inferior
+Inferior gluteal artery	right	Arteria glutea inferior
+Inferior gluteal veins	left	Venae gluteae inferiores
+Inferior gluteal veins	right	Venae gluteae inferiores
+Inferior head of lateral pterygoid muscle	left	Caput inferius musculi pterygoidei lateralis
+Inferior head of lateral pterygoid muscle	right	Caput inferius musculi pterygoidei lateralis
+Inferior labial artery	left	Arteria labialis inferior
+Inferior labial artery	right	Arteria labialis inferior
+Inferior labial veins	left	Venae labiales inferiores
+Inferior labial veins	right	Venae labiales inferiores
+Inferior lateral brachial cutaneous nerve	left	Nervus cutaneus lateralis inferior brachii
+Inferior lateral brachial cutaneous nerve	right	Nervus cutaneus lateralis inferior brachii
+Inferior lateral genicular artery	left	Arteria inferior lateralis genus
+Inferior lateral genicular artery	right	Arteria inferior lateralis genus
+Inferior lingular artery of left lung		Arteria lingularis inferior pulmonis sinistri
+Inferior lingular segmental bronchus of left lung (BV)		Bronchus segmentalis lingularis inf. pulmonis sinistri (BV)
+Inferior lingular vein of left lung		Vena lingularis inferior pulmonis sinistri
+Inferior lobar artery of right lung		Arteria lobaris inferior pulmonis dextri
+Inferior lobe of left lung		Lobus inferior pulmonis sinistri
+Inferior lobe of right lung		Lobus inferior pulmonis dextri
+Inferior medial genicular artery	left	Arteria inferior medialis genus
+Inferior medial genicular artery	right	Arteria inferior medialis genus
+Inferior mesenteric artery		Arteria mesenterica inferior
+Inferior mesenteric vein		Vena mesenterica inferior
+Inferior nasal concha bone	left	Concha nasalis inferior
+Inferior nasal concha bone	right	Concha nasalis inferior
+Inferior oblique muscle	left	Musculus obliquus inferior bulbi oculi
+Inferior oblique muscle	right	Musculus obliquus inferior bulbi oculi
+Inferior ophthalmic vein	left	Vena ophthalmica inferior
+Inferior ophthalmic vein	right	Vena ophthalmica inferior
+Inferior pancreaticoduodenal artery		Arteria pancreaticoduodenalis
+Inferior papillary muscle of left ventricle		Musculus papillaris inferior ventriculi sinistri
+Inferior parathyroid gland	left	Glandula parathyreoidea inferior
+Inferior parathyroid gland	right	Glandula parathyreoidea inferior
+Inferior petrosal sinus	left	Sinus petrosus inferior
+Inferior petrosal sinus	right	Sinus petrosus inferior
+Inferior pharyngeal constrictor	left	Constrictor inferior pharyngis
+Inferior pharyngeal constrictor	right	Constrictor inferior pharyngis
+Inferior phrenic artery		Arteria phrenica inferior
+Inferior pubic ligament		Ligamentum pubicum inferius
+Inferior rectus muscle	left	Musculus rectus inferior
+Inferior rectus muscle	right	Musculus rectus inferior
+Inferior salivatory nucleus	left	Nucleus salivatorius inferior
+Inferior salivatory nucleus	right	Nucleus salivatorius inferior
+Inferior suprarenal artery	left	Arteria suprarenalis inferior
+Inferior suprarenal artery	right	Arteria suprarenalis inferior
+Inferior tarsus	left	Tarsus inferior
+Inferior tarsus	right	Tarsus inferior
+Inferior temporal gyrus	left	Gyrus temporalis inferior
+Inferior temporal gyrus	right	Gyrus temporalis inferior
+Inferior temporal sulcus	left	Sulcus temporalis inferior
+Inferior temporal sulcus	right	Sulcus temporalis inferior
+Inferior thyroid artery	left	Arteria thyreoidea inferior arteria thyroidea inferior
+Inferior thyroid artery	right	Arteria thyreoidea inferior arteria thyroidea inferior
+Inferior trunk of brachial plexus	left	Truncus inferior plexus brachialis
+Inferior trunk of brachial plexus	right	Truncus inferior plexus brachialis
+Inferior ulnar collateral artery	left	Arteria collateralis ulnaris inferior
+Inferior ulnar collateral artery	right	Arteria collateralis ulnaris inferior
+Inferior vein of left ventricle		Vena inferior ventriculi sinistri
+Infra-orbital artery	left	Arteria infraorbitalis
+Infra-orbital artery	right	Arteria infraorbitalis
+Infraclavicular fossa	left	Fossa infraclavicularis
+Infraclavicular fossa	right	Fossa infraclavicularis
+Inframammary region	left	Regio inframammaria
+Inframammary region	right	Regio inframammaria
+Infrapatellar branch of saphenous nerve	left	Ramus infrapatellaris nervi sapheni
+Infrapatellar branch of saphenous nerve	right	Ramus infrapatellaris nervi sapheni
+Infrapatellar fat pad	left	Corpus adiposum infrapatellare
+Infrapatellar fat pad	right	Corpus adiposum infrapatellare
+Infrascapular region	left	Regio infrascapularis
+Infrascapular region	right	Regio infrascapularis
+Infraspinatus muscle	left	Musculus infraspinatus
+Infraspinatus muscle	right	Musculus infraspinatus
+Inguinal ligament	left	Ligamentum inguinale
+Inguinal ligament	right	Ligamentum inguinale
+Inguinal region	left	Regio inguinalis
+Inguinal region	right	Regio inguinalis
+Innermost intercostal muscles	left	Musculi intercostales intimi
+Innermost intercostal muscles	right	Musculi intercostales intimi
+Intercapitular veins of foot	left	Venae intercapitulares pedis
+Intercapitular veins of foot	right	Venae intercapitulares pedis
+Interclavicular ligament	left	Ligamentum interclaviculare
+Interclavicular ligament	right	Ligamentum interclaviculare
+Intercornual ligament	left	Ligamentum intercornuale
+Intercornual ligament	right	Ligamentum intercornuale
+Intercostal nerves	left	Nervi intercostales
+Intercostal nerves	right	Nervi intercostales
+Intermediate cuneiform bone	left	Os cuneiforme intermedium
+Intermediate cuneiform bone	right	Os cuneiforme intermedium
+Intermediate dorsal cutaneous nerve of foot	left	Nervus cutaneus intermedius dorsalis pedis
+Intermediate dorsal cutaneous nerve of foot	right	Nervus cutaneus intermedius dorsalis pedis
+Intermediate tendon of digastric muscle	left	Tendo intermedius musculi digastrici
+Intermediate tendon of digastric muscle	right	Tendo intermedius musculi digastrici
+Internal abdominal oblique muscle	left	Musculus obliquus internus abdominis
+Internal abdominal oblique muscle	right	Musculus obliquus internus abdominis
+Internal carotid artery	left	Carotis interna
+Internal carotid artery	right	Carotis interna
+Internal iliac artery	left	Arteria iliaca interna
+Internal iliac artery	right	Arteria iliaca interna
+Internal iliac vein	left	Vena iliaca interna
+Internal iliac vein	right	Vena iliaca interna
+Internal intercostal membrane	left	Membrana intercostalis interna
+Internal intercostal membrane	right	Membrana intercostalis interna
+Internal intercostal muscles	left	Musculi intercostales interni
+Internal intercostal muscles	right	Musculi intercostales interni
+Internal jugular vein	left	Vena jugularis interna
+Internal jugular vein	right	Vena jugularis interna
+Internal pudendal artery	left	Arteria pudendalis interna
+Internal pudendal artery	right	Arteria pudendalis interna
+Internal pudendal vein	left	Vena pudendalis interna
+Internal pudendal vein	right	Vena pudendalis interna
+Internal thoracic artery	left	Arteria thoracica interna
+Internal thoracic artery	right	Arteria thoracica interna
+Internal thoracic veins	left	Venae thoracicae internae
+Internal thoracic veins	right	Venae thoracicae internae
+Interosseous membrane of forearm	left	Membrana interossea antebrachii
+Interosseous membrane of forearm	right	Membrana interossea antebrachii
+Interosseous membrane of leg	left	Membrana interossea cruris
+Interosseous membrane of leg	right	Membrana interossea cruris
+Interosseous sacro-iliac ligament	left	Ligamentum sacroiliacum interosseum
+Interosseous sacro-iliac ligament	right	Ligamentum sacroiliacum interosseum
+Interpeduncular fossa	left	Fossa interpeduncularis
+Interpeduncular fossa	right	Fossa interpeduncularis
+Interpubic disc		Discus interpubicus
+Intersesamoid ligament	left	Ligamentum intersesamoideum
+Intersesamoid ligament	right	Ligamentum intersesamoideum
+Interspinales colli muscles	left	Musculi interspinales colli
+Interspinales colli muscles	right	Musculi interspinales colli
+Interspinales lumborum muscles	left	Musculi interspinales lumborum
+Interspinales lumborum muscles	right	Musculi interspinales lumborum
+Interspinales thoracis muscles	left	Musculi interspinales thoracis
+Interspinales thoracis muscles	right	Musculi interspinales thoracis
+Interspinous ligaments		Ligamenta interspinalia
+Intertragic incisure	left	Incisura intertragica
+Intertragic incisure	right	Incisura intertragica
+Intertransverse ligaments	left	Ligamenta intertransversaria
+Intertransverse ligaments	right	Ligamenta intertransversaria
+Intra-articular ligament of head of rib		Ligamentum intraarticulare capitis costae
+Intraparietal sulcus	left	Sulcus intraparietalis
+Intraparietal sulcus	right	Sulcus intraparietalis
+Intrarenal veins of left kidney		Venae intrarenales renis sinistri
+Intrarenal veins of right kidney		Venae intrarenales renis dextri
+Investing abdominal fascia	left	Fascia investiens abdominis
+Investing abdominal fascia	right	Fascia investiens abdominis
+Iris	left	Iris
+Iris	right	Iris
+Ischiofemoral ligament	left	Ligamentum ischiofemorale
+Ischiofemoral ligament	right	Ligamentum ischiofemorale
+Jejunum		Jejunum
+Kidney	left	Ren
+Kidney	right	Ren
+Labial commissure	left	Commissura labiorum oris
+Labial commissure	right	Commissura labiorum oris
+Lacrimal artery	left	Arteria lacrimalis
+Lacrimal artery	right	Arteria lacrimalis
+Lacrimal bone	left	Os lacrimale
+Lacrimal bone	right	Os lacrimale
+Lacrimal canaliculus	left	Canaliculus lacrimalis
+Lacrimal canaliculus	right	Canaliculus lacrimalis
+Lacrimal gland	left	Glandula lacrimalis
+Lacrimal gland	right	Glandula lacrimalis
+Lacrimal sac	left	Saccus lacrimalis
+Lacrimal sac	right	Saccus lacrimalis
+Lateral antebrachial cutaneous nerve	left	Nervus cutaneus lateralis antebrachii
+Lateral antebrachial cutaneous nerve	right	Nervus cutaneus lateralis antebrachii
+Lateral basal segmental artery of left lung		Arteria segmentalis basalis lateralis pulmonis sinistri
+Lateral basal segmental artery of right lung		Arteria segmentalis basalis lateralis pulmonis dextri
+Lateral bicipital groove	left	Sulcus bicipitalis lateralis
+Lateral bicipital groove	right	Sulcus bicipitalis lateralis
+Lateral border of foot	left	Margo lateralis pedis
+Lateral border of foot	right	Margo lateralis pedis
+Lateral border of forearm	left	Margo lateralis antebrachii
+Lateral border of forearm	right	Margo lateralis antebrachii
+Lateral circumflex femoral artery	left	Arteria circumflexa lateralis femoris
+Lateral circumflex femoral artery	right	Arteria circumflexa lateralis femoris
+Lateral circumflex femoral veins	left	Venae circumflexae latérales
+Lateral circumflex femoral veins	right	Venae circumflexae latérales
+Lateral crico-arytenoid muscle	left	Musculus cricoarytendoideus lateralis
+Lateral crico-arytenoid muscle	right	Musculus cricoarytendoideus lateralis
+Lateral cuneiform bone	left	Os cuneiforme laterale
+Lateral cuneiform bone	right	Os cuneiforme laterale
+Lateral femoral cutaneous nerve	left	Nervus cutaneus lateralis femoris
+Lateral femoral cutaneous nerve	right	Nervus cutaneus lateralis femoris
+Lateral femoral intermuscular septum	left	Septum intermusculare laterale femoris
+Lateral femoral intermuscular septum	right	Septum intermusculare laterale femoris
+Lateral geniculate body	left	Corpus geniculatum laterale
+Lateral geniculate body	right	Corpus geniculatum laterale
+Lateral head of flexor hallucis brevis	left	Caput laterale flexoris brevis hallucis
+Lateral head of flexor hallucis brevis	right	Caput laterale flexoris brevis hallucis
+Lateral head of gastrocnemius	left	Caput laterale musculi gastrocnemii
+Lateral head of gastrocnemius	right	Caput laterale musculi gastrocnemii
+Lateral head of triceps brachii	left	Caput laterale musculi tricipitis brachii
+Lateral head of triceps brachii	right	Caput laterale musculi tricipitis brachii
+Lateral intermuscular septum of arm	left	Septum intermusculare laterale brachii
+Lateral intermuscular septum of arm	right	Septum intermusculare laterale brachii
+Lateral meniscus	left	Meniscus lateralis
+Lateral meniscus	right	Meniscus lateralis
+Lateral occipital artery	left	Arteria occipitalis lateralis
+Lateral occipital artery	right	Arteria occipitalis lateralis
+Lateral occipitotemporal gyrus	left	Gyrus occipitotemporalis lateralis
+Lateral occipitotemporal gyrus	right	Gyrus occipitotemporalis lateralis
+Lateral part of longitudinal arch of foot	left	Pars lateralis arcus longitudinalis pedis
+Lateral part of longitudinal arch of foot	right	Pars lateralis arcus longitudinalis pedis
+Lateral patellar retinaculum	left	Retinaculum laterale patellae
+Lateral patellar retinaculum	right	Retinaculum laterale patellae
+Lateral pectoral nerve	left	Nervus pectoralis lateralis
+Lateral pectoral nerve	right	Nervus pectoralis lateralis
+Lateral plantar artery	left	Arteria plantaris lateralis
+Lateral plantar artery	right	Arteria plantaris lateralis
+Lateral plantar nerve	left	Nervus plantaris lateralis
+Lateral plantar nerve	right	Nervus plantaris lateralis
+Lateral plantar veins	left	Venae plantares latérales
+Lateral plantar veins	right	Venae plantares latérales
+Lateral pontine branches of basilar artery	left	Rami laterales pontis arteriae basilaris
+Lateral pontine branches of basilar artery	right	Rami laterales pontis arteriae basilaris
+Lateral process of nasal septal cartilage	left	Processus lateralis cartilaginis septi nasi
+Lateral process of nasal septal cartilage	right	Processus lateralis cartilaginis septi nasi
+Lateral rectus muscle	left	Musculus rectus lateralis bulbi oculi
+Lateral rectus muscle	right	Musculus rectus lateralis bulbi oculi
+Lateral region of abdomen	left	Regio lateralis abdominis
+Lateral region of abdomen	right	Regio lateralis abdominis
+Lateral region of neck	left	Regio lateralis colli
+Lateral region of neck	right	Regio lateralis colli
+Lateral region of thorax	left	Regio lateralis thoracis
+Lateral region of thorax	right	Regio lateralis thoracis
+Lateral retromalleolar region	left	Regio retromalleolaris lateralis regio
+Lateral retromalleolar region	right	Regio retromalleolaris lateralis regio
+Lateral sacral veins	left	Venae sacrales latérales
+Lateral sacral veins	right	Venae sacrales latérales
+Lateral segmental artery of right lung		Arteria segmentalis lateralis pulmonis dextri
+Lateral talocalcaneal ligament	left	Ligamentum talocalcaneum laterale
+Lateral talocalcaneal ligament	right	Ligamentum talocalcaneum laterale
+Lateral tarsal artery	left	Arteria tarsea lateralis
+Lateral tarsal artery	right	Arteria tarsea lateralis
+Lateral temporomandibular ligament	left	Ligamentum temporomandibulare laterale
+Lateral temporomandibular ligament	right	Ligamentum temporomandibulare laterale
+Lateral thoracic artery	left	Arteria thoracica lateralis
+Lateral thoracic artery	right	Arteria thoracica lateralis
+Lateral thoracic vein	left	Vena thoracica lateralis
+Lateral thoracic vein	right	Vena thoracica lateralis
+Lateral thyrohyoid ligament	left	Ligamentum thyreohyoideum laterale
+Lateral thyrohyoid ligament	right	Ligamentum thyreohyoideum laterale
+Lateral vein of right lung		Vena lateralis pulmonis dextri
+Lateral ventricle	left	Ventriculus lateralis
+Lateral ventricle	right	Ventriculus lateralis
+Latissimus dorsi muscle	left	Musculus latissimus dorsi
+Latissimus dorsi muscle	right	Musculus latissimus dorsi
+Left anterior lateral segment of liver (III)		Segmentum anterius laterale sinistrum hepatis (III)
+Left brachiocephalic vein		Vena brachiocephalica sinistra
+Left colic artery		Arteria colica sinistra
+Left common carotid artery		Carotis communis sinistra
+Left coronary artery		Arteria coronaria sinistra
+Left coronary leaflet		Valvula coronaria sinistra aortae
+Left gastric artery		Arteria gastrica sinistra
+Left gastro-omental vein		Vena gastroomentalis sinistra
+Left inferior lobar bronchus		Bronchus lobaris inferior sinister
+Left inferior pulmonary vein		Vena pulmonalis sinistra inferior
+Left main bronchus		Bronchus principalis sinister
+Left posterior lateral segment of liver (II)		Segmentum posterius laterale sinistrum hepatis (II)
+Left pulmonary artery		Arteria pulmonalis sinistra
+Left renal vein		Vena renalis sinistra
+Left semilunar leaflet of pulmonary valve		Valvula semilunaris sinistra valvae trunci pulmonalis
+Left subclavian artery		Arteria subclavia sinistra
+Left subcostal vein		Vena subcostalis sinistra
+Left superior lobar bronchus		Bronchus lobaris superior sinister
+Left superior pulmonary vein		Vena pulmonalis sinistra superior
+Left ventricle		Ventriculus sinister
+Lens	left	Lens
+Lens	right	Lens
+Lentiform nucleus	left	Nucleus lentiformis
+Lentiform nucleus	right	Nucleus lentiformis
+Lesser omentum		Omentum minus
+Lesser supraclavicular fossa	left	Fossa supraclavicularis minor
+Lesser supraclavicular fossa	right	Fossa supraclavicularis minor
+Levator anguli oris	left	Levator anguli oris
+Levator anguli oris	right	Levator anguli oris
+Levator labii superioris	left	Levator labii superioris
+Levator labii superioris	right	Levator labii superioris
+Levator nasolabialis	left	Levator nasolabialis
+Levator nasolabialis	right	Levator nasolabialis
+Levator palpebrae superioris	left	Levator palpebrae superioris
+Levator palpebrae superioris	right	Levator palpebrae superioris
+Levator scapulae	left	Levator scapulae
+Levator scapulae	right	Levator scapulae
+Levatores breves costarum	left	Levatores breves costarum
+Levatores breves costarum	right	Levatores breves costarum
+Levatores longi costarum	left	Levatores longi costarum
+Levatores longi costarum	right	Levatores longi costarum
+Ligament of head of femur	left	Ligamentum capitis femoris
+Ligament of head of femur	right	Ligamentum capitis femoris
+Ligamenta flava		Ligamenta flava
+Linea alba		Linea alba
+Lingual gyrus	left	Gyrus lingualis
+Lingual gyrus	right	Gyrus lingualis
+Lingual nerve	left	Nervus lingualis
+Lingual nerve	right	Nervus lingualis
+Liver		Hepar
+Lobule of auricle	left	Lobulus auriculae
+Lobule of auricle	right	Lobulus auriculae
+Long head of biceps brachii	left	Caput longum musculi bicipitis brachii
+Long head of biceps brachii	right	Caput longum musculi bicipitis brachii
+Long head of biceps femoris	left	Caput longum musculi bicipitis femoris
+Long head of biceps femoris	right	Caput longum musculi bicipitis femoris
+Long head of triceps brachii	left	Caput longum musculi tricipitis brachii
+Long head of triceps brachii	right	Caput longum musculi tricipitis brachii
+Long plantar ligament	left	Ligamentum plantare longum
+Long plantar ligament	right	Ligamentum plantare longum
+Long posterior ciliary arteries	left	Arteriae ciliares posteriores longae
+Long posterior ciliary arteries	right	Arteriae ciliares posteriores longae
+Long thoracic nerve	left	Nervus thoracicus longus
+Long thoracic nerve	right	Nervus thoracicus longus
+Longissimus capitis muscle	left	Musculus longissimus capitis
+Longissimus capitis muscle	right	Musculus longissimus capitis
+Longissimus colli muscle	left	Musculus longissimus colli
+Longissimus colli muscle	right	Musculus longissimus colli
+Longissimus thoracis muscle	left	Musculus longissimus thoracis
+Longissimus thoracis muscle	right	Musculus longissimus thoracis
+Longus capitis muscle	left	Musculus longus capitis
+Longus capitis muscle	right	Musculus longus capitis
+Lower canine	left	Dens caninus inferioris
+Lower canine	right	Dens caninus inferioris
+Lower first molar tooth	left	Dens molaris primus inferioris
+Lower first molar tooth	right	Dens molaris primus inferioris
+Lower first premolar	left	Dens premolaris primus inferioris
+Lower first premolar	right	Dens premolaris primus inferioris
+Lower lateral incisor	left	Dens incisivus lateralis inferioris
+Lower lateral incisor	right	Dens incisivus lateralis inferioris
+Lower medial incisor	left	Dens incisivus medialis inferioris
+Lower medial incisor	right	Dens incisivus medialis inferioris
+Lower second molar tooth	left	Dens molaris secundus inferioris
+Lower second molar tooth	right	Dens molaris secundus inferioris
+Lower second premolar	left	Dens premolaris secundus inferioris
+Lower second premolar	right	Dens premolaris secundus inferioris
+Lumbar arteries	left	Arteriae lumbales
+Lumbar branch of iliolumbar artery	right	Ramus lumbalis arteriae iliolumbalis
+Lumbar region	left	Regio lumbalis
+Lumbar region	right	Regio lumbalis
+Lumbar veins	left	Venae lumbales
+Lumbar veins	right	Venae lumbales
+Lumbrical muscles of foot	left	Musculi lumbricales pedis
+Lumbrical muscles of foot	right	Musculi lumbricales pedis
+Lumbrical muscles of hand	left	Musculi lumbricales manus
+Lumbrical muscles of hand	right	Musculi lumbricales manus
+Lunate bone	left	Os lunatum
+Lunate bone	right	Os lunatum
+Major alar cartilage	left	Cartilago alaris major
+Major alar cartilage	right	Cartilago alaris major
+Malleus	left	Malleus
+Malleus	right	Malleus
+Mamillary body	right	Corpus mammillare
+Mammary region	left	Regio mammaria
+Mammary region	right	Regio mammaria
+Mandible		Mandibula
+Manubrium of sternum		Manubrium sterni
+Masseteric fascia	left	Fascia masseterica
+Masseteric fascia	right	Fascia masseterica
+Mastoid region	left	Regio mastoidea
+Mastoid region	right	Regio mastoidea
+Maxilla	left	Maxilla
+Maxilla	right	Maxilla
+Maxillary artery	left	Arteria maxillaris
+Maxillary artery	right	Arteria maxillaris
+Maxillary nerve	left	Nervus maxillaris
+Maxillary nerve	right	Nervus maxillaris
+Maxillary veins	left	Venae maxillares
+Maxillary veins	right	Venae maxillares
+Medial antebrachial cutaneous nerve	left	Nervus cutaneus medialis antebrachii
+Medial antebrachial cutaneous nerve	right	Nervus cutaneus medialis antebrachii
+Medial basal segmental artery of left lung		Arteria segmentalis basalis medialis pulmonis sinistri
+Medial basal segmental artery of right lung		Arteria segmentalis basalis medialis pulmonis dextri
+Medial bicipital groove	left	Sulcus bicipitalis medialis
+Medial bicipital groove	right	Sulcus bicipitalis medialis
+Medial border of foot	left	Margo medialis pedis
+Medial border of foot	right	Margo medialis pedis
+Medial border of forearm	left	Margo medialis antebrachii
+Medial border of forearm	right	Margo medialis antebrachii
+Medial brachial cutaneous nerve	left	Nervus cutaneus medialis brachii
+Medial brachial cutaneous nerve	right	Nervus cutaneus medialis brachii
+Medial circumflex femoral artery	left	Arteria circumflexa medialis femoris
+Medial circumflex femoral artery	right	Arteria circumflexa medialis femoris
+Medial circumflex femoral veins	left	Venae circumflexae mediales
+Medial circumflex femoral veins	right	Venae circumflexae mediales
+Medial crural cutaneous branches of saphenous nerve	left	Rami cutanei mediales cruris nervi sapheni
+Medial crural cutaneous branches of saphenous nerve	right	Rami cutanei mediales cruris nervi sapheni
+Medial cuneiform bone	left	Os cuneiforme mediale
+Medial cuneiform bone	right	Os cuneiforme mediale
+Medial dorsal cutaneous nerve of foot	left	Nervus cutaneus medialis dorsalis pedis
+Medial dorsal cutaneous nerve of foot	right	Nervus cutaneus medialis dorsalis pedis
+Medial femoral intermuscular septum	left	Septum intermusculare mediale femoris
+Medial femoral intermuscular septum	right	Septum intermusculare mediale femoris
+Medial geniculate body	left	Corpus geniculatum mediale
+Medial geniculate body	right	Corpus geniculatum mediale
+Medial head of flexor hallucis brevis	left	Caput mediale flexoris brevis hallucis
+Medial head of flexor hallucis brevis	right	Caput mediale flexoris brevis hallucis
+Medial head of gastrocnemius	left	Caput mediale musculi gastrocnemii
+Medial head of gastrocnemius	right	Caput mediale musculi gastrocnemii
+Medial head of triceps brachii	left	Caput mediale musculi tricipitis caput brachii
+Medial head of triceps brachii	right	Caput mediale musculi tricipitis caput brachii
+Medial intermuscular septum of arm	left	Septum intermusculare mediale brachii
+Medial intermuscular septum of arm	right	Septum intermusculare mediale brachii
+Medial meniscus	left	Meniscus medialis
+Medial meniscus	right	Meniscus medialis
+Medial occipital artery	left	Arteria occipitalis medialis
+Medial occipital artery	right	Arteria occipitalis medialis
+Medial patellar retinaculum	left	Retinaculum mediale patellae
+Medial patellar retinaculum	right	Retinaculum mediale patellae
+Medial plantar artery	left	Arteria plantaris medialis
+Medial plantar artery	right	Arteria plantaris medialis
+Medial plantar nerve	left	Nervus plantaris medialis
+Medial plantar nerve	right	Nervus plantaris medialis
+Medial plantar veins	left	Venae plantares mediales
+Medial plantar veins	right	Venae plantares mediales
+Medial pontine branches of basilar artery	left	Rami mediales pontis arteriae basilaris
+Medial pontine branches of basilar artery	right	Rami mediales pontis arteriae basilaris
+Medial pterygoid muscle	left	Musculus pterygoideus medialis
+Medial pterygoid muscle	right	Musculus pterygoideus medialis
+Medial rectus muscle	left	Musculus rectus medialis
+Medial rectus muscle	right	Musculus rectus medialis
+Medial retromalleolar region	left	Regio retromalleolaris medialis regio
+Medial retromalleolar region	right	Regio retromalleolaris medialis regio
+Medial segmental artery of right lung		Arteria segmentalis medialis pulmonis dextri
+Medial sural cutaneous nerve	left	Nervus cutaneus medialis surae
+Medial sural cutaneous nerve	right	Nervus cutaneus medialis surae
+Medial talocalcaneal ligament	left	Ligamentum talocalcaneum mediale
+Medial talocalcaneal ligament	right	Ligamentum talocalcaneum mediale
+Medial vein of right lung		Vena medialis pulmonalis dextri
+Median antebrachial vein	left	Vena mediana antebrachii
+Median antebrachial vein	right	Vena mediana antebrachii
+Median cubital vein	left	Vena mediana cubiti
+Median cubital vein	right	Vena mediana cubiti
+Median nerve	left	Nervus medianus
+Median nerve	right	Nervus medianus
+Median sacral artery		Arteria sacralis mediana
+Medulla oblongata	left	Medulla oblongata
+Medulla oblongata	right	Medulla oblongata
+Meningeal branch of maxillary nerve	left	Ramus meningeus nervi maxillaris
+Meningeal branch of maxillary nerve	right	Ramus meningeus nervi maxillaris
+Meniscopatellar ligament	left	Ligamentum meniscopatellare
+Meniscopatellar ligament	right	Ligamentum meniscopatellare
+Mental branch of inferior alveolar artery	left	Ramus mentalis arteriae alveolaris inferioris
+Mental branch of inferior alveolar artery	right	Ramus mentalis arteriae alveolaris inferioris
+Mental nerve	left	Nervus mentalis
+Mental nerve	right	Nervus mentalis
+Mental region	left	Regio mentalis
+Mental region	right	Regio mentalis
+Mentalis muscle	left	Musculus mentalis
+Mentalis muscle	right	Musculus mentalis
+Mentolabial sulcus	left	Sulcus mentolabialis
+Mentolabial sulcus	right	Sulcus mentolabialis
+Meso-appendix		Mesoappendix
+Mesocolic taenia		Taenia mesocolica
+Mesocolon		Mesocolon
+Metatarsal region	left	Regio metatarsea
+Metatarsal region	right	Regio metatarsea
+Midbrain	left	Mesencephalon
+Midbrain	right	Mesencephalon
+Middle cardiac vein		Vena media cordis interventricularis inferior
+Middle colic vein		Vena colica media
+Middle collateral artery	left	Arteria collateralis media
+Middle collateral artery	right	Arteria collateralis media
+Middle frontal gyrus	left	Gyrus frontalis medius
+Middle frontal gyrus	right	Gyrus frontalis medius
+Middle glenohumeral ligament	left	Ligamentum glenohumerale medium
+Middle glenohumeral ligament	right	Ligamentum glenohumerale medium
+Middle layer of thoracolumbar fascia	left	Lamina media fasciae thoracolumbaris
+Middle layer of thoracolumbar fascia	right	Lamina media fasciae thoracolumbaris
+Middle lobar artery of right lung		Arteria lobaris media pulmonis dextri
+Middle lobe of right lung		Lobus medius pulmonis dextri
+Middle meningeal artery	left	Arteria meningea media
+Middle meningeal artery	right	Arteria meningea media
+Middle phalanx of fifth finger of foot	left	Phalanx media quintum digitorum pedis
+Middle phalanx of fifth finger of foot	right	Phalanx media quintum digitorum pedis
+Middle phalanx of fourth finger of foot	left	Phalanx media quartum digitorum pedis
+Middle phalanx of fourth finger of foot	right	Phalanx media quartum digitorum pedis
+Middle phalanx of second finger of foot	left	Phalanx media secundum digitorum pedis
+Middle phalanx of second finger of foot	right	Phalanx media secundum digitorum pedis
+Middle phalanx of third finger of foot	left	Phalanx media tertium digitorum pedis
+Middle phalanx of third finger of foot	right	Phalanx media tertium digitorum pedis
+Middle pharyngeal constrictor	left	Constrictor medius pharyngis
+Middle pharyngeal constrictor	right	Constrictor medius pharyngis
+Middle temporal gyrus	left	Gyrus temporalis medius
+Middle temporal gyrus	right	Gyrus temporalis medius
+Middle trunk of brachial plexus	left	Truncus medius plexus brachialis
+Middle trunk of brachial plexus	right	Truncus medius plexus brachialis
+Motor nucleus of facial nerve	left	Nucleus nervi facialis
+Motor nucleus of facial nerve	right	Nucleus nervi facialis
+Motor root of trigeminal nerve	left	Radix motoria nervi trigemini
+Motor root of trigeminal nerve	right	Radix motoria nervi trigemini
+Multifidus colli muscle	left	Musculus multifidus colli
+Multifidus colli muscle	right	Musculus multifidus colli
+Multifidus lumborum muscle	left	Musculus multifidus lumborum
+Multifidus lumborum muscle	right	Musculus multifidus lumborum
+Multifidus thoracis muscle	left	Musculus multifidus thoracis
+Multifidus thoracis muscle	right	Musculus multifidus thoracis
+Muscular branches of axillary nerve	left	Rami musculares nervi axillaris
+Muscular branches of axillary nerve	right	Rami musculares nervi axillaris
+Muscular branches of deep fibular nerve	left	Rami musculares nervi fibularis profundi
+Muscular branches of deep fibular nerve	right	Rami musculares nervi fibularis profundi
+Muscular branches of median nerve	left	Rami musculares nervi mediani
+Muscular branches of median nerve	right	Rami musculares nervi mediani
+Muscular branches of radial nerve	left	Rami musculares nervi radialis
+Muscular branches of radial nerve	right	Rami musculares nervi radialis
+Muscular branches of ulnar nerve	left	Rami musculares nervi ulnaris
+Muscular branches of ulnar nerve	right	Rami musculares nervi ulnaris
+Muscular triangle	left	Trigonum musculare
+Muscular triangle	right	Trigonum musculare
+Musculocutaneous nerve	left	Nervus musculocutaneus
+Musculocutaneous nerve	right	Nervus musculocutaneus
+Musculophrenic artery	left	Arteria musculoohrenica
+Musculophrenic artery	right	Arteria musculoohrenica
+Musculophrenic veins	left	Venae musculophrenicae
+Musculophrenic veins	right	Venae musculophrenicae
+Mylohyoid branch of inferior alveolar artery	left	Ramus mylohyoideus arteriae alveolaris inferioris
+Mylohyoid branch of inferior alveolar artery	right	Ramus mylohyoideus arteriae alveolaris inferioris
+Mylohyoid muscle	left	Musculus mylohyoideus
+Mylohyoid muscle	right	Musculus mylohyoideus
+Nail plate	left	Lamina unguis
+Nail plate	right	Lamina unguis
+Nasal bone	left	Os nasale
+Nasal bone	right	Os nasale
+Nasal region	left	Regio nasalis
+Nasal region	right	Regio nasalis
+Nasal septal cartilage		Cartilago septi nasi
+Nasalis muscle	left	Musculus nasalis
+Nasalis muscle	right	Musculus nasalis
+Nasolabial sulcus	left	Sulcus nasolabialis
+Nasolabial sulcus	right	Sulcus nasolabialis
+Nasolacrimal duct	left	Ductus nasolacrimalis
+Nasolacrimal duct	right	Ductus nasolacrimalis
+Navicular bone	left	Os naviculare
+Navicular bone	right	Os naviculare
+Nerve to mylohyoid muscle	left	Nervus mylohyoideus
+Nerve to mylohyoid muscle	right	Nervus mylohyoideus
+Neurohypophysis		Neurohypophysis
+Ninth rib	left	Nona costa
+Ninth rib	right	Nona costa
+Nuchal ligament		Ligamentum nuchae
+Nucleus ambiguus	left	Nucleus ambiguus
+Nucleus ambiguus	right	Nucleus ambiguus
+Nucleus of abducens nerve	left	Nucleus nervi abducentis
+Nucleus of abducens nerve	right	Nucleus nervi abducentis
+Nucleus of accessory nerve	left	Nucleus nervi accessorii
+Nucleus of accessory nerve	right	Nucleus nervi accessorii
+Nucleus of hypoglossal nerve	left	Nucleus nervi hypoglossi
+Nucleus of hypoglossal nerve	right	Nucleus nervi hypoglossi
+Nucleus of oculomotor nerve	left	Nucleus nervi oculomotorius nucleus
+Nucleus of oculomotor nerve	right	Nucleus nervi oculomotorius nucleus
+Nucleus of solitary tract	left	Nucleus tractus solitarii
+Nucleus of solitary tract	right	Nucleus tractus solitarii
+Nucleus of trochlear nerve	left	Nucleus nervi trochlearis
+Nucleus of trochlear nerve	right	Nucleus nervi trochlearis
+Oblique cord	left	Chorda obliqua
+Oblique cord	right	Chorda obliqua
+Oblique head of adductor hallucis	left	Caput obliquum adductoris hallucis
+Oblique head of adductor hallucis	right	Caput obliquum adductoris hallucis
+Oblique head of adductor pollicis	left	Caput obliquum adductoris pollicis
+Oblique head of adductor pollicis	right	Caput obliquum adductoris pollicis
+Oblique part of cricothyroid muscle	left	Pars obliqua musculi cricothyreoidei
+Oblique part of cricothyroid muscle	right	Pars obliqua musculi cricothyreoidei
+Oblique popliteal ligament	left	Ligamentum popliteum obliquum
+Oblique popliteal ligament	right	Ligamentum popliteum obliquum
+Obliquus inferior capitis muscle	left	Musculus obliquus inferior capitis
+Obliquus inferior capitis muscle	right	Musculus obliquus inferior capitis
+Obliquus superior capitis muscle	left	Musculus obliquus superior capitis
+Obliquus superior capitis muscle	right	Musculus obliquus superior capitis
+Obturator externus	left	Obturator externus
+Obturator externus	right	Obturator externus
+Obturator internus	left	Obturator internus
+Obturator internus	right	Obturator internus
+Obturator membrane	left	Membrana obturatoria
+Obturator membrane	right	Membrana obturatoria
+Obturator nerve	left	Nervus obturatorius
+Obturator nerve	right	Nervus obturatorius
+Occipital artery	left	Arteria occipitalis
+Occipital artery	right	Arteria occipitalis
+Occipital bone		Os occipitale
+Occipital pole	left	Polus occipitalis
+Occipital pole	right	Polus occipitalis
+Occipital region	left	Regio occipitalis
+Occipital region	right	Regio occipitalis
+Occipital vein	left	Vena occipitalis
+Occipital vein	right	Vena occipitalis
+Occipitalis muscle	left	Musculus occipitalis
+Occipitalis muscle	right	Musculus occipitalis
+Oculomotor nerve (III)	left	Nervus oculomotorius (III)
+Oculomotor nerve (III)	right	Nervus oculomotorius (III)
+Oesophagus		Oesophagus
+Olfactory nerve (I)	left	Nervus olfactorius (I)
+Olfactory nerve (I)	right	Nervus olfactorius (I)
+Olfactory sulcus	left	Sulcus olfactorius
+Olfactory sulcus	right	Sulcus olfactorius
+Olive	left	Oliva
+Olive	right	Oliva
+Omental taenia		Taenia omentalis
+Omohyoid muscle	left	Musculus omohyoideus
+Omohyoid muscle	right	Musculus omohyoideus
+Opercular part of inferior frontal gyrus	left	Pars opercularis gyri frontalis inferioris
+Opercular part of inferior frontal gyrus	right	Pars opercularis gyri frontalis inferioris
+Ophthalmic artery	left	Arteria ophthalmica
+Ophthalmic artery	right	Arteria ophthalmica
+Opponens digiti minimi muscle of hand	left	Musculus opponens digiti minimi manus
+Opponens digiti minimi muscle of hand	right	Musculus opponens digiti minimi manus
+Opponens pollicis muscle	left	Musculus opponens pollicis
+Opponens pollicis muscle	right	Musculus opponens pollicis
+Optic chiasm	left	Chiasma opticum
+Optic chiasm	right	Chiasma opticum
+Optic nerve (II)	left	Nervus opticus (II)
+Optic nerve (II)	right	Nervus opticus (II)
+Optic tract	left	Tractus opticus
+Optic tract	right	Tractus opticus
+Oral region	left	Regio oralis
+Oral region	right	Regio oralis
+Orbicularis oris muscle	left	Musculus orbicularis oris
+Orbicularis oris muscle	right	Musculus orbicularis oris
+Orbital gyri	left	Gyri orbitales
+Orbital gyri	right	Gyri orbitales
+Orbital part of orbicularis oculi	left	Pars orbitalis musculi orbicularis oculi
+Orbital part of orbicularis oculi	right	Pars orbitalis musculi orbicularis oculi
+Orbital region	left	Regio orbitalis
+Orbital region	right	Regio orbitalis
+Orbitofrontal branches of anterior cerebral artery	left	Rami orbitofrontales arteriae cerebri anterior
+Orbitofrontal branches of anterior cerebral artery	right	Rami orbitofrontales arteriae cerebri anterior
+Palatine bone	left	Os palatinum
+Palatine bone	right	Os palatinum
+Palatopharyngeus muscle	left	Musculus palatopharyngeus
+Palatopharyngeus muscle	right	Musculus palatopharyngeus
+Palm	left	Palma
+Palm	right	Palma
+Palmar aponeurosis	left	Aponeurosis palmaris
+Palmar aponeurosis	right	Aponeurosis palmaris
+Palmar branch of median nerve	left	Ramus palmaris nervi mediani
+Palmar branch of median nerve	right	Ramus palmaris nervi mediani
+Palmar branch of ulnar nerve	left	Ramus palmaris nervi ulnaris
+Palmar branch of ulnar nerve	right	Ramus palmaris nervi ulnaris
+Palmar capitohamate ligament	left	Ligamentum capitohamatum palmare
+Palmar capitohamate ligament	right	Ligamentum capitohamatum palmare
+Palmar carpal branch of radial artery	left	Ramus carpeus palmaris arteriae
+Palmar carpal branch of radial artery	right	Ramus carpeus palmaris arteriae
+Palmar carpometacarpal ligaments	left	Ligamenta carpometacarpea palmaria
+Palmar carpometacarpal ligaments	right	Ligamenta carpometacarpea palmaria
+Palmar digital veins	left	Venae digitales palmares
+Palmar digital veins	right	Venae digitales palmares
+Palmar interossei muscles	left	Musculi interossei palmares
+Palmar interossei muscles	right	Musculi interossei palmares
+Palmar interphalangeal ligaments	left	Ligamenta interphalangea palmaria
+Palmar interphalangeal ligaments	right	Ligamenta interphalangea palmaria
+Palmar lunotriquetral ligament	left	Ligamentum lunotriquetrum palmare
+Palmar lunotriquetral ligament	right	Ligamentum lunotriquetrum palmare
+Palmar metacarpal arteries	left	Arteriae metacarpeae palmares
+Palmar metacarpal arteries	right	Arteriae metacarpeae palmares
+Palmar metacarpal ligaments	left	Ligamenta metacarpea palmaria
+Palmar metacarpal ligaments	right	Ligamenta metacarpea palmaria
+Palmar radio-ulnar ligament	left	Ligamentum radioulnare palmare
+Palmar radio-ulnar ligament	right	Ligamentum radioulnare palmare
+Palmar scaphotriquetral ligament	left	Ligamentum scaphotriquetrum palmare
+Palmar scaphotriquetral ligament	right	Ligamentum scaphotriquetrum palmare
+Palmar trapezoideocapitate ligament	left	Ligamentum trapezoideocapitatum palmare
+Palmar trapezoideocapitate ligament	right	Ligamentum trapezoideocapitatum palmare
+Palmaris longus muscle	left	Musculus palmaris longus
+Palmaris longus muscle	right	Musculus palmaris longus
+Palpebral part of orbicularis oculi	left	Pars palpebralis musculi orbicularis oculi
+Palpebral part of orbicularis oculi	right	Pars palpebralis musculi orbicularis oculi
+Pancreas		Pancreas
+Pancreatic duct		Ductus pancreaticus
+Paracentral sulcus	left	Sulcus paracentralis
+Paracentral sulcus	right	Sulcus paracentralis
+Parietal bone	left	Os parietale
+Parietal bone	right	Os parietale
+Parietal region	left	Regio parietalis
+Parietal region	right	Regio parietalis
+Parieto-occipital artery	left	Arteria paritooccipitale
+Parieto-occipital artery	right	Arteria paritooccipitale
+Parieto-occipital sulcus	left	Sulcus parietooccipitalis
+Parieto-occipital sulcus	right	Sulcus parietooccipitalis
+Parotid duct	left	Ductus parotideus
+Parotid duct	right	Ductus parotideus
+Parotid gland	left	Glandula parotidea
+Parotid gland	right	Glandula parotidea
+Patella	left	Patella
+Patella	right	Patella
+Patellar anastomosis	left	Rete patellare
+Patellar anastomosis	right	Rete patellare
+Pectineus muscle	left	Musculus pectineus
+Pectineus muscle	right	Musculus pectineus
+Pectoral branches of thoraco-acromial artery	left	Rami pectorales arteriae thoracoacromialis
+Pectoral branches of thoraco-acromial artery	right	Rami pectorales arteriae thoracoacromialis
+Pectoral fascia	left	Fascia pectoralis
+Pectoral fascia	right	Fascia pectoralis
+Pectoral region	left	Regio pectoralis
+Pectoral region	right	Regio pectoralis
+Pectoralis minor muscle	left	Musculus pectoralis minor
+Pectoralis minor muscle	right	Musculus pectoralis minor
+Perforating branches of plantar metatarsal arteries	left	Rami perforantes arteriarum metatarsearum plantarium
+Perforating branches of plantar metatarsal arteries	right	Rami perforantes arteriarum metatarsearum plantarium
+Perforating femoral arteries	left	Arteriae perforantes femoris
+Perforating femoral arteries	right	Arteriae perforantes femoris
+Perforating veins	left	Venae perforantes
+Perforating veins	right	Venae perforantes
+Pericallosal artery	left	Arteria pericallosa
+Pericallosal artery	right	Arteria pericallosa
+Philtrum	left	Philtrum
+Philtrum	right	Philtrum
+Pineal gland		Glandula pinealis
+Piriformis fascia	left	Fascia musculi piriformis
+Piriformis fascia	right	Fascia musculi piriformis
+Piriformis muscle	left	Musculus piriformis
+Piriformis muscle	right	Musculus piriformis
+Pisiform bone	left	Os pisiforme
+Pisiform bone	right	Os pisiforme
+Pisohamate ligament	left	Ligamentum pisohamatum
+Pisohamate ligament	right	Ligamentum pisohamatum
+Pisometacarpal ligament	left	Ligamentum pisometacarpeum
+Pisometacarpal ligament	right	Ligamentum pisometacarpeum
+Pisotriquetral ligament	left	Ligamentum pisotriquetrum
+Pisotriquetral ligament	right	Ligamentum pisotriquetrum
+Plantar aponeurosis	left	Aponeurosis plantaris
+Plantar aponeurosis	right	Aponeurosis plantaris
+Plantar arch	left	Arcus plantaris
+Plantar arch	right	Arcus plantaris
+Plantar calcaneocuboid ligament	left	Ligamentum calcaneocuboideum plantare
+Plantar calcaneocuboid ligament	right	Ligamentum calcaneocuboideum plantare
+Plantar cuneocuboid ligament	left	Ligamentum cuneocuboideum plantare
+Plantar cuneocuboid ligament	right	Ligamentum cuneocuboideum plantare
+Plantar cuneonavicular ligaments	left	Ligamenta cuneonavicularia plantaria
+Plantar cuneonavicular ligaments	right	Ligamenta cuneonavicularia plantaria
+Plantar digital veins	left	Venae digitales plantares
+Plantar digital veins	right	Venae digitales plantares
+Plantar intercuneiform ligaments	left	Ligamenta intercuneiformia plantaria
+Plantar intercuneiform ligaments	right	Ligamenta intercuneiformia plantaria
+Plantar interossei muscles	left	Musculi interossei plantares
+Plantar interossei muscles	right	Musculi interossei plantares
+Plantar interphalangeal ligaments	left	Ligamenta interphalangea plantaria
+Plantar interphalangeal ligaments	right	Ligamenta interphalangea plantaria
+Plantar metatarsal arteries	left	Arteriae metatarseae plantares
+Plantar metatarsal arteries	right	Arteriae metatarseae plantares
+Plantar metatarsal ligaments	left	Ligamenta metatarsea plantaria
+Plantar metatarsal ligaments	right	Ligamenta metatarsea plantaria
+Plantar metatarsal veins	left	Venae metatarseae plantares
+Plantar metatarsal veins	right	Venae metatarseae plantares
+Plantar metatarsophalangeal ligaments	left	Ligamenta metatarsophalangea plantaria
+Plantar metatarsophalangeal ligaments	right	Ligamenta metatarsophalangea plantaria
+Plantar surfaces of digits of foot	left	Facies plantares digitorum
+Plantar surfaces of digits of foot	right	Facies plantares digitorum
+Plantar tarsometatarsal ligaments	left	Ligamenta tarsometatarsea plantaria
+Plantar tarsometatarsal ligaments	right	Ligamenta tarsometatarsea plantaria
+Plantar venous arch	left	Arcus venosus plantaris
+Plantar venous arch	right	Arcus venosus plantaris
+Plantaris muscle	left	Musculus plantaris
+Plantaris muscle	right	Musculus plantaris
+Platysma	left	Platysma
+Platysma	right	Platysma
+Pons	left	Pons
+Pons	right	Pons
+Popliteal artery	left	Arteria poplitea
+Popliteal artery	right	Arteria poplitea
+Popliteal fascia	left	Fascia poplitea
+Popliteal fascia	right	Fascia poplitea
+Popliteal fossa	left	Fossa poplitea
+Popliteal fossa	right	Fossa poplitea
+Popliteal vein	left	Vena poplitea
+Popliteal vein	right	Vena poplitea
+Popliteofibular ligament	left	Ligamentum popliteofibulare
+Popliteofibular ligament	right	Ligamentum popliteofibulare
+Popliteus muscle	left	Musculus popliteus
+Popliteus muscle	right	Musculus popliteus
+Postcentral gyrus	left	Gyrus postcentralis
+Postcentral gyrus	right	Gyrus postcentralis
+Postcentral sulcus	left	Sulcus postcentralis
+Postcentral sulcus	right	Sulcus postcentralis
+Posterior antebrachial cutaneous nerve	left	Nervus cutaneus posterior antebrachii
+Posterior antebrachial cutaneous nerve	right	Nervus cutaneus posterior antebrachii
+Posterior auricular groove	left	Sulcus posterior auriculae
+Posterior auricular groove	right	Sulcus posterior auriculae
+Posterior auricular vein	left	Vena auricularis posterior
+Posterior auricular vein	right	Vena auricularis posterior
+Posterior basal segmental artery of left lung		Arteria segmentalis basalis posterior pulmonis sinistri
+Posterior basal segmental artery of right lung		Arteria segmentalis basalis posterior pulmonis dextri
+Posterior belly of digastric muscle	left	Venter posterior musculi digastrici
+Posterior belly of digastric muscle	right	Venter posterior musculi digastrici
+Posterior branch of medial antebrachial cutaneous nerve	left	Ramus posterior nervi cutanei medialis antebrachii
+Posterior branch of medial antebrachial cutaneous nerve	right	Ramus posterior nervi cutanei medialis antebrachii
+Posterior branch of obturator nerve	left	Ramus posterior nervi obturatorii
+Posterior branch of obturator nerve	right	Ramus posterior nervi obturatorii
+Posterior branch of renal artery	right	Ramus posterior arteriae renalis
+Posterior cerebral artery	left	Arteria cerebri posterior
+Posterior cerebral artery	right	Arteria cerebri posterior
+Posterior circumflex humeral artery	left	Arteria circumflexa posterior humeri
+Posterior circumflex humeral artery	right	Arteria circumflexa posterior humeri
+Posterior circumflex humeral vein	left	Vena circumflexa posterior humeri
+Posterior circumflex humeral vein	right	Vena circumflexa posterior humeri
+Posterior cochlear nucleus	left	Nucleus cochlearis posterior
+Posterior cochlear nucleus	right	Nucleus cochlearis posterior
+Posterior commissure		Commissura posterior
+Posterior communicating artery	left	Arteria communicans posterior
+Posterior communicating artery	right	Arteria communicans posterior
+Posterior cord of brachial plexus	left	Fasciculus posterior plexus brachialis
+Posterior cord of brachial plexus	right	Fasciculus posterior plexus brachialis
+Posterior crico-arytenoid muscle	left	Musculus cricoarytenoideus posterior
+Posterior crico-arytenoid muscle	right	Musculus cricoarytenoideus posterior
+Posterior cruciate ligament	left	Ligamentum decussatum posterius
+Posterior cruciate ligament	right	Ligamentum decussatum posterius
+Posterior deep temporal artery	left	Arteria temporalis profunda posterior
+Posterior deep temporal artery	right	Arteria temporalis profunda posterior
+Posterior division of inferior trunk of brachial plexus	left	Divisio posterior trunci inferioris plexus brachialis
+Posterior division of inferior trunk of brachial plexus	right	Divisio posterior trunci inferioris plexus brachialis
+Posterior division of internal iliac artery	left	Divisio posterior arteriae iliacae internaecus
+Posterior division of internal iliac artery	right	Divisio posterior arteriae iliacae internaecus
+Posterior division of mandibular nerve	left	Divisio posterior nervi mandibularis
+Posterior division of mandibular nerve	right	Divisio posterior nervi mandibularis
+Posterior division of middle trunk of brachial plexus	left	Divisio posterior trunci medii plexus brachialis
+Posterior division of middle trunk of brachial plexus	right	Divisio posterior trunci medii plexus brachialis
+Posterior division of retromandibular vein	left	Divisio posterior venae retromandibularis
+Posterior division of retromandibular vein	right	Divisio posterior venae retromandibularis
+Posterior division of superior trunk of brachial plexus	left	Divisio posterior trunci superioris plexus brachialis
+Posterior division of superior trunk of brachial plexus	right	Divisio posterior trunci superioris plexus brachialis
+Posterior ethmoidal artery	left	Arteria ethmoidea posterior
+Posterior ethmoidal artery	right	Arteria ethmoidea posterior
+Posterior inferior cerebellar artery	left	Arteria cerebelli inferior posterior
+Posterior inferior cerebellar artery	right	Arteria cerebelli inferior posterior
+Posterior intercavernous sinus		Sinus intercavernosus posterior
+Posterior intercostal arteries	right	Arteriae intercostales posteriores
+Posterior intermuscular septum of leg	left	Septum intermusculare posterius cruris
+Posterior intermuscular septum of leg	right	Septum intermusculare posterius cruris
+Posterior interosseous nerve of forearm	left	Nervus interosseus posterior antebrachii
+Posterior interosseous nerve of forearm	right	Nervus interosseus posterior antebrachii
+Posterior lateral segment of liver (VII)		Segmentum posterius laterale dextrum hepatis (VII)
+Posterior layer of thoracolumbar fascia	left	Lamina posterior fasciae thoracolumbaris
+Posterior layer of thoracolumbar fascia	right	Lamina posterior fasciae thoracolumbaris
+Posterior leaflet of left atrioventricular valve		Cuspis posterior valvae atrioventricularis sinistrae
+Posterior ligament of fibular head	left	Ligamentum posterius capitis fibulae
+Posterior ligament of fibular head	right	Ligamentum posterius capitis fibulae
+Posterior longitudinal ligament		Ligamentum longitudinale posterius
+Posterior medial segment of liver (VIII)		Segmentum posterius mediale dextrum hepatis (VIII)
+Posterior nucleus of vagus nerve	left	Nucleus posterior nervi vagi
+Posterior nucleus of vagus nerve	right	Nucleus posterior nervi vagi
+Posterior region of arm	left	Regio posterior brachii
+Posterior region of arm	right	Regio posterior brachii
+Posterior region of elbow	left	Regio posterior cubiti
+Posterior region of elbow	right	Regio posterior cubiti
+Posterior region of forearm	left	Regio posterior antebrachii
+Posterior region of forearm	right	Regio posterior antebrachii
+Posterior region of knee	left	Regio posterior genus
+Posterior region of knee	right	Regio posterior genus
+Posterior region of leg	left	Regio posterior cruris
+Posterior region of leg	right	Regio posterior cruris
+Posterior region of thigh	left	Regio posterior femoris
+Posterior region of thigh	right	Regio posterior femoris
+Posterior region of wrist	left	Regio posterior carpi
+Posterior region of wrist	right	Regio posterior carpi
+Posterior sacro-iliac ligament	left	Ligamentum sacroiliacum posterius
+Posterior sacro-iliac ligament	right	Ligamentum sacroiliacum posterius
+Posterior segment of eyeball	left	Segmentum posterius bulbi oculi
+Posterior segment of eyeball	right	Segmentum posterius bulbi oculi
+Posterior segment of liver (I)		Segmentum posterius hepatis (I)
+Posterior segmental artery of left lung		Arteria segmentalis posterior pulmonis sinistri
+Posterior segmental artery of right lung		Arteria segmentalis posterior pulmonis dextri
+Posterior septal branches of sphenopalatine artery	left	Rami septales posteriores arteriae sphenopalatinae
+Posterior septal branches of sphenopalatine artery	right	Rami septales posteriores arteriae sphenopalatinae
+Posterior sternoclavicular ligament	left	Ligamentum sternoclaviculare posterius
+Posterior sternoclavicular ligament	right	Ligamentum sternoclaviculare posterius
+Posterior superior alveolar artery	left	Arteria alveolaris superior posterior
+Posterior superior alveolar artery	right	Arteria alveolaris superior posterior
+Posterior talocalcaneal ligament	left	Ligamentum talocalcaneum posterius
+Posterior talocalcaneal ligament	right	Ligamentum talocalcaneum posterius
+Posterior talofibular ligament	left	Ligamentum talofibulare posterius
+Posterior talofibular ligament	right	Ligamentum talofibulare posterius
+Posterior tibial artery	left	Arteria tibialis posterior
+Posterior tibial artery	right	Arteria tibialis posterior
+Posterior tibial veins	left	Venae tibiales posteriores
+Posterior tibial veins	right	Venae tibiales posteriores
+Posterior tibiofibular ligament	left	Ligamentum tibiofibulare posterius
+Posterior tibiofibular ligament	right	Ligamentum tibiofibulare posterius
+Posterior vein of right lung		Vena posterior pulmonis dextri
+Precentral gyrus	left	Gyrus precentralis
+Precentral gyrus	right	Gyrus precentralis
+Precuneus	left	Precuneus
+Precuneus	right	Precuneus
+Presternal region	left	Regio presternalis
+Presternal region	right	Regio presternalis
+Procerus muscle	left	Musculus procerus
+Procerus muscle	right	Musculus procerus
+Pronator quadratus	left	Pronator quadratus
+Pronator quadratus	right	Pronator quadratus
+Proper hepatic artery		Arteria hepatica propria
+Proper palmar digital arteries	left	Arteriae digitales palmares propriae
+Proper palmar digital arteries	right	Arteriae digitales palmares propriae
+Proper palmar digital branches of median nerve	left	Rami digitales palmares proprii nervi mediani
+Proper palmar digital branches of median nerve	right	Rami digitales palmares proprii nervi mediani
+Proper palmar digital branches of ulnar nerve	left	Rami digitales palmares proprii nervi ulnaris
+Proper palmar digital branches of ulnar nerve	right	Rami digitales palmares proprii nervi ulnaris
+Proper plantar digital arteries	left	Arteriae digitales plantares propriae
+Proper plantar digital arteries	right	Arteriae digitales plantares propriae
+Proper plantar digital branches of lateral plantar nerve	left	Rami digitales plantares proprii nervi plantaris lateralis
+Proper plantar digital branches of lateral plantar nerve	right	Rami digitales plantares proprii nervi plantaris lateralis
+Proper plantar digital branches of medial plantar nerve	left	Rami digitales plantares proprii nervi plantaris medialis
+Proper plantar digital branches of medial plantar nerve	right	Rami digitales plantares proprii nervi plantaris medialis
+Prostate		Prostata
+Proximal phalanx of fifth finger of foot	left	Phalanx proximalis quintum digitorum pedis
+Proximal phalanx of fifth finger of foot	right	Phalanx proximalis quintum digitorum pedis
+Proximal phalanx of first finger of foot	left	Phalanx proximalis primum digitorum pedis
+Proximal phalanx of first finger of foot	right	Phalanx proximalis primum digitorum pedis
+Proximal phalanx of fourth finger of foot	left	Phalanx proximalis quartum digitorum pedis
+Proximal phalanx of fourth finger of foot	right	Phalanx proximalis quartum digitorum pedis
+Proximal phalanx of second finger of foot	left	Phalanx proximalis secundum digitorum pedis
+Proximal phalanx of second finger of foot	right	Phalanx proximalis secundum digitorum pedis
+Proximal phalanx of third finger of foot	left	Phalanx proximalis tertium digitorum pedis
+Proximal phalanx of third finger of foot	right	Phalanx proximalis tertium digitorum pedis
+Proximal transverse arch of foot	left	Arcus transversus proximalis
+Proximal transverse arch of foot	right	Arcus transversus proximalis
+Psoas major	left	Psoas major
+Psoas major	right	Psoas major
+Pterygospinous ligament	left	Ligamentum pterygospinale
+Pterygospinous ligament	right	Ligamentum pterygospinale
+Pubic symphysis		Symphysis pubica
+Pubo-analis muscle	left	Musculus puboanalis
+Pubo-analis muscle	right	Musculus puboanalis
+Pubococcygeus muscle	left	Musculus pubococcygeus
+Pubococcygeus muscle	right	Musculus pubococcygeus
+Pubofemoral ligament	left	Ligamentum pubofemorale
+Pubofemoral ligament	right	Ligamentum pubofemorale
+Pulmonary trunk		Truncus pulmonalis
+Putamen	left	Putamen
+Putamen	right	Putamen
+Pyramid of medulla oblongata	left	Pyramis medullae oblongatae
+Pyramid of medulla oblongata	right	Pyramis medullae oblongatae
+Pyramidalis muscle	left	Musculus pyramidalis
+Pyramidalis muscle	right	Musculus pyramidalis
+Quadrangular membrane	left	Membrana quadrangularis
+Quadrangular membrane	right	Membrana quadrangularis
+Quadrate ligament	left	Ligamentum quadratum
+Quadrate ligament	right	Ligamentum quadratum
+Quadratus femoris muscle	left	Musculus quadratus femoris
+Quadratus femoris muscle	right	Musculus quadratus femoris
+Quadratus lumborum muscle	left	Musculus quadratus lumborum
+Quadratus lumborum muscle	right	Musculus quadratus lumborum
+Quadratus plantae muscle	left	Musculus quadratus plantae
+Quadratus plantae muscle	right	Musculus quadratus plantae
+Radial artery	left	Arteria radialis
+Radial artery	right	Arteria radialis
+Radial collateral artery	left	Arteria collateralis radialis
+Radial collateral artery	right	Arteria collateralis radialis
+Radial collateral ligament	left	Ligamentum collaterale radiale cubiti
+Radial collateral ligament	right	Ligamentum collaterale radiale cubiti
+Radial collateral ligament of wrist joint	left	Ligamentum collaterale radiale carpi
+Radial collateral ligament of wrist joint	right	Ligamentum collaterale radiale carpi
+Radial foveola	left	Foveola radialis
+Radial foveola	right	Foveola radialis
+Radial head of flexor digitorum superficialis	left	Caput radiale flexoris superficialis digitorum
+Radial head of flexor digitorum superficialis	right	Caput radiale flexoris superficialis digitorum
+Radial nerve	left	Nervus radialis
+Radial nerve	right	Nervus radialis
+Radial veins	left	Venae radiales
+Radial veins	right	Venae radiales
+Radiate carpal ligament	left	Ligamentum radiatum carpi
+Radiate carpal ligament	right	Ligamentum radiatum carpi
+Radioscaphocapitate ligament	left	Ligamentum radioscaphocapitatum
+Radioscaphocapitate ligament	right	Ligamentum radioscaphocapitatum
+Radius	left	Radius
+Radius	right	Radius
+Rectus abdominis muscle	left	Musculus rectus abdominis
+Rectus abdominis muscle	right	Musculus rectus abdominis
+Rectus femoris muscle	left	Musculus rectus femoris
+Rectus femoris muscle	right	Musculus rectus femoris
+Rectus posterior major capitis muscle	left	Musculus rectus posterior major capitis
+Rectus posterior major capitis muscle	right	Musculus rectus posterior major capitis
+Rectus posterior minor capitis muscle	left	Musculus rectus posterior minor capitis
+Rectus posterior minor capitis muscle	right	Musculus rectus posterior minor capitis
+Red nucleus	left	Nucleus ruber
+Red nucleus	right	Nucleus ruber
+Renal pelvis	left	Pelvis renalis
+Renal pelvis	right	Pelvis renalis
+Retina	left	Retina
+Retina	right	Retina
+Retromandibular vein	left	Vena retromandibularis
+Retromandibular vein	right	Vena retromandibularis
+Rhomboid major muscle	left	Musculus rhomboideus major
+Rhomboid major muscle	right	Musculus rhomboideus major
+Rhomboid minor muscle	left	Musculus rhomboideus minor
+Rhomboid minor muscle	right	Musculus rhomboideus minor
+Right ascending lumbar vein		Vena lumbalis ascendens dextra
+Right atrium		Atrium dextrum
+Right brachiocephalic vein		Vena brachiocephalica dextra
+Right colic artery		Arteria colica dextra
+Right colic vein		Vena colica dextra
+Right common carotid artery		Carotis communis dextra
+Right coronary artery		Arteria coronaria dextra
+Right coronary leaflet		Valvula coronaria dextra aortae
+Right gastro-omental vein		Vena gastroomentalis dextra
+Right inferior lobar bronchus		Bronchus lobaris inferior dexter
+Right inferior pulmonary vein		Vena pulmonalis dextra inferior
+Right main bronchus		Bronchus principalis dexter
+Right pulmonary artery		Arteria pulmonalis dextra
+Right renal vein		Vena renalis dextra
+Right semilunar leaflet of pulmonary valve		Valvula semilunaris dextra valvae trunci pulmonalis
+Right subclavian artery		Arteria subclavia dextra
+Right subcostal vein		Vena subcostalis dextra
+Right superior lobar bronchus		Bronchus lobaris superior dexter
+Right superior phrenic vein		Vena phrenica superior dextra
+Right testicular vein		Vena testicularis dextra
+Right ventricle		Ventriculus dexter
+Risorius muscle	left	Musculus risorius
+Risorius muscle	right	Musculus risorius
+Roots of brachial plexus	left	Radices plexus brachialis
+Roots of brachial plexus	right	Radices plexus brachialis
+Rotatores	left	Rotatores
+Rotatores	right	Rotatores
+Sacral region	left	Regio sacralis
+Sacral region	right	Regio sacralis
+Sacrospinous ligament	left	Ligamentum sacrospinale
+Sacrospinous ligament	right	Ligamentum sacrospinale
+Sacrotuberous ligament	left	Ligamentum sacrotuberale
+Sacrotuberous ligament	right	Ligamentum sacrotuberale
+Sacrum		Os sacrum
+Saphenous nerve	left	Nervus saphenus
+Saphenous nerve	right	Nervus saphenus
+Sartorius muscle	left	Musculus sartorius
+Sartorius muscle	right	Musculus sartorius
+Scalenus anterior muscle	left	Musculus scalenus anterior
+Scalenus anterior muscle	right	Musculus scalenus anterior
+Scalenus medius muscle	left	Musculus scalenus medius
+Scalenus medius muscle	right	Musculus scalenus medius
+Scalenus posterior muscle	left	Musculus scalenus posterior
+Scalenus posterior muscle	right	Musculus scalenus posterior
+Scapha	left	Scapha
+Scapha	right	Scapha
+Scaphocapitate ligament	left	Ligamentum scaphocapitatum
+Scaphocapitate ligament	right	Ligamentum scaphocapitatum
+Scaphoid bone	left	Os scaphoideum
+Scaphoid bone	right	Os scaphoideum
+Scaphotrapeziotrapezoidal ligament	left	Ligamentum scaphotrapeziotrapezoideum
+Scaphotrapeziotrapezoidal ligament	right	Ligamentum scaphotrapeziotrapezoideum
+Scapula	left	Scapula
+Scapula	right	Scapula
+Scapular region	left	Regio scapularis
+Scapular region	right	Regio scapularis
+Scapular spinal part of deltoid muscle	left	Pars spinalis scapularis musculi pars spinalis deltoidei
+Scapular spinal part of deltoid muscle	right	Pars spinalis scapularis musculi pars spinalis deltoidei
+Sciatic nerve	left	Nervus ischiadicus
+Sciatic nerve	right	Nervus ischiadicus
+Sclera	left	Sclera
+Sclera	right	Sclera
+Second metatarsal bone	left	Os secundum metatarsi
+Second metatarsal bone	right	Os secundum metatarsi
+Second posterior intercostal artery	left	Arteria intercostalis posterior secunda
+Second posterior intercostal artery	right	Arteria intercostalis posterior secunda
+Second rib	left	Costa secunda
+Second rib	right	Costa secunda
+Semimembranosus muscle	left	Musculus semimembranosus
+Semimembranosus muscle	right	Musculus semimembranosus
+Seminal gland	left	Glandula seminalis
+Seminal gland	right	Glandula seminalis
+Semispinalis colli muscle	left	Musculus semispinalis colli
+Semispinalis colli muscle	right	Musculus semispinalis colli
+Semispinalis thoracis muscle	left	Musculus semispinalis thoracis
+Semispinalis thoracis muscle	right	Musculus semispinalis thoracis
+Semitendinosus muscle	left	Musculus semitendinosus
+Semitendinosus muscle	right	Musculus semitendinosus
+Sensory root of trigeminal nerve	left	Radix sensoria nervi trigemini
+Sensory root of trigeminal nerve	right	Radix sensoria nervi trigemini
+Septal branches of anterior interventricular artery		Rami sept. art. Intervent. ant. sept. arteriae coron. sinis.
+Septal branches of posterior ethmoidal artery	left	Rami septales arteriae ethmoideae posterioris
+Septal branches of posterior ethmoidal artery	right	Rami septales arteriae ethmoideae posterioris
+Septal nuclei		Nuclei septales
+Septum pellucidum		Septum pellucidum
+Serratus anterior muscle	left	Musculus serratus anterior
+Serratus anterior muscle	right	Musculus serratus anterior
+Serratus posterior inferior muscle	left	Musculus serratus posterior inferior
+Serratus posterior inferior muscle	right	Musculus serratus posterior inferior
+Serratus posterior superior muscle	left	Musculus serratus posterior superior
+Serratus posterior superior muscle	right	Musculus serratus posterior superior
+Sesamoid bones of foot	left	Ossa sesamoidea pedis
+Sesamoid bones of foot	right	Ossa sesamoidea pedis
+Seventh rib	left	Septima costa
+Seventh rib	right	Septima costa
+Short head of biceps brachii	left	Caput breve musculi bicipitis brachii
+Short head of biceps brachii	right	Caput breve musculi bicipitis brachii
+Short head of biceps femoris	left	Caput breve musculi bicipitis femoris
+Short head of biceps femoris	right	Caput breve musculi bicipitis femoris
+Short posterior ciliary arteries	left	Arteriae ciliares posteriores breves
+Short posterior ciliary arteries	right	Arteriae ciliares posteriores breves
+Sigmoid arteries		Arteriae sigmoideae
+Sigmoid colon		Colon sigmoideum
+Sigmoid sinus	left	Sinus sigmoideus
+Sigmoid sinus	right	Sinus sigmoideus
+Sigmoid veins		Venae sigmoideae
+Sinus of frontal bone		Sinus ossis frontalis
+Sinus of sphenoid bone		Sinus ossis sphenoidei
+Sixth rib	left	Sexta costa
+Sixth rib	right	Sexta costa
+Small saphenous vein	left	Vena saphena parva
+Small saphenous vein	right	Vena saphena parva
+Soft palate		Palatum molle
+Sole	left	Planta
+Sole	right	Planta
+Soleus muscle	left	Musculus soleus
+Soleus muscle	right	Musculus soleus
+Sphenoid bone		Os sphenoideum
+Sphenomandibular ligament	left	Ligamentum sphenomandibulare
+Sphenomandibular ligament	right	Ligamentum sphenomandibulare
+Spinal branch of iliolumbar artery	right	Ramus spinalis arteriae iliolumbalis
+Spinal dura		Dura spinalis
+Spinalis capitis muscle	left	Musculus spinalis capitis
+Spinalis capitis muscle	right	Musculus spinalis capitis
+Spinalis colli muscle	left	Musculus spinalis colli
+Spinalis colli muscle	right	Musculus spinalis colli
+Spinalis thoracis muscle	left	Musculus spinalis thoracis
+Spinalis thoracis muscle	right	Musculus spinalis thoracis
+Spleen		Lien
+Splenic vein		Vena splenica
+Splenius capitis muscle	left	Musculus splenius capitis
+Splenius capitis muscle	right	Musculus splenius capitis
+Splenius colli muscle	left	Musculus splenius colli
+Splenius colli muscle	right	Musculus splenius colli
+Stapes	left	Stapes
+Stapes	right	Stapes
+Sternocleidomastoid muscle	left	Musculus sternocleidomastoideus
+Sternocleidomastoid muscle	right	Musculus sternocleidomastoideus
+Sternocleidomastoid region	left	Regio sternocleidomastoidea
+Sternocleidomastoid region	right	Regio sternocleidomastoidea
+Sternocostal head of pectoralis major muscle	left	Pars sternocostalis musculi pectoralis majoris
+Sternocostal head of pectoralis major muscle	right	Pars sternocostalis musculi pectoralis majoris
+Sternohyoid muscle	left	Musculus sternohyoideus
+Sternohyoid muscle	right	Musculus sternohyoideus
+Sternothyroid muscle	left	Musculus sternothyreoideus
+Sternothyroid muscle	right	Musculus sternothyreoideus
+Stomach		Gaster
+Straight part of cricothyroid muscle	left	Pars recta musculi cricothyreoidei
+Straight part of cricothyroid muscle	right	Pars recta musculi cricothyreoidei
+Straight sinus		Sinus rectus
+Stria medullaris thalami	left	Stria medullaris thalami
+Stria medullaris thalami	right	Stria medullaris thalami
+Stria terminalis	left	Stria terminalis
+Stria terminalis	right	Stria terminalis
+Stylohyoid ligament	left	Ligamentum stylohyoideum
+Stylohyoid ligament	right	Ligamentum stylohyoideum
+Stylohyoid muscle	left	Musculus stylohyoideus
+Stylohyoid muscle	right	Musculus stylohyoideus
+Stylomandibular ligament	left	Ligamentum stylomandibulare
+Stylomandibular ligament	right	Ligamentum stylomandibulare
+Stylopharyngeus muscle	left	Musculus stylopharyngeus
+Stylopharyngeus muscle	right	Musculus stylopharyngeus
+Subclavian nerve	left	Nervus subclavius
+Subclavian nerve	right	Nervus subclavius
+Subclavius muscle	left	Musculus subclavius
+Subclavius muscle	right	Musculus subclavius
+Subcostal artery	left	Arteria subcostalis
+Sublingual gland	left	Glandula sublingualis
+Sublingual gland	right	Glandula sublingualis
+Submandibular duct	left	Ductus submandibularis
+Submandibular duct	right	Ductus submandibularis
+Submandibular gland	left	Glandula submandibularis
+Submandibular gland	right	Glandula submandibularis
+Submandibular triangle	left	Trigonum submandibulare
+Submandibular triangle	right	Trigonum submandibulare
+Submental artery	left	Arteria submentalis
+Submental artery	right	Arteria submentalis
+Submental triangle	left	Trigonum submentale
+Submental triangle	right	Trigonum submentale
+Submental vein	left	Vena submentalis
+Submental vein	right	Vena submentalis
+Subparietal sulcus	left	Sulcus subparietalis
+Subparietal sulcus	right	Sulcus subparietalis
+Subscapular artery	left	Arteria subscapularis
+Subscapular artery	right	Arteria subscapularis
+Subscapular vein	right	Vena subscapularis
+Subscapularis muscle	left	Musculus subscapularis
+Subscapularis muscle	right	Musculus subscapularis
+Superficial branch of medial plantar artery	left	Ramus superficialis arteriae plantaris medialis
+Superficial branch of medial plantar artery	right	Ramus superficialis arteriae plantaris medialis
+Superficial branch of radial nerve	left	Ramus superficialis nervi radialis
+Superficial branch of radial nerve	right	Ramus superficialis nervi radialis
+Superficial branch of ulnar nerve	left	Ramus superficialis nervi ulnaris
+Superficial branch of ulnar nerve	right	Ramus superficialis nervi ulnaris
+Superficial dorsal veins of penis		Venae dorsales superficiales penis
+Superficial epigastric artery	left	Arteria epigastrica superficialis
+Superficial epigastric artery	right	Arteria epigastrica superficialis
+Superficial epigastric vein	left	Vena epigastrica superficialis
+Superficial epigastric vein	right	Vena epigastrica superficialis
+Superficial external pudendal artery	left	Arteria pudendalis externa superficialis
+Superficial external pudendal artery	right	Arteria pudendalis externa superficialis
+Superficial fibular nerve	left	Nervus fibularis superficialis
+Superficial fibular nerve	right	Nervus fibularis superficialis
+Superficial head of flexor pollicis brevis	left	Caput superficiale flexoris brevis pollicis
+Superficial head of flexor pollicis brevis	right	Caput superficiale flexoris brevis pollicis
+Superficial head of pronator teres	left	Caput superficiale pronatoris teretis
+Superficial head of pronator teres	right	Caput superficiale pronatoris teretis
+Superficial investing cervical fascia	left	Fascia investiens superficialis colli lamina
+Superficial investing cervical fascia	right	Fascia investiens superficialis colli lamina
+Superficial layer of temporal fascia	left	Lamina superficialis fasciae temporalis
+Superficial layer of temporal fascia	right	Lamina superficialis fasciae temporalis
+Superficial palmar arch	left	Arcus palmaris superficialis
+Superficial palmar arch	right	Arcus palmaris superficialis
+Superficial part of masseter	left	Pars superficialis masseteris
+Superficial part of masseter	right	Pars superficialis masseteris
+Superficial part of tibial collateral ligament	left	Pars superficialis ligamenti collateralis tibialis
+Superficial part of tibial collateral ligament	right	Pars superficialis ligamenti collateralis tibialis
+Superficial temporal artery	left	Arteria temporalis superficialis
+Superficial temporal artery	right	Arteria temporalis superficialis
+Superficial temporal veins	left	Venae temporales superficiales
+Superficial temporal veins	right	Venae temporales superficiales
+Superficial transverse metacarpal ligament	left	Ligamentum metacarpeum transversum superficiale
+Superficial transverse metacarpal ligament	right	Ligamentum metacarpeum transversum superficiale
+Superficial transverse metatarsal ligament	left	Ligamentum metatarseum transversum superficiale
+Superficial transverse metatarsal ligament	right	Ligamentum metatarseum transversum superficiale
+Superficial venous palmar arch	left	Arcus venosus palmaris superficialis
+Superficial venous palmar arch	right	Arcus venosus palmaris superficialis
+Superior basal vein of left lung		Vena basalis superior pulmonis sinistri
+Superior basal vein of right lung		Vena basalis superior pulmonis dextri
+Superior cerebellar artery	left	Arteria cerebelli superior
+Superior cerebellar artery	right	Arteria cerebelli superior
+Superior cerebellar peduncle	left	Pedunculus cerebellaris superior
+Superior cerebellar peduncle	right	Pedunculus cerebellaris superior
+Superior colliculus	left	Colliculus superior
+Superior colliculus	right	Colliculus superior
+Superior epigastric artery	left	Arteria epigastrica superior
+Superior epigastric artery	right	Arteria epigastrica superior
+Superior epigastric veins	left	Venae epigastricae superiores
+Superior epigastric veins	right	Venae epigastricae superiores
+Superior extensor retinaculum of ankle	left	Retinaculum extensorium superius tali
+Superior extensor retinaculum of ankle	right	Retinaculum extensorium superius tali
+Superior fibular retinaculum	left	Retinaculum fibulare superius
+Superior fibular retinaculum	right	Retinaculum fibulare superius
+Superior frontal gyrus	left	Gyrus frontalis superior
+Superior frontal gyrus	right	Gyrus frontalis superior
+Superior frontal sulcus	left	Sulcus frontalis superior
+Superior frontal sulcus	right	Sulcus frontalis superior
+Superior gemellus muscle	left	Musculus gemellus superior
+Superior gemellus muscle	right	Musculus gemellus superior
+Superior glenohumeral ligament	left	Ligamentum glenohumerale superius
+Superior glenohumeral ligament	right	Ligamentum glenohumerale superius
+Superior gluteal artery	left	Arteria glutea superior
+Superior gluteal artery	right	Arteria glutea superior
+Superior head of lateral pterygoid muscle	left	Caput superius musculi pterygoidei lateralis
+Superior head of lateral pterygoid muscle	right	Caput superius musculi pterygoidei lateralis
+Superior labial artery	left	Arteria labialis superior
+Superior labial artery	right	Arteria labialis superior
+Superior labial vein	left	Vena labialis superior
+Superior labial vein	right	Vena labialis superior
+Superior lateral brachial cutaneous nerve	left	Nervus cutaneus lateralis posterioris femoris
+Superior lateral brachial cutaneous nerve	right	Nervus cutaneus lateralis posterioris femoris
+Superior lateral genicular artery	left	Arteria superior lateralis genus
+Superior lateral genicular artery	right	Arteria superior lateralis genus
+Superior lingular artery of left lung		Arteria lingularis superior pulmonis sinistri
+Superior lingular vein of left lung		Vena lingularis superior pulmonis sinistri
+Superior lobar artery of right lung		Arteria lobaris superior pulmonis dextri
+Superior lobe of left lung		Lobus superior pulmonis sinistri
+Superior lobe of right lung		Lobus superior pulmonis dextri
+Superior medial genicular artery	left	Arteria superior medialis genus
+Superior medial genicular artery	right	Arteria superior medialis genus
+Superior mesenteric artery		Arteria mesenteries superior
+Superior oblique muscle	left	Musculus obliquus superior bulbi oculi
+Superior oblique muscle	right	Musculus obliquus superior bulbi oculi
+Superior occipital gyri	left	Gyri occipitales superiores
+Superior occipital gyri	right	Gyri occipitales superiores
+Superior ophthalmic vein	left	Vena ophthalmica superior
+Superior parathyroid gland	left	Glandula parathyreoidea superior
+Superior parathyroid gland	right	Glandula parathyreoidea superior
+Superior parietal lobule	left	Lobulus parietalis superior
+Superior parietal lobule	right	Lobulus parietalis superior
+Superior petrosal sinus	left	Sinus petrosus superior
+Superior petrosal sinus	right	Sinus petrosus superior
+Superior pharyngeal constrictor	left	Constrictor superior pharyngis
+Superior pharyngeal constrictor	right	Constrictor superior pharyngis
+Superior phrenic arteries		Arteriae phrenicae superiores
+Superior pubic ligament		Ligamentum pubicum superius
+Superior rectus muscle	left	Musculus rectus superior
+Superior rectus muscle	right	Musculus rectus superior
+Superior sagittal sinus		Sinus sagittalis superior
+Superior salivatory nucleus	left	Nucleus salivatorius superior
+Superior salivatory nucleus	right	Nucleus salivatorius superior
+Superior segmental artery of left lung		Arteria segmentalis superior pulmonis sinistri
+Superior segmental artery of right lung		Arteria segmentalis superior pulmonis dextri
+Superior tarsus	left	Tarsus superior
+Superior tarsus	right	Tarsus superior
+Superior temporal sulcus	left	Sulcus temporalis superior
+Superior temporal sulcus	right	Sulcus temporalis superior
+Superior transverse scapular ligament	left	Ligamentum transversum superius scapulae
+Superior transverse scapular ligament	right	Ligamentum transversum superius scapulae
+Superior trunk of brachial plexus	left	Truncus superior plexus brachialis
+Superior trunk of brachial plexus	right	Truncus superior plexus brachialis
+Superior vein of left lung		Vena superior pulmonis sinistri
+Superior vein of right lung		Vena superior pulmonis dextri
+Superior vena cava		Vena cava superior
+Supinator	left	Supinator
+Supinator	right	Supinator
+Supra-orbital artery	left	Arteria supraorbitalis
+Supra-orbital artery	right	Arteria supraorbitalis
+Supramarginal gyrus	left	Gyrus supramarginalis
+Supramarginal gyrus	right	Gyrus supramarginalis
+Suprarenal gland	left	Glandula suprarenalis
+Suprarenal gland	right	Glandula suprarenalis
+Suprascapular artery	left	Arteria suprascapularis
+Suprascapular artery	right	Arteria suprascapularis
+Suprascapular nerve	left	Nervus suprascapularis
+Suprascapular nerve	right	Nervus suprascapularis
+Suprascapular vein	left	Vena suprascapularis
+Suprascapular vein	right	Vena suprascapularis
+Supraspinatus muscle	left	Musculus supraspinatus
+Supraspinatus muscle	right	Musculus supraspinatus
+Supratrochlear artery	left	Arteria supratrochlearis
+Supratrochlear artery	right	Arteria supratrochlearis
+Supreme intercostal artery	left	Arteria intercostalis suprema
+Supreme intercostal artery	right	Arteria intercostalis suprema
+Sural communicating branch of common fibular nerve	left	Ramus communicans suralis nervi fibularis communis
+Sural communicating branch of common fibular nerve	right	Ramus communicans suralis nervi fibularis communis
+Sural nerve	left	Nervus suralis
+Sural nerve	right	Nervus suralis
+Suspensory ligament of eyeball	left	Ligamentum suspensorium bulbi
+Suspensory ligament of eyeball	right	Ligamentum suspensorium bulbi
+Sympathetic nerves	left	Nervi sympathici
+Sympathetic nerves	right	Nervi sympathici
+Sympathetic trunk	left	Truncus sympathicus
+Sympathetic trunk	right	Truncus sympathicus
+Talonavicular ligament	left	Ligamentum talonaviculare
+Talonavicular ligament	right	Ligamentum talonaviculare
+Talus	left	Os tali
+Talus	right	Os tali
+Temporal bone	left	Os temporale
+Temporal bone	right	Os temporale
+Temporal plane	left	Planum temporale
+Temporal plane	right	Planum temporale
+Temporal pole	left	Polus temporalis
+Temporal pole	right	Polus temporalis
+Temporal region	left	Regio temporalis
+Temporal region	right	Regio temporalis
+Temporalis muscle	left	Musculus temporalis
+Temporalis muscle	right	Musculus temporalis
+Temporoparietalis muscle	left	Musculus temporoparietalis
+Temporoparietalis muscle	right	Musculus temporoparietalis
+Tendinous arch of levator ani	left	Arcus tendineus levatoris ani
+Tendinous arch of levator ani	right	Arcus tendineus levatoris ani
+Tensor fasciae latae	left	Tensor fasciae latae
+Tensor fasciae latae	right	Tensor fasciae latae
+Tenth rib	left	Decima costa
+Tenth rib	right	Decima costa
+Tentorium cerebelli	left	Tentorium cerebelli
+Tentorium cerebelli	right	Tentorium cerebelli
+Teres major muscle	left	Musculus teres major
+Teres major muscle	right	Musculus teres major
+Teres minor muscle	left	Musculus teres minor
+Teres minor muscle	right	Musculus teres minor
+Testis	left	Testis
+Testis	right	Testis
+Thalamus	left	Thalamus
+Thalamus	right	Thalamus
+Third metatarsal bone	left	Os tertium metatarsi
+Third metatarsal bone	right	Os tertium metatarsi
+Third rib	left	Tertia costa
+Third rib	right	Tertia costa
+Third ventricle		Ventriculus tertius
+Thoracic aorta		Aorta thoracica
+Thoraco-acromial artery	left	Arteria thoracoacromialis
+Thoraco-acromial artery	right	Arteria thoracoacromialis
+Thoracodorsal artery	left	Arteria thoracodorsalis
+Thoracodorsal artery	right	Arteria thoracodorsalis
+Thoracodorsal vein	left	Vena thoracodorsalis
+Thoracodorsal vein	right	Vena thoracodorsalis
+Thyro-epiglottic part of thyro-arytenoid muscle	left	Pars thyreoepiglottica musculi thyreoarytenoidei
+Thyro-epiglottic part of thyro-arytenoid muscle	right	Pars thyreoepiglottica musculi thyreoarytenoidei
+Thyrocervical trunk	left	Truncus thyreocervicalis
+Thyrocervical trunk	right	Truncus thyreocervicalis
+Thyrohyoid muscle	left	Musculus thyreohyoideus
+Thyrohyoid muscle	right	Musculus thyreohyoideus
+Thyroid cartilage		Cartilago thyreoidea
+Thyroid gland		Glandula thyreoidea
+Tibia	left	Tibia
+Tibia	right	Tibia
+Tibial nerve	left	Nervus tibialis
+Tibial nerve	right	Nervus tibialis
+Tibialis anterior muscle	left	Musculus tibialis anterior
+Tibialis anterior muscle	right	Musculus tibialis anterior
+Tibialis posterior muscle	left	Musculus tibialis posterior
+Tibialis posterior muscle	right	Musculus tibialis posterior
+Tibiocalcaneal ligament	left	Ligamentum calcaneotibiale
+Tibiocalcaneal ligament	right	Ligamentum calcaneotibiale
+Tibionavicular ligament	left	Ligamentum tibionaviculare
+Tibionavicular ligament	right	Ligamentum tibionaviculare
+Tongue		Lingua
+Trachea		Trachea
+Tragus	left	Tragus
+Tragus	right	Tragus
+Transverse acetabular ligament	left	Ligamentum transversum acetabuli
+Transverse acetabular ligament	right	Ligamentum transversum acetabuli
+Transverse arytenoid muscle		Musculus arytenoideus transversus
+Transverse cervical artery	left	Arteria transversa colli arteria transversa cervicis
+Transverse cervical artery	right	Arteria transversa colli arteria transversa cervicis
+Transverse colon		Colon transversum
+Transverse facial artery	left	Arteria transversa faciei
+Transverse facial artery	right	Arteria transversa faciei
+Transverse head of adductor hallucis	left	Caput transversum adductoris hallucis
+Transverse head of adductor hallucis	right	Caput transversum adductoris hallucis
+Transverse head of adductor pollicis	left	Caput transversum adductoris pollicis
+Transverse head of adductor pollicis	right	Caput transversum adductoris pollicis
+Transverse humeral ligament	left	Ligamentum transversum humeri
+Transverse humeral ligament	right	Ligamentum transversum humeri
+Transverse intermuscular septum of leg	left	Septum intermusculare transversum cruris
+Transverse intermuscular septum of leg	right	Septum intermusculare transversum cruris
+Transverse ligament of knee	left	Ligamentum transversum genus
+Transverse ligament of knee	right	Ligamentum transversum genus
+Transverse occipital sulcus	left	Sulcus occipitalis transversus
+Transverse occipital sulcus	right	Sulcus occipitalis transversus
+Transverse part of iliofemoral ligament	left	Pars transversa ligamenti iliofemoralis
+Transverse part of iliofemoral ligament	right	Pars transversa ligamenti iliofemoralis
+Transverse part of trapezius muscle	left	Pars transversa musculi trapezii
+Transverse part of trapezius muscle	right	Pars transversa musculi trapezii
+Transverse sinus	left	Sinus transversus
+Transverse sinus	right	Sinus transversus
+Transverse temporal gyri	left	Gyri temporales transversi
+Transverse temporal gyri	right	Gyri temporales transversi
+Transverse tibiofibular ligament	left	Ligamentum tibiofibulare transversum
+Transverse tibiofibular ligament	right	Ligamentum tibiofibulare transversum
+Transversus abdominis muscle	left	Musculus transversus abdominis
+Transversus abdominis muscle	right	Musculus transversus abdominis
+Transversus thoracis muscle	left	Musculus transversus thoracis
+Transversus thoracis muscle	right	Musculus transversus thoracis
+Trapezium bone	left	Os trapezium
+Trapezium bone	right	Os trapezium
+Trapezoid bone	left	Os trapezoideum
+Trapezoid bone	right	Os trapezoideum
+Trapezoid ligament	left	Ligamentum trapezoideum
+Trapezoid ligament	right	Ligamentum trapezoideum
+Triangle of auscultation	left	Trigonum auscultationis
+Triangle of auscultation	right	Trigonum auscultationis
+Triangular fossa	left	Fossa triangularis
+Triangular fossa	right	Fossa triangularis
+Triangular part of inferior frontal gyrus	left	Pars triangularis gyri frontalis inferioris
+Triangular part of inferior frontal gyrus	right	Pars triangularis gyri frontalis inferioris
+Trigeminal nerve (V)	left	Nervus trigeminus (V)
+Trigeminal nerve (V)	right	Nervus trigeminus (V)
+Triquetrocapitate ligament	left	Ligamentum triquetrocapitatum
+Triquetrocapitate ligament	right	Ligamentum triquetrocapitatum
+Triquetrohamate ligament	left	Ligamentum triquetrohamatum
+Triquetrohamate ligament	right	Ligamentum triquetrohamatum
+Triquetrum bone	left	Os triquetrum
+Triquetrum bone	right	Os triquetrum
+Triradiate cartilage	left	Cartilago triradiata
+Triradiate cartilage	right	Cartilago triradiata
+Trochlea of superior oblique muscle	left	Trochlea musculi obliqui superioris
+Trochlea of superior oblique muscle	right	Trochlea musculi obliqui superioris
+Trochlear nerve (IV)	left	Nervus trochlearis (IV)
+Trochlear nerve (IV)	right	Nervus trochlearis (IV)
+Tubercle of upper lip	left	Tuberculum labii superioris
+Tubercle of upper lip	right	Tuberculum labii superioris
+Twelfth rib	left	Duodecima costa
+Twelfth rib	right	Duodecima costa
+Tympanic membrane	left	Membrana tympanica
+Tympanic membrane	right	Membrana tympanica
+Ulna	left	Ulna
+Ulna	right	Ulna
+Ulnar artery	left	Arteria ulnaris
+Ulnar artery	right	Arteria ulnaris
+Ulnar collateral ligament	left	Ligamentum collaterale ulnare cubiti
+Ulnar collateral ligament	right	Ligamentum collaterale ulnare cubiti
+Ulnar collateral ligament of wrist joint	left	Ligamentum collaterale ulnare carpi
+Ulnar collateral ligament of wrist joint	right	Ligamentum collaterale ulnare carpi
+Ulnar head of extensor carpi ulnaris	left	Caput ulnare extensoris ulnaris carpi
+Ulnar head of extensor carpi ulnaris	right	Caput ulnare extensoris ulnaris carpi
+Ulnar head of flexor carpi ulnaris	left	Caput ulnare flexoris ulnaris carpi
+Ulnar head of flexor carpi ulnaris	right	Caput ulnare flexoris ulnaris carpi
+Ulnar nerve	left	Nervus ulnaris
+Ulnar nerve	right	Nervus ulnaris
+Ulnar veins	left	Venae ulnares
+Ulnar veins	right	Venae ulnares
+Ulnocapitate ligament	left	Ligamentum ulnocapitatum
+Ulnocapitate ligament	right	Ligamentum ulnocapitatum
+Ulnolunate ligament	left	Ligamentum ulnolunatum
+Ulnolunate ligament	right	Ligamentum ulnolunatum
+Ulnopisiform ligament		Ligamentum ulnopisiforme
+Ulnopisiform ligament	left	Ligamentum ulnopisiforme
+Ulnotriquetral ligament	left	Ligamentum ulnotriquetrum
+Ulnotriquetral ligament	right	Ligamentum ulnotriquetrum
+Umbilical region	left	Regio umbilicalis
+Umbilical region	right	Regio umbilicalis
+Umbilicus	left	Umbilicus
+Umbilicus	right	Umbilicus
+Upper canine	left	Dens caninus superioris
+Upper canine	right	Dens caninus superioris
+Upper first molar tooth	left	Dens molaris primus suprioris
+Upper first molar tooth	right	Dens molaris primus suprioris
+Upper first premolar	left	Dens premolaris primus superioris
+Upper first premolar	right	Dens premolaris primus superioris
+Upper lateral incisor	left	Dens incisivus lateralis superioris
+Upper lateral incisor	right	Dens incisivus lateralis superioris
+Upper medial incisor	left	Dens incisivus medialis superioris
+Upper medial incisor	right	Dens incisivus medialis superioris
+Upper second molar tooth	left	Dens molaris secundus superioris
+Upper second molar tooth	right	Dens molaris secundus superioris
+Upper second premolar	left	Dens premolaris secundus superioris
+Upper second premolar	right	Dens premolaris secundus superioris
+Ureter	left	Ureter
+Ureter	right	Ureter
+Urethra		Urethra
+Urinary bladder		Vesica urinaria
+Urogenital region	left	Regio urogenitalis
+Urogenital region	right	Regio urogenitalis
+Uvula of palate		Uvula palatina
+Vagus nerve (X)	left	Nervus vagus (X)
+Vastus intermedius muscle	left	Musculus vastus intermedius
+Vastus intermedius muscle	right	Musculus vastus intermedius
+Vastus lateralis muscle	left	Musculus vastus lateralis
+Vastus lateralis muscle	right	Musculus vastus lateralis
+Vastus medialis muscle	left	Musculus vastus medialis
+Vastus medialis muscle	right	Musculus vastus medialis
+Vermiform appendix		Appendix vermiformis
+Vertebra C3		Vertebra cervicalis III
+Vertebra C4		Vertebra cervicalis IV
+Vertebra C5		Vertebra cervicalis V
+Vertebra C6		Vertebra cervicalis VI
+Vertebra C7		Vertebra cervicalis VII
+Vertebra L1		Vertebra lumborum I
+Vertebra L2		Vertebra lumborum II
+Vertebra L3		Vertebra lumborum III
+Vertebra L4		Vertebra lumborum IV
+Vertebra L5		Vertebra lumborum V
+Vertebra T1		Vertebra thoracis I
+Vertebra T10		Vertebra thoracis X
+Vertebra T11		Vertebra thoracis XI
+Vertebra T12		Vertebra thoracis XII
+Vertebra T2		Vertebra thoracis II
+Vertebra T3		Vertebra thoracis III
+Vertebra T4		Vertebra thoracis IV
+Vertebra T5		Vertebra thoracis V
+Vertebra T6		Vertebra thoracis VI
+Vertebra T7		Vertebra thoracis VII
+Vertebra T8		Vertebra thoracis VIII
+Vertebra T9		Vertebra thoracis IX
+Vertebral artery	left	Arteria vertebralis
+Vertebral artery	right	Arteria vertebralis
+Vertebral region	left	Regio vertebralis
+Vertebral region	right	Regio vertebralis
+Vertebral vein	left	Vena vertebralis
+Vertebral vein	right	Vena vertebralis
+Vestibular nerve	left	Nervus vestibularis
+Vestibular nerve	right	Nervus vestibularis
+Vestibular nuclei	left	Nuclei vestibulares
+Vestibular nuclei	right	Nuclei vestibulares
+Vestibule	left	Vestibulum
+Vestibule	right	Vestibulum
+Vestibulocochlear nerve (VIII)	left	Nervus vestibulocochlearis (VIII)
+Vestibulocochlear nerve (VIII)	right	Nervus vestibulocochlearis (VIII)
+Vitreous body	left	Corpus vitreum
+Vitreous body	right	Corpus vitreum
+Vomer		Vomer
+White matter of telencephalon	left	Substantia alba telencephali
+White matter of telencephalon	right	Substantia alba telencephali
+Xiphoid process		Processus xiphoideus
+Zona orbicularis	left	Zona orbicularis
+Zona orbicularis	right	Zona orbicularis
+Zonular fibres	left	Fibrae zonulares
+Zonular fibres	right	Fibrae zonulares
+Zygomatic bone	left	Os zygomaticum
+Zygomatic bone	right	Os zygomaticum
+Zygomatic region	left	Regio zygomatica
+Zygomatic region	right	Regio zygomatica
+Zygomaticus major muscle	left	Musculus zygomaticus major
+Zygomaticus major muscle	right	Musculus zygomaticus major
+Zygomaticus minor muscle	left	Musculus zygomaticus minor
+Zygomaticus minor muscle	right	Musculus zygomaticus minor
