@@ -42,7 +42,7 @@ Sources, in order of authority:
 | # | recipient | address | question | blocks launch? |
 |---|---|---|---|---|
 | 1 | **biv-me authors** — Joshua R. Dillon, Charlène Mauger | ✅ sent | **✅ ANSWERED 18 Aug 2026.** CARDIOHANCE, local ethics approval, no restrictions; cite the repo + the 2026 Med Image Anal paper (D21) | ~~YES~~ — resolved; the heart ships |
-| 2 | **Z-Anatomy** — Gauthier Kervyn (the modeller), via the **models** repo | ⚠️ no address published; issue on `Z-Anatomy/Models-of-human-anatomy` — **not** the Unity repos | Tell them their "UW, no licence" credit is wrong (the source denies it — D20) and ask which BodyParts3D licence to print | Attribution accuracy of an asset that **is** shipping |
+| 2 | **Z-Anatomy** — Gauthier Kervyn (the modeller), via the **models** repo | ✅ sent | **✅ SENT 18 Aug 2026** as [`Z-Anatomy/Models-of-human-anatomy#7`](https://github.com/Z-Anatomy/Models-of-human-anatomy/issues/7) — the wrong UW credit, the BodyParts3D licence question, and the #5 comparison findings. Awaiting reply | Attribution accuracy of an asset that **is** shipping |
 | 3 | **Brainder** — Anderson M. Winkler | ✅ sent | **✅ ANSWERED 17 Aug 2026.** UW attribution denied; a reply with renders is drafted below | No — the component is excluded today |
 | 4 | ~~**University of Washington**~~ | — | ⛔ **Do not send.** The named source denies any UW affiliation, so the premise is gone | No |
 | 5 | **DBCLS** (BodyParts3D) | ✅ `bodyparts@dbcls.rois.ac.jp` | Written confirmation of the 2025-02-27 CC BY 4.0 relicence | No — but the default atlas rests on an unconfirmed reading |
@@ -152,7 +152,15 @@ question. **If there is no reply:** treat as unresolved — the heart stays out.
 
 ---
 
-## 2. Z-Anatomy — tell them their white-matter credit is wrong, and ask which BodyParts3D licence to print
+## 2. Z-Anatomy — ✅ SENT 18 AUGUST 2026, awaiting reply
+
+> **The canonical text is the issue itself:**
+> [`Z-Anatomy/Models-of-human-anatomy#7`](https://github.com/Z-Anatomy/Models-of-human-anatomy/issues/7),
+> filed 18 August 2026 — a lightly tightened edit of the draft below, same claims,
+> same three points, same give-back offer. What lands next depends on the reply:
+> a `License.txt` correction upstream closes the white-matter miscredit at its
+> source; a BodyParts3D answer decides which licence line we print; an ossicle
+> correction, if any, changes one register note. None of it gates anything here.
 
 > ### Venue, in brief (full reconnaissance in the git history of this file)
 >
