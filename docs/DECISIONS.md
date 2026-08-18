@@ -2099,16 +2099,28 @@ decision gate on it: *measure the payload, then choose*. Measured, on
 
 | | Anatomed | ours |
 |---|---|---|
-| edges | 84,360 | 278,402 |
-| gap exactly zero | 96.3 % | **91.9 %** |
+| edges | 84,360 | 280,920 |
+| gap exactly zero | 96.3 % | **89.8 %** |
 | structures with any neighbour | a fraction of ours | 100 % |
-| payload | — | 394 KB at K=12 |
+| payload | — | 395 KB at K=12 |
+
+> ⚠️ **These figures were corrected after review; the conclusion was not.** The
+> first run read `POSITION` without applying the node transform, and the atlas is
+> quantised — every mesh node carries its own scale (0.7853–0.8463) and Y
+> translation (0.7950–0.8540), so a bone and a ligament were measured on rulers
+> 59 mm apart against a 2 mm threshold, and the "body" was 2.000 units tall rather
+> than 1.700 m. It reported **91.9 %** zero-gap over 278,402 edges. Applying the
+> world matrix gives the row above: **89.8 %** over 280,920. The defect was real,
+> the numbers moved, and **the decision stands** — 89.8 % ties is the same answer.
+> `build-adjacency.mjs` now asserts the body height in metres before it measures
+> anything, because the wrong ruler was silent and every downstream number looked
+> plausible.
 
 **We reproduced the defect we criticised.** Not because the idea is wrong but
 because axis-aligned boxes overlap generously in dense anatomy: a box gap of zero
 means "these two boxes intersect", which in a torso is nearly everything against
 nearly everything. Covering 100 % of structures is not a win when the ranking
-inside that coverage is 92 % ties.
+inside that coverage is 90 % ties.
 
 **So it does not ship.** No feature is wired, no artifact is served, and
 `build-adjacency.mjs` stays as the measurement that produced this answer.

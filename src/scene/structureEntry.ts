@@ -71,6 +71,8 @@ export interface StructureEntry {
    * distinct terms against 3,614 structures. Absence means "not yet mapped",
    * never "has no term".
    */
+  ontologyid?: string
+
   /**
    * Terminologia-style Latin name, where the structure has one.
    *
@@ -84,9 +86,13 @@ export interface StructureEntry {
    * For a structure with no ontology term this is the ONLY formal identity it
    * carries — which is most of `z-anatomy-regions`. Counts live in
    * `docs/ONTOLOGY_MAP.md`, generated; do not type one here.
+   *
+   * ⚠️ KEEP THIS BELOW `ontologyid`. It was first written above it, between that
+   * field and its own doc comment, which silently reassigned the ontology
+   * documentation to this field and left `ontologyid` with none at all — only
+   * the LAST block before a declaration binds to it.
    */
   name_lat?: string
-  ontologyid?: string
   /** The merged mesh this structure ended up in, e.g. `musculoskeletal/bone`. */
   mesh?: string
 

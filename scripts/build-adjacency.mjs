@@ -22,7 +22,7 @@
  * ⚠️ THE OUTPUT IS ADAPTED CC BY-SA DATA. It is derived from Z-Anatomy geometry,
  * so it travels with the asset under the asset's terms and never into `src/`.
  */
-import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs'
+import { writeFileSync, mkdirSync, existsSync } from 'node:fs'
 import { dirname, join } from 'node:path'
 import { createRequire } from 'node:module'
 
@@ -39,10 +39,17 @@ const OUT = join(ROOT, 'public/data/adjacency.json')
 /**
  * Contact threshold in METRES.
  *
- * The assets are canonical metres, so this is a real quantity rather than a
- * tuning constant: 2 mm is about the thickness of the fascia between two
- * structures that a viewer would call touching. Stated here once, in the unit
- * the data is in.
+ * 2 mm is about the thickness of the fascia between two structures that a viewer
+ * would call touching. Stated here once, in the unit the data is in.
+ *
+ * ⚠️ METRES ONLY AFTER THE NODE TRANSFORM IS APPLIED, and the first version of
+ * this script did not apply it. The atlas is `KHR_mesh_quantization`d: every
+ * mesh node carries its own scale and translation, and raw `POSITION` is in a
+ * per-node quantised space, NOT in metres. Measured on the shipped asset: the
+ * eleven nodes carry scales from 0.7853 to 0.8463 and Y translations from 0.7950
+ * to 0.8540, so reading POSITION verbatim put a bone and a ligament on different
+ * rulers 59 mm apart — thirty times this threshold — and made every cross-mesh
+ * gap meaningless. `worldBox()` below is what makes the unit true.
  */
 const GAP_M = 0.002
 /** Neighbours kept per structure, nearest first. */
@@ -58,12 +65,23 @@ const io = new NodeIO()
   .registerDependencies({ 'meshopt.decoder': MeshoptDecoder })
 
 const doc = await io.read(SRC)
-const scene = doc.getRoot().listScenes()[0]
+const root = doc.getRoot()
+const scene = root.getDefaultScene() ?? root.listScenes()[0]
 const table = scene?.getExtras()?.structures ?? []
 
-/* --- 2.1: an axis-aligned box per structure -------------------------------- */
-const box = new Map() // id -> [minx,miny,minz,maxx,maxy,maxz]
-for (const mesh of doc.getRoot().listMeshes()) {
+/* --- 2.1: an axis-aligned box per structure, IN WORLD SPACE ---------------- */
+/**
+ * Walk the NODES rather than the meshes, because the transform lives on the node
+ * and a mesh does not know where it was placed. `getWorldMatrix()` composes the
+ * whole parent chain, so this stays correct if the scene graph ever gains
+ * rotation or nesting — today every node is a direct child of the scene with a
+ * pure scale and translation, and that was exactly enough to be wrong.
+ */
+const box = new Map() // id -> [minx,miny,minz,maxx,maxy,maxz], world metres
+for (const node of root.listNodes()) {
+  const mesh = node.getMesh()
+  if (!mesh) continue
+  const m = node.getWorldMatrix()
   for (const prim of mesh.listPrimitives()) {
     const pos = prim.getAttribute('POSITION')
     const sid = prim.getAttribute('_STRUCTURE')
@@ -72,20 +90,44 @@ for (const mesh of doc.getRoot().listMeshes()) {
     for (let i = 0; i < pos.getCount(); i++) {
       const id = sid.getElement(i, [0])[0]
       pos.getElement(i, p)
+      // Column-major 4x4 times (x, y, z, 1).
+      const x = m[0] * p[0] + m[4] * p[1] + m[8] * p[2] + m[12]
+      const y = m[1] * p[0] + m[5] * p[1] + m[9] * p[2] + m[13]
+      const z = m[2] * p[0] + m[6] * p[1] + m[10] * p[2] + m[14]
       const b = box.get(id)
-      if (!b) box.set(id, [p[0], p[1], p[2], p[0], p[1], p[2]])
+      if (!b) box.set(id, [x, y, z, x, y, z])
       else {
-        if (p[0] < b[0]) b[0] = p[0]
-        if (p[1] < b[1]) b[1] = p[1]
-        if (p[2] < b[2]) b[2] = p[2]
-        if (p[0] > b[3]) b[3] = p[0]
-        if (p[1] > b[4]) b[4] = p[1]
-        if (p[2] > b[5]) b[5] = p[2]
+        if (x < b[0]) b[0] = x
+        if (y < b[1]) b[1] = y
+        if (z < b[2]) b[2] = z
+        if (x > b[3]) b[3] = x
+        if (y > b[4]) b[4] = y
+        if (z > b[5]) b[5] = z
       }
     }
   }
 }
 console.log(`${table.length.toLocaleString()} structures, ${box.size.toLocaleString()} with geometry`)
+
+/**
+ * ⚠️ ASSERT THE UNIT, because the bug this replaces was silent. Reading POSITION
+ * without the node transform produced a "body" 2.000 units tall and every
+ * downstream number still looked reasonable — the threshold, the edge count and
+ * the zero-gap percentage were all plausible and all measured on the wrong
+ * ruler. A gap threshold in metres is only meaningful if the geometry is in
+ * metres, so check it here rather than trusting it.
+ */
+const heights = [...box.values()]
+const bodyHeight = Math.max(...heights.map((b) => b[4])) - Math.min(...heights.map((b) => b[1]))
+if (!(bodyHeight > 1.4 && bodyHeight < 2.1)) {
+  console.error(
+    `✗ body height measures ${bodyHeight.toFixed(3)} — that is not metres.\n` +
+      '  GAP_M is a threshold in metres, so this run would be meaningless.\n' +
+      '  Check that the node world transform is being applied to POSITION.',
+  )
+  process.exit(1)
+}
+console.log(`  body height           : ${bodyHeight.toFixed(3)} m (unit check passed)`)
 
 /* --- 2.2: adjacency by box gap --------------------------------------------- */
 const ids = [...box.keys()]

@@ -54,23 +54,38 @@ if (!SRC || SRC.startsWith('--') || !existsSync(SRC)) {
 }
 
 /**
- * "1st" -> "First". Their spelling to ours.
+ * "1st" -> "first". Their spelling of an ordinal to ours.
  *
- * A closed list rather than a number-to-word library, because the only ordinals
- * that appear are these, and a library would happily convert something that is
- * not an ordinal at all.
+ * A closed list rather than a number-to-word library, because a library would
+ * happily convert something that is not an ordinal at all.
+ *
+ * ⚠️ `2d` AND `3d` ARE IN THE LIST BECAUSE THE CATALOGUE USES THEM — it writes
+ * "2d metacarpal bone", not "2nd". The first version of this list carried only
+ * the regular spellings and claimed in a comment that those were the only ones
+ * that appear; 50 parts say otherwise. It cost nothing at the time, because
+ * those particular parts carry no Latin name, which is exactly what makes the
+ * omission dangerous: a miss here is indistinguishable from "this part has no
+ * Latin name", so a catalogue revision would have dropped them in silence.
+ *
+ * ⚠️ NOT ANCHORED TO THE START. 267 parts carry the ordinal mid-name, as in
+ * "Costal cartilage of 10th rib" against our "…of tenth rib". Word boundaries
+ * on both sides keep this a spelling substitution rather than a similarity
+ * judgement — it is still exact matching (D18), just of a normalised string.
  */
 const ORDINALS = [
-  ['1st', 'First'], ['2nd', 'Second'], ['3rd', 'Third'], ['4th', 'Fourth'],
-  ['5th', 'Fifth'], ['6th', 'Sixth'], ['7th', 'Seventh'], ['8th', 'Eighth'],
-  ['9th', 'Ninth'], ['10th', 'Tenth'], ['11th', 'Eleventh'], ['12th', 'Twelfth'],
+  ['1st', 'first'], ['2nd', 'second'], ['2d', 'second'], ['3rd', 'third'], ['3d', 'third'],
+  ['4th', 'fourth'], ['5th', 'fifth'], ['6th', 'sixth'], ['7th', 'seventh'],
+  ['8th', 'eighth'], ['9th', 'ninth'], ['10th', 'tenth'], ['11th', 'eleventh'],
+  ['12th', 'twelfth'],
 ]
 const normalise = (s) => {
-  let out = String(s ?? '').trim()
+  let out = String(s ?? '')
+    .trim()
+    .toLowerCase()
   for (const [from, to] of ORDINALS) {
-    out = out.replace(new RegExp(`^${from}\\b`, 'i'), to)
+    out = out.replace(new RegExp(`\\b${from}\\b`, 'g'), to)
   }
-  return out.toLowerCase()
+  return out
 }
 const SIDE = { l: 'left', r: 'right' }
 
@@ -115,7 +130,11 @@ for (const file of ASSETS) {
     continue
   }
   const doc = await io.read(file)
-  const table = doc.getRoot().listScenes()[0]?.getExtras()?.structures ?? []
+  const r = doc.getRoot()
+  // The default scene, not scene zero — a re-export can renumber them, and the
+  // wrong scene has no structure table at all, which would look like a clean run
+  // that simply found nothing.
+  const table = (r.getDefaultScene() ?? r.listScenes()[0])?.getExtras()?.structures ?? []
   let hit = 0
   for (const s of table) {
     if (s.attachment) {

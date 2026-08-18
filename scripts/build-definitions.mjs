@@ -86,7 +86,6 @@ const io = new NodeIO()
   .registerExtensions(ALL_EXTENSIONS)
   .registerDependencies({ 'meshopt.decoder': MeshoptDecoder })
 
-const sleep = (ms) => new Promise((r) => setTimeout(r, ms))
 const CURIE = /\b(UBERON|FMA)[:_]?(\d+)\b/i
 
 /** Every CURIE any shipped asset carries, and which files carry it. */

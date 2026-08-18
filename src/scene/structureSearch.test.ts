@@ -195,6 +195,10 @@ describe('Latin nomenclature (D24)', () => {
   it('does not let Latin resolve a TERM — that would be approximate matching onto an identifier', () => {
     // "Gaster" is the Latin for stomach; it must not produce an FMA resolution.
     const hits = searchStructures(atlas, 'Gaster')
+    // ⚠️ Assert there IS a hit first. `every` is true of an empty array, so
+    // without this the test passed whether or not Latin search returned
+    // anything — a guard that cannot fail is not a guard.
+    expect(hits.length).toBeGreaterThan(0)
     expect(hits.every((h) => h.via === 'latin')).toBe(true)
   })
 })
