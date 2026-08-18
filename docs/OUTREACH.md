@@ -545,6 +545,70 @@ Library page.
 > how did Z-Anatomy obtain a model that cannot be downloaded?* The second half is
 > really a question for Z-Anatomy (issue #7), and their answer may matter more.
 
+**Reply to send — to `c.d.erolin@dundee.ac.uk`, cc Eve (medical school) as she copied in:**
+
+**Subject:** Re: Credit wording — both chains are live, and two questions back
+
+> Dear Caroline,
+>
+> Thank you — that was exactly the detail we were missing, and both chains are now
+> live at <https://opentwin.opening.science>. The credits read:
+>
+> > Anatomy of the Inner Ear — University of Dundee School of Medicine — CC BY-NC-SA 4.0
+> > ↳ a derivative of "3D Ear" by W. Robert J. Funnell, Sam Daniel and Daren Nicholson
+> >   at McGill University, used under CC BY-NC-SA 1.0
+> >
+> > Cranial Nerves and Foramina — University of Dundee, CAHID — produced by Sophia
+> > Lappe — CC BY 4.0
+> > ↳ based upon the BodyParts3D data set, © The Database Center for Life Science,
+> >   licensed under CC Attribution-Share Alike 2.1 Japan
+>
+> They appear in the interface (open "All models and sources"), in the machine-readable
+> register in the repository, and inside the asset files themselves, so the credit
+> travels if a file is ever handed on without the app around it.
+>
+> On where they are used: they reach us through **Z-Anatomy**, not from your Sketchfab
+> pages directly. Z-Anatomy publishes a Blender/FBX distribution whose licence file
+> lists both of your models among its included components; we convert those files to
+> glTF for the browser. That is why you could not find them on their website — the web
+> app there shows only the skeleton, while the downloadable model set is the full body.
+>
+> Two questions back, if you have the patience for them.
+>
+> 1. **Is Cranial Nerves and Foramina really CC BY 4.0?** We print that on Z-Anatomy's
+>    authority, but your Sketchfab page for it states no licence at all, and the model
+>    is not downloadable there. (Your inner-ear page, by contrast, states CC BY-NC-SA
+>    4.0 explicitly and is downloadable.) If the licence is something else — a
+>    colleague's similar cranial-nerves model is listed CC BY-SA 4.0 elsewhere — we
+>    would rather print what you intend. And if you know how Z-Anatomy obtained it, we
+>    would be glad to know; we have an open question with them about their licence
+>    file and can pass anything on.
+> 2. **The chain behind McGill.** In verifying the "3D Ear" credit I found that the
+>    McGill site (`audilab.bmed.mcgill.ca`) no longer resolves — the licence statement
+>    is confirmed only from the Internet Archive — and that its own about page says the
+>    models derive from MRI of a human cadaver provided by Drs O. W. Henson Jr and
+>    Miriam Henson at UNC Chapel Hill, scanned at Duke. Nobody downstream credits them.
+>    If you agree that is the same chain, we will add them; you are better placed than
+>    we are to say whether it is right. Also, a small one: McGill spell it
+>    **Nicholson** where your notice has "Nicolson" — we have followed McGill, but say
+>    if you would rather we match yours.
+>
+> One thing you may want to know, offered as information and not as a complaint: CC
+> ShareAlike **1.0** requires adaptations under exactly 1.0 — the "or later version"
+> option only arrives with 2.0 — so the 1.0 → 4.0 step in the inner ear's notice is
+> not something that licence offers, and Sketchfab has no 1.0 option to choose. It
+> makes no difference to us, since the non-commercial term flows down under any
+> reading and this project is non-commercial and open source, but it might matter for
+> a future release of yours.
+>
+> Happy to send screenshots of how the credits render, or to change any wording you
+> would prefer.
+>
+> With thanks,
+>
+> Martin Etzrodt
+> Open Science Foundation · Matten bei Interlaken, Switzerland
+
 <details>
 <summary>The letter as sent, 17 August 2026</summary>
 
