@@ -16,9 +16,11 @@
 >
 > **Read `docs/HANDOVER.md` first**, then `docs/README.md` for the documentation
 > index — it says which documents are current and which are historical. Decisions
-> and their reversals are in `docs/DECISIONS.md` (D1–D18). There are **two live
-> plans, deliberately**: `docs/PLAN_NEXT.md` for repo quality and
-> `docs/PLAN_INTEGRATION.md` for new geometry. `docs/ROADMAP.md` holds the phases.
+> and their reversals are in `docs/DECISIONS.md` (D1–D19). There are **two live
+> plans**: `docs/PLAN_NEXT.md` for repo quality and `docs/PLAN_IDENTITY.md` for
+> the current milestone. ⚠️ `docs/PLAN_INTEGRATION.md` is **finished and
+> historical** — all five of its items landed — and this box described it as live
+> long after that stopped being true; `docs/README.md` had it right. `docs/ROADMAP.md` holds the phases.
 >
 > **Four documents are generated and must not be hand-edited** —
 > `docs/LICENCE_LOG.md` (`npm run check:licences`), `docs/ONTOLOGY_MAP.md`

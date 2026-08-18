@@ -40,6 +40,7 @@
     "gen:bridge-module": "node scripts/gen-bridge-module.mjs",
     "check:crosswalk": "node scripts/check-crosswalk.mjs",
     "check:dist": "node scripts/check-dist-assets.mjs",
+    "pr:gate": "node scripts/pr-gate.mjs",
     "gen:preview": "node scripts/gen-preview.mjs --url http://localhost:5173"
   },
   "dependencies": {

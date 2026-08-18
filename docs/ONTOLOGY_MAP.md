@@ -19,12 +19,12 @@ A crosswalk in `docs/` is not a join the app can make. Unless the term travels i
 | `hra` | 96 mesh nodes | 85 (89 %) | node `extras.ontologyid` |
 | `hra-m` | 85 mesh nodes | 76 (89 %) | node `extras.ontologyid` |
 | `bodyparts3d` | 1,838 in the structure table | 1,838 (100 %) | structure table |
-| `z-anatomy` | 3,614 in the structure table | 1,842 (51 %) | structure table |
+| `z-anatomy` | 3,617 in the structure table | 1,946 (54 %) | structure table |
 | `z-anatomy-regions` | 257 in the structure table | 0 (0 %) | **nowhere — name only** |
 | `htb-ct-f` | 33 mesh nodes | 33 (100 %) | node `extras.ontologyid` |
 | `ct-atlas-f` | 109 mesh nodes | 109 (100 %) | node `extras.ontologyid` |
 
-**1 of the 7 built assets carry no term at all: `z-anatomy-regions`.** Z-Anatomy ships 3,614 named structures and now carries 1,842 of them (51 %), written into the structure table from `docs/z-anatomy-fma.tsv`, which maps 1,479 distinct terms across 1,482 rows. The remainder is unmapped crosswalk, not a pipeline failure. BodyParts3D carries 1,838 of 1,838 (100 %), from `docs/bodyparts3d-system-map.tsv`. It is still merged to eleven draw calls — the ids travel in the structure table and the `_STRUCTURE` attribute, not in the node graph, so the draw-call budget is unaffected.
+**1 of the 7 built assets carry no term at all: `z-anatomy-regions`.** Z-Anatomy ships 3,617 named structures and now carries 1,946 of them (54 %), written into the structure table from `docs/z-anatomy-fma.tsv`, which maps 1,479 distinct terms across 1,482 rows. The remainder is unmapped crosswalk, not a pipeline failure. BodyParts3D carries 1,838 of 1,838 (100 %), from `docs/bodyparts3d-system-map.tsv`. It is still merged to eleven draw calls — the ids travel in the structure table and the `_STRUCTURE` attribute, not in the node graph, so the draw-call budget is unaffected.
 
 ## The FMA ↔ UBERON bridge
 
@@ -2484,11 +2484,11 @@ Each overlay’s own parts, read from its asset, matched against the crosswalks 
 
 ### ⚠️ The conflict this table found: the schematic eye
 
-The eye overlay was built and documented on the basis that **no atlas here contained an eyeball**. That was true of the three-file Z-Anatomy build and stopped being true when `NervousSystem100.fbx` was imported; nothing re-checked it until this table was generated. Z-Anatomy carries a complete bilateral globe under `nervous` — 11 distinct parts (anterior chamber of eyeball, anterior segment of eyeball, cornea, iris, lens, posterior segment of eyeball, retina, sclera, suspensory ligament of eyeball, vitreous body, zonular fibres) — **22 structures at ids 2626–2647**, contiguous. There is no left/right obstacle either, because the eye overlay already places two instances.
+The eye overlay was built and documented on the basis that **no atlas here contained an eyeball**. That was true of the three-file Z-Anatomy build and stopped being true when `NervousSystem100.fbx` was imported; nothing re-checked it until this table was generated. Z-Anatomy carries a complete bilateral globe under `nervous` — 11 distinct parts (anterior chamber of eyeball, anterior segment of eyeball, cornea, iris, lens, posterior segment of eyeball, retina, sclera, suspensory ligament of eyeball, vitreous body, zonular fibres) — **22 structures at ids 2629–2650**, contiguous. There is no left/right obstacle either, because the eye overlay already places two instances.
 
 It is **not** wired up, deliberately, and the decision is recorded rather than taken: the schematic models three refracting surfaces, while Z-Anatomy models the sclera and iris it does not have. Superseding would render LESS anatomy in exchange for correct optics, which contradicts the overlay’s own note that it is "not a substitute for an anatomical eye". Until that is settled, switching the eye on over Z-Anatomy draws two overlapping globes.
 
-⚠️ **The reason previously given for not narrowing the mask no longer holds, and it was the only one.** This section used to say that masking just cornea, lens and retina was unavailable because those ids "are not contiguous, and the masking mechanism takes a range". The mechanism stopped taking a range when `src/scene/structureMask.ts` replaced `{lo, hi}` with a per-structure texture indexed by id — done for the ear, whose two sides interleave — so an arbitrary set is exactly what it now consumes. Those three sit at ids **2628, 2632, 2638, 2641, 2645, 2646** and could be masked today. What remains is the ANATOMICAL question above, which is a judgement about rendering less anatomy for better optics, not a capability gap. Settle that on its merits.
+⚠️ **The reason previously given for not narrowing the mask no longer holds, and it was the only one.** This section used to say that masking just cornea, lens and retina was unavailable because those ids "are not contiguous, and the masking mechanism takes a range". The mechanism stopped taking a range when `src/scene/structureMask.ts` replaced `{lo, hi}` with a per-structure texture indexed by id — done for the ear, whose two sides interleave — so an arbitrary set is exactly what it now consumes. Those three sit at ids **2631, 2635, 2641, 2644, 2648, 2649** and could be masked today. What remains is the ANATOMICAL question above, which is a judgement about rendering less anatomy for better optics, not a capability gap. Settle that on its merits.
 
 ---
 

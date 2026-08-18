@@ -1664,17 +1664,18 @@ guessed at, because each is a terminology or product call and not a lookup.
 
 ### The eye overlay masks cornea, lens and retina — nothing else
 
-Z-Anatomy carries a complete bilateral globe: 22 structures, 11 parts a side.
+Z-Anatomy carries a complete bilateral globe — `npm run gen:ontology` reports the
+current part count and ids.
 Three options were real, and the middle one is the only one that adds without
 subtracting.
 
 | option | outcome |
 |---|---|
-| mask all 22 | one clean eye, but LESS anatomy — loses sclera, iris, vitreous, chambers |
+| mask the whole globe | one clean eye, but LESS anatomy — loses sclera, iris, vitreous, chambers |
 | mask nothing | two overlapping globes whenever the overlay is on over Z-Anatomy |
-| **mask the 3 refracting surfaces** | correct optics inside Z-Anatomy's own shell |
+| **mask the 3 optical structures** | correct optics inside Z-Anatomy's own shell |
 
-The overlay's own note says it is "not a substitute for an anatomical eye", so
+⚠️ Two of the three REFRACT (cornea, lens); the retina does not — it is the photosensitive surface they focus onto. Calling all three "refracting surfaces" was wrong and is corrected here. The overlay's own note says it is "not a substitute for an anatomical eye", so
 masking the sclera and iris it does not model would have made the interface
 contradict its own caption.
 
@@ -1682,8 +1683,13 @@ contradict its own caption.
 `ONTOLOGY_MAP.md` recorded the narrow mask as unavailable because the three ids
 "are not contiguous, and the masking mechanism takes a range". True when written;
 false from the moment `structureMask.ts` became a per-structure texture for the
-ear. Measured on the shipped asset the six sided structures are at ids 2628,
-2632, 2638, 2641, 2645, 2646 — which no `{lo, hi}` could ever have expressed.
+ear. The six sided structures they resolve to are not contiguous, so no `{lo, hi}`
+could ever have expressed them.
+
+⚠️ **This paragraph used to name those ids, which is the exact rule D18 wrote and
+CodeRabbit caught two entries later.** Ids drift on an asset rebuild and prose
+cannot follow. `npm run gen:ontology` measures and prints them; the mask resolves
+them by NAME at runtime and never from a number typed here.
 The document had also been carrying hand-typed ids that a rebuild invalidated
 (D18), so the generator now measures them.
 
@@ -1717,3 +1723,136 @@ unmatched, most are `adds an organ` — scala tympani and vestibuli, the facial
 nerve, the heart's epicardium and endocardia — anatomy no atlas here models, so
 there is nothing to supersede and no term would change it. `Chorda Tympani` is
 the one genuine missing term.
+
+---
+
+## D20 — The "University of Washington white matter" was two things, and both are licensed
+
+**17 August 2026.** The one component `--publishable` existed to drop is
+re-identified, relicensed and restored. The publishable and research builds
+converge: nothing in the Z-Anatomy asset is excluded any more.
+
+### What the credit said, and who denied it
+
+Z-Anatomy's `Resources/Models/License.txt` lists, alone among its components
+with **no licence**: *"'Brainder' and 'White matter' from the University of
+Washington"*. Silence grants nothing, so those structures were excluded from
+every served build — correctly, on what was then known.
+
+Then the named source answered. **Anderson M. Winkler, the author of Brainder
+(brainder.org), wrote on 17 August 2026 that neither he nor Brainder has ever
+been affiliated with the University of Washington.** The upstream credit is
+wrong on its face — and "Brainder" is not an institution's project to name; it
+IS Winkler's site.
+
+### The discriminator he gave, and what measurement found
+
+Winkler's test: Brainder ships **cortical** surfaces — pial, and a "white"
+surface that is the grey/white **boundary**, not white matter proper. Tracts and
+fasciculi are not his; a folded boundary shell could be.
+
+Measured on `NervousSystem100.fbx` (weld → union-find → Euler characteristic,
+plus area/volume sphericity), the component is **two different objects that one
+name regex had lumped together**:
+
+| | telencephalon pair (l, r) | spinal cord |
+|---|---|---|
+| topology | closed, one dominant shell each | open tube, 255 boundary edges |
+| folding | sphericity 0.219 — the folded-cortical range | smooth; thin, not folded |
+| reading | a FreeSurfer-style **white surface** — his description exactly | modelled anatomy following the vertebral canal |
+
+The two hemispheres are exact mirrors of one source hemisphere — how a
+downloaded reference is used, not how anatomy is sculpted. Renders were sent to
+Winkler for confirmation.
+
+### Why publishable without waiting for his reply
+
+The remaining uncertainty is *which* licensed branch applies, not *whether* one
+does:
+
+- **Derived from Brain for Blender** → CC BY-SA 3.0, whose §4(b) permits
+  distributing adaptations under a later licence version. Our CC BY-SA 4.0
+  asset qualifies.
+- **"Used as reference" only** (upstream's other phrasing) → the geometry is
+  Z-Anatomy's own CC BY-SA 4.0 work.
+
+The only reading that ever blocked distribution — an unlicensed University of
+Washington release — is the one its alleged source denies. Winkler's
+confirmation from the renders decides the **credit wording**; it does not gate
+the publishability, and the register says so.
+
+### What changed
+
+- `COMPONENTS` in `build-z-anatomy.mjs`: `white-matter-uw` (NONE STATED) became
+  `white-matter-brainder` (CC BY-SA 3.0), **telencephalon only**.
+- The spinal cord is deliberately **untagged**: Brainder is cortex-only by its
+  author's statement, and the only line tying that tube to any third party was
+  the discredited UW credit. It returns to the file's default — Z-Anatomy's own
+  work — because tagging it to any component now would be over-attribution, the
+  inner-ear pattern's mistake again. Item 2 of `docs/OUTREACH.md` asks upstream
+  to confirm.
+- `COPYRIGHT_MAIN`, `licences.json`, and the in-app credit in
+  `anatomySources.ts` now name Brain for Blender and Winkler; `needsPermission`
+  is gone.
+- The asset was rebuilt from the FBX set (byte-verified against upstream's
+  repository) so the three structures are actually in the shipped build.
+
+### What this does NOT settle
+
+The credit **wording** waits for Winkler; upstream's own licence file still
+carries the wrong attribution, which item 2 of `docs/OUTREACH.md` raises so the
+error stops propagating downstream of Z-Anatomy; and if Winkler unexpectedly
+says the cortical pair is not his, the component reverts to Z-Anatomy's own
+CC BY-SA 4.0 — still licensed, different credit line.
+
+---
+
+## D21 — The heart's donor is CARDIOHANCE, and the login wall comes down
+
+**18 August 2026.** The last provenance gate on the beating heart is answered by
+its corresponding author, and with it the last reason the site was gated. Two
+changes follow, plus one new mechanism the public state required.
+
+### The answer, verbatim in substance
+
+Joshua Dillon (Auckland Bioengineering Institute) wrote on 18 August 2026: the
+bundled `patient1` demo case is from **CARDIOHANCE**, for which the authors hold
+**local ethics approval to share online**, and there are **no restrictions** on
+our further use. Requested credit: the GitHub repository plus a biv-me paper —
+preferring the **2026 Medical Image Analysis paper** over the superseded FIMH
+2025 one this register had been citing:
+
+> Dillon, J., Mauger, C., Zhao, D., Petersen, S. E., McCulloch, A. D., Young,
+> A. A., & Nash, M. P. (2026). biv-me: Open-source software for generating
+> time-varying biventricular meshes from cine cardiovascular magnetic resonance
+> imaging with multi-cohort validation. *Medical Image Analysis*, 114, 104252.
+> doi:10.1016/j.media.2026.104252
+
+So the UK Biobank branch — the one that would have forced withdrawal — is dead,
+and the Sunnybrook CC0 fallback (`INTEGRATION_CANDIDATES.md` C3) stays recorded
+as history only. `beating-heart` flips to `publishable: true`; the attribution
+names the cohort, the ethics basis and the 2026 citation.
+
+### The wall comes down — and what that made mechanical
+
+With the heart resolved, exactly one asset still failed the public bar:
+**`ct-atlas-f`**, whose source scan was never recorded (a record we failed to
+keep, not a party we failed to ask — report 05). Until now only memory kept it
+out of a public deploy, which `docs/OUTREACH.md` had flagged as the gap.
+
+Now it is mechanical, and driven by the rights register rather than by a list
+in build config: `pruneUnshippedModels` (vite.config.ts) reads `licences.json`
+and **withholds from `dist` any asset whose `ownLicence` says "unresolved" or
+that carries a `gate` field**; `scripts/check-dist-assets.mjs` asserts the same
+rule from the other side, failing if a withheld asset leaks into `dist`.
+Resolving an asset in the register is what ships it — no code change, no
+memory. The CT-atlas pill degrades to "not installed" on the public site, which
+is the documented honest state.
+
+### What this does NOT settle
+
+`ct-atlas-f` itself — establish the source scan's provenance or regenerate from
+a scan with a known licence, then clear its register entry and it ships
+automatically. And the site being public raises the stakes on every remaining
+credit-wording thread in `docs/OUTREACH.md`; none of them gates, all of them
+are now visible to their subjects.

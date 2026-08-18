@@ -39,6 +39,7 @@ than the result.
 | [`DATA_CONTRACT.md`](DATA_CONTRACT.md) | `TwinMetrics`, the one boundary between this repo and the data upstream |
 | [`RESOURCES.md`](RESOURCES.md) | Every resource evaluated, with licence and standing |
 | [`DEPLOY.md`](DEPLOY.md) | Shipping it, including the publishable-build gate |
+| [`OUTREACH.md`](OUTREACH.md) | The letters owed before a public release — one recipient, address and sendable draft per open question in the licence log |
 | [`reports/`](reports/README.md) | **6 technical reports** — photographic colour (answers D4), the CT pipeline, the geometry survey, ontology identity, the licence position |
 | [`STACK_AND_MODELS.md`](STACK_AND_MODELS.md) | Dated snapshot: the stack, all ten models, and how publishable each is as presented. Point-in-time — the generated docs above win on conflict |
 | [`ROADMAP.md`](ROADMAP.md) | Phases and their state |

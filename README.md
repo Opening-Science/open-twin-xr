@@ -104,16 +104,18 @@ rejected.
 | [HuBMAP HRA](https://humanatlas.io/) | CC BY 4.0 | Organ-scale, UBERON-rich, both sexes |
 | [Visible Human Project](https://www.nlm.nih.gov/research/visible/) — US NLM | Public domain | The donors HRA derives from |
 | [Healthy-Total-Body-CTs](https://www.cancerimagingarchive.net/collection/healthy-total-body-cts/) — TCIA | CC BY 4.0 | The first complete female body here. Subject 003, at her measured size |
-| [biv-me](https://github.com/UOA-Heart-Mechanics-Research/biv-me) — Univ. of Auckland | Apache-2.0 ⚠️ | Beating heart overlay, 25 cardiac phases. ⚠️ Subject provenance unconfirmed upstream — not publishable yet |
+| [biv-me](https://github.com/UOA-Heart-Mechanics-Research/biv-me) — Univ. of Auckland | Apache-2.0 | Beating heart overlay, 25 cardiac phases. Donor: a CARDIOHANCE participant, shared with local ethics approval (confirmed by the authors — D21). Cite Dillon et al. 2026, *Med Image Anal* 114:104252 |
 | [OpenEar](https://zenodo.org/record/1473724) — MED-EL / Univ. of Bern | CC BY 4.0 | Temporal bone with **photographic** surface colour from micro-slicing |
 | [Arizona eye model](https://doi.org/10.1364/JOSAA.14.002884) — Schwiegerling | Parameters, not a work | The schematic eye is generated from published radii and conics, so this project owns the mesh outright |
 | [AnatomyTOOL / Open3Dmodel](https://anatomytool.org/open3dmodel-about) — Leiden UMC | CC BY-SA | Verified importable — shares our exact frame. Not yet imported |
 
 Third-party components inside Z-Anatomy — the inner ear (Univ. of Dundee,
 CC BY-NC-SA 4.0), the kidney (lissiecowley, CC BY-NC 4.0), Cranial Nerves and
-Foramina (Univ. of Dundee CAHID, CC BY 4.0), and white matter (Univ. of
-Washington, **no licence stated**) — are credited in-app and recorded per
-structure. See the generated table in `docs/HANDOVER.md`.
+Foramina (Univ. of Dundee CAHID, CC BY 4.0), and the white matter boundary
+surfaces (Brain for Blender, Anderson M. Winkler, CC BY-SA 3.0 — upstream
+miscredits them to the University of Washington, which their author denies;
+see D20) — are credited in-app and recorded per structure. See the generated
+table in `docs/HANDOVER.md`.
 
 ### Segmentation and mesh pipeline
 

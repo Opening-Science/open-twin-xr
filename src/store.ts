@@ -136,8 +136,10 @@ interface TwinState {
   atlasAvailability: Record<string, boolean> | null
   /**
    * Which organ-overlay assets the server actually has, or null before the probe
-   * answers. A publishable build may legitimately omit one — the beating heart is
-   * `publishable: false` — so the toggle has to know rather than 404 in the Canvas.
+   * answers. A publishable build may legitimately omit one — the beating heart
+   * was `publishable: false` until its provenance resolved (D21), and the next
+   * unresolved asset will be withheld the same way — so the toggle has to know
+   * rather than 404 in the Canvas.
    */
   overlayAvailability: Record<string, boolean> | null
   /**

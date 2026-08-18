@@ -203,11 +203,12 @@ export const ORGAN_OVERLAYS: Record<OrganOverlayId, OrganOverlay> = {
     licenceUrl: 'https://www.apache.org/licenses/LICENSE-2.0',
     attribution:
       'Beating biventricular heart from biv-me (UOA Heart Mechanics Research), Apache-2.0 — ' +
-      'a model fitted to one subject’s cine MRI, 25 cardiac phases.',
+      'fitted to cine CMR of a CARDIOHANCE study participant, shared with local ethics ' +
+      'approval; 25 cardiac phases. Cite Dillon et al. 2026, Medical Image Analysis 114:104252.',
     shareAlike: false,
     system: 'cardiovascular',
     donor: {
-      label: 'biv-me demo subject',
+      label: 'CARDIOHANCE participant (biv-me demo case)',
       derivedFrom: 'cine MRI, fitted biventricular model, 25 phases across one cardiac cycle',
     },
     // Fallback = the HRA placement, since HRA is where the heart was first
@@ -260,10 +261,20 @@ export const ORGAN_OVERLAYS: Record<OrganOverlayId, OrganOverlay> = {
         'phase, fitted upstream to one subject’s cine MRI.',
     },
     animation: { name: 'cardiac-cycle', baseCycleSeconds: 1 },
-    publishable: false,
+    /**
+     * RESOLVED 18 August 2026 (D21). This was `false` for three weeks on one
+     * open question — which cohort the bundled demo case came from, UK Biobank
+     * or CARDIOHANCE. Answered in writing by the corresponding author, Joshua
+     * Dillon (Auckland Bioengineering Institute): it is a CARDIOHANCE
+     * participant, with local ethics approval to share online and no
+     * restrictions on further use. Requested credit: the GitHub repository and
+     * the 2026 Medical Image Analysis paper (preferred over the superseded
+     * FIMH 2025 one) — both are in the attribution above.
+     */
+    publishable: true,
     note:
-      'The demo subject’s provenance is unconfirmed upstream, so this is for local ' +
-      'evaluation and not for publication.',
+      'One CARDIOHANCE study participant’s heart, shared with local ethics approval — ' +
+      'a different person from the body it sits inside, at their measured size.',
   },
 
   /**
@@ -300,7 +311,7 @@ export const ORGAN_OVERLAYS: Record<OrganOverlayId, OrganOverlay> = {
    * left/right obstacle either, because this overlay already places two instances.
    *
    * It is deliberately NOT wired up, because the swap would trade anatomy for
-   * optics. This asset models three refracting surfaces; Z-Anatomy's eye models the
+   * optics. This asset models three optical structures — two refracting (cornea, lens) and the photosensitive retina; Z-Anatomy's eye models the
    * sclera and iris this one does not have, so superseding would render LESS
    * anatomy in exchange for a correct optical model — and the note below already
    * tells the viewer this is "not a substitute for an anatomical eye". Making that
@@ -337,7 +348,7 @@ export const ORGAN_OVERLAYS: Record<OrganOverlayId, OrganOverlay> = {
       { side: 'Right', position: [-0.0315, 1.5839, 0.056], quaternion: [0, 0, 0, 1] },
     ],
     /**
-     * ⚠️ SUPERSEDES ONLY THE THREE REFRACTING SURFACES, not the whole globe.
+     * ⚠️ SUPERSEDES ONLY ITS OWN THREE OPTICAL STRUCTURES, not the whole globe.
      *
      * Z-Anatomy carries a complete bilateral eye — 22 structures, 11 parts per
      * side: cornea, lens, retina, sclera, iris, vitreous body, zonular fibres,
@@ -355,8 +366,9 @@ export const ORGAN_OVERLAYS: Record<OrganOverlayId, OrganOverlay> = {
      * `docs/ONTOLOGY_MAP.md` recorded it as unavailable because "those ids are
      * not contiguous, and the masking mechanism takes a range" — true when
      * written, and false since `structureMask.ts` moved to a per-structure
-     * texture for the ear. Measured on the shipped asset the three sit at ids
-     * 2628, 2632, 2638, 2641, 2645 and 2646, which no `{lo, hi}` could express.
+     * texture for the ear. The six sided structures they resolve to do not form a
+     * contiguous range, so no `{lo, hi}` could express them — `npm run gen:ontology`
+     * reports the current ids, which is where to look rather than here.
      *
      * Both sides, unlike the ear: this overlay already places two instances, so
      * there is no one-sided obstacle to work around.

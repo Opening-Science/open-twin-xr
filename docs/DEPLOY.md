@@ -1,6 +1,8 @@
-# Deploying a private preview
+# Deploying the site
 
-Static build plus atlas assets on a small VPS, behind a login wall.
+Static build plus atlas assets on a small VPS. **Public since 18 August 2026 (D21)** —
+it began as a login-gated private preview, and the gating recipe is kept below in case
+a future asset needs a gated evaluation phase again.
 
 **Build on your machine, serve from the server.** The split is not arbitrary — the
 two jobs have completely different requirements, and the measurements are in "Why the
@@ -24,10 +26,13 @@ server can be small" below.
 preview; it does not change what may lawfully be sent to them. Three things follow, none
 of which auth relaxes:
 
-1. **The University of Washington white matter must not go up.** It carries no licence
-   statement, and silence grants nothing — attribution answers a licence's conditions, it
-   cannot create a grant. Build with `--publishable`, which drops it and nothing else
-   (see below).
+1. **The unlicensed-component gate is currently EMPTY (D20, 17 August 2026).** For three
+   weeks this item read "the University of Washington white matter must not go up" — no
+   licence statement, and silence grants nothing. That component is resolved: its named
+   source (Anderson M. Winkler, Brainder) denies any UW affiliation, the telencephalon
+   pair is his CC BY-SA 3.0 grey/white boundary surface, and the spinal cord is
+   Z-Anatomy's own. Keep building with `--publishable` — the flag is the mechanism that
+   catches the *next* unlicensed component, and today it drops nothing.
 2. **The Z-Anatomy-derived GLB is CC BY-SA.** Share-alike attaches to the *adapted* work,
    so once it is being distributed it has to be redistributable under the same terms,
    with attribution and an indication of changes.
@@ -54,16 +59,16 @@ npm run check:winding && npm run check:structures && npm run check:licences
 **`--publishable` is the flag that matters.** It drops components with no licence
 statement and leaves everything else — the non-commercial components stay, because
 non-commercial is compatible with this project's stance and they need attribution, not
-removal. Without it you get the full research build, which is correct locally and
-unlawful to serve.
+removal.
 
-Confirm the roll-call reads `0 structures NONE STATED ... excluded by --publishable`
-before shipping:
-
-```
-0 structures  NONE STATED   Brainder / White matter (University of Washington)
-                            <- excluded by --publishable
-```
+⚠️ **Since D20 (17 August 2026) it drops NOTHING**, because its one caseload — the
+"University of Washington" white matter — turned out to be a wrongly credited CC BY-SA
+3.0 Brainder surface plus Z-Anatomy's own spinal cord, and both now ship. The
+publishable and research builds are currently identical. Keep the flag anyway: it is
+the mechanism, and the next import may need it. What to confirm before shipping is
+therefore the roll-call itself — every component named with a real licence, and **no
+`NONE STATED` line at all**. If one appears, a new unlicensed component has arrived
+and this document's earlier rule applies to it unchanged.
 
 `bodyparts3d`, `hra` and `hra-m` have no unlicensed components, so their existing
 `.ao.glb` builds can go up as they are.
@@ -71,8 +76,10 @@ before shipping:
 ⚠️ Rebuilding also refreshes the component tags, which only change on a rebuild. That is
 how the Dundee inner-ear tag went from 8 structures to **4** — cochlea and vestibule per
 side, dropping the tympanic membrane and auditory tube, which are MIDDLE ear and were
-being over-attributed. 3,617 structures became 3,614. If your counts differ from
-`LICENCE_LOG.md`, the log is right and your build is stale.
+being over-attributed. The structure count has moved twice for tag reasons: down when
+the then-unlicensed white matter was excluded, back up when D20 restored it under its
+real licence. If your counts differ from `LICENCE_LOG.md`, the log is right and your
+build is stale.
 
 ## 2. Build the app
 
@@ -211,8 +218,8 @@ register flags:
 
 | asset | flag | why it shipped anyway |
 |---|---|---|
-| `biv-heart` | `publishable: false` — subject provenance unconfirmed upstream | The audience was gated and named. The risk was accepted knowingly, and the biv-me email is still owed. |
-| `ct-atlas-f` | licence unresolved — source scan never recorded | Same. ⚠️ Do **not** carry this decision into a public release. |
+| `biv-heart` | ~~`publishable: false`~~ **RESOLVED 18 Aug 2026 (D21)** — CARDIOHANCE participant, local ethics approval, no restrictions | Ships publicly, crediting the repo and the 2026 *Medical Image Analysis* paper. The email that was owed was sent and answered. |
+| `ct-atlas-f` | licence unresolved — source scan never recorded | ⚠️ Still unresolved — and since D21 it is **withheld from `dist` mechanically**: the build reads `licences.json` and drops any asset with an unresolved `ownLicence` or a `gate` field, and `check:dist` fails if one leaks. Its pill reads "not installed" on the public site, which is the honest state. Resolve it in the register and it ships. |
 
 ⚠️ **The one thing the gate did NOT relax is the unlicensed white matter.** No audience
 makes geometry servable when no grant exists, so Z-Anatomy was rebuilt with
@@ -237,15 +244,17 @@ curl -s "$VERIFY_URL/" | grep -oE '(src|href)="/assets/[^"]+"'
 curl -s -o /dev/null -w '%{http_code} %{size_download}\n' \
   "$VERIFY_URL/models/bodyparts3d.ao.glb"
 
-# 4. The login wall is still up on the PUBLIC name. 401 is the pass condition.
+# 4. The PUBLIC name serves. Since D21 (wall down) the pass condition is 200;
+#    while the site was gated it was 401. Also confirm the withheld asset is
+#    genuinely absent — 404 here is the PASS condition, not a failure:
 curl -s -o /dev/null -w '%{http_code}\n' "https://$SITE/"
+curl -s -o /dev/null -w '%{http_code}\n' "https://$SITE/models/ct-atlas-f.glb"   # expect 404
 ```
 
-`$VERIFY_URL` is a route that reaches the site without credentials. On the current
-deployment that is the tailnet HTTP route, which exists precisely so a deploy can be
-verified without handling the basic-auth secret. If you have no such route, use the public
-name with credentials from your password manager — but note that step 4 then needs a
-separate unauthenticated request to be meaningful.
+`$VERIFY_URL` is a route that reaches the site without credentials — on the current
+deployment, the tailnet HTTP route. Since the wall came down the public name works for
+every check too; the tailnet route is kept because it also works during any future
+gated phase.
 
 Also worth a glance in a browser: the interface should read **Open Twin XR**, the
 colour-mode toggle should say **Anatomical / Metrics**, and the Look group should offer
@@ -265,16 +274,23 @@ Caddy over nginx here for one reason: **automatic HTTPS with no certbot cron to 
 WebXR requires a secure context, so TLS is not optional for the headset path — it is the
 feature working at all.
 
+> ℹ️ **The login wall came down on 18 August 2026 (D21).** Every rights question
+> that gated the preview is resolved or mechanically withheld, so the site is
+> public and the `basic_auth` block below is HISTORY — kept because it is the
+> correct recipe if a future asset ever needs a gated evaluation again. If you
+> re-add it, remember: a wall limits *who* sees the work, it never changes what
+> may lawfully be sent to them.
+
 ```caddyfile
 $SITE {
 	root * /srv/opentwin/dist
 	encode zstd gzip
 
-	# The login wall. Generate the hash with `caddy hash-password` and put it in an
-	# environment file — NEVER commit it.
-	basic_auth {
-		{$OPENTWIN_USER} {$OPENTWIN_HASH}
-	}
+	# The login wall (REMOVED 18 Aug 2026 — see the note above). Generate the hash
+	# with `caddy hash-password` and put it in an environment file — NEVER commit it.
+	# basic_auth {
+	# 	{$OPENTWIN_USER} {$OPENTWIN_HASH}
+	# }
 
 	# GLBs are content-addressed by rebuild, not by filename, so they must revalidate.
 	# Getting this wrong is not theoretical: a browser holding a cached GLB across a
