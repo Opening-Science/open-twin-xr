@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest'
+import { beforeAll, describe, expect, it } from 'vitest'
 import { existsSync, readFileSync } from 'node:fs'
 import { evaluateAnny, ANNY_NEUTRAL, type AnnyGrid } from './annyGrid'
 import {
@@ -7,6 +7,7 @@ import {
   POSE_NEUTRAL,
   type AnnyRig,
   type AnnyRigMeta,
+  type PoseScratch,
 } from './annyRig'
 
 /**
@@ -92,11 +93,31 @@ function bounds(v: Float32Array) {
 }
 
 describe.skipIf(!have)('anny pose rig', () => {
-  const grid = loadGrid()
-  const rig = loadRig()
-  const { rest, groundOffsetY } = restShape(grid)
-  const scratch = makePoseScratch(rig)
-  const out = new Float32Array(rest.length)
+  /**
+   * ⚠️ LOADED IN A HOOK, NOT IN THE SUITE BODY. vitest still RUNS the body of
+   * a skipped `describe` while it collects the tests — `skipIf` only decides
+   * whether the tests inside execute. With the loads written in the body, this
+   * file threw ENOENT on every clone without the baked grid, which is what CI
+   * is, and the suite the comment above promised would skip failed the whole
+   * run instead — twice, on the same PR. Hooks of a skipped suite never run;
+   * the body always does.
+   */
+  let grid: AnnyGrid
+  let rig: AnnyRig
+  let rest: Float32Array
+  let groundOffsetY: number
+  let scratch: PoseScratch
+  let out: Float32Array
+
+  beforeAll(() => {
+    grid = loadGrid()
+    rig = loadRig()
+    const shape = restShape(grid)
+    rest = shape.rest
+    groundOffsetY = shape.groundOffsetY
+    scratch = makePoseScratch(rig)
+    out = new Float32Array(rest.length)
+  })
 
   it('the rig matches the grid it poses', () => {
     expect(rig.meta.vertices).toBe(grid.meta.vertices)

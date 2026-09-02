@@ -177,6 +177,22 @@ not: the atlases are **different donors**, and the same organ sits 29.3 mm apart
 between two of them. Overlay placement is per-atlas and measured. See
 `placements` in `src/scene/organOverlays.ts`.
 
+### 8. A test that reads an asset must load it inside a hook
+
+No asset is committed, so CI runs every test with `public/models/` empty. Guarding
+a suite with `describe.skipIf(!haveAssets)` is not enough on its own: vitest still
+**executes the body** of a skipped `describe` while it collects the tests, so a
+`readFileSync` written there throws before anything is skipped and the whole file
+fails. `src/scene/annyRig.test.ts` did exactly that — green locally, where the
+baked grid exists, and red in CI twice on the same PR. Load in a `beforeAll`, which
+a skipped suite never runs, or guard the load itself as `annyGrid.test.ts` does.
+
+To see what CI sees, run the suite from a checkout that has no assets:
+
+```bash
+git worktree add ../bare HEAD && ln -s "$PWD/node_modules" ../bare/node_modules && (cd ../bare && npx vitest run)
+```
+
 ---
 
 ## Two things deliberately not built
@@ -210,8 +226,8 @@ between two of them. Overlay placement is per-atlas and measured. See
    usefully, what was **reversed and why**. Several obvious improvements are in
    there as things already tried.
 2. Branch off `main`. Keep the branch focused.
-3. Run `npm run typecheck`, `npm run lint` and `npm run build`. Run the asset gates
-   if you touched the pipeline.
+3. Run `npm run typecheck`, `npm run lint`, `npm run test` and `npm run build`.
+   Run the asset gates if you touched the pipeline.
 4. Open a PR. The template asks which gates you ran and whether you edited a
    generated file — answer both honestly; "not run" is a fine answer, a wrong "yes"
    is not.

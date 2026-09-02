@@ -10,10 +10,12 @@
  *
  * Two facts, both measured rather than assumed:
  *
- *   1. Branch protection and rulesets both return 403 on this repository —
- *      "Upgrade to GitHub Pro or make this repository public". So there are NO
- *      required checks and NO required reviews. Native auto-merge has nothing to
- *      wait for; a PR is mergeable the moment it opens.
+ *   1. When this was written, branch protection and rulesets both returned 403 —
+ *      "Upgrade to GitHub Pro or make this repository public" — so there were NO
+ *      required checks and NO required reviews, and a PR was mergeable the moment
+ *      it opened. The repository has since gone public and a ruleset now guards
+ *      `main`: one approving review, code-owner review and signed commits. None
+ *      of that reads CodeRabbit's threads, so fact 2 still stands on its own.
  *
  *   2. CodeRabbit's status check reports `pass` — "Review completed" — even when
  *      it has findings. On PR #11 it left THIRTEEN inline comments, including a
@@ -25,9 +27,8 @@
  * opposite of what it was asked for. This gate waits for the review to EXIST,
  * then refuses while any of its threads is unresolved.
  *
- * ⚠️ IT IS DISCIPLINE, NOT ENFORCEMENT. Nothing stops a human pressing Merge.
- * Making the repository public, or moving to a plan with rulesets, is what would
- * turn this into a rule GitHub applies.
+ * ⚠️ IT IS DISCIPLINE, NOT ENFORCEMENT. Nothing stops a human pressing Merge past
+ * an unresolved thread; the ruleset enforces reviews and signatures, not this.
  */
 import { execFileSync } from 'node:child_process'
 
