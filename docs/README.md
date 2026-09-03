@@ -44,7 +44,7 @@ than the result.
 | [`STACK_AND_MODELS.md`](STACK_AND_MODELS.md) | Dated snapshot: the stack, all ten models, and how publishable each is as presented. Point-in-time — the generated docs above win on conflict |
 | [`ROADMAP.md`](ROADMAP.md) | Phases and their state |
 | [`PLAN_IDENTITY.md`](PLAN_IDENTITY.md) | **Proposal, not a record** — the next milestone: cross-atlas structure search and selection |
-| [`PLAN_NEXT.md`](PLAN_NEXT.md) | Numbered repo-quality queue; items 19–21 are open |
+| [`PLAN_NEXT.md`](PLAN_NEXT.md) | Numbered repo-quality queue; each item records its own status |
 | [`PLAN_ANATOMED.md`](PLAN_ANATOMED.md) | **Proposal, nothing started** — take Anatomed's Latin names, derive structure adjacency from our own geometry, copy none of its CC BY-SA code |
 | [`PLAN_VIEWER.md`](PLAN_VIEWER.md) | **Proposal, nothing started** — viewer affordances a review of anatomy101.in exposed: deep links keyed by term, cross-section clipping, part-of rollup |
 
