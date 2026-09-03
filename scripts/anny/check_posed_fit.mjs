@@ -17,6 +17,11 @@
  * anatomy the envelope has no surface for. What matters is that it is high and
  * that the exceptions are named.
  *
+ * ⚠️ A REPORT, NOT A GATE. It prints the table and exits 0 whatever the numbers
+ * are, because what counts as an acceptable span delta or containment is a
+ * modelling judgement that D25 records per atlas, not a threshold this script
+ * can own. Read the table; do not read the exit status.
+ *
  *     node scripts/anny/check_posed_fit.mjs
  */
 

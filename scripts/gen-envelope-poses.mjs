@@ -36,6 +36,18 @@ if (!existsSync(IN)) {
 
 const spec = JSON.parse(readFileSync(IN, 'utf8'))
 const poseIds = Object.keys(spec.poses).sort()
+// An empty `poses` is reachable — the measurement emits it when no atlas yields
+// a complete limb on both sides, which a partial asset set can produce — and
+// rendering it would write `export type EnvelopePoseId = ` with no right-hand
+// side, a syntax error that surfaces two commands later in `tsc` rather than
+// here. Refuse before writing, as the missing-input branch above does.
+if (poseIds.length === 0) {
+  console.error(
+    `✗ ${IN} defines no poses — nothing to generate. Re-run \`npm run measure:atlas-pose\` ` +
+      'with the atlas assets present.',
+  )
+  process.exit(1)
+}
 const modes = Object.entries(spec.atlases)
   .map(([id, a]) => [id, a.poseId ?? null])
   .sort(([a], [b]) => a.localeCompare(b))
@@ -67,8 +79,14 @@ const modeRows = modes
 const summary = poseIds
   .map((p) => {
     const entry = spec.poses[p]
-    const driven = Object.values(entry.segments).filter((s) => s.source === 'measured').length
-    return ` *   ${p.padEnd(20)} ${driven}/8 segments measured — covers ${entry.members.join(', ')}`
+    // The total comes from the spec, not from a literal: a segment added to the
+    // measurement's table must not leave this generated line claiming "/8".
+    const all = Object.values(entry.segments)
+    const driven = all.filter((s) => s.source === 'measured').length
+    return (
+      ` *   ${p.padEnd(20)} ${driven}/${all.length} segments measured — ` +
+      `covers ${entry.members.join(', ')}`
+    )
   })
   .join('\n')
 

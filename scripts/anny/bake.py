@@ -134,6 +134,18 @@ def minimal_rotation(a, b):
     return np.eye(3) + K + K @ K * ((1 - c) / (s * s))
 
 
+REPO = Path(__file__).resolve().parents[2]
+
+
+def repo_relative(path):
+    """A path as the repository sees it, with forward slashes; unchanged if outside."""
+    p = Path(path).resolve()
+    try:
+        return p.relative_to(REPO).as_posix()
+    except ValueError:
+        return str(p)
+
+
 def load_pose_spec(path, pose_id):
     """Read one pose out of the generated spec, or fail loudly."""
     spec = json.loads(Path(path).read_text())
@@ -151,15 +163,24 @@ def build_pose_parameters(model, torch, roma, pose, verbose=True):
     """
     Aim ANNY's limb bones along the atlas's measured axes.
 
-    Returns `(pose_parameters, driven)` where `driven` records, per bone, the
-    angle it was actually rotated through — the number that goes into the
-    provenance file and proves the pose did something.
+    Returns `(pose_parameters, driven, targets)`. `driven` records, per bone,
+    the angle from the DEFAULT phenotype's rest axis to the target — the number
+    that decides whether a bone is worth driving at all. `targets` is the unit
+    direction each driven bone was aimed at, so `preset_angles` can measure the
+    rotation each preset's OWN rest pose went through.
+
+    ⚠️ THE TARGET IS PHENOTYPE-INDEPENDENT ON PURPOSE. `world-orient` takes an
+    absolute orientation per bone, so every preset is aimed at the same atlas
+    axis whatever its rest pose was. What differs per preset is the angle
+    travelled to get there, which is why the provenance records that angle per
+    asset rather than copying the default-phenotype figure onto all of them.
     """
     rest = model()
     world_orient = model.get_pose_parameterization(rest, pose_parameterization="world-orient")
     rest_poses = rest["rest_bone_poses"][0].detach().cpu().numpy()
 
     driven = {}
+    targets = {}
     for seg_key, seg in pose["segments"].items():
         source = seg.get("source")
         if source not in ("measured", "default"):
@@ -185,9 +206,29 @@ def build_pose_parameters(model, torch, roma, pose, verbose=True):
             M[:3, :3] = R
             world_orient[0, i] = torch.tensor(M, dtype=world_orient.dtype)
             driven[bone] = {"deg": round(deg, 2), "from": seg_key, "source": source}
+            targets[bone] = target_anny
             if verbose:
                 print(f"    {bone:<14} {deg:5.1f} deg  ({source})")
-    return world_orient, driven
+    return world_orient, driven, targets
+
+
+def preset_angles(model, kwargs, driven, targets):
+    """
+    The angle each driven bone rotates through for ONE preset: from that
+    preset's rest axis to the shared target. ANNY derives `rest_bone_poses`
+    from the phenotype, so `adult-f` and `adult-m` do not start from the same
+    rest axis and do not travel the same angle to the same target. The set of
+    driven bones is fixed by `build_pose_parameters`; only the figure is re-measured.
+    """
+    rest_poses = model(**kwargs)["rest_bone_poses"][0].detach().cpu().numpy()
+    out = {}
+    for bone, record in driven.items():
+        i = model.bone_labels.index(bone)
+        axis = rest_poses[i][:3, :3][:, 1]
+        axis = axis / np.linalg.norm(axis)
+        deg = float(np.degrees(np.arccos(np.clip(np.dot(axis, targets[bone]), -1, 1))))
+        out[bone] = {**record, "deg": round(deg, 2)}
+    return out
 
 # Phenotype macros are floats 0..1, all defaulting to 0.5:
 #   gender, age, muscle, weight, height, proportions
@@ -295,7 +336,7 @@ def main() -> int:
         import roma  # noqa: F401  (roma is what supplies ANNY's rigid helpers)
 
         print("building pose parameters (world-orient):")
-        pose_parameters, driven = build_pose_parameters(model, torch, roma, pose_entry)
+        pose_parameters, driven, targets = build_pose_parameters(model, torch, roma, pose_entry)
         if not driven:
             raise SystemExit(
                 f"pose '{args.pose}' drove no bones at all — every segment was within "
@@ -383,13 +424,19 @@ def main() -> int:
             # the same weight as the phenotype parameters — including the spec's
             # hash, so a bake can be tied to the exact measurement that produced
             # it rather than to whatever the spec says today.
+            #
+            # The spec path is recorded RELATIVE TO THE REPOSITORY, not as it was
+            # given on the command line: the first bakes wrote one machine's
+            # absolute path into a committed manifest.
             entry["pose"] = {
                 "id": args.pose,
-                "spec": args.pose_spec,
+                "spec": repo_relative(args.pose_spec),
                 "spec_sha256_12": spec_digest,
                 "covers": pose_entry.get("members", []),
                 "measured_from": pose_entry.get("measuredFrom"),
-                "driven_bones": driven,
+                # This preset's own angles — see `preset_angles`.
+                "driven_bones": preset_angles(model, kwargs, driven, targets),
+                "deg_basis": "rotation from this preset's rest axis to the shared target",
             }
         provenance[f"{name}{suffix}"] = entry
 

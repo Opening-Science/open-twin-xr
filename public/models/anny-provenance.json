@@ -100,8 +100,8 @@
     "script": "scripts/anny/bake.py",
     "pose": {
       "id": "bodyparts3d",
-      "spec": "/Users/martinetzrodt/open-twin-openXR/scripts/anny/atlas-poses.json",
-      "spec_sha256_12": "52650fbef2f2",
+      "spec": "scripts/anny/atlas-poses.json",
+      "spec_sha256_12": "64ac1ed2e7ce",
       "covers": [
         "bodyparts3d",
         "z-anatomy",
@@ -111,86 +111,87 @@
       "measured_from": "bodyparts3d.ao.glb",
       "driven_bones": {
         "upperarm01.L": {
-          "deg": 31.94,
+          "deg": 31.67,
           "from": "upperarm.L",
           "source": "measured"
         },
         "upperarm02.L": {
-          "deg": 31.4,
+          "deg": 32.74,
           "from": "upperarm.L",
           "source": "measured"
         },
         "lowerarm01.L": {
-          "deg": 44.68,
+          "deg": 40.14,
           "from": "forearm.L",
           "source": "measured"
         },
         "lowerarm02.L": {
-          "deg": 44.27,
+          "deg": 43.53,
           "from": "forearm.L",
           "source": "measured"
         },
         "upperleg01.L": {
-          "deg": 14.41,
+          "deg": 16.37,
           "from": "thigh.L",
           "source": "measured"
         },
         "upperleg02.L": {
-          "deg": 10.93,
+          "deg": 11.96,
           "from": "thigh.L",
           "source": "measured"
         },
         "lowerleg01.L": {
-          "deg": 6.75,
+          "deg": 5.69,
           "from": "shank.L",
           "source": "measured"
         },
         "lowerleg02.L": {
-          "deg": 7.64,
+          "deg": 7.74,
           "from": "shank.L",
           "source": "measured"
         },
         "upperarm01.R": {
-          "deg": 31.82,
+          "deg": 31.56,
           "from": "upperarm.R",
           "source": "measured"
         },
         "upperarm02.R": {
-          "deg": 31.28,
+          "deg": 32.62,
           "from": "upperarm.R",
           "source": "measured"
         },
         "lowerarm01.R": {
-          "deg": 43.6,
+          "deg": 39.01,
           "from": "forearm.R",
           "source": "measured"
         },
         "lowerarm02.R": {
-          "deg": 43.17,
+          "deg": 42.4,
           "from": "forearm.R",
           "source": "measured"
         },
         "upperleg01.R": {
-          "deg": 14.49,
+          "deg": 16.45,
           "from": "thigh.R",
           "source": "measured"
         },
         "upperleg02.R": {
-          "deg": 11.44,
+          "deg": 12.48,
           "from": "thigh.R",
           "source": "measured"
         },
         "lowerleg01.R": {
-          "deg": 6.84,
+          "deg": 5.76,
           "from": "shank.R",
           "source": "measured"
         },
         "lowerleg02.R": {
-          "deg": 7.71,
+          "deg": 7.8,
           "from": "shank.R",
           "source": "measured"
         }
-      }
+      },
+      "deg_basis": "rotation from this preset's rest axis to the shared target"
     }
   },
   "adult-m.pose-bodyparts3d": {
@@ -211,8 +212,8 @@
     "script": "scripts/anny/bake.py",
     "pose": {
       "id": "bodyparts3d",
-      "spec": "/Users/martinetzrodt/open-twin-openXR/scripts/anny/atlas-poses.json",
-      "spec_sha256_12": "52650fbef2f2",
+      "spec": "scripts/anny/atlas-poses.json",
+      "spec_sha256_12": "64ac1ed2e7ce",
       "covers": [
         "bodyparts3d",
         "z-anatomy",
@@ -222,86 +223,87 @@
       "measured_from": "bodyparts3d.ao.glb",
       "driven_bones": {
         "upperarm01.L": {
-          "deg": 31.94,
+          "deg": 31.27,
           "from": "upperarm.L",
           "source": "measured"
         },
         "upperarm02.L": {
-          "deg": 31.4,
+          "deg": 33.9,
           "from": "upperarm.L",
           "source": "measured"
         },
         "lowerarm01.L": {
-          "deg": 44.68,
+          "deg": 46.36,
           "from": "forearm.L",
           "source": "measured"
         },
         "lowerarm02.L": {
-          "deg": 44.27,
+          "deg": 45.0,
           "from": "forearm.L",
           "source": "measured"
         },
         "upperleg01.L": {
-          "deg": 14.41,
+          "deg": 14.75,
           "from": "thigh.L",
           "source": "measured"
         },
         "upperleg02.L": {
-          "deg": 10.93,
+          "deg": 8.92,
           "from": "thigh.L",
           "source": "measured"
         },
         "lowerleg01.L": {
-          "deg": 6.75,
+          "deg": 6.14,
           "from": "shank.L",
           "source": "measured"
         },
         "lowerleg02.L": {
-          "deg": 7.64,
+          "deg": 5.25,
           "from": "shank.L",
           "source": "measured"
         },
         "upperarm01.R": {
-          "deg": 31.82,
+          "deg": 31.15,
           "from": "upperarm.R",
           "source": "measured"
         },
         "upperarm02.R": {
-          "deg": 31.28,
+          "deg": 33.78,
           "from": "upperarm.R",
           "source": "measured"
         },
         "lowerarm01.R": {
-          "deg": 43.6,
+          "deg": 45.31,
           "from": "forearm.R",
           "source": "measured"
         },
         "lowerarm02.R": {
-          "deg": 43.17,
+          "deg": 43.92,
           "from": "forearm.R",
           "source": "measured"
         },
         "upperleg01.R": {
-          "deg": 14.49,
+          "deg": 14.77,
           "from": "thigh.R",
           "source": "measured"
         },
         "upperleg02.R": {
-          "deg": 11.44,
+          "deg": 9.43,
           "from": "thigh.R",
           "source": "measured"
         },
         "lowerleg01.R": {
-          "deg": 6.84,
+          "deg": 6.25,
           "from": "shank.R",
           "source": "measured"
         },
         "lowerleg02.R": {
-          "deg": 7.71,
+          "deg": 5.35,
           "from": "shank.R",
           "source": "measured"
         }
-      }
+      },
+      "deg_basis": "rotation from this preset's rest axis to the shared target"
     }
   },
   "adult-f.pose-htb-ct-f": {
@@ -322,84 +324,85 @@
     "script": "scripts/anny/bake.py",
     "pose": {
       "id": "htb-ct-f",
-      "spec": "/Users/martinetzrodt/open-twin-openXR/scripts/anny/atlas-poses.json",
-      "spec_sha256_12": "52650fbef2f2",
+      "spec": "scripts/anny/atlas-poses.json",
+      "spec_sha256_12": "64ac1ed2e7ce",
       "covers": [
         "htb-ct-f"
       ],
       "measured_from": "htb-ct-003.glb",
       "driven_bones": {
         "upperarm01.L": {
-          "deg": 104.7,
+          "deg": 104.07,
           "from": "upperarm.L",
           "source": "measured"
         },
         "upperarm02.L": {
-          "deg": 105.26,
+          "deg": 103.3,
           "from": "upperarm.L",
           "source": "measured"
         },
         "lowerarm01.L": {
-          "deg": 141.8,
+          "deg": 145.24,
           "from": "forearm.L",
           "source": "measured"
         },
         "lowerarm02.L": {
-          "deg": 142.87,
+          "deg": 144.45,
           "from": "forearm.L",
           "source": "measured"
         },
         "upperleg02.L": {
-          "deg": 11.57,
+          "deg": 12.77,
           "from": "thigh.L",
           "source": "measured"
         },
         "lowerleg01.L": {
-          "deg": 15.69,
+          "deg": 14.94,
           "from": "shank.L",
           "source": "measured"
         },
         "lowerleg02.L": {
-          "deg": 15.29,
+          "deg": 14.32,
           "from": "shank.L",
           "source": "measured"
         },
         "upperarm01.R": {
-          "deg": 113.8,
+          "deg": 113.18,
           "from": "upperarm.R",
           "source": "measured"
         },
         "upperarm02.R": {
-          "deg": 114.36,
+          "deg": 112.4,
           "from": "upperarm.R",
           "source": "measured"
         },
         "lowerarm01.R": {
-          "deg": 130.73,
+          "deg": 134.49,
           "from": "forearm.R",
           "source": "measured"
         },
         "lowerarm02.R": {
-          "deg": 131.8,
+          "deg": 133.41,
           "from": "forearm.R",
           "source": "measured"
         },
         "upperleg02.R": {
-          "deg": 14.37,
+          "deg": 15.47,
           "from": "thigh.R",
           "source": "measured"
         },
         "lowerleg01.R": {
-          "deg": 16.32,
+          "deg": 15.91,
           "from": "shank.R",
           "source": "measured"
         },
         "lowerleg02.R": {
-          "deg": 15.61,
+          "deg": 14.59,
           "from": "shank.R",
           "source": "measured"
         }
-      }
+      },
+      "deg_basis": "rotation from this preset's rest axis to the shared target"
     }
   },
   "adult-m.pose-htb-ct-f": {
@@ -420,84 +423,85 @@
     "script": "scripts/anny/bake.py",
     "pose": {
       "id": "htb-ct-f",
-      "spec": "/Users/martinetzrodt/open-twin-openXR/scripts/anny/atlas-poses.json",
-      "spec_sha256_12": "52650fbef2f2",
+      "spec": "scripts/anny/atlas-poses.json",
+      "spec_sha256_12": "64ac1ed2e7ce",
       "covers": [
         "htb-ct-f"
       ],
       "measured_from": "htb-ct-003.glb",
       "driven_bones": {
         "upperarm01.L": {
-          "deg": 104.7,
+          "deg": 104.57,
           "from": "upperarm.L",
           "source": "measured"
         },
         "upperarm02.L": {
-          "deg": 105.26,
+          "deg": 103.31,
           "from": "upperarm.L",
           "source": "measured"
         },
         "lowerarm01.L": {
-          "deg": 141.8,
+          "deg": 140.11,
           "from": "forearm.L",
           "source": "measured"
         },
         "lowerarm02.L": {
-          "deg": 142.87,
+          "deg": 141.88,
           "from": "forearm.L",
           "source": "measured"
         },
         "upperleg02.L": {
-          "deg": 11.57,
+          "deg": 10.31,
           "from": "thigh.L",
           "source": "measured"
         },
         "lowerleg01.L": {
-          "deg": 15.69,
+          "deg": 16.88,
           "from": "shank.L",
           "source": "measured"
         },
         "lowerleg02.L": {
-          "deg": 15.29,
+          "deg": 16.16,
           "from": "shank.L",
           "source": "measured"
         },
         "upperarm01.R": {
-          "deg": 113.8,
+          "deg": 113.68,
           "from": "upperarm.R",
           "source": "measured"
         },
         "upperarm02.R": {
-          "deg": 114.36,
+          "deg": 112.41,
           "from": "upperarm.R",
           "source": "measured"
         },
         "lowerarm01.R": {
-          "deg": 130.73,
+          "deg": 128.96,
           "from": "forearm.R",
           "source": "measured"
         },
         "lowerarm02.R": {
-          "deg": 131.8,
+          "deg": 130.78,
           "from": "forearm.R",
           "source": "measured"
         },
         "upperleg02.R": {
-          "deg": 14.37,
+          "deg": 13.46,
           "from": "thigh.R",
           "source": "measured"
         },
         "lowerleg01.R": {
-          "deg": 16.32,
+          "deg": 17.8,
           "from": "shank.R",
           "source": "measured"
         },
         "lowerleg02.R": {
-          "deg": 15.61,
+          "deg": 17.31,
           "from": "shank.R",
           "source": "measured"
         }
-      }
+      },
+      "deg_basis": "rotation from this preset's rest axis to the shared target"
     }
   },
   "adult-f.pose-hra-m": {
@@ -518,74 +522,75 @@
     "script": "scripts/anny/bake.py",
     "pose": {
       "id": "hra-m",
-      "spec": "/Users/martinetzrodt/open-twin-openXR/scripts/anny/atlas-poses.json",
-      "spec_sha256_12": "354913494183",
+      "spec": "scripts/anny/atlas-poses.json",
+      "spec_sha256_12": "64ac1ed2e7ce",
       "covers": [
         "hra-m"
       ],
       "measured_from": "hra-m.glb",
       "driven_bones": {
         "upperarm01.L": {
-          "deg": 12.07,
+          "deg": 11.08,
           "from": "upperarm.L",
           "source": "measured"
         },
         "upperarm02.L": {
-          "deg": 11.8,
+          "deg": 12.01,
           "from": "upperarm.L",
           "source": "measured"
         },
         "upperarm01.R": {
-          "deg": 11.25,
+          "deg": 10.22,
           "from": "upperarm.R",
           "source": "measured"
         },
         "upperarm02.R": {
-          "deg": 11.01,
+          "deg": 11.13,
           "from": "upperarm.R",
           "source": "measured"
         },
         "lowerarm01.L": {
-          "deg": 38.59,
+          "deg": 33.32,
           "from": "forearm.L",
           "source": "measured"
         },
         "lowerarm02.L": {
-          "deg": 37.7,
+          "deg": 36.27,
           "from": "forearm.L",
           "source": "measured"
         },
         "lowerarm01.R": {
-          "deg": 38.29,
+          "deg": 33.03,
           "from": "forearm.R",
           "source": "measured"
         },
         "lowerarm02.R": {
-          "deg": 37.38,
+          "deg": 35.94,
           "from": "forearm.R",
           "source": "measured"
         },
         "upperleg01.L": {
-          "deg": 14.23,
+          "deg": 15.98,
           "from": "thigh.L",
           "source": "measured"
         },
         "lowerleg01.L": {
-          "deg": 5.47,
+          "deg": 6.05,
           "from": "shank.L",
           "source": "measured"
         },
         "upperleg01.R": {
-          "deg": 14.23,
+          "deg": 15.98,
           "from": "thigh.R",
           "source": "measured"
         },
         "lowerleg01.R": {
-          "deg": 5.47,
+          "deg": 6.05,
           "from": "shank.R",
           "source": "measured"
         }
-      }
+      },
+      "deg_basis": "rotation from this preset's rest axis to the shared target"
     }
   },
   "adult-m.pose-hra-m": {
@@ -606,74 +611,75 @@
     "script": "scripts/anny/bake.py",
     "pose": {
       "id": "hra-m",
-      "spec": "/Users/martinetzrodt/open-twin-openXR/scripts/anny/atlas-poses.json",
-      "spec_sha256_12": "354913494183",
+      "spec": "scripts/anny/atlas-poses.json",
+      "spec_sha256_12": "64ac1ed2e7ce",
       "covers": [
         "hra-m"
       ],
       "measured_from": "hra-m.glb",
       "driven_bones": {
         "upperarm01.L": {
-          "deg": 12.07,
+          "deg": 10.94,
           "from": "upperarm.L",
           "source": "measured"
         },
         "upperarm02.L": {
-          "deg": 11.8,
+          "deg": 13.75,
           "from": "upperarm.L",
           "source": "measured"
         },
         "upperarm01.R": {
-          "deg": 11.25,
+          "deg": 10.1,
           "from": "upperarm.R",
           "source": "measured"
         },
         "upperarm02.R": {
-          "deg": 11.01,
+          "deg": 12.89,
           "from": "upperarm.R",
           "source": "measured"
         },
         "lowerarm01.L": {
-          "deg": 38.59,
+          "deg": 40.7,
           "from": "forearm.L",
           "source": "measured"
         },
         "lowerarm02.L": {
-          "deg": 37.7,
+          "deg": 38.77,
           "from": "forearm.L",
           "source": "measured"
         },
         "lowerarm01.R": {
-          "deg": 38.29,
+          "deg": 40.41,
           "from": "forearm.R",
           "source": "measured"
         },
         "lowerarm02.R": {
-          "deg": 37.38,
+          "deg": 38.46,
           "from": "forearm.R",
           "source": "measured"
         },
         "upperleg01.L": {
-          "deg": 14.23,
+          "deg": 15.34,
           "from": "thigh.L",
           "source": "measured"
         },
         "lowerleg01.L": {
-          "deg": 5.47,
+          "deg": 7.04,
           "from": "shank.L",
           "source": "measured"
         },
         "upperleg01.R": {
-          "deg": 14.23,
+          "deg": 15.34,
           "from": "thigh.R",
           "source": "measured"
         },
         "lowerleg01.R": {
-          "deg": 5.47,
+          "deg": 7.04,
           "from": "shank.R",
           "source": "measured"
         }
-      }
+      },
+      "deg_basis": "rotation from this preset's rest axis to the shared target"
     }
   },
   "adult-f.pose-hra": {
@@ -694,8 +700,8 @@
     "script": "scripts/anny/bake.py",
     "pose": {
       "id": "hra",
-      "spec": "/Users/martinetzrodt/open-twin-openXR/scripts/anny/atlas-poses.json",
-      "spec_sha256_12": "354913494183",
+      "spec": "scripts/anny/atlas-poses.json",
+      "spec_sha256_12": "64ac1ed2e7ce",
       "covers": [
         "hra",
         "composed-f"
@@ -703,86 +709,87 @@
       "measured_from": "hra.glb",
       "driven_bones": {
         "upperarm01.L": {
-          "deg": 15.12,
+          "deg": 14.1,
           "from": "upperarm.L",
           "source": "measured"
         },
         "upperarm02.L": {
-          "deg": 14.86,
+          "deg": 15.0,
           "from": "upperarm.L",
           "source": "measured"
         },
         "upperarm01.R": {
-          "deg": 14.89,
+          "deg": 13.87,
           "from": "upperarm.R",
           "source": "measured"
         },
         "upperarm02.R": {
-          "deg": 14.64,
+          "deg": 14.76,
           "from": "upperarm.R",
           "source": "measured"
         },
         "lowerarm01.L": {
-          "deg": 37.56,
+          "deg": 32.27,
           "from": "forearm.L",
           "source": "measured"
         },
         "lowerarm02.L": {
-          "deg": 36.72,
+          "deg": 35.37,
           "from": "forearm.L",
           "source": "measured"
         },
         "lowerarm01.R": {
-          "deg": 37.43,
+          "deg": 32.15,
           "from": "forearm.R",
           "source": "measured"
         },
         "lowerarm02.R": {
-          "deg": 36.59,
+          "deg": 35.23,
           "from": "forearm.R",
           "source": "measured"
         },
         "upperleg01.L": {
-          "deg": 11.9,
+          "deg": 13.79,
           "from": "thigh.L",
           "source": "measured"
         },
         "upperleg02.L": {
-          "deg": 7.29,
+          "deg": 8.43,
           "from": "thigh.L",
           "source": "measured"
         },
         "lowerleg01.L": {
-          "deg": 5.91,
+          "deg": 4.97,
           "from": "shank.L",
           "source": "measured"
         },
         "lowerleg02.L": {
-          "deg": 6.9,
+          "deg": 7.18,
           "from": "shank.L",
           "source": "measured"
         },
         "upperleg01.R": {
-          "deg": 11.9,
+          "deg": 13.79,
           "from": "thigh.R",
           "source": "measured"
         },
         "upperleg02.R": {
-          "deg": 7.29,
+          "deg": 8.43,
           "from": "thigh.R",
           "source": "measured"
         },
         "lowerleg01.R": {
-          "deg": 5.92,
+          "deg": 4.99,
           "from": "shank.R",
           "source": "measured"
         },
         "lowerleg02.R": {
-          "deg": 6.91,
+          "deg": 7.19,
           "from": "shank.R",
           "source": "measured"
         }
-      }
+      },
+      "deg_basis": "rotation from this preset's rest axis to the shared target"
     }
   },
   "adult-m.pose-hra": {
@@ -803,8 +810,8 @@
     "script": "scripts/anny/bake.py",
     "pose": {
       "id": "hra",
-      "spec": "/Users/martinetzrodt/open-twin-openXR/scripts/anny/atlas-poses.json",
-      "spec_sha256_12": "354913494183",
+      "spec": "scripts/anny/atlas-poses.json",
+      "spec_sha256_12": "64ac1ed2e7ce",
       "covers": [
         "hra",
         "composed-f"
@@ -812,86 +819,87 @@
       "measured_from": "hra.glb",
       "driven_bones": {
         "upperarm01.L": {
-          "deg": 15.12,
+          "deg": 13.98,
           "from": "upperarm.L",
           "source": "measured"
         },
         "upperarm02.L": {
-          "deg": 14.86,
+          "deg": 16.77,
           "from": "upperarm.L",
           "source": "measured"
         },
         "upperarm01.R": {
-          "deg": 14.89,
+          "deg": 13.75,
           "from": "upperarm.R",
           "source": "measured"
         },
         "upperarm02.R": {
-          "deg": 14.64,
+          "deg": 16.53,
           "from": "upperarm.R",
           "source": "measured"
         },
         "lowerarm01.L": {
-          "deg": 37.56,
+          "deg": 39.65,
           "from": "forearm.L",
           "source": "measured"
         },
         "lowerarm02.L": {
-          "deg": 36.72,
+          "deg": 37.76,
           "from": "forearm.L",
           "source": "measured"
         },
         "lowerarm01.R": {
-          "deg": 37.43,
+          "deg": 39.53,
           "from": "forearm.R",
           "source": "measured"
         },
         "lowerarm02.R": {
-          "deg": 36.59,
+          "deg": 37.63,
           "from": "forearm.R",
           "source": "measured"
         },
         "upperleg01.L": {
-          "deg": 11.9,
+          "deg": 12.69,
           "from": "thigh.L",
           "source": "measured"
         },
         "upperleg02.L": {
-          "deg": 7.29,
+          "deg": 5.29,
           "from": "thigh.L",
           "source": "measured"
         },
         "lowerleg01.L": {
-          "deg": 5.91,
+          "deg": 5.02,
           "from": "shank.L",
           "source": "measured"
         },
         "lowerleg02.L": {
-          "deg": 6.9,
+          "deg": 4.23,
           "from": "shank.L",
           "source": "measured"
         },
         "upperleg01.R": {
-          "deg": 11.9,
+          "deg": 12.69,
           "from": "thigh.R",
           "source": "measured"
         },
         "upperleg02.R": {
-          "deg": 7.29,
+          "deg": 5.29,
           "from": "thigh.R",
           "source": "measured"
         },
         "lowerleg01.R": {
-          "deg": 5.92,
+          "deg": 5.03,
           "from": "shank.R",
           "source": "measured"
         },
         "lowerleg02.R": {
-          "deg": 6.91,
+          "deg": 4.24,
           "from": "shank.R",
           "source": "measured"
         }
-      }
+      },
+      "deg_basis": "rotation from this preset's rest axis to the shared target"
     }
   }
 }

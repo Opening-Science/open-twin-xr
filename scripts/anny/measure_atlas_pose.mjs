@@ -487,7 +487,12 @@ function armFromSlices(instances, stats, side) {
   const axis = dot < 0 ? pca.axis.map((c) => -c) : pca.axis
   return {
     axis,
-    slices: pts.length,
+    // Both counts, because they differ: every bucket is sampled, and only the
+    // buckets that yielded a usable outermost cluster keep a centroid. The
+    // generated prose used to print the second as "N slices", which understated
+    // what was sampled and mislabelled what was kept.
+    slicesSampled: SLICES,
+    slicesUsed: pts.length,
     lengthM: Math.hypot(v[0], v[1], v[2]),
   }
 }
@@ -665,7 +670,10 @@ function groupPoses(measured) {
       return shared >= 4 && worst >= 0 && worst < SAME_POSE_DEG
     })
     if (fit) {
-      const { worst } = compare(fit.members[0], id)
+      // Against EVERY member, not the primary alone: two members each within
+      // 5 deg of the primary can sit 10 deg apart, and the report's "worst
+      // disagreement within group" would otherwise not show it.
+      const worst = Math.max(...fit.members.map((m) => compare(m, id).worst))
       fit.members.push(id)
       fit.worstWithinDeg = Math.max(fit.worstWithinDeg, worst)
     } else {
@@ -866,13 +874,31 @@ async function main() {
     const notes = []
     if (id === 'hra' || id === 'hra-m') {
       const unmerged = file.replace('.ao.glb', '.glb')
-      const check = await verifyUnmergedMatches(file, unmerged)
+      // An absent or unreadable unmerged file is a normal state here — nothing
+      // under public/models is committed — and the header promises that a failed
+      // check reports the atlas unmeasured rather than guessing. Until this
+      // caught it, `io.read` on a missing `hra.glb` escaped `main` and the whole
+      // run exited with nothing written for ANY atlas.
+      let check
+      try {
+        check = await verifyUnmergedMatches(file, unmerged)
+      } catch (e) {
+        check = { ok: false, worstDeltaM: null, error: String(e?.message ?? e) }
+      }
       if (!check.ok) {
-        log(`⚠️  ${id}: ${unmerged} does not match the shipped ${file} ` +
-            `(worst bbox delta ${check.worstDeltaM} m) — NOT measured.`)
+        log(
+          check.error
+            ? `⚠️  ${id}: ${unmerged} could not be read (${check.error}) — NOT measured.`
+            : `⚠️  ${id}: ${unmerged} does not match the shipped ${file} ` +
+                `(worst bbox delta ${check.worstDeltaM} m) — NOT measured.`,
+        )
         measured[id] = {
           atlas: id, measuredFrom: null, segments: {},
-          notes: [`unmerged file disagrees with shipped asset by ${check.worstDeltaM} m; refused to measure`],
+          notes: [
+            check.error
+              ? `${unmerged} could not be read (${check.error}); refused to measure`
+              : `unmerged file disagrees with shipped asset by ${check.worstDeltaM} m; refused to measure`,
+          ],
         }
         continue
       }
@@ -963,7 +989,9 @@ async function main() {
       for (const seg of ['upperarm', 'forearm']) {
         m.segments[`${seg}.${S}`] = {
           source: 'measured',
-          via: `arm centreline from the body surface, ${arm.slices} slices — this atlas has arms but no arm bones`,
+          via:
+            `arm centreline from the body surface, ${arm.slicesUsed} of ${arm.slicesSampled} ` +
+            'slices usable — this atlas has arms but no arm bones',
           axis: arm.axis.map((v) => +v.toFixed(5)),
           lengthM: +arm.lengthM.toFixed(4),
           bones: SEGMENTS[seg].bones.map((b) => `${b}.${S}`),
