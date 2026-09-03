@@ -2,6 +2,7 @@ import { existsSync, readFileSync, readdirSync, rmSync, statSync } from 'node:fs
 import { join } from 'node:path'
 import { defineConfig, type Plugin } from 'vite'
 import react from '@vitejs/plugin-react'
+import { MODEL_REGISTRIES } from './scripts/model-registries.mjs'
 
 /**
  * Keep build intermediates out of the deployed bundle.
@@ -59,16 +60,11 @@ function pruneUnshippedModels(): Plugin {
        * never appear, exactly as they would if the assets had never been baked.
        *
        * Caught by reading `dist/models` before a deploy, which is the only thing
-       * that catches it. If you add a registry, add it here in the same commit.
+       * that catches it. The list now lives in `scripts/model-registries.mjs`,
+       * shared with `check:dist`, so the two halves of the rule cannot drift
+       * apart again; if you add a registry, add it there in the same commit.
        */
-      for (const f of [
-        'anatomySources.ts',
-        'organOverlays.ts',
-        'bodyEnvelopes.ts',
-        'annyGrid.ts',
-        'envelopePoses.ts',
-        'annyRig.ts',
-      ]) {
+      for (const f of MODEL_REGISTRIES) {
         try {
           sources += readFileSync(join(__dirname, 'src', 'scene', f), 'utf8')
         } catch {
