@@ -46,6 +46,17 @@ const gh = (jsonArgs) => {
 }
 
 const REPO = 'Opening-Science/open-twin-xr'
+
+/**
+ * ⚠️ THE SAME BOT HAS TWO LOGINS, AND THE GATE HAD ONLY ONE OF THEM. The REST
+ * API reports CodeRabbit as `coderabbitai[bot]`; GraphQL's `author.login`
+ * reports it as `coderabbitai`. The thread filter below compared against the
+ * REST form, so on a PR with SIXTEEN open CodeRabbit threads it counted zero —
+ * and the one check that does the work (section 4) had been dead since it was
+ * written, printing "0 unresolved" as coverage. Measured on PR #17, 3 September
+ * 2026. Normalise before comparing, everywhere a login is read.
+ */
+const isRabbit = (login) => String(login ?? '').replace(/\[bot\]$/, '') === 'coderabbitai'
 const failuresEarly = []
 let number = prArg
 if (!number) {
@@ -128,7 +139,7 @@ for (const c of bad) {
 
 // --- 3. CodeRabbit must have actually reviewed --------------------------------
 const reviews = gh(['api', `repos/${REPO}/pulls/${number}/reviews`])
-const rabbit = reviews.filter((r) => r.user?.login === 'coderabbitai[bot]')
+const rabbit = reviews.filter((r) => isRabbit(r.user?.login))
 if (!rabbit.length) {
   failures.push('CodeRabbit has not reviewed yet — its check going green is not the same thing')
 } else {
@@ -175,9 +186,7 @@ const threads = gh([
         } } } }`,
 ])
 const nodes = threads?.data?.repository?.pullRequest?.reviewThreads?.nodes ?? []
-const rabbitThreads = nodes.filter(
-  (t) => t.comments?.nodes?.[0]?.author?.login === 'coderabbitai[bot]',
-)
+const rabbitThreads = nodes.filter((t) => isRabbit(t.comments?.nodes?.[0]?.author?.login))
 const open = rabbitThreads.filter((t) => !t.isResolved && !t.isOutdated)
 notes.push(`CodeRabbit threads: ${rabbitThreads.length} total, ${open.length} unresolved`)
 if (open.length) {
