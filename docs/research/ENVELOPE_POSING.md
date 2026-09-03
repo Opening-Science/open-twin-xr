@@ -1,6 +1,6 @@
 # Posing the ANNY envelope — implementation strategy
 
-> ## Status, 18 August 2026 — ALL FIVE PHASES ARE BUILT
+> ## Status, 18 August 2026 — BUILT, all but one Phase 5 item
 >
 > **This document is now history.** `docs/DECISIONS.md` **D25** (the posed
 > overlay) and **D26** (the position sliders) are the current record and win
@@ -11,7 +11,7 @@
 >   went from **+0.456 m to +0.013 m** and containment from 33 % to 74 %.
 > - **Phase 5 — the standalone position sliders.** Four sliders (arms out,
 >   elbows, stance, knees) over a 395 KB baked rig, with the measurements taken
->   at rest so a pose cannot move a stated height. See D26 for the three defects
+>   at rest so a pose cannot move a stated height. See D26 for the defects
 >   that each failed silently on the way.
 >
 > **One item from Phase 5 was NOT built: the glass-hull toggle for the
@@ -377,3 +377,7 @@ implementation cannot re-litigate them silently:
    the measurement land together and nothing is measured from polluted data.
 
 Implementation has not started; the maintainer will say when.
+
+*(As the plan was written. It started and shipped the same day — see the status
+box at the top, which is the current record. The sentence stays as what the plan
+said.)*

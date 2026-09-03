@@ -57,15 +57,18 @@ they are a debugging surface, and `?tune` already gates them.
 ⚠️ **A link must address the structure by its ontology term, never by its
 `structureId`.** Those ids are assigned at build time, and a rebuild reassigns
 them: this is exactly the failure D18 records, where `ONTOLOGY_MAP.md` carried
-hand-typed eye-globe ids that a rebuild silently moved from 2631–2650 to
-2626–2647, so a mask built from them would have hidden the wrong anatomy. A link
-is a hand-typed id with a longer life than a document. So:
+hand-typed eye-globe ids that a rebuild silently moved, so a mask built from
+them would have hidden the wrong anatomy (D18 has the two ranges, as evidence
+rather than as ids to use). A link is a hand-typed id with a longer life than a
+document. So:
 
 ```
 ?m=z-anatomy&x=male&s=FMA:7197        # resolves through searchStructures()
 ```
 
-Structures with no term — 1,671 of Z-Anatomy's — cannot be linked stably. Fall
+Structures with no term — 1,671 of Z-Anatomy's when this plan was written on
+18 August 2026; `npm run gen:ontology` measures the current figure — cannot be
+linked stably. Fall
 back to `?n=<name>` and accept that it is asset-bound, rather than pretending an
 index is a name. If neither resolves, say *which* of the three states it is; the
 empty states `PLAN_IDENTITY.md` item 4 already requires apply unchanged here.

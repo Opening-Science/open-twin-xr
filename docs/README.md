@@ -48,7 +48,7 @@ than the result.
 | [`PLAN_ANATOMED.md`](PLAN_ANATOMED.md) | **Proposal, nothing started** — take Anatomed's Latin names, derive structure adjacency from our own geometry, copy none of its CC BY-SA code |
 | [`PLAN_VIEWER.md`](PLAN_VIEWER.md) | **Proposal, nothing started** — viewer affordances a review of anatomy101.in exposed: deep links keyed by term, cross-section clipping, part-of rollup |
 
-⚠️ **Four live plans.** `PLAN_NEXT.md` is the repo-quality queue (items 19–21 open);
+⚠️ **Four live plans.** `PLAN_NEXT.md` is the repo-quality queue and records each item's status itself;
 `PLAN_IDENTITY.md` is the current milestone; `PLAN_ANATOMED.md` feeds it and is
 unstarted; `PLAN_VIEWER.md` is unstarted and waits on `PLAN_IDENTITY.md`'s search
 interface. The new-geometry queue is finished — `PLAN_INTEGRATION.md` moved to

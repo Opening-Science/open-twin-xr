@@ -222,8 +222,8 @@ git worktree add ../bare HEAD && ln -s "$PWD/node_modules" ../bare/node_modules 
 ## Making a change
 
 1. **Read [`docs/DECISIONS.md`](docs/DECISIONS.md) first** if your change touches
-   architecture, licensing or the asset pipeline. It records D1–D15 and, more
-   usefully, what was **reversed and why**. Several obvious improvements are in
+   architecture, licensing or the asset pipeline. It records every decision to
+   date and, more usefully, what was **reversed and why**. Several obvious improvements are in
    there as things already tried.
 2. Branch off `main`. Keep the branch focused.
 3. Run `npm run typecheck`, `npm run lint`, `npm run test` and `npm run build`.

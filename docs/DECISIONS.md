@@ -1387,7 +1387,7 @@ reasoning, same answer.
 
 ### What it costs, and this is the part that matters
 
-> ⚠️ **SUPERSEDED BY [D25](#d25--the-envelope-is-posed-to-the-atlas-from-the-atlases-own-bones).**
+> ⚠️ **SUPERSEDED BY [D25](#d25--the-envelope-is-posed-to-the-atlas-from-the-atlass-own-bones).**
 > The paragraph below says the pose mismatch "cannot be made to" go away. That
 > was true of the static BAKE and false of the model it came from: ANNY is rigged,
 > and the bake simply never used it. The envelope is now posed per atlas from the
@@ -2232,6 +2232,28 @@ torso with fragmentary limbs and is deliberately left **unposed** rather than
 posed from two measured segments. And it remains a generated surface with no
 organs, no donor and no scan of anyone — which was always the point.
 
+### Addendum, 3 September 2026 — re-baked after review, and byte-identical
+
+Review of the PR that shipped this found four of the eight posed bakes carrying
+a spec hash the committed `atlas-poses.json` did not have. The cause was
+ordinary: the measurement was re-run between baking `bodyparts3d` and `htb-ct-f`
+and baking `hra` and `hra-m`, and the manifest ties each bake to the spec's
+bytes, as it should. Rather than argue that the four pose entries had not
+changed, all eight were re-baked from the committed spec — regenerated first, so
+the arm-centreline provenance now says how many slices were sampled as well as
+how many were kept — and compared with the previous raw bakes: **all eight
+byte-identical**, before and after conversion. No pose changed, nothing served
+changed, and the table above stands.
+
+What did change is the record. One spec hash across the eight; the spec path
+relative to the repository rather than one machine's absolute path; and the
+`driven_bones` angles measured from **each preset's own rest pose** instead of
+the default phenotype's — ANNY derives the rest orientation from the phenotype,
+so the female and male bakes travel different angles to reach the same target,
+and a single figure copied onto both was wrong for both. `licences.json` now
+carries each posed bake's measured height rather than the rest-pose figure it
+had inherited.
+
 ---
 
 ## D26 — The parametric body can be posed, and the measurements ignore the pose
@@ -2300,3 +2322,18 @@ is not**, and the interface states which it is.
 output, a body-sized body on the floor, a knee that moves the shin and not the
 head, and arms that move symmetrically. A "does it render" check passes through
 defects 2 and 3.
+
+### Addendum, 3 September 2026 — a fourth defect, and it failed silently too
+
+4. **Composition order.** A bone below two driven joints is skinned by the
+   product of their pivot rotations, and the runtime multiplied it leaf-to-root:
+   the shin bent about a knee the hip had already moved away from. One slider
+   at a time it is invisible, because a product of one term has no order, and
+   every test above moved one slider — so with hip and knee both active the
+   shin parted from the thigh by **22 cm** and nothing said so. Found by
+   review, not by measurement, which is the failure this list exists to record.
+   `annyRig.test.ts` now poses a two-joint chain and checks it against an
+   independent Rodrigues rotation, written separately so the two cannot share
+   a mistake. The same review added `RigMismatch` — the rig must have been
+   baked for the grid it poses, which nothing checked — and the panel now reads
+   the checked rig from the store instead of fetching its own copy.
