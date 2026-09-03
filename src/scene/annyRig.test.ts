@@ -2,9 +2,13 @@ import { beforeAll, describe, expect, it } from 'vitest'
 import { existsSync, readFileSync } from 'node:fs'
 import { evaluateAnny, ANNY_NEUTRAL, type AnnyGrid } from './annyGrid'
 import {
+  interpolateJoints,
   makePoseScratch,
   poseAnny,
+  poseLimits,
   POSE_NEUTRAL,
+  POSE_SLIDERS,
+  RigMismatch,
   type AnnyRig,
   type AnnyRigMeta,
   type PoseScratch,
@@ -81,6 +85,32 @@ function restShape(grid: AnnyGrid) {
   return { rest: out, groundOffsetY: minY }
 }
 
+/**
+ * Rodrigues' rotation of a point about an axis through a pivot — written here,
+ * independently of `pivotRotation`, so a test of the composition order cannot
+ * share a mistake with the code it checks.
+ */
+function rotateAbout(
+  p: readonly [number, number, number],
+  axis: readonly [number, number, number],
+  deg: number,
+  pivot: readonly [number, number, number],
+): [number, number, number] {
+  const t = (deg * Math.PI) / 180
+  const c = Math.cos(t)
+  const s = Math.sin(t)
+  const len = Math.hypot(axis[0], axis[1], axis[2])
+  const k = [axis[0] / len, axis[1] / len, axis[2] / len]
+  const v = [p[0] - pivot[0], p[1] - pivot[1], p[2] - pivot[2]]
+  const dot = k[0] * v[0] + k[1] * v[1] + k[2] * v[2]
+  const cross = [k[1] * v[2] - k[2] * v[1], k[2] * v[0] - k[0] * v[2], k[0] * v[1] - k[1] * v[0]]
+  return [
+    pivot[0] + v[0] * c + cross[0] * s + k[0] * dot * (1 - c),
+    pivot[1] + v[1] * c + cross[1] * s + k[1] * dot * (1 - c),
+    pivot[2] + v[2] * c + cross[2] * s + k[2] * dot * (1 - c),
+  ]
+}
+
 function bounds(v: Float32Array) {
   let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity
   for (let i = 0; i < v.length; i += 3) {
@@ -91,6 +121,21 @@ function bounds(v: Float32Array) {
   }
   return { minX, maxX, minY, maxY, width: maxX - minX, height: maxY - minY }
 }
+
+/** Needs no asset, so it runs everywhere CI does. */
+describe('pose limits', () => {
+  it('fills a slider the bake did not know about instead of leaving it undefined', () => {
+    const partial = { meta: { limitsDeg: { knee: [0, 100] } } } as unknown as AnnyRig
+    const limits = poseLimits(partial)
+    for (const s of POSE_SLIDERS) expect(Array.isArray(limits[s])).toBe(true)
+    expect(limits.knee).toEqual([0, 100])
+    expect(limits.elbow).toEqual([0, 0])
+  })
+
+  it('is all zeros without a rig', () => {
+    for (const s of POSE_SLIDERS) expect(poseLimits(null)[s]).toEqual([0, 0])
+  })
+})
 
 describe.skipIf(!have)('anny pose rig', () => {
   /**
@@ -124,13 +169,24 @@ describe.skipIf(!have)('anny pose rig', () => {
     expect(rig.meta.gridPoints).toBe(grid.meta.coreCombos.length)
   })
 
-  it('weights are normalised per vertex', () => {
+  it('refuses a rig baked for a different grid, by name', () => {
+    const stale = { ...rig, meta: { ...rig.meta, gridPoints: rig.meta.gridPoints + 1 } }
+    expect(() =>
+      poseAnny(grid, stale, { ...ANNY_NEUTRAL }, { ...POSE_NEUTRAL }, rest, out, scratch, groundOffsetY),
+    ).toThrow(RigMismatch)
+  })
+
+  it('weights are normalised on every vertex', () => {
+    // Every row, not a sample: one row that does not sum to 1 scales that
+    // vertex during skinning, and a sample of four cannot say which.
     const inf = rig.meta.influences
-    for (const v of [0, 1000, 7000, rig.meta.vertices - 1]) {
+    let worst = 0
+    for (let v = 0; v < rig.meta.vertices; v++) {
       let s = 0
       for (let i = 0; i < inf; i++) s += rig.boneWeight[v * inf + i]
-      expect(s).toBeCloseTo(1, 4)
+      worst = Math.max(worst, Math.abs(s - 1))
     }
+    expect(worst).toBeLessThan(1e-4)
   })
 
   it('the neutral pose is the rest shape, untouched', () => {
@@ -191,5 +247,80 @@ describe.skipIf(!have)('anny pose rig', () => {
     poseAnny(grid, rig, { ...ANNY_NEUTRAL }, { ...POSE_NEUTRAL, armAbduct: 45 }, rest, out, scratch, groundOffsetY)
     const b = bounds(out)
     expect(Math.abs(b.maxX + b.minX)).toBeLessThan(0.05)
+  })
+
+  /**
+   * ⚠️ THE ONE THAT CATCHES A WRONG COMPOSITION ORDER, which every single-slider
+   * test above passes straight through. A bone below two driven joints is
+   * skinned by the PRODUCT of their pivot rotations, and a product of two
+   * rotations about different pivots is not commutative: the knee turns about
+   * its rest pivot first and the hip then carries the whole leg, so the shin
+   * has to land exactly where "bend, then abduct" puts it. Multiplied the other
+   * way round, the shin bends about a knee the hip has already moved away from
+   * and parts from the thigh. The expected position comes from `rotateAbout`,
+   * not from `pivotRotation`, so the two cannot agree by sharing a mistake.
+   */
+  it('a bent knee under an abducted hip lands where bend-then-abduct puts it', () => {
+    const hipJ = rig.meta.drivenJoints.indexOf('upperleg01.L')
+    const kneeJ = rig.meta.drivenJoints.indexOf('lowerleg01.L')
+    expect(hipJ).toBeGreaterThanOrEqual(0)
+    expect(kneeJ).toBeGreaterThanOrEqual(0)
+    const hipSpec = rig.meta.jointAxes.find((a) => a.bone === 'upperleg01.L')!
+    const kneeSpec = rig.meta.jointAxes.find((a) => a.bone === 'lowerleg01.L')!
+
+    const joints = interpolateJoints(
+      grid,
+      rig,
+      { ...ANNY_NEUTRAL },
+      new Float32Array(rig.meta.drivenJoints.length * 3),
+    )
+    // Into the grounded frame the vertices are in, exactly as `poseAnny` does.
+    const pivot = (j: number): [number, number, number] => [
+      joints[j * 3],
+      joints[j * 3 + 1] - groundOffsetY,
+      joints[j * 3 + 2],
+    ]
+
+    // Vertices whose EVERY influence sits below both joints: the shin and foot.
+    const inf = rig.meta.influences
+    const below: number[] = []
+    for (let v = 0; v < rig.meta.vertices; v++) {
+      let any = false
+      let ok = true
+      for (let i = 0; i < inf; i++) {
+        if (rig.boneWeight[v * inf + i] === 0) continue
+        any = true
+        const chain = rig.meta.chains[rig.boneIndex[v * inf + i]]
+        if (!(chain.length === 2 && chain[0] === hipJ && chain[1] === kneeJ)) ok = false
+      }
+      if (any && ok) below.push(v)
+    }
+    expect(below.length).toBeGreaterThan(100)
+
+    const hip = 30
+    const knee = 60
+    poseAnny(
+      grid,
+      rig,
+      { ...ANNY_NEUTRAL },
+      { ...POSE_NEUTRAL, hipAbduct: hip, knee },
+      rest,
+      out,
+      scratch,
+      groundOffsetY,
+    )
+    const hipDeg = hipSpec.mirrored && hipSpec.side === 'R' ? -hip : hip
+    const kneeDeg = kneeSpec.mirrored && kneeSpec.side === 'R' ? -knee : knee
+    let worst = 0
+    for (const v of below) {
+      const p: [number, number, number] = [rest[v * 3], rest[v * 3 + 1], rest[v * 3 + 2]]
+      const bent = rotateAbout(p, kneeSpec.axis, kneeDeg, pivot(kneeJ))
+      const e = rotateAbout(bent, hipSpec.axis, hipDeg, pivot(hipJ))
+      worst = Math.max(
+        worst,
+        Math.hypot(out[v * 3] - e[0], out[v * 3 + 1] - e[1], out[v * 3 + 2] - e[2]),
+      )
+    }
+    expect(worst).toBeLessThan(1e-4)
   })
 })

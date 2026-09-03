@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import { useTwin } from '../store'
 import {
   ANNY_AXES,
@@ -6,14 +5,7 @@ import {
   BODY_DENSITY_KG_PER_M3,
   type AnnyAxis,
 } from '../scene/annyGrid'
-import {
-  loadAnnyRig,
-  poseLimits,
-  RigNotInstalled,
-  POSE_SLIDERS,
-  type AnnyRig,
-  type PoseSlider,
-} from '../scene/annyRig'
+import { poseLimits, POSE_SLIDERS, type PoseSlider } from '../scene/annyRig'
 
 /**
  * What each position slider means, in plain words.
@@ -158,28 +150,19 @@ export function ParametricPanel() {
  * optional asset like every binary here, and a control that renders but cannot
  * act is this repository's named failure — the hull pill says "no skin" rather
  * than sitting inert. Absent rig, the shape sliders work and this group is
- * simply not there.
+ * simply not there. The same holds for a rig baked for a different grid: the
+ * body refuses it and publishes nothing, so no slider appears that could not act.
+ *
+ * The rig is read from the store rather than fetched here. `ParametricBody` is
+ * the one component that has the grid to check a rig against, and it used to be
+ * that this panel fetched and decoded a second copy of the same file for the
+ * sake of four number pairs.
  */
 function PositionControls() {
   const pose = useTwin((s) => s.annyPose)
   const setPose = useTwin((s) => s.setAnnyPose)
   const resetPose = useTwin((s) => s.resetAnnyPose)
-  const [rig, setRig] = useState<AnnyRig | null>(null)
-
-  useEffect(() => {
-    let cancelled = false
-    loadAnnyRig()
-      .then((r) => !cancelled && setRig(r))
-      .catch((e) => {
-        // See `ParametricBody`: absent is fine, unreadable is not.
-        if (!(e instanceof RigNotInstalled)) {
-          console.error('[parametric] the pose rig is present but unreadable:', e)
-        }
-      })
-    return () => {
-      cancelled = true
-    }
-  }, [])
+  const rig = useTwin((s) => s.annyRig)
 
   if (!rig) return null
   const limits = poseLimits(rig)

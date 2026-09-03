@@ -98,6 +98,33 @@ export const ANNY_RIG_URLS = ['/models/anny-grid.rig', '/models/anny-grid-rig.js
  */
 export class RigNotInstalled extends Error {}
 
+/** The rig and the shape grid were not baked from the same mesh or the same stops. */
+export class RigMismatch extends Error {}
+
+/**
+ * The rig poses the grid's vertices about joints sampled at the grid's points,
+ * so both counts have to agree exactly — nothing else ties the two files to
+ * each other. `loadAnnyRig` can only check the rig against its own sidecar; a
+ * grid rebaked with different stops beside a stale rig passes that and would
+ * then read joint positions at the wrong grid index and skin a vertex count it
+ * was not built for. Throws, so the mismatch is named rather than rendered.
+ */
+export function assertRigMatchesGrid(rig: AnnyRig, grid: AnnyGrid): void {
+  if (rig.meta.gridPoints !== grid.meta.coreCombos.length) {
+    throw new RigMismatch(
+      `the pose rig was baked at ${rig.meta.gridPoints} grid points but the shape grid has ` +
+        `${grid.meta.coreCombos.length} — rebake both with the same stops ` +
+        '(npm run bake:anny-grid, then scripts/anny/bake_rig.py)',
+    )
+  }
+  if (rig.meta.vertices !== grid.meta.vertices) {
+    throw new RigMismatch(
+      `the pose rig skins ${rig.meta.vertices} vertices but the shape grid has ` +
+        `${grid.meta.vertices} — they were not baked from the same mesh`,
+    )
+  }
+}
+
 export async function loadAnnyRig(base = '/models/anny-grid'): Promise<AnnyRig> {
   const [meta, buf] = await Promise.all([
     fetch(`${base}-rig.json`).then((r) => {
@@ -285,6 +312,14 @@ export function poseAnny(
    */
   groundOffsetY = 0,
 ): boolean {
+  // Before the early return, so a stale rig is named the first time it is
+  // handed over and not only once a slider moves.
+  assertRigMatchesGrid(rig, grid)
+  if (rest.length !== rig.meta.vertices * 3) {
+    throw new RigMismatch(
+      `the rest shape has ${rest.length / 3} vertices but the rig skins ${rig.meta.vertices}`,
+    )
+  }
   const active = POSE_SLIDERS.some((s) => Math.abs(pose[s] ?? 0) > 1e-6)
   if (!active) {
     if (out !== rest) out.set(rest)
@@ -321,7 +356,22 @@ export function poseAnny(
     )
   }
 
-  // Per bone, the product of its driven ancestors' rotations.
+  /**
+   * Per bone, the product of its driven ancestors' rotations.
+   *
+   * ⚠️ ROOT ON THE LEFT, AND THE ORDER IS NOT A CONVENTION. `chains` lists a
+   * bone's driven ancestors root-most first, `mul34` is `a * b` — apply `b`,
+   * then `a` — and every pivot in `jointM` is a REST position. A child joint
+   * therefore turns about its rest pivot first and its parent then carries the
+   * result, so the product has to be J[root] * … * J[leaf]: accumulator on the
+   * left, the next joint down on the right. The first version multiplied the
+   * other way round, J[leaf] * … * J[root], which bends the shin about a knee
+   * the hip has already moved away from. With one slider at a time it is
+   * invisible, because a product of one term has no order; with a hip and a
+   * knee both active the shin parted from the thigh by 22 cm and every
+   * single-slider test passed. `annyRig.test.ts` now checks a two-joint chain
+   * against an independent rotation.
+   */
   const tmp = new Float32Array(12)
   for (let b = 0; b < rig.meta.bones; b++) {
     const chain = rig.meta.chains[b]
@@ -333,7 +383,7 @@ export function poseAnny(
     scratch.boneM.set(scratch.jointM.subarray(chain[0] * 12, chain[0] * 12 + 12), base)
     for (let c = 1; c < chain.length; c++) {
       tmp.set(scratch.boneM.subarray(base, base + 12))
-      mul34(scratch.boneM, base, scratch.jointM, chain[c] * 12, tmp, 0)
+      mul34(scratch.boneM, base, tmp, 0, scratch.jointM, chain[c] * 12)
     }
   }
 
@@ -359,16 +409,19 @@ export function poseAnny(
   return true
 }
 
-/** Every slider at its baked limits, for the UI. */
+/**
+ * Every slider at its baked limits, for the UI.
+ *
+ * Filled key by key rather than returned as parsed. `limitsDeg` is whatever the
+ * bake wrote, so a rig baked before a slider existed has no entry for it, and
+ * the panel destructures `limits[slider]` inside render. A missing slider gets
+ * a zero range — a control that visibly cannot move — instead of a throw.
+ */
 export function poseLimits(rig: AnnyRig | null): Record<PoseSlider, [number, number]> {
-  return (
-    rig?.meta.limitsDeg ?? {
-      armAbduct: [0, 0],
-      elbow: [0, 0],
-      hipAbduct: [0, 0],
-      knee: [0, 0],
-    }
-  )
+  const baked = rig?.meta.limitsDeg as Partial<Record<PoseSlider, [number, number]>> | undefined
+  const out = {} as Record<PoseSlider, [number, number]>
+  for (const s of POSE_SLIDERS) out[s] = baked?.[s] ?? [0, 0]
+  return out
 }
 
 /** Named so the axis list cannot drift from the grid's. */

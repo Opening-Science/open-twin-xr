@@ -15,6 +15,7 @@ import {
   type BodyMeasurements,
 } from './annyGrid'
 import {
+  assertRigMatchesGrid,
   loadAnnyRig,
   makePoseScratch,
   poseAnny,
@@ -58,6 +59,7 @@ export function ParametricBody() {
   const params = useTwin((s) => s.annyParams)
   const pose = useTwin((s) => s.annyPose)
   const setMeasurements = useTwin((s) => s.setBodyMeasurements)
+  const setAnnyRig = useTwin((s) => s.setAnnyRig)
   const [grid, setGrid] = useState<AnnyGrid | null>(null)
   const [rig, setRig] = useState<AnnyRig | null>(null)
   const [failed, setFailed] = useState<string | null>(null)
@@ -97,6 +99,35 @@ export function ParametricBody() {
       cancelled = true
     }
   }, [])
+
+  /**
+   * The rig, but only if it was baked for THIS grid.
+   *
+   * `loadAnnyRig` can check the rig against its own sidecar and nothing more. A
+   * grid rebaked with different stops beside a stale rig passes that check and
+   * would read joint positions at the wrong grid index — the body would pose,
+   * wrongly, and nothing would say so. Both files are known here and nowhere
+   * else, so this is where they are reconciled: a mismatch is named on the
+   * console, the body renders unposed, and the panel gets no rig to show
+   * sliders for.
+   */
+  const usableRig = useMemo(() => {
+    if (!grid || !rig) return null
+    try {
+      assertRigMatchesGrid(rig, grid)
+      return rig
+    } catch (e) {
+      console.error('[parametric] the pose rig does not match the shape grid; position sliders disabled:', e)
+      return null
+    }
+  }, [grid, rig])
+
+  // Published for the panel, withdrawn on unmount so a stale rig cannot outlive
+  // the body that checked it.
+  useEffect(() => {
+    setAnnyRig(usableRig)
+    return () => setAnnyRig(null)
+  }, [usableRig, setAnnyRig])
 
   const geometry = useMemo(() => {
     if (!grid) return null
@@ -171,9 +202,9 @@ export function ParametricBody() {
 
     setMeasurements(measureBody(rest, grid.indices))
 
-    if (rig) {
-      if (!scratchRef.current) scratchRef.current = makePoseScratch(rig)
-      poseAnny(grid, rig, params, pose, rest, out, scratchRef.current, minY)
+    if (usableRig) {
+      if (!scratchRef.current) scratchRef.current = makePoseScratch(usableRig)
+      poseAnny(grid, usableRig, params, pose, rest, out, scratchRef.current, minY)
       /**
        * ⚠️ RE-GROUND AFTER POSING, BUT ONLY DOWNWARDS.
        *
@@ -193,7 +224,7 @@ export function ParametricBody() {
     attr.needsUpdate = true
     geometry.computeVertexNormals()
     geometry.computeBoundingSphere()
-  }, [geometry, grid, rig, params, pose, setMeasurements])
+  }, [geometry, grid, usableRig, params, pose, setMeasurements])
 
   /**
    * ⚠️ RETHROW. Catching this and rendering `null` is what made a fresh clone show

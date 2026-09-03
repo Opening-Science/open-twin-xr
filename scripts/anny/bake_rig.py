@@ -245,10 +245,14 @@ def main() -> int:
         "package": "anny==0.6.0",
         "frame": "Y-up, metres, ANNY native origin — same as anny-grid.bin",
         "script": "scripts/anny/bake_rig.py",
+        # In WRITE ORDER — see the alignment note above the write. The first
+        # version listed these the other way round, so the metadata described a
+        # file that had never been written; `loadAnnyRig` computes its offsets
+        # from the counts rather than from this list, which is why nothing broke.
         "layout": [
-            f"uint8  [{n_v}][{k}]  bone indices",
-            f"uint16 [{n_v}][{k}]  weights, /65535",
             f"float32[{len(combos)}][{len(driven_ids)}][3]  driven joint positions",
+            f"uint16 [{n_v}][{k}]  weights, /65535",
+            f"uint8  [{n_v}][{k}]  bone indices",
         ],
     }
     meta_path = out.parent / (out.name + "-rig.json")
