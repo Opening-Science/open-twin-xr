@@ -5,6 +5,23 @@ import {
   BODY_DENSITY_KG_PER_M3,
   type AnnyAxis,
 } from '../scene/annyGrid'
+import { poseLimits, POSE_SLIDERS, type PoseSlider } from '../scene/annyRig'
+
+/**
+ * What each position slider means, in plain words.
+ *
+ * ⚠️ NAMED FOR THE MOVEMENT, NOT THE JOINT. "Arms out" says what the slider
+ * does; "shoulder abduction, 0-60 deg" says what the rig does. The shape sliders
+ * above make the same choice for the same reason — a control the reader has to
+ * decode invites them to guess, and guessing is what put the gender axis
+ * backwards in the notes this feature was built from.
+ */
+const POSE_SLIDER_INFO: Record<PoseSlider, { label: string; ends: [string, string] }> = {
+  armAbduct: { label: 'Arms out', ends: ['down', 'raised'] },
+  elbow: { label: 'Elbows', ends: ['straight', 'bent'] },
+  hipAbduct: { label: 'Stance', ends: ['together', 'apart'] },
+  knee: { label: 'Knees', ends: ['straight', 'bent'] },
+}
 
 /**
  * The parametric body's controls: six phenotype sliders and what the resulting
@@ -80,6 +97,8 @@ export function ParametricPanel() {
         })}
       </div>
 
+      <PositionControls />
+
       {/*
         What the shape measures.
 
@@ -111,6 +130,99 @@ export function ParametricPanel() {
         artist priors from MakeHuman rather than measured population data, so no position in it is
         a measurement of a human body. Skin tone, ancestry and chest-shape axes are deliberately
         not offered.
+      </p>
+    </div>
+  )
+}
+
+/**
+ * The position sliders — where the limbs are, as opposed to what shape the body
+ * is.
+ *
+ * ⚠️ SEPARATE GROUP FROM "SHAPE", AND NOT A COSMETIC SPLIT. The two answer
+ * different questions and only one of them feeds the measurements below: height,
+ * waist, volume, mass and BMI are all taken on the REST shape, before any of
+ * these are applied (see `ParametricBody`). A body with bent knees is not
+ * shorter, and letting a pose slider move a stated height would be inventing a
+ * measurement out of a rotation.
+ *
+ * ⚠️ THE PANEL HIDES ITSELF WHEN THE RIG IS NOT INSTALLED. `anny-grid.rig` is an
+ * optional asset like every binary here, and a control that renders but cannot
+ * act is this repository's named failure — the hull pill says "no skin" rather
+ * than sitting inert. Absent rig, the shape sliders work and this group is
+ * simply not there. The same holds for a rig baked for a different grid: the
+ * body refuses it and publishes nothing, so no slider appears that could not act.
+ *
+ * The rig is read from the store rather than fetched here. `ParametricBody` is
+ * the one component that has the grid to check a rig against, and it used to be
+ * that this panel fetched and decoded a second copy of the same file for the
+ * sake of four number pairs.
+ */
+function PositionControls() {
+  const pose = useTwin((s) => s.annyPose)
+  const setPose = useTwin((s) => s.setAnnyPose)
+  const resetPose = useTwin((s) => s.resetAnnyPose)
+  const rig = useTwin((s) => s.annyRig)
+
+  if (!rig) return null
+  const limits = poseLimits(rig)
+  const posed = POSE_SLIDERS.some((s) => Math.abs(pose[s]) > 0.5)
+
+  return (
+    <div className="flex flex-col gap-2 border-t border-line pt-2">
+      <div className="flex items-baseline justify-between">
+        <h3 className="text-sm font-semibold text-ink">Position</h3>
+        <button
+          onClick={resetPose}
+          className="text-[11px] text-muted transition hover:text-ink"
+          title="Return every limb to the model's own rest pose"
+        >
+          reset
+        </button>
+      </div>
+
+      {POSE_SLIDERS.map((slider) => {
+        const info = POSE_SLIDER_INFO[slider]
+        const [lo, hi] = limits[slider]
+        const v = pose[slider]
+        return (
+          <div key={slider} className="flex flex-col gap-0.5">
+            <div className="flex items-baseline justify-between text-[11px]">
+              <label htmlFor={`pose-${slider}`} className="text-ink/80">
+                {info.label}
+              </label>
+              <span className="font-mono text-[10px] text-muted">{v.toFixed(0)}°</span>
+            </div>
+            <input
+              id={`pose-${slider}`}
+              type="range"
+              min={lo}
+              max={hi}
+              step={1}
+              value={v}
+              onChange={(e) => setPose(slider, Number(e.target.value))}
+              className="h-1.5 w-full accent-[#4f9c84]"
+              aria-label={`${info.label}, ${lo} to ${hi} degrees`}
+              aria-valuetext={`${v.toFixed(0)} degrees`}
+            />
+            <div className="flex justify-between text-[9px] leading-none text-muted/70">
+              <span>{info.ends[0]}</span>
+              <span>{info.ends[1]}</span>
+            </div>
+          </div>
+        )
+      })}
+
+      {/*
+        ⚠️ THE RANGE CAP IS STATED, because a slider that stops is otherwise read
+        as a bug. It stops where linear blend skinning starts to pinch the joint,
+        which is a limit of the deformation method and not of any body.
+      */}
+      <p className="text-[9px] leading-snug text-muted/70">
+        Left and right move together. The ranges stop short of where the surface starts to pinch at
+        a joint — a limit of the skinning, not of a body — and none of this is range-of-motion or
+        ergonomic data.
+        {posed && ' The measurements below are taken at rest, so posing does not change them.'}
       </p>
     </div>
   )

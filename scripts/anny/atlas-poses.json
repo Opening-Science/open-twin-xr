@@ -1,0 +1,1786 @@
+{
+  "generatedBy": "scripts/anny/measure_atlas_pose.mjs",
+  "warning": "GENERATED FILE — do not hand-edit. Re-run the script instead.",
+  "canonicalFrame": "Directions are unit vectors in the atlas's own glTF frame (Y up). They are invariant under the uniform scale and translation AtlasBody applies, so no registration is needed. ANNY is Z-up: convert before use.",
+  "segments": {
+    "upperarm": {
+      "bones": [
+        "upperarm01",
+        "upperarm02"
+      ],
+      "label": "upper arm"
+    },
+    "forearm": {
+      "bones": [
+        "lowerarm01",
+        "lowerarm02"
+      ],
+      "label": "forearm"
+    },
+    "thigh": {
+      "bones": [
+        "upperleg01",
+        "upperleg02"
+      ],
+      "label": "thigh"
+    },
+    "shank": {
+      "bones": [
+        "lowerleg01",
+        "lowerleg02"
+      ],
+      "label": "shank"
+    }
+  },
+  "samePoseThresholdDeg": 5,
+  "poses": {
+    "hra": {
+      "id": "hra",
+      "members": [
+        "hra",
+        "composed-f"
+      ],
+      "worstWithinGroupDeg": 0.26,
+      "measuredFrom": "hra.glb",
+      "segments": {
+        "upperarm.L": {
+          "source": "measured",
+          "via": "arm centreline from the body surface, 16 of 24 slices usable — this atlas has arms but no arm bones",
+          "axis": [
+            0.47544,
+            -0.86412,
+            0.16507
+          ],
+          "lengthM": 0.4415,
+          "bones": [
+            "upperarm01.L",
+            "upperarm02.L"
+          ],
+          "note": "one direction for the whole limb: a surface silhouette cannot separate an upper arm from a forearm, so the arm is posed straight"
+        },
+        "upperarm.R": {
+          "source": "measured",
+          "via": "arm centreline from the body surface, 16 of 24 slices usable — this atlas has arms but no arm bones",
+          "axis": [
+            -0.47974,
+            -0.86163,
+            0.16563
+          ],
+          "lengthM": 0.4419,
+          "bones": [
+            "upperarm01.R",
+            "upperarm02.R"
+          ],
+          "note": "one direction for the whole limb: a surface silhouette cannot separate an upper arm from a forearm, so the arm is posed straight"
+        },
+        "forearm.L": {
+          "source": "measured",
+          "via": "arm centreline from the body surface, 16 of 24 slices usable — this atlas has arms but no arm bones",
+          "axis": [
+            0.47544,
+            -0.86412,
+            0.16507
+          ],
+          "lengthM": 0.4415,
+          "bones": [
+            "lowerarm01.L",
+            "lowerarm02.L"
+          ],
+          "note": "one direction for the whole limb: a surface silhouette cannot separate an upper arm from a forearm, so the arm is posed straight"
+        },
+        "forearm.R": {
+          "source": "measured",
+          "via": "arm centreline from the body surface, 16 of 24 slices usable — this atlas has arms but no arm bones",
+          "axis": [
+            -0.47974,
+            -0.86163,
+            0.16563
+          ],
+          "lengthM": 0.4419,
+          "bones": [
+            "lowerarm01.R",
+            "lowerarm02.R"
+          ],
+          "note": "one direction for the whole limb: a surface silhouette cannot separate an upper arm from a forearm, so the arm is posed straight"
+        },
+        "thigh.L": {
+          "source": "measured",
+          "via": "mesh nodes VH_F_femur_L",
+          "vertices": 4517,
+          "axis": [
+            -0.01016,
+            -0.99917,
+            0.03942
+          ],
+          "lengthM": 0.4204,
+          "bones": [
+            "upperleg01.L",
+            "upperleg02.L"
+          ],
+          "jointGapM": 0.032
+        },
+        "shank.L": {
+          "source": "measured",
+          "via": "mesh nodes VH_F_tibia_L, VH_F_fibula_L",
+          "vertices": 2354,
+          "axis": [
+            0.02485,
+            -0.99963,
+            -0.0109
+          ],
+          "lengthM": 0.3573,
+          "bones": [
+            "lowerleg01.L",
+            "lowerleg02.L"
+          ],
+          "jointGapM": 0.032
+        },
+        "thigh.R": {
+          "source": "measured",
+          "via": "mesh nodes VH_F_femur_R",
+          "vertices": 4517,
+          "axis": [
+            0.01016,
+            -0.99917,
+            0.03942
+          ],
+          "lengthM": 0.4204,
+          "bones": [
+            "upperleg01.R",
+            "upperleg02.R"
+          ],
+          "jointGapM": 0.0325
+        },
+        "shank.R": {
+          "source": "measured",
+          "via": "mesh nodes VH_F_tibia_R, VH_F_fibula_R",
+          "vertices": 2354,
+          "axis": [
+            -0.02458,
+            -0.99964,
+            -0.01088
+          ],
+          "lengthM": 0.3572,
+          "bones": [
+            "lowerleg01.R",
+            "lowerleg02.R"
+          ],
+          "jointGapM": 0.0325
+        }
+      }
+    },
+    "hra-m": {
+      "id": "hra-m",
+      "members": [
+        "hra-m"
+      ],
+      "worstWithinGroupDeg": 0,
+      "measuredFrom": "hra-m.glb",
+      "segments": {
+        "upperarm.L": {
+          "source": "measured",
+          "via": "arm centreline from the body surface, 14 of 24 slices usable — this atlas has arms but no arm bones",
+          "axis": [
+            0.51471,
+            -0.84697,
+            0.13308
+          ],
+          "lengthM": 0.4257,
+          "bones": [
+            "upperarm01.L",
+            "upperarm02.L"
+          ],
+          "note": "one direction for the whole limb: a surface silhouette cannot separate an upper arm from a forearm, so the arm is posed straight"
+        },
+        "upperarm.R": {
+          "source": "measured",
+          "via": "arm centreline from the body surface, 14 of 24 slices usable — this atlas has arms but no arm bones",
+          "axis": [
+            -0.5294,
+            -0.83776,
+            0.13377
+          ],
+          "lengthM": 0.4271,
+          "bones": [
+            "upperarm01.R",
+            "upperarm02.R"
+          ],
+          "note": "one direction for the whole limb: a surface silhouette cannot separate an upper arm from a forearm, so the arm is posed straight"
+        },
+        "forearm.L": {
+          "source": "measured",
+          "via": "arm centreline from the body surface, 14 of 24 slices usable — this atlas has arms but no arm bones",
+          "axis": [
+            0.51471,
+            -0.84697,
+            0.13308
+          ],
+          "lengthM": 0.4257,
+          "bones": [
+            "lowerarm01.L",
+            "lowerarm02.L"
+          ],
+          "note": "one direction for the whole limb: a surface silhouette cannot separate an upper arm from a forearm, so the arm is posed straight"
+        },
+        "forearm.R": {
+          "source": "measured",
+          "via": "arm centreline from the body surface, 14 of 24 slices usable — this atlas has arms but no arm bones",
+          "axis": [
+            -0.5294,
+            -0.83776,
+            0.13377
+          ],
+          "lengthM": 0.4271,
+          "bones": [
+            "lowerarm01.R",
+            "lowerarm02.R"
+          ],
+          "note": "one direction for the whole limb: a surface silhouette cannot separate an upper arm from a forearm, so the arm is posed straight"
+        },
+        "thigh.L": {
+          "source": "measured",
+          "via": "mesh nodes VH_M_femur_L",
+          "vertices": 6053,
+          "axis": [
+            0.04222,
+            -0.99911,
+            0.00239
+          ],
+          "lengthM": 0.4805,
+          "bones": [
+            "upperleg01.L",
+            "upperleg02.L"
+          ],
+          "jointGapM": 0.0443
+        },
+        "shank.L": {
+          "source": "measured",
+          "via": "mesh nodes VH_M_tibia_L, VH_M_fibula_L",
+          "vertices": 3335,
+          "axis": [
+            0.13165,
+            -0.97704,
+            -0.16751
+          ],
+          "lengthM": 0.43,
+          "bones": [
+            "lowerleg01.L",
+            "lowerleg02.L"
+          ],
+          "jointGapM": 0.0443
+        },
+        "thigh.R": {
+          "source": "measured",
+          "via": "mesh nodes VH_M_femur_R",
+          "vertices": 6053,
+          "axis": [
+            -0.04222,
+            -0.99911,
+            0.00239
+          ],
+          "lengthM": 0.4805,
+          "bones": [
+            "upperleg01.R",
+            "upperleg02.R"
+          ],
+          "jointGapM": 0.0443
+        },
+        "shank.R": {
+          "source": "measured",
+          "via": "mesh nodes VH_M_tibia_R, VH_M_fibula_R",
+          "vertices": 3335,
+          "axis": [
+            -0.13165,
+            -0.97704,
+            -0.16751
+          ],
+          "lengthM": 0.43,
+          "bones": [
+            "lowerleg01.R",
+            "lowerleg02.R"
+          ],
+          "jointGapM": 0.0443
+        }
+      }
+    },
+    "bodyparts3d": {
+      "id": "bodyparts3d",
+      "members": [
+        "bodyparts3d",
+        "z-anatomy",
+        "composed",
+        "z-anatomy-regions"
+      ],
+      "worstWithinGroupDeg": 3.6,
+      "measuredFrom": "bodyparts3d.ao.glb",
+      "segments": {
+        "upperarm.L": {
+          "source": "measured",
+          "via": "structure table (1 entries)",
+          "vertices": 1386,
+          "axis": [
+            0.17188,
+            -0.98439,
+            -0.03775
+          ],
+          "lengthM": 0.3061,
+          "bones": [
+            "upperarm01.L",
+            "upperarm02.L"
+          ],
+          "jointGapM": 0.0284
+        },
+        "forearm.L": {
+          "source": "measured",
+          "via": "structure table (2 entries)",
+          "vertices": 645,
+          "axis": [
+            0.15135,
+            -0.96606,
+            0.20935
+          ],
+          "lengthM": 0.2584,
+          "bones": [
+            "lowerarm01.L",
+            "lowerarm02.L"
+          ],
+          "jointGapM": 0.0284
+        },
+        "thigh.L": {
+          "source": "measured",
+          "via": "structure table (1 entries)",
+          "vertices": 1470,
+          "axis": [
+            -0.07244,
+            -0.99736,
+            0.00524
+          ],
+          "lengthM": 0.462,
+          "bones": [
+            "upperleg01.L",
+            "upperleg02.L"
+          ],
+          "jointGapM": 0.0236
+        },
+        "shank.L": {
+          "source": "measured",
+          "via": "structure table (2 entries)",
+          "vertices": 1294,
+          "axis": [
+            0.00062,
+            -0.99981,
+            -0.01971
+          ],
+          "lengthM": 0.3949,
+          "bones": [
+            "lowerleg01.L",
+            "lowerleg02.L"
+          ],
+          "jointGapM": 0.0236
+        },
+        "upperarm.R": {
+          "source": "measured",
+          "via": "structure table (1 entries)",
+          "vertices": 1413,
+          "axis": [
+            -0.1742,
+            -0.98388,
+            -0.0403
+          ],
+          "lengthM": 0.3059,
+          "bones": [
+            "upperarm01.R",
+            "upperarm02.R"
+          ],
+          "jointGapM": 0.0267
+        },
+        "forearm.R": {
+          "source": "measured",
+          "via": "structure table (2 entries)",
+          "vertices": 680,
+          "axis": [
+            -0.17301,
+            -0.9609,
+            0.21618
+          ],
+          "lengthM": 0.2594,
+          "bones": [
+            "lowerarm01.R",
+            "lowerarm02.R"
+          ],
+          "jointGapM": 0.0267
+        },
+        "thigh.R": {
+          "source": "measured",
+          "via": "structure table (1 entries)",
+          "vertices": 1435,
+          "axis": [
+            0.08158,
+            -0.99664,
+            0.00659
+          ],
+          "lengthM": 0.4623,
+          "bones": [
+            "upperleg01.R",
+            "upperleg02.R"
+          ],
+          "jointGapM": 0.0265
+        },
+        "shank.R": {
+          "source": "measured",
+          "via": "structure table (2 entries)",
+          "vertices": 1286,
+          "axis": [
+            0.00163,
+            -0.99979,
+            -0.02062
+          ],
+          "lengthM": 0.3951,
+          "bones": [
+            "lowerleg01.R",
+            "lowerleg02.R"
+          ],
+          "jointGapM": 0.0265
+        }
+      }
+    },
+    "htb-ct-f": {
+      "id": "htb-ct-f",
+      "members": [
+        "htb-ct-f"
+      ],
+      "worstWithinGroupDeg": 0,
+      "measuredFrom": "htb-ct-003.glb",
+      "segments": {
+        "upperarm.L": {
+          "source": "measured",
+          "via": "UBERON nodes UBERON_0000976 split by x sign",
+          "vertices": 642,
+          "axis": [
+            0.30898,
+            0.63742,
+            0.70585
+          ],
+          "lengthM": 0.3056,
+          "bones": [
+            "upperarm01.L",
+            "upperarm02.L"
+          ],
+          "jointGapM": 0.0107
+        },
+        "forearm.L": {
+          "source": "measured",
+          "via": "UBERON nodes UBERON_0001423, UBERON_0001424 split by x sign",
+          "vertices": 614,
+          "axis": [
+            -0.83974,
+            0.52574,
+            -0.13576
+          ],
+          "lengthM": 0.2326,
+          "bones": [
+            "lowerarm01.L",
+            "lowerarm02.L"
+          ],
+          "jointGapM": 0.0107
+        },
+        "thigh.L": {
+          "source": "measured",
+          "via": "UBERON nodes UBERON_0000981 split by x sign",
+          "vertices": 1092,
+          "axis": [
+            -0.02979,
+            -0.98524,
+            0.16857
+          ],
+          "lengthM": 0.4173,
+          "bones": [
+            "upperleg01.L",
+            "upperleg02.L"
+          ],
+          "jointGapM": 0.034
+        },
+        "shank.L": {
+          "source": "measured",
+          "via": "UBERON nodes UBERON_0000979, UBERON_0001446 split by x sign",
+          "vertices": 1101,
+          "axis": [
+            -0.09636,
+            -0.96031,
+            -0.26178
+          ],
+          "lengthM": 0.3544,
+          "bones": [
+            "lowerleg01.L",
+            "lowerleg02.L"
+          ],
+          "jointGapM": 0.034
+        },
+        "upperarm.R": {
+          "source": "measured",
+          "via": "UBERON nodes UBERON_0000976 split by x sign",
+          "vertices": 653,
+          "axis": [
+            -0.18465,
+            0.72603,
+            0.66241
+          ],
+          "lengthM": 0.3039,
+          "bones": [
+            "upperarm01.R",
+            "upperarm02.R"
+          ],
+          "jointGapM": 0.0168
+        },
+        "forearm.R": {
+          "source": "measured",
+          "via": "UBERON nodes UBERON_0001423, UBERON_0001424 split by x sign",
+          "vertices": 648,
+          "axis": [
+            0.84553,
+            0.53023,
+            0.0627
+          ],
+          "lengthM": 0.2429,
+          "bones": [
+            "lowerarm01.R",
+            "lowerarm02.R"
+          ],
+          "jointGapM": 0.0168
+        },
+        "thigh.R": {
+          "source": "measured",
+          "via": "UBERON nodes UBERON_0000981 split by x sign",
+          "vertices": 1143,
+          "axis": [
+            0.02482,
+            -0.97161,
+            0.23528
+          ],
+          "lengthM": 0.4145,
+          "bones": [
+            "upperleg01.R",
+            "upperleg02.R"
+          ],
+          "jointGapM": 0.0287
+        },
+        "shank.R": {
+          "source": "measured",
+          "via": "UBERON nodes UBERON_0000979, UBERON_0001446 split by x sign",
+          "vertices": 1135,
+          "axis": [
+            0.0332,
+            -0.9459,
+            -0.32274
+          ],
+          "lengthM": 0.3553,
+          "bones": [
+            "lowerleg01.R",
+            "lowerleg02.R"
+          ],
+          "jointGapM": 0.0287
+        }
+      }
+    }
+  },
+  "atlases": {
+    "hra": {
+      "atlas": "hra",
+      "measuredFrom": "hra.glb",
+      "bbox": {
+        "widthM": 0.9617,
+        "heightM": 1.6578,
+        "depthM": 0.4517,
+        "widthOverHeight": 0.5801
+      },
+      "segments": {
+        "upperarm.L": {
+          "source": "measured",
+          "via": "arm centreline from the body surface, 16 of 24 slices usable — this atlas has arms but no arm bones",
+          "axis": [
+            0.47544,
+            -0.86412,
+            0.16507
+          ],
+          "lengthM": 0.4415,
+          "bones": [
+            "upperarm01.L",
+            "upperarm02.L"
+          ],
+          "note": "one direction for the whole limb: a surface silhouette cannot separate an upper arm from a forearm, so the arm is posed straight"
+        },
+        "upperarm.R": {
+          "source": "measured",
+          "via": "arm centreline from the body surface, 16 of 24 slices usable — this atlas has arms but no arm bones",
+          "axis": [
+            -0.47974,
+            -0.86163,
+            0.16563
+          ],
+          "lengthM": 0.4419,
+          "bones": [
+            "upperarm01.R",
+            "upperarm02.R"
+          ],
+          "note": "one direction for the whole limb: a surface silhouette cannot separate an upper arm from a forearm, so the arm is posed straight"
+        },
+        "forearm.L": {
+          "source": "measured",
+          "via": "arm centreline from the body surface, 16 of 24 slices usable — this atlas has arms but no arm bones",
+          "axis": [
+            0.47544,
+            -0.86412,
+            0.16507
+          ],
+          "lengthM": 0.4415,
+          "bones": [
+            "lowerarm01.L",
+            "lowerarm02.L"
+          ],
+          "note": "one direction for the whole limb: a surface silhouette cannot separate an upper arm from a forearm, so the arm is posed straight"
+        },
+        "forearm.R": {
+          "source": "measured",
+          "via": "arm centreline from the body surface, 16 of 24 slices usable — this atlas has arms but no arm bones",
+          "axis": [
+            -0.47974,
+            -0.86163,
+            0.16563
+          ],
+          "lengthM": 0.4419,
+          "bones": [
+            "lowerarm01.R",
+            "lowerarm02.R"
+          ],
+          "note": "one direction for the whole limb: a surface silhouette cannot separate an upper arm from a forearm, so the arm is posed straight"
+        },
+        "thigh.L": {
+          "source": "measured",
+          "via": "mesh nodes VH_F_femur_L",
+          "vertices": 4517,
+          "axis": [
+            -0.01016,
+            -0.99917,
+            0.03942
+          ],
+          "lengthM": 0.4204,
+          "bones": [
+            "upperleg01.L",
+            "upperleg02.L"
+          ],
+          "jointGapM": 0.032
+        },
+        "shank.L": {
+          "source": "measured",
+          "via": "mesh nodes VH_F_tibia_L, VH_F_fibula_L",
+          "vertices": 2354,
+          "axis": [
+            0.02485,
+            -0.99963,
+            -0.0109
+          ],
+          "lengthM": 0.3573,
+          "bones": [
+            "lowerleg01.L",
+            "lowerleg02.L"
+          ],
+          "jointGapM": 0.032
+        },
+        "thigh.R": {
+          "source": "measured",
+          "via": "mesh nodes VH_F_femur_R",
+          "vertices": 4517,
+          "axis": [
+            0.01016,
+            -0.99917,
+            0.03942
+          ],
+          "lengthM": 0.4204,
+          "bones": [
+            "upperleg01.R",
+            "upperleg02.R"
+          ],
+          "jointGapM": 0.0325
+        },
+        "shank.R": {
+          "source": "measured",
+          "via": "mesh nodes VH_F_tibia_R, VH_F_fibula_R",
+          "vertices": 2354,
+          "axis": [
+            -0.02458,
+            -0.99964,
+            -0.01088
+          ],
+          "lengthM": 0.3572,
+          "bones": [
+            "lowerleg01.R",
+            "lowerleg02.R"
+          ],
+          "jointGapM": 0.0325
+        }
+      },
+      "notes": [
+        "shipped asset hra.ao.glb is merged and unnamed; measured from hra.glb, verified to match its bounding box within 0.000076 m"
+      ],
+      "poseId": "hra"
+    },
+    "hra-m": {
+      "atlas": "hra-m",
+      "measuredFrom": "hra-m.glb",
+      "bbox": {
+        "widthM": 1.0432,
+        "heightM": 1.8243,
+        "depthM": 0.3256,
+        "widthOverHeight": 0.5718
+      },
+      "segments": {
+        "upperarm.L": {
+          "source": "measured",
+          "via": "arm centreline from the body surface, 14 of 24 slices usable — this atlas has arms but no arm bones",
+          "axis": [
+            0.51471,
+            -0.84697,
+            0.13308
+          ],
+          "lengthM": 0.4257,
+          "bones": [
+            "upperarm01.L",
+            "upperarm02.L"
+          ],
+          "note": "one direction for the whole limb: a surface silhouette cannot separate an upper arm from a forearm, so the arm is posed straight"
+        },
+        "upperarm.R": {
+          "source": "measured",
+          "via": "arm centreline from the body surface, 14 of 24 slices usable — this atlas has arms but no arm bones",
+          "axis": [
+            -0.5294,
+            -0.83776,
+            0.13377
+          ],
+          "lengthM": 0.4271,
+          "bones": [
+            "upperarm01.R",
+            "upperarm02.R"
+          ],
+          "note": "one direction for the whole limb: a surface silhouette cannot separate an upper arm from a forearm, so the arm is posed straight"
+        },
+        "forearm.L": {
+          "source": "measured",
+          "via": "arm centreline from the body surface, 14 of 24 slices usable — this atlas has arms but no arm bones",
+          "axis": [
+            0.51471,
+            -0.84697,
+            0.13308
+          ],
+          "lengthM": 0.4257,
+          "bones": [
+            "lowerarm01.L",
+            "lowerarm02.L"
+          ],
+          "note": "one direction for the whole limb: a surface silhouette cannot separate an upper arm from a forearm, so the arm is posed straight"
+        },
+        "forearm.R": {
+          "source": "measured",
+          "via": "arm centreline from the body surface, 14 of 24 slices usable — this atlas has arms but no arm bones",
+          "axis": [
+            -0.5294,
+            -0.83776,
+            0.13377
+          ],
+          "lengthM": 0.4271,
+          "bones": [
+            "lowerarm01.R",
+            "lowerarm02.R"
+          ],
+          "note": "one direction for the whole limb: a surface silhouette cannot separate an upper arm from a forearm, so the arm is posed straight"
+        },
+        "thigh.L": {
+          "source": "measured",
+          "via": "mesh nodes VH_M_femur_L",
+          "vertices": 6053,
+          "axis": [
+            0.04222,
+            -0.99911,
+            0.00239
+          ],
+          "lengthM": 0.4805,
+          "bones": [
+            "upperleg01.L",
+            "upperleg02.L"
+          ],
+          "jointGapM": 0.0443
+        },
+        "shank.L": {
+          "source": "measured",
+          "via": "mesh nodes VH_M_tibia_L, VH_M_fibula_L",
+          "vertices": 3335,
+          "axis": [
+            0.13165,
+            -0.97704,
+            -0.16751
+          ],
+          "lengthM": 0.43,
+          "bones": [
+            "lowerleg01.L",
+            "lowerleg02.L"
+          ],
+          "jointGapM": 0.0443
+        },
+        "thigh.R": {
+          "source": "measured",
+          "via": "mesh nodes VH_M_femur_R",
+          "vertices": 6053,
+          "axis": [
+            -0.04222,
+            -0.99911,
+            0.00239
+          ],
+          "lengthM": 0.4805,
+          "bones": [
+            "upperleg01.R",
+            "upperleg02.R"
+          ],
+          "jointGapM": 0.0443
+        },
+        "shank.R": {
+          "source": "measured",
+          "via": "mesh nodes VH_M_tibia_R, VH_M_fibula_R",
+          "vertices": 3335,
+          "axis": [
+            -0.13165,
+            -0.97704,
+            -0.16751
+          ],
+          "lengthM": 0.43,
+          "bones": [
+            "lowerleg01.R",
+            "lowerleg02.R"
+          ],
+          "jointGapM": 0.0443
+        }
+      },
+      "notes": [
+        "shipped asset hra-m.ao.glb is merged and unnamed; measured from hra-m.glb, verified to match its bounding box within 0.00007 m"
+      ],
+      "poseId": "hra-m"
+    },
+    "bodyparts3d": {
+      "atlas": "bodyparts3d",
+      "measuredFrom": "bodyparts3d.ao.glb",
+      "bbox": {
+        "widthM": 0.6593,
+        "heightM": 1.7,
+        "depthM": 0.2887,
+        "widthOverHeight": 0.3879
+      },
+      "segments": {
+        "upperarm.L": {
+          "source": "measured",
+          "via": "structure table (1 entries)",
+          "vertices": 1386,
+          "axis": [
+            0.17188,
+            -0.98439,
+            -0.03775
+          ],
+          "lengthM": 0.3061,
+          "bones": [
+            "upperarm01.L",
+            "upperarm02.L"
+          ],
+          "jointGapM": 0.0284
+        },
+        "forearm.L": {
+          "source": "measured",
+          "via": "structure table (2 entries)",
+          "vertices": 645,
+          "axis": [
+            0.15135,
+            -0.96606,
+            0.20935
+          ],
+          "lengthM": 0.2584,
+          "bones": [
+            "lowerarm01.L",
+            "lowerarm02.L"
+          ],
+          "jointGapM": 0.0284
+        },
+        "thigh.L": {
+          "source": "measured",
+          "via": "structure table (1 entries)",
+          "vertices": 1470,
+          "axis": [
+            -0.07244,
+            -0.99736,
+            0.00524
+          ],
+          "lengthM": 0.462,
+          "bones": [
+            "upperleg01.L",
+            "upperleg02.L"
+          ],
+          "jointGapM": 0.0236
+        },
+        "shank.L": {
+          "source": "measured",
+          "via": "structure table (2 entries)",
+          "vertices": 1294,
+          "axis": [
+            0.00062,
+            -0.99981,
+            -0.01971
+          ],
+          "lengthM": 0.3949,
+          "bones": [
+            "lowerleg01.L",
+            "lowerleg02.L"
+          ],
+          "jointGapM": 0.0236
+        },
+        "upperarm.R": {
+          "source": "measured",
+          "via": "structure table (1 entries)",
+          "vertices": 1413,
+          "axis": [
+            -0.1742,
+            -0.98388,
+            -0.0403
+          ],
+          "lengthM": 0.3059,
+          "bones": [
+            "upperarm01.R",
+            "upperarm02.R"
+          ],
+          "jointGapM": 0.0267
+        },
+        "forearm.R": {
+          "source": "measured",
+          "via": "structure table (2 entries)",
+          "vertices": 680,
+          "axis": [
+            -0.17301,
+            -0.9609,
+            0.21618
+          ],
+          "lengthM": 0.2594,
+          "bones": [
+            "lowerarm01.R",
+            "lowerarm02.R"
+          ],
+          "jointGapM": 0.0267
+        },
+        "thigh.R": {
+          "source": "measured",
+          "via": "structure table (1 entries)",
+          "vertices": 1435,
+          "axis": [
+            0.08158,
+            -0.99664,
+            0.00659
+          ],
+          "lengthM": 0.4623,
+          "bones": [
+            "upperleg01.R",
+            "upperleg02.R"
+          ],
+          "jointGapM": 0.0265
+        },
+        "shank.R": {
+          "source": "measured",
+          "via": "structure table (2 entries)",
+          "vertices": 1286,
+          "axis": [
+            0.00163,
+            -0.99979,
+            -0.02062
+          ],
+          "lengthM": 0.3951,
+          "bones": [
+            "lowerleg01.R",
+            "lowerleg02.R"
+          ],
+          "jointGapM": 0.0265
+        }
+      },
+      "notes": [],
+      "poseId": "bodyparts3d"
+    },
+    "z-anatomy": {
+      "atlas": "z-anatomy",
+      "measuredFrom": "z-anatomy.ao.glb",
+      "bbox": {
+        "widthM": 0.6674,
+        "heightM": 1.6999,
+        "depthM": 0.2672,
+        "widthOverHeight": 0.3926
+      },
+      "segments": {
+        "upperarm.L": {
+          "source": "measured",
+          "via": "structure table (1 entries)",
+          "vertices": 1452,
+          "axis": [
+            0.17226,
+            -0.98386,
+            -0.04846
+          ],
+          "lengthM": 0.3181,
+          "bones": [
+            "upperarm01.L",
+            "upperarm02.L"
+          ],
+          "jointGapM": 0.0287
+        },
+        "forearm.L": {
+          "source": "measured",
+          "via": "structure table (2 entries)",
+          "vertices": 670,
+          "axis": [
+            0.16959,
+            -0.96071,
+            0.21973
+          ],
+          "lengthM": 0.27,
+          "bones": [
+            "lowerarm01.L",
+            "lowerarm02.L"
+          ],
+          "jointGapM": 0.0287
+        },
+        "thigh.L": {
+          "source": "measured",
+          "via": "structure table (1 entries)",
+          "vertices": 1281,
+          "axis": [
+            -0.0689,
+            -0.9961,
+            -0.05515
+          ],
+          "lengthM": 0.454,
+          "bones": [
+            "upperleg01.L",
+            "upperleg02.L"
+          ],
+          "jointGapM": 0.0291
+        },
+        "shank.L": {
+          "source": "measured",
+          "via": "structure table (2 entries)",
+          "vertices": 1083,
+          "axis": [
+            -0.00247,
+            -0.99982,
+            -0.01866
+          ],
+          "lengthM": 0.3763,
+          "bones": [
+            "lowerleg01.L",
+            "lowerleg02.L"
+          ],
+          "jointGapM": 0.0291
+        },
+        "upperarm.R": {
+          "source": "measured",
+          "via": "structure table (1 entries)",
+          "vertices": 1408,
+          "axis": [
+            -0.17352,
+            -0.9836,
+            -0.04923
+          ],
+          "lengthM": 0.3181,
+          "bones": [
+            "upperarm01.R",
+            "upperarm02.R"
+          ],
+          "jointGapM": 0.0277
+        },
+        "forearm.R": {
+          "source": "measured",
+          "via": "structure table (2 entries)",
+          "vertices": 652,
+          "axis": [
+            -0.16752,
+            -0.96109,
+            0.21965
+          ],
+          "lengthM": 0.2699,
+          "bones": [
+            "lowerarm01.R",
+            "lowerarm02.R"
+          ],
+          "jointGapM": 0.0277
+        },
+        "thigh.R": {
+          "source": "measured",
+          "via": "structure table (1 entries)",
+          "vertices": 1258,
+          "axis": [
+            0.0703,
+            -0.996,
+            -0.05514
+          ],
+          "lengthM": 0.454,
+          "bones": [
+            "upperleg01.R",
+            "upperleg02.R"
+          ],
+          "jointGapM": 0.0291
+        },
+        "shank.R": {
+          "source": "measured",
+          "via": "structure table (2 entries)",
+          "vertices": 1082,
+          "axis": [
+            0.00403,
+            -0.99979,
+            -0.01992
+          ],
+          "lengthM": 0.3763,
+          "bones": [
+            "lowerleg01.R",
+            "lowerleg02.R"
+          ],
+          "jointGapM": 0.0291
+        }
+      },
+      "notes": [],
+      "poseId": "bodyparts3d"
+    },
+    "z-anatomy-regions": {
+      "atlas": "z-anatomy-regions",
+      "measuredFrom": "z-anatomy-regions.ao.glb",
+      "bbox": {
+        "widthM": 0.6767,
+        "heightM": 1.7349,
+        "depthM": 0.2957,
+        "widthOverHeight": 0.3901
+      },
+      "segments": {
+        "upperarm.L": {
+          "source": "rest",
+          "via": "structure table (2 entries)",
+          "vertices": 515,
+          "lengthM": 0.2402,
+          "bones": [
+            "upperarm01.L",
+            "upperarm02.L"
+          ],
+          "jointGapM": 0.094,
+          "note": "this limb is not fully measurable here (upperarm.L: untrusted, forearm.L: untrusted), so it keeps ANNY's rest pose rather than borrowing another body's",
+          "untrusted": true
+        },
+        "forearm.L": {
+          "source": "rest",
+          "via": "structure table (4 entries)",
+          "vertices": 638,
+          "lengthM": 0.2441,
+          "bones": [
+            "lowerarm01.L",
+            "lowerarm02.L"
+          ],
+          "jointGapM": 0.094,
+          "note": "this limb is not fully measurable here (upperarm.L: rest, forearm.L: untrusted), so it keeps ANNY's rest pose rather than borrowing another body's",
+          "untrusted": true
+        },
+        "thigh.L": {
+          "source": "rest",
+          "via": "structure table (2 entries)",
+          "vertices": 941,
+          "lengthM": 0.5181,
+          "bones": [
+            "upperleg01.L",
+            "upperleg02.L"
+          ],
+          "jointGapM": 0.115,
+          "note": "this limb is not fully measurable here (thigh.L: untrusted, shank.L: untrusted), so it keeps ANNY's rest pose rather than borrowing another body's",
+          "untrusted": true
+        },
+        "shank.L": {
+          "source": "rest",
+          "via": "structure table (2 entries)",
+          "vertices": 802,
+          "lengthM": 0.2886,
+          "bones": [
+            "lowerleg01.L",
+            "lowerleg02.L"
+          ],
+          "jointGapM": 0.115,
+          "note": "this limb is not fully measurable here (thigh.L: rest, shank.L: untrusted), so it keeps ANNY's rest pose rather than borrowing another body's",
+          "untrusted": true
+        },
+        "upperarm.R": {
+          "source": "rest",
+          "via": "structure table (2 entries)",
+          "vertices": 523,
+          "lengthM": 0.2396,
+          "bones": [
+            "upperarm01.R",
+            "upperarm02.R"
+          ],
+          "jointGapM": 0.094,
+          "note": "this limb is not fully measurable here (upperarm.R: untrusted, forearm.R: untrusted), so it keeps ANNY's rest pose rather than borrowing another body's",
+          "untrusted": true
+        },
+        "forearm.R": {
+          "source": "rest",
+          "via": "structure table (4 entries)",
+          "vertices": 625,
+          "lengthM": 0.2444,
+          "bones": [
+            "lowerarm01.R",
+            "lowerarm02.R"
+          ],
+          "jointGapM": 0.094,
+          "note": "this limb is not fully measurable here (upperarm.R: rest, forearm.R: untrusted), so it keeps ANNY's rest pose rather than borrowing another body's",
+          "untrusted": true
+        },
+        "thigh.R": {
+          "source": "rest",
+          "via": "structure table (2 entries)",
+          "vertices": 929,
+          "lengthM": 0.5181,
+          "bones": [
+            "upperleg01.R",
+            "upperleg02.R"
+          ],
+          "jointGapM": 0.115,
+          "note": "this limb is not fully measurable here (thigh.R: untrusted, shank.R: untrusted), so it keeps ANNY's rest pose rather than borrowing another body's",
+          "untrusted": true
+        },
+        "shank.R": {
+          "source": "rest",
+          "via": "structure table (2 entries)",
+          "vertices": 797,
+          "lengthM": 0.2885,
+          "bones": [
+            "lowerleg01.R",
+            "lowerleg02.R"
+          ],
+          "jointGapM": 0.115,
+          "note": "this limb is not fully measurable here (thigh.R: rest, shank.R: untrusted), so it keeps ANNY's rest pose rather than borrowing another body's",
+          "untrusted": true
+        }
+      },
+      "notes": [
+        "no trustworthy axis of its own; inherits 'z-anatomy', declared the same body (\"TARO, via Z-Anatomy retopology\")"
+      ],
+      "poseId": "bodyparts3d",
+      "inheritsFrom": "z-anatomy"
+    },
+    "htb-ct-f": {
+      "atlas": "htb-ct-f",
+      "measuredFrom": "htb-ct-003.glb",
+      "bbox": {
+        "widthM": 0.4598,
+        "heightM": 1.8579,
+        "depthM": 0.3497,
+        "widthOverHeight": 0.2475
+      },
+      "segments": {
+        "upperarm.L": {
+          "source": "measured",
+          "via": "UBERON nodes UBERON_0000976 split by x sign",
+          "vertices": 642,
+          "axis": [
+            0.30898,
+            0.63742,
+            0.70585
+          ],
+          "lengthM": 0.3056,
+          "bones": [
+            "upperarm01.L",
+            "upperarm02.L"
+          ],
+          "jointGapM": 0.0107
+        },
+        "forearm.L": {
+          "source": "measured",
+          "via": "UBERON nodes UBERON_0001423, UBERON_0001424 split by x sign",
+          "vertices": 614,
+          "axis": [
+            -0.83974,
+            0.52574,
+            -0.13576
+          ],
+          "lengthM": 0.2326,
+          "bones": [
+            "lowerarm01.L",
+            "lowerarm02.L"
+          ],
+          "jointGapM": 0.0107
+        },
+        "thigh.L": {
+          "source": "measured",
+          "via": "UBERON nodes UBERON_0000981 split by x sign",
+          "vertices": 1092,
+          "axis": [
+            -0.02979,
+            -0.98524,
+            0.16857
+          ],
+          "lengthM": 0.4173,
+          "bones": [
+            "upperleg01.L",
+            "upperleg02.L"
+          ],
+          "jointGapM": 0.034
+        },
+        "shank.L": {
+          "source": "measured",
+          "via": "UBERON nodes UBERON_0000979, UBERON_0001446 split by x sign",
+          "vertices": 1101,
+          "axis": [
+            -0.09636,
+            -0.96031,
+            -0.26178
+          ],
+          "lengthM": 0.3544,
+          "bones": [
+            "lowerleg01.L",
+            "lowerleg02.L"
+          ],
+          "jointGapM": 0.034
+        },
+        "upperarm.R": {
+          "source": "measured",
+          "via": "UBERON nodes UBERON_0000976 split by x sign",
+          "vertices": 653,
+          "axis": [
+            -0.18465,
+            0.72603,
+            0.66241
+          ],
+          "lengthM": 0.3039,
+          "bones": [
+            "upperarm01.R",
+            "upperarm02.R"
+          ],
+          "jointGapM": 0.0168
+        },
+        "forearm.R": {
+          "source": "measured",
+          "via": "UBERON nodes UBERON_0001423, UBERON_0001424 split by x sign",
+          "vertices": 648,
+          "axis": [
+            0.84553,
+            0.53023,
+            0.0627
+          ],
+          "lengthM": 0.2429,
+          "bones": [
+            "lowerarm01.R",
+            "lowerarm02.R"
+          ],
+          "jointGapM": 0.0168
+        },
+        "thigh.R": {
+          "source": "measured",
+          "via": "UBERON nodes UBERON_0000981 split by x sign",
+          "vertices": 1143,
+          "axis": [
+            0.02482,
+            -0.97161,
+            0.23528
+          ],
+          "lengthM": 0.4145,
+          "bones": [
+            "upperleg01.R",
+            "upperleg02.R"
+          ],
+          "jointGapM": 0.0287
+        },
+        "shank.R": {
+          "source": "measured",
+          "via": "UBERON nodes UBERON_0000979, UBERON_0001446 split by x sign",
+          "vertices": 1135,
+          "axis": [
+            0.0332,
+            -0.9459,
+            -0.32274
+          ],
+          "lengthM": 0.3553,
+          "bones": [
+            "lowerleg01.R",
+            "lowerleg02.R"
+          ],
+          "jointGapM": 0.0287
+        }
+      },
+      "notes": [],
+      "poseId": "htb-ct-f"
+    },
+    "ct-atlas-f": {
+      "atlas": "ct-atlas-f",
+      "measuredFrom": "ct-atlas-f.glb",
+      "bbox": {
+        "widthM": 0.3767,
+        "heightM": 0.861,
+        "depthM": 0.3305,
+        "widthOverHeight": 0.4375
+      },
+      "segments": {
+        "shank.L": {
+          "source": "rest",
+          "via": "UBERON nodes UBERON_0000979, UBERON_0001446 split by x sign",
+          "note": "no complete limb measured on both sides in this atlas"
+        },
+        "shank.R": {
+          "source": "rest",
+          "via": "UBERON nodes UBERON_0000979, UBERON_0001446 split by x sign",
+          "note": "no complete limb measured on both sides in this atlas"
+        },
+        "upperarm.L": {
+          "source": "rest",
+          "via": "UBERON nodes UBERON_0000976.left",
+          "vertices": 615,
+          "lengthM": 0.2834,
+          "bones": [
+            "upperarm01.L",
+            "upperarm02.L"
+          ],
+          "jointGapM": 0.0366,
+          "note": "no complete limb measured on both sides in this atlas"
+        },
+        "forearm.L": {
+          "source": "rest",
+          "via": "UBERON nodes UBERON_0001423.left, UBERON_0001424.left",
+          "vertices": 599,
+          "lengthM": 0.2123,
+          "bones": [
+            "lowerarm01.L",
+            "lowerarm02.L"
+          ],
+          "jointGapM": 0.0366,
+          "note": "no complete limb measured on both sides in this atlas"
+        },
+        "thigh.L": {
+          "source": "rest",
+          "via": "UBERON nodes UBERON_0000981.left",
+          "vertices": 539,
+          "lengthM": 0.1664,
+          "bones": [
+            "upperleg01.L",
+            "upperleg02.L"
+          ],
+          "note": "no complete limb measured on both sides in this atlas"
+        },
+        "upperarm.R": {
+          "source": "rest",
+          "via": "UBERON nodes UBERON_0000976.right",
+          "vertices": 572,
+          "lengthM": 0.2673,
+          "bones": [
+            "upperarm01.R",
+            "upperarm02.R"
+          ],
+          "jointGapM": 0.0492,
+          "note": "no complete limb measured on both sides in this atlas"
+        },
+        "forearm.R": {
+          "source": "rest",
+          "via": "UBERON nodes UBERON_0001423.right, UBERON_0001424.right",
+          "vertices": 229,
+          "lengthM": 0.0942,
+          "bones": [
+            "lowerarm01.R",
+            "lowerarm02.R"
+          ],
+          "jointGapM": 0.0492,
+          "note": "no complete limb measured on both sides in this atlas"
+        },
+        "thigh.R": {
+          "source": "rest",
+          "via": "UBERON nodes UBERON_0000981.right",
+          "vertices": 526,
+          "lengthM": 0.1613,
+          "bones": [
+            "upperleg01.R",
+            "upperleg02.R"
+          ],
+          "note": "no complete limb measured on both sides in this atlas"
+        }
+      },
+      "notes": [
+        "2 segment(s) measured but no complete limb on both sides — too little to define a pose, so the envelope keeps ANNY's rest pose here",
+        "no segment measurable — the envelope stays in ANNY's rest pose"
+      ],
+      "poseId": null
+    },
+    "composed": {
+      "atlas": "composed",
+      "inheritsFrom": "z-anatomy",
+      "measuredFrom": "z-anatomy.ao.glb",
+      "segments": {
+        "upperarm.L": {
+          "source": "measured",
+          "via": "structure table (1 entries)",
+          "vertices": 1452,
+          "axis": [
+            0.17226,
+            -0.98386,
+            -0.04846
+          ],
+          "lengthM": 0.3181,
+          "bones": [
+            "upperarm01.L",
+            "upperarm02.L"
+          ],
+          "jointGapM": 0.0287
+        },
+        "forearm.L": {
+          "source": "measured",
+          "via": "structure table (2 entries)",
+          "vertices": 670,
+          "axis": [
+            0.16959,
+            -0.96071,
+            0.21973
+          ],
+          "lengthM": 0.27,
+          "bones": [
+            "lowerarm01.L",
+            "lowerarm02.L"
+          ],
+          "jointGapM": 0.0287
+        },
+        "thigh.L": {
+          "source": "measured",
+          "via": "structure table (1 entries)",
+          "vertices": 1281,
+          "axis": [
+            -0.0689,
+            -0.9961,
+            -0.05515
+          ],
+          "lengthM": 0.454,
+          "bones": [
+            "upperleg01.L",
+            "upperleg02.L"
+          ],
+          "jointGapM": 0.0291
+        },
+        "shank.L": {
+          "source": "measured",
+          "via": "structure table (2 entries)",
+          "vertices": 1083,
+          "axis": [
+            -0.00247,
+            -0.99982,
+            -0.01866
+          ],
+          "lengthM": 0.3763,
+          "bones": [
+            "lowerleg01.L",
+            "lowerleg02.L"
+          ],
+          "jointGapM": 0.0291
+        },
+        "upperarm.R": {
+          "source": "measured",
+          "via": "structure table (1 entries)",
+          "vertices": 1408,
+          "axis": [
+            -0.17352,
+            -0.9836,
+            -0.04923
+          ],
+          "lengthM": 0.3181,
+          "bones": [
+            "upperarm01.R",
+            "upperarm02.R"
+          ],
+          "jointGapM": 0.0277
+        },
+        "forearm.R": {
+          "source": "measured",
+          "via": "structure table (2 entries)",
+          "vertices": 652,
+          "axis": [
+            -0.16752,
+            -0.96109,
+            0.21965
+          ],
+          "lengthM": 0.2699,
+          "bones": [
+            "lowerarm01.R",
+            "lowerarm02.R"
+          ],
+          "jointGapM": 0.0277
+        },
+        "thigh.R": {
+          "source": "measured",
+          "via": "structure table (1 entries)",
+          "vertices": 1258,
+          "axis": [
+            0.0703,
+            -0.996,
+            -0.05514
+          ],
+          "lengthM": 0.454,
+          "bones": [
+            "upperleg01.R",
+            "upperleg02.R"
+          ],
+          "jointGapM": 0.0291
+        },
+        "shank.R": {
+          "source": "measured",
+          "via": "structure table (2 entries)",
+          "vertices": 1082,
+          "axis": [
+            0.00403,
+            -0.99979,
+            -0.01992
+          ],
+          "lengthM": 0.3763,
+          "bones": [
+            "lowerleg01.R",
+            "lowerleg02.R"
+          ],
+          "jointGapM": 0.0291
+        }
+      },
+      "notes": [
+        "inherits the pose of 'z-anatomy', which supplies its musculoskeletal system"
+      ],
+      "poseId": "bodyparts3d"
+    },
+    "composed-f": {
+      "atlas": "composed-f",
+      "inheritsFrom": "hra",
+      "measuredFrom": "hra.glb",
+      "segments": {
+        "upperarm.L": {
+          "source": "measured",
+          "via": "arm centreline from the body surface, 16 of 24 slices usable — this atlas has arms but no arm bones",
+          "axis": [
+            0.47544,
+            -0.86412,
+            0.16507
+          ],
+          "lengthM": 0.4415,
+          "bones": [
+            "upperarm01.L",
+            "upperarm02.L"
+          ],
+          "note": "one direction for the whole limb: a surface silhouette cannot separate an upper arm from a forearm, so the arm is posed straight"
+        },
+        "upperarm.R": {
+          "source": "measured",
+          "via": "arm centreline from the body surface, 16 of 24 slices usable — this atlas has arms but no arm bones",
+          "axis": [
+            -0.47974,
+            -0.86163,
+            0.16563
+          ],
+          "lengthM": 0.4419,
+          "bones": [
+            "upperarm01.R",
+            "upperarm02.R"
+          ],
+          "note": "one direction for the whole limb: a surface silhouette cannot separate an upper arm from a forearm, so the arm is posed straight"
+        },
+        "forearm.L": {
+          "source": "measured",
+          "via": "arm centreline from the body surface, 16 of 24 slices usable — this atlas has arms but no arm bones",
+          "axis": [
+            0.47544,
+            -0.86412,
+            0.16507
+          ],
+          "lengthM": 0.4415,
+          "bones": [
+            "lowerarm01.L",
+            "lowerarm02.L"
+          ],
+          "note": "one direction for the whole limb: a surface silhouette cannot separate an upper arm from a forearm, so the arm is posed straight"
+        },
+        "forearm.R": {
+          "source": "measured",
+          "via": "arm centreline from the body surface, 16 of 24 slices usable — this atlas has arms but no arm bones",
+          "axis": [
+            -0.47974,
+            -0.86163,
+            0.16563
+          ],
+          "lengthM": 0.4419,
+          "bones": [
+            "lowerarm01.R",
+            "lowerarm02.R"
+          ],
+          "note": "one direction for the whole limb: a surface silhouette cannot separate an upper arm from a forearm, so the arm is posed straight"
+        },
+        "thigh.L": {
+          "source": "measured",
+          "via": "mesh nodes VH_F_femur_L",
+          "vertices": 4517,
+          "axis": [
+            -0.01016,
+            -0.99917,
+            0.03942
+          ],
+          "lengthM": 0.4204,
+          "bones": [
+            "upperleg01.L",
+            "upperleg02.L"
+          ],
+          "jointGapM": 0.032
+        },
+        "shank.L": {
+          "source": "measured",
+          "via": "mesh nodes VH_F_tibia_L, VH_F_fibula_L",
+          "vertices": 2354,
+          "axis": [
+            0.02485,
+            -0.99963,
+            -0.0109
+          ],
+          "lengthM": 0.3573,
+          "bones": [
+            "lowerleg01.L",
+            "lowerleg02.L"
+          ],
+          "jointGapM": 0.032
+        },
+        "thigh.R": {
+          "source": "measured",
+          "via": "mesh nodes VH_F_femur_R",
+          "vertices": 4517,
+          "axis": [
+            0.01016,
+            -0.99917,
+            0.03942
+          ],
+          "lengthM": 0.4204,
+          "bones": [
+            "upperleg01.R",
+            "upperleg02.R"
+          ],
+          "jointGapM": 0.0325
+        },
+        "shank.R": {
+          "source": "measured",
+          "via": "mesh nodes VH_F_tibia_R, VH_F_fibula_R",
+          "vertices": 2354,
+          "axis": [
+            -0.02458,
+            -0.99964,
+            -0.01088
+          ],
+          "lengthM": 0.3572,
+          "bones": [
+            "lowerleg01.R",
+            "lowerleg02.R"
+          ],
+          "jointGapM": 0.0325
+        }
+      },
+      "notes": [
+        "inherits the pose of 'hra', which supplies its musculoskeletal system"
+      ],
+      "poseId": "hra"
+    }
+  }
+}

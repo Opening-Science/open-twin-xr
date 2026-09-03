@@ -12,6 +12,7 @@ import { activeSources, resolveMode, type AnatomyMode, type Sex } from './scene/
 import { BPM_RANGE, DEFAULT_BPM, type OrganOverlayId } from './scene/organOverlays'
 import type { BodyEnvelopeId } from './scene/bodyEnvelopes'
 import { ANNY_NEUTRAL, type AnnyParams } from './scene/annyGrid'
+import { POSE_NEUTRAL, type AnnyRig, type PoseParams, type PoseSlider } from './scene/annyRig'
 import type { BodyMeasurements } from './scene/annyGrid'
 
 /** Depth layers an atlas can declare, outermost first. */
@@ -415,6 +416,27 @@ interface TwinState {
    */
   annyParams: AnnyParams
   /**
+   * Where the parametric body's limbs are, in degrees. All zero is ANNY's own
+   * rest pose — the A-pose the grid was baked at.
+   *
+   * ⚠️ SEPARATE FROM `annyParams`, AND THAT SEPARATION IS LOAD-BEARING. Shape and
+   * pose are different kinds of claim: shape is a point in a phenotype space the
+   * grid samples, pose is a rotation applied afterwards. `bodyMeasurements` is
+   * taken on the shape BEFORE this is applied, because the height of a body with
+   * bent knees is not a stature and linear blend skinning perturbs volume. Mixing
+   * the two into one object would make that distinction easy to lose.
+   */
+  annyPose: PoseParams
+  /**
+   * The pose rig, loaded by `ParametricBody` and checked against the shape grid
+   * before it is published here, so the panel shows position sliders only for
+   * a rig that can actually act. Null when the rig is not installed, unreadable,
+   * or baked for a different grid — the panel hides the group in all three
+   * cases. The body owns the load because it is the one component that has the
+   * grid to check against; the panel used to fetch and decode its own copy.
+   */
+  annyRig: AnnyRig | null
+  /**
    * Geometry read off the evaluated body, published so the panel can show it
    * without re-deriving it. Null until the grid has been evaluated once.
    *
@@ -479,6 +501,9 @@ interface TwinState {
   setEnvelopeAvailability: (a: Record<string, boolean> | null) => void
   setAnnyParam: (axis: keyof AnnyParams, value: number) => void
   resetAnnyParams: () => void
+  setAnnyPose: (slider: PoseSlider, deg: number) => void
+  resetAnnyPose: () => void
+  setAnnyRig: (rig: AnnyRig | null) => void
   setBodyMeasurements: (m: BodyMeasurements | null) => void
   setFocusY: (y: number, distance?: number | null) => void
 }
@@ -534,6 +559,8 @@ export const useTwin = create<TwinState>((set) => ({
   bodyEnvelope: null,
   envelopeAvailability: null,
   annyParams: { ...ANNY_NEUTRAL },
+  annyPose: { ...POSE_NEUTRAL },
+  annyRig: null,
   bodyMeasurements: null,
   focusY: 0.95,
   focusDistance: null,
@@ -610,6 +637,10 @@ export const useTwin = create<TwinState>((set) => ({
   setAnnyParam: (axis, value) =>
     set((st) => ({ annyParams: { ...st.annyParams, [axis]: Math.min(1, Math.max(0, value)) } })),
   resetAnnyParams: () => set({ annyParams: { ...ANNY_NEUTRAL } }),
+  setAnnyPose: (slider, deg) =>
+    set((st) => ({ annyPose: { ...st.annyPose, [slider]: deg } })),
+  resetAnnyPose: () => set({ annyPose: { ...POSE_NEUTRAL } }),
+  setAnnyRig: (rig) => set({ annyRig: rig }),
   setBodyMeasurements: (bodyMeasurements) => set({ bodyMeasurements }),
   setStructureLabel: (structureLabel) => set({ structureLabel }),
   setStructureCount: (sourceId, count) =>

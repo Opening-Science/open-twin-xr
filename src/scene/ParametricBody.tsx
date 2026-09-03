@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import {
   BufferAttribute,
   BufferGeometry,
@@ -14,6 +14,15 @@ import {
   type AnnyGrid,
   type BodyMeasurements,
 } from './annyGrid'
+import {
+  assertRigMatchesGrid,
+  loadAnnyRig,
+  makePoseScratch,
+  poseAnny,
+  RigNotInstalled,
+  type AnnyRig,
+  type PoseScratch,
+} from './annyRig'
 
 /**
  * The parametric body, STANDALONE — its own mode, not a skin over an atlas.
@@ -48,8 +57,11 @@ import {
  */
 export function ParametricBody() {
   const params = useTwin((s) => s.annyParams)
+  const pose = useTwin((s) => s.annyPose)
   const setMeasurements = useTwin((s) => s.setBodyMeasurements)
+  const setAnnyRig = useTwin((s) => s.setAnnyRig)
   const [grid, setGrid] = useState<AnnyGrid | null>(null)
+  const [rig, setRig] = useState<AnnyRig | null>(null)
   const [failed, setFailed] = useState<string | null>(null)
 
   useEffect(() => {
@@ -61,6 +73,61 @@ export function ParametricBody() {
       cancelled = true
     }
   }, [])
+
+  /**
+   * The rig loads SEPARATELY and its absence is not an error.
+   *
+   * ⚠️ Deliberately not folded into the grid's `Promise.all`. The rig is a later
+   * addition and a much smaller file; a build that ships the grid but not the rig
+   * is a supported state, and there the body should render perfectly with the
+   * shape sliders and simply no position sliders. Joining the two loads would
+   * turn a missing optional file into a blank canvas — which is exactly the
+   * failure the grid probe in `Body.tsx` was added to stop.
+   */
+  useEffect(() => {
+    let cancelled = false
+    loadAnnyRig()
+      .then((r) => !cancelled && setRig(r))
+      .catch((e) => {
+        // Not installed is normal and silent. Anything else is a defect in an
+        // asset that IS there, and must not masquerade as an absent one.
+        if (!(e instanceof RigNotInstalled)) {
+          console.error('[parametric] the pose rig is present but unreadable:', e)
+        }
+      })
+    return () => {
+      cancelled = true
+    }
+  }, [])
+
+  /**
+   * The rig, but only if it was baked for THIS grid.
+   *
+   * `loadAnnyRig` can check the rig against its own sidecar and nothing more. A
+   * grid rebaked with different stops beside a stale rig passes that check and
+   * would read joint positions at the wrong grid index — the body would pose,
+   * wrongly, and nothing would say so. Both files are known here and nowhere
+   * else, so this is where they are reconciled: a mismatch is named on the
+   * console, the body renders unposed, and the panel gets no rig to show
+   * sliders for.
+   */
+  const usableRig = useMemo(() => {
+    if (!grid || !rig) return null
+    try {
+      assertRigMatchesGrid(rig, grid)
+      return rig
+    } catch (e) {
+      console.error('[parametric] the pose rig does not match the shape grid; position sliders disabled:', e)
+      return null
+    }
+  }, [grid, rig])
+
+  // Published for the panel, withdrawn on unmount so a stale rig cannot outlive
+  // the body that checked it.
+  useEffect(() => {
+    setAnnyRig(usableRig)
+    return () => setAnnyRig(null)
+  }, [usableRig, setAnnyRig])
 
   const geometry = useMemo(() => {
     if (!grid) return null
@@ -98,24 +165,66 @@ export function ParametricBody() {
    * a slider. Normals are recomputed here too, because a body lit with stale
    * normals reads as a shading bug rather than as a shape change.
    */
+  /**
+   * Scratch buffers for posing, kept across ticks so a slider drag allocates
+   * nothing. Null until the rig arrives.
+   */
+  const restRef = useRef<Float32Array | null>(null)
+  const scratchRef = useRef<PoseScratch | null>(null)
+
   useEffect(() => {
     if (!geometry || !grid) return
     const attr = geometry.getAttribute('position') as BufferAttribute
     const out = attr.array as Float32Array
-    evaluateAnny(grid, params, out)
+
+    /**
+     * ⚠️ SHAPE FIRST, MEASURE, THEN POSE — AND THAT ORDER IS THE POINT.
+     *
+     * `measureBody` reports height, waist, volume, mass and BMI. Every one of
+     * those is a claim about a SHAPE, and none of them survives a pose: the
+     * standing height of a body with bent knees is not its stature, and linear
+     * blend skinning pinches volume at every joint it bends. Measuring after
+     * posing would quietly make the knee slider change the reported BMI, which
+     * is the kind of number a viewer would reasonably believe.
+     *
+     * So the rest shape is measured, and the pose is applied to a copy on its
+     * way to the screen.
+     */
+    const rest = restRef.current ?? new Float32Array(out.length)
+    restRef.current = rest
+    evaluateAnny(grid, params, rest)
 
     // Ground the feet at y = 0, so changing height does not sink or float the
     // body. The canonical frame this mounts into puts y = 0 at the floor.
     let minY = Infinity
-    for (let i = 1; i < out.length; i += 3) if (out[i] < minY) minY = out[i]
-    for (let i = 1; i < out.length; i += 3) out[i] -= minY
+    for (let i = 1; i < rest.length; i += 3) if (rest[i] < minY) minY = rest[i]
+    for (let i = 1; i < rest.length; i += 3) rest[i] -= minY
+
+    setMeasurements(measureBody(rest, grid.indices))
+
+    if (usableRig) {
+      if (!scratchRef.current) scratchRef.current = makePoseScratch(usableRig)
+      poseAnny(grid, usableRig, params, pose, rest, out, scratchRef.current, minY)
+      /**
+       * ⚠️ RE-GROUND AFTER POSING, BUT ONLY DOWNWARDS.
+       *
+       * Bending the knees lifts the feet off the floor, so the body has to be
+       * re-seated or it hovers. Raising an ARM must not move the body at all —
+       * and a naive "subtract the new minimum" does exactly that whenever the
+       * lowest point stops being a foot. Shifting only when the body has risen
+       * keeps the feet planted without letting an arm slider bob it.
+       */
+      let posedMin = Infinity
+      for (let i = 1; i < out.length; i += 3) if (out[i] < posedMin) posedMin = out[i]
+      if (posedMin > 0) for (let i = 1; i < out.length; i += 3) out[i] -= posedMin
+    } else {
+      out.set(rest)
+    }
 
     attr.needsUpdate = true
     geometry.computeVertexNormals()
     geometry.computeBoundingSphere()
-
-    setMeasurements(measureBody(out, grid.indices))
-  }, [geometry, grid, params, setMeasurements])
+  }, [geometry, grid, usableRig, params, pose, setMeasurements])
 
   /**
    * ⚠️ RETHROW. Catching this and rendering `null` is what made a fresh clone show

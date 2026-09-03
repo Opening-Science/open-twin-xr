@@ -10,10 +10,12 @@
  *
  * Two facts, both measured rather than assumed:
  *
- *   1. Branch protection and rulesets both return 403 on this repository —
- *      "Upgrade to GitHub Pro or make this repository public". So there are NO
- *      required checks and NO required reviews. Native auto-merge has nothing to
- *      wait for; a PR is mergeable the moment it opens.
+ *   1. When this was written, branch protection and rulesets both returned 403 —
+ *      "Upgrade to GitHub Pro or make this repository public" — so there were NO
+ *      required checks and NO required reviews, and a PR was mergeable the moment
+ *      it opened. The repository has since gone public and a ruleset now guards
+ *      `main`: one approving review, code-owner review and signed commits. None
+ *      of that reads CodeRabbit's threads, so fact 2 still stands on its own.
  *
  *   2. CodeRabbit's status check reports `pass` — "Review completed" — even when
  *      it has findings. On PR #11 it left THIRTEEN inline comments, including a
@@ -25,9 +27,8 @@
  * opposite of what it was asked for. This gate waits for the review to EXIST,
  * then refuses while any of its threads is unresolved.
  *
- * ⚠️ IT IS DISCIPLINE, NOT ENFORCEMENT. Nothing stops a human pressing Merge.
- * Making the repository public, or moving to a plan with rulesets, is what would
- * turn this into a rule GitHub applies.
+ * ⚠️ IT IS DISCIPLINE, NOT ENFORCEMENT. Nothing stops a human pressing Merge past
+ * an unresolved thread; the ruleset enforces reviews and signatures, not this.
  */
 import { execFileSync } from 'node:child_process'
 
@@ -45,6 +46,17 @@ const gh = (jsonArgs) => {
 }
 
 const REPO = 'Opening-Science/open-twin-xr'
+
+/**
+ * ⚠️ THE SAME BOT HAS TWO LOGINS, AND THE GATE HAD ONLY ONE OF THEM. The REST
+ * API reports CodeRabbit as `coderabbitai[bot]`; GraphQL's `author.login`
+ * reports it as `coderabbitai`. The thread filter below compared against the
+ * REST form, so on a PR with SIXTEEN open CodeRabbit threads it counted zero —
+ * and the one check that does the work (section 4) had been dead since it was
+ * written, printing "0 unresolved" as coverage. Measured on PR #17, 3 September
+ * 2026. Normalise before comparing, everywhere a login is read.
+ */
+const isRabbit = (login) => String(login ?? '').replace(/\[bot\]$/, '') === 'coderabbitai'
 const failuresEarly = []
 let number = prArg
 if (!number) {
@@ -127,7 +139,7 @@ for (const c of bad) {
 
 // --- 3. CodeRabbit must have actually reviewed --------------------------------
 const reviews = gh(['api', `repos/${REPO}/pulls/${number}/reviews`])
-const rabbit = reviews.filter((r) => r.user?.login === 'coderabbitai[bot]')
+const rabbit = reviews.filter((r) => isRabbit(r.user?.login))
 if (!rabbit.length) {
   failures.push('CodeRabbit has not reviewed yet — its check going green is not the same thing')
 } else {
@@ -174,9 +186,7 @@ const threads = gh([
         } } } }`,
 ])
 const nodes = threads?.data?.repository?.pullRequest?.reviewThreads?.nodes ?? []
-const rabbitThreads = nodes.filter(
-  (t) => t.comments?.nodes?.[0]?.author?.login === 'coderabbitai[bot]',
-)
+const rabbitThreads = nodes.filter((t) => isRabbit(t.comments?.nodes?.[0]?.author?.login))
 const open = rabbitThreads.filter((t) => !t.isResolved && !t.isOutdated)
 notes.push(`CodeRabbit threads: ${rabbitThreads.length} total, ${open.length} unresolved`)
 if (open.length) {
