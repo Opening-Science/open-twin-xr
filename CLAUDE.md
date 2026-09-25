@@ -6,17 +6,18 @@
 > materials, lighting, XR, and eventually personalisation from a person's own
 > imaging. That is the whole subject.
 >
-> **Health-data mapping and scoring are NOT built here.** They moved to
-> <https://github.com/etzm/open-twin> and the two reconcile later. The scoring
-> UI that used to live here — per-system scores, the detail card, connected
-> sources, the dashboard — has been removed from the app on purpose; the
-> components remain unmounted under `src/ui/` for a later iteration. Do not
-> rebuild them, and do not present the bundled fictional sample as anyone's
-> measured health.
+> **Health-data mapping, scoring rules and medical interpretation are NOT built
+> here.** They belong upstream in <https://github.com/etzm/open-twin>.
+> [D27](docs/DECISIONS.md#d27--research-and-wellness-interpretation-ui-is-in-scope)
+> now permits this viewer to integrate a dedicated research/wellness
+> Interpretation view that consumes validated upstream states. Do not score
+> FHIR, assign clinical meaning or invent calibration in the browser, and do not
+> present the bundled fictional sample as anyone's measured health.
 >
 > **Read `docs/HANDOVER.md` first**, then `docs/README.md` for the documentation
 > index — it says which documents are current and which are historical. Decisions
-> and their reversals are in `docs/DECISIONS.md` (D1–D26).
+> and their reversals are in `docs/DECISIONS.md` (D1–D27). The approved XR-2
+> design gate is `docs/XR2_DESIGN_DECISIONS.md`.
 >
 > ⚠️ **`docs/README.md` is the authority on which plans are live, and this box
 > keeps going stale against it.** It has now been wrong twice in the same
