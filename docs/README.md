@@ -18,7 +18,7 @@ conversations that produced it.
 | 2 | [`HANDOVER.md`](HANDOVER.md) | The orientation document. What this is, what it is *not*, where everything lives |
 | 3 | [`ARCHITECTURE.md`](ARCHITECTURE.md) | How the code is arranged and why |
 | 4 | [`MODEL_PIPELINE.md`](MODEL_PIPELINE.md) | How to get real anatomy on screen instead of the placeholder |
-| 5 | [`DECISIONS.md`](DECISIONS.md) | D1–D19. **Read this before proposing a change** — several obvious ideas were tried and reversed, and the reversals are recorded |
+| 5 | [`DECISIONS.md`](DECISIONS.md) | D1–D27. **Read this before proposing a change** — several obvious ideas were tried and reversed, and the reversals are recorded |
 
 After that, follow whatever you are actually working on — and read
 [`reports/`](reports/README.md) for the 6 areas where the reasoning matters more
@@ -37,6 +37,7 @@ than the result.
 | [`ONTOLOGY_MAP.md`](ONTOLOGY_MAP.md) | **Generated.** Organ systems ↔ UBERON/FMA, and which assets actually carry a term |
 | [`LICENCE_LOG.md`](LICENCE_LOG.md) | **Generated.** Pre-publication due diligence, read from the shipped assets |
 | [`DATA_CONTRACT.md`](DATA_CONTRACT.md) | `TwinMetrics`, the one boundary between this repo and the data upstream |
+| [`XR2_DESIGN_DECISIONS.md`](XR2_DESIGN_DECISIONS.md) | **Approved design gate.** Research/wellness interpretation-view semantics and acceptance tests; implementation has not started |
 | [`RESOURCES.md`](RESOURCES.md) | Every resource evaluated, with licence and standing |
 | [`DEPLOY.md`](DEPLOY.md) | Shipping it, including the publishable-build gate |
 | [`OUTREACH.md`](OUTREACH.md) | The letters owed before a public release — one recipient, address and sendable draft per open question in the licence log |
@@ -47,10 +48,13 @@ than the result.
 | [`PLAN_NEXT.md`](PLAN_NEXT.md) | Numbered repo-quality queue; items 19–21 are open |
 | [`PLAN_ANATOMED.md`](PLAN_ANATOMED.md) | **Proposal, nothing started** — take Anatomed's Latin names, derive structure adjacency from our own geometry, copy none of its CC BY-SA code |
 
-⚠️ **Three live plans.** `PLAN_NEXT.md` is the repo-quality queue (items 19–21 open);
-`PLAN_IDENTITY.md` is the current milestone; `PLAN_ANATOMED.md` feeds it and is
-unstarted. The new-geometry queue is finished — `PLAN_INTEGRATION.md` moved to
-Historical below, and its findings are in [`reports/`](reports/README.md).
+⚠️ **Three live plans and one approved design gate.** `PLAN_NEXT.md` is the
+repo-quality queue (items 19–21 open); `PLAN_IDENTITY.md` is the current
+milestone; `PLAN_ANATOMED.md` feeds it and is unstarted.
+`XR2_DESIGN_DECISIONS.md` records the approved interpretation-view semantics,
+but implementation remains gated on PR #18. The new-geometry queue is finished
+— `PLAN_INTEGRATION.md` moved to Historical below, and its findings are in
+[`reports/`](reports/README.md).
 
 ## Research and survey — read when you need the background
 

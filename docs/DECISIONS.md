@@ -2131,3 +2131,30 @@ degenerates — or measure vertex-level proximity per structure pair, which is
 honest but needs a BVH per structure and a real time budget. Either is a separate
 piece of work with its own gate. ⚠️ Do not ship the box-gap graph on the grounds
 that it covers everything; coverage was never the problem.
+
+---
+
+## D27 — Research and wellness interpretation UI is in scope
+
+**25 September 2026. Amends D8 and D15.**
+
+This repository remains a research and wellness viewer. It does not perform
+health interpretation in a medical sense and must not present supplied states
+as medical advice, disease probability, treatment guidance or clinical
+decision support.
+
+D8's ownership boundary remains: terminology mapping, scoring rules and
+clinical meaning belong upstream. XR does not score FHIR, assign anatomy,
+invent calibration or reinterpret confidence in the browser. It accepts a
+validated upstream interpretation document and renders what that document says.
+
+What changes is the earlier prohibition on rebuilding any scoring or
+interpretation interface. XR may now integrate a dedicated Interpretation view
+for research purposes. That view must remain separate from the numeric metrics
+mode, preserve missing and unrenderable evidence, and make no conversion between
+categorical severity and the existing 0–10 score.
+
+D15's claim discipline also remains. The interface must identify itself as
+research-use visualisation, avoid reassurance and medical-purpose claims, and
+pass claim lint. The approved semantics and tests are recorded in
+[`XR2_DESIGN_DECISIONS.md`](XR2_DESIGN_DECISIONS.md).
