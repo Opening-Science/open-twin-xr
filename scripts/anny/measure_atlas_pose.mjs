@@ -665,15 +665,18 @@ function groupPoses(measured) {
   }
   const groups = []
   for (const id of ids) {
+    // Against EVERY member, not the primary alone: two atlases each within
+    // 5 deg of the primary can sit 10 deg apart. Checking only members[0]
+    // admitted the second one and merely reported the disagreement in
+    // worstWithinDeg — the group, and so atlas-poses.json, still shared a bake.
+    let worst = -1
     const fit = groups.find((g) => {
-      const { worst, shared } = compare(g.members[0], id)
-      return shared >= 4 && worst >= 0 && worst < SAME_POSE_DEG
+      const all = g.members.map((m) => compare(m, id))
+      if (!all.every((c) => c.shared >= 4 && c.worst >= 0 && c.worst < SAME_POSE_DEG)) return false
+      worst = Math.max(...all.map((c) => c.worst))
+      return true
     })
     if (fit) {
-      // Against EVERY member, not the primary alone: two members each within
-      // 5 deg of the primary can sit 10 deg apart, and the report's "worst
-      // disagreement within group" would otherwise not show it.
-      const worst = Math.max(...fit.members.map((m) => compare(m, id).worst))
       fit.members.push(id)
       fit.worstWithinDeg = Math.max(fit.worstWithinDeg, worst)
     } else {
