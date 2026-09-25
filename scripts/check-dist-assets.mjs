@@ -32,6 +32,7 @@
  */
 import { existsSync, readFileSync, readdirSync } from 'node:fs'
 import { join } from 'node:path'
+import { MODEL_REGISTRIES } from './model-registries.mjs'
 
 const ROOT = process.cwd()
 const DIST = join(ROOT, 'dist', 'models')
@@ -49,9 +50,22 @@ if (!existsSync(DIST)) {
  * OUTPUT rather than re-deriving the intent from a hand-kept list that could
  * drift the same way the registry list did.
  */
-const REGISTRIES = ['anatomySources.ts', 'organOverlays.ts', 'bodyEnvelopes.ts', 'annyGrid.ts']
+/**
+ * ⚠️ THIS LIST AND `pruneUnshippedModels`' LIST MUST AGREE, AND THEY DRIFTED.
+ *
+ * They are two halves of one rule — the plugin decides what survives the build,
+ * this decides whether what survived is right — so a registry missing from
+ * either is unchecked from that side. `envelopePoses.ts` and `annyRig.ts` were
+ * missing from BOTH on 18 August 2026, which is how a build pruned eight posed
+ * GLBs and two rig files while this script reported success: it verified 18
+ * assets and never knew the other ten existed. A green check over an incomplete
+ * list is worse than no check, because it is read as coverage.
+ *
+ * So there is now ONE list, `scripts/model-registries.mjs`, and both halves
+ * import it.
+ */
 let sources = ''
-for (const f of REGISTRIES) {
+for (const f of MODEL_REGISTRIES) {
   const p = join(ROOT, 'src', 'scene', f)
   if (existsSync(p)) sources += readFileSync(p, 'utf8')
 }

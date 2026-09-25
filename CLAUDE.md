@@ -16,11 +16,15 @@
 >
 > **Read `docs/HANDOVER.md` first**, then `docs/README.md` for the documentation
 > index — it says which documents are current and which are historical. Decisions
-> and their reversals are in `docs/DECISIONS.md` (D1–D19). There are **two live
-> plans**: `docs/PLAN_NEXT.md` for repo quality and `docs/PLAN_IDENTITY.md` for
-> the current milestone. ⚠️ `docs/PLAN_INTEGRATION.md` is **finished and
-> historical** — all five of its items landed — and this box described it as live
-> long after that stopped being true; `docs/README.md` had it right. `docs/ROADMAP.md` holds the phases.
+> and their reversals are in `docs/DECISIONS.md` (D1–D26).
+>
+> ⚠️ **`docs/README.md` is the authority on which plans are live, and this box
+> keeps going stale against it.** It has now been wrong twice in the same
+> paragraph: it called `docs/PLAN_INTEGRATION.md` live long after all five of its
+> items had landed, and it said "two live plans" while the index listed **four**
+> (`PLAN_NEXT.md`, `PLAN_IDENTITY.md`, `PLAN_ANATOMED.md`, `PLAN_VIEWER.md`).
+> Both times the index had it right. **Do not restate the plan list here — go and
+> read the index.** `docs/ROADMAP.md` holds the phases.
 >
 > **Four documents are generated and must not be hand-edited** —
 > `docs/LICENCE_LOG.md` (`npm run check:licences`), `docs/ONTOLOGY_MAP.md`

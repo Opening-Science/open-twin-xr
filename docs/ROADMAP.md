@@ -456,6 +456,18 @@ geometrically standalone**: it reads nothing about the atlas, so morphing it wou
 move the skin while the organs inside stayed a fixed adult male TARO. That is
 worse than not morphing it, so the parametric version was deliberately NOT built.
 
+### Update, 18 August 2026 — the envelope now follows the atlas's POSE, which is not this
+
+**D25** poses the envelope to whichever atlas is on screen, from that atlas's own
+bone geometry, and **D26** gives the standalone parametric body its own position
+sliders. The Z-Anatomy span error closed from 0.456 m to 0.013 m.
+
+⚠️ **That is a rigid alignment, and it is not a step towards personalisation —
+do not read it as one.** Posing rotates limbs about joints; personalisation means
+the body is a particular person's SHAPE. The envelope still reads nothing about
+the donor beyond which pose to stand in, and its shape space is still MakeHuman
+artist priors. Everything below is untouched by it.
+
 ⚠️ **The blocking objection, which any plan for this phase has to answer rather
 than route around: deforming organs by a skin-surface transform yields a WRONG
 organ, not a personalised one, because organ shape is not a function of skin

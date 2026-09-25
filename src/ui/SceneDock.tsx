@@ -1,9 +1,10 @@
 import { useState, type ReactNode } from 'react'
-import { useDonorSex, useTwin } from '../store'
+import { useDonorSex, useResolvedAnatomyMode, useTwin } from '../store'
 import { AtlasControls, OrganOverlayRow } from './AttributionBar'
 import { FramingControls } from './FocusSlider'
 import { MaterialTuner } from './MaterialTuner'
 import { BODY_ENVELOPES, BODY_ENVELOPE_IDS, envelopeSex } from '../scene/bodyEnvelopes'
+import { posedEnvelopeUrl } from '../scene/envelopePoses'
 
 /**
  * Every control that floats over the 3D view, in one place.
@@ -215,6 +216,18 @@ function EnvelopeControls() {
   const activeSex = envelope ? envelopeSex(envelope) : null
   const mismatched = donorSex !== null && activeSex !== null && activeSex !== donorSex
 
+  /**
+   * Is the envelope actually POSED right now?
+   *
+   * Derived the same way `BodyEnvelope` decides what to load — a url plus a
+   * successful probe — rather than from the mode alone, so the caption cannot
+   * claim a posed fit while the rest-pose asset is what rendered. A mode can
+   * have a pose while the bake for it is simply not installed.
+   */
+  const mode = useResolvedAnatomyMode()
+  const posedUrl = envelope ? posedEnvelopeUrl(mode, envelope) : null
+  const posed = posedUrl !== null && (availability?.[posedUrl] ?? false)
+
   const installed = BODY_ENVELOPE_IDS.filter(
     (id) => availability?.[BODY_ENVELOPES[id].url] ?? false,
   )
@@ -280,12 +293,37 @@ function EnvelopeControls() {
         A generated surface — no organs, no donor, no scan of anyone.{' '}
         {envelope ? 'Apache-2.0 code over CC0 shapes; credited in full below.' : ''}
       </div>
-      {envelope && (
-        <div className="text-[9px] leading-snug text-[#8a6d3b]">
-          Its rest pose is not the atlas’s, so it wraps the torso but not the limbs. A reference
-          silhouette, not this body’s skin.
-        </div>
-      )}
+      {/*
+        ⚠️ THIS LINE HAD TO CHANGE WHEN THE POSED BAKES LANDED, AND LEAVING IT
+        WOULD HAVE MADE THE INTERFACE LIE IN THE HONEST DIRECTION.
+
+        It read "its rest pose is not the atlas's, so it wraps the torso but not
+        the limbs" — D16's measurement, correct for two years of this feature and
+        false the moment a posed variant loads. Measured on Z-Anatomy: the
+        envelope spanned 1.124 m across the arms against the atlas's 0.667 m, and
+        the posed bake spans 0.681 m. An over-cautious caveat is still a wrong
+        one, and a warning that does not apply teaches viewers to ignore the ones
+        that do.
+
+        What does NOT change is everything the caveat was protecting: this is a
+        generated surface with no organs and no donor, the limbs are posed from
+        an ATLAS's bones rather than from this shape's own, and the roll about
+        each limb axis is unconstrained because a bone direction does not carry
+        one. So the "reference silhouette" framing stays; only the claim about
+        the limbs is corrected.
+      */}
+      {envelope &&
+        (posed ? (
+          <div className="text-[9px] leading-snug text-[#8a6d3b]">
+            Posed to this atlas’s limbs, measured from its own bones. Still a reference silhouette,
+            not this body’s skin.
+          </div>
+        ) : (
+          <div className="text-[9px] leading-snug text-[#8a6d3b]">
+            Its rest pose is not the atlas’s, so it wraps the torso but not the limbs. A reference
+            silhouette, not this body’s skin.
+          </div>
+        ))}
 
       {/*
         ⚠️ THE PAIRING WARNING. The envelope is switched to match the donor

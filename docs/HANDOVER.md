@@ -371,10 +371,16 @@ happens only in `health` colour mode. Do not make it a default again.
 ## Where to look next
 
 `docs/README.md` is the documentation index and says which documents are current.
-`docs/DECISIONS.md` D1–D13 records what was decided and, more usefully, what was
+`docs/DECISIONS.md` records what was decided and, more usefully, what was
 reversed and why — read it before proposing a change, because several obvious ideas
-were tried and undone. `docs/PLAN_NEXT.md` and `docs/PLAN_INTEGRATION.md` are the
-two live queues. `docs/DEPLOY.md` covers shipping it.
+were tried and undone. `docs/DEPLOY.md` covers shipping it.
+
+⚠️ **This paragraph used to name the live queues, and it was wrong on both
+counts** — it said "D1–D13" when the log had reached D26, and called
+`PLAN_INTEGRATION.md` live long after all five of its items had landed. The same
+box in `CLAUDE.md` went stale the same way, twice. **A count and a plan list are
+exactly the things that rot in prose**, so neither is restated here: the index
+has them, and it is maintained.
 
 If you change anything in the pipeline, run all three checks and read
 `docs/LICENCE_LOG.md`'s action list before publishing anything.

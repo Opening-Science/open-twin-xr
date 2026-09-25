@@ -275,7 +275,8 @@ export const ANATOMY_SOURCES: Record<AnatomySourceId, AnatomySource> = {
     licence: 'CC BY 4.0',
     licenceUrl: 'https://creativecommons.org/licenses/by/4.0/',
     attribution:
-      '3D anatomical structures from the HuBMAP Human Reference Atlas (HRA), CC BY 4.0.',
+      '3D anatomical structures from the HuBMAP Human Reference Atlas (HRA), ' +
+      'humanatlas.io, CC BY 4.0.',
     citation:
       'Börner K, et al. HuBMAP 3D Human Reference Atlas construction and usage. ' +
       'Nature Methods (2024).',
@@ -322,7 +323,8 @@ export const ANATOMY_SOURCES: Record<AnatomySourceId, AnatomySource> = {
     licence: 'CC BY 4.0',
     licenceUrl: 'https://creativecommons.org/licenses/by/4.0/',
     attribution:
-      '3D anatomical structures from the HuBMAP Human Reference Atlas (HRA), CC BY 4.0.',
+      '3D anatomical structures from the HuBMAP Human Reference Atlas (HRA), ' +
+      'humanatlas.io, CC BY 4.0.',
     shareAlike: false,
     variantOf: 'hra',
     donor: {
