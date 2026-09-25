@@ -11,7 +11,7 @@ research and wellness purposes, but it does not perform health interpretation
 in a medical sense.
 
 Contract source reviewed: `interpretation-contract.v0.2` at PR #18 head
-`817e7e353dc2544226c6560b863c4db1e37279f7`.
+`b1783a84c1988a47ff7e23932b9b0302d43a44e4`.
 
 ## 1. Contract summary
 

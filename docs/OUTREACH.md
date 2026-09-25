@@ -46,7 +46,7 @@ Sources, in order of authority:
 | 3 | **Brainder** — Anderson M. Winkler | ✅ sent | **✅ ANSWERED 17 Aug 2026.** UW attribution denied; a reply with renders is drafted below | No — the component is excluded today |
 | 4 | ~~**University of Washington**~~ | — | ⛔ **Do not send.** The named source denies any UW affiliation, so the premise is gone | No |
 | 5 | **DBCLS** (BodyParts3D) | ✅ `bodyparts@dbcls.rois.ac.jp` | Written confirmation of the 2025-02-27 CC BY 4.0 relicence | No — but the default atlas rests on an unconfirmed reading |
-| 6 | **HuBMAP HRA** — MC-IU | ✅ `infoccf@indiana.edu` | Which version-specific citation must we render? | No — but the exact wording is a CC BY condition |
+| 6 | **HuBMAP HRA** — Katy Börner (IU) | ✅ sent | **✅ ANSWERED 18 Aug 2026.** Short credit **with the data link** — `humanatlas.io` — not the version-specific citation. Shipped. Version-in-GLB is now upstream's question | No — resolved |
 | 7 | **University of Dundee** — Caroline Erolin (CAHID) | ✅ sent | **✅ ANSWERED TWICE, 18 Aug 2026.** The fuller chains ship (D23); then: the cranial-nerves model has **no CC licence at all** and she gave express permission instead, with the attribution she wants (D23b). She also independently corroborated the DBCLS relicence | No — but it changed what we print |
 | 7b | **University of Dundee** — Eve Laws (Medical School) | ⏳ **awaiting reply** — she is on Caroline's thread, so a reply-all reaches her | The inner ear is the medical school's, not CAHID's: does the McGill → UNC/Duke chain belong in the credit, and which spelling? | No |
 | 8 | **Courtesy notices** — OpenEar, TCIA, NAVER LABS Europe, lissiecowley | see §8 | None. "We are using your work, here is the credit" | No |
@@ -481,6 +481,29 @@ README (<https://dbarchive.biosciencedbc.jp/data/bodyparts3d/20110915/README_e.h
 ---
 
 ## 6. HuBMAP HRA — which citation exactly
+
+> ### ✅ ANSWERED 18 August 2026 — by Katy Börner, inline
+>
+> **The wording she asked for, now shipping everywhere the credit lives:**
+>
+> > 3D anatomical structures from the HuBMAP Human Reference Atlas (HRA),
+> > humanatlas.io, CC BY 4.0.
+>
+> So the question is settled in the direction we hoped: **the short credit plus the
+> data link**, not the full version-specific citation. Applied to `licences.json`,
+> `anatomySources.ts` and the embedded `asset.copyright` of both HRA assets.
+>
+> **On which release the meshes came from — she turned our question upstream** rather
+> than answering it, asking her team *"could the version number be added to the GLB
+> metadata?"*. Read plainly: the existing files probably cannot say, and future HRA
+> releases may. Nothing to do here; re-check at the next HRA refresh, and until then
+> the credit is version-less **by the licensor's own choice of wording**, which is a
+> better position than the guess we were prepared to make.
+>
+> ⚠️ **Two invitations came back with it, and they are for a person, not the repo:**
+> to present this project at the **HRA Working Group meeting, 2 September, 11:00 ET**,
+> and to a future **HRA Hackathon**. Neither is a code change; both are recorded here
+> because an invitation from a source we depend on is worth more than a credit line.
 
 **To:** ✅ `infoccf@indiana.edu` — the feedback address on the CCF 3D Reference Object
 Library page.

@@ -2,6 +2,7 @@ import { existsSync, readFileSync, readdirSync, rmSync, statSync } from 'node:fs
 import { join } from 'node:path'
 import { defineConfig, type Plugin } from 'vite'
 import react from '@vitejs/plugin-react'
+import { MODEL_REGISTRIES } from './scripts/model-registries.mjs'
 
 /**
  * Keep build intermediates out of the deployed bundle.
@@ -49,7 +50,21 @@ function pruneUnshippedModels(): Plugin {
        * literal, which is the second half of the same bug.
        */
       let sources = ''
-      for (const f of ['anatomySources.ts', 'organOverlays.ts', 'bodyEnvelopes.ts', 'annyGrid.ts']) {
+      /**
+       * ⚠️ AND IT HAS NOW BEEN INCOMPLETE A THIRD TIME. `envelopePoses.ts` (the
+       * posed envelope variants, D25) and `annyRig.ts` (the pose rig, D26) were
+       * added on 18 August 2026 and not listed here, so a build pruned all eight
+       * posed GLBs and both rig files. The symptom is the one this comment
+       * already describes and it is still not visible in development: the
+       * envelope silently falls back to its rest pose and the position sliders
+       * never appear, exactly as they would if the assets had never been baked.
+       *
+       * Caught by reading `dist/models` before a deploy, which is the only thing
+       * that catches it. The list now lives in `scripts/model-registries.mjs`,
+       * shared with `check:dist`, so the two halves of the rule cannot drift
+       * apart again; if you add a registry, add it there in the same commit.
+       */
+      for (const f of MODEL_REGISTRIES) {
         try {
           sources += readFileSync(join(__dirname, 'src', 'scene', f), 'utf8')
         } catch {
