@@ -1,15 +1,26 @@
-import { beforeEach, describe, expect, it, vi } from 'vitest'
+import { beforeEach, describe, expect, expectTypeOf, it, vi } from 'vitest'
+import { createHash } from 'node:crypto'
 import { readFileSync } from 'node:fs'
 import {
+  CONTRIBUTOR_STATUSES,
+  SEVERITIES,
+  SYSTEM_IDS,
+  UNRENDERABLE_REASONS,
   assertInterpretationDocument,
   loadInterpretationDocument,
+  type InterpretationSystemId,
 } from './interpretationContract'
+import type { SystemId } from './schema'
 
 type MutableObject = Record<string, unknown>
 
 const fixture = JSON.parse(
-  readFileSync('public/data/interpretation/minimal.valid.json', 'utf8'),
+  readFileSync('contracts/fixtures/minimal.valid.json', 'utf8'),
 ) as MutableObject
+
+const schema = JSON.parse(
+  readFileSync('contracts/interpretation-contract.v0.2.schema.json', 'utf8'),
+) as { $defs: Record<string, { enum?: string[] }> }
 
 function valid(): MutableObject {
   return structuredClone(fixture)
@@ -33,6 +44,41 @@ function contributors(object: MutableObject): MutableObject[] {
 
 beforeEach(() => {
   vi.unstubAllGlobals()
+})
+
+describe('vendored contract', () => {
+  it('matches every checksum recorded in CONTRACT_PROVENANCE.md', () => {
+    const record = readFileSync('contracts/CONTRACT_PROVENANCE.md', 'utf8')
+    const pinned = record
+      .split(/^## /m)
+      .slice(1)
+      .map((section) => ({
+        path: /Local path: `([^`]+)`/.exec(section)?.[1],
+        sha256: /SHA256: `([0-9a-f]{64})`/.exec(section)?.[1],
+      }))
+    expect(pinned).toHaveLength(2)
+
+    for (const { path, sha256 } of pinned) {
+      expect(path, 'every section needs a Local path').toBeDefined()
+      expect(sha256, `${path} needs a SHA256`).toBeDefined()
+      const actual = createHash('sha256').update(new Uint8Array(readFileSync(path!))).digest('hex')
+      expect(actual, path).toBe(sha256)
+    }
+  })
+
+  it.each([
+    ['SystemId', SYSTEM_IDS],
+    ['Severity', SEVERITIES],
+    ['ContributorStatus', CONTRIBUTOR_STATUSES],
+    ['UnrenderableReason', UNRENDERABLE_REASONS],
+  ])('validator enum %s equals the schema', (name, values) => {
+    expect([...values]).toEqual(schema.$defs[name].enum)
+  })
+
+  it('shares its system ids with the viewer contract', () => {
+    // Checked by `npm run typecheck`, which compiles this file; a no-op at run time.
+    expectTypeOf<InterpretationSystemId>().toEqualTypeOf<SystemId>()
+  })
 })
 
 describe('assertInterpretationDocument', () => {
@@ -162,8 +208,20 @@ describe('assertInterpretationDocument', () => {
   })
 
   it.each([
+    '2026-07-28t00:00:00z',
+    '2016-12-31T23:59:60Z',
+    '2026-07-28T00:00:00.5+05:30',
+  ])('accepts RFC 3339 date-time %s', (value) => {
+    const document = valid()
+    document.as_of = value
+    expect(() => assertInterpretationDocument(document)).not.toThrow()
+  })
+
+  it.each([
     ['as_of', '2026-02-30T00:00:00Z'],
     ['as_of', '2026-07-28'],
+    ['as_of', '2026-07-28T00:00:61Z'],
+    ['as_of', '2026-07-28T00:00:00+24:00'],
   ])('rejects invalid `%s` date-time values', (field, value) => {
     const document = valid()
     document[field] = value

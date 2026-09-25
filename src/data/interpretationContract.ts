@@ -8,8 +8,13 @@
  * v0.2 does not declare states unique by system_id. This validator therefore
  * does not add a consumer-only uniqueness rule; that constraint must be added
  * and versioned upstream before XR enforces it.
+ *
+ * The enum constants below are copied from the schema by hand, so they are
+ * exported for `interpretationContract.test.ts`, which compares each one with
+ * the vendored schema's `$defs` — a refresh that changes an enum there and not
+ * here fails the tests instead of shipping a validator that disagrees.
  */
-const SYSTEM_IDS = [
+export const SYSTEM_IDS = [
   'musculoskeletal',
   'cardiovascular',
   'nervous',
@@ -21,9 +26,9 @@ const SYSTEM_IDS = [
   'reproductive',
 ] as const
 
-const SEVERITIES = ['none', 'borderline', 'mild', 'moderate', 'marked', 'indeterminate'] as const
+export const SEVERITIES = ['none', 'borderline', 'mild', 'moderate', 'marked', 'indeterminate'] as const
 
-const CONTRIBUTOR_STATUSES = [
+export const CONTRIBUTOR_STATUSES = [
   'present',
   'missing',
   'stale',
@@ -31,14 +36,21 @@ const CONTRIBUTOR_STATUSES = [
   'unit_incommensurable',
 ] as const
 
-const UNRENDERABLE_REASONS = [
+export const UNRENDERABLE_REASONS = [
   'no_system_id_upstream',
   'not_anatomical',
   'system_excluded_upstream',
 ] as const
 
+/**
+ * RFC 3339 `date-time` (section 5.6). The separator and `Z` may be lower case,
+ * and a leap second (`:60`) is valid — both are legal RFC 3339 that a producer
+ * may emit, so rejecting them would make this consumer stricter than the
+ * contract. `Date.parse` is deliberately not used: it rejects `:60` and its
+ * handling of lower-case separators varies by engine.
+ */
 const DATE_TIME =
-  /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})(?:\.\d+)?(?:Z|[+-]\d{2}:\d{2})$/
+  /^(\d{4})-(\d{2})-(\d{2})[Tt](\d{2}):(\d{2}):(\d{2})(?:\.\d+)?(?:[Zz]|[+-](\d{2}):(\d{2}))$/
 
 export type InterpretationSystemId = (typeof SYSTEM_IDS)[number]
 export type Severity = (typeof SEVERITIES)[number]
@@ -129,9 +141,9 @@ function optionalString(value: unknown, path: string): asserts value is string {
 function dateTime(value: unknown, path: string): asserts value is string {
   nonEmptyString(value, path)
   const match = DATE_TIME.exec(value)
-  if (!match || Number.isNaN(Date.parse(value))) fail(path, 'must be an RFC 3339 date-time')
+  if (!match) fail(path, 'must be an RFC 3339 date-time')
 
-  const [, year, month, day, hour, minute, second] = match
+  const [, year, month, day, hour, minute, second, offsetHour, offsetMinute] = match
   const calendar = new Date(Date.UTC(Number(year), Number(month) - 1, Number(day)))
   const validCalendarDate =
     calendar.getUTCFullYear() === Number(year) &&
@@ -142,7 +154,9 @@ function dateTime(value: unknown, path: string): asserts value is string {
     !validCalendarDate ||
     Number(hour) > 23 ||
     Number(minute) > 59 ||
-    Number(second) > 59
+    Number(second) > 60 ||
+    (offsetHour !== undefined && Number(offsetHour) > 23) ||
+    (offsetMinute !== undefined && Number(offsetMinute) > 59)
   ) {
     fail(path, 'must be an RFC 3339 date-time')
   }
@@ -357,6 +371,10 @@ export function assertInterpretationDocument(raw: unknown): InterpretationDocume
   return document as unknown as InterpretationDocumentV02
 }
 
+/**
+ * Not called by the app yet: it is the seam XR-2 will use to fetch a document.
+ * Kept here so the fetch path is validated and tested together with the guard.
+ */
 export async function loadInterpretationDocument(url: string): Promise<InterpretationDocumentV02> {
   const response = await fetch(url)
   if (!response.ok) {
