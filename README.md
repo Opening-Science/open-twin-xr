@@ -4,16 +4,26 @@ An open-source, web-based **human body viewer** with WebXR — the same anatomic
 scene in a browser or on a headset. Its subject is the body: anatomy, geometry,
 materials, lighting, and eventually personalisation from a person's own imaging.
 
+Developed under the Open Science Foundation for **research and non-medical
+consumer wellness**. **Medical use is outside the intended scope**; see
+[intended use](#intended-use).
+
 ![The viewer on first load: the BodyParts3D male donor on the dark theme, the arterial
 tree and the viscera read through a glass skin whose edge is lit where it turns away
 from the camera, with the control dock grouping atlas, donor, overlays and appearance,
 the framing column, and the required attribution beside it](docs/preview.png)
 
-> **It is not a health dashboard.** Health-data mapping and scoring live upstream
-> in [`etzm/open-twin`](https://github.com/etzm/open-twin) and the two reconcile
-> later (decision **D8**). This app consumes an already-scored `TwinMetrics`
-> and asks no questions about how the numbers were reached. The bundled sample is
-> **fictional** and must never be presented as anyone's measured health.
+> **The viewer renders; it does not interpret.** Converting, scoring and
+> interpreting health data happen upstream in
+> [`Opening-Science/open-twin`](https://github.com/Opening-Science/open-twin)
+> (decision **D8**). This app can colour anatomy by per-system values it is given,
+> and [D27](docs/DECISIONS.md#d27--research-and-wellness-interpretation-ui-is-in-scope)
+> admits a separate research-use view for interpretation states that open-twin
+> supplies. That view's design is approved in
+> [`docs/XR2_DESIGN_DECISIONS.md`](docs/XR2_DESIGN_DECISIONS.md), but the view is
+> not yet in the app. Nothing is scored or given clinical meaning in the browser.
+> The bundled sample is **fictional** and must never be presented as anyone's
+> measured health.
 
 ## Quick start
 
@@ -83,7 +93,7 @@ short version:
 |---|---|
 | [`docs/HANDOVER.md`](docs/HANDOVER.md) | **Start here.** Written for someone picking the repo up cold |
 | [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) | How the code is arranged, and why |
-| [`docs/DECISIONS.md`](docs/DECISIONS.md) | D1–D13: what was decided, and what was reversed and why. Read before proposing a change |
+| [`docs/DECISIONS.md`](docs/DECISIONS.md) | What was decided, and what was reversed and why. Read before proposing a change |
 | [`docs/MODEL_PIPELINE.md`](docs/MODEL_PIPELINE.md) | Getting real anatomy on screen |
 | [`docs/ONTOLOGY_MAP.md`](docs/ONTOLOGY_MAP.md) | Generated: organ systems ↔ UBERON/FMA, and which assets carry a term |
 | [`docs/LICENCE_LOG.md`](docs/LICENCE_LOG.md) | Generated due-diligence record |
@@ -143,6 +153,33 @@ table in `docs/HANDOVER.md`.
   Nature Methods (2024).
 - Mitsuhashi N, et al. *BodyParts3D: 3D structure database for anatomical
   concepts.* Nucleic Acids Research 37 (2009) D782–D785.
+
+## Intended use
+
+Open Twin XR is experimental software for research and non-medical consumer
+wellness. It displays anatomy and, where a deployment supplies them, per-system
+values or interpretation states produced upstream. **Medical use is outside the
+intended scope:** diagnosis, disease prediction or prevention, clinical
+monitoring, triage, treatment or other medical decisions. Supplied states are
+research outputs, not clinically validated assessments; they must not guide care
+or replace professional medical advice.
+
+Regulatory status depends on actual functions, intended purpose and claims. A
+wellness label, research disclaimer or component boundary does not exempt
+medical functionality. This repository claims no medical-device certification or
+clearance. `npm run lint:claims` checks the interface's own copy for
+medical-purpose, monitoring and reassurance wording in CI. That check is a
+floor, not a certificate.
+
+The browser only renders what it is given, but a deployment that shows real
+measurements still handles health data. Before handling participant data or
+exposing outputs to consumers, read open-twin's
+[intended use and integration responsibilities](https://github.com/Opening-Science/open-twin/blob/main/docs/INTENDED-USE.md),
+which sets out operators' data-protection and regulatory responsibilities.
+
+The software is supplied under the MIT licence's warranty and liability terms,
+subject to applicable law. This section does not change that licence or certify
+compliance.
 
 ## Licensing
 
