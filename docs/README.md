@@ -36,8 +36,8 @@ than the result.
 | [`CT_ATLAS_PIPELINE.md`](CT_ATLAS_PIPELINE.md) | CT → labelmap → mesh, with MOOSE. The heaviest pipeline here |
 | [`ONTOLOGY_MAP.md`](ONTOLOGY_MAP.md) | **Generated.** Organ systems ↔ UBERON/FMA, and which assets actually carry a term |
 | [`LICENCE_LOG.md`](LICENCE_LOG.md) | **Generated.** Pre-publication due diligence, read from the shipped assets |
-| [`DATA_CONTRACT.md`](DATA_CONTRACT.md) | `TwinMetrics`, the one boundary between this repo and the data upstream |
-| [`XR2_DESIGN_DECISIONS.md`](XR2_DESIGN_DECISIONS.md) | **Approved design gate.** Research/wellness interpretation-view semantics and acceptance tests; implementation has not started |
+| [`DATA_CONTRACT.md`](DATA_CONTRACT.md) | The canonical interpretation boundary and the separate legacy `TwinMetrics` demo |
+| [`XR2_DESIGN_DECISIONS.md`](XR2_DESIGN_DECISIONS.md) | **Approved decisions.** Research/wellness interpretation-view semantics and acceptance tests |
 | [`RESOURCES.md`](RESOURCES.md) | Every resource evaluated, with licence and standing |
 | [`DEPLOY.md`](DEPLOY.md) | Shipping it, including the publishable-build gate |
 | [`OUTREACH.md`](OUTREACH.md) | The letters owed before a public release — one recipient, address and sendable draft per open question in the licence log |
@@ -49,12 +49,12 @@ than the result.
 | [`PLAN_ANATOMED.md`](PLAN_ANATOMED.md) | **Proposal, nothing started** — take Anatomed's Latin names, derive structure adjacency from our own geometry, copy none of its CC BY-SA code |
 | [`PLAN_VIEWER.md`](PLAN_VIEWER.md) | **Proposal, nothing started** — viewer affordances a review of anatomy101.in exposed: deep links keyed by term, cross-section clipping, part-of rollup |
 
-⚠️ **Four live plans and one approved design gate.** `PLAN_NEXT.md` is the
+⚠️ **Four live plans and one approved decision record.** `PLAN_NEXT.md` is the
 repo-quality queue and records each item's status itself;
 `PLAN_IDENTITY.md` is the current milestone; `PLAN_ANATOMED.md` feeds it and is
 unstarted; `PLAN_VIEWER.md` is unstarted and waits on `PLAN_IDENTITY.md`'s search
 interface. `XR2_DESIGN_DECISIONS.md` records the approved interpretation-view
-semantics, but implementation remains gated on PR #18. The new-geometry queue is
+semantics that implementation must satisfy. The new-geometry queue is
 finished — `PLAN_INTEGRATION.md` moved to Historical below, and its findings are
 in [`reports/`](reports/README.md).
 

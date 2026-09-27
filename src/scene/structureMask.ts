@@ -42,8 +42,8 @@ import type { StructureEntry } from './structureEntry'
  * It carries both jobs in one RGBA texel because they are read at the same index
  * in the same draw:
  *
- *     RGB   the tint to apply, straight into `<color_fragment>`
- *     A     255 visible, 0 collapsed to the origin in the vertex shader
+ *     RGB   the tint to apply in `<color_fragment>`
+ *     A     visible pattern token byte, or 0 to collapse the structure
  *
  * `NearestFilter` on both axes and no mipmaps: this is a lookup table, and any
  * interpolation would blend one structure's entry into its neighbour's — which
@@ -59,6 +59,9 @@ import type { StructureEntry } from './structureEntry'
  * hardware. At 1024 wide, Z-Anatomy needs 4 rows.
  */
 export const MASK_WIDTH = 1024
+/** Visible alpha bytes reserved for interpretation pattern ids 0..6. */
+export const INTERPRETATION_PATTERN_BASE = 136
+export const INTERPRETATION_PATTERN_STEP = 16
 
 export interface StructureMask {
   texture: DataTexture
@@ -101,6 +104,7 @@ export function writeStructureMask(
   structures: readonly StructureEntry[],
   hidden: ReadonlySet<number> | null,
   tintFor: ((entry: StructureEntry, id: number) => string | null) | null,
+  patternFor: ((entry: StructureEntry, id: number) => number) | null = null,
 ): void {
   const data = mask.texture.image.data as Uint8Array
   data.fill(255)
@@ -111,14 +115,17 @@ export function writeStructureMask(
       data[o + 3] = 0
       continue
     }
+    if (patternFor) {
+      const token = Math.max(0, Math.min(6, Math.round(patternFor(structures[i], i))))
+      data[o + 3] = INTERPRETATION_PATTERN_BASE + token * INTERPRETATION_PATTERN_STEP
+    }
     if (!tintFor) continue
     const hex = tintFor(structures[i], i)
     if (!hex) continue
     scratch.set(hex)
-    // The tint multiplies the lit tissue colour rather than replacing it, so
-    // form and shading survive — see the injection in `AtlasBody`. Written in
-    // sRGB bytes because that is what the shader's `texture2D` hands back and
-    // what the diffuse colour it multiplies is already in.
+    // The viewer's inspect modes multiply this tint into tissue colour; the
+    // dedicated interpretation view uses it as categorical albedo. In both
+    // cases the stock colour chunk still applies baked AO afterwards.
     data[o] = Math.round(scratch.r * 255)
     data[o + 1] = Math.round(scratch.g * 255)
     data[o + 2] = Math.round(scratch.b * 255)

@@ -103,8 +103,8 @@ export function StructurePanel() {
         </button>
       </div>
 
-      {/* Anatomical hue and the metric scale mean incompatible things — red is
-          "muscle" in one and "poor score" in the other — so they are modes, not
+      {/* Anatomical hue and the measured blue-grey metric scale mean incompatible
+          things, so they are modes, not
           a blend. See src/scene/anatomyPalette.ts. */}
       <div className="flex gap-0.5 rounded-full bg-track p-0.5 text-[11px]">
         {(['anatomical', 'metrics'] as const).map((m) => (
@@ -115,7 +115,7 @@ export function StructurePanel() {
             title={
               m === 'anatomical'
                 ? 'Tissue colours — red muscle, ivory bone. A metric shows as a glow.'
-                : 'Colour by the supplied per-system metric — red to green.'
+                : 'Colour by the supplied per-system metric — measured blue-grey scale.'
             }
             className={
               'flex-1 rounded-full px-2 py-1 capitalize transition ' +

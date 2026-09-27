@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "license": "MIT",
-  "description": "Open-source web-based 3D human-body viewer. Renders real anatomy from registered open atlases and can colour it by supplied per-system metrics. WebXR in the browser and on a headset.",
+  "description": "Open-source web-based 3D human-body viewer. Renders real anatomy from registered open atlases and can display supplied metrics or validated categorical interpretation states. WebXR in the browser and on a headset.",
   "author": "Martin Etzrodt, OSF Staff and Open Twin XR contributors",
   "repository": {
     "type": "git",

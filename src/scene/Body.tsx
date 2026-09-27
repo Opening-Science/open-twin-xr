@@ -59,6 +59,7 @@ export function Body() {
 function BodyContent() {
   const clearSel = useTwin((s) => s.selectSystem)
   const mode = useResolvedAnatomyMode()
+  const viewerMode = useTwin((s) => s.viewerMode)
   const publishAvailability = useTwin((s) => s.setAtlasAvailability)
   const envelope = useTwin((s) => s.bodyEnvelope)
 
@@ -259,7 +260,7 @@ function BodyContent() {
         fallback={null}
       >
         <Suspense fallback={null}>
-          <BodyEnvelope />
+          {viewerMode === 'viewer' && <BodyEnvelope />}
         </Suspense>
       </AssetErrorBoundary>
     </group>

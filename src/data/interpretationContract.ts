@@ -372,8 +372,9 @@ export function assertInterpretationDocument(raw: unknown): InterpretationDocume
 }
 
 /**
- * Not called by the app yet: it is the seam XR-2 will use to fetch a document.
- * Kept here so the fetch path is validated and tested together with the guard.
+ * The current interpretation view accepts a local file and calls the validator
+ * directly. This remains the validated boundary for a future URL-based source;
+ * XR-2 deliberately adds no live backend integration.
  */
 export async function loadInterpretationDocument(url: string): Promise<InterpretationDocumentV02> {
   const response = await fetch(url)
