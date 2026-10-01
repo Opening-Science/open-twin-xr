@@ -4,11 +4,11 @@ These files are pinned, read-only copies from `Opening-Science/open-twin`.
 
 ## Schema
 
-- Upstream commit: `84305d105a30ca5bbc3c9e4d7bace2d9ce5aa2ce`
+- Upstream commit: `ffdf8997f76d15c8bed901043d340650aad0af08`
 - Upstream path: `docs/contracts/interpretation-contract.v0.2.schema.json`
 - Local path: `contracts/interpretation-contract.v0.2.schema.json`
 - Schema `$id`: `https://open-twin.org/contracts/interpretation-contract.v0.2.schema.json`
-- SHA256: `ae8b4769fa9e834fe9da52441160135ae12a4ad78204ebabb1e20c5f4fc95c39`
+- SHA256: `785a05a1a02d1e157ab9ae53d92c3e98fc2fad58f916c60ae25a39331e88a5cd`
 
 ## Acceptance fixture
 

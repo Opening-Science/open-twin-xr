@@ -122,10 +122,11 @@ describe('assertInterpretationDocument', () => {
     expect(() => assertInterpretationDocument(document)).toThrow(/system_id/)
   })
 
-  it('does not invent a duplicate-system rule absent from the v0.2 schema', () => {
-    const document = valid()
-    list(document, 'states').push(structuredClone(state(document)))
-    expect(() => assertInterpretationDocument(document)).not.toThrow()
+  it('rejects a duplicate system_id (DUPLICATE_SYSTEM_ID)', () => {
+    const document = JSON.parse(
+      readFileSync('contracts/fixtures/duplicate-system-id.json', 'utf8'),
+    )
+    expect(() => assertInterpretationDocument(document)).toThrow(/DUPLICATE_SYSTEM_ID/)
   })
 
   it.each(['severity', 'confidence', 'sufficient_data', 'contributing', 'geometry'])(
