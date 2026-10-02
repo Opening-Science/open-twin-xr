@@ -56,7 +56,7 @@ describe('vendored contract', () => {
         path: /Local path: `([^`]+)`/.exec(section)?.[1],
         sha256: /SHA256: `([0-9a-f]{64})`/.exec(section)?.[1],
       }))
-    expect(pinned).toHaveLength(2)
+    expect(pinned).toHaveLength(3)
 
     for (const { path, sha256 } of pinned) {
       expect(path, 'every section needs a Local path').toBeDefined()

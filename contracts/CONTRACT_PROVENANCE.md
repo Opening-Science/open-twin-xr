@@ -22,6 +22,13 @@ shown as a person's name. It lives beside the schema rather than under `public/`
 because only the tests read it: anything in `public/` is copied into every build,
 and a fictional health state has no business being served from a deployed viewer.
 
+## Reject fixture
+
+- Upstream commit: `ffdf8997f76d15c8bed901043d340650aad0af08`
+- Upstream path: `packages/interpretation-contract/fixtures/reject/duplicate-system-id.json`
+- Local path: `contracts/fixtures/duplicate-system-id.json`
+- SHA256: `6f69beecf37b60ac63f306b8020bd7c668692767e82f3699d5f5c2f74d4cb419`
+
 The upstream JSON Schema is the contract source of truth. The browser does not load
 or compile it at runtime; `src/data/interpretationContract.ts` implements the same
 boundary using hand-written guards, matching this repository's existing validation
