@@ -23,13 +23,35 @@ import {
   type MeshBVHOptions,
 } from 'three-mesh-bvh'
 import type { SystemId, SystemScore } from '../data/schema'
+import {
+  stateForFma,
+  styleForState,
+  visualKeyForState,
+} from '../data/interpretationPresentation'
 import { useTwin, type AnatomyLayer } from '../store'
 import { scoreToColor, scoreToEmissive } from './metricColor'
 import { anatomicalColor, scoreLift, tissueSurface } from './anatomyPalette'
 import { TERM_TO_SYSTEM } from './anatomy/layout'
 import { sourceForSystem, type AnatomyMode, type AnatomySource } from './anatomySources'
 import { useHiddenStructureIds, useSupersededBy } from './OrganOverlay'
-import { createStructureMask, inspectTint, writeStructureMask, MASK_WIDTH } from './structureMask'
+import {
+  applyInterpretationPatternVaryings,
+  availableFmaFromRendered,
+  interpretationOpacity,
+  interpretationPatternFragment,
+  INTERPRETATION_NO_DATA_OPACITY,
+  maskHiddenForInterpretation,
+  meshIsVisible,
+  uniqueStructureIds,
+} from './interpretationRender'
+import {
+  createStructureMask,
+  inspectTint,
+  writeStructureMask,
+  INTERPRETATION_PATTERN_BASE,
+  INTERPRETATION_PATTERN_STEP,
+  MASK_WIDTH,
+} from './structureMask'
 import {
   normalise,
   structureTerm,
@@ -231,6 +253,7 @@ function isBodyHull(systemId: SystemId | null, group?: string): boolean {
 const OT_A_STRUCTURE =
   '#ifndef OT_A_STRUCTURE\n#define OT_A_STRUCTURE\nattribute float aStructure;\n#endif'
 
+/** Screen-space texture keyed by the categorical interpretation token. */
 /**
  * Does the body hull currently read as a SOLID surface, i.e. should it catch
  * picks rather than let them through to the anatomy behind it?
@@ -270,6 +293,10 @@ export function AtlasBody({
   const url = source.url
   const { scene } = useGLTF(url)
   const data = useTwin((s) => s.data)
+  const interpretationDocument = useTwin((s) => s.interpretationDocument)
+  const viewerMode = useTwin((s) => s.viewerMode)
+  const interpretationMode = viewerMode === 'interpretation'
+  const setInterpretationFmaFor = useTwin((s) => s.setInterpretationFmaFor)
   const termMap = useTermMap()
   const colourMode = useTwin((s) => s.colourMode)
   const hullOpacity = useTwin((s) => s.hullOpacity)
@@ -309,13 +336,19 @@ export function AtlasBody({
   const hiddenSystems = useTwin((s) => s.hiddenSystems)
   const hiddenLayers = useTwin((s) => s.hiddenLayers)
   /** Organs an active overlay replaces, so this atlas does not draw them too. */
-  const superseded = useSupersededBy(source.id)
+  const configuredSuperseded = useSupersededBy(source.id)
+  const superseded = useMemo(
+    () => (interpretationMode ? [] : configuredSuperseded),
+    [configuredSuperseded, interpretationMode],
+  )
 
   /** Flatten to meshes tagged with the system each one belongs to. */
   const entries = useMemo(() => {
     const out: {
       mesh: Mesh
       systemId: SystemId | null
+      /** Term carried directly by this mesh; never inherited from an ancestor. */
+      directTerm: string | null
       term: string | null
       layer?: string
       label?: string
@@ -351,6 +384,7 @@ export function AtlasBody({
       // detail keyed by an FMA term we do not map still inherits the system of
       // the UBERON-keyed organ that contains it.
       const chain = termChain(o)
+      const directTerm = readTerm(o)
       const term = chain.find((t) => termMap.has(t)) ?? chain[0] ?? null
 
       // Ontology term first — it is the cross-atlas contract. But HRA's terms
@@ -387,7 +421,7 @@ export function AtlasBody({
       const ud = (o.userData ?? {}) as Record<string, unknown>
       const layer = typeof ud.layer === 'string' ? ud.layer : undefined
       const label = typeof ud.label === 'string' ? ud.label : undefined
-      out.push({ mesh: o, systemId, term, layer, label, hiddenGroup, groupKey })
+      out.push({ mesh: o, systemId, directTerm, term, layer, label, hiddenGroup, groupKey })
     })
     return out
   }, [scene, termMap, source])
@@ -667,10 +701,26 @@ export function AtlasBody({
     writeStructureMask(
       mask,
       structures,
-      hiddenIds,
-      structureInspect === 'none' ? null : (e) => inspectTint(structureInspect, e),
+      maskHiddenForInterpretation(interpretationMode, hiddenIds),
+      interpretationMode
+        ? (entry) =>
+            styleForState(stateForFma(interpretationDocument, structureTerm(entry))).color
+        : structureInspect === 'none'
+          ? null
+          : (entry) => inspectTint(structureInspect, entry),
+      interpretationMode
+        ? (entry) =>
+            styleForState(stateForFma(interpretationDocument, structureTerm(entry))).patternToken
+        : null,
     )
-  }, [mask, structures, hiddenIds, structureInspect])
+  }, [
+    mask,
+    structures,
+    hiddenIds,
+    structureInspect,
+    interpretationDocument,
+    interpretationMode,
+  ])
 
   /**
    * Whether the mask shader variant is needed at all.
@@ -681,7 +731,9 @@ export function AtlasBody({
    * the texture and change without a recompile, so keying on them would mint a
    * fresh program every time somebody dragged a toggle.
    */
-  const maskOn = mask !== null && (hiddenIds !== null || structureInspect !== 'none')
+  const maskOn =
+    mask !== null &&
+    (hiddenIds !== null || structureInspect !== 'none' || interpretationMode)
 
   /**
    * PER-STRUCTURE EXPLODE — roadmap phase 4.
@@ -964,9 +1016,16 @@ export function AtlasBody({
   const visible = useMemo(
     () =>
       entries.filter((e) => {
-        if (e.hiddenGroup) return false
-        if (e.layer && hiddenLayers.includes(e.layer as AnatomyLayer)) return false
-        if (e.systemId && hiddenSystems.includes(e.systemId)) return false
+        if (
+          !meshIsVisible({
+            hiddenGroup: e.hiddenGroup,
+            systemId: e.systemId,
+            layer: e.layer,
+            hiddenSystems,
+            hiddenLayers,
+          })
+        )
+          return false
         // An active organ overlay stands in for the static organ, so hide it
         // rather than render both. Tested against the node name AND the group
         // key, because an atlas may carry the organ under either.
@@ -979,8 +1038,33 @@ export function AtlasBody({
         if (assigned === url) return true
         return !presentUrls.includes(assigned)
       }),
-    [entries, mode, url, presentUrls, hiddenSystems, hiddenLayers, superseded],
+    [
+      entries,
+      mode,
+      url,
+      presentUrls,
+      hiddenSystems,
+      hiddenLayers,
+      superseded,
+    ],
   )
+
+  /**
+   * Publish only FMA identifiers on geometry that is actually drawn.
+   * Composition-excluded meshes and UBERON-only terms are left out: placement
+   * is an exact FMA join against the visible body.
+   */
+  useEffect(() => {
+    const rendered = visible.map((entry) => {
+      const attr = entry.mesh.geometry.getAttribute('_structure')
+      return {
+        directTerm: entry.directTerm,
+        structureIds: attr ? uniqueStructureIds(attr.array as ArrayLike<number>) : null,
+      }
+    })
+    setInterpretationFmaFor(source.id, availableFmaFromRendered(rendered, structures))
+    return () => setInterpretationFmaFor(source.id, null)
+  }, [visible, setInterpretationFmaFor, source.id, structures])
 
   /**
    * Resolution report. Swapping an atlas in is the step most likely to fail
@@ -1063,6 +1147,8 @@ export function AtlasBody({
     baked: boolean,
     /** The atlas's own group key — colours groups that resolve to no system. */
     group?: string,
+    /** Ontology term carried by this mesh itself; never an inherited ancestor. */
+    directTerm: string | null = null,
     /**
      * Whether THIS mesh carries `_structure`.
      *
@@ -1103,24 +1189,38 @@ export function AtlasBody({
     // so two atlases cannot share a mask by sharing a key.
     // Scoped to the hull, so flipping the toggle cannot mint a duplicate
     // program for each of the ~65 organ materials that ignore it.
+    const interpretationState = stateForFma(interpretationDocument, directTerm)
+    const interpretationVisualKey = visualKeyForState(interpretationState)
+    const interpretationStyle = styleForState(interpretationState)
     const glassOn = glassHull && isBodyHull(systemId, group)
     const maskThis = maskOn && hasStructure
     // The hover rim needs no store flag — the uniform decides at draw time — so
     // this is geometry-only and never flips while the app runs.
     const hoverThis = hasStructure
-    const key = `${systemId}|${layer}|${group}|${colourMode}|${selected}|${hullOpacity.toFixed(2)}|${baked}|${perStructureExplode}|${xrayOn}|${smoothOn}|${maskThis}|${glassOn}|${hoverThis}`
+    const key = `${systemId}|${layer}|${group}|${viewerMode}|${colourMode}|${interpretationVisualKey}|${interpretationStyle.patternToken}|${selected}|${hullOpacity.toFixed(2)}|${baked}|${perStructureExplode}|${xrayOn}|${smoothOn}|${maskThis}|${glassOn}|${hoverThis}`
     const cache = materials.current
     const hit = cache.get(key)
     if (hit) return hit
 
     const sys = systemId ? byId.get(systemId) : undefined
     const score = sys?.hasData ? sys.score : null
-    const anatomical = colourMode === 'anatomical'
+    const anatomical = !interpretationMode && colourMode === 'anatomical'
+    const metrics = !interpretationMode && colourMode === 'metrics'
     const isShell = systemId === 'integumentary'
     const isMuscle = layer === 'muscle'
-    const color = anatomical ? anatomicalColor(systemId, layer, group) : scoreToColor(score)
-    const emissive = anatomical ? scoreLift(score) : scoreToEmissive(score)
-    const unresolvedOrNoData = systemId === null || score === null
+    const color = interpretationMode
+      ? new Color(interpretationStyle.color)
+      : anatomical
+        ? anatomicalColor(systemId, layer, group)
+        : scoreToColor(score)
+    const emissive = interpretationMode
+      ? 0
+      : anatomical
+        ? scoreLift(score)
+        : scoreToEmissive(score)
+    const unresolvedOrNoData = interpretationMode
+      ? interpretationVisualKey === 'no_data'
+      : systemId === null || score === null
 
     /**
      * ⚠️ "No health score" must NOT dissolve the anatomy in the body view.
@@ -1132,15 +1232,14 @@ export function AtlasBody({
      * resolve to no system at all, which is why the abdomen looked like a point
      * cloud while the scored musculoskeletal system stayed solid.
      *
-     * It was reasonable when this repo was a health dashboard: an unmeasured
-     * system SHOULD look unmeasured, and that rule is still right in `health`
-     * mode. But **D8 moved scoring upstream to `etzm/open-twin` and this
-     * repository became a body viewer**, so most systems now legitimately carry
-     * no score — and ghosting them means the anatomy dissolves for a reason that
-     * has nothing to do with anatomy.
+     * It was reasonable for the numeric metrics view: an unmeasured system
+     * SHOULD look unmeasured. The anatomical view, however, is allowed to show
+     * the atlas without making a statement about supplied measurements. D27
+     * separately permits the categorical research/wellness interpretation view,
+     * where missing and insufficient states use an explicit no-data treatment.
      *
      * So the ghost is scoped to the mode that is actually making a claim about
-     * health, exactly as the muscle rule on the line above already does.
+     * supplied metrics, exactly as the muscle rule on the line above already does.
      * `anatomical` is the atlas look and renders the body solid.
      */
     /**
@@ -1162,20 +1261,31 @@ export function AtlasBody({
      */
     const isSubcutaneous = isShell && !isBodyHull(systemId, group)
 
-    const opacity = isSubcutaneous
-      ? 0.3
-      : isShell
-        ? hullOpacity
-        : isMuscle && !anatomical
-          ? 0.22
-          : unresolvedOrNoData && !anatomical
-            ? 0.45
-            : 1
+    // A merged `_STRUCTURE` mesh may contain both supplied states and no-data
+    // structures, so its interpretation opacity is applied per structure in
+    // the mask shader. Mesh-level opacity would make every exact match inherit
+    // the node's (usually absent) direct term.
+    const opacity = interpretationMode
+      ? interpretationOpacity({
+          maskThis,
+          isShell: isShell && !isSubcutaneous,
+          visualKey: interpretationVisualKey,
+          hullOpacity,
+        })
+      : isSubcutaneous
+        ? 0.3
+        : isShell
+          ? hullOpacity
+          : isMuscle && metrics
+            ? 0.22
+            : unresolvedOrNoData && metrics
+              ? 0.45
+              : 1
 
     const surface = tissueSurface(systemId, layer)
 
     const m = new MeshPhysicalMaterial({
-      color: isShell && !selected && !anatomical ? new Color('#bcd3e6') : color,
+      color: isShell && !selected && metrics ? new Color('#bcd3e6') : color,
       /**
        * Emissive is added AFTER lighting and completely unlit — the last line of
        * three.js's physical shader is
@@ -1266,7 +1376,7 @@ export function AtlasBody({
        * Everything else keeps the hash, where it buys correct depth and costs
        * grain the 4x MSAA largely absorbs at these opacities.
        */
-      alphaHash: opacity < 1 && !isShell,
+      alphaHash: interpretationMode && maskThis ? true : opacity < 1 && !isShell,
       transparent: isShell && (opacity < 1 || glassOn),
       /**
        * The shell writes depth ONLY while it is opaque.
@@ -1510,7 +1620,7 @@ vec4 otStructureMask( float id ) {
             // it. Any future patch needing the attribute must use it too.
             '#include <common>\n' +
               OT_A_STRUCTURE +
-              '\nuniform sampler2D uMask;\nuniform vec2 uMaskSize;\nvarying vec3 vStructureTint;' +
+              '\nuniform sampler2D uMask;\nuniform vec2 uMaskSize;\nvarying vec3 vStructureTint;\nvarying float vStructurePattern;\nvarying vec3 vOtPatternPos;' +
               lookup,
           )
           /**
@@ -1527,25 +1637,58 @@ vec4 otStructureMask( float id ) {
            */
           .replace(
             '#include <begin_vertex>',
-            '#include <begin_vertex>\nvec4 otMask = otStructureMask( aStructure );\nvStructureTint = otMask.rgb;\nif ( otMask.a < 0.5 ) transformed = vec3( 0.0 );',
+            `#include <begin_vertex>
+vec4 otMask = otStructureMask( aStructure );
+vStructureTint = otMask.rgb;
+vStructurePattern = ( otMask.a * 255.0 - ${INTERPRETATION_PATTERN_BASE.toFixed(1)} ) / ${INTERPRETATION_PATTERN_STEP.toFixed(1)};
+if ( otMask.a < 0.5 ) transformed = vec3( 0.0 );
+vOtPatternPos = transformed;`,
           )
 
         shader.fragmentShader = shader.fragmentShader
-          .replace('#include <common>', '#include <common>\nvarying vec3 vStructureTint;')
+          .replace(
+            '#include <common>',
+            '#include <common>\nvarying vec3 vStructureTint;\nvarying float vStructurePattern;\nvarying vec3 vOtPatternPos;',
+          )
           /**
-           * MULTIPLIED into the lit colour, not substituted for it.
+           * Inspect tint is multiplied into the lit colour. Interpretation tint
+           * replaces the base albedo before the stock colour chunk.
            *
-           * Replacing the albedo would flatten every structure it touched into a
-           * silhouette, which destroys exactly the form the AO bake and the
-           * material work exist to build — and the default texel is white, so a
-           * multiply is a true no-op wherever no tint is set. `<color_fragment>`
-           * is the same insertion point three.js uses for vertex colours, so
-           * this composes with the baked AO rather than fighting it.
+           * In both cases `<color_fragment>` still runs, so baked AO preserves
+           * form. The interpretation replacement must happen first or the
+           * categorical colour would erase that shading.
            */
           .replace(
             '#include <color_fragment>',
-            '#include <color_fragment>\ndiffuseColor.rgb *= vStructureTint;',
+            interpretationMode
+              ? `diffuseColor.rgb = vStructureTint;
+#include <color_fragment>
+${interpretationPatternFragment('vStructurePattern')}
+${
+  isShell
+    ? ''
+    : `if ( vStructurePattern < 0.5 ) diffuseColor.a *= ${INTERPRETATION_NO_DATA_OPACITY.toFixed(2)};`
+}`
+              : '#include <color_fragment>\ndiffuseColor.rgb *= vStructureTint;',
           )
+      }
+    }
+
+    if (interpretationMode && !maskThis) {
+      const prevInterpretation = m.onBeforeCompile
+      m.onBeforeCompile = (shader, renderer) => {
+        prevInterpretation?.(shader, renderer)
+        applyInterpretationPatternVaryings(shader)
+        shader.fragmentShader = shader.fragmentShader.replace(
+          '#include <color_fragment>',
+          `#include <color_fragment>
+${interpretationPatternFragment(interpretationStyle.patternToken.toFixed(1))}
+${
+  !isShell && interpretationVisualKey === 'no_data'
+    ? `diffuseColor.a *= ${INTERPRETATION_NO_DATA_OPACITY.toFixed(2)};`
+    : ''
+}`,
+        )
       }
     }
 
@@ -1685,8 +1828,11 @@ vec4 otStructureMask( float id ) {
      * program to reuse. Verified by logging — the injection ran on every toggle
      * while the compile hook fired only once per atlas.
      */
-    if (xrayOn || perStructureExplode || maskThis || glassOn || hoverThis) {
-      const variant = `${xrayOn ? 'x' : ''}${perStructureExplode ? 'e' : ''}${maskThis ? 'm' : ''}${glassOn ? 'g' : ''}${hoverThis ? 'h' : ''}`
+    if (xrayOn || perStructureExplode || maskThis || glassOn || hoverThis || interpretationMode) {
+      const interpretationVariant = interpretationMode
+        ? `i${maskThis ? 's' : ''}${interpretationStyle.patternToken}`
+        : ''
+      const variant = `${xrayOn ? 'x' : ''}${perStructureExplode ? 'e' : ''}${maskThis ? 'm' : ''}${glassOn ? 'g' : ''}${hoverThis ? 'h' : ''}${interpretationVariant}`
       m.customProgramCacheKey = () => variant
     }
 
@@ -1765,6 +1911,7 @@ vec4 otStructureMask( float id ) {
         e.systemId === selectedSystem && (selectedLayer === null || e.layer === selectedLayer),
         e.mesh.geometry.hasAttribute('color'),
         e.groupKey,
+        e.directTerm,
         e.mesh.geometry.hasAttribute('_structure'),
       )
     }
@@ -1798,7 +1945,9 @@ vec4 otStructureMask( float id ) {
   }, [
     entries,
     visible,
+    viewerMode,
     colourMode,
+    interpretationDocument,
     hullOpacity,
     selectedSystem,
     selectedLayer,

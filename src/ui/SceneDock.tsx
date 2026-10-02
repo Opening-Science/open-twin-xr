@@ -47,6 +47,7 @@ export function SceneDock() {
    */
   const [open, setOpen] = useState(true)
   const parametric = useTwin((s) => s.anatomyMode) === 'parametric'
+  const viewerMode = useTwin((s) => s.viewerMode)
 
   return (
     <div className="pointer-events-none absolute inset-2.5 z-20 flex items-start justify-between gap-3">
@@ -86,7 +87,7 @@ export function SceneDock() {
               row was still drawn and still toggling state, which is the same
               inert-control problem the envelope row had directly below.
             */}
-            {!parametric && (
+            {viewerMode === 'viewer' && !parametric && (
               <DockGroup label="Overlays">
                 <OrganOverlayRow />
               </DockGroup>
@@ -104,17 +105,21 @@ export function SceneDock() {
               surface, and the whole point of D18 is that this mode replaces
               the body rather than wrapping one.
             */}
-            {!parametric && (
+            {viewerMode === 'viewer' && !parametric && (
               <DockGroup label="Envelope">
                 <EnvelopeControls />
               </DockGroup>
             )}
-            <DockGroup label="Inspect">
-              <InspectControls />
-            </DockGroup>
-            <DockGroup label="Look">
-              <LookControls />
-            </DockGroup>
+            {viewerMode === 'viewer' && (
+              <>
+                <DockGroup label="Inspect">
+                  <InspectControls />
+                </DockGroup>
+                <DockGroup label="Look">
+                  <LookControls />
+                </DockGroup>
+              </>
+            )}
           </div>
         )}
       </div>

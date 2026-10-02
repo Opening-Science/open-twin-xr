@@ -1,27 +1,32 @@
-# Data contract: open-twin -> viewer
+# Data contracts at the viewer boundary
 
-> **Revised after verification.** Read `SCHEMA_VERIFICATION.md` first. The
-> original version of this file assumed open-twin supplies per-system scores. It
-> does not. It supplies raw FHIR R4 Observations.
+The viewer accepts two deliberately separate document types:
 
-The viewer reads exactly one type: `TwinMetrics` (`src/data/schema.ts`).
-Everything upstream is the adapter's problem (`src/data/adapter.ts`).
+- `interpretation-contract.v0.2` is the canonical Open Twin → XR seam. The
+  pinned schema, fixture and provenance are under `contracts/`; validation is
+  in `src/data/interpretationContract.ts`. Its categorical states drive only
+  the dedicated research/wellness interpretation view.
+- `TwinMetrics` (`src/data/schema.ts`) remains the legacy fictional demo model
+  for the existing anatomical/metrics viewer. It is not converted into, or
+  treated as authority for, the interpretation contract.
+
+The browser does not score FHIR observations or convert interpretation severity
+or confidence into a numeric metric.
 
 ## Production topology
 
 ```
 [vendor APIs]
-  -> @open-twin/provider-*        (stateless libs, hold credentials)
-  -> FHIR R4 Bundle of Observations + OperationOutcome
-  -> scoring step                 (reference intervals -> 0-10 per system)
-  -> TwinMetrics JSON
-  -> (HTTP) -> browser app
+  -> upstream FHIR ingestion and interpretation
+  -> interpretation-contract.v0.2 JSON
+  -> viewer validation
+  -> categorical interpretation view
 ```
 
-Everything above the last arrow is **server-side**. The browser only fetches an
-already-scored `TwinMetrics`.
+Any future network integration remains outside XR-2; its current entry point is
+a local JSON file selected by the user.
 
-## The shape
+## Legacy TwinMetrics shape
 
 ```
 TwinMetrics

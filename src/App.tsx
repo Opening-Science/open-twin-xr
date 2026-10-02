@@ -10,6 +10,12 @@ import { OsfLogo } from './ui/OsfLogo'
 import { CanvasKeyboardShell } from './ui/CanvasKeyboardShell'
 import { SelectedStructureCard } from './ui/SelectedStructureCard'
 import { ParametricPanel } from './ui/ParametricPanel'
+import {
+  InterpretationEvidencePanel,
+  InterpretationFooter,
+  InterpretationPanel,
+  ViewerModeSwitch,
+} from './ui/InterpretationView'
 
 /**
  * An open-source human body viewer.
@@ -20,7 +26,7 @@ import { ParametricPanel } from './ui/ParametricPanel'
  * sidebar, a name and a search box, a health-status ring, a trend chart, a list
  * of per-system score cards, connected-source status, and an AI bubble.
  *
- * All of it is unmounted, and none of it is deleted. `Sidebar`,
+ * Those legacy components remain unmounted, and none of them is deleted. `Sidebar`,
  * `MetricsStatusCard`, `TrendChart`, `SystemScoreList`, `ConnectedSources`,
  * `ChatbotStub` and `DetailPanel` are intact under `src/ui/` and mount again in
  * one line each. They belong to a later iteration, so removing the files would
@@ -36,9 +42,9 @@ import { ParametricPanel } from './ui/ParametricPanel'
  * sample is labelled elsewhere.
  *
  * The subject of this repository is the **body** — anatomy, geometry, materials,
- * lighting, XR, and personalisation from imaging and body scans. Health-data
- * mapping remains part of the plan (see D8 in `docs/DECISIONS.md`); the data side
- * of it lives upstream in `etzm/open-twin`, and the two reconcile later.
+ * lighting, XR, and personalisation from imaging and body scans. D27 now also
+ * permits a dedicated research/wellness view of supplied interpretation states.
+ * Their meaning is established upstream; this viewer validates and renders it.
  *
  * WHAT DELIBERATELY STAYED
  * ------------------------
@@ -48,6 +54,8 @@ import { ParametricPanel } from './ui/ParametricPanel'
  *   HRA and BodyParts3D both require credit wherever the model or a rendering of
  *   it is distributed. It does not get removed for tidiness.
  * - `XREnterButton`, because WebXR is the point of the name.
+ * - the dedicated interpretation view, because D27 permits categorical display
+ *   without reviving the legacy score dashboard or interpreting data here.
  * - `loadTwin()`, because the metrics colour mode needs something to colour by.
  *   It reads the bundled sample and validates it through
  *   `assertTwinMetrics()`, which still refuses to render a fabricated score.
@@ -57,6 +65,7 @@ export default function App() {
   const theme = useTwin((s) => s.theme)
   const stage = useTwin((s) => s.stage)
   const parametric = useTwin((s) => s.anatomyMode) === 'parametric'
+  const viewerMode = useTwin((s) => s.viewerMode)
 
   /*
    * The theme class goes on <html>, not on this div, because the CSS variables
@@ -151,10 +160,17 @@ export default function App() {
         </div>
 
         <div className="flex flex-col gap-5 overflow-y-auto">
+          <ViewerModeSwitch />
           {/* The anatomy controls have nothing to control in the parametric
               mode — there are no systems, layers or structures — so the shape
               sliders take their place rather than sitting beside a panel of
               inert rows. */}
+          {viewerMode === 'interpretation' && (
+            <>
+              <InterpretationPanel />
+              <InterpretationEvidencePanel />
+            </>
+          )}
           {parametric ? <ParametricPanel /> : <StructurePanel />}
           {/* Between the anatomy controls and the credits, because it is both:
               it names what is selected and it states that structure's OWN
@@ -163,6 +179,7 @@ export default function App() {
           <AtlasAttribution />
         </div>
       </main>
+      {viewerMode === 'interpretation' && <InterpretationFooter />}
     </div>
   )
 }

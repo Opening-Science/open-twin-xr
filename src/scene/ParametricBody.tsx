@@ -8,6 +8,11 @@ import {
 } from 'three'
 import { useTwin } from '../store'
 import {
+  applyInterpretationPatternVaryings,
+  interpretationPatternFragment,
+  parametricInterpretationMaterial,
+} from './interpretationRender'
+import {
   evaluateAnny,
   loadAnnyGrid,
   measureBody,
@@ -60,6 +65,8 @@ export function ParametricBody() {
   const pose = useTwin((s) => s.annyPose)
   const setMeasurements = useTwin((s) => s.setBodyMeasurements)
   const setAnnyRig = useTwin((s) => s.setAnnyRig)
+  const setInterpretationFmaFor = useTwin((s) => s.setInterpretationFmaFor)
+  const viewerMode = useTwin((s) => s.viewerMode)
   const [grid, setGrid] = useState<AnnyGrid | null>(null)
   const [rig, setRig] = useState<AnnyRig | null>(null)
   const [failed, setFailed] = useState<string | null>(null)
@@ -140,21 +147,38 @@ export function ParametricBody() {
 
   useEffect(() => () => geometry?.dispose(), [geometry])
 
-  const material = useMemo(
-    () =>
-      new MeshPhysicalMaterial({
-        color: '#d8c3b4',
-        roughness: 0.66,
-        metalness: 0,
-        clearcoat: 0.15,
-        clearcoatRoughness: 0.55,
-        ior: 1.38,
-        // Opaque, unlike the overlay form. There is nothing inside it to see, so
-        // transparency would only cost legibility of the silhouette.
-        side: DoubleSide,
-      }),
-    [],
-  )
+  useEffect(() => {
+    setInterpretationFmaFor('parametric', [])
+    return () => setInterpretationFmaFor('parametric', null)
+  }, [setInterpretationFmaFor])
+
+  const look = parametricInterpretationMaterial(viewerMode)
+  const material = useMemo(() => {
+    const m = new MeshPhysicalMaterial({
+      color: look.color,
+      roughness: 0.66,
+      metalness: 0,
+      clearcoat: 0.15,
+      clearcoatRoughness: 0.55,
+      ior: 1.38,
+      // Opaque, unlike the overlay form. There is nothing inside it to see, so
+      // transparency would only cost legibility of the silhouette.
+      side: DoubleSide,
+    })
+    if (look.patternToken != null) {
+      const token = look.patternToken
+      m.onBeforeCompile = (shader) => {
+        applyInterpretationPatternVaryings(shader)
+        shader.fragmentShader = shader.fragmentShader.replace(
+          '#include <color_fragment>',
+          `#include <color_fragment>
+${interpretationPatternFragment(token.toFixed(1))}`,
+        )
+      }
+      m.customProgramCacheKey = () => `interpretation-no-data-${token}`
+    }
+    return m
+  }, [look.color, look.patternToken])
   useEffect(() => () => material.dispose(), [material])
 
   /**

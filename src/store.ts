@@ -1,5 +1,6 @@
 import { create } from 'zustand'
 import type { TwinMetrics, SystemId } from './data/schema'
+import type { InterpretationDocumentV02 } from './data/interpretationContract'
 /**
  * From the LEAF module, deliberately, not from `AtlasBody` where these types
  * used to live. `AtlasBody` imports this store, so taking them from the
@@ -18,9 +19,16 @@ import type { BodyMeasurements } from './scene/annyGrid'
 /** Depth layers an atlas can declare, outermost first. */
 export const ANATOMY_LAYERS = ['organ', 'connective', 'muscle', 'bone'] as const
 export type AnatomyLayer = (typeof ANATOMY_LAYERS)[number]
+export type ViewerMode = 'viewer' | 'interpretation'
 
 interface TwinState {
   data: TwinMetrics | null
+  /** Validated upstream interpretation document; subject_ref is never displayed. */
+  interpretationDocument: InterpretationDocumentV02 | null
+  /** Dedicated view boundary: categorical states never share the metrics legend. */
+  viewerMode: ViewerMode
+  /** Exact FMA ids carried by each mounted anatomy source. */
+  interpretationFmaBySource: Record<string, string[]>
   /** Currently selected/highlighted body system, or null. */
   selectedSystem: SystemId | null
   /**
@@ -328,7 +336,7 @@ interface TwinState {
   /**
    * How structures are coloured. `anatomical` is the atlas look — red muscle,
    * ivory bone — with the metric carried by emissive lift instead of hue.
-   * `metrics` is the red/amber/green score scale. They cannot be combined
+   * `metrics` is the measured blue-grey score scale. They cannot be combined
    * without one lying, so the viewer picks. See `anatomyPalette.ts`.
    */
   colourMode: 'anatomical' | 'metrics'
@@ -455,6 +463,10 @@ interface TwinState {
   focusDistance: number | null
 
   setData: (d: TwinMetrics) => void
+  setInterpretationDocument: (d: InterpretationDocumentV02 | null) => void
+  setViewerMode: (m: ViewerMode) => void
+  /** Pass null when a source unmounts. */
+  setInterpretationFmaFor: (sourceId: string, fmaIds: string[] | null) => void
   /**
    * Select a system, optionally narrowed to one of its layers.
    *
@@ -524,6 +536,9 @@ function prefersReducedMotion(): boolean {
 
 export const useTwin = create<TwinState>((set) => ({
   data: null,
+  interpretationDocument: null,
+  viewerMode: 'viewer',
+  interpretationFmaBySource: {},
   selectedSystem: null,
   selectedLayer: null,
   presentLayers: {},
@@ -566,6 +581,15 @@ export const useTwin = create<TwinState>((set) => ({
   focusDistance: null,
 
   setData: (data) => set({ data }),
+  setInterpretationDocument: (interpretationDocument) => set({ interpretationDocument }),
+  setViewerMode: (viewerMode) => set({ viewerMode }),
+  setInterpretationFmaFor: (sourceId, fmaIds) =>
+    set((st) => {
+      const next = { ...st.interpretationFmaBySource }
+      if (fmaIds === null) delete next[sourceId]
+      else next[sourceId] = fmaIds
+      return { interpretationFmaBySource: next }
+    }),
   selectSystem: (selectedSystem, selectedLayer = null) =>
     set({ selectedSystem, selectedLayer: selectedSystem === null ? null : selectedLayer }),
   setPresentLayers: (presentLayers) => set({ presentLayers }),

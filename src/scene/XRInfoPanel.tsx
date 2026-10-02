@@ -1,8 +1,17 @@
 import { useEffect, useMemo } from 'react'
 import { useXR } from '@react-three/xr'
 import { CanvasTexture, LinearFilter } from 'three'
+import { RESEARCH_USE_FOOTER } from '../data/interpretationPresentation'
 import { useTwin } from '../store'
 import { anatomicalColor } from './anatomyPalette'
+import {
+  XR_INTERPRETATION_PANEL_HEIGHT_PX,
+  XR_INTERPRETATION_PANEL_WORLD_HEIGHT,
+  XR_PANEL_WIDTH_PX,
+  XR_VIEWER_PANEL_HEIGHT_PX,
+  XR_VIEWER_PANEL_WORLD_HEIGHT,
+  wrapLines,
+} from './interpretationRender'
 import { structureTerm } from './structureEntry'
 
 /**
@@ -28,8 +37,7 @@ import { structureTerm } from './structureEntry'
 // system/layer/term, and a licence line where the structure has its own. A
 // headset cannot scroll a texture, so the panel has to be tall enough for
 // everything it may need to say.
-const W = 768
-const H = 260
+const W = XR_PANEL_WIDTH_PX
 const PAD = 44
 
 function roundRect(
@@ -52,6 +60,7 @@ function roundRect(
 export function XRInfoPanel() {
   const session = useXR((s) => s.session)
   const data = useTwin((s) => s.data)
+  const viewerMode = useTwin((s) => s.viewerMode)
   const selected = useTwin((s) => s.selectedSystem)
   const selectedStructure = useTwin((s) => s.selectedStructure)
 
@@ -80,6 +89,8 @@ export function XRInfoPanel() {
     ? selectedStructure.entry.name +
       (selectedStructure.entry.side ? ` (${selectedStructure.entry.side})` : '')
     : (sys?.name ?? null)
+  const panelTitle =
+    title ?? (viewerMode === 'interpretation' ? 'Interpretation view' : null)
 
   /** The line under the title: system, layer, and the ontology term if there is one. */
   const subtitle = useMemo(() => {
@@ -106,21 +117,24 @@ export function XRInfoPanel() {
   // deliberately-unresolved structures the old gate dropped entirely.
   const accent = sys ? '#' + anatomicalColor(sys.id).getHexString() : '#8e9caa'
 
+  const panelH =
+    viewerMode === 'interpretation' ? XR_INTERPRETATION_PANEL_HEIGHT_PX : XR_VIEWER_PANEL_HEIGHT_PX
+
   const texture = useMemo(() => {
-    if (!title) return null
+    if (!panelTitle) return null
     const canvas = document.createElement('canvas')
     canvas.width = W
-    canvas.height = H
+    canvas.height = panelH
     const ctx = canvas.getContext('2d')
     if (!ctx) return null
 
-    ctx.clearRect(0, 0, W, H)
+    ctx.clearRect(0, 0, W, panelH)
     ctx.fillStyle = 'rgba(255,255,255,0.96)'
-    roundRect(ctx, 0, 0, W, H, 34)
+    roundRect(ctx, 0, 0, W, panelH, 34)
     ctx.fill()
 
     ctx.fillStyle = accent
-    roundRect(ctx, 0, 0, 14, H, 7)
+    roundRect(ctx, 0, 0, 14, panelH, 7)
     ctx.fill()
 
     ctx.textBaseline = 'top'
@@ -130,11 +144,11 @@ export function XRInfoPanel() {
     // headset gives no way to scroll a texture, so measure and step down rather
     // than let it run off the edge.
     let size = 44
-    while (size > 26 && ctx.measureText(title).width > W - PAD * 2) {
+    while (size > 26 && ctx.measureText(panelTitle).width > W - PAD * 2) {
       size -= 2
       ctx.font = `600 ${size}px system-ui, -apple-system, Segoe UI, sans-serif`
     }
-    ctx.fillText(title, PAD, PAD)
+    ctx.fillText(panelTitle, PAD, PAD)
 
     if (subtitle) {
       ctx.fillStyle = '#5c6b78'
@@ -145,7 +159,24 @@ export function XRInfoPanel() {
     if (licence) {
       ctx.fillStyle = '#8a6d3b'
       ctx.font = '600 24px system-ui, -apple-system, Segoe UI, sans-serif'
-      ctx.fillText(licence, PAD, H - PAD - 24)
+      ctx.fillText(
+        licence,
+        PAD,
+        viewerMode === 'interpretation' ? panelH - PAD - 92 : panelH - PAD - 24,
+      )
+    }
+
+    if (viewerMode === 'interpretation') {
+      ctx.fillStyle = '#5c466f'
+      ctx.font = '600 20px system-ui, -apple-system, Segoe UI, sans-serif'
+      const footerLines = wrapLines(
+        RESEARCH_USE_FOOTER,
+        (line) => ctx.measureText(line).width,
+        W - PAD * 2,
+      )
+      footerLines.forEach((line, index) => {
+        ctx.fillText(line, PAD, panelH - PAD - 20 - (footerLines.length - 1 - index) * 24)
+      })
     }
 
     const tex = new CanvasTexture(canvas)
@@ -153,21 +184,24 @@ export function XRInfoPanel() {
     tex.magFilter = LinearFilter
     tex.needsUpdate = true
     return tex
-  }, [title, subtitle, licence, accent])
+  }, [panelTitle, subtitle, licence, accent, viewerMode, panelH])
 
   useEffect(() => () => texture?.dispose(), [texture])
 
   // Only inside an immersive session: on a flat screen the Anatomy panel's hover
   // readout already identifies structures, and a second copy floating in the
   // scene is noise.
-  if (!session || !title || !texture) return null
+  if (!session || !panelTitle || !texture) return null
 
   // Height follows the canvas so the text never stretches. The panel is now
   // three lines rather than one, so it is taller in metres — but the WIDTH is
   // what has to stay bounded, and at this aspect it is 0.62 m, about an arm's
   // width beside the body rather than the 1.7 m the original 0.34 m would have given.
-  const aspect = W / H
-  const height = 0.21
+  const aspect = W / panelH
+  const height =
+    viewerMode === 'interpretation'
+      ? XR_INTERPRETATION_PANEL_WORLD_HEIGHT
+      : XR_VIEWER_PANEL_WORLD_HEIGHT
 
   return (
     <mesh position={[0.62, 1.25, -0.15]} rotation={[0, -0.42, 0]}>

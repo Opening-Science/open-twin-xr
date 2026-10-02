@@ -136,6 +136,7 @@ export function useOverlayAvailability(): Record<string, boolean> | null {
  */
 export function OrganOverlays() {
   const overlays = useTwin((s) => s.overlays)
+  const viewerMode = useTwin((s) => s.viewerMode)
   const available = useOverlayAvailability()
   const setOverlayAvailability = useTwin((s) => s.setOverlayAvailability)
 
@@ -144,6 +145,8 @@ export function OrganOverlays() {
   useEffect(() => {
     setOverlayAvailability(available)
   }, [available, setOverlayAvailability])
+
+  if (viewerMode === 'interpretation') return null
 
   const on = (Object.keys(ORGAN_OVERLAYS) as OrganOverlayId[]).filter(
     // Absent until the probe answers, so a slow probe shows nothing rather than

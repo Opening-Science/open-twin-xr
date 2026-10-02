@@ -1,8 +1,8 @@
 # XR-2 design decisions
 
 Status: defaults approved by Martin on 25 September 2026, with the amendments
-recorded below. This document defines semantics and tests only. It does not
-authorize XR-2 implementation while PR #18 remains unmerged.
+recorded below. PR #18 has merged; XR-2 implementation must satisfy these
+semantics and tests.
 
 Scope is governed by
 [D27](DECISIONS.md#d27--research-and-wellness-interpretation-ui-is-in-scope):

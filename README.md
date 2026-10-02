@@ -20,8 +20,8 @@ the framing column, and the required attribution beside it](docs/preview.png)
 > and [D27](docs/DECISIONS.md#d27--research-and-wellness-interpretation-ui-is-in-scope)
 > admits a separate research-use view for interpretation states that open-twin
 > supplies. That view's design is approved in
-> [`docs/XR2_DESIGN_DECISIONS.md`](docs/XR2_DESIGN_DECISIONS.md), but the view is
-> not yet in the app. Nothing is scored or given clinical meaning in the browser.
+> [`docs/XR2_DESIGN_DECISIONS.md`](docs/XR2_DESIGN_DECISIONS.md).
+> Nothing is scored or given clinical meaning in the browser.
 > The bundled sample is **fictional** and must never be presented as anyone's
 > measured health.
 
