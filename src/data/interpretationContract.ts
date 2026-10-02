@@ -5,9 +5,9 @@
  * interpret, colour anatomy, or display subject_ref. The vendored JSON Schema
  * remains the source of truth.
  *
- * v0.2 does not declare states unique by system_id. This validator therefore
- * does not add a consumer-only uniqueness rule; that constraint must be added
- * and versioned upstream before XR enforces it.
+ * v0.2 `$comment` on states[] requires at most one entry per system_id.
+ * JSON Schema 2020-12 cannot unique-by-property; this validator enforces the
+ * producer rule DUPLICATE_SYSTEM_ID.
  *
  * The enum constants below are copied from the schema by hand, so they are
  * exported for `interpretationContract.test.ts`, which compares each one with
@@ -361,9 +361,17 @@ export function assertInterpretationDocument(raw: unknown): InterpretationDocume
   nonEmptyString(document.subject_ref, '$.subject_ref')
   dateTime(document.as_of, '$.as_of')
 
-  arrayAt(document.states, '$.states').forEach((state, index) =>
-    systemStateAt(state, `$.states[${index}]`),
-  )
+  const seenSystemIds = new Set<string>()
+  arrayAt(document.states, '$.states').forEach((state, index) => {
+    systemStateAt(state, `$.states[${index}]`)
+    const id = (state as JsonObject).system_id
+    if (typeof id === 'string') {
+      if (seenSystemIds.has(id)) {
+        fail(`$.states[${index}].system_id`, 'is not unique (DUPLICATE_SYSTEM_ID)')
+      }
+      seenSystemIds.add(id)
+    }
+  })
   arrayAt(document.unrenderable, '$.unrenderable').forEach((state, index) =>
     unrenderableStateAt(state, `$.unrenderable[${index}]`),
   )

@@ -56,7 +56,7 @@ describe('vendored contract', () => {
         path: /Local path: `([^`]+)`/.exec(section)?.[1],
         sha256: /SHA256: `([0-9a-f]{64})`/.exec(section)?.[1],
       }))
-    expect(pinned).toHaveLength(2)
+    expect(pinned).toHaveLength(3)
 
     for (const { path, sha256 } of pinned) {
       expect(path, 'every section needs a Local path').toBeDefined()
@@ -122,10 +122,11 @@ describe('assertInterpretationDocument', () => {
     expect(() => assertInterpretationDocument(document)).toThrow(/system_id/)
   })
 
-  it('does not invent a duplicate-system rule absent from the v0.2 schema', () => {
-    const document = valid()
-    list(document, 'states').push(structuredClone(state(document)))
-    expect(() => assertInterpretationDocument(document)).not.toThrow()
+  it('rejects a duplicate system_id (DUPLICATE_SYSTEM_ID)', () => {
+    const document = JSON.parse(
+      readFileSync('contracts/fixtures/duplicate-system-id.json', 'utf8'),
+    )
+    expect(() => assertInterpretationDocument(document)).toThrow(/DUPLICATE_SYSTEM_ID/)
   })
 
   it.each(['severity', 'confidence', 'sufficient_data', 'contributing', 'geometry'])(
