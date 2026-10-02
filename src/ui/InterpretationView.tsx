@@ -20,6 +20,7 @@ export function ViewerModeSwitch() {
 
   return (
     <div
+      role="group"
       className="flex gap-0.5 rounded-full border border-line bg-panel p-0.5 text-[11px] backdrop-blur-panel"
       aria-label="Viewer mode"
     >
@@ -41,7 +42,7 @@ export function ViewerModeSwitch() {
 }
 
 export function InterpretationPanel() {
-  const document = useTwin((state) => state.interpretationDocument)
+  const interpretationDocument = useTwin((state) => state.interpretationDocument)
   const setDocument = useTwin((state) => state.setInterpretationDocument)
   const selectedSystem = useTwin((state) => state.selectedSystem)
   const selectSystem = useTwin((state) => state.selectSystem)
@@ -80,9 +81,9 @@ export function InterpretationPanel() {
         </label>
       </div>
 
-      {document ? (
+      {interpretationDocument ? (
         <div className="flex items-center justify-between gap-2 rounded-xl bg-track px-2.5 py-2 text-[10px] text-muted">
-          <span>Validated v0.2 · {document.as_of}</span>
+          <span>Validated v0.2 · {interpretationDocument.as_of}</span>
           <button
             onClick={() => setDocument(null)}
             className="shrink-0 transition hover:text-ink"
@@ -104,7 +105,7 @@ export function InterpretationPanel() {
 
       <div className="flex flex-col gap-1">
         {SYSTEM_IDS.map((systemId) => {
-          const states = document?.states.filter((state) => state.system_id === systemId) ?? []
+          const states = interpretationDocument?.states.filter((state) => state.system_id === systemId) ?? []
           const selected = selectedSystem === systemId
           const rowStyle = styleForState(states.length === 1 ? states[0] : null)
 
@@ -130,7 +131,7 @@ export function InterpretationPanel() {
               </div>
 
               <div className="mt-1 pl-5 text-[10px] leading-snug text-muted">
-                {!document
+                {!interpretationDocument
                   ? 'No document loaded'
                   : states.length === 0
                     ? 'No interpretation state supplied'
@@ -177,18 +178,18 @@ export function InterpretationPanel() {
 }
 
 export function InterpretationEvidencePanel() {
-  const document = useTwin((state) => state.interpretationDocument)
+  const interpretationDocument = useTwin((state) => state.interpretationDocument)
   const reports = useTwin((state) => state.interpretationFmaBySource)
   const availableFmaIds = useMemo(
     () => new Set(Object.values(reports).flat()),
     [reports],
   )
   const placements = useMemo(
-    () => placementIssues(document, availableFmaIds),
-    [document, availableFmaIds],
+    () => placementIssues(interpretationDocument, availableFmaIds),
+    [interpretationDocument, availableFmaIds],
   )
-  const absent = useMemo(() => absentSystems(document), [document])
-  const supplied = document?.unrenderable ?? []
+  const absent = useMemo(() => absentSystems(interpretationDocument), [interpretationDocument])
+  const supplied = interpretationDocument?.unrenderable ?? []
   const unplacedCount =
     supplied.length +
     placements.filter(
@@ -205,7 +206,7 @@ export function InterpretationEvidencePanel() {
         </span>
       </div>
 
-      {!document ? (
+      {!interpretationDocument ? (
         <p className="text-[10px] leading-snug text-muted">
           No interpretation document loaded; no supplied evidence has been hidden.
         </p>

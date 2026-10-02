@@ -35,6 +35,17 @@ describe('structure interpretation mask', () => {
     expect(data[3]).toBeGreaterThan(127)
   })
 
+  it('writes a visible pattern byte when Interpretation passes no hidden ids', () => {
+    mask = createStructureMask(structures.length)
+    writeStructureMask(mask, structures, null, null, () => 6)
+
+    const data = mask.texture.image.data as Uint8Array
+    expect(data[3]).toBeGreaterThanOrEqual(INTERPRETATION_PATTERN_BASE)
+    expect(data[7]).toBe(
+      INTERPRETATION_PATTERN_BASE + 6 * INTERPRETATION_PATTERN_STEP,
+    )
+  })
+
   it('keeps hidden structures collapsed even when a pattern is requested', () => {
     mask = createStructureMask(structures.length)
     writeStructureMask(mask, structures, new Set([1]), null, () => 6)

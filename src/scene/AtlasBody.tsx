@@ -35,6 +35,16 @@ import { TERM_TO_SYSTEM } from './anatomy/layout'
 import { sourceForSystem, type AnatomyMode, type AnatomySource } from './anatomySources'
 import { useHiddenStructureIds, useSupersededBy } from './OrganOverlay'
 import {
+  applyInterpretationPatternVaryings,
+  availableFmaFromRendered,
+  interpretationOpacity,
+  interpretationPatternFragment,
+  INTERPRETATION_NO_DATA_OPACITY,
+  maskHiddenForInterpretation,
+  meshIsVisible,
+  uniqueStructureIds,
+} from './interpretationRender'
+import {
   createStructureMask,
   inspectTint,
   writeStructureMask,
@@ -244,37 +254,6 @@ const OT_A_STRUCTURE =
   '#ifndef OT_A_STRUCTURE\n#define OT_A_STRUCTURE\nattribute float aStructure;\n#endif'
 
 /** Screen-space texture keyed by the categorical interpretation token. */
-function interpretationPatternFragment(tokenExpression: string): string {
-  return `
-    float otPatternToken = floor(${tokenExpression} + 0.5);
-    vec2 otPixel = gl_FragCoord.xy;
-    float otDiagonalA = step(0.72, fract((otPixel.x + otPixel.y) / 8.0));
-    float otDiagonalB = step(0.72, fract((otPixel.x - otPixel.y) / 8.0));
-    float otDot = 1.0 - step(
-      0.17,
-      length(fract(otPixel / 6.0) - vec2(0.5))
-    );
-    float otPattern = max(otDiagonalA, otDiagonalB);
-    if (otPatternToken > 0.5 && otPatternToken < 1.5) {
-      otPattern = otDot;
-    } else if (otPatternToken > 1.5 && otPatternToken < 2.5) {
-      otPattern = step(0.74, fract((otPixel.x - otPixel.y) / 10.0));
-    } else if (otPatternToken > 2.5 && otPatternToken < 3.5) {
-      otPattern = step(0.72, fract(otPixel.x / 8.0));
-    } else if (otPatternToken > 3.5 && otPatternToken < 4.5) {
-      otPattern = step(0.72, fract(otPixel.y / 8.0));
-    } else if (otPatternToken > 4.5 && otPatternToken < 5.5) {
-      otPattern = step(0.58, fract((otPixel.x + otPixel.y) / 6.0));
-    } else if (otPatternToken > 5.5) {
-      otPattern = max(
-        step(0.68, fract((otPixel.x + otPixel.y) / 10.0)),
-        step(0.68, fract((otPixel.x - otPixel.y) / 10.0))
-      );
-    }
-    diffuseColor.rgb *= mix(0.74, 1.08, otPattern);
-  `
-}
-
 /**
  * Does the body hull currently read as a SOLID surface, i.e. should it catch
  * picks rather than let them through to the anatomy behind it?
@@ -636,29 +615,6 @@ export function AtlasBody({
   )
 
   /**
-   * Publish only FMA identifiers that this atlas can address directly.
-   * Ancestor terms and UBERON bridge entries are intentionally excluded:
-   * interpretation placement is an exact FMA join.
-   */
-  useEffect(() => {
-    const fmaIds = new Set<string>()
-    for (const entry of entries) {
-      if (
-        !entry.hiddenGroup &&
-        !entry.mesh.geometry.hasAttribute('_structure') &&
-        entry.directTerm?.startsWith('FMA:')
-      )
-        fmaIds.add(entry.directTerm)
-    }
-    for (const structure of structures ?? []) {
-      const term = structureTerm(structure)
-      if (term?.startsWith('FMA:')) fmaIds.add(term)
-    }
-    setInterpretationFmaFor(source.id, [...fmaIds])
-    return () => setInterpretationFmaFor(source.id, null)
-  }, [entries, setInterpretationFmaFor, source.id, structures])
-
-  /**
    * The third-party components embedded in this atlas, published so the panel
    * can name the rights holder of the structure under the pointer.
    *
@@ -745,7 +701,7 @@ export function AtlasBody({
     writeStructureMask(
       mask,
       structures,
-      hiddenIds,
+      maskHiddenForInterpretation(interpretationMode, hiddenIds),
       interpretationMode
         ? (entry) =>
             styleForState(stateForFma(interpretationDocument, structureTerm(entry))).color
@@ -1001,9 +957,9 @@ export function AtlasBody({
   /** Face-on opacity floor for the x-ray view. 1 = solid. See `materialFor`. */
   const xrayUniform = useRef({ value: 1 })
   const perStructureExplode = explodeAttr !== null
-  const xrayOn = !interpretationMode && xray > 0
+  const xrayOn = xray > 0
   // Only the gut for now — see the note at the use site.
-  const smoothOn = !interpretationMode && smoothTransparency && xrayOn
+  const smoothOn = smoothTransparency && xrayOn
 
   /** Positions before any explosion, so the offset is applied, not accumulated. */
   const homePositions = useRef(new Map<Mesh, Vector3>())
@@ -1060,14 +1016,15 @@ export function AtlasBody({
   const visible = useMemo(
     () =>
       entries.filter((e) => {
-        if (e.hiddenGroup) return false
         if (
-          !interpretationMode &&
-          e.layer &&
-          hiddenLayers.includes(e.layer as AnatomyLayer)
+          !meshIsVisible({
+            hiddenGroup: e.hiddenGroup,
+            systemId: e.systemId,
+            layer: e.layer,
+            hiddenSystems,
+            hiddenLayers,
+          })
         )
-          return false
-        if (!interpretationMode && e.systemId && hiddenSystems.includes(e.systemId))
           return false
         // An active organ overlay stands in for the static organ, so hide it
         // rather than render both. Tested against the node name AND the group
@@ -1089,9 +1046,25 @@ export function AtlasBody({
       hiddenSystems,
       hiddenLayers,
       superseded,
-      interpretationMode,
     ],
   )
+
+  /**
+   * Publish only FMA identifiers on geometry that is actually drawn.
+   * Composition-excluded meshes and UBERON-only terms are left out: placement
+   * is an exact FMA join against the visible body.
+   */
+  useEffect(() => {
+    const rendered = visible.map((entry) => {
+      const attr = entry.mesh.geometry.getAttribute('_structure')
+      return {
+        directTerm: entry.directTerm,
+        structureIds: attr ? uniqueStructureIds(attr.array as ArrayLike<number>) : null,
+      }
+    })
+    setInterpretationFmaFor(source.id, availableFmaFromRendered(rendered, structures))
+    return () => setInterpretationFmaFor(source.id, null)
+  }, [visible, setInterpretationFmaFor, source.id, structures])
 
   /**
    * Resolution report. Swapping an atlas in is the step most likely to fail
@@ -1219,7 +1192,7 @@ export function AtlasBody({
     const interpretationState = stateForFma(interpretationDocument, directTerm)
     const interpretationVisualKey = visualKeyForState(interpretationState)
     const interpretationStyle = styleForState(interpretationState)
-    const glassOn = !interpretationMode && glassHull && isBodyHull(systemId, group)
+    const glassOn = glassHull && isBodyHull(systemId, group)
     const maskThis = maskOn && hasStructure
     // The hover rim needs no store flag — the uniform decides at draw time — so
     // this is geometry-only and never flips while the app runs.
@@ -1293,11 +1266,12 @@ export function AtlasBody({
     // the mask shader. Mesh-level opacity would make every exact match inherit
     // the node's (usually absent) direct term.
     const opacity = interpretationMode
-      ? maskThis
-        ? 1
-        : unresolvedOrNoData
-          ? 0.55
-          : 1
+      ? interpretationOpacity({
+          maskThis,
+          isShell: isShell && !isSubcutaneous,
+          visualKey: interpretationVisualKey,
+          hullOpacity,
+        })
       : isSubcutaneous
         ? 0.3
         : isShell
@@ -1646,7 +1620,7 @@ vec4 otStructureMask( float id ) {
             // it. Any future patch needing the attribute must use it too.
             '#include <common>\n' +
               OT_A_STRUCTURE +
-              '\nuniform sampler2D uMask;\nuniform vec2 uMaskSize;\nvarying vec3 vStructureTint;\nvarying float vStructurePattern;' +
+              '\nuniform sampler2D uMask;\nuniform vec2 uMaskSize;\nvarying vec3 vStructureTint;\nvarying float vStructurePattern;\nvarying vec3 vOtPatternPos;' +
               lookup,
           )
           /**
@@ -1667,13 +1641,14 @@ vec4 otStructureMask( float id ) {
 vec4 otMask = otStructureMask( aStructure );
 vStructureTint = otMask.rgb;
 vStructurePattern = ( otMask.a * 255.0 - ${INTERPRETATION_PATTERN_BASE.toFixed(1)} ) / ${INTERPRETATION_PATTERN_STEP.toFixed(1)};
-if ( otMask.a < 0.5 ) transformed = vec3( 0.0 );`,
+if ( otMask.a < 0.5 ) transformed = vec3( 0.0 );
+vOtPatternPos = transformed;`,
           )
 
         shader.fragmentShader = shader.fragmentShader
           .replace(
             '#include <common>',
-            '#include <common>\nvarying vec3 vStructureTint;\nvarying float vStructurePattern;',
+            '#include <common>\nvarying vec3 vStructureTint;\nvarying float vStructurePattern;\nvarying vec3 vOtPatternPos;',
           )
           /**
            * Inspect tint is multiplied into the lit colour. Interpretation tint
@@ -1689,7 +1664,11 @@ if ( otMask.a < 0.5 ) transformed = vec3( 0.0 );`,
               ? `diffuseColor.rgb = vStructureTint;
 #include <color_fragment>
 ${interpretationPatternFragment('vStructurePattern')}
-if ( vStructurePattern < 0.5 ) diffuseColor.a *= 0.55;`
+${
+  isShell
+    ? ''
+    : `if ( vStructurePattern < 0.5 ) diffuseColor.a *= ${INTERPRETATION_NO_DATA_OPACITY.toFixed(2)};`
+}`
               : '#include <color_fragment>\ndiffuseColor.rgb *= vStructureTint;',
           )
       }
@@ -1699,10 +1678,16 @@ if ( vStructurePattern < 0.5 ) diffuseColor.a *= 0.55;`
       const prevInterpretation = m.onBeforeCompile
       m.onBeforeCompile = (shader, renderer) => {
         prevInterpretation?.(shader, renderer)
+        applyInterpretationPatternVaryings(shader)
         shader.fragmentShader = shader.fragmentShader.replace(
           '#include <color_fragment>',
           `#include <color_fragment>
-${interpretationPatternFragment(interpretationStyle.patternToken.toFixed(1))}`,
+${interpretationPatternFragment(interpretationStyle.patternToken.toFixed(1))}
+${
+  !isShell && interpretationVisualKey === 'no_data'
+    ? `diffuseColor.a *= ${INTERPRETATION_NO_DATA_OPACITY.toFixed(2)};`
+    : ''
+}`,
         )
       }
     }

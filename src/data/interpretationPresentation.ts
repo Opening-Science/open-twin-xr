@@ -48,10 +48,10 @@ export const INTERPRETATION_STYLES: Record<InterpretationVisualKey, Interpretati
   no_data: {
     key: 'no_data',
     label: 'No interpretation data',
-    color: '#8e857d',
+    color: '#3f342c',
     patternToken: 0,
     swatch:
-      'repeating-linear-gradient(45deg, #b3aaa2 0 1.5px, #8e857d 1.5px 3px)',
+      'repeating-linear-gradient(45deg, #6a5a4c 0 1.5px, #3f342c 1.5px 3px)',
   },
   none: {
     key: 'none',
@@ -96,10 +96,10 @@ export const INTERPRETATION_STYLES: Record<InterpretationVisualKey, Interpretati
   indeterminate: {
     key: 'indeterminate',
     label: 'Indeterminate',
-    color: '#8b7a99',
+    color: '#ddd4e8',
     patternToken: 6,
     swatch:
-      'repeating-linear-gradient(45deg, transparent 0 3px, #665771 3px 4px), repeating-linear-gradient(-45deg, #a99ab5 0 3px, #665771 3px 4px)',
+      'repeating-linear-gradient(45deg, transparent 0 3px, #8a7a9c 3px 4px), repeating-linear-gradient(-45deg, #ddd4e8 0 3px, #8a7a9c 3px 4px)',
   },
 }
 

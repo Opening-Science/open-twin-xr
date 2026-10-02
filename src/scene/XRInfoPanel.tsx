@@ -4,6 +4,14 @@ import { CanvasTexture, LinearFilter } from 'three'
 import { RESEARCH_USE_FOOTER } from '../data/interpretationPresentation'
 import { useTwin } from '../store'
 import { anatomicalColor } from './anatomyPalette'
+import {
+  XR_INTERPRETATION_PANEL_HEIGHT_PX,
+  XR_INTERPRETATION_PANEL_WORLD_HEIGHT,
+  XR_PANEL_WIDTH_PX,
+  XR_VIEWER_PANEL_HEIGHT_PX,
+  XR_VIEWER_PANEL_WORLD_HEIGHT,
+  wrapLines,
+} from './interpretationRender'
 import { structureTerm } from './structureEntry'
 
 /**
@@ -29,8 +37,7 @@ import { structureTerm } from './structureEntry'
 // system/layer/term, and a licence line where the structure has its own. A
 // headset cannot scroll a texture, so the panel has to be tall enough for
 // everything it may need to say.
-const W = 768
-const H = 320
+const W = XR_PANEL_WIDTH_PX
 const PAD = 44
 
 function roundRect(
@@ -110,21 +117,24 @@ export function XRInfoPanel() {
   // deliberately-unresolved structures the old gate dropped entirely.
   const accent = sys ? '#' + anatomicalColor(sys.id).getHexString() : '#8e9caa'
 
+  const panelH =
+    viewerMode === 'interpretation' ? XR_INTERPRETATION_PANEL_HEIGHT_PX : XR_VIEWER_PANEL_HEIGHT_PX
+
   const texture = useMemo(() => {
     if (!panelTitle) return null
     const canvas = document.createElement('canvas')
     canvas.width = W
-    canvas.height = H
+    canvas.height = panelH
     const ctx = canvas.getContext('2d')
     if (!ctx) return null
 
-    ctx.clearRect(0, 0, W, H)
+    ctx.clearRect(0, 0, W, panelH)
     ctx.fillStyle = 'rgba(255,255,255,0.96)'
-    roundRect(ctx, 0, 0, W, H, 34)
+    roundRect(ctx, 0, 0, W, panelH, 34)
     ctx.fill()
 
     ctx.fillStyle = accent
-    roundRect(ctx, 0, 0, 14, H, 7)
+    roundRect(ctx, 0, 0, 14, panelH, 7)
     ctx.fill()
 
     ctx.textBaseline = 'top'
@@ -152,16 +162,21 @@ export function XRInfoPanel() {
       ctx.fillText(
         licence,
         PAD,
-        viewerMode === 'interpretation' ? H - PAD - 92 : H - PAD - 24,
+        viewerMode === 'interpretation' ? panelH - PAD - 92 : panelH - PAD - 24,
       )
     }
 
     if (viewerMode === 'interpretation') {
       ctx.fillStyle = '#5c466f'
       ctx.font = '600 20px system-ui, -apple-system, Segoe UI, sans-serif'
-      const breakAt = RESEARCH_USE_FOOTER.indexOf(' supplied')
-      ctx.fillText(RESEARCH_USE_FOOTER.slice(0, breakAt), PAD, H - PAD - 48)
-      ctx.fillText(RESEARCH_USE_FOOTER.slice(breakAt + 1), PAD, H - PAD - 20)
+      const footerLines = wrapLines(
+        RESEARCH_USE_FOOTER,
+        (line) => ctx.measureText(line).width,
+        W - PAD * 2,
+      )
+      footerLines.forEach((line, index) => {
+        ctx.fillText(line, PAD, panelH - PAD - 20 - (footerLines.length - 1 - index) * 24)
+      })
     }
 
     const tex = new CanvasTexture(canvas)
@@ -169,7 +184,7 @@ export function XRInfoPanel() {
     tex.magFilter = LinearFilter
     tex.needsUpdate = true
     return tex
-  }, [panelTitle, subtitle, licence, accent, viewerMode])
+  }, [panelTitle, subtitle, licence, accent, viewerMode, panelH])
 
   useEffect(() => () => texture?.dispose(), [texture])
 
@@ -182,8 +197,11 @@ export function XRInfoPanel() {
   // three lines rather than one, so it is taller in metres — but the WIDTH is
   // what has to stay bounded, and at this aspect it is 0.62 m, about an arm's
   // width beside the body rather than the 1.7 m the original 0.34 m would have given.
-  const aspect = W / H
-  const height = 0.21
+  const aspect = W / panelH
+  const height =
+    viewerMode === 'interpretation'
+      ? XR_INTERPRETATION_PANEL_WORLD_HEIGHT
+      : XR_VIEWER_PANEL_WORLD_HEIGHT
 
   return (
     <mesh position={[0.62, 1.25, -0.15]} rotation={[0, -0.42, 0]}>

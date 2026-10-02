@@ -165,16 +165,13 @@ export default function App() {
               mode — there are no systems, layers or structures — so the shape
               sliders take their place rather than sitting beside a panel of
               inert rows. */}
-          {viewerMode === 'interpretation' ? (
+          {viewerMode === 'interpretation' && (
             <>
               <InterpretationPanel />
               <InterpretationEvidencePanel />
             </>
-          ) : parametric ? (
-            <ParametricPanel />
-          ) : (
-            <StructurePanel />
           )}
+          {parametric ? <ParametricPanel /> : <StructurePanel />}
           {/* Between the anatomy controls and the credits, because it is both:
               it names what is selected and it states that structure's OWN
               licence where that differs from the atlas's. See the file. */}

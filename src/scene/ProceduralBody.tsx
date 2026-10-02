@@ -2,8 +2,9 @@ import { useEffect, useMemo, useState } from 'react'
 import type { ThreeEvent } from '@react-three/fiber'
 import type { BufferGeometry } from 'three'
 import type { SystemId, SystemScore } from '../data/schema'
-import { stateForFma, styleForState } from '../data/interpretationPresentation'
+import { stateForFma, styleForState, visualKeyForState } from '../data/interpretationPresentation'
 import { useTwin, type AnatomyLayer } from '../store'
+import { interpretationOpacity, meshIsVisible } from './interpretationRender'
 import { scoreToColor, scoreToEmissive } from './metricColor'
 import { anatomicalColor, scoreLift } from './anatomyPalette'
 import { ORGAN_PARTS, type OrganPart } from './anatomy/layout'
@@ -107,7 +108,12 @@ function Organ({
           transparent
           opacity={
             interpretationMode
-              ? 0.55
+              ? interpretationOpacity({
+                  maskThis: false,
+                  isShell: true,
+                  visualKey: interpretationStyle.key,
+                  hullOpacity,
+                })
               : selected
                 ? Math.max(hullOpacity, 0.3)
                 : hullOpacity
@@ -129,7 +135,12 @@ function Organ({
   // one that normally recedes so the viewer can see past it.
   const base = part.baseOpacity ?? 1
   const opacity = interpretationMode
-    ? 0.55
+    ? interpretationOpacity({
+        maskThis: false,
+        isShell: false,
+        visualKey: visualKeyForState(stateForFma(interpretationDocument, part.term)),
+        hullOpacity,
+      })
     : selected
       ? 1
       : noData
@@ -167,7 +178,6 @@ function Organ({
 
 export function ProceduralBody() {
   const data = useTwin((s) => s.data)
-  const viewerMode = useTwin((s) => s.viewerMode)
   const setInterpretationFmaFor = useTwin((s) => s.setInterpretationFmaFor)
   const geometry = useOrganGeometry()
   // The placeholder must obey the same controls as the atlas. It used to ignore
@@ -192,14 +202,16 @@ export function ProceduralBody() {
       {ORGAN_PARTS.map((part) => {
         const geo = geometry.get(part.term)
         if (!geo) return null
-        if (viewerMode !== 'interpretation' && hiddenSystems.includes(part.system)) return null
         // The procedural body has no muscle; its skeleton stands in for bone.
         const layer: AnatomyLayer | null =
           part.system === 'musculoskeletal' ? 'bone' : part.shell ? null : 'organ'
         if (
-          viewerMode !== 'interpretation' &&
-          layer &&
-          hiddenLayers.includes(layer)
+          !meshIsVisible({
+            systemId: part.system,
+            layer: layer ?? undefined,
+            hiddenSystems,
+            hiddenLayers,
+          })
         )
           return null
         return (

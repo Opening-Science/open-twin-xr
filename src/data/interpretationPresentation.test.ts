@@ -72,7 +72,13 @@ describe('exact interpretation placement', () => {
   it('does not choose between duplicate states targeting one FMA id', () => {
     const duplicate = {
       ...fixture,
-      states: [...fixture.states, structuredClone(fixture.states[0])],
+      states: [
+        fixture.states[0],
+        {
+          ...structuredClone(fixture.states[0]),
+          system_id: 'metabolic' as const,
+        },
+      ],
     }
     expect(stateForFma(duplicate, 'FMA:7088')).toBeNull()
     expect(

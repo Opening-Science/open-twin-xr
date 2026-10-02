@@ -86,6 +86,7 @@ export function StructurePanel() {
   const selectSystem = useTwin((s) => s.selectSystem)
   const colourMode = useTwin((s) => s.colourMode)
   const setColourMode = useTwin((s) => s.setColourMode)
+  const viewerMode = useTwin((s) => s.viewerMode)
 
   const systems = data?.systems ?? []
   const allIds = systems.map((s) => s.id)
@@ -105,7 +106,9 @@ export function StructurePanel() {
 
       {/* Anatomical hue and the measured blue-grey metric scale mean incompatible
           things, so they are modes, not
-          a blend. See src/scene/anatomyPalette.ts. */}
+          a blend. See src/scene/anatomyPalette.ts. Hidden in Interpretation
+          because that view has its own categorical legend. */}
+      {viewerMode === 'viewer' && (
       <div className="flex gap-0.5 rounded-full bg-track p-0.5 text-[11px]">
         {(['anatomical', 'metrics'] as const).map((m) => (
           <button
@@ -126,6 +129,7 @@ export function StructurePanel() {
           </button>
         ))}
       </div>
+      )}
 
       {/* Hover readout. Reserves its line so the panel does not jump.
 
